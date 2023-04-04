@@ -1,7 +1,14 @@
 @tailwind base;
 
 /* Write your own custom base styles here */
-
+html,
+body,
+div#__next {
+  height: 100%;
+}
+html {
+  scroll-behavior: smooth;
+}
 /* Start purging... */
 @tailwind components;
 /* Stop purging. */
