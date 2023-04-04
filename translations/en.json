@@ -1,0 +1,457 @@
+{
+  "header": {
+    "title": "Who We Are",
+    "description": "The Breathe Mongolia - Clean Air Coalition is an international team of professionals and everyday citizens, working to end Mongolia’s air pollution crisis."
+  },
+  "subNavigationTabs": {
+    "aboutUs": "About Us",
+    "ourStory": "Our Story",
+    "impact": "Impact",
+    "ourTeam": "Our Team",
+    "supportUs": "Support Us"
+  },
+  "aboutUs": {
+    "ourMission": "Our Mission",
+    "missionStatement": "Our mission is to arm people with the resources to end air pollution in Mongolia",
+    "ourVision": "Our Vision",
+    "visionStatement": "Our vision is clean, sustainable and prosperous Mongolia",
+    "whatWeDo": "What We Do",
+    "whatWeDoDescription": "We create bilingual digital space and set of tools to address the lack of a centralized source for quality information and insight to the current conditions in Mongolia by focusing on:",
+    "education": "Education",
+    "educationDescription": "We educate the public so they can protect themselves and reduce emissions",
+    "building": "Community",
+    "buildingDescription": "We build a community of professionals and allies working to reduce air pollution",
+    "monitoring": "Watchdog",
+    "monitoringDescription": "We monitor policies and decisions to inform the public and to promote accountability",
+    "why": "Why",
+    "whyDescription": "The right to breathe clean air is a fundamental human right. We deserve to live long and healthy lives with our loved ones in our homeland.",
+    "ourAlignment": "Our Alignment to Sustainable Development Goals",
+    "ourAlignmentDescription": "Our work contributes to the Sustainable Development Goals (SDG) put forth by the United Nations. Specifically, we align with and seek to impact the following 7 SDGs and their targets:",
+    "vision": "Breathe Mongolia Mongolian Sustainable Development Vision 2030",
+    "visionDescription": "Breathe Mongolia’s work supports 3 out of the 10 goals set forth by Mongolia Sustainable Development Vision 2030, which includes:",
+    "goal6KeyWord": "Improve",
+    "improveEnvironment": "the living environment of the Mongolian people",
+    "improveEnvironmentDetails": "to lead a healthy and long life; increase life expectancy at birth to 78 years",
+    "goal8KeyWord": "Preserve",
+    "preserveBalance": "ecological balance",
+    "preserveBalanceDetails": "and to be placed among first 30 countries on the rankings of the countries by the Green economy index in the world",
+    "goal10KeyWord": "Build",
+    "buildGovernance": "professional, stable and participative governance,",
+    "buildGovernanceDetails": "free of corruption that is adept at implementing development policies at all levels."
+  },
+  "ourStory": {
+    "title": "Our Story",
+    "ourStoryDetails": "Young Mongols decided to organize a protest in New York City, raising awareness about the deadly air pollution in Mongolia under #BreatheMongolia hashtag. The protest inspired other concerned Mongols and global citizens across the world and our founders met and created Breathe Mongolia - Clean Air Coalition nonprofit. Now, Breathe Mongolia platform serves as a central collaboration, watchdog and knowledge center hub for the fight against air pollution in Mongolia, run by volunteers in 10 countries from diverse professions such as atmospheric chemist, software engineer, urban planner, medical doctor and policy analyst. We are determined to bring all the stakeholders together and equip them with tools to eliminate the source of pollution in our homeland.",
+    "moreAboutOurStory": "MORE ABOUT OUR STORY",
+    "StoriesAirPollution": "Stories About Air Pollution",
+    "readMoreStories": "READ MORE STORIES"
+  },
+  "impact": {
+    "ourAccomplishments": "Our Accomplishments",
+    "accomplishment": "Accomplishment",
+    "loadMore": "LOAD MORE"
+  },
+  "ourTeam": {
+    "whereOurTeamIsLocated": "Where Our Team Is Located",
+    "featuredMembers": "Featured Team Members",
+    "ourTeam": "Our Team"
+  },
+  "supportUs": {
+    "waysToDonate": "Ways to Donate Money",
+    "donateDirectlyOn": "Donate directly on",
+    "donate": "DONATE",
+    "otherWaysToDonate": "Other Ways to Donate",
+    "startBirthdayFundraiser": "Start a birthday fundraiser on Facebook",
+    "facebookStepOnePart1": "Visit our Facebook page, click on",
+    "facebookStepOnePart2": "tab",
+    "facebookStepTwo": "Click on “Raise Money” on Create a Fundraiser section",
+    "facebookStepThree": "Set the amount, motivation text and invite your friends",
+    "addToSmileAmazon": "Add Breathe Mongolia - Clean Air Coalition on",
+    "wontCostACent": ", It won't cost a single cent",
+    "amazonSmileStepOne": "Click on “Get Started” and search for “Breathe Mongolia” ",
+    "amazonSmileStepTwo": "Select Breathe Mongolia - Clean Air Coalition",
+    "amazonSmileStepThreePart1": "Always shop from ",
+    "amazonSmileStepThreePart2": "",
+    "andBreak": "AND",
+    "donateThroughEmployer": "Donate through your employer. Get matching donations from your employer or have employer give us corporate grants. We’re on Benevity and YouCause",
+    "volunteerForUs": "Volunteer for Us",
+    "currentVolunteersNeeded": "Current Volunteers Needed",
+    "viewPosition": "View Position"
+  },
+
+  "title": "this is landing page",
+  "pledge": {
+    "button": "take this pledge",
+    "pledged": "Congratulations!",
+    "pledgeTo": "I pledge to <1>{{title}}</1>",
+    "congrats": "Congratulations! You have pledged to:",
+    "tapToTakePledge": "Tap to take this pledge",
+    "joined": "You and {{totalPledge}} people have taken this pledge!",
+    "share": "Share Your Pledge Now!",
+    "mobileTitle": "Take This Pledge and Share with Your Network!"
+  },
+  "additionalResources": {
+    "title": "Additional Resources"
+  },
+  "actionList": {
+    "title": "What you can do:",
+    "soon": "More Coming Soon! ",
+    "button": "Read More"
+  },
+  "userFeedback": {
+    "question": "Did you find this information useful?",
+    "thankYou": "Thank you for your feedback!",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "faq": {
+    "title": "FAQ",
+    "mobileTitle": "Frequently asked questions",
+    "tabTitle1": "Line 1",
+    "tabTitle2": "Line 2",
+    "tabTitle3": "Line 3"
+  },
+  "nav": {
+    "home": "Home",
+    "takeAction": "Take Action",
+    "news": "News",
+    "agaarNeg": "AGAAR NEG",
+    "aboutUs": "About Us",
+    "protect": "Protect",
+    "volunteer": "Volunteer",
+    "download": "Download",
+    "more": "More",
+    "connect": "Connect",
+    "donate": "Donate"
+  },
+  "hero": {
+    "title": "TAKE ACTION",
+    "description": "Tackling air pollution starts with each and every one of us. Learn about the actions you can take to reduce your emission and protect the health of your loved ones.",
+    "mobileDescription": "Tackling air pollution starts with each and every one of us. Learn about the actions you can take to reduce your emission and protect the health of your loved ones.",
+    "learnMore": "Learn More"
+  },
+  "backBtnText": "Back to Take Action Home",
+  "donate": {
+    "title": "Donate",
+    "mobileTitle": "Help reduce air pollution",
+    "description": "Please donate to Breathe Mongolia! Your generous donation would help Breathe Mongolia educate adults and children about air pollution, how to protect their health, and help reduce pollution.",
+    "button": "DONATE",
+    "sidebarTitle": "More ways to Give",
+    "sidebarTitleMobile": "See more ways to give",
+    "seeLess": "See less",
+    "donateOnetime": "One-time donation",
+    "donateFacebook": "Donate on Facebook",
+    "donateFacebookFund": "Start a Facebook Fundraiser",
+    "donateAmazonSmile": "Shop on AmazonSmile for BM",
+    "donateYourcause": "Employer donation on Yourcause",
+    "donateBenevity": "Employer donation on Benevity",
+    "donateMore": "Learn more about donations to BM"
+  },
+  "subscribe": {
+    "mobileTitle": "Connect with us!",
+    "mobileDescription": "We’re social! Follow us on social media, expand your network, and help raise awareness about air pollution in Mongolia. ",
+    "title": "Stay Connected",
+    "description": "Join our mailing list and follow us on social media.",
+    "sidebarTitle": "More ways to Connect ",
+    "email": "Email Us",
+    "slack": "Join Agaar Neg community on Slack",
+    "facebook": "Follow us on Facebook",
+    "twitter": "Follow us on Twitter",
+    "instagram": "Follow us on Instagram",
+    "youtube": "Subscribe to our Youtube channel",
+    "btn": "subscribe",
+    "subscribed": "Subscribed",
+    "validEmail": "Please enter a valid email",
+    "placeholder": "Your E-mail...",
+    "placeholder1": "Join our email list",
+    "footerPlaceHolder":"Enter your email to receive our newsletters"
+  },
+  "footer": {
+    "subfooter": "Stay connected:",
+    "title":{
+      "explore": "explore",
+      "getInvolved":"getInvolved",
+      "aboutUs":"About Us"
+    },
+    "nav": {
+      "home": "home",
+      "action": "take action",
+      "news": "news",
+      "agaarNeg": "AGAAR NEG",
+      "about": "about us",
+      "waysToDonate": "Ways to Donate",
+      "ourStory": "Our Story",
+      "impact":"Impact",
+      "ourTeam": "Our Team", 
+      "paypalDonate": "Donate on PayPal",
+      "givebutterDonate": "Donate on Givebutter",
+      "donatefb": "donate on Facebook",
+      "startFundraiser": "start a facebook fundraiser",
+      "shop": "shop on AmazonSmile",
+      "employerDonate": "Employer Donation on YourCause",
+      "employerDonate2": "Employer Donation on Benevity",
+      "volunteer": "volunteer",
+      "askQuestion": "ask a question",
+      "shareKnowledge": "share a knowledge",
+      "becomeVolunteer": "become a volunteer",
+      "download": "Download",
+      "iqApp": "IQAir app",
+      "followUs": "Follow Us:",
+      "join": "join the conversation"
+
+    },
+    "disclosure": "Breathe Mongolia - Clean Air Coalition nonprofit (“NGO”) seeks to inform and guide the public to research and learn about health-protecting and pollution-reducing solutions based on publicly available information. The NGO is not endorsing any specific resource and cannot validate or guarantee the effectiveness of the resources. Under no circumstances will the NGO be held liable whatsoever for any claims, damages, losses, expenses, or costs raised from the consumer’s choice. We advise consumers to conduct their own research and consult with industry experts before purchasing products and services.",
+    "name": "Breathe Mongolia - Clean Air Coalition is a 501(c)3 nonprofit in the US (Agaariin Kharuul nonprofit in Mongolia).",
+    "copyright": " Breathe Mongolia - Clean Air Coalition, Inc. All Rights Reserved",
+    "responsible": "Breathe Mongolia is not responsible for the content of external sites."
+  },
+  "join": {
+    "title": "Join Our Cause",
+    "description": "Our work depends on the hard-working, genuine volunteers that dedicate their time to the organization. Sign up to volunteer!",
+    "sidebarTitle": "Join breathe Mongolia",
+    "volunteer": "Sign up to be a volunteer",
+    "share": "Join our advisory board",
+    "ask": "Apply for a job",
+    "mobileVolunteer": "Become a Volunteer!",
+    "mobileShare": "Join our advisory board",
+    "mobileAsk": "Apply for a job"
+  },
+  "download": {
+    "title": "Download Resources",
+    "mobileTitle": "Resources",
+    "description": "Download resources to educate yourself, your family, and to prevent against harmful effects of air pollution.",
+    "sidebarTitle": "Download",
+    "book": "Children’s comic book",
+    "mobileBook": "Download our children’s book",
+    "mobileDescription": "Download resources to educate yourself, your family, and to prevent against harmful effects of air pollution."
+  },
+  "actionCategory": {
+    "protect": "Act",
+    "donate": "Donate",
+    "volunteer": "Join us",
+    "connect": "Connect"
+  },
+  "province": {
+    "ulaanbaatar": "Ulaanbaatar",
+    "arkhangai": "Arkhangai",
+    "bayanolgii": "Bayan-Olgii",
+    "bayankhongor": "Bayankhongor",
+    "bulgan": "Bulgan",
+    "darkhan": "Darkhan-Uul",
+    "dornod": "Dornod",
+    "dornogovi": "Dornogovi",
+    "dundgovi": "Dundgovi",
+    "govialtai": "Govi-Altai",
+    "govisumber": "Govisumber",
+    "khentii": "Khentii",
+    "khovd": "Khovd",
+    "khovsgol": "Khovsgol",
+    "umnugobi": "Omnogovi",
+    "orkhon": "Orkhon",
+    "uvurkhangai": "Ovorkhangai",
+    "selenge": "Selenge",
+    "sukhbaatar": "Sukhbaatar",
+    "tov": "Tov",
+    "uvs": "Uvs",
+    "zavkhan": "Zavkhan"
+  },
+  "map": {
+    "outdoor": "Outdoor sensors",
+    "outdoorlabel": "monitoring outdoor air quality",
+    "indoorlabel": "monitoring indoor air quality",
+    "indoor": "Indoor sensors",
+    "satellite": "Satellite",
+    "streets": "Street",
+    "aqiShort": "AQI",
+    "whatZone": "What Zone Am I In?",
+    "zoneDesc": "Click on a zone to see which air quality improvement zone you are in.",
+    "pinTitle": "Click on a pin",
+    "pinDesc": "<strong>Click on a pin</strong> to <strong>select a station</strong> to check air quality",
+    "aqi": "Air Quality Index",
+    "zone": "Zone",
+    "zones": "Zones",
+    "aqiTitle": "Air Quality Index Key",
+    "healthy": "Healty",
+    "moderate": "Moderate",
+    "unhealthySensitive": "Unhealthy For Sensitive Groups",
+    "unhealthy": "Unhealthy",
+    "veryUnhealthy": "Very Unhealthy",
+    "hazardous": "Hazardous",
+    "zone0": "Unapproved Zone. Phase out raw coal",
+    "zone1": "Phase out raw coal",
+    "zone23": "Connecting to grid soon, burn improved coal until then",
+    "zone4": "Have to use electricity, No burning",
+    "selectProvince": "Select a city/province"
+  },
+  "actionShareEmail": {
+    "subject": "Take action against air pollution in Mongolia",
+    "bodyPart1": "I just pledged to",
+    "bodyPart2": "People need to know about this.",
+    "bodyPart3": "Thanks!"
+  },
+  "stationDetail": {
+    "uBWorldRanking": "UB World Ranking",
+    "city": "city",
+    "AQI": "AQI",
+    "usaqi": "us aqi",
+    "km/h": "km/h",
+    "Recommendations": "Recommendations",
+    "OtherAirPollutants": "Other Air Pollutants",
+    "outdoor": "Outside Sensor",
+    "indoor": "Inside Sensor",
+    "selectAStation": "Select a station",
+    "Click On A Pin": "Click On A Pin",
+    "Wind": "Wind",
+    "Click on a pin to see that air quality monitoring station's details": "Click on a pin to see that air quality monitoring station's details",
+    "selectAirQualityImprovementZone": "Select a zone",
+    "khoroos": "khoroos",
+    "zone4": "zone 4",
+    "zone2": "zone 2&3",
+    "zone1": "zone 1",
+    "zone0": "zone 0",
+    "What Zone Am I In?": "What Zone Am I In?",
+    "Click on a zone to see which air quality improvement zone you are in.": "Click on a zone to see which air quality improvement zone you are in.",
+    "Zones": "Zones",
+    "Air Quality Index": "Air Quality Index",
+    "Ulaanbaatar": "Ulaanbaatar",
+    "Bayankhongor": "Bayankhongor",
+    "Uvurkhangai": "Uvurkhangai",
+    "Arkhangai": "Arkhangai",
+    "Umnugovi": "Umnugovi",
+    "Darkhan": "Darkhan",
+    "outdoorText": {
+      "good": {
+        "first_advice": "Go For A Walk",
+        "second_advice": "Open Your Windows",
+        "third_advice": "Do Wet Cleaning",
+        "category_text": "Air quality is good. Enjoy the outdoors!"
+      },
+      "moderate": {
+        "first_advice": "Monitor Air Quality",
+        "second_advice": "Use Non-Toxic Cleaning Products",
+        "third_advice": "Avoid Heavy Traffic",
+        "category_text": "Moderate air quality continue monitoring the air"
+      },
+      "unhealthy_sensitive": {
+        "first_advice": "Run An Air Purifier",
+        "second_advice": "Do Not Smoke",
+        "third_advice": "Monitor Your Health",
+        "category_text": "Unhealthy for vulnerable populations of all ages"
+      },
+      "unhealthy": {
+        "first_advice": "Run An Air Purifier",
+        "second_advice": "Close Your Windows",
+        "third_advice": "Wear A Mask Outside",
+        "category_text": "Unhealthy air quality. Monitor your health"
+      },
+      "very_unhealthy": {
+        "first_advice": "Run An Air Purifier",
+        "second_advice": "Monitor Your Health",
+        "third_advice": "Wear A Mask Outside",
+        "category_text": "Very unhealthy! Serious health effects"
+      },
+      "hazardous": {
+        "first_advice": "Stay Home",
+        "second_advice": "Run An Air Purifier",
+        "third_advice": "Wear A Mask Outside",
+        "category_text": "Caution! air quality is hazardous!"
+      }
+    },
+    "indoorText": {
+      "good": {
+        "first_advice": "Do Wet Cleaning",
+        "second_advice": "Do Not Smoke",
+        "third_advice": "Use Non-Toxic Cleaning Products",
+        "category_text": "Air quality is good"
+      },
+      "moderate": {
+        "first_advice": "Monitor Air Quality",
+        "second_advice": "Use Non-Toxic Cleaning Products",
+        "third_advice": "Do Not Smoke",
+        "category_text": "Moderate air quality continue monitoring the air"
+      },
+      "unhealthy_sensitive": {
+        "first_advice": "Run An Air Purifier",
+        "second_advice": "Do Not Smoke",
+        "third_advice": "Monitor Your Health",
+        "category_text": "Unhealthy for vulnerable populations of all ages"
+      },
+      "unhealthy": {
+        "first_advice": "Run An Air Purifier",
+        "second_advice": "Use Non-Toxic Cleaning Products",
+        "third_advice": "Monitor Your Health",
+        "category_text": "Unhealthy air quality. Monitor your health"
+      },
+      "very_unhealthy": {
+        "first_advice": "Run An Air Purifier",
+        "second_advice": "Monitor Your Health",
+        "third_advice": "Improve Your Insulation",
+        "category_text": "Very unhealthy! Serious health effects"
+      },
+      "hazardous": {
+        "first_advice": "Improve Your Insulation",
+        "second_advice": "Run An Air Purifier",
+        "third_advice": "Monitor Your Health",
+        "category_text": "Caution! air quality is hazardous!"
+      }
+    },
+    "zone4_details": "Electricity only, no burning",
+    "zone2_details": "Connecting to grid soon",
+    "zone1_details": "Can burn improved coal",
+    "zone0_details": "Unapproved zone",
+    "Songinokhairkhan": "Сонгинохайрхан",
+    "Bayanzurkh": "Bayanzurkh",
+    "Chingeltei": "Chingeltei",
+    "Sukhbaatar": "Sukhbaatar",
+    "Bayangol": "Bayangol",
+    "Khan Uul": "Хан Khan Uul",
+    "Nalaikh": "Nalaikh"
+  },
+  "home": {
+    "campaignWork": {
+      "seeMore": "See more"
+    },
+    "joinBm": {
+      "opportunities": "Open positions",
+      "applyNow": "Apply Now"
+    },
+    "takeAction": {
+      "title": "Take Action"
+    },
+    "news": {
+      "title": "News"
+    }
+  },
+  "news": {
+    "title": "News",
+    "featuredNews": "Featured news",
+    "featuredVideos": "Featured videos",
+    "morevideos": "see more videos",
+    "latestOnAirPollution": "Latest on air pollution",
+    "latestOnAirPollutionText": "We curate relevant Mongolian and English articles, in addition to writing original pieces about air pollution in Mongolia and worldwide . If you have suggestions, contact <a href='mailto: hello@breathemongolia.org'> hello@breathemongolia.org </a>",
+    "morefilter": "More filter",
+    "agaarNegPlatform": "Agaar Neg platfrom by Breathe Mongolia",
+    "latestOnBm": "Latest on Breathe Mongolia",
+    "seemore": "See more",
+    "allvideos": "Videos",
+    "agaarneg.mn": "agaarneg.mn",
+    "seemoreon": "see more on",
+    "bannerText": "Stay up-to-date with the latest on air pollution and related topics in Mongolia and worldwide",
+    "latestNews": "Latest news",
+    "sourceLanguageEng": "Eng",
+    "sourceLanguageMgl": "Mgl",
+    "all": "All",
+    "teams": "Teams"
+  },
+  "givebutter": {
+    "support": "Support us"
+  },
+  "error": {
+    "oops": "Oops !",
+    "text": "We couldn’t find the page you were looking for.",
+    "return": "Return home"
+  },
+  "search": {
+    "results": "search results for"
+  }
+}

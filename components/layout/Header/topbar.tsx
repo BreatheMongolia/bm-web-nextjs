@@ -1,5 +1,16 @@
 import { ArrowUpIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { SOCIAL_URLS } from 'lib/consts/urls'
+import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
+
+type Option = {
+  value: string
+  label: any // react-dropdown Dropdown Option's label is React.ReactNode
+}
+const availableOptions: Option[] = [
+  { value: 'en', label: 'ENG' },
+  { value: 'mn', label: 'MNG' },
+]
 
 export const Topbar = () => {
   const socialUrls = [
@@ -39,9 +50,14 @@ export const Topbar = () => {
           )
         })}
         {/* Language Selector */}
+        {availableOptions.map((x, idx) => {
+          return (
+            <Link href="/" locale={x.value}>
+              {x.label}
+            </Link>
+          )
+        })}
       </div>
     </div>
   )
 }
-
-const IconButton = () => {}

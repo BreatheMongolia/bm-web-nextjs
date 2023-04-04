@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         'bm-blue': '#3173D0',
+        'action-red': '#EE6161',
       },
       fontSize: {
         '5xl': '2.5rem',

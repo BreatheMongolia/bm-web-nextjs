@@ -1,0 +1,9 @@
+schema: https://breathemon2stg.wpengine.com/graphql
+generates:
+  ./graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+    config:
+      fetcher: fetch

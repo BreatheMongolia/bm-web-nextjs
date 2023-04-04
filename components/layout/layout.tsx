@@ -5,7 +5,7 @@ export const Layout = ({ children }: { children: any }) => {
   return (
     <div className="flex flex-col h-full">
       <Header />
-      <main className="grow"> {children} </main>
+      <main className="grow bg-[#FAFAFF]"> {children} </main>
       <Footer />
     </div>
   )
