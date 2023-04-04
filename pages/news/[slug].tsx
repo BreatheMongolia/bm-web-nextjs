@@ -2,17 +2,20 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api'
-import { CMS_NAME } from '../../lib/constants'
+import { getNewsFull, getNewsPostSlugs } from '../../lib/api'
+import { News } from 'graphql/generated'
 
-export default function Post({ post, posts, preview }) {
+export default function Post({ post }: { post: News }) {
   const router = useRouter()
   // const morePosts = posts?.edges
 
+  console.log(router.isFallback)
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
-
+  // console.log(post)
+  // console.log(post.customFields.featuredImage.image.mediaDetails)
+  // TODO: Get Image URL from the MediaDetails.sizes object
   return (
     <div>
       {router.isFallback ? (
@@ -22,18 +25,13 @@ export default function Post({ post, posts, preview }) {
         <>
           <article>
             <Head>
-              <title>{`${post.title} | Next.js Blog Example with ${CMS_NAME}`}</title>
-              <meta property="og:image" content={post.featuredImage?.node.sourceUrl} />
+              <title>{`${post.customFields.title} - Breathe Mongolia Clean Air Coalition`}</title>
+              {/* <meta property="og:image" content={post.customFields.featuredImage.image.mediaDetails} /> */}
             </Head>
-            {/* <PostHeader
-                title={post.title}
-                coverImage={post.featuredImage}
-                date={post.date}
-                author={post.author}
-                categories={post.categories}
-              /> */}
-            {/* <PostBody content={post.content} /> */}
-            {/* <footer>{post.tags.edges.length > 0 && <Tags tags={post.tags} />}</footer> */}
+            <div className="container max-w-screen-lg">
+              <h1 className="font-bold text-xl"> {post.customFields.title} </h1>
+              <div dangerouslySetInnerHTML={{ __html: post.customFields.body }}></div>
+            </div>
           </article>
 
           {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
@@ -43,24 +41,23 @@ export default function Post({ post, posts, preview }) {
   )
 }
 
-// export const getStaticProps: GetStaticProps = async ({ params, preview = false, previewData }) => {
-//   const data = await getPostAndMorePosts(params?.slug, preview, previewData)
+export const getStaticProps: GetStaticProps = async ({ params, preview = false, previewData }) => {
+  const post = await getNewsFull(params?.slug)
 
-//   return {
-//     props: {
-//       preview,
-//       post: data.post,
-//       posts: data.posts,
-//     },
-//     revalidate: 10,
-//   }
-// }
+  return {
+    props: {
+      preview,
+      post: post,
+    },
+    revalidate: 60,
+  }
+}
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const allPosts = await getAllPostsWithSlug()
+export const getStaticPaths: GetStaticPaths = async () => {
+  const news = await getNewsPostSlugs()
 
-//   return {
-//     paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
-//     fallback: true,
-//   }
-// }
+  return {
+    paths: news.map((x, idx) => `/news/${x.desiredSlug || x.slug || x.databaseId}`) || [],
+    fallback: true,
+  }
+}

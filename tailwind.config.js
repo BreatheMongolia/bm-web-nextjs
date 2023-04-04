@@ -3,12 +3,16 @@ module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './assets/**/*.{js,ts,jsx,tsx}'],
   darkMode: false,
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       colors: {
         'bm-blue': '#3173D0',
         'action-red': '#EE6161',
       },
       fontSize: {
+        xsm: '13px',
         '5xl': '2.5rem',
         '6xl': '2.75rem',
         '7xl': '4.5rem',

@@ -10,11 +10,11 @@ export const Navbar = () => {
   const { t } = useTranslation()
   const matchUrl = `/${i18n.language}`
   return (
-    <div className="w-full flex justify-between px-5 py-1 uppercase text-[13px] tracking-[1px] font-medium bg-white text-black">
+    <div className="w-full flex justify-between px-5 py-1 uppercase text-xsm tracking-[1px] font-medium bg-white text-black">
       <a className="headerLogo" href={matchUrl}>
-        <Image width={300} height={50} src="/images/logo.png" alt="Breathe Mongolia" />
+        <Image width={300} height={100} src="/images/logo.png" alt="Breathe Mongolia" />
       </a>
-      <div className="flex items-center gap-6 ">
+      <div className="flex items-center gap-10 ">
         <MenuItem title={t('nav.home')} href="/" isActive={path == '/'} />
         <MenuItem title={t('nav.takeAction')} href="/take-actions" isActive={path.includes('take-action')} />
         <MenuItem title={t('nav.news')} href="/news" isActive={path.includes('news')} />
