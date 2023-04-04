@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { getAllPostsForHome } from '../lib/api'
-import { CMS_NAME } from '../lib/constants'
+import { PageImageBanner } from 'components/generic/PageImageBanner'
 
 export default function Index() {
   return (
@@ -9,7 +8,18 @@ export default function Index() {
       <Head>
         <title>{`Breathe Mongolia - Clean Air Coalition`}</title>
       </Head>
-      <div>Testing</div>
+      <div>
+        <PageImageBanner
+          imageUrl={{
+            en: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
+            mn: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
+          }}
+          bottomText={{
+            left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
+            right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
+          }}
+        />
+      </div>
     </div>
   )
 }

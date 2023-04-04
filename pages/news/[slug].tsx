@@ -5,7 +5,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { getNewsFull, getNewsPostSlugs } from '../../lib/api'
 import { News } from 'graphql/generated'
 
-export default function Post({ post }: { post: News }) {
+export default function NewsPostPage({ post }: { post: News }) {
   const router = useRouter()
   // const morePosts = posts?.edges
 

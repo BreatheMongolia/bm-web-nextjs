@@ -4,7 +4,7 @@ import { getNewsPosts } from 'lib/api'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
-const News = ({ news }: { news: News[] }) => {
+const NewsPage = ({ news }: { news: News[] }) => {
   const router = useRouter()
 
   return (
@@ -40,7 +40,7 @@ const News = ({ news }: { news: News[] }) => {
   )
 }
 
-export default News
+export default NewsPage
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await getNewsPosts()
