@@ -1,3 +1,14 @@
+import { useTranslation } from 'react-i18next'
+
 export const Footer = () => {
-  return <div className="h-10 bg-bm-blue text-white">Footer</div>
+  const [t, i18n] = useTranslation()
+
+  return (
+    <div className="bg-bm-blue text-white py-5">
+      <div className="container flex text-xs">
+        <div>Logos</div>
+        <div></div>
+      </div>
+    </div>
+  )
 }
