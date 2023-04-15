@@ -12,6 +12,10 @@ div#__next {
 html {
   scroll-behavior: smooth;
 }
+img,
+figure {
+  max-width: 100%;
+}
 /* Start purging... */
 @tailwind components;
 /* Stop purging. */

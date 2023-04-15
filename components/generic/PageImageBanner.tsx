@@ -13,7 +13,7 @@ type BannerProps = {
 export const PageImageBanner = ({ imageUrl, bottomText }: BannerProps) => {
   return (
     // linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%)
-    <div className="w-full bg-bm-blue bg-gradient-to-r from-bm-blue to-[#61b1ee]">
+    <div className="w-full bg-bm-blue bg-gradient-to-r from-bm-blue to-[#61b1ee] hidden sm:block">
       <div>
         <img src={imageUrl.en} alt="" />
       </div>

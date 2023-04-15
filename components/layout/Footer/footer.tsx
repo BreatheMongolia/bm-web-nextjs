@@ -39,13 +39,13 @@ export const Footer = () => {
       },
     ]
     return (
-      <div className="border-t-4 border-bm-blue py-10 bg-inherit">
-        <div className="container grid grid-cols-5 px-7 space-2 uppercase tracking-widest text-slate-700 ">
+      <div className="border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
+        <div className="container flex flex-col sm:grid sm:grid-cols-5 px-7 gap-2 uppercase tracking-widest text-slate-700 ">
           {linkSections.map((x, idx) => {
             return (
               <div key={idx}>
-                <h2 className="font-bold text-lg mb-5"> {x.title} </h2>
-                <div className="flex flex-col gap-3 text-sm font-semibold">
+                <h2 className="font-bold text-lg"> {x.title} </h2>
+                <div className="flex flex-col gap-4 text-sm font-semibold my-7">
                   {x.urls.map((url, i) => {
                     return (
                       <Link href={url.url} target={url.target} key={i} className="hover:text-bm-blue">
@@ -58,7 +58,7 @@ export const Footer = () => {
             )
           })}
           <div className="col-span-2">
-            <h2 className="font-bold text-lg mb-4"> {t('footer.nav.join')} </h2>
+            <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('footer.nav.join')} </h2>
           </div>
         </div>
       </div>
