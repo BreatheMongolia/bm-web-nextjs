@@ -1,6 +1,6 @@
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { News } from 'graphql/generated'
-import { getNewsPosts } from 'lib/api'
+import { getNewsPosts } from 'lib/graphql-api/queries/news'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 

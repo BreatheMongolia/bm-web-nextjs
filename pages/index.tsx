@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
+import { getHomePage } from 'lib/graphql-api/queries/home'
+import { MapComponent, TakeActionCarousel } from 'components/HomePage'
 
 export default function Index() {
   return (
@@ -19,16 +21,21 @@ export default function Index() {
             right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
           }}
         />
+        <div>
+          <MapComponent />
+          <TakeActionCarousel />
+        </div>
       </div>
     </div>
   )
 }
 
-// export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-//   const allPosts = await getAllPostsForHome(preview)
-
-//   return {
-//     props: { allPosts, preview },
-//     revalidate: 10,
-//   }
-// }
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+  const page = await getHomePage('/')
+  // TODO: Utility function to break up page res to separate objects that we can pass down
+  console.log(page)
+  return {
+    props: { page },
+    revalidate: 60,
+  }
+}
