@@ -48,7 +48,7 @@ export const Topbar = () => {
         {/* Language Selector */}
         {availableOptions.map((x, idx) => {
           return (
-            <Link href="/" locale={x.value}>
+            <Link href="/" locale={x.value} key={idx}>
               {x.label}
             </Link>
           )
