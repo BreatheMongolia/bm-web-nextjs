@@ -25,7 +25,7 @@ export const Navbar = () => {
     <div className="">
       <div className="w-full flex justify-between px-2 sm:px-5 py-1 uppercase text-xsm tracking-[1px] font-medium bg-white text-black">
         <Link href="/">
-          <img className="aspect-auto max-h-14 sm:max-h-16" src="/images/logo.png" alt="Breathe Mongolia" />
+          <img className="aspect-auto max-h-14 sm:max-h-16 mb-2" src="/images/logo.png" alt="Breathe Mongolia" />
         </Link>
         <div className="items-center gap-10 hidden lg:flex">
           <MenuItem title={t('nav.home')} href="/" isActive={path == '/'} />

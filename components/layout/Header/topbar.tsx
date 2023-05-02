@@ -23,7 +23,7 @@ export const Topbar = () => {
     SOCIAL_URLS.YOUTUBE,
   ]
   return (
-    <div className="w-full bg-bm-blue text-white px-5 py-2">
+    <div className="w-full bg-bm-blue text-white px-5 py-1">
       <div className="flex justify-end gap-x-2">
         {/* TODO: Replace with search bar */}
         <Link href="/search">

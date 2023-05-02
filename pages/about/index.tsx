@@ -1,11 +1,9 @@
+import { AboutUsHeader } from 'components/AboutUsPage'
+
 const AboutPage = () => {
   return (
     <div>
-      <div> Big Image Header </div>
-      <div> tabs </div>
-      <div> our process </div>
-      <div> why/goals </div>
-      <div> our partners </div>
+      <AboutUsHeader />
     </div>
   )
 }
