@@ -28,8 +28,17 @@ export default function Index({ page }: { page: Page }) {
             right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
           }}
         />
-        <div>
-          <MapComponent />
+        <div className="container mx-auto flex flex-col gap-20">
+          <MapComponent
+            title={{
+              en: page.customFields.mapTitle,
+              mn: page.customFields.mapTitleMn,
+            }}
+            descriptionHtml={{
+              en: page.customFields.mapDescription,
+              mn: page.customFields.mapDescriptionMn,
+            }}
+          />
           {/* Add other page level components here */}
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
         </div>

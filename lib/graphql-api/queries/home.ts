@@ -175,6 +175,13 @@ const HomePageGQLQuerySections = {
         }
     }
     `,
+  map: `
+    # map
+    mapTitle
+    mapTitleMn
+    mapDescription
+    mapDescriptionMn
+    `,
 }
 
 export async function getHomePage(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {
@@ -191,6 +198,7 @@ export async function getHomePage(id: string, idType: PageIdType = PageIdType.Ur
                     ${HomePageGQLQuerySections.joinBm}
                     ${HomePageGQLQuerySections.ourWork}
                     ${HomePageGQLQuerySections.featuredTakeActions}
+                    ${HomePageGQLQuerySections.map}
                 }
             }
         }
