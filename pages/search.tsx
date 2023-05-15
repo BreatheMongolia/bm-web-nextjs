@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
+import { useTranslation } from 'react-i18next'
 
 export default function Index() {
+  const { t } = useTranslation()
   return (
     <div>
       <Head>
