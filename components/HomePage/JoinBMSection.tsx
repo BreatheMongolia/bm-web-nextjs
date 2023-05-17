@@ -22,7 +22,7 @@ export const JoinBMSection = ({
 
   // TEMP: object to test the Volunteers temp section
 
-  // a comment
+  // git
   const volunteersTemp = [
     {
       title: 'Test Volunteer Position',
