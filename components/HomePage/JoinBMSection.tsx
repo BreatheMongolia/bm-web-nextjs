@@ -21,6 +21,8 @@ export const JoinBMSection = ({
   // - Blocked: By API call for volunteer position, but show the UI for now
 
   // TEMP: object to test the Volunteers temp section
+
+  // a comment
   const volunteersTemp = [
     {
       title: 'Test Volunteer Position',
