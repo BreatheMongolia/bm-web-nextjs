@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { getHomePage } from 'lib/graphql-api/queries/home'
 import { useTranslation } from 'react-i18next'
-import { MapComponent, TakeActionCarousel } from 'components/HomePage'
+import { MapComponent, TakeActionCarousel, OurPartners, JoinBMSection } from 'components/HomePage'
 import { Page } from 'graphql/generated'
 
 // TODO: Detect the current language and update fields based on the current language
@@ -41,6 +41,25 @@ export default function Index({ page }: { page: Page }) {
           />
           {/* Add other page level components here */}
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
+          <JoinBMSection
+            title={{
+              en: page.customFields.joinBreatheMongoliaTitle,
+              mn: page.customFields.joinBreatheMongoliaTitleMn,
+            }}
+            descriptionHtml={{
+              en: page.customFields.joinBreatheMongoliaDescription,
+              mn: page.customFields.joinBreatheMongoliaDescriptionMn,
+            }}
+            slider={page.customFields.joinBreatheMongoliaImageSlider}
+            countriesInfoText={page.customFields.countriesInfoText}
+          />
+          <OurPartners
+            title={{
+              en: page.customFields.partnersLogosTitle,
+              mn: page.customFields.partnersLogosTitleMn,
+            }}
+            partnerLogos={page.customFields.partnersLogos}
+          />
         </div>
       </div>
     </div>
