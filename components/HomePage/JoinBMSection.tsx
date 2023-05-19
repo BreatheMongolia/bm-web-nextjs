@@ -1,8 +1,9 @@
 import { H2 } from 'components/generic/Typography'
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import parse from "html-react-parser";
 
 import {
   Page_Customfields_CountriesInfoText,
@@ -62,10 +63,15 @@ export const JoinBMSection = ({
     ]
   }
   // TODO: show countries info section
+  const firstCountriesInfo = countriesInfoText[0];
+  const secondCountriesInfo = countriesInfoText[1];
+  const thirdCountriesInfo = countriesInfoText[2];
   // TODO: Show volunteer positions section
   // - Blocked: By API call for volunteer position, but show the UI for now
-  console.log(`This is in console: ${firstImageLink}`);
-  console.log(`This is in console: ${secondImageLink}`);
+
+  // console.log(`This is in console: ${firstCountriesInfo.infoIcon}`);
+  
+  // console.log(`This is in console: ${secondImageLink}`);
   // TEMP: object to test the Volunteers temp section
   const volunteersTemp = [
     {
@@ -85,6 +91,21 @@ export const JoinBMSection = ({
           <img src={secondImageLink} alt="Photo 2" />
         </div>
       </Slider>
+      <div className="first text">
+        <img src={firstCountriesInfo.infoIcon} alt="" />
+        {parse(firstCountriesInfo.customTextMn)}
+        {firstCountriesInfo.fieldGroupName}
+      </div>
+      <div className="second text">
+        <img src={secondCountriesInfo.infoIcon} alt="" />
+        {parse(secondCountriesInfo.customTextMn)}
+        {secondCountriesInfo.fieldGroupName}
+      </div>
+      <div className="third text">
+        <img src={thirdCountriesInfo.infoIcon} alt="" />
+        {parse(thirdCountriesInfo.customTextMn)}
+        {thirdCountriesInfo.fieldGroupName}
+      </div>
     </div>
   )
 }
