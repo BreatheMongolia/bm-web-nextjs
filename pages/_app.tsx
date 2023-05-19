@@ -1,9 +1,15 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Layout } from '../components/layout/layout'
-import '../styles/index.scss'
+import 'styles/index.scss'
+import 'styles/map-styles.scss'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import Script from 'next/script'
 import { AnimatePresence } from 'framer-motion'
+import { createContext } from 'react'
+import { MapContextInterface } from 'lib/air-pollution-map/types'
+
+export const MapContext = createContext<MapContextInterface | null>(null)
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   // FIXME: Givebutter doesn't seem to be working

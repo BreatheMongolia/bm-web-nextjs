@@ -5,6 +5,7 @@ import { getHomePage } from 'lib/graphql-api/queries/home'
 import { useTranslation } from 'react-i18next'
 import { MapComponent, TakeActionCarousel, OurPartners, JoinBMSection, NewsCarousel } from 'components/HomePage'
 import { Page } from 'graphql/generated'
+import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
 
 // TODO: Detect the current language and update fields based on the current language
 // TODO: Add a util function to extract the correct image size for the imageUrl
@@ -29,16 +30,19 @@ export default function Index({ page }: { page: Page }) {
           }}
         />
         <div className="container mx-auto flex flex-col gap-20">
-          <MapComponent
-            title={{
-              en: page.customFields.mapTitle,
-              mn: page.customFields.mapTitleMn,
-            }}
-            descriptionHtml={{
-              en: page.customFields.mapDescription,
-              mn: page.customFields.mapDescriptionMn,
-            }}
-          />
+          <MapContextWrapper>
+            <MapComponent
+              title={{
+                en: page.customFields.mapTitle,
+                mn: page.customFields.mapTitleMn,
+              }}
+              descriptionHtml={{
+                en: page.customFields.mapDescription,
+                mn: page.customFields.mapDescriptionMn,
+              }}
+            />
+          </MapContextWrapper>
+
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
