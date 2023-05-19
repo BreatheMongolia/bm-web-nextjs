@@ -1,18 +1,18 @@
 import { H2 } from 'components/generic/Typography'
-import { TakeAction } from 'graphql/generated'
+import { Page_Customfields_FeaturedNews } from 'graphql/generated'
 import { useTranslation } from 'react-i18next'
 
-export const TakeActionCarousel = ({ takeActionPosts }: { takeActionPosts: TakeAction[] }) => {
+export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields_FeaturedNews[] }) => {
   const { t } = useTranslation()
 
   return (
     <div>
       <H2
-        title={t('home.takeAction.title')}
-        trailingLineColor="yellow"
+        title={t('home.news.title')}
+        trailingLineColor="blue"
         extraButton={{
           title: t('home.campaignWork.seeMore'),
-          url: '/take-actions',
+          url: '/news',
         }}
       />
     </div>

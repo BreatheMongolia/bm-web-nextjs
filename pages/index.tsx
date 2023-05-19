@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { getHomePage } from 'lib/graphql-api/queries/home'
 import { useTranslation } from 'react-i18next'
-import { MapComponent, TakeActionCarousel, OurPartners, JoinBMSection } from 'components/HomePage'
+import { MapComponent, TakeActionCarousel, OurPartners, JoinBMSection, NewsCarousel } from 'components/HomePage'
 import { Page } from 'graphql/generated'
 
 // TODO: Detect the current language and update fields based on the current language
@@ -40,6 +40,7 @@ export default function Index({ page }: { page: Page }) {
             }}
           />
           {/* Add other page level components here */}
+          <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
           <JoinBMSection
             title={{
