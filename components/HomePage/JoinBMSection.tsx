@@ -1,9 +1,9 @@
 import { H2 } from 'components/generic/Typography'
-import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import parse from "html-react-parser";
+import React from 'react'
+import Slider from 'react-slick'
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
+import parse from 'html-react-parser'
 
 import {
   Page_Customfields_CountriesInfoText,
@@ -22,9 +22,9 @@ export const JoinBMSection = ({
   countriesInfoText: Page_Customfields_CountriesInfoText[]
 }) => {
   // TODO: Slider for the slider images
-  const firstImageLink = slider[0].sliderImageLink;
-  const secondImageLink = slider[1].sliderImageLink;
-  
+  const firstImageLink = slider[0].sliderImageLink
+  const secondImageLink = slider[1].sliderImageLink
+
   const settings = {
     dots: true,
     infinite: false,
@@ -34,7 +34,7 @@ export const JoinBMSection = ({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 15000,
-    cssEase: "linear",
+    cssEase: 'linear',
     adaptiveHeight: true,
     responsive: [
       {
@@ -42,35 +42,35 @@ export const JoinBMSection = ({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 2,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
   // TODO: show countries info section
-  const firstCountriesInfo = countriesInfoText[0];
-  const secondCountriesInfo = countriesInfoText[1];
-  const thirdCountriesInfo = countriesInfoText[2];
+  const firstCountriesInfo = countriesInfoText[0]
+  const secondCountriesInfo = countriesInfoText[1]
+  const thirdCountriesInfo = countriesInfoText[2]
   // TODO: Show volunteer positions section
   // - Blocked: By API call for volunteer position, but show the UI for now
 
   // console.log(`This is in console: ${firstCountriesInfo.infoIcon}`);
-  
+
   // console.log(`This is in console: ${secondImageLink}`);
   // TEMP: object to test the Volunteers temp section
   const volunteersTemp = [
