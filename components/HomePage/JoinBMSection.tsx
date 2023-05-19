@@ -85,10 +85,10 @@ export const JoinBMSection = ({
       {/* {volunteersTemp.map(x)} */}
       <Slider {...settings}>
         <div>
-          <img src={firstImageLink} alt="Photo 1" />
+          <img src={firstImageLink} alt="Photo 1 " />
         </div>
         <div>
-          <img src={secondImageLink} alt="Photo 2" />
+          <img src={secondImageLink} alt="Photo 2 " />
         </div>
       </Slider>
       <div className="first text">
