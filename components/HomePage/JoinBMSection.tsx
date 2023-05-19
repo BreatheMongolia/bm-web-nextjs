@@ -23,45 +23,44 @@ export const JoinBMSection = ({
   // TODO: Slider for the slider images
   const firstImageLink = slider[0].sliderImageLink;
   const secondImageLink = slider[1].sliderImageLink;
-
-  const ImageSlider = () => {
-    const sliderRef = useRef<Slider>(null);
   
-    useEffect(() => {
-      const interval = setInterval(() => {
-        if (sliderRef.current) {
-          const currentSlide = sliderRef.current.innerSlider.state.currentSlide;
-          if (currentSlide === 0) {
-            sliderRef.current.slickGoTo(1);
-          }
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 15000,
+    cssEase: "linear",
+    adaptiveHeight: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 2,
+          dots: true
         }
-      }, 15000);
-  
-      return () => clearInterval(interval);
-    }, []);
-  
-    const settings = {
-      dots: true,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      initialSlide: 0,
-    };
-  
-    return (
-      <Slider {...settings} ref={sliderRef}>
-        <div>
-          <img src={firstImageLink} alt="Photo 1" />
-        </div>
-        <div>
-          <img src={secondImageLink} alt="Photo 2" />
-        </div>
-      </Slider>
-    );
-  };
-  
-
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  }
   // TODO: show countries info section
   // TODO: Show volunteer positions section
   // - Blocked: By API call for volunteer position, but show the UI for now
@@ -78,7 +77,14 @@ export const JoinBMSection = ({
     <div>
       <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
       {/* {volunteersTemp.map(x)} */}
-      <ImageSlider />
+      <Slider {...settings}>
+        <div>
+          <img src={firstImageLink} alt="Photo 1" />
+        </div>
+        <div>
+          <img src={secondImageLink} alt="Photo 2" />
+        </div>
+      </Slider>
     </div>
   )
 }
