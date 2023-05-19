@@ -5,6 +5,7 @@ import { InfoPopup } from './Helpers'
 import { t } from 'i18next'
 import { MapContext } from 'pages/_app'
 import AQIScale from './Helpers/AQIScale'
+import MapController from './MapController/MapController'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -69,6 +70,14 @@ export const MapComponent = ({
         <div id="map" ref={mapContainer} className="map-wrapper">
           <InfoPopup />
         </div>
+        {/* <MapController
+          showStationDetail={showStationDetail}
+          leftRadios={leftRadios}
+          rightRadios={rightRadios}
+          onChangeSensorType={(type: string) => onSensorTypeChange(type)}
+          baseMap={baseMap}
+          onBaseMapChange={(value: string) => onMapStyleChange(value)}
+        /> */}
         {/* Other Layers on top of Map */}
         <AQIScale />
       </div>
