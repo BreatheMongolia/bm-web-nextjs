@@ -22,8 +22,6 @@ export const JoinBMSection = ({
   countriesInfoText: Page_Customfields_CountriesInfoText[]
 }) => {
   // TODO: Slider for the slider images
-  const firstImageLink = slider[0].sliderImageLink
-  const secondImageLink = slider[1].sliderImageLink
 
   const settings = {
     dots: true,
@@ -63,9 +61,6 @@ export const JoinBMSection = ({
     ],
   }
   // TODO: show countries info section
-  const firstCountriesInfo = countriesInfoText[0]
-  const secondCountriesInfo = countriesInfoText[1]
-  const thirdCountriesInfo = countriesInfoText[2]
   // TODO: Show volunteer positions section
   // - Blocked: By API call for volunteer position, but show the UI for now
 
@@ -84,14 +79,22 @@ export const JoinBMSection = ({
       <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
       {/* {volunteersTemp.map(x)} */}
       <Slider {...settings}>
-        <div>
-          <img src={firstImageLink} alt="Photo 1" />
-        </div>
-        <div>
-          <img src={secondImageLink} alt="Photo 2" />
-        </div>
+        {slider.map((x, idx) => {
+          return (
+            <div key={idx}>
+              <img src={x.sliderImage.mediaItemUrl} />
+            </div>
+          )
+        })}
       </Slider>
-      <div className="first text">
+      {countriesInfoText.map((x, idx) => {
+        return (
+          <div key={idx}>
+            <img src={x.infoIcon.mediaItemUrl} />
+          </div>
+        )
+      })}
+      {/* <div className="first text">
         <img src={firstCountriesInfo.infoIcon} alt="" />
         {parse(firstCountriesInfo.customTextMn)}
         {firstCountriesInfo.fieldGroupName}
@@ -105,7 +108,7 @@ export const JoinBMSection = ({
         <img src={thirdCountriesInfo.infoIcon} alt="" />
         {parse(thirdCountriesInfo.customTextMn)}
         {thirdCountriesInfo.fieldGroupName}
-      </div>
+      </div> */}
     </div>
   )
 }
