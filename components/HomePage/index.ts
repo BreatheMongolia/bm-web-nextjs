@@ -1,4 +1,5 @@
-export * from './MapComponent'
+export * from './MapComponent/MapComponent'
 export * from './TakeActionCarousel'
 export * from './OurPartners'
 export * from './JoinBMSection'
+export * from './NewsCarousel'

@@ -1,12 +1,10 @@
+import { NewsCard } from 'components/Cards'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { News } from 'graphql/generated'
 import { getNewsPosts } from 'lib/graphql-api/queries/news'
 import { GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
 
 const NewsPage = ({ news }: { news: News[] }) => {
-  const router = useRouter()
-
   return (
     <div>
       <PageImageBanner
@@ -19,21 +17,9 @@ const NewsPage = ({ news }: { news: News[] }) => {
           right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
         }}
       />
-      <div className="container grid sm:grid-cols-4 gap-5 py-5">
+      <div className="container grid sm:grid-cols-4 gap-2 py-5">
         {news.map((x, idx) => {
-          return (
-            <div key={idx}>
-              <div
-                className="cursor-pointer hover:opacity-50"
-                onClick={() => {
-                  // TODO: source link, target=_blank or history.push()
-                  router.push(`/news/${x.desiredSlug || x.slug || x.databaseId}`)
-                }}
-              >
-                <div className="bg-zinc-300 rounded-md h-full">{x.customFields.title}</div>{' '}
-              </div>
-            </div>
-          )
+          return <NewsCard key={idx} news={x} />
         })}
       </div>
     </div>
