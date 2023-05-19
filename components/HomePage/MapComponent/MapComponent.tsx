@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { InfoPopup } from './Helpers'
 import { t } from 'i18next'
 import { MapContext } from 'pages/_app'
+import AQIScale from './Helpers/AQIScale'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -63,12 +64,13 @@ export const MapComponent = ({
   return (
     <div className="aqi-map-wrapper">
       <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
-      <div className={`map-container ${showStationDetail && 'station-detail-open'}`}>
+      <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map_dropdowns"></div>
         <div id="map" ref={mapContainer} className="map-wrapper">
           <InfoPopup />
         </div>
         {/* Other Layers on top of Map */}
+        <AQIScale />
       </div>
     </div>
   )
