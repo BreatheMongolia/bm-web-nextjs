@@ -1,11 +1,13 @@
+import { useEffect, useState } from 'react'
+
 const SimpleButton = ({ text, color = 'bg-sky-500' }: { text: string; color?: 'bg-sky-500' | 'bg-action-red' }) => {
-  const getBorderColor = () => {
-    return color === 'bg-sky-500' ? 'border-sky-600' : 'border-red-700'
-  }
+  const [borderColor, setBorderColor] = useState('')
+  useEffect(() => setBorderColor(color === 'bg-sky-500' ? 'border-sky-600' : 'border-red-700'), [color])
+
   return (
     <div
       className={`rounded-xl relative inline-flex group items-center justify-center px-8 py-2 m-1 cursor-pointer 
-    border-2 ${color} active:${getBorderColor()}
+    border-2 ${color} active:${borderColor}
     active:shadow-none shadow-lg 
     text-white uppercase text-md tracking-wide `}
     >

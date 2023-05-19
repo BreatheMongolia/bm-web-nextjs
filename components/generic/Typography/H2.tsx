@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 export const H2 = ({
   title,
@@ -17,7 +18,9 @@ export const H2 = ({
   descriptionHtml?: string
 }) => {
   const TrailingLine = () => {
-    const borderColor = trailingLineColor === 'yellow' ? 'border-amber-400' : 'border-bm-blue'
+    // Setting state and useEffect removes the hydration error from static generation
+    const [borderColor, setBorderColor] = useState('border-amber-400')
+    useEffect(() => setBorderColor(trailingLineColor === 'yellow' ? 'border-amber-400' : 'border-bm-blue'), [])
     return <div className={`border-b-2 grow ${borderColor}`}></div>
   }
   const ExtraButton = () => {
@@ -40,7 +43,7 @@ export const H2 = ({
       </div>
 
       {descriptionHtml && (
-        <p className="mt-2 mb-5 text-zinc-600" dangerouslySetInnerHTML={{ __html: descriptionHtml }}></p>
+        <div className="mt-2 mb-5 text-zinc-600" dangerouslySetInnerHTML={{ __html: descriptionHtml }}></div>
       )}
     </div>
   )
