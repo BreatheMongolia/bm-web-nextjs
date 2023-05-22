@@ -1,9 +1,12 @@
-import { H2 } from 'components/generic/Typography'
-import React from 'react'
-import Slider from 'react-slick'
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
-import parse from 'html-react-parser'
+import { H2 } from 'components/generic/Typography';
+import React, { FC } from "react";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import parse from 'html-react-parser';
+import Slider from 'react-slick';
+
 
 import {
   Page_Customfields_CountriesInfoText,
@@ -32,7 +35,7 @@ export const JoinBMSection = ({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 15000,
-    cssEase: 'linear',
+    cssEase: "linear",
     adaptiveHeight: true,
     responsive: [
       {
@@ -40,26 +43,27 @@ export const JoinBMSection = ({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 2,
-          dots: true,
-        },
+          dots: true
+        }
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 2,
-        },
+          initialSlide: 2
+        }
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+          slidesToScroll: 1
+        }
+      }
+    ]
   }
+
   // TODO: show countries info section
   // TODO: Show volunteer positions section
   // - Blocked: By API call for volunteer position, but show the UI for now
@@ -68,47 +72,38 @@ export const JoinBMSection = ({
 
   // console.log(`This is in console: ${secondImageLink}`);
   // TEMP: object to test the Volunteers temp section
-  const volunteersTemp = [
-    {
-      title: 'Test Volunteer Position',
-      url: 'https://www.notion.so/breathemongolia/Fundraising-Manager-3c5a7d35aaad4b92939eaab909d270e4',
-    },
-  ]
+  const renderSlides = () =>
+    slider.map(x => (
+      <div>
+        <img src={x.sliderImage.mediaItemUrl} />
+      </div>
+    ));
+
   return (
-    <div>
+    <div className='join-bm'>
       <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
-      {/* {volunteersTemp.map(x)} */}
-      <Slider {...settings}>
-        {slider.map((x, idx) => {
-          return (
-            <div key={idx}>
-              <img src={x.sliderImage.mediaItemUrl} />
-            </div>
-          )
-        })}
-      </Slider>
-      {countriesInfoText.map((x, idx) => {
-        return (
-          <div key={idx}>
-            <img src={x.infoIcon.mediaItemUrl} />
+      <div className='join-bm-section'>
+        <div className='photo-slider'>
+          <Slider {...settings}>
+            {renderSlides()}
+          </Slider>
+        </div>
+        <div className='volunteer-info'>
+          <div className='volunteer-count'>
+            {countriesInfoText.map(x => {
+              return (
+                <div className='country-text'>
+                  <img className='volunteer-hours' src={x.infoIcon.mediaItemUrl} />
+                  {x.customTextMn && <div className="text-data-custom">{parse(x.customTextMn)}</div>}
+                </div>
+              )
+            })}
           </div>
-        )
-      })}
-      {/* <div className="first text">
-        <img src={firstCountriesInfo.infoIcon} alt="" />
-        {parse(firstCountriesInfo.customTextMn)}
-        {firstCountriesInfo.fieldGroupName}
+          <div className='volunteer-opportunity'>
+
+          </div>
+        </div>
       </div>
-      <div className="second text">
-        <img src={secondCountriesInfo.infoIcon} alt="" />
-        {parse(secondCountriesInfo.customTextMn)}
-        {secondCountriesInfo.fieldGroupName}
-      </div>
-      <div className="third text">
-        <img src={thirdCountriesInfo.infoIcon} alt="" />
-        {parse(thirdCountriesInfo.customTextMn)}
-        {thirdCountriesInfo.fieldGroupName}
-      </div> */}
     </div>
   )
 }
