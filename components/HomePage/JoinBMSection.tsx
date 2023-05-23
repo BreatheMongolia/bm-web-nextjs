@@ -1,8 +1,5 @@
 import { H2 } from 'components/generic/Typography'
-import React, { FC } from 'react'
-
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import React from 'react'
 
 import parse from 'html-react-parser'
 import Slider from 'react-slick'
