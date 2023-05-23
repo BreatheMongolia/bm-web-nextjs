@@ -14,7 +14,9 @@ const MAP_BASE_CONFIG = {
   zoom: 12,
   style: 'streets-v11',
 }
-// Set mapbox API KEY
+// FIXME: Bad to hardcode the API KEY in the code. But since it's static rendering it was easier this way.
+const MAPBOX_KEY =
+  'pk.eyJ1IjoiYnJlYXRoZW1vbmdvbGlhIiwiYSI6ImNrMjhnMHU4bDEwOXkzaXFodnFiaW1heHIifQ.7MPVleYVPDUY10UE200Zow'
 
 export const MapComponent = ({
   title,
@@ -34,8 +36,6 @@ export const MapComponent = ({
   const [baseMap, setBaseMap] = useState(map?.style?.stylesheet?.id || MAP_BASE_CONFIG.style)
 
   useEffect(() => {
-    // FIXME: MapBox API Key not working
-    return
     if (!map) {
       // Initialize map once when the MapComponent rendered at the first time
       const newMap = new mapboxgl.Map({
@@ -43,7 +43,7 @@ export const MapComponent = ({
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [MAP_BASE_CONFIG.lng, MAP_BASE_CONFIG.lat],
         zoom: zoom,
-        accessToken: process.env.MAPBOX_TOKEN,
+        accessToken: MAPBOX_KEY,
       })
       // disable the scroll since the map is full width of the page, and user can't scroll down
       newMap.scrollZoom.disable()
@@ -85,9 +85,8 @@ export const MapComponent = ({
       <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
       <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map_dropdowns"></div>
-        <div id="map" ref={mapContainer} className="map-wrapper">
-          <InfoPopup />
-        </div>
+        <div id="map" ref={mapContainer} className="map-wrapper"></div>
+        <InfoPopup />
         <MapController
           leftRadios={leftRadios}
           rightRadios={rightRadios}
