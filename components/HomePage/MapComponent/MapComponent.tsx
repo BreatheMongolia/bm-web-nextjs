@@ -6,6 +6,7 @@ import { t } from 'i18next'
 import { MapContext } from 'pages/_app'
 import AQIScale from './Helpers/AQIScale'
 import MapController from './MapController/MapController'
+import { leftRadios, rightRadios } from './consts'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -62,6 +63,23 @@ export const MapComponent = ({
       document.getElementById('map').replaceWith(map.getContainer())
     }
   }, [])
+
+  // MapController Hooks
+  const onSensorTypeChange = (type: string) => {
+    setShowStationDetail(false)
+    mapContext?.setSelectedStation(null)
+
+    if (type === 'indoor') {
+      mapContext?.setShowIndoor(!mapContext?.showIndoor)
+    } else {
+      mapContext?.setShowOutdoor(!mapContext?.showOutdoor)
+    }
+  }
+  const onMapStyleChange = (value: string) => {
+    setBaseMap(value)
+    map?.setStyle('mapbox://styles/mapbox/' + value)
+  }
+
   return (
     <div className="aqi-map-wrapper">
       <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
@@ -70,14 +88,13 @@ export const MapComponent = ({
         <div id="map" ref={mapContainer} className="map-wrapper">
           <InfoPopup />
         </div>
-        {/* <MapController
-          showStationDetail={showStationDetail}
+        <MapController
           leftRadios={leftRadios}
           rightRadios={rightRadios}
           onChangeSensorType={(type: string) => onSensorTypeChange(type)}
           baseMap={baseMap}
           onBaseMapChange={(value: string) => onMapStyleChange(value)}
-        /> */}
+        />
         {/* Other Layers on top of Map */}
         <AQIScale />
       </div>
