@@ -71,26 +71,28 @@ export const JoinBMSection = ({
     },
   ]
 
+  const descriptionInMng = descriptionHtml.mn.substring(0, 326) + "." + descriptionHtml.mn.substring(326);
+
   // TODO: show countries info section
   // TODO: Show volunteer positions section
   // - Blocked: By API call for volunteer position, but show the UI for now
 
 
-  // console.log(`This is in console: ${descriptionHtml.mn}`);
+  // console.log(`This is in console: ${descriptionHtml.mn}, ${descriptionHtml.mn.length}`);
   // TEMP: object to test the Volunteers temp section
 
   return (
     <div className="join-bm-slider-wrapper custom-sections-gap">
       <div className="home-main-content">
-      <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
+      <H2 title={title.mn} descriptionHtml={descriptionInMng} />
         <div className="join_bm_carousel_sec">
             <div className="membersPhoto">
               <Slider {...settings}>
                 {slider.map(x => (
-      <div key={x.sliderImage.databaseId}>
-        <img className='slider-image' src={x.sliderImage.mediaItemUrl} />
-      </div>
-    ))}
+                  <div key={x.sliderImage.databaseId}>
+                    <img className='slider-image' src={x.sliderImage.mediaItemUrl} />
+                  </div>
+                ))}
               </Slider>
             </div>
           <div className="volunteer-count">
