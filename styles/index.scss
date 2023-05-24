@@ -79,10 +79,10 @@ figure {
   @apply table ml-0 mr-0;
 }
 
-.wp-block-image .alignleft>figcaption,
-.wp-block-image .alignright>figcaption,
-.wp-block-image .aligncenter>figcaption,
-.wp-block-image.is-resized>figcaption {
+.wp-block-image .alignleft > figcaption,
+.wp-block-image .alignright > figcaption,
+.wp-block-image .aligncenter > figcaption,
+.wp-block-image.is-resized > figcaption {
   @apply table-caption;
 
   caption-side: bottom;
@@ -177,13 +177,13 @@ p {
 
           p {
             display: inline-block;
-            font-family: "Open Sans";
+            font-family: 'Open Sans';
             font-style: normal;
             font-weight: 800;
             font-size: 38px;
             line-height: 52px;
             text-align: center;
-            letter-spacing: .0000010729px;
+            letter-spacing: 0.0000010729px;
             background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: rgba(0, 0, 0, 0);
@@ -200,7 +200,7 @@ p {
 
           body {
             margin: 0;
-            font-family: "Open Sans", sans-serif;
+            font-family: 'Open Sans', sans-serif;
             background-color: #fafaff;
           }
 
@@ -209,6 +209,68 @@ p {
       }
     }
 
-    .volunteer-opportunity {}
+    .volunteer-opportunity {
+    }
+  }
+
+  // Our-Partners spinner custom styles
+
+  .our-partners {
+
+    .partner-logos-slider-wrapper {
+      .slick-slide {
+        padding: 0 5px;
+        div {
+          transition: none;
+        }
+        &:first-child {
+          margin-left: 0;
+          padding-left: 0;
+        }
+        &:last-child {
+          margin-right: 18px;
+          padding-right: 10px;
+        }
+      }
+      /* the parent */
+      .slick-list {
+        padding: 0 -5x;
+      }
+    }
+
+    .custom-sections-gap {
+      padding-top: 25px;
+      padding-bottom: 50px;
+    }
+
+    .spinner-overlay {
+      height: 60vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spinner-container {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(195, 195, 195, 0.6);
+      border-radius: 50%;
+      border-top-color: #636767;
+      animation: spin 1s ease-in-out infinite;
+      -webkit-animation: spin 1s ease-in-out infinite;
+
+      @keyframes spin {
+        to {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+      @-webkit-keyframes spin {
+        to {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+    }
   }
 }

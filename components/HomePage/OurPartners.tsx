@@ -1,15 +1,13 @@
+import React from 'react'
 import { H2 } from 'components/generic/Typography'
 import { Page_Customfields_PartnersLogos } from 'graphql/generated'
-import Slider from "react-slick"
+import Slider from 'react-slick'
 
 export const OurPartners = ({
   title,
   partnerLogos,
 }: {
-  title: {
-    en: string
-    mn: string
-  }
+  title: { en: string; mn: string }
   partnerLogos: Page_Customfields_PartnersLogos[]
 }) => {
   // console.log(title, partnerLogos)
@@ -25,7 +23,7 @@ export const OurPartners = ({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
-    cssEase: "linear",
+    cssEase: 'linear',
     adaptiveHeight: true,
     responsive: [
       {
@@ -34,35 +32,53 @@ export const OurPartners = ({
           slidesToShow: 4,
           slidesToScroll: 2,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
 
+  // const renderPartners = () =>
+  //   partnerLogos.map(x => (
+  //     <div>
+  //       <img src={x.partnersLogosImage.mediaItemUrl} />
+  //     </div>
+  //   ))
+
   return (
-    <div>
+    <div className="our-partners">
       <H2 title={title.mn} />
-      {/* <Slider {...settings}> */}
-          {partnerLogos.map((x, idx) => {
-            return <div key={idx}>{x.partnersLogosImage.mediaItemUrl}</div>
-          })}
-      {/* </Slider> */}
+      <div className="partner-logos-slider-wrapper custom-sections-gap">
+
+      {/* <div className="spinner-overlay spinner-container"> */}
+          <Slider {...settings}>
+        {/* <div className="spinner-overlay spinner-container"> */}
+            {partnerLogos.map((x, idx) => (
+                <div key={idx}>
+                  <a href={x.partnersLogosUrls} target="_blank">
+                    <img src={x.partnersLogosImage.mediaItemUrl} alt="" />
+                  </a>
+                </div>
+              )
+            )}
+        {/* </div> */}
+        </Slider>
+      </div>
     </div>
   )
 }

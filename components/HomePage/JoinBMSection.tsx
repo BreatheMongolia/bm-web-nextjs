@@ -1,7 +1,7 @@
 import { H2 } from 'components/generic/Typography'
 import React from 'react'
 
-import parse from 'html-react-parser'
+// import parse from 'html-react-parser'
 import Slider from 'react-slick'
 
 import {
@@ -88,7 +88,7 @@ export const JoinBMSection = ({
               return (
                 <div className="country-text">
                   <img className="volunteer-hours" src={x.infoIcon.mediaItemUrl} />
-                  {x.customTextMn && <div className="text-data-custom">{parse(x.customTextMn)}</div>}
+                  {/* {x.customTextMn && <div className="text-data-custom">{parse(x.customTextMn)}</div>} */}
                 </div>
               )
             })}
