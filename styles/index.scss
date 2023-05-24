@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
 @tailwind base;
+@import url(https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css);
 
 /* Write your own custom base styles here */
 html,
@@ -133,5 +135,80 @@ p {
 
   a:hover {
     @apply text-blue-400;
+  }
+}
+
+.join-bm-section {
+  display: flex;
+  gap: 10px;
+  padding-top: 35px;
+
+  .photo-slider {
+    width: 65%;
+  }
+
+  .volunteer-info {
+    .volunteer-count {
+      display: flex;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: flex-start !important;
+      width: 340px;
+
+      .country-text {
+        padding-right: 40px;
+        box-sizing: border-box;
+
+        div {
+          display: block;
+        }
+
+        .volunteer-hours {
+          width: 20px;
+          height: 20px;
+        }
+
+        .text-data-custom {
+          box-sizing: border-box;
+
+          div {
+            display: block;
+          }
+
+          p {
+            display: inline-block;
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: 800;
+            font-size: 38px;
+            line-height: 52px;
+            text-align: center;
+            letter-spacing: .0000010729px;
+            background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: rgba(0, 0, 0, 0);
+            margin: 0;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+          }
+
+          .text-center {
+            text-align: center;
+          }
+
+          body {
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+            background-color: #fafaff;
+          }
+
+          webkit-font-smoothing: antialiased;
+        }
+      }
+    }
+
+    .volunteer-opportunity {}
   }
 }
