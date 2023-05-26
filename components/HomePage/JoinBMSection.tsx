@@ -8,6 +8,7 @@ import parse from 'html-react-parser';
 import Slider from 'react-slick';
 
 
+
 import {
   Page_Customfields_CountriesInfoText,
   Page_Customfields_JoinBreatheMongoliaImageSlider,
@@ -25,6 +26,7 @@ export const JoinBMSection = ({
   countriesInfoText: Page_Customfields_CountriesInfoText[]
 }) => {
   // TODO: Slider for the slider images
+
 
   const settings = {
     dots: true,
@@ -63,6 +65,7 @@ export const JoinBMSection = ({
       }
     ]
   }
+
 
   const volunteersTemp = [
     {
