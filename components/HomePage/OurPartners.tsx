@@ -10,10 +10,7 @@ export const OurPartners = ({
   title: { en: string; mn: string }
   partnerLogos: Page_Customfields_PartnersLogos[]
 }) => {
-  // console.log(title, partnerLogos)
-  // TODO: Add <Slider /> component (react-slick)
-  // TODO: Div/styling for images within Slider
-
+  // Styling the settings for partner-logo images within Slider
   const settings = {
     dots: false,
     infinite: true,
@@ -24,7 +21,7 @@ export const OurPartners = ({
     autoplay: true,
     autoplaySpeed: 5000,
     cssEase: 'linear',
-    adaptiveHeight: true,
+    adaptiveHeight: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -53,31 +50,19 @@ export const OurPartners = ({
     ],
   }
 
-  // const renderPartners = () =>
-  //   partnerLogos.map(x => (
-  //     <div>
-  //       <img src={x.partnersLogosImage.mediaItemUrl} />
-  //     </div>
-  //   ))
-
   return (
     <div className="our-partners">
       <H2 title={title.mn} />
-      <div className="partner-logos-slider-wrapper custom-sections-gap">
-
-      {/* <div className="spinner-overlay spinner-container"> */}
-          <Slider {...settings}>
-        {/* <div className="spinner-overlay spinner-container"> */}
-            {partnerLogos.map((x, idx) => (
-                <div key={idx}>
-                  <a href={x.partnersLogosUrls} target="_blank">
-                    <img src={x.partnersLogosImage.mediaItemUrl} alt="" />
-                  </a>
-                </div>
-              )
-            )}
-        {/* </div> */}
-        </Slider>
+      <div className="partner-logos-slider-wrapper">
+      <Slider {...settings}>
+        {partnerLogos.map((x, idx) => (
+          <div key={idx}>
+            <a href={x.partnersLogosUrls} target="_blank">
+              <img className="object-cover h-150" src={x.partnersLogosImage.mediaItemUrl} alt="" loading="lazy" />
+            </a>
+          </div>
+        ))}
+      </Slider>
       </div>
     </div>
   )
