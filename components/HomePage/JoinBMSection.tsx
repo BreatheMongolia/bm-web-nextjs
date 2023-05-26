@@ -27,6 +27,7 @@ export const JoinBMSection = ({
 }) => {
   // TODO: Slider for the slider images
 
+
   const settings = {
     dots: true,
     infinite: false,
