@@ -1,17 +1,17 @@
 import { H2 } from 'components/generic/Typography'
 import { TakeAction } from 'graphql/generated'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const TakeActionCarousel = ({ takeActionPosts }: { takeActionPosts: TakeAction[] }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('home')
 
   return (
     <div>
       <H2
-        title={t('home.takeAction.title')}
+        title={t('takeAction.title')}
         trailingLineColor="yellow"
         extraButton={{
-          title: t('home.campaignWork.seeMore'),
+          title: t('campaignWork.seeMore'),
           url: '/take-actions',
         }}
       />

@@ -2,16 +2,29 @@ import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { getHomePage } from 'lib/graphql-api/queries/home'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import { MapComponent, TakeActionCarousel, OurPartners, JoinBMSection, NewsCarousel } from 'components/HomePage'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Page } from 'graphql/generated'
 import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
+import { useEffect } from 'react'
 
 // TODO: Detect the current language and update fields based on the current language
 // TODO: Add a util function to extract the correct image size for the imageUrl
 
 export default function Index({ page }: { page: Page }) {
   const { t } = useTranslation()
+  const router = useRouter()
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    // Get the current language from the URL (e.g., "mn" or "en")
+    const { locale } = router
+    if (locale) {
+      i18n.changeLanguage(locale)
+    }
+  }, [])
   // You can get the inner objects from the page object - it has all the content needed for the Components needed for the page.
   return (
     <div>
@@ -71,12 +84,11 @@ export default function Index({ page }: { page: Page }) {
   )
 }
 // This calls the API first and then loads the page
-export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+export const getStaticProps: GetStaticProps = async ({ preview = false, locale }) => {
   const page = await getHomePage('/')
-  console.log(page)
   // this return passes it to the above component
   return {
-    props: { page },
+    props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page },
     // This tells the page how often to refetch from the API (in seconds)
     revalidate: 60,
   }

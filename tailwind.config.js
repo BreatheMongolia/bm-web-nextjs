@@ -18,6 +18,7 @@ module.exports = {
         'action-red': '#EE6161',
       },
       fontSize: {
+        sm: '12px',
         xsm: '13px',
         '5xl': '2.5rem',
         '6xl': '2.75rem',
@@ -27,6 +28,10 @@ module.exports = {
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',
         medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
+      },
+      spacing: {
+        40: '40px',
+        64: '64px',
       },
     },
   },

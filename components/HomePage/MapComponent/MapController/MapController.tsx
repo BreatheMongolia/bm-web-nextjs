@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import './style.scss'
 import { MapContext } from 'pages/_app'
 
