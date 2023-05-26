@@ -1,7 +1,7 @@
-import React, { FC, useContext } from "react"
-import { MapContext } from "../../App"
-import { useTranslation } from "react-i18next"
-import "./style.scss"
+import React, { FC, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
+import './style.scss'
+import { MapContext } from 'pages/_app'
 
 type Props = {
   leftRadios: any[]
@@ -18,13 +18,13 @@ const MapController: FC<Props> = ({
   onChangeSensorType,
   baseMap,
   showStationDetail,
-  onBaseMapChange
+  onBaseMapChange,
 }) => {
   const { t, i18n } = useTranslation()
   const mapContext = useContext(MapContext)
 
   return (
-    <div className={"controller_container"}>
+    <div className={'controller_container'}>
       <div id="sensor_switch">
         {leftRadios.map((item: { id: string; value: string; label: string; sublabel: string }, index) => (
           <div className="radio_wrapper" key={index}>
@@ -34,7 +34,7 @@ const MapController: FC<Props> = ({
               type="checkbox"
               name="stoggle"
               value={item.value}
-              checked={item.value === "outdoor" ? mapContext?.showOutdoor : mapContext?.showIndoor}
+              checked={item.value === 'outdoor' ? mapContext?.showOutdoor : mapContext?.showIndoor}
               onChange={() => onChangeSensorType(item.value)}
             />
             <label htmlFor={item.id}>
