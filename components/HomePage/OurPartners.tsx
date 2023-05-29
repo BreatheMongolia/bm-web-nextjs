@@ -20,8 +20,6 @@ export const OurPartners = ({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
-    cssEase: 'linear',
-    adaptiveHeight: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -58,7 +56,7 @@ export const OurPartners = ({
         {partnerLogos.map((x, idx) => (
           <div key={idx}>
             <a href={x.partnersLogosUrls} target="_blank">
-              <img className="object-cover h-150" src={x.partnersLogosImage.mediaItemUrl} alt="" loading="lazy" />
+              <img src={x.partnersLogosImage.mediaItemUrl} alt="" loading="lazy" />
             </a>
           </div>
         ))}
