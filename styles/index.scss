@@ -269,54 +269,8 @@ p {
       color: #2c2d41;
       transition: all 0.3s ease;
 
-<<<<<<< HEAD
-        .volunteer-hours {
-          width: 20px;
-          height: 20px;
-        }
-
-        .text-data-custom {
-          box-sizing: border-box;
-
-          div {
-            display: block;
-          }
-
-          p {
-            display: inline-block;
-            font-family: 'Open Sans';
-            font-style: normal;
-            font-weight: 800;
-            font-size: 38px;
-            line-height: 52px;
-            text-align: center;
-            letter-spacing: 0.0000010729px;
-            background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: rgba(0, 0, 0, 0);
-            margin: 0;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-          }
-
-          .text-center {
-            text-align: center;
-          }
-
-          body {
-            margin: 0;
-            font-family: 'Open Sans', sans-serif;
-            background-color: #fafaff;
-          }
-
-          webkit-font-smoothing: antialiased;
-        }
-=======
       &:hover {
         color: #3174d0;
->>>>>>> 8fa0da729358f1c0e7d010d56bcfdbcc2aa5acef
       }
     }
     .apply_now_button {
@@ -339,9 +293,6 @@ p {
       text-align: center;
       letter-spacing: normal;
 
-<<<<<<< HEAD
-    .volunteer-opportunity {
-=======
       &:hover {
         background: #61b1ee;
       }
@@ -409,7 +360,6 @@ p {
       .title {
         padding-top: 0;
       }
->>>>>>> 8fa0da729358f1c0e7d010d56bcfdbcc2aa5acef
     }
   }
 
