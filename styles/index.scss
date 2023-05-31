@@ -77,10 +77,10 @@ figure {
   @apply table ml-0 mr-0;
 }
 
-.wp-block-image .alignleft > figcaption,
-.wp-block-image .alignright > figcaption,
-.wp-block-image .aligncenter > figcaption,
-.wp-block-image.is-resized > figcaption {
+.wp-block-image .alignleft>figcaption,
+.wp-block-image .alignright>figcaption,
+.wp-block-image .aligncenter>figcaption,
+.wp-block-image.is-resized>figcaption {
   @apply table-caption;
 
   caption-side: bottom;
@@ -149,17 +149,21 @@ p {
     margin-top: 26px;
     margin-bottom: 12px;
   }
+
   .join_bm_carousel_sec {
     margin-top: 35px;
     display: flex;
     gap: 10px;
   }
+
   .membersPhoto {
     width: 62%;
   }
+
   .country_count_col:not(:nth-of-type(3)) {
     padding-right: 40px;
   }
+
   .slick-dots li button:before {
     content: "";
     width: 12px;
@@ -169,6 +173,7 @@ p {
     border-radius: 100%;
     opacity: 1 !important;
   }
+
   .slick-dots li.slick-active button:before {
     background: #646464;
   }
@@ -191,6 +196,7 @@ p {
       margin: 0;
     }
   }
+
   .slider-image {
     width: fit-content;
     margin-left: auto;
@@ -198,15 +204,18 @@ p {
     height: 350px;
     outline: none;
   }
+
   .volunteer-count {
     margin: auto;
     width: fit-content;
   }
+
   .volunteer-count-section {
     justify-content: center;
     align-items: flex-start !important;
     width: 340px;
   }
+
   .flex-row {
     display: flex !important;
     flex-wrap: wrap !important;
@@ -214,7 +223,7 @@ p {
   }
 
   .text-data-custom {
-    > p {
+    >p {
       display: inline-block;
       font-family: "Open Sans";
       font-style: normal;
@@ -230,7 +239,8 @@ p {
       text-fill-color: transparent;
       margin: 0;
     }
-    > pre {
+
+    >pre {
       font-family: "Open Sans";
       font-style: normal;
       font-weight: 800;
@@ -246,8 +256,10 @@ p {
       margin: 0;
     }
   }
+
   .opportunity-section {
     margin-top: 30px;
+
     .title {
       font-family: "Open Sans";
       font-style: normal;
@@ -258,9 +270,11 @@ p {
       margin-top: 0 !important;
       margin-bottom: 8px;
     }
+
     .position-list {
       padding-left: 20px;
     }
+
     .pos_link_url {
       font-family: "Open Sans";
       font-style: normal;
@@ -273,6 +287,7 @@ p {
         color: #3174d0;
       }
     }
+
     .apply_now_button {
       margin-top: 10px;
       display: inline-flex;
@@ -298,6 +313,7 @@ p {
       }
     }
   }
+
   .country-text {
     img {
       width: 20px;
@@ -318,10 +334,12 @@ p {
       margin: auto;
       width: 90% !important;
       flex-direction: column;
+
       .volunteer-count-section {
         width: 350px;
         flex-wrap: nowrap !important;
       }
+
       .opportunity-section {
         width: 350px;
       }
@@ -337,26 +355,32 @@ p {
         font-size: 15px;
       }
     }
+
     .join_bm_carousel_sec {
       flex-direction: column;
       gap: 60px;
     }
+
     .membersPhoto {
       width: 85%;
       margin: 0 auto;
     }
+
     .slider-image {
       object-position: top center;
       margin: 0 auto;
     }
+
     .volunteer-count {
       display: flex;
       width: 75%;
       gap: 40px;
       margin: 0 auto;
     }
+
     .opportunity-section {
       margin-top: 0px;
+
       .title {
         padding-top: 0;
       }
@@ -364,25 +388,39 @@ p {
   }
 
   // Our-Partners Section custom styles
-
   .partner-logos-slider-wrapper {
+
+
     .slick-slide {
       padding: 0 5px;
+
       div {
         transition: none;
       }
+
       &:first-child {
         margin-left: 0;
         padding-left: 0;
       }
+
       &:last-child {
         margin-right: 18px;
         padding-right: 10px;
       }
     }
+
     /* the parent */
     .slick-list {
       padding: 0 -5x;
     }
+  }
+}
+
+
+.partner-logos-slider-wrapper {
+  .slick-track {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -52,15 +52,15 @@ export const OurPartners = ({
     <div className="our-partners">
       <H2 title={title.mn} />
       <div className="partner-logos-slider-wrapper">
-      <Slider {...settings}>
-        {partnerLogos.map((x, idx) => (
-          <div key={idx}>
-            <a href={x.partnersLogosUrls} target="_blank">
-              <img src={x.partnersLogosImage.mediaItemUrl} alt="" loading="lazy" />
-            </a>
-          </div>
-        ))}
-      </Slider>
+        <Slider {...settings}>
+          {partnerLogos.map((x, idx) => (
+            <div key={idx}>
+              <a href={x.partnersLogosUrls} target="_blank" className="flex justify-center">
+                <img src={x.partnersLogosImage.mediaItemUrl} alt="" loading="lazy" />
+              </a>
+            </div>
+          ))}
+        </Slider>
       </div>
     </div>
   )
