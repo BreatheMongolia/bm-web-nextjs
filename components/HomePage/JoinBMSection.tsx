@@ -7,6 +7,8 @@ import "slick-carousel/slick/slick-theme.css";
 import parse from 'html-react-parser';
 import Slider from 'react-slick';
 
+
+
 import {
   Page_Customfields_CountriesInfoText,
   Page_Customfields_JoinBreatheMongoliaImageSlider,
@@ -97,14 +99,39 @@ export const JoinBMSection = ({
               </Slider>
             </div>
           <div className="volunteer-count">
-            {countriesInfoText.map(x => {
-              return (
-                <div className="country-text">
-                  <img className="volunteer-hours" src={x.infoIcon.mediaItemUrl} />
-                  {x.customTextMn && <div className="text-data-custom">{parse(x.customTextMn)}</div>}
+            <div className="volunteer-count-section  flex-row">
+              {countriesInfoText.map(x => (
+                <div className="country_count_col" key={x.infoIcon.databaseId}>
+                  <div className="text-center country-text">
+                    <img src={x.infoIcon.mediaItemUrl} alt="" />
+                    {x.customTextMn && <div className="text-data-custom">{parse(x.customTextMn)}</div>}
+                  </div>
                 </div>
-              )
-            })}
+              ))}
+            </div>
+
+            <div className="opportunity-section">
+              {/* <p className="title">{t("home.joinBm.opportunities")}</p> */}
+              <ul className="position-list">
+                {volunteersTemp.map((x, idx) => (
+                  <li className="position_list_el" key={idx}>
+                    <a className="pos_link_url" href={x.url} target="_blank">
+                      {/* {getTranslated(
+                        volunteerPos?.node?.customFields?.position,
+                        volunteerPos?.node?.customFields?.positionMn
+                      )} */}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="apply_button_container">
+                <a className="apply_now_button" href="https://link.breathemongolia.org/volunteer" target="_blank">
+                  {/* {t("home.joinBm.applyNow")} */}
+                  Apply Now
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
