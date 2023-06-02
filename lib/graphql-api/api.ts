@@ -1,5 +1,3 @@
-import { News, NewsIdType } from 'graphql/generated'
-
 const API_URL = process.env.WORDPRESS_API_URL
 
 export async function fetchAPI(query = '', { variables }: Record<string, any> = {}) {

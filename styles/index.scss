@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
 @tailwind base;
-@import url(https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css);
 
 /* Write your own custom base styles here */
 html,
@@ -138,77 +136,298 @@ p {
   }
 }
 
-.join-bm-section {
-  display: flex;
-  gap: 10px;
-  padding-top: 35px;
+/* Join Breathe Mongolia styles start */
 
-  .photo-slider {
-    width: 65%;
+.join-bm-slider-wrapper {
+  background: #fafaff;
+
+  h2 {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 35px;
+    margin-top: 26px;
+    margin-bottom: 12px;
   }
 
-  .volunteer-info {
-    .volunteer-count {
-      display: flex;
-      box-sizing: border-box;
-      justify-content: center;
-      align-items: flex-start !important;
-      width: 340px;
+  .join_bm_carousel_sec {
+    margin-top: 35px;
+    display: flex;
+    gap: 10px;
+  }
 
-      .country-text {
-        padding-right: 40px;
-        box-sizing: border-box;
+  .membersPhoto {
+    width: 62%;
+  }
 
-        div {
-          display: block;
-        }
+  .country_count_col:not(:nth-of-type(3)) {
+    padding-right: 40px;
+  }
 
-        .volunteer-hours {
-          width: 20px;
-          height: 20px;
-        }
+  .slick-dots li button:before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border: 1px solid #646464;
+    border-radius: 100%;
+    opacity: 1 !important;
+  }
 
-        .text-data-custom {
-          box-sizing: border-box;
+  .slick-dots li.slick-active button:before {
+    background: #646464;
+  }
 
-          div {
-            display: block;
-          }
+  .slick-arrow {
+    top: 35% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-          p {
-            display: inline-block;
-            font-family: "Open Sans";
-            font-style: normal;
-            font-weight: 800;
-            font-size: 38px;
-            line-height: 52px;
-            text-align: center;
-            letter-spacing: .0000010729px;
-            background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: rgba(0, 0, 0, 0);
-            margin: 0;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-          }
+  .join_bm_desc {
+    p {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 150%;
+      color: #524d42;
+      margin: 0;
+    }
+  }
 
-          .text-center {
-            text-align: center;
-          }
+  .slider-image {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    outline: none;
+  }
 
-          body {
-            margin: 0;
-            font-family: "Open Sans", sans-serif;
-            background-color: #fafaff;
-          }
+  .volunteer-count {
+    margin: auto;
+    width: fit-content;
+  }
 
-          webkit-font-smoothing: antialiased;
-        }
+  .volunteer-count-section {
+    justify-content: center;
+    align-items: flex-start !important;
+    width: 340px;
+  }
+
+  .flex-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center;
+  }
+
+  .text-data-custom {
+    >p {
+      display: inline-block;
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 800;
+      font-size: 38px;
+      line-height: 52px;
+      text-align: center;
+      letter-spacing: 1.07288e-6px;
+      background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      margin: 0;
+    }
+
+    >pre {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      letter-spacing: 1.07288e-6px;
+      background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      margin: 0;
+    }
+  }
+
+  .opportunity-section {
+    margin-top: 30px;
+
+    .title {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 150%;
+      color: #2c2d41;
+      margin-top: 0 !important;
+      margin-bottom: 8px;
+    }
+
+    .position-list {
+      padding-left: 20px;
+      list-style-type: disc;
+      color: black;
+    }
+
+    .pos_link_url {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      color: #2c2d41;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #3174d0;
       }
     }
 
-    .volunteer-opportunity {}
+    .apply_now_button {
+      margin-top: 10px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 30px;
+      width: 116px;
+      max-width: 116px;
+      padding: 0;
+      background: #f4ac3d;
+      border-radius: 8px;
+      text-transform: uppercase;
+      color: #ffffff;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      letter-spacing: normal;
+
+      &:hover {
+        background: #61b1ee;
+      }
+    }
+  }
+
+  .country-text {
+    img {
+      width: 20px;
+      height: 20px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+@media (max-width: 1064px) {
+  .join-bm-slider-wrapper .volunteer-count {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .join-bm-slider-wrapper {
+    .volunteer-count {
+      margin: auto;
+      width: 90% !important;
+      flex-direction: column;
+
+      .volunteer-count-section {
+        width: 350px;
+        flex-wrap: nowrap !important;
+      }
+
+      .opportunity-section {
+        width: 350px;
+      }
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  .join-bm-slider-wrapper {
+    .join_bm_desc {
+      p {
+        font-weight: 400;
+        font-size: 15px;
+      }
+    }
+
+    .join_bm_carousel_sec {
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .membersPhoto {
+      width: 85%;
+      margin: 0 auto;
+    }
+
+    .slider-image {
+      object-position: top center;
+      margin: 0 auto;
+    }
+
+    .volunteer-count {
+      display: flex;
+      width: 75%;
+      gap: 40px;
+      margin: 0 auto;
+    }
+
+    .opportunity-section {
+      margin-top: 0px;
+
+      .title {
+        padding-top: 0;
+      }
+    }
+  }
+
+  /* Join Breathe Mongolia styles end */
+
+  // Our-Partners Section custom styles
+  .partner-logos-slider-wrapper {
+
+
+    .slick-slide {
+      padding: 0 5px;
+
+      div {
+        transition: none;
+      }
+
+      &:first-child {
+        margin-left: 0;
+        padding-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 18px;
+        padding-right: 10px;
+      }
+    }
+
+    /* the parent */
+    .slick-list {
+      padding: 0 -5x;
+    }
+  }
+}
+
+
+.partner-logos-slider-wrapper {
+  .slick-track {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
   }
 }
