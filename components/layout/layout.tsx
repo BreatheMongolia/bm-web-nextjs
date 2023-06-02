@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { Footer } from './Footer/footer'
 import { Header } from './Header/header'
 

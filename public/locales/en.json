@@ -354,11 +354,7 @@
   "givebutter": {
     "support": "Support us"
   },
-  "error": {
-    "oops": "Oops !",
-    "text": "We couldn’t find the page you were looking for.",
-    "return": "Return home"
-  },
+  "error": {},
   "search": {
     "results": "search results for"
   }

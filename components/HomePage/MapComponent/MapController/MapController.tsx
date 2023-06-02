@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 import { MapContext } from 'pages/_app'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 type Props = {
   leftRadios: any[]

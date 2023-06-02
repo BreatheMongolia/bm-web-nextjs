@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { AQIScales } from '../consts'
 // import { Path } from '../../../assets/icons'
 import cx from 'classnames'

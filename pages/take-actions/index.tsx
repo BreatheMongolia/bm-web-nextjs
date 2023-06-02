@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 const TakeActionsPage = ({ news }: { news: News[] }) => {
   const { t } = useTranslation()

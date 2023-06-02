@@ -3,6 +3,7 @@ import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { News } from 'graphql/generated'
 import { getNewsPosts } from 'lib/graphql-api/queries/news'
 import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const NewsPage = ({ news }: { news: News[] }) => {
   return (
@@ -28,13 +29,12 @@ const NewsPage = ({ news }: { news: News[] }) => {
 
 export default NewsPage
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const data = await getNewsPosts()
-
-  console.log(data)
 
   return {
     props: {
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
       news: data,
     },
     revalidate: 60,
