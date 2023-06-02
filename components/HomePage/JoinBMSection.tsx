@@ -117,6 +117,7 @@ export const JoinBMSection = ({
 
             <div className="opportunity-section">
               {/* <p className="title">{t("home.joinBm.opportunities")}</p> */}
+              Нээлттэй ажлын байр
               <ul className="position-list">
                 {volunteersTemp.map((x, idx) => (
                   <li className="position_list_el" key={idx}>
