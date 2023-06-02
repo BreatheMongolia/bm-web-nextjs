@@ -4,6 +4,9 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { InfoPopup } from './Helpers'
 import { t } from 'i18next'
 import { MapContext } from 'pages/_app'
+import AQIScale from './Helpers/AQIScale'
+import MapController from './MapController/MapController'
+import { leftRadios, rightRadios } from './consts'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -11,7 +14,9 @@ const MAP_BASE_CONFIG = {
   zoom: 12,
   style: 'streets-v11',
 }
-// Set mapbox API KEY
+// FIXME: Bad to hardcode the API KEY in the code. But since it's static rendering it was easier this way.
+const MAPBOX_KEY =
+  'pk.eyJ1IjoiYnJlYXRoZW1vbmdvbGlhIiwiYSI6ImNrMjhnMHU4bDEwOXkzaXFodnFiaW1heHIifQ.7MPVleYVPDUY10UE200Zow'
 
 export const MapComponent = ({
   title,
@@ -31,8 +36,6 @@ export const MapComponent = ({
   const [baseMap, setBaseMap] = useState(map?.style?.stylesheet?.id || MAP_BASE_CONFIG.style)
 
   useEffect(() => {
-    // FIXME: MapBox API Key not working
-    return
     if (!map) {
       // Initialize map once when the MapComponent rendered at the first time
       const newMap = new mapboxgl.Map({
@@ -40,7 +43,7 @@ export const MapComponent = ({
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [MAP_BASE_CONFIG.lng, MAP_BASE_CONFIG.lat],
         zoom: zoom,
-        accessToken: process.env.MAPBOX_TOKEN,
+        accessToken: MAPBOX_KEY,
       })
       // disable the scroll since the map is full width of the page, and user can't scroll down
       newMap.scrollZoom.disable()
@@ -60,15 +63,39 @@ export const MapComponent = ({
       document.getElementById('map').replaceWith(map.getContainer())
     }
   }, [])
+
+  // MapController Hooks
+  const onSensorTypeChange = (type: string) => {
+    setShowStationDetail(false)
+    mapContext?.setSelectedStation(null)
+
+    if (type === 'indoor') {
+      mapContext?.setShowIndoor(!mapContext?.showIndoor)
+    } else {
+      mapContext?.setShowOutdoor(!mapContext?.showOutdoor)
+    }
+  }
+  const onMapStyleChange = (value: string) => {
+    setBaseMap(value)
+    map?.setStyle('mapbox://styles/mapbox/' + value)
+  }
+
   return (
     <div className="aqi-map-wrapper">
       <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
-      <div className={`map-container ${showStationDetail && 'station-detail-open'}`}>
+      <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map_dropdowns"></div>
-        <div id="map" ref={mapContainer} className="map-wrapper">
-          <InfoPopup />
-        </div>
+        <div id="map" ref={mapContainer} className="map-wrapper"></div>
+        <InfoPopup />
+        <MapController
+          leftRadios={leftRadios}
+          rightRadios={rightRadios}
+          onChangeSensorType={(type: string) => onSensorTypeChange(type)}
+          baseMap={baseMap}
+          onBaseMapChange={(value: string) => onMapStyleChange(value)}
+        />
         {/* Other Layers on top of Map */}
+        <AQIScale />
       </div>
     </div>
   )
