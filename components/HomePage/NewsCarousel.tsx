@@ -1,17 +1,17 @@
 import { H2 } from 'components/generic/Typography'
 import { Page_Customfields_FeaturedNews } from 'graphql/generated'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields_FeaturedNews[] }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('home')
 
   return (
     <div>
       <H2
-        title={t('home.news.title')}
+        title={t('news.title')}
         trailingLineColor="blue"
         extraButton={{
-          title: t('home.campaignWork.seeMore'),
+          title: t('campaignWork.seeMore'),
           url: '/news',
         }}
       />
