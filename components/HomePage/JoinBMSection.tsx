@@ -69,9 +69,14 @@ export const JoinBMSection = ({
 
   const volunteersTemp = [
     {
-      title: 'Test Volunteer Position',
+      title: 'Хандив хариуцсан менежер',
       url: 'https://www.notion.so/breathemongolia/Fundraising-Manager-3c5a7d35aaad4b92939eaab909d270e4',
     },
+    {
+      title: 'Сайн дурын ажлын байрны анкет',
+      url: 'https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u', 
+    }
+
   ]
 
   const descriptionInMng = descriptionHtml.mn.substring(0, 326) + "." + descriptionHtml.mn.substring(326);
@@ -112,6 +117,7 @@ export const JoinBMSection = ({
 
             <div className="opportunity-section">
               {/* <p className="title">{t("home.joinBm.opportunities")}</p> */}
+              Нээлттэй ажлын байр
               <ul className="position-list">
                 {volunteersTemp.map((x, idx) => (
                   <li className="position_list_el" key={idx}>
@@ -120,6 +126,7 @@ export const JoinBMSection = ({
                         volunteerPos?.node?.customFields?.position,
                         volunteerPos?.node?.customFields?.positionMn
                       )} */}
+                      {x.title}
                     </a>
                   </li>
                 ))}
@@ -127,7 +134,7 @@ export const JoinBMSection = ({
               <div className="apply_button_container">
                 <a className="apply_now_button" href="https://link.breathemongolia.org/volunteer" target="_blank">
                   {/* {t("home.joinBm.applyNow")} */}
-                  Apply Now
+                  АНКEТ БӨГЛӨХ
                 </a>
               </div>
             </div>
