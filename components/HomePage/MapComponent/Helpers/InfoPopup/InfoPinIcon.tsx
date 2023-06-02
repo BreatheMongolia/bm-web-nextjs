@@ -1,7 +1,7 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from 'react-i18next'
 
 const InfoPinIcon = () => {
-  const { t } = useTranslation('map')
+  const { t } = useTranslation()
 
   return (
     <div className="relative">
@@ -33,7 +33,7 @@ const InfoPinIcon = () => {
       </svg>
 
       <span className="absolute text-[8px] top-[20px] font-bold right-0 w-8 text-center text-white">
-        {t('aqiShort')}
+        {t('map.aqiShort')}
       </span>
     </div>
   )
