@@ -1,6 +1,6 @@
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { News } from 'graphql/generated'
-import { getNewsPosts } from 'lib/api'
+// import { getNewsPosts } from '../api'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
@@ -43,13 +43,11 @@ const TakeActionsPage = ({ news }: { news: News[] }) => {
 export default TakeActionsPage
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await getNewsPosts()
-
-  console.log(data)
+  // const data = await getNewsPosts()
 
   return {
     props: {
-      news: data,
+      news: [],
     },
     revalidate: 60,
   }
