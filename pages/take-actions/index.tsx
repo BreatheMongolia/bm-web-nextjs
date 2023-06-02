@@ -2,10 +2,23 @@ import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { News } from 'graphql/generated'
 // import { getNewsPosts } from '../api'
 import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const TakeActionsPage = ({ news }: { news: News[] }) => {
+  const { t } = useTranslation()
   const router = useRouter()
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    // Get the current language from the URL (e.g., "mn" or "en")
+    const { locale } = router
+    if (locale) {
+      i18n.changeLanguage(locale)
+    }
+  }, [])
 
   return (
     <div>
@@ -42,11 +55,12 @@ const TakeActionsPage = ({ news }: { news: News[] }) => {
 
 export default TakeActionsPage
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // const data = await getNewsPosts()
 
   return {
     props: {
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
       news: [],
     },
     revalidate: 60,

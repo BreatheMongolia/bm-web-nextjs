@@ -84,9 +84,10 @@ export default function Index({ page }: { page: Page }) {
   )
 }
 // This calls the API first and then loads the page
-export const getStaticProps: GetStaticProps = async ({ preview = false, locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
   // this return passes it to the above component
+  console.log('server locale', locale)
   return {
     props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page },
     // This tells the page how often to refetch from the API (in seconds)
