@@ -18,7 +18,6 @@ module.exports = {
         'action-red': '#EE6161',
       },
       fontSize: {
-        sm: '12px',
         xsm: '13px',
         '5xl': '2.5rem',
         '6xl': '2.75rem',

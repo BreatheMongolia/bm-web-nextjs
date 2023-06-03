@@ -24,5 +24,148 @@
   "zone1": "Түүхий нүүрсийг үе шаттай хориглоно",
   "zone2,3": "Цахилгаан, бусад үүсвэрээр үе шаттай холбох бүс",
   "zone4": "Бүх төрлийн хатуу түлш хэрэглэхийг хориглох бүс",
-  "selectProvince": "Аймаг/хот сонгох"
+  "selectProvince": "Аймаг/хот сонгох",
+  "province": {
+    "ulaanbaatar": "Улаанбаатар",
+    "arkhangai": "Архангай",
+    "bayanolgii": "Баян-Өлгий",
+    "bayankhongor": "Баянхонгор",
+    "bulgan": "Булган",
+    "darkhan": "Дархан-Уул",
+    "dornod": "Дорнод",
+    "dornogovi": "Дорноговь",
+    "dundgovi": "Дундговь",
+    "govialtai": "Говь-Алтай",
+    "govisumber": "Говьсүмбэр",
+    "khentii": "Хэнтий",
+    "khovd": "Ховд",
+    "khovsgol": "Хөвсгөл",
+    "umnugobi": "Өмнөговь",
+    "orkhon": "Орхон",
+    "uvurkhangai": "Өвөрхангай",
+    "selenge": "Сэлэнгэ",
+    "sukhbaatar": "Сүхбаатар",
+    "tov": "Төв",
+    "uvs": "Увс",
+    "zavkhan": "Завхан"
+  },
+
+  "stationDetail": {
+    "uBWorldRanking": "Агаарын бохирдлоороо УБ хот дэлхийд",
+    "city": "хот",
+    "AQI": "АЧИ",
+    "usaqi": "АЧИ (АНУ)",
+    "km/h": "км/ц",
+    "Recommendations": "Зөвлөмж",
+    "OtherAirPollutants": "Бусад бохирдуулагч",
+    "outdoor": "Гадаа агаар хэмжигч",
+    "indoor": "Тасалгааны агаар хэмжигч",
+    "selectAStation": "Хяналтын станц сонгох",
+    "Click On A Pin": "Тэмдэг дээр дарна уу",
+    "Wind": "CAЛХИНЫ ХУРД",
+    "Click on a pin to see that air quality monitoring station's details": "Тэмдэг дээр даран агаарын чанарын дэлгэрэнгүй мэдээллийг харна уу",
+    "selectAirQualityImprovementZone": "А.Ч сайжруулах бүсүүд",
+    "khoroos": "дүүргийн хороод",
+    "zone4": "БҮС 4",
+    "zone2": "БҮС 2&3",
+    "zone1": "БҮС 1",
+    "zone0": "БҮС 0",
+    "What Zone Am I In?": "Ta Аль Бүсэд Байна Вэ?",
+    "Click on a zone to see which air quality improvement zone you are in.": "Агаарын чанарыг сайжруулах аль бүсэд байгааг харахын тулд хороон дээр дарна уу.",
+    "Zones": "Бүсүүд",
+    "Air Quality Index": "АЧИ",
+    "Ulaanbaatar": "Улаанбаатар",
+    "Bayankhongor": "Баянхонгор",
+    "Uvurkhangai": "Өвөрхангай",
+    "Arkhangai": "Архангай",
+    "Umnugovi": "Өмнөговь",
+    "Darkhan": "Дархан",
+    "outdoorText": {
+      "good": {
+        "first_advice": "Явган яваарай",
+        "second_advice": "Цонхоо онгойлго",
+        "third_advice": "Нойтон цэвэрлэгээ хийгээрэй",
+        "category_text": "Агаарын чанар хэвийн. Агаарт гараарай!"
+      },
+      "moderate": {
+        "first_advice": "Aгаарын чанарыг хяна",
+        "second_advice": "Эко цэвэрлэгч сонгоорой",
+        "third_advice": "Авто замаас холуур байгаарай",
+        "category_text": "Бага бохирдолтой. Агаарын чанарыг шалгаарай"
+      },
+      "unhealthy_sensitive": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Тамхи бүү тат",
+        "third_advice": "Эрүүл мэнддээ анхаар",
+        "category_text": "Хүүхдүүд, өндөр настай, архаг өвчтэй хүмүүс болгоомжил"
+      },
+      "unhealthy": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Цонхоо хаа",
+        "third_advice": "Маскаа зүүгээрэй",
+        "category_text": "Агаарын чанар эрүүл мэндэд аюултай!"
+      },
+      "very_unhealthy": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Эрүүл мэнддээ анхаар",
+        "third_advice": "Маскаа зүүгээрэй",
+        "category_text": "Анxаар! Агаарын чанар эрүүл мэндэд xортой"
+      },
+      "hazardous": {
+        "first_advice": "Гадагш бүү гар",
+        "second_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "third_advice": "Маскаа зүүгээрэй",
+        "category_text": "Анхаар! Эрүүл мэндэд маш их хортой"
+      }
+    },
+    "indoorText": {
+      "good": {
+        "first_advice": "Нойтон цэвэрлэгээ хийгээрэй",
+        "second_advice": "Тамхи бүү тат",
+        "third_advice": "Эко цэвэрлэгч сонгоорой",
+        "category_text": "Aгаарын чанар хэвийн"
+      },
+      "moderate": {
+        "first_advice": "Aгаарын чанарыг хяна",
+        "second_advice": "Эко цэвэрлэгч сонгоорой",
+        "third_advice": "Тамхи бүү тат",
+        "category_text": "Бага бохирдолтой. Агаарын чанарыг шалгаарай"
+      },
+      "unhealthy_sensitive": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Тамхи бүү тат",
+        "third_advice": "Эрүүл мэнддээ анхаар",
+        "category_text": "Xүүхдүүд, өндөр настай, aрхаг өвчтэй хүмүүс болгоомжил"
+      },
+      "unhealthy": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Эко цэвэрлэгч сонгоорой",
+        "third_advice": "Эрүүл мэнддээ анхаар",
+        "category_text": "Агаарын чанар эрүүл мэндэд аюултай!"
+      },
+      "very_unhealthy": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Эрүүл мэнддээ анхаар",
+        "third_advice": "Гэрийн дулаалгаа сайжруул",
+        "category_text": "Анxаар! Агаарын чанар эрүүл мэндэд xортой"
+      },
+      "hazardous": {
+        "first_advice": "Гэрийн дулаалгаа сайжруул",
+        "second_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "third_advice": "Эрүүл мэнддээ анхаар",
+        "category_text": "Aнхаар! Эрүүл мэндэд маш их хортой"
+      }
+    },
+    "zone4_details": "Хатуу түлш хэрэглэхгүй",
+    "zone2_details": "Цахилгаанд холбогдоно",
+    "zone1_details": "Сайжруулсан түлш хэрэглэнэ",
+    "zone0_details": "Батлагдаагүй бүс",
+    "Songinokhairkhan": "Сонгинохайрхан",
+    "Bayanzurkh": "Баянзүрх",
+    "Chingeltei": "Чингэлтэй",
+    "Sukhbaatar": "Сүхбаатар",
+    "Bayangol": "Баянгол",
+    "Khan Uul": "Хан Уул",
+    "Nalaikh": "Налайх"
+  }
 }

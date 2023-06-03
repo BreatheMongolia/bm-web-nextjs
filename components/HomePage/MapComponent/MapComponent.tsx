@@ -2,11 +2,14 @@ import { H2 } from 'components/generic/Typography'
 import mapboxgl from 'mapbox-gl'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { InfoPopup } from './Helpers'
-import { t } from 'i18next'
+import { useTranslation } from 'next-i18next'
 import { MapContext } from 'pages/_app'
 import AQIScale from './Helpers/AQIScale'
 import MapController from './MapController/MapController'
-import { leftRadios, rightRadios } from './consts'
+import { LocationOption, leftRadios, locationsWithSensors, rightRadios } from './consts'
+import { MapDropdownWrapper } from './MapDropdowns/MapDropdownWrapper'
+import { LocationDropdown, RankDropdown, StationsDropdown } from './MapDropdowns'
+import { isStationWithinBBOX } from './utils'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -25,6 +28,7 @@ export const MapComponent = ({
   title: { en: string; mn: string }
   descriptionHtml: { en: string; mn: string }
 }) => {
+  const { t } = useTranslation('map')
   // init
   const mapContext = useContext(MapContext)
   const map = mapContext?.mapCurrent
@@ -34,6 +38,12 @@ export const MapComponent = ({
   const [zoom, setZoom] = useState(MAP_BASE_CONFIG.zoom)
   const [showStationDetail, setShowStationDetail] = useState(false)
   const [baseMap, setBaseMap] = useState(map?.style?.stylesheet?.id || MAP_BASE_CONFIG.style)
+  // dropdown/map related
+  const [selectedLocation, setSelectedLocation] = useState<{ value: string; label: string }>({
+    value: 'ulaanbaatar',
+    label: t('province.ulaanbaatar'),
+  })
+  const [currentDropdown, setCurrentDropdown] = useState<'location' | 'stations' | 'rank' | 'none'>('location')
 
   useEffect(() => {
     if (!map) {
@@ -79,13 +89,73 @@ export const MapComponent = ({
     setBaseMap(value)
     map?.setStyle('mapbox://styles/mapbox/' + value)
   }
+  // Selecting a location from LocationDropdown menu, flies to the location
+  const onLocationChange = (location: LocationOption) => {
+    if (!map) {
+      return
+    }
+    // hide location dropdown if it was open
+    setSelectedLocation(location)
+    console.log(currentDropdown)
+    if (currentDropdown === 'location') {
+      console.log(currentDropdown)
+      setCurrentDropdown('none')
+    }
+    map?.flyTo({
+      center: locationsWithSensors[location.value],
+      essential: true,
+    })
+  }
+
+  const onStationClick = (station: any) => {
+    // if(isMobile) {
+    //   setIsStationsDropdownOpen(false)
+    // }
+    mapContext?.setSelectedStation(station)
+    const mapBoundingBox = map.getBounds()
+    if (!isStationWithinBBOX(station.location.coordinates[0], station.location.coordinates[1], mapBoundingBox)) {
+      // station lon and lat
+      map.flyTo({
+        center: station.location.coordinates,
+        essential: true,
+      })
+    }
+  }
 
   return (
     <div className="aqi-map-wrapper">
-      <H2 title={title.mn} descriptionHtml={descriptionHtml.mn} />
+      <H2 className="mb-12" title={title.mn} descriptionHtml={descriptionHtml.mn} />
       <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
-        <div id="map_dropdowns"></div>
         <div id="map" ref={mapContainer} className="map-wrapper"></div>
+        <MapDropdownWrapper title={t(`province.${selectedLocation.value}`)}>
+          <LocationDropdown
+            onLocationClick={(location: any) => onLocationChange(location)}
+            selected={selectedLocation}
+            setTitleClick={(isOpen: boolean) => {
+              setCurrentDropdown(isOpen ? 'location' : 'none')
+            }}
+            open={currentDropdown === 'location'}
+          />
+          <StationsDropdown
+            // stations={[...openAQStations, ...airVisualStations, ...purpleAirStations, ...airVisualOutdoorStations]}
+            stations={['test']}
+            onStationClick={(station: any) => onStationClick(station)}
+            setTitleClick={(isOpen: boolean) => {
+              setCurrentDropdown(isOpen ? 'stations' : 'none')
+            }}
+            open={currentDropdown === 'stations'}
+          />
+          <RankDropdown
+            // ubRank={ubRank}
+            ubRank={0}
+            // data={ranks}
+            data={[]}
+            setTitleClick={(isOpen: boolean) => {
+              setCurrentDropdown(isOpen ? 'rank' : 'none')
+            }}
+            open={currentDropdown === 'rank'}
+          />
+        </MapDropdownWrapper>
         <InfoPopup />
         <MapController
           leftRadios={leftRadios}

@@ -409,3 +409,33 @@ export const pollutantsChemicalFormula = {
     index: '',
   },
 }
+
+export type LocationOption = {
+  value: string
+  label: string
+}
+
+export const locationOptions: LocationOption[] = [
+  { value: 'ulaanbaatar', label: 'province.ulaanbaatar' },
+  { value: 'arkhangai', label: 'province.arkhangai' },
+  { value: 'bayanolgii', label: 'province.bayanolgii' },
+  { value: 'bayankhongor', label: 'province.bayankhongor' },
+  { value: 'bulgan', label: 'province.bulgan' },
+  { value: 'darkhan', label: 'province.darkhan' },
+  { value: 'dornod', label: 'province.dornod' },
+  { value: 'dornogovi', label: 'province.dornogovi' },
+  { value: 'dundgovi', label: 'province.dundgovi' },
+  { value: 'govialtai', label: 'province.govialtai' },
+  { value: 'govisumber', label: 'province.govisumber' },
+  { value: 'khentii', label: 'province.khentii' },
+  { value: 'khovd', label: 'province.khovd' },
+  { value: 'khovsgol', label: 'province.khovsgol' },
+  { value: 'umnugobi', label: 'province.umnugobi' },
+  { value: 'orkhon', label: 'province.orkhon' },
+  { value: 'uvurkhangai', label: 'province.uvurkhangai' },
+  { value: 'selenge', label: 'province.selenge' },
+  { value: 'sukhbaatar', label: 'province.sukhbaatar' },
+  { value: 'tov', label: 'province.tov' },
+  { value: 'uvs', label: 'province.uvs' },
+  { value: 'zavkhan', label: 'province.zavkhan' },
+]
