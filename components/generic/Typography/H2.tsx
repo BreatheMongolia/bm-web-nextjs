@@ -17,7 +17,7 @@ export const H2 = ({
     url: string
   }
   descriptionHtml?: string
-  className: string
+  className?: string
 }) => {
   const TrailingLine = () => {
     // Setting state and useEffect removes the hydration error from static generation

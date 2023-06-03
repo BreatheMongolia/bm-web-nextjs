@@ -4,7 +4,14 @@ import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { getHomePage } from 'lib/graphql-api/queries/home'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import { MapComponent, TakeActionCarousel, OurPartners, JoinBMSection, NewsCarousel } from 'components/HomePage'
+import {
+  MapComponent,
+  TakeActionCarousel,
+  OurPartners,
+  JoinBMSection,
+  NewsCarousel,
+  OurWorkCarousel,
+} from 'components/HomePage'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Page } from 'graphql/generated'
 import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
@@ -59,6 +66,13 @@ export default function Index({ page }: { page: Page }) {
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
+          <OurWorkCarousel
+            title={{
+              en: page.customFields.campaignAndOurWorkTitle,
+              mn: page.customFields.campaignAndOurWorkTitleMn,
+            }}
+            campaigns={page.customFields.campaignAndOurWorkSlider}
+          />
           <JoinBMSection
             title={{
               en: page.customFields.joinBreatheMongoliaTitle,
