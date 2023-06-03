@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
-import cx from 'classnames'
+import React, { useState } from 'react'
+import { useTranslation } from 'next-i18next'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import InfoPinIcon from './InfoPinIcon'
 
 const InfoPopup = () => {
+  const { t } = useTranslation('map')
   const [hidden, setHidden] = useState(false)
 
   return (
@@ -20,13 +20,8 @@ const InfoPopup = () => {
         <InfoPinIcon />
       </div>
       <div className="info-content">
-        <div className="info_popup_description">
-          <Trans i18nKey="map.pinDesc">
-            <strong></strong>
-          </Trans>
-        </div>
+        <div className="info_popup_description" dangerouslySetInnerHTML={{ __html: t('pinDesc') }}></div>
       </div>
-
       <div onClick={() => setHidden(true)}>
         <XMarkIcon className="h-5 w-5" />
       </div>

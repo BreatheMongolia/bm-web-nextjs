@@ -85,7 +85,7 @@ export const Topbar = () => {
                 {Object.keys(availableOptions).map(key => {
                   const option: Option = availableOptions[key]
                   return (
-                    <Menu.Item>
+                    <Menu.Item key={key}>
                       {({ active }) => (
                         <button
                           className={`${

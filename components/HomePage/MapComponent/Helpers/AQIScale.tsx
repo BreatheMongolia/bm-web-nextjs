@@ -2,11 +2,10 @@ import React, { FC, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { AQIScales } from '../consts'
 // import { Path } from '../../../assets/icons'
-import cx from 'classnames'
 import { Bars2Icon } from '@heroicons/react/24/solid'
 
 const AQIScale = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('map')
 
   const [shown, setShown] = useState(true)
 
@@ -23,7 +22,7 @@ const AQIScale = () => {
         className="flex px-3 py-1 items-center bg-slate-100 cursor-pointer hover:bg-slate-200 transition-all text-xs"
         onClick={() => setShown(!shown)}
       >
-        <h2 className="grow font-bold">{t('map.aqiTitle')}</h2>
+        <h2 className="grow font-bold">{t('aqiTitle')}</h2>
         <div className="aqi-scale-btn">
           <Bars2Icon className="h-5 w-5" />
         </div>

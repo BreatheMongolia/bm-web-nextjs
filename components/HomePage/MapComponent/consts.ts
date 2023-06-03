@@ -29,14 +29,14 @@ export const leftRadios = [
   {
     id: 'outdoor_sensor',
     value: 'outdoor',
-    label: 'map.outdoor',
-    sublabel: 'map.outdoorlabel',
+    label: 'outdoor',
+    sublabel: 'outdoorlabel',
   },
   {
     id: 'indoor_sensor',
     value: 'indoor',
-    label: 'map.indoor',
-    sublabel: 'map.indoorlabel',
+    label: 'indoor',
+    sublabel: 'indoorlabel',
   },
 ]
 
@@ -44,21 +44,21 @@ export const rightRadios = [
   {
     id: 'satellite-v9',
     value: 'satellite',
-    label: 'map.satellite',
+    label: 'satellite',
   },
   {
     id: 'streets-v11',
     value: 'streets',
-    label: 'map.streets',
+    label: 'streets',
   },
 ]
 export const AQIScales = [
-  { color: 'green', value: '0', text: 'map.healthy' },
-  { color: 'yellow', value: '50', text: 'map.moderate' },
-  { color: 'orange', value: '100', text: 'map.unhealthySensitive' },
-  { color: 'red', value: '150', text: 'map.unhealthy' },
-  { color: 'purple', value: '200', text: 'map.veryUnhealthy' },
-  { color: 'brown', value: '300+', text: 'map.hazardous' },
+  { color: 'green', value: '0', text: 'healthy' },
+  { color: 'yellow', value: '50', text: 'moderate' },
+  { color: 'orange', value: '100', text: 'unhealthySensitive' },
+  { color: 'red', value: '150', text: 'unhealthy' },
+  { color: 'purple', value: '200', text: 'veryUnhealthy' },
+  { color: 'brown', value: '300+', text: 'hazardous' },
 ]
 
 export const activeStations = 'v2/stations?city=Ulaanbaatar&state=ulaanbaatar&country=mongolia&key=' + breatheMonAPI
