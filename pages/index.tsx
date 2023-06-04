@@ -9,6 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Page } from 'graphql/generated'
 import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
 import { useEffect } from 'react'
+import { getTranslated } from 'lib/utils/getTranslated'
 
 // TODO: Detect the current language and update fields based on the current language
 // TODO: Add a util function to extract the correct image size for the imageUrl
@@ -25,6 +26,16 @@ export default function Index({ page }: { page: Page }) {
       i18n.changeLanguage(locale)
     }
   }, [])
+  const getBannerTextRight = bannerTextRight => {
+    var text: string = "";
+    for (let i = 0; i < bannerTextRight.length; i++) {
+      text += bannerTextRight[i].categoryText;
+      text += bannerTextRight?.length - 1 !== i ? "・" : ""
+    }
+    return text;
+  
+  }
+    
   // You can get the inner objects from the page object - it has all the content needed for the Components needed for the page.
   return (
     <div>
@@ -37,10 +48,10 @@ export default function Index({ page }: { page: Page }) {
             en: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
             mn: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
           }}
+          imageUrls={page.customFields.banners}
           bottomText={{
             left: page.customFields.bannerTextLeft,
-            right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
-          }}
+            right: getBannerTextRight(page.customFields.bannerTextRight)}}
         />
         <div className="container mx-auto flex flex-col gap-20">
           <MapContextWrapper>
@@ -86,6 +97,7 @@ export default function Index({ page }: { page: Page }) {
 // This calls the API first and then loads the page
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
+  console.log(locale);
   // this return passes it to the above component
   return {
     props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page },
