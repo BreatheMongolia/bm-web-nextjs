@@ -126,7 +126,7 @@ export const JoinBMSection = ({
                 ))}
               </ul>
               <div className="apply_button_container">
-                <a className="apply_now_button" href="https://link.breathemongolia.org/volunteer" target="_blank">
+                <a className="apply_now_button" href="https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u" target="_blank">
                   {/* {t("home.joinBm.applyNow")} */}
                   АНКEТ БӨГЛӨХ
                 </a>
