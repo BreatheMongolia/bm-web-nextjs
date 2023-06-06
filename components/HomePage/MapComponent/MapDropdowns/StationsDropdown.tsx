@@ -25,10 +25,10 @@ export const StationsDropdown = ({
         </div>
       </div>
       <div className={`overflow-hidden transition-all overflow-y-auto ${!open ? 'h-0' : 'h-48'}`}>
-        {stations.map(zone => {
+        {stations.map((zone, idx) => {
           return (
             <div
-              key={zone.value}
+              key={idx}
               className={`py-3 text-zinc-900 pl-4 text-xs
                     border-b-[0.5px] border-slate-300 cursor-pointer
                     hover:bg-[#4870d7] hover:text-white

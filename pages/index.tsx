@@ -16,11 +16,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Page } from 'graphql/generated'
 import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
 import { useEffect } from 'react'
+import { fetchPurpleAirStations } from 'lib/air-pollution-map/api-hooks/fetchPurpleAirStations'
+import { StationType } from 'lib/air-pollution-map/types'
+import { fetchOpenAQStations } from 'lib/air-pollution-map/api-hooks/fetchOpenAQStations'
 
 // TODO: Detect the current language and update fields based on the current language
 // TODO: Add a util function to extract the correct image size for the imageUrl
 
-export default function Index({ page }: { page: Page }) {
+export default function Index({ page, stations }: { page: Page; stations: StationType[] }) {
   const { t } = useTranslation()
   const router = useRouter()
   const { i18n } = useTranslation()
@@ -100,9 +103,20 @@ export default function Index({ page }: { page: Page }) {
 // This calls the API first and then loads the page
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
+
+  const purpleAirStations = await fetchPurpleAirStations()
+  const openAQStations = await fetchOpenAQStations()
+  // const airVisualOutdoorStations = await fetchPurpleAirStations()
+  // const airVisualIndoorStations = await fetchPurpleAirStations()
+
+  const stations = [
+    ...purpleAirStations,
+    ...openAQStations,
+    // ...airVisualIndoorStations, ...airVisualOutdoorStations
+  ]
   // this return passes it to the above component
   return {
-    props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page },
+    props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page, stations },
     // This tells the page how often to refetch from the API (in seconds)
     revalidate: 60,
   }
