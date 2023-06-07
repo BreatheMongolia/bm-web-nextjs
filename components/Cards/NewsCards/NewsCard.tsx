@@ -28,7 +28,7 @@ export const NewsCard = ({ news }: { news: News }) => {
   }
   return (
     <div
-      className="relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer h-52 bg-cover bg-center group "
+      className="relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer  bg-cover bg-center group w-[330px] h-[250px] "
       style={{ backgroundImage: `url(${featuredImageBig})` }}
       onClick={onCardClick}
     >
@@ -49,7 +49,7 @@ export const NewsCard = ({ news }: { news: News }) => {
 
         {/* <img className="object-fill max-w-none h-full" src={featuredImageBig} /> */}
         <div className="w-full p-4 ">
-          <div className="w-full text-white line-clamp-2"> {news.customFields.titleMn} </div>
+          <div className="w-full text-white line-clamp-2 top-0"> {news.customFields.titleMn} </div>
         </div>
       </div>
     </div>
