@@ -49,7 +49,7 @@ export const NewsCard = ({ news }: { news: News }) => {
 
         {/* <img className="object-fill max-w-none h-full" src={featuredImageBig} /> */}
         <div className="w-full p-4 ">
-          <div className="w-full text-white line-clamp-2 top-0"> {news.customFields.titleMn} </div>
+          <div className="w-full text-white line-clamp-2"> {news.customFields.titleMn} </div>
         </div>
       </div>
     </div>
