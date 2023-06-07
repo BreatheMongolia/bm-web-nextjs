@@ -20,6 +20,7 @@ export default function Index({ page }: { page: Page }) {
   const { i18n } = useTranslation()
 
   useEffect(() => {
+
     // Get the current language from the URL (e.g., "mn" or "en")
     const { locale } = router
     if (locale) {

@@ -34,7 +34,7 @@ export const PageImageBanner = ({ imageUrls, imageUrl, bottomText }: BannerProps
           slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
-          dots: true
+          dots: false
         }
       },
       {
@@ -55,7 +55,7 @@ export const PageImageBanner = ({ imageUrls, imageUrl, bottomText }: BannerProps
     ]
    }
   return (
-    <div className="banner-slider-wrapper ">
+    <div className="banner-slider-wrapper max-[1000px]:hidden">
         <Slider  {...bannerCarouselSettings} >
         {imageUrls?.map((banner: any) => (
           <a key={banner?.bannerImage.id} href={banner?.bannerImage.url} target="_blank">
