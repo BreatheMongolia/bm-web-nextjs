@@ -1,19 +1,29 @@
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { ArrowUpIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { SOCIAL_URLS } from 'lib/consts/urls'
 import Link from 'next/link'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { SocialIcon } from 'react-social-icons'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 type Option = {
   value: string
-  label: any // react-dropdown Dropdown Option's label is React.ReactNode
+  label: string
 }
-const availableOptions: Option[] = [
-  { value: 'en', label: 'ENG' },
-  { value: 'mn', label: 'MNG' },
-]
+
+type Options = {
+  [key: string]: Option
+}
+
+const availableOptions: Options = {
+  en: { value: 'en', label: 'ENG' },
+  mn: { value: 'mn', label: 'MNG' },
+}
 
 export const Topbar = () => {
+  const [t, i18n] = useTranslation()
+
   const socialUrls = [
     SOCIAL_URLS.FACEBOOK,
     SOCIAL_URLS.INSTAGRAM,
@@ -22,6 +32,11 @@ export const Topbar = () => {
     SOCIAL_URLS.LINKEDIN,
     SOCIAL_URLS.YOUTUBE,
   ]
+
+  const changeLanguage = language => {
+    i18n.changeLanguage(language)
+  }
+
   return (
     <div className="w-full bg-bm-blue text-white px-5 py-1">
       <div className="flex justify-end gap-x-2">
@@ -46,13 +61,46 @@ export const Topbar = () => {
           )
         })}
         {/* Language Selector */}
-        {availableOptions.map((x, idx) => {
-          return (
-            <Link href="/" locale={x.value} key={idx}>
-              {x.label}
-            </Link>
-          )
-        })}
+        <Menu as="div" className="relative inline-flex items-center justify-center">
+          <Menu.Button className="flex w-full items-center justify-center rounded-md text-xs font-semibold text-white hover:bg-opacity-30">
+            <div>{availableOptions[i18n.language].label}</div>
+            <ChevronDownIcon className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100" aria-hidden="true" />
+          </Menu.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute top-40 right-0 mt-2 w-64 origin-top-right rounded-md bg-bm-blue shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <div className="px-1 py-1">
+                {Object.keys(availableOptions)
+                  .filter(x => x != i18n.language)
+                  .map(key => {
+                    const option: Option = availableOptions[key]
+                    return (
+                      <Menu.Item key={key}>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? 'text-white bg-white' : 'text-white'
+                            } justify-center w-full group flex items-center rounded-md px-2 py-2 text-xs bg-opacity-10`}
+                            key={key}
+                            onClick={() => changeLanguage(key)}
+                          >
+                            {option.label}
+                          </button>
+                        )}
+                      </Menu.Item>
+                    )
+                  })}
+              </div>
+            </Menu.Items>
+          </Transition>
+        </Menu>
       </div>
     </div>
   )

@@ -3,6 +3,8 @@ import { H2 } from 'components/generic/Typography'
 import { Page_Customfields_FeaturedTakeActions } from 'graphql/generated'
 import Slider from 'react-slick'
 import { TakeActionCard } from '../Cards/TakeActionCard'
+import { TakeAction } from 'graphql/generated'
+import { useTranslation } from 'next-i18next'
 // import { useTranslation } from 'react-i18next'
 // import { useHistory } from "react-router-dom"
 // import SliderLeftArrow from "../assets/icons/SliderLeftArrow"
@@ -15,6 +17,7 @@ export const TakeActionCarousel = ({
   title: { en: string; mn: string }
   takeActionPosts: Page_Customfields_FeaturedTakeActions[]
 }) => {
+  const { t } = useTranslation('home')
   // console.log(takeActionPosts);
   // const { t } = useTranslation()
   // Styling the settings for take-action-carousel within Slider
@@ -57,16 +60,13 @@ export const TakeActionCarousel = ({
       },
     ],
   }
-
   return (
     <div className="custom-sections-gap take-action-carousel-section">
       <H2
-        // title={t('home.take-actions.title')}
-        title="Take Action"
+        title={t('takeAction.title')}
         trailingLineColor="yellow"
         extraButton={{
-          // title: t('home.take-actions.seeMore'),
-          title: 'All',
+          title: t('campaignWork.seeMore'),
           url: '/take-actions',
         }}
       />
@@ -84,11 +84,7 @@ export const TakeActionCarousel = ({
         // }
       >
         {takeActionPosts.map((x, idx) => (
-          <div>
-            {x.featuredImage != null && (
-              <TakeActionCard key={idx} takeAction={x} />
-            )}
-          </div>
+          <div>{x.featuredImage != null && <TakeActionCard key={idx} takeAction={x} />}</div>
         ))}
       </Slider>
     </div>

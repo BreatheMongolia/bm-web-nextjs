@@ -135,7 +135,131 @@ p {
     @apply text-blue-400;
   }
 }
+.slick-arrow {
+  z-index: 9;
+}
 
+.slick-next {
+  right: 10 !important;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  display: none !important;
+}
+
+.slick-arrow.slick-next,
+.slick-arrow.slick-prev {
+  width: 51px;
+  height: 51px;
+}
+
+
+/* Banner section styles start */
+.banner-slider-wrapper {
+  margin-bottom: 70px;
+  min-height: 210px;
+  position: relative;
+  .slick-slide {
+    height: auto !important;
+  }
+  .slick-slide img {
+    width: 100%;
+    min-height: 210px;
+    height: 210px;
+    object-fit: cover;
+    object-position: top;
+  }
+  .banner_bottom_text_bar {
+    position: absolute;
+    width: 100%;
+    height: 36px;
+    left: 0;
+    z-index: 9;
+    bottom: 0;
+    background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
+    justify-content: center;
+    justify-items: center;
+  }
+  .banner_bottom_text_content {
+    justify-content: space-between;
+    height: 36px;
+    p {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 24px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #ffffff;
+      align-self: center;
+      &:first-of-type {
+        text-align: left;
+      }
+      &:last-of-type {
+        text-align: right;
+      }
+    }
+  }
+    }
+.news-carousel-section{
+  .slick-slide {
+    padding: 0 5px;
+    div {
+      transition: none;
+    }
+
+    &:first-child {
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 18px;
+      padding-right: 10px;
+    }
+  }
+
+  /* the parent */
+  .slick-list {
+    padding: 0 -5x;
+  }
+    .slick-arrow {
+      z-index: 9;
+    }
+  
+    .slick-next {
+      right: 10 !important;
+    }
+  
+    .slick-next:before,
+    .slick-prev:before {
+      display: none !important;
+    }
+  
+    .slick-arrow.slick-next,
+    .slick-arrow.slick-prev {
+      width: 51px;
+      height: 51px;
+    }
+}
+.prev-gray-arrow,
+.next-gray-arrow {
+  &::before {
+    content: none;
+  }
+
+    border: none;
+    opacity: 1;
+    backdrop-filter: blur(15px);
+    z-index: 9;
+    border-radius: 50%;
+    top: 50% !important;
+    display: flex !important;
+    align-items: center;
+    justify-content:center;
+}
 /* Join Breathe Mongolia styles start */
 
 .join-bm-slider-wrapper {
@@ -350,6 +474,16 @@ p {
       }
     }
   }
+  .banner-slider-wrapper {
+     padding-top: 0;
+   }
+     .news-carousel-section {
+       .slick-slide {
+         div {
+           width: 330px;
+         }
+       }
+     }
 }
 
 @media (max-width: 950px) {

@@ -1,40 +1,40 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import dayjs from 'dayjs'
 import { EXTERNAL_URLS } from 'lib/consts/urls'
 import Link from 'next/link'
 
 export const Footer = () => {
-  const [t, i18n] = useTranslation()
+  const [t, i18n] = useTranslation('footer')
 
   const FooterLinkSection = () => {
     const linkSections = [
       {
-        title: t('footer.title.explore'),
+        title: t('titleExplore'),
         urls: [
-          { title: t('footer.nav.home'), url: '/' },
-          { title: t('footer.nav.news'), url: '/news' },
-          { title: t('footer.nav.agaarNeg'), url: EXTERNAL_URLS.AGAAR_NEG, target: '_blank' },
+          { title: t('nav.home'), url: '/' },
+          { title: t('nav.news'), url: '/news' },
+          { title: t('nav.agaarNeg'), url: EXTERNAL_URLS.AGAAR_NEG, target: '_blank' },
         ],
       },
       {
-        title: t('footer.title.getInvolved'),
+        title: t('title.getInvolved'),
         urls: [
-          { title: t('footer.nav.action'), url: '/take-actions' },
-          { title: t('footer.nav.waysToDonate'), url: '/about/supportus' },
+          { title: t('nav.action'), url: '/take-actions' },
+          { title: t('nav.waysToDonate'), url: '/about/supportus' },
           {
-            title: t('footer.nav.volunteer'),
+            title: t('nav.volunteer'),
             url: EXTERNAL_URLS.VOLUNTEER_FORM,
             target: '_blank',
           },
         ],
       },
       {
-        title: t('footer.title.aboutUs'),
+        title: t('title.aboutUs'),
         urls: [
-          { title: t('footer.nav.ourStory'), url: '/about' },
-          { title: t('footer.nav.impact'), url: '/about/impact' },
-          { title: t('footer.nav.ourTeam'), url: '/about/ourteam' },
+          { title: t('nav.ourStory'), url: '/about' },
+          { title: t('nav.impact'), url: '/about/impact' },
+          { title: t('nav.ourTeam'), url: '/about/ourteam' },
         ],
       },
     ]
@@ -58,7 +58,7 @@ export const Footer = () => {
             )
           })}
           <div className="col-span-2">
-            <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('footer.nav.join')} </h2>
+            <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('nav.join')} </h2>
           </div>
         </div>
       </div>
@@ -80,10 +80,10 @@ export const Footer = () => {
           <div className="text-xsm sm:text-sm font-normal leading-5">
             <p>
               ©2019-{dayjs().year().toString()}
-              {t('footer.copyright')} <br></br>
-              {t('footer.name')}
+              {t('copyright')} <br></br>
+              {t('name')}
             </p>
-            <p className="mt-4">{t('footer.responsible')}</p>
+            <p className="mt-4">{t('responsible')}</p>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ export const H2 = ({
   trailingLineColor,
   extraButton,
   descriptionHtml,
+  className,
 }: {
   title: string
   iconImageUrl?: string
@@ -16,6 +17,7 @@ export const H2 = ({
     url: string
   }
   descriptionHtml?: string
+  className?: string
 }) => {
   const TrailingLine = () => {
     // Setting state and useEffect removes the hydration error from static generation
@@ -31,7 +33,7 @@ export const H2 = ({
     )
   }
   return (
-    <div className="mt-2 mb-5">
+    <div className={`mt-2 mb-5 ${className}`}>
       <div className="flex items-center gap-x-10">
         <div>
           <h2 className="font-bold text-lg sm:text-3xl text-zinc-800 mt-2 mb-1"> {title} </h2>

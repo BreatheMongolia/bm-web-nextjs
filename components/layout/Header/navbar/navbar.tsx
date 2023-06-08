@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
-import i18n from 'lib/i18n'
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { MenuItem } from './menuItem'
 import SimpleButton from 'components/generic/SimpleButton'
@@ -12,8 +11,7 @@ export const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
   const path = router.pathname.toLowerCase()
-  const { t } = useTranslation()
-  const matchUrl = `/${i18n.language}`
+  const { t } = useTranslation('nav')
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -28,11 +26,11 @@ export const Navbar = () => {
           <img className="aspect-auto max-h-14 sm:max-h-16 mb-2" src="/images/logo.png" alt="Breathe Mongolia" />
         </Link>
         <div className="items-center gap-10 hidden lg:flex">
-          <MenuItem title={t('nav.home')} href="/" isActive={path == '/'} />
-          <MenuItem title={t('nav.takeAction')} href="/take-actions" isActive={path.includes('take-action')} />
-          <MenuItem title={t('nav.news')} href="/news" isActive={path.includes('news')} />
-          <MenuItem title={t('nav.agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
-          <MenuItem title={t('nav.aboutUs')} href="/about" isActive={path.includes('about')} />
+          <MenuItem title={t('home')} href="/" isActive={path == '/'} />
+          <MenuItem title={t('takeAction')} href="/take-actions" isActive={path.includes('take-action')} />
+          <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
+          <MenuItem title={t('agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
+          <MenuItem title={t('aboutUs')} href="/about" isActive={path.includes('about')} />
 
           {/* GiveButter Button */}
           <button
@@ -42,7 +40,7 @@ export const Navbar = () => {
             givebutter-theme="click-only"
             force-https="true"
           >
-            {t('nav.donate')}
+            {t('donate')}
           </button>
         </div>
         {/* Added the pl-1 to make the div more clickable */}
@@ -62,11 +60,11 @@ export const Navbar = () => {
         transition-all ease-in-out duration-200
         ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <MenuItem title={t('nav.home')} href="/" isActive={path == '/'} />
-        <MenuItem title={t('nav.takeAction')} href="/take-actions" isActive={path.includes('take-action')} />
-        <MenuItem title={t('nav.news')} href="/news" isActive={path.includes('news')} />
-        <MenuItem title={t('nav.agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
-        <MenuItem title={t('nav.aboutUs')} href="/about" isActive={path.includes('about')} />
+        <MenuItem title={t('home')} href="/" isActive={path == '/'} />
+        <MenuItem title={t('takeAction')} href="/take-actions" isActive={path.includes('take-action')} />
+        <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
+        <MenuItem title={t('agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
+        <MenuItem title={t('aboutUs')} href="/about" isActive={path.includes('about')} />
 
         <hr className="border-slate-400" />
         {/* GiveButter Button */}
@@ -77,7 +75,7 @@ export const Navbar = () => {
           givebutter-theme="click-only"
           force-https="true"
         >
-          {t('nav.donate')}
+          {t('donate')}
         </button>
       </div>
     </div>

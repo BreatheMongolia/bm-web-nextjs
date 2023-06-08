@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import BM_WFH_Team from 'assets/images/BM_WFH_Team.jpg'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const AboutUsHeader = () => {
   const { t } = useTranslation()
