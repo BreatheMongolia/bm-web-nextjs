@@ -83,8 +83,15 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
             title={{
               en: page.customFields.featuredTakeActions[0].customFields.title,
               mn: page.customFields.featuredTakeActions[0].customFields.titleMn,
-            }} 
-            takeActionPosts={page.customFields.featuredTakeActions} 
+            }}
+            takeActionPosts={page.customFields.featuredTakeActions}
+          />
+          <OurWorkCarousel
+            title={{
+              en: page.customFields.campaignAndOurWorkTitle,
+              mn: page.customFields.campaignAndOurWorkTitleMn,
+            }}
+            campaigns={page.customFields.campaignAndOurWorkSlider}
           />
           <JoinBMSection
             title={{
