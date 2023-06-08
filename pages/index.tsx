@@ -19,6 +19,7 @@ import { useEffect } from 'react'
 import { fetchPurpleAirStations } from 'lib/air-pollution-map/api-hooks/fetchPurpleAirStations'
 import { StationType } from 'lib/air-pollution-map/types'
 import { fetchOpenAQStations } from 'lib/air-pollution-map/api-hooks/fetchOpenAQStations'
+import { getTranslated } from 'lib/utils/getTranslated'
 
 // TODO: Detect the current language and update fields based on the current language
 // TODO: Add a util function to extract the correct image size for the imageUrl
@@ -35,6 +36,15 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
       i18n.changeLanguage(locale)
     }
   }, [])
+  const getBannerTextRight = bannerTextRight => {
+    var text: string = ''
+    for (let i = 0; i < bannerTextRight.length; i++) {
+      text += bannerTextRight[i].categoryText
+      text += bannerTextRight?.length - 1 !== i ? '・' : ''
+    }
+    return text
+  }
+
   // You can get the inner objects from the page object - it has all the content needed for the Components needed for the page.
   return (
     <div>
@@ -47,9 +57,10 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
             en: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
             mn: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
           }}
+          imageUrls={page.customFields.banners}
           bottomText={{
             left: page.customFields.bannerTextLeft,
-            right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
+            right: getBannerTextRight(page.customFields.bannerTextRight),
           }}
         />
         <div className="container mx-auto flex flex-col gap-20">
@@ -104,16 +115,17 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
 
-  const purpleAirStations = await fetchPurpleAirStations()
-  const openAQStations = await fetchOpenAQStations()
-  // const airVisualOutdoorStations = await fetchPurpleAirStations()
-  // const airVisualIndoorStations = await fetchPurpleAirStations()
+  // const purpleAirStations = await fetchPurpleAirStations()
+  // const openAQStations = await fetchOpenAQStations()
+  // // const airVisualOutdoorStations = await fetchPurpleAirStations()
+  // // const airVisualIndoorStations = await fetchPurpleAirStations()
 
-  const stations = [
-    ...purpleAirStations,
-    ...openAQStations,
-    // ...airVisualIndoorStations, ...airVisualOutdoorStations
-  ]
+  // const stations = [
+  //   ...purpleAirStations,
+  //   ...openAQStations,
+  //   // ...airVisualIndoorStations, ...airVisualOutdoorStations
+  // ]
+  console.log(locale)
   // this return passes it to the above component
   return {
     props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page, stations },
