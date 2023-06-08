@@ -128,7 +128,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   console.log(locale)
   // this return passes it to the above component
   return {
-    props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page, stations },
+    props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page },
     // This tells the page how often to refetch from the API (in seconds)
     revalidate: 60,
   }
