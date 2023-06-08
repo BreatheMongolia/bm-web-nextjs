@@ -10,7 +10,7 @@ type MenuItemProps = {
 export const MenuItem = (props: MenuItemProps) => {
   return (
     <Link
-      className={`hover:text-bm-blue ${props.isActive && 'font-semibold text-bm-blue'}`}
+      className={`hover:text-bm-blue font-semibold ${props.isActive && ' text-bm-blue'}`}
       href={props.href}
       target={props.target}
     >

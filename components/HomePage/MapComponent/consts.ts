@@ -29,14 +29,14 @@ export const leftRadios = [
   {
     id: 'outdoor_sensor',
     value: 'outdoor',
-    label: 'map.outdoor',
-    sublabel: 'map.outdoorlabel',
+    label: 'outdoor',
+    sublabel: 'outdoorlabel',
   },
   {
     id: 'indoor_sensor',
     value: 'indoor',
-    label: 'map.indoor',
-    sublabel: 'map.indoorlabel',
+    label: 'indoor',
+    sublabel: 'indoorlabel',
   },
 ]
 
@@ -44,21 +44,21 @@ export const rightRadios = [
   {
     id: 'satellite-v9',
     value: 'satellite',
-    label: 'map.satellite',
+    label: 'satellite',
   },
   {
     id: 'streets-v11',
     value: 'streets',
-    label: 'map.streets',
+    label: 'streets',
   },
 ]
 export const AQIScales = [
-  { color: 'green', value: '0', text: 'map.healthy' },
-  { color: 'yellow', value: '50', text: 'map.moderate' },
-  { color: 'orange', value: '100', text: 'map.unhealthySensitive' },
-  { color: 'red', value: '150', text: 'map.unhealthy' },
-  { color: 'purple', value: '200', text: 'map.veryUnhealthy' },
-  { color: 'brown', value: '300+', text: 'map.hazardous' },
+  { color: 'green', value: '0', text: 'healthy' },
+  { color: 'yellow', value: '50', text: 'moderate' },
+  { color: 'orange', value: '100', text: 'unhealthySensitive' },
+  { color: 'red', value: '150', text: 'unhealthy' },
+  { color: 'purple', value: '200', text: 'veryUnhealthy' },
+  { color: 'brown', value: '300+', text: 'hazardous' },
 ]
 
 export const activeStations = 'v2/stations?city=Ulaanbaatar&state=ulaanbaatar&country=mongolia&key=' + breatheMonAPI
@@ -409,3 +409,33 @@ export const pollutantsChemicalFormula = {
     index: '',
   },
 }
+
+export type LocationOption = {
+  value: string
+  label: string
+}
+
+export const locationOptions: LocationOption[] = [
+  { value: 'ulaanbaatar', label: 'province.ulaanbaatar' },
+  { value: 'arkhangai', label: 'province.arkhangai' },
+  { value: 'bayanolgii', label: 'province.bayanolgii' },
+  { value: 'bayankhongor', label: 'province.bayankhongor' },
+  { value: 'bulgan', label: 'province.bulgan' },
+  { value: 'darkhan', label: 'province.darkhan' },
+  { value: 'dornod', label: 'province.dornod' },
+  { value: 'dornogovi', label: 'province.dornogovi' },
+  { value: 'dundgovi', label: 'province.dundgovi' },
+  { value: 'govialtai', label: 'province.govialtai' },
+  { value: 'govisumber', label: 'province.govisumber' },
+  { value: 'khentii', label: 'province.khentii' },
+  { value: 'khovd', label: 'province.khovd' },
+  { value: 'khovsgol', label: 'province.khovsgol' },
+  { value: 'umnugobi', label: 'province.umnugobi' },
+  { value: 'orkhon', label: 'province.orkhon' },
+  { value: 'uvurkhangai', label: 'province.uvurkhangai' },
+  { value: 'selenge', label: 'province.selenge' },
+  { value: 'sukhbaatar', label: 'province.sukhbaatar' },
+  { value: 'tov', label: 'province.tov' },
+  { value: 'uvs', label: 'province.uvs' },
+  { value: 'zavkhan', label: 'province.zavkhan' },
+]

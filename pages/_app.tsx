@@ -8,6 +8,8 @@ import Script from 'next/script'
 import { AnimatePresence } from 'framer-motion'
 import { createContext } from 'react'
 import { MapContextInterface } from 'lib/air-pollution-map/types'
+import { appWithTranslation } from 'next-i18next'
+import { i18n } from '../next-i18next.config'
 
 export const MapContext = createContext<MapContextInterface | null>(null)
 
@@ -33,4 +35,10 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   )
 }
 
-export default MyApp
+export default appWithTranslation(MyApp, {
+  i18n: {
+    locales: ['mn', 'en'],
+    defaultLocale: 'mn',
+    localeDetection: false,
+  },
+})
