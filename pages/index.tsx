@@ -45,7 +45,13 @@ export default function Index({ page }: { page: Page }) {
 
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
-          <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
+          <TakeActionCarousel
+            title={{
+              en: page.customFields.featuredTakeActions[0].customFields.title,
+              mn: page.customFields.featuredTakeActions[0].customFields.titleMn,
+            }} 
+            takeActionPosts={page.customFields.featuredTakeActions} 
+          />
           <JoinBMSection
             title={{
               en: page.customFields.joinBreatheMongoliaTitle,
