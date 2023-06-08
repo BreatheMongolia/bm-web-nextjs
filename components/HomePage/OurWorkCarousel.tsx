@@ -1,6 +1,14 @@
 import { H2 } from 'components/generic/Typography'
+import React, { FC } from "react"
 import { Page_Customfields_CampaignAndOurWorkSlider } from 'graphql/generated'
 import { useTranslation } from 'next-i18next'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import Slider from 'react-slick'
+import parse from "html-react-parser"
+import Arrow from 'components/generic/Arrow'
+import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
+import SliderRightArrow from 'assets/icons/SliderRightArrow'
 
 export const OurWorkCarousel = ({
   title,
@@ -10,8 +18,58 @@ export const OurWorkCarousel = ({
   campaigns: Page_Customfields_CampaignAndOurWorkSlider[]
 }) => {
   const { t } = useTranslation('home')
+  function formatMyDate(value: any, locale = "fr-Fr") {
+    const year = new Date(value).toLocaleDateString(locale, { year: "numeric" })
+    const month = new Date(value).toLocaleDateString(locale, { month: "numeric" })
+    const day = new Date(value).toLocaleDateString(locale, { day: "numeric" })
+    return day + " • " + month + " • " + year
+  }
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: false,
+    autoplaySpeed: 5000,
+    cssEase: "linear",
+    adaptiveHeight: true,
+    centerMode: false,
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          infinite: false
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          centerMode: false,
+          variableWidth: true
+        }
+      }
+    ]
+  }
+  
   return (
-    <div>
+    <div className="campaign-slider-wrapper custom-sections-gap">
       <H2
         title={title.mn}
         trailingLineColor="yellow"
@@ -20,6 +78,53 @@ export const OurWorkCarousel = ({
           url: '/news',
         }}
       />
+
+      <Slider {...settings}
+      prevArrow={
+        <Arrow check={0} classes="prev-gray-arrow">
+          <SliderLeftArrow />
+        </Arrow>
+      }
+      nextArrow={
+        <Arrow check={campaigns.length - 1} classes="next-gray-arrow">
+          <SliderRightArrow />
+        </Arrow>
+      }
+      >
+        {campaigns.map(campaign => (
+        <React.Fragment key={campaign.volunteerImage.id}>
+        <div
+          key={campaign.volunteerImage.id}
+          className="campaignCard"
+          onClick={() => window.open(campaign.campaignCatgeoryUrl, "_blank")}
+        >
+          <img className="slider-image" src={campaign.volunteerImage?.mediaDetails.sizes !== null
+                ? campaign?.volunteerImage?.mediaDetails.sizes[0].sourceUrl
+                : ""} />
+          <div className="campaign-content">
+            <div className="campaignCategory">
+              <span className="custom_dot_green"></span>
+              <span className="custom_green_span"> {campaign.campaignCategoryTextMn}</span>
+            </div>
+            <h3 className="campaign-title">{campaign.campaignTitleMn}</h3>
+            {campaign?.campaignDescription && (
+              <div className="campaign-desc">{parse(campaign.campaignDescriptionMn)}</div>
+            )}
+
+            <div className="campaign-date">
+              {" "}
+              <span>{formatMyDate(campaign.campaignDate)} </span>
+            </div>
+          </div>
+        </div>
+        </React.Fragment>
+          // <div key={x.volunteerImage.id}>
+          //   <img className="slider-image" src={x.volunteerImage?.mediaDetails.sizes !== null
+          //       ? x.volunteerImage?.mediaDetails.sizes[0].sourceUrl
+          //       : ""} />
+          // </div>
+        ))}
+      </Slider>
     </div>
   )
 }
