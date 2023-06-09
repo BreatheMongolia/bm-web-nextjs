@@ -10,6 +10,7 @@ import dayjs from 'dayjs'
 import Arrow from 'components/generic/Arrow'
 import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
 import SliderRightArrow from 'assets/icons/SliderRightArrow'
+import { getTranslated } from 'lib/utils/getTranslated'
 export const OurWorkCarousel = ({
   title,
   campaigns,
@@ -75,7 +76,7 @@ export const OurWorkCarousel = ({
   return (
     <div className="campaign-slider-wrapper custom-sections-gap">
       <H2
-        title={title.mn}
+        title={getTranslated(title.en, title.mn)}
         trailingLineColor="yellow"
         extraButton={{
           title: t('campaignWork.seeMore'),
