@@ -64,12 +64,10 @@ export const TakeActionCarousel = ({
   return (
     <div className="custom-sections-gap take-action-carousel-section">
       <H2
-        // title={t('home.take-actions.title')}
-        title="Take Action"
+        title={t('takeAction.title')}
         trailingLineColor="yellow"
         extraButton={{
-          // title: t('home.take-actions.seeMore'),
-          title: 'All',
+          title: t('campaignWork.seeMore'),
           url: '/take-actions',
         }}
       />
