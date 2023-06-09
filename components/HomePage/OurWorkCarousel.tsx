@@ -6,10 +6,10 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 import parse from "html-react-parser"
+import dayjs from "dayjs"
 import Arrow from 'components/generic/Arrow'
 import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
 import SliderRightArrow from 'assets/icons/SliderRightArrow'
-
 export const OurWorkCarousel = ({
   title,
   campaigns,
@@ -67,7 +67,9 @@ export const OurWorkCarousel = ({
       }
     ]
   }
-  
+  const sortedCampaigns = campaigns.sort((a: any, b: any) =>
+    dayjs(a?.campaignDate).isBefore(dayjs(b?.campaignDate)) ? 1 : -1
+  )
   return (
     <div className="campaign-slider-wrapper custom-sections-gap">
       <H2
@@ -78,7 +80,6 @@ export const OurWorkCarousel = ({
           url: '/news',
         }}
       />
-
       <Slider {...settings}
       prevArrow={
         <Arrow check={0} classes="prev-gray-arrow">
@@ -86,12 +87,12 @@ export const OurWorkCarousel = ({
         </Arrow>
       }
       nextArrow={
-        <Arrow check={campaigns.length - 1} classes="next-gray-arrow">
+        <Arrow check={sortedCampaigns.length - 1} classes="next-gray-arrow">
           <SliderRightArrow />
         </Arrow>
       }
       >
-        {campaigns.map(campaign => (
+        {sortedCampaigns.map(campaign => (
         <React.Fragment key={campaign.volunteerImage.id}>
         <div
           key={campaign.volunteerImage.id}
@@ -118,11 +119,6 @@ export const OurWorkCarousel = ({
           </div>
         </div>
         </React.Fragment>
-          // <div key={x.volunteerImage.id}>
-          //   <img className="slider-image" src={x.volunteerImage?.mediaDetails.sizes !== null
-          //       ? x.volunteerImage?.mediaDetails.sizes[0].sourceUrl
-          //       : ""} />
-          // </div>
         ))}
       </Slider>
     </div>
