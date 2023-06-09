@@ -110,10 +110,10 @@ export const TakeActionCarousel = ({
   return (
     <div className="take-action-carousel-section">
       <H2
-        title={t('take-action.title')}
+        title={t('takeAction.title')}
         trailingLineColor="yellow"
         extraButton={{
-          title: t('take-actions.seeMore'),
+          title: t('campaignWork.seeMore'),
           url: '/take-actions',
         }}
       />
