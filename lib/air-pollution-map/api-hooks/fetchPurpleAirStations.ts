@@ -9,7 +9,8 @@ import {
 import { StationType } from '../types'
 
 export const fetchPurpleAirStations = async () => {
-  return await Promise.allSettled(
+  const stations: StationType[] = []
+  await Promise.allSettled(
     purpleAirIndoorStationsAPI.map(async indoorStationAPI => {
       const res = await axios.get(indoorStationAPI)
       if (res.data) {
@@ -38,11 +39,11 @@ export const fetchPurpleAirStations = async () => {
       return null
     }),
   ).then(result => {
-    const filtered = result
-      .filter(v => v.status === 'fulfilled' && v.value !== null && v.value !== undefined)
-      .filter(v => v)
-      .map(result => result)
-
-    return filtered
+    result.map(res => {
+      if (res.status === 'fulfilled' && res.value) {
+        stations.push(res.value)
+      }
+    })
   })
+  return stations
 }

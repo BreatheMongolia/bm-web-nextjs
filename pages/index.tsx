@@ -20,6 +20,8 @@ import { fetchPurpleAirStations } from 'lib/air-pollution-map/api-hooks/fetchPur
 import { StationType } from 'lib/air-pollution-map/types'
 import { fetchOpenAQStations } from 'lib/air-pollution-map/api-hooks/fetchOpenAQStations'
 import { getTranslated } from 'lib/utils/getTranslated'
+import { fetchAirVisualIndoorStations } from 'lib/air-pollution-map/api-hooks/fetchAirVisualIndoorStations'
+import { fetchAirVisualOutdoorStations } from 'lib/air-pollution-map/api-hooks/fetchAirVisualOutdoorStations'
 
 // TODO: Detect the current language and update fields based on the current language
 // TODO: Add a util function to extract the correct image size for the imageUrl
@@ -115,16 +117,12 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
 
-  // const purpleAirStations = await fetchPurpleAirStations()
-  // const openAQStations = await fetchOpenAQStations()
-  // // const airVisualOutdoorStations = await fetchPurpleAirStations()
-  // // const airVisualIndoorStations = await fetchPurpleAirStations()
+  const purpleAirStations = await fetchPurpleAirStations()
+  const openAQStations = await fetchOpenAQStations()
+  const airVisualOutdoorStations = await fetchAirVisualOutdoorStations()
+  const airVisualIndoorStations = await fetchAirVisualIndoorStations()
 
-  // const stations = [
-  //   ...purpleAirStations,
-  //   ...openAQStations,
-  //   // ...airVisualIndoorStations, ...airVisualOutdoorStations
-  // ]
+  const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   console.log(locale)
   // this return passes it to the above component
   return {
