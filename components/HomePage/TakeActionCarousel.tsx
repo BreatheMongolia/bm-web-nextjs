@@ -5,6 +5,7 @@ import Slider from 'react-slick'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+import { getTranslated } from 'lib/utils/getTranslated'
 // import { TakeActionCard } from '../Cards/TakeActionCard'
 // import { TakeAction } from 'graphql/generated'
 // import { useHistory } from "react-router-dom"
@@ -19,11 +20,12 @@ export const TakeActionCarousel = ({
   title,
   takeActionPosts,
 }: {
-  title: { en: string; mn: string }
+  title: string
   takeActionPosts: Page_Customfields_FeaturedTakeActions[]
 }) => {
   const { t } = useTranslation('home')
-  console.log(takeActionPosts);
+  console.log(takeActionPosts)
+  takeActionPosts.filter((value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index)
 
   // const featuredImageBox = getImage(
   //   takeAction.featuredImage.node?.mediaDetails,
@@ -34,7 +36,7 @@ export const TakeActionCarousel = ({
   // const getTransformedData = (takeActionPosts: Page_Customfields_FeaturedTakeActions[]) => {
   //   if (takeActionPosts.length === 0) {
   //     return []
-  //   }  
+  //   }
   //   const takeActions: TakeActionArray[] = []
   //   takeActionPosts.map((x: TakeAction) => {
   //     takeActions.push({
@@ -110,7 +112,7 @@ export const TakeActionCarousel = ({
   return (
     <div className="take-action-carousel-section">
       <H2
-        title={t('takeAction.title')}
+        title={title}
         trailingLineColor="yellow"
         extraButton={{
           title: t('campaignWork.seeMore'),
@@ -131,28 +133,46 @@ export const TakeActionCarousel = ({
         }
       >
         {takeActionPosts.map((x, idx) => (
-          <React.Fragment>
+          <div>
+          { x?.featuredImage?.node?.mediaDetails.sizes !== null
+            && <React.Fragment>
             <div
-              key={idx}
-              className="relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer h-52 bg-cover bg-center group "
-              onClick={() => window.open(x.featuredImage.node?.mediaItemUrl, '_blank')}
+              key={"take-action-carousel" + idx}
+              className="card take-action-carousel"
+              onClick={() => window.open(x?.featuredImage?.node?.mediaDetails.sizes !== null
+                      ? x?.featuredImage?.node?.mediaItemUrl
+                      : '', '_blank')}
             >
-              <div className="flex flex-col h-full justify-end bg-gradient-to-t from-black/80 to-black/0 via-black/30 group-hover:from-black/90 group-hover:to-black/20 transition-all">
+              {/* <div className="take-action-carousel"> */}
                 <img
-                  className="object-fill max-w-none h-full"
-                  src={x?.featuredImage?.node?.mediaDetails.sizes !== null
-                    ? x?.featuredImage?.node?.mediaDetails.sizes[0].sourceUrl
-                    : ''}
+                  className="card-img-top take-action-img"
+                  src={
+                    x?.featuredImage?.node?.mediaDetails.sizes !== null
+                      ? x?.featuredImage?.node?.mediaDetails.sizes[0].sourceUrl
+                      : ''
+                  }
                 />
-                <div className="w-full p-4 ">
-                  <div className="w-full text-white line-clamp-2">
-                    {' '}
-                    {x.customFields.typeOfAction[0].customFields.nameMn}{' '}
+                <div className="take-action-info">
+                  <div className="take-action-title">
+                    {getTranslated(
+                      x.customFields.title,
+                      x.customFields.titleMn,
+                    )}
+                  </div>
+                  <div className="read-more-arrow ">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="12" fill="#F4AC3D" />
+                      <path
+                        d="M15.6674 12.6249L16.334 12L11.0005 7L9.66732 8.24978L13.6668 12L9.66732 15.7502L11.0005 17L15.6674 12.6249Z"
+                        fill="#FAFAFF"
+                      />
+                    </svg>
                   </div>
                 </div>
-              </div>
             </div>
           </React.Fragment>
+          }
+        </div>
         ))}
       </Slider>
     </div>
