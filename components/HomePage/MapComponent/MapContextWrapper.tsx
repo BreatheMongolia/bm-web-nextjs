@@ -22,22 +22,6 @@ export const MapContextWrapper = ({ children }) => {
     setMapCurrent: (mapIns: any) => setMapCurrent(mapIns),
     selectedStation: selectedStation,
     setSelectedStation: (station: StationType | null) => setSelectedStation(station),
-    openAQStations: openAQStations,
-    airVisualStations: airVisualStations,
-    purpleAirStations: purpleAirStations,
-    airVisualOutdoorStations: airVisualOutdoorStations,
-    feedAirVisualStations: (data: StationType[]) => {
-      setAirVisualStations([...data])
-    },
-    feedPurpleAirStations: (data: StationType[]) => {
-      setPurpleAirStations([...data])
-    },
-    feedOpenAQStations: (data: StationType[]) => {
-      setOpenAQStations([...data])
-    },
-    feedAirVisualOutdoorStations: (data: StationType[]) => {
-      setAirVisualOutdoorStations([...data])
-    },
     showIndoor: showIndoor,
     showOutdoor: showOutdoor,
     setShowIndoor: (value: boolean) => {

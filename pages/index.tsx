@@ -46,7 +46,7 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
     }
     return text
   }
-
+  console.log(stations)
   // You can get the inner objects from the page object - it has all the content needed for the Components needed for the page.
   return (
     <div>
@@ -76,6 +76,7 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
                 en: page.customFields.mapDescription,
                 mn: page.customFields.mapDescriptionMn,
               }}
+              stations={stations}
             />
           </MapContextWrapper>
 
@@ -123,11 +124,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const airVisualIndoorStations = await fetchAirVisualIndoorStations()
 
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+
+  console.log('fetched stations => ', stations.length, ' station(s)')
   console.log(locale)
   // this return passes it to the above component
   return {
-    props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page },
+    props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page, stations },
     // This tells the page how often to refetch from the API (in seconds)
-    revalidate: 60,
+    revalidate: 60 * 60,
   }
 }

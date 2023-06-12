@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {
-  getAQIcolor,
+  getAQIColor,
   hasStationUpdatedWithinLastWeek,
   isStationWithinMongoliaBBox,
 } from 'components/HomePage/MapComponent/utils'
@@ -52,7 +52,7 @@ export const fetchAirVisualOutdoorStations = async () => {
             location: { coordinates: [lon, lat] },
             sponsoredBy: 'Air Visual',
             type: 'outdoor',
-            color: getAQIcolor(aqius),
+            color: getAQIColor(aqius),
           } as StationType
         }
       } catch (error) {

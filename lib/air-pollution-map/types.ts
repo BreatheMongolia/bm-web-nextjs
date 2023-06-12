@@ -4,14 +4,6 @@ export interface MapContextInterface {
   addPin: (data: StationType) => void
   mapCurrent: any
   setMapCurrent: Function
-  openAQStations: StationType[]
-  airVisualStations: StationType[]
-  purpleAirStations: StationType[]
-  airVisualOutdoorStations: StationType[]
-  feedAirVisualStations: Function
-  feedPurpleAirStations: Function
-  feedOpenAQStations: Function
-  feedAirVisualOutdoorStations: Function
   showIndoor: boolean
   showOutdoor: boolean
   setShowIndoor: Function
@@ -23,7 +15,7 @@ export interface MapContextInterface {
 export interface StationType {
   city?: string
   country?: string
-  pollution: object
+  pollution: any
   weather?: object
   location: {
     coordinates: number[]

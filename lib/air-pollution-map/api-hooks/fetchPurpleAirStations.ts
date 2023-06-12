@@ -2,7 +2,7 @@ import { purpleAirIndoorStationsAPI } from 'components/HomePage/MapComponent/con
 import axios from 'axios'
 import {
   getAQIFromPM2,
-  getAQIcolor,
+  getAQIColor,
   hasStationUpdatedWithinLastWeek,
   isStationWithinMongoliaBBox,
 } from 'components/HomePage/MapComponent/utils'
@@ -32,7 +32,7 @@ export const fetchPurpleAirStations = async () => {
             location: { coordinates: [lon, lat] },
             type: 'indoor',
             sponsoredBy: 'Purple Air',
-            color: getAQIcolor(stationAQI),
+            color: getAQIColor(stationAQI),
           } as StationType
         }
       }

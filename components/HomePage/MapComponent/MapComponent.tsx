@@ -10,6 +10,8 @@ import { LocationOption, leftRadios, locationsWithSensors, rightRadios } from '.
 import { MapDropdownWrapper } from './MapDropdowns/MapDropdownWrapper'
 import { LocationDropdown, RankDropdown, StationsDropdown } from './MapDropdowns'
 import { isStationWithinBBOX } from './utils'
+import { StationType } from 'lib/air-pollution-map/types'
+import { StationDetail } from './StationDetail'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -24,9 +26,11 @@ const MAPBOX_KEY =
 export const MapComponent = ({
   title,
   descriptionHtml,
+  stations,
 }: {
   title: { en: string; mn: string }
   descriptionHtml: { en: string; mn: string }
+  stations: StationType[]
 }) => {
   const { t } = useTranslation('map')
   // init
@@ -137,8 +141,7 @@ export const MapComponent = ({
             open={currentDropdown === 'location'}
           />
           <StationsDropdown
-            // stations={[...openAQStations, ...airVisualStations, ...purpleAirStations, ...airVisualOutdoorStations]}
-            stations={['test']}
+            stations={stations}
             onStationClick={(station: any) => onStationClick(station)}
             setTitleClick={(isOpen: boolean) => {
               setCurrentDropdown(isOpen ? 'stations' : 'none')
@@ -166,6 +169,7 @@ export const MapComponent = ({
         />
         {/* Other Layers on top of Map */}
         <AQIScale />
+        <StationDetail station={mapContext.selectedStation} />
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {
   getAQIFromPM2,
-  getAQIcolor,
+  getAQIColor,
   hasStationUpdatedWithinLastWeek,
   isStationWithinMongoliaBBox,
 } from 'components/HomePage/MapComponent/utils'
@@ -42,7 +42,7 @@ export const fetchAirVisualIndoorStations = async () => {
                 location: { coordinates: [lon, lat] },
                 type: 'indoor',
                 sponsoredBy: 'Air Visual',
-                color: getAQIcolor(aqius),
+                color: getAQIColor(aqius),
               } as StationType
             }
           }

@@ -1,13 +1,15 @@
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { StationType } from 'lib/air-pollution-map/types'
 import { useTranslation } from 'next-i18next'
+import { getAQIColor } from '../utils'
 
 export const StationsDropdown = ({
-  stations,
+  stations = [],
   onStationClick,
   setTitleClick,
   open,
 }: {
-  stations: any
+  stations: StationType[]
   onStationClick: Function
   setTitleClick: Function
   open: boolean
@@ -25,20 +27,27 @@ export const StationsDropdown = ({
         </div>
       </div>
       <div className={`overflow-hidden transition-all overflow-y-auto ${!open ? 'h-0' : 'h-48'}`}>
-        {stations.map((zone, idx) => {
-          return (
-            <div
-              key={idx}
-              className={`py-3 text-zinc-900 pl-4 text-xs
+        {stations
+          .sort((a, b) => b.pollution.aqius - a.pollution.aqius)
+          .map((station, idx) => {
+            return (
+              <div
+                key={idx}
+                className={`py-3 text-zinc-900 pl-4 text-xs
                     border-b-[0.5px] border-slate-300 cursor-pointer
                     hover:bg-[#4870d7] hover:text-white
+                    flex items-center px-3 gap-x-1
                 `}
-              onClick={() => onStationClick(zone)}
-            >
-              <span> {t(zone.label)} </span>
-            </div>
-          )
-        })}
+                onClick={() => onStationClick(station)}
+              >
+                <span className="grow">
+                  {idx + 1}. {station.name}
+                </span>
+                <span className=""> {station.pollution.aqius} </span>
+                <div className={`aqi_circle ${getAQIColor(station.pollution.aqius)}`}> </div>
+              </div>
+            )
+          })}
       </div>
     </div>
   )
