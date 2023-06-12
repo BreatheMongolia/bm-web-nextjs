@@ -7,14 +7,17 @@ export const StationsDropdown = ({
   stations = [],
   onStationClick,
   setTitleClick,
+  selectedStation,
   open,
 }: {
   stations: StationType[]
   onStationClick: Function
   setTitleClick: Function
+  selectedStation: StationType
   open: boolean
 }) => {
   const { t } = useTranslation('map')
+
   return (
     <div className="font-semibold">
       <div
@@ -30,13 +33,15 @@ export const StationsDropdown = ({
         {stations
           .sort((a, b) => b.pollution.aqius - a.pollution.aqius)
           .map((station, idx) => {
+            const isCurrentStation = selectedStation && station.name === selectedStation.name
             return (
               <div
                 key={idx}
                 className={`py-3 text-zinc-900 pl-4 text-xs
-                    border-b-[0.5px] border-slate-300 cursor-pointer
-                    hover:bg-[#4870d7] hover:text-white
-                    flex items-center px-3 gap-x-1
+                  ${isCurrentStation && 'bg-gray-200'}
+                  border-b-[0.5px] border-slate-300 cursor-pointer
+                  hover:bg-[#4870d7] hover:text-white
+                  flex items-center px-3 gap-x-1
                 `}
                 onClick={() => onStationClick(station)}
               >

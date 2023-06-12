@@ -34,7 +34,7 @@ export const LocationDropdown = ({
               className={`py-3 text-zinc-900 pl-4 text-xs
                     border-b-[0.5px] border-slate-300 cursor-pointer
                     hover:bg-[#4870d7] hover:text-white
-                    ${selected.value === zone.value && ' bg-[#4870d7]/20'}
+                    ${selected.value === zone.value && ' bg-gray-200'}
                 `}
               onClick={() => onLocationClick(zone)}
             >

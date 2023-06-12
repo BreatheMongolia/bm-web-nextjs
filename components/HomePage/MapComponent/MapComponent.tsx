@@ -146,6 +146,7 @@ export const MapComponent = ({
             setTitleClick={(isOpen: boolean) => {
               setCurrentDropdown(isOpen ? 'stations' : 'none')
             }}
+            selectedStation={mapContext.selectedStation}
             open={currentDropdown === 'stations'}
           />
           <RankDropdown
@@ -169,7 +170,12 @@ export const MapComponent = ({
         />
         {/* Other Layers on top of Map */}
         <AQIScale />
-        <StationDetail station={mapContext.selectedStation} />
+        <StationDetail
+          setHidden={() => {
+            mapContext.setSelectedStation(null)
+          }}
+          station={mapContext.selectedStation}
+        />
       </div>
     </div>
   )
