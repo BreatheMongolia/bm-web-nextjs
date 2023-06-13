@@ -127,6 +127,39 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
       </div>
     )
   }
+  const ContentRightArea = () => {
+    return (
+      <div className={`flex-grow px-4 py-3 ${bgColors.right}`}>
+        <div className="flex items-center">
+          <span className="grow font-bold">{t('stationDetail.Recommendations')}</span>
+          <div onClick={() => setHidden(true)} className="cursor-pointer hover:text-black/30">
+            <XMarkIcon className="h-5 w-5" />
+          </div>
+        </div>
+        {/* Recommended Area */}
+        <div className="grid grid-cols-2 gap-1">
+          <div className={`${bgColors.otherBox} rounded p-3 flex space-x-2 items-center justify-center`}>
+            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.first_advice}`}></div>
+            <div className="text-xs font-semibold">
+              {t(`stationDetail.${station.type}Text.${healthCategory}.first_advice`)}
+            </div>
+          </div>
+          <div className={`${bgColors.otherBox} rounded p-3 flex space-x-2 items-center justify-center`}>
+            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.second_advice}`}></div>
+            <div className="text-xs font-semibold">
+              {t(`stationDetail.${station.type}Text.${healthCategory}.second_advice`)}
+            </div>
+          </div>
+          <div className={`${bgColors.otherBox} rounded p-3 flex space-x-2 items-center justify-center`}>
+            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.third_advice}`}></div>
+            <div className="text-xs font-semibold">
+              {t(`stationDetail.${station.type}Text.${healthCategory}.third_advice`)}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
   return (
     <AnimatePresence>
       {station && (
@@ -140,11 +173,11 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           border-[0.5px] border-black/20 backdrop-blur-xl
           "
         >
-          <div className={`${aqiColor} flex`}>
-            <div className="flex flex-col flex-1">
+          <div className={`${aqiColor} flex items-stretch`}>
+            <div className="flex flex-col grow">
               {/* top left */}
               <ContentTopLeftArea />
-              <div className="grid grid-cols-3">
+              <div className="grid grid-cols-3 grow">
                 {/* bottom a */}
                 <ContentBottomAreaA />
                 {/* bottom b */}
@@ -152,15 +185,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
               </div>
             </div>
             {/* right */}
-            <div className={`flex-1 px-4 py-3 ${bgColors.right}`}>
-              <div className="flex items-center">
-                <span className="grow font-bold">{t('stationDetail.Recommendations')}</span>
-                <div onClick={() => setHidden(true)} className="cursor-pointer hover:text-black/30">
-                  <XMarkIcon className="h-5 w-5" />
-                </div>
-              </div>
-              <div>{/* content */}</div>
-            </div>
+            <ContentRightArea />
           </div>
         </motion.div>
       )}
