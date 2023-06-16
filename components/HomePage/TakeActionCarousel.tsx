@@ -89,11 +89,12 @@ export const TakeActionCarousel = ({
             <div
               key={"take-action-carousel" + idx}
               className="relative flex flex-col m-2 take-action-carousel"
-              onClick={() => window.open(x?.featuredImage?.node?.mediaDetails.sizes !== null
-                      ? x?.featuredImage?.node?.mediaItemUrl
-                      : '', '_blank')}
+              onClick={() => window.open('/action/' + x.databaseId)}
+                // x?.featuredImage?.node?.mediaDetails.sizes !== null
+                //       ? x?.featuredImage?.node?.mediaItemUrl
+                //       : '', '_blank')}
             >
-              {/* <div className="take-action-carousel"> */}
+              {/* <div className="take-action-carousel-section"> */}
                 <img
                   className="card-img-top take-action-img"
                   src={
