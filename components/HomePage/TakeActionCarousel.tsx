@@ -6,67 +6,17 @@ import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
-// import { TakeActionCard } from '../Cards/TakeActionCard'
-// import { TakeAction } from 'graphql/generated'
 // import { useHistory } from "react-router-dom"
-
-export type TakeActionArray = {
-  title: string
-  typeOfAction: []
-  featuredImage: string
-}
 
 export const TakeActionCarousel = ({
   title,
   takeActionPosts,
 }: {
-  title: string
+  title: string,
   takeActionPosts: Page_Customfields_FeaturedTakeActions[]
 }) => {
   const { t } = useTranslation('home')
-  console.log(takeActionPosts)
-  takeActionPosts.filter((value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index)
-
-  // const featuredImageBox = getImage(
-  //   takeAction.featuredImage.node?.mediaDetails,
-  //   takeAction.featuredImage.node?.mediaItemUrl,
-  //   takeAction.featuredImage.node?.mediaDetails,
-  //   'medium_large',
-  // )
-  // const getTransformedData = (takeActionPosts: Page_Customfields_FeaturedTakeActions[]) => {
-  //   if (takeActionPosts.length === 0) {
-  //     return []
-  //   }
-  //   const takeActions: TakeActionArray[] = []
-  //   takeActionPosts.map((x: TakeAction) => {
-  //     takeActions.push({
-  //       title: x?.customFields?.titleMn,
-  //         // getTranslated(x?.customFields?.title, x?.customFields?.titleMn) !== null
-  //         //   ? getTranslated(x?.customFields?.title, x?.customFields?.titleMn)
-  //         //   : "",
-  //       typeOfAction: x?.customFields?.typeOfAction?.map(
-  //         (type: {
-  //           // databaseId: number
-  //           // actionTypeId: number
-  //           // name: string
-  //           // link: string
-  //           customFields: { name: string; nameMn: string }
-  //         }) => {
-  //           return {
-  //             ...type,
-  //             name: type?.customFields?.nameMn
-  //             // getTranslated(type?.customFields?.name, type?.customFields?.nameMn)
-  //           }
-  //         }
-  //       ),
-  //       featuredImage:
-  //         x?.featuredImage?.node?.mediaDetails.sizes !== null
-  //           ? x?.featuredImage?.node?.mediaDetails.sizes[0].sourceUrl
-  //           : ""
-  //     })
-  //   }
-  //   return takeActions
-  // }
+  // takeActionPosts.filter((value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index)
 
   // Styling the settings for take-action-carousel within Slider
   const settings = {
@@ -112,7 +62,7 @@ export const TakeActionCarousel = ({
   return (
     <div className="take-action-carousel-section">
       <H2
-        title={title}
+        title={'takeAction.title'}
         trailingLineColor="yellow"
         extraButton={{
           title: t('campaignWork.seeMore'),
@@ -138,7 +88,7 @@ export const TakeActionCarousel = ({
             && <React.Fragment>
             <div
               key={"take-action-carousel" + idx}
-              className="card take-action-carousel"
+              className="relative flex flex-col m-2 take-action-carousel"
               onClick={() => window.open(x?.featuredImage?.node?.mediaDetails.sizes !== null
                       ? x?.featuredImage?.node?.mediaItemUrl
                       : '', '_blank')}
@@ -154,10 +104,10 @@ export const TakeActionCarousel = ({
                 />
                 <div className="take-action-info">
                   <div className="take-action-title">
-                    {getTranslated(
-                      x.customFields.title,
-                      x.customFields.titleMn,
-                    )}
+                    {getTranslated(x?.customFields?.title, x?.customFields?.titleMn) !== null
+                      ? getTranslated(x?.customFields?.title, x?.customFields?.titleMn)
+                      : ""
+                    }
                   </div>
                   <div className="read-more-arrow ">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
