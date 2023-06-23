@@ -1,68 +1,69 @@
 import React from 'react'
 import { H2 } from 'components/generic/Typography'
-import { TakeAction, Page_Customfields_FeaturedTakeActions } from 'graphql/generated'
+import { Page_Customfields_FeaturedTakeActions } from 'graphql/generated'
 import Slider from 'react-slick'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
+// import { Link } from 'next/link'
 // import { useHistory } from "react-router-dom"
 
+// Styling the settings for take-action-carousel within Slider
+const settings = {
+  dots: false,
+  infinite: false,
+  speed: 800,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  arrows: true,
+  autoplaySpeed: 5000,
+  cssEase: 'linear',
+  adaptiveHeight: true,
+  centerMode: false,
+  variableWidth: true,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 2,
+        infinite: true,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        initialSlide: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+}
+
 export const TakeActionCarousel = ({
-  title,
-  takeActionPosts,
+  takeActionPosts
 }: {
-  title: string,
   takeActionPosts: Page_Customfields_FeaturedTakeActions[]
 }) => {
   const { t } = useTranslation('home')
   // takeActionPosts.filter((value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index)
 
-  // Styling the settings for take-action-carousel within Slider
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplaySpeed: 5000,
-    cssEase: 'linear',
-    adaptiveHeight: true,
-    centerMode: false,
-    variableWidth: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  }
+  
 
   return (
     <div className="take-action-carousel-section">
       <H2
-        title={'takeAction.title'}
+        title={t('takeAction.title')}
         trailingLineColor="yellow"
         extraButton={{
           title: t('campaignWork.seeMore'),
@@ -83,18 +84,13 @@ export const TakeActionCarousel = ({
         }
       >
         {takeActionPosts.map((x, idx) => (
-          <div>
+          <div key={idx}>
           { x?.featuredImage?.node?.mediaDetails.sizes !== null
             && <React.Fragment>
             <div
-              key={"take-action-carousel" + idx}
-              className="relative flex flex-col m-2 take-action-carousel"
+              className="relative flex flex-col m-1.5 take-action-carousel"
               onClick={() => window.open('/action/' + x.databaseId)}
-                // x?.featuredImage?.node?.mediaDetails.sizes !== null
-                //       ? x?.featuredImage?.node?.mediaItemUrl
-                //       : '', '_blank')}
             >
-              {/* <div className="take-action-carousel-section"> */}
                 <img
                   className="card-img-top take-action-img"
                   src={
@@ -111,6 +107,7 @@ export const TakeActionCarousel = ({
                     }
                   </div>
                   <div className="read-more-arrow ">
+                    {/* <a href="https://breathemongolia.org/action/${x.databaseId}"> */}
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="24" height="24" rx="12" fill="#F4AC3D" />
                       <path
@@ -118,6 +115,7 @@ export const TakeActionCarousel = ({
                         fill="#FAFAFF"
                       />
                     </svg>
+                    {/* </a> */}
                   </div>
                 </div>
             </div>

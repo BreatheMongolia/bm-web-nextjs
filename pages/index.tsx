@@ -80,7 +80,6 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel
-            title={ getTranslated(t('takeAction.title'), t('takeAction.titleMn'))}
             takeActionPosts={page.customFields.featuredTakeActions}
           />
           <OurWorkCarousel
