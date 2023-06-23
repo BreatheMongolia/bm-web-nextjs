@@ -2,12 +2,8 @@ import { MapContextInterface, StationType } from 'lib/air-pollution-map/types'
 import { MapContext } from 'pages/_app'
 import { useRef, useState } from 'react'
 export const MapContextWrapper = ({ children }) => {
-  const [pins, setPins] = useState<any>({})
+  const [pins, setPins] = useState<HTMLDivElement[]>([])
   const [selectedStation, setSelectedStation] = useState<StationType | null>(null)
-  const [openAQStations, setOpenAQStations] = useState<StationType[]>([])
-  const [airVisualStations, setAirVisualStations] = useState<StationType[]>([])
-  const [purpleAirStations, setPurpleAirStations] = useState<StationType[]>([])
-  const [airVisualOutdoorStations, setAirVisualOutdoorStations] = useState<StationType[]>([])
   const [showIndoor, setShowIndoor] = useState(true)
   const [showOutdoor, setShowOutdoor] = useState(true)
 
@@ -17,8 +13,7 @@ export const MapContextWrapper = ({ children }) => {
   const mapData: MapContextInterface = {
     mapCurrent: mapCurrent,
     pins: pins,
-    addPin: (station: object) => setPins((oldPins: any) => ({ ...oldPins, ...station })),
-    setPins: (data: object) => setPins(data),
+    addPin: (pin: HTMLDivElement) => setPins([...pins, pin]),
     setMapCurrent: (mapIns: any) => setMapCurrent(mapIns),
     selectedStation: selectedStation,
     setSelectedStation: (station: StationType | null) => setSelectedStation(station),

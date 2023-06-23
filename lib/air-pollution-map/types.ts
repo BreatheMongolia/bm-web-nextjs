@@ -1,7 +1,6 @@
 export interface MapContextInterface {
-  pins: string[]
-  setPins: (data: { [key: string]: StationType }) => void
-  addPin: (data: StationType) => void
+  pins: any[]
+  addPin: (pin: HTMLDivElement) => void
   mapCurrent: any
   setMapCurrent: Function
   showIndoor: boolean

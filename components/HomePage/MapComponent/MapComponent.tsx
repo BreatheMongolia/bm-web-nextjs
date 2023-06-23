@@ -9,9 +9,11 @@ import MapController from './MapController/MapController'
 import { LocationOption, leftRadios, locationsWithSensors, rightRadios } from './consts'
 import { MapDropdownWrapper } from './MapDropdowns/MapDropdownWrapper'
 import { LocationDropdown, RankDropdown, StationsDropdown } from './MapDropdowns'
-import { isStationWithinBBOX } from './utils'
+// import { isStationWithinBBOX } from './utils'
 import { StationType } from 'lib/air-pollution-map/types'
 import { StationDetail } from './StationDetail'
+import StationPin from './Helpers/StationPin'
+import { createRoot } from 'react-dom/client'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -42,6 +44,8 @@ export const MapComponent = ({
   const [zoom, setZoom] = useState(MAP_BASE_CONFIG.zoom)
   const [showStationDetail, setShowStationDetail] = useState(false)
   const [baseMap, setBaseMap] = useState(map?.style?.stylesheet?.id || MAP_BASE_CONFIG.style)
+  const [loadedPins, setLoadedPins] = useState(false)
+
   // dropdown/map related
   const [selectedLocation, setSelectedLocation] = useState<{ value: string; label: string }>({
     value: 'ulaanbaatar',
@@ -77,6 +81,12 @@ export const MapComponent = ({
       document.getElementById('map').replaceWith(map.getContainer())
     }
   }, [])
+
+  useEffect(() => {
+    if (!loadedPins && map) {
+      loadStationPins()
+    }
+  }, [map])
 
   // MapController Hooks
   const onSensorTypeChange = (type: string) => {
@@ -116,20 +126,47 @@ export const MapComponent = ({
     //   setIsStationsDropdownOpen(false)
     // }
     mapContext?.setSelectedStation(station)
-    const mapBoundingBox = map.getBounds()
-    if (!isStationWithinBBOX(station.location.coordinates[0], station.location.coordinates[1], mapBoundingBox)) {
-      // station lon and lat
-      map.flyTo({
-        center: station.location.coordinates,
-        essential: true,
-      })
-    }
+    // const mapBoundingBox = map.getBounds()
+
+    // I think it's better to fly even if it is within bounds?
+    map.flyTo({
+      center: station.location.coordinates,
+      essential: true,
+    })
+    // if (!isStationWithinBBOX(station.location.coordinates[0], station.location.coordinates[1], mapBoundingBox)) {
+    //   // station lon and lat
+    // }
+  }
+
+  const loadStationPins = () => {
+    const rootDomNode = document.getElementById('map-markers')
+    const root = createRoot(rootDomNode)
+    stations.map((x, idx) => {
+      const pin = document.createElement('div')
+      const pinRoot = createRoot(pin)
+      pinRoot.render(
+        <StationPin
+          key={x.name + '-' + idx}
+          station={x}
+          onClick={() => {
+            onStationClick(x)
+          }}
+        />,
+      )
+      root.render(<div ref={ref => ref.appendChild(pin)}></div>)
+      console.log(root)
+      mapContext.addPin(pin)
+
+      const coords: [number, number] = [x.location.coordinates[0] ?? 0, x.location.coordinates[1] ?? 0]
+      new mapboxgl.Marker(pin).setLngLat(coords).addTo(map)
+    })
+    setLoadedPins(true)
   }
 
   return (
     <div className="aqi-map-wrapper">
       <H2 className="mb-12" title={title.mn} descriptionHtml={descriptionHtml.mn} />
-      <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
+      <div className={`map-container bg-zinc-100  rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map" ref={mapContainer} className="map-wrapper"></div>
         <MapDropdownWrapper title={t(`province.${selectedLocation.value}`)}>
           <LocationDropdown
@@ -169,6 +206,8 @@ export const MapComponent = ({
           onBaseMapChange={(value: string) => onMapStyleChange(value)}
         />
         {/* Other Layers on top of Map */}
+        <div id="map-markers"></div>
+        {/* Load the Station Pins */}
         <AQIScale />
         <StationDetail
           setHidden={() => {
