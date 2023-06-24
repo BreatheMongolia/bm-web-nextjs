@@ -6,6 +6,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
+import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
+import { getTakeActionsPage } from 'lib/graphql-api/queries/takeAction'
 
 const TakeActionsPage = ({ news }: { news: News[] }) => {
   const { t } = useTranslation()
@@ -32,23 +34,8 @@ const TakeActionsPage = ({ news }: { news: News[] }) => {
           right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
         }}
       />
-      <div className="container grid sm:grid-cols-4 gap-5 py-5">
-        {news.map((x, idx) => {
-          return (
-            <div key={idx}>
-              <div
-                className="cursor-pointer hover:opacity-50"
-                onClick={() => {
-                  // TODO: source link, target=_blank or history.push()
-                  router.push(`/news/${x.desiredSlug || x.slug || x.databaseId}`)
-                }}
-              >
-                <div className="bg-zinc-300 rounded-md h-full">{x.customFields.title}</div>{' '}
-              </div>
-            </div>
-          )
-        })}
-      </div>
+      <TakeActionsGrid />
+      <DonateSection />
     </div>
   )
 }
@@ -56,7 +43,8 @@ const TakeActionsPage = ({ news }: { news: News[] }) => {
 export default TakeActionsPage
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  // const data = await getNewsPosts()
+  // TODO: Call the api for takeactions page
+  // const data = await getTakeActionsPage()
 
   return {
     props: {
