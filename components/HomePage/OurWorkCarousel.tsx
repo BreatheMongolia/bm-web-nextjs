@@ -116,6 +116,7 @@ export const OurWorkCarousel = ({
                   <span className="custom_dot_green"></span>
                   <span className="custom_green_span"> {campaign.campaignCategoryTextMn}</span>
                 </div>
+                {/* FIXME: there is a hydration error below */}
                 <h3 className="campaign-title">{campaign.campaignTitleMn}</h3>
                 {campaign?.campaignDescription && (
                   <div className="campaign-desc">{parse(campaign.campaignDescriptionMn)}</div>
