@@ -125,7 +125,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   //   ...openAQStations,
   //   // ...airVisualIndoorStations, ...airVisualOutdoorStations
   // ]
-  console.log(locale)
   // this return passes it to the above component
   return {
     props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page },

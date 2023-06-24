@@ -14,7 +14,6 @@ export const LocationDropdown = ({
   open: boolean
 }) => {
   const { t } = useTranslation('map')
-  console.log(selected)
   return (
     <div className="font-semibold">
       <div
