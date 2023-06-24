@@ -6,49 +6,8 @@ import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
-// import { Link } from 'next/link'
+import Link  from 'next/link'
 // import { useHistory } from "react-router-dom"
-
-// Styling the settings for take-action-carousel within Slider
-const settings = {
-  dots: false,
-  infinite: false,
-  speed: 800,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  arrows: true,
-  autoplaySpeed: 5000,
-  cssEase: 'linear',
-  adaptiveHeight: true,
-  centerMode: false,
-  variableWidth: true,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 2,
-        infinite: true,
-        dots: true,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        initialSlide: 2,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-}
 
 export const TakeActionCarousel = ({
   takeActionPosts
@@ -58,7 +17,46 @@ export const TakeActionCarousel = ({
   const { t } = useTranslation('home')
   // takeActionPosts.filter((value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index)
 
-  
+  // Styling the settings for take-action-carousel within Slider
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 800,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplaySpeed: 5000,
+    cssEase: 'linear',
+    adaptiveHeight: true,
+    centerMode: false,
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
 
   return (
     <div className="take-action-carousel-section">
@@ -66,7 +64,7 @@ export const TakeActionCarousel = ({
         title={t('takeAction.title')}
         trailingLineColor="yellow"
         extraButton={{
-          title: t('campaignWork.seeMore'),
+          title: t('takeAction.seeMore'),
           url: '/take-actions',
         }}
       />
@@ -78,7 +76,7 @@ export const TakeActionCarousel = ({
           </Arrow>
         }
         nextArrow={
-          <Arrow check={takeActionPosts?.length - 3} classes="next-gray-arrow">
+          <Arrow check={takeActionPosts?.length - 4} classes="next-gray-arrow">
             <ChevronRightIcon className="w-8 h-8 text-white" />
           </Arrow>
         }
@@ -107,7 +105,7 @@ export const TakeActionCarousel = ({
                     }
                   </div>
                   <div className="read-more-arrow ">
-                    {/* <a href="https://breathemongolia.org/action/${x.databaseId}"> */}
+                    <Link href={`/action/${x.databaseId}`}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="24" height="24" rx="12" fill="#F4AC3D" />
                       <path
@@ -115,7 +113,7 @@ export const TakeActionCarousel = ({
                         fill="#FAFAFF"
                       />
                     </svg>
-                    {/* </a> */}
+                    </Link>
                   </div>
                 </div>
             </div>
