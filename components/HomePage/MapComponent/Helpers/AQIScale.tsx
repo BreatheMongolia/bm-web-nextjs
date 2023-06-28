@@ -12,7 +12,9 @@ const AQIScale = () => {
   return (
     <div
       className={`
-      w-[400px] absolute left-1.5 bottom-2 z-10
+      absolute left-1.5 z-10
+      -bottom-2 sm:bottom-2
+      w-11/12 md:w-[400px]
       overflow-hidden rounded-md bg-white text-xsm
       border-[0.5px] border-black/20 backdrop-blur-xl	
       ${!shown && 'folded'}

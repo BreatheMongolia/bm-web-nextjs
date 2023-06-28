@@ -122,7 +122,6 @@ export const OurWorkCarousel = ({
                   <div className="campaign-desc">{parse(campaign.campaignDescriptionMn)}</div>
                 )}
                 <div className="campaign-date">
-                  {' '}
                   <span>{formatMyDate(campaign.campaignDate)} </span>
                 </div>
               </div>

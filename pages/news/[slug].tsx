@@ -17,8 +17,6 @@ export default function NewsPostPage({ post }: { post: News }) {
 
   const { t } = useTranslation('common')
 
-  // console.log(post)
-  // console.log(post.customFields.featuredImage.image.mediaDetails)
   // TODO: Get Image URL from the MediaDetails.sizes object
   return (
     <div>
