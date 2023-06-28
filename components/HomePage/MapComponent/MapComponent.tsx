@@ -97,8 +97,18 @@ export const MapComponent = ({
     mapContext?.setSelectedStation(null)
 
     if (type === 'indoor') {
+      const doms = document.getElementsByClassName('marker-indoor')
+      for (let i = 0; i < doms.length; i++) {
+        const d = doms.item(i)
+        d.setAttribute('style', !mapContext.showIndoor ? '' : 'display: none')
+      }
       mapContext?.setShowIndoor(!mapContext?.showIndoor)
     } else {
+      const doms = document.getElementsByClassName('marker-outdoor')
+      for (let i = 0; i < doms.length; i++) {
+        const d = doms.item(i)
+        d.setAttribute('style', !mapContext.showOutdoor ? '' : 'display: none')
+      }
       mapContext?.setShowOutdoor(!mapContext?.showOutdoor)
     }
   }
