@@ -60,6 +60,5 @@ export const fetchAirVisualIndoorStations = async () => {
       }
     })
   })
-  console.log('fetchAirVisualIndoorStations() =>', apiStats)
   return stations
 }

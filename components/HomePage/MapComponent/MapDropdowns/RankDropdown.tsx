@@ -20,10 +20,6 @@ export const RankDropdown = ({
     const country = rank.country.toLowerCase().replaceAll(' ', '-')
     const state = rank.state.toLowerCase().replaceAll(' ', '-')
     const city = rank.city.toLowerCase().replaceAll(' ', '-')
-    // const hasState = state === city
-
-    console.log(rank)
-    // const urlEnd = hasState ? `${state}/${city}` : city
     return `https://www.iqair.com/us/${country}/${state}/${city}`
   }
   return (
@@ -46,7 +42,6 @@ export const RankDropdown = ({
               key={index}
               onClick={() => {
                 const url = buildCountryAQIUrl(item)
-                console.log(url)
                 window.open(url, '_blank')
               }}
               title={`AirVisual AQI Rank for ${(item.country, item.city)}`}

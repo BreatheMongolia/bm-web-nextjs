@@ -139,7 +139,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
 
   console.log('fetched stations => ', stations.length, ' station(s)')
-  console.log(locale)
   // this return passes it to the above component
 
   console.log('fetched ranks', airVisualGlobalRanks.length, 'cities')

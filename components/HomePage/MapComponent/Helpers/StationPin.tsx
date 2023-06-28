@@ -6,7 +6,6 @@ import { MapContext } from 'pages/_app'
 const StationPin = ({ station, onClick }: { station: StationType; onClick: Function }) => {
   const mapContext = useContext(MapContext)
 
-  console.log(mapContext)
   const isSelectedStation = false
   const getPinStyle = () => {
     let wrapperClassNames = `text-white font-bold relative transition transition-all hover:-mt-1 hover:scale-125`
