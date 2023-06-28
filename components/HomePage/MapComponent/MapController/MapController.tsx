@@ -17,7 +17,10 @@ const MapController: FC<Props> = ({ leftRadios, rightRadios, onChangeSensorType,
   return (
     <div
       className="
-      absolute bottom-2 right-2 z-10
+      absolute z-10
+      -bottom-28 sm:-bottom-24 md:bottom-2
+      left-2 md:left-auto right-2 
+      w-11/12 md:w-auto
       bg-slate-100 rounded-md p-2 px-4
       border-[0.5px] border-black/20 backdrop-blur-xl	
       flex flex-row justify-between

@@ -161,7 +161,7 @@ export const MapComponent = ({
 
   return (
     <div className="aqi-map-wrapper">
-      <H2 className="mb-12" title={title.mn} descriptionHtml={descriptionHtml.mn} />
+      <H2 className="mb-20 md:mb-12" title={title.mn} descriptionHtml={descriptionHtml.mn} />
       <div className={`map-container bg-zinc-100  rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map" ref={mapContainer} className="map-wrapper"></div>
         <MapDropdownWrapper title={t(`province.${selectedLocation.value}`)}>

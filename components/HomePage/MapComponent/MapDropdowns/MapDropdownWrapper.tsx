@@ -3,7 +3,10 @@ export const MapDropdownWrapper = ({ children, title }: { children; title: strin
     <div
       className="
       flex flex-col z-10
-      absolute -top-[36px] right-3 bg-white w-[290px] rounded overflow-hidden
+      absolute bg-white rounded overflow-hidden
+      left-2 md:left-auto md:right-3
+      -top-16 md:-top-[36px] 
+      w-11/12 md:w-[290px]
       border-[0.5px] border-[#4870d7] backdrop-blur-xl
       text-white
       "
