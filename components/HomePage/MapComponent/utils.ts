@@ -23,7 +23,7 @@ export function getTransformedDataFromOpenAQ(res: any) {
             aqius: getAQIFromPM2(PM25.lastValue),
             ts: Date.parse(PM25.lastUpdated),
           },
-          color: getAQIcolor(getAQIFromPM2(PM25.lastValue)),
+          color: getAQIColor(getAQIFromPM2(PM25.lastValue)),
           type: 'outdoor',
         }
       } else {
@@ -33,7 +33,7 @@ export function getTransformedDataFromOpenAQ(res: any) {
           current.pollution.aqius = getAQIFromPM2(PM25.lastValue)
           current.pollution.p2 = parseInt(PM25.lastValue)
           current.pollution.ts = Date.parse(PM25.lastUpdated)
-          current.color = getAQIcolor(getAQIFromPM2(PM25.lastValue))
+          current.color = getAQIColor(getAQIFromPM2(PM25.lastValue))
         }
       }
     }
@@ -45,7 +45,7 @@ export function getTransformedDataFromOpenAQ(res: any) {
 }
 
 // Getting AQI color scale
-export const getAQIcolor = (aqi: number) => {
+export const getAQIColor = (aqi: number) => {
   if (aqi < 50) {
     return 'green'
   } else if (aqi < 100) {

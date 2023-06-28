@@ -1,18 +1,27 @@
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { RankType } from 'lib/air-pollution-map/types'
 import { useTranslation } from 'next-i18next'
+import { getAQIColor } from '../utils'
 
 export const RankDropdown = ({
-  ubRank,
   data,
   setTitleClick,
   open,
 }: {
-  ubRank: number
-  data: []
+  data: RankType[]
   setTitleClick: Function
   open: boolean
 }) => {
   const { t } = useTranslation('map')
+  // show ub rank
+  const ubRank = data.findIndex(x => x.city === 'Ulaanbaatar')
+
+  function buildCountryAQIUrl(rank: RankType) {
+    const country = rank.country.toLowerCase().replaceAll(' ', '-')
+    const state = rank.state.toLowerCase().replaceAll(' ', '-')
+    const city = rank.city.toLowerCase().replaceAll(' ', '-')
+    return `https://www.iqair.com/us/${country}/${state}/${city}`
+  }
   return (
     <div className="font-semibold">
       <div
@@ -31,11 +40,23 @@ export const RankDropdown = ({
           return (
             <div
               key={index}
+              onClick={() => {
+                const url = buildCountryAQIUrl(item)
+                window.open(url, '_blank')
+              }}
+              title={`AirVisual AQI Rank for ${(item.country, item.city)}`}
               className={`py-3 text-zinc-900 pl-4 text-xs
-                    border-b-[0.5px] border-slate-300 
+                    border-b-[0.5px] border-slate-300 cursor-pointer
+                    hover:bg-[#4870d7] hover:text-white
+                    flex items-center px-3 gap-x-1
+                    ${ubRank === index && 'bg-amber-200'} 
                 `}
             >
-              <span> {t(item)} </span>
+              <span className="grow">
+                {index + 1}. {item.city}, {item.country}
+              </span>
+              <span>{item.ranking.current_aqi}</span>
+              <div className={`aqi_circle ${getAQIColor(item.ranking.current_aqi)}`}> </div>
             </div>
           )
         })}

@@ -1,17 +1,8 @@
 export interface MapContextInterface {
-  pins: string[]
-  setPins: (data: { [key: string]: StationType }) => void
-  addPin: (data: StationType) => void
+  pins: any[]
+  addPin: (pin: HTMLDivElement) => void
   mapCurrent: any
   setMapCurrent: Function
-  openAQStations: StationType[]
-  airVisualStations: StationType[]
-  purpleAirStations: StationType[]
-  airVisualOutdoorStations: StationType[]
-  feedAirVisualStations: Function
-  feedPurpleAirStations: Function
-  feedOpenAQStations: Function
-  feedAirVisualOutdoorStations: Function
   showIndoor: boolean
   showOutdoor: boolean
   setShowIndoor: Function
@@ -23,7 +14,7 @@ export interface MapContextInterface {
 export interface StationType {
   city?: string
   country?: string
-  pollution: object
+  pollution: any
   weather?: object
   location: {
     coordinates: number[]
@@ -52,4 +43,14 @@ export interface ZoneType {
   state: string
   sponsoredBy: string
   units: object
+}
+
+export interface RankType {
+  city: string
+  state: string
+  country: string
+  ranking: {
+    current_aqi: number
+    current_aqi_cn: number
+  }
 }

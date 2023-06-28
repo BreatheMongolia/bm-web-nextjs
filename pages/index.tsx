@@ -1,9 +1,24 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { PageImageBanner } from 'components/generic/PageImageBanner'
-import { getHomePage } from 'lib/graphql-api/queries/home'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+// types
+import { Page } from 'graphql/generated'
+import { RankType, StationType } from 'lib/air-pollution-map/types'
+// lib functions/queries
+import { getHomePage } from 'lib/graphql-api/queries/home'
+import {
+  fetchPurpleAirStations,
+  fetchOpenAQStations,
+  fetchAirVisualGlobalStations,
+  fetchAirVisualIndoorStations,
+  fetchAirVisualOutdoorStations,
+} from 'lib/air-pollution-map/api-hooks'
+// components
+import { PageImageBanner } from 'components/generic/PageImageBanner'
+import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
 import {
   MapComponent,
   TakeActionCarousel,
@@ -12,19 +27,19 @@ import {
   NewsCarousel,
   OurWorkCarousel,
 } from 'components/HomePage'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Page } from 'graphql/generated'
-import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
-import { useEffect } from 'react'
-import { fetchPurpleAirStations } from 'lib/air-pollution-map/api-hooks/fetchPurpleAirStations'
-import { StationType } from 'lib/air-pollution-map/types'
-import { fetchOpenAQStations } from 'lib/air-pollution-map/api-hooks/fetchOpenAQStations'
-import { getTranslated } from 'lib/utils/getTranslated'
 
 // TODO: Detect the current language and update fields based on the current language
 // TODO: Add a util function to extract the correct image size for the imageUrl
 
-export default function Index({ page, stations }: { page: Page; stations: StationType[] }) {
+export default function Index({
+  page,
+  stations,
+  globalRanks,
+}: {
+  page: Page
+  stations: StationType[]
+  globalRanks: RankType[]
+}) {
   const { t } = useTranslation()
   const router = useRouter()
   const { i18n } = useTranslation()
@@ -44,8 +59,6 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
     }
     return text
   }
-
-  // You can get the inner objects from the page object - it has all the content needed for the Components needed for the page.
   return (
     <div>
       <Head>
@@ -53,10 +66,6 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
       </Head>
       <div>
         <PageImageBanner
-          imageUrl={{
-            en: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
-            mn: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
-          }}
           imageUrls={page.customFields.banners}
           bottomText={{
             left: page.customFields.bannerTextLeft,
@@ -74,6 +83,8 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
                 en: page.customFields.mapDescription,
                 mn: page.customFields.mapDescriptionMn,
               }}
+              stations={stations}
+              globalRanks={globalRanks}
             />
           </MapContextWrapper>
 
@@ -117,20 +128,26 @@ export default function Index({ page, stations }: { page: Page; stations: Statio
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
 
-  // const purpleAirStations = await fetchPurpleAirStations()
-  // const openAQStations = await fetchOpenAQStations()
-  // // const airVisualOutdoorStations = await fetchPurpleAirStations()
-  // // const airVisualIndoorStations = await fetchPurpleAirStations()
+  const purpleAirStations = await fetchPurpleAirStations()
+  const openAQStations = await fetchOpenAQStations()
+  const airVisualOutdoorStations = await fetchAirVisualOutdoorStations()
+  const airVisualIndoorStations = await fetchAirVisualIndoorStations()
+  const airVisualGlobalRanks = await fetchAirVisualGlobalStations()
 
-  // const stations = [
-  //   ...purpleAirStations,
-  //   ...openAQStations,
-  //   // ...airVisualIndoorStations, ...airVisualOutdoorStations
-  // ]
+  const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+
+  console.log('fetched stations => ', stations.length, ' station(s)')
   // this return passes it to the above component
+
+  console.log('fetched ranks', airVisualGlobalRanks.length, 'cities')
   return {
-    props: { ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])), page },
+    props: {
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
+      page,
+      stations,
+      globalRanks: airVisualGlobalRanks,
+    },
     // This tells the page how often to refetch from the API (in seconds)
-    revalidate: 60,
+    revalidate: 60 * 60,
   }
 }
