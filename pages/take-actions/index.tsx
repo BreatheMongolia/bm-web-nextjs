@@ -25,10 +25,6 @@ const TakeActionsPage = ({ news }: { news: News[] }) => {
   return (
     <div>
       <PageImageBanner
-        imageUrl={{
-          en: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
-          mn: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
-        }}
         bottomText={{
           left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
           right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
