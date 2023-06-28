@@ -6,6 +6,7 @@ import { useTranslation } from 'next-i18next'
 import { SocialIcon } from 'react-social-icons'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { useRouter } from 'next/router'
 
 type Option = {
   value: string
@@ -22,6 +23,8 @@ const availableOptions: Options = {
 }
 
 export const Topbar = () => {
+  const router = useRouter()
+  const { pathname } = router
   const [t, i18n] = useTranslation()
 
   const socialUrls = [
@@ -33,8 +36,9 @@ export const Topbar = () => {
     SOCIAL_URLS.YOUTUBE,
   ]
 
-  const changeLanguage = language => {
-    i18n.changeLanguage(language)
+  const getURL = () => {
+    const baseUrl = window.location.origin
+    return baseUrl + pathname
   }
 
   return (
@@ -81,18 +85,19 @@ export const Topbar = () => {
                   .filter(x => x != i18n.language)
                   .map(key => {
                     const option: Option = availableOptions[key]
+
                     return (
                       <Menu.Item key={key}>
                         {({ active }) => (
-                          <button
+                          <Link
                             className={`${
                               active ? 'text-white bg-white' : 'text-white'
                             } justify-center w-full group flex items-center rounded-md px-2 py-2 text-xs bg-opacity-10`}
-                            key={key}
-                            onClick={() => changeLanguage(key)}
+                            href={getURL()}
+                            locale={key}
                           >
                             {option.label}
-                          </button>
+                          </Link>
                         )}
                       </Menu.Item>
                     )

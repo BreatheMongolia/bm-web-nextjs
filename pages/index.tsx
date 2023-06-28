@@ -90,9 +90,7 @@ export default function Index({
 
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
-          <TakeActionCarousel
-            takeActionPosts={page.customFields.featuredTakeActions}
-          />
+          <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
           <OurWorkCarousel
             title={{
               en: page.customFields.campaignAndOurWorkTitle,
@@ -136,10 +134,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
 
-  console.log('fetched stations => ', stations.length, ' station(s)')
+  // console.log('fetched stations => ', stations.length, ' station(s)')
   // this return passes it to the above component
 
-  console.log('fetched ranks', airVisualGlobalRanks.length, 'cities')
+  // console.log('fetched ranks', airVisualGlobalRanks.length, 'cities')
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
