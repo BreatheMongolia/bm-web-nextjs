@@ -66,10 +66,6 @@ export default function Index({
       </Head>
       <div>
         <PageImageBanner
-          imageUrl={{
-            en: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
-            mn: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
-          }}
           imageUrls={page.customFields.banners}
           bottomText={{
             left: page.customFields.bannerTextLeft,
@@ -95,13 +91,13 @@ export default function Index({
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
-          {/* <OurWorkCarousel
+          <OurWorkCarousel
             title={{
               en: page.customFields.campaignAndOurWorkTitle,
               mn: page.customFields.campaignAndOurWorkTitleMn,
             }}
             campaigns={page.customFields.campaignAndOurWorkSlider}
-          /> */}
+          />
           <JoinBMSection
             title={{
               en: page.customFields.joinBreatheMongoliaTitle,

@@ -37,7 +37,7 @@ export const MapComponent = ({
   stations: StationType[]
   globalRanks: RankType[]
 }) => {
-  const { t } = useTranslation('map')
+  const { t, i18n } = useTranslation('map')
   // init
   const mapContext = useContext(MapContext)
   const map = mapContext?.mapCurrent
@@ -171,8 +171,8 @@ export const MapComponent = ({
 
   return (
     <div className="aqi-map-wrapper">
-      <H2 className="mb-20 md:mb-12" title={title.mn} descriptionHtml={descriptionHtml.mn} />
-      <div className={`map-container bg-zinc-100  rounded-md ${showStationDetail && 'station-detail-open'}`}>
+      <H2 className="mb-20 md:mb-12" title={title[i18n.language]} descriptionHtml={descriptionHtml[i18n.language]} />
+      <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map" ref={mapContainer} className="map-wrapper"></div>
         <MapDropdownWrapper title={t(`province.${selectedLocation.value}`)}>
           <LocationDropdown

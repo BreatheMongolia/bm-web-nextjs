@@ -1,22 +1,16 @@
 import { Page_NewsGeneralFields_Banner } from 'graphql/generated'
-import Slider from "react-slick"
-import {
-  Page_Customfields_Banners
-} from 'graphql/generated'
+import Slider from 'react-slick'
+import { Page_Customfields_Banners } from 'graphql/generated'
 
-  type BannerProps = {
-  imageUrls?: Page_Customfields_Banners[ ]
-  imageUrl?: {
-    en: string
-    mn?: string
-  }
+type BannerProps = {
+  imageUrls?: Page_Customfields_Banners[]
   bottomText?: {
     left?: string
     right?: string
   }
 }
-export const PageImageBanner = ({ imageUrls, imageUrl, bottomText }: BannerProps) => {
-   const bannerCarouselSettings = {
+export const PageImageBanner = ({ imageUrls, bottomText }: BannerProps) => {
+  const bannerCarouselSettings = {
     dots: false,
     infinite: true,
     speed: 800,
@@ -25,7 +19,7 @@ export const PageImageBanner = ({ imageUrls, imageUrl, bottomText }: BannerProps
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
-    cssEase: "linear",
+    cssEase: 'linear',
     adaptiveHeight: false,
     responsive: [
       {
@@ -34,29 +28,29 @@ export const PageImageBanner = ({ imageUrls, imageUrl, bottomText }: BannerProps
           slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
-          dots: false
-        }
+          dots: false,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1
-        }
+          initialSlide: 1,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-   }
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
   return (
     <div className="banner-slider-wrapper max-[1000px]:hidden">
-        <Slider  {...bannerCarouselSettings} >
+      <Slider {...bannerCarouselSettings}>
         {imageUrls?.map((banner: any) => (
           <a key={banner?.bannerImage.id} href={banner?.bannerImage.url} target="_blank">
             <div>
@@ -66,10 +60,10 @@ export const PageImageBanner = ({ imageUrls, imageUrl, bottomText }: BannerProps
         ))}
       </Slider>
       <div className="banner_bottom_text_bar ">
-          <div className="flex container mx-auto justify-center banner_bottom_text_content">
-            <p>{bottomText.left}</p>
-            <p>{bottomText.right}</p>
-          </div>
+        <div className="flex container mx-auto justify-center banner_bottom_text_content">
+          <p>{bottomText.left}</p>
+          <p>{bottomText.right}</p>
+        </div>
       </div>
     </div>
   )
