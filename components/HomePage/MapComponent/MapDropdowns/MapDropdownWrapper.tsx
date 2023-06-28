@@ -2,7 +2,7 @@ export const MapDropdownWrapper = ({ children, title }: { children; title: strin
   return (
     <div
       className="
-      flex flex-col
+      flex flex-col z-10
       absolute -top-[36px] right-3 bg-white w-[290px] rounded overflow-hidden
       border-[0.5px] border-[#4870d7] backdrop-blur-xl
       text-white

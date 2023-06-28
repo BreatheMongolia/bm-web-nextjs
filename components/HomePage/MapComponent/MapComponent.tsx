@@ -14,6 +14,7 @@ import { StationType } from 'lib/air-pollution-map/types'
 import { StationDetail } from './StationDetail'
 import StationPin from './Helpers/StationPin'
 import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -141,8 +142,18 @@ export const MapComponent = ({
     const root = createRoot(rootDomNode)
     stations.map((x, idx) => {
       const pin = document.createElement('div')
-      const pinRoot = createRoot(pin)
-      pinRoot.render(
+      // const pinRoot = createRoot(pin)
+      // pinRoot.render(
+      //   <StationPin
+      //     key={x.name + '-' + idx}
+      //     station={x}
+      //     onClick={() => {
+      //       onStationClick(x)
+      //     }}
+      //   />,
+      // )
+      // root.render(<div ref={ref => ref.appendChild(pin)}></div>)
+      ReactDOM.render(
         <StationPin
           key={x.name + '-' + idx}
           station={x}
@@ -150,11 +161,10 @@ export const MapComponent = ({
             onStationClick(x)
           }}
         />,
+        pin,
       )
-      root.render(<div ref={ref => ref.appendChild(pin)}></div>)
       console.log(root)
       mapContext.addPin(pin)
-
       const coords: [number, number] = [x.location.coordinates[0] ?? 0, x.location.coordinates[1] ?? 0]
       new mapboxgl.Marker(pin).setLngLat(coords).addTo(map)
     })
@@ -204,7 +214,7 @@ export const MapComponent = ({
           onBaseMapChange={(value: string) => onMapStyleChange(value)}
         />
         {/* Other Layers on top of Map */}
-        <div id="map-markers"></div>
+        <div id="map-markers" className=""></div>
         {/* Load the Station Pins */}
         <AQIScale />
         <StationDetail

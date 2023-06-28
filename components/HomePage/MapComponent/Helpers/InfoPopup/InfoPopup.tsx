@@ -10,7 +10,7 @@ const InfoPopup = () => {
   return (
     <div
       className={`
-      flex flex-row justify-center absolute right-[350px] 
+      flex flex-row justify-center absolute right-[350px] z-10
       space-x-2
       w-[290px] rounded-md p-2 bg-slate-100 text-xs top-2
       border-[0.5px] border-black/20 backdrop-blur-xl
