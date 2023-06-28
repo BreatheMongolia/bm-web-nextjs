@@ -44,3 +44,13 @@ export interface ZoneType {
   sponsoredBy: string
   units: object
 }
+
+export interface RankType {
+  city: string
+  state: string
+  country: string
+  ranking: {
+    current_aqi: number
+    current_aqi_cn: number
+  }
+}

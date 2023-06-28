@@ -10,7 +10,7 @@ import { LocationOption, leftRadios, locationsWithSensors, rightRadios } from '.
 import { MapDropdownWrapper } from './MapDropdowns/MapDropdownWrapper'
 import { LocationDropdown, RankDropdown, StationsDropdown } from './MapDropdowns'
 // import { isStationWithinBBOX } from './utils'
-import { StationType } from 'lib/air-pollution-map/types'
+import { RankType, StationType } from 'lib/air-pollution-map/types'
 import { StationDetail } from './StationDetail'
 import StationPin from './Helpers/StationPin'
 import { createRoot } from 'react-dom/client'
@@ -30,10 +30,12 @@ export const MapComponent = ({
   title,
   descriptionHtml,
   stations,
+  globalRanks,
 }: {
   title: { en: string; mn: string }
   descriptionHtml: { en: string; mn: string }
   stations: StationType[]
+  globalRanks: RankType[]
 }) => {
   const { t } = useTranslation('map')
   // init
@@ -138,21 +140,8 @@ export const MapComponent = ({
   }
 
   const loadStationPins = () => {
-    const rootDomNode = document.getElementById('map-markers')
-    const root = createRoot(rootDomNode)
     stations.map((x, idx) => {
       const pin = document.createElement('div')
-      // const pinRoot = createRoot(pin)
-      // pinRoot.render(
-      //   <StationPin
-      //     key={x.name + '-' + idx}
-      //     station={x}
-      //     onClick={() => {
-      //       onStationClick(x)
-      //     }}
-      //   />,
-      // )
-      // root.render(<div ref={ref => ref.appendChild(pin)}></div>)
       ReactDOM.render(
         <StationPin
           key={x.name + '-' + idx}
@@ -163,7 +152,6 @@ export const MapComponent = ({
         />,
         pin,
       )
-      console.log(root)
       mapContext.addPin(pin)
       const coords: [number, number] = [x.location.coordinates[0] ?? 0, x.location.coordinates[1] ?? 0]
       new mapboxgl.Marker(pin).setLngLat(coords).addTo(map)
@@ -195,10 +183,7 @@ export const MapComponent = ({
             open={currentDropdown === 'stations'}
           />
           <RankDropdown
-            // ubRank={ubRank}
-            ubRank={0}
-            // data={ranks}
-            data={[]}
+            data={globalRanks}
             setTitleClick={(isOpen: boolean) => {
               setCurrentDropdown(isOpen ? 'rank' : 'none')
             }}
@@ -213,9 +198,6 @@ export const MapComponent = ({
           baseMap={baseMap}
           onBaseMapChange={(value: string) => onMapStyleChange(value)}
         />
-        {/* Other Layers on top of Map */}
-        <div id="map-markers" className=""></div>
-        {/* Load the Station Pins */}
         <AQIScale />
         <StationDetail
           setHidden={() => {

@@ -48,7 +48,7 @@ export const StationsDropdown = ({
                 <span className="grow">
                   {idx + 1}. {station.name}
                 </span>
-                <span className=""> {station.pollution.aqius} </span>
+                <span> {station.pollution.aqius} </span>
                 <div className={`aqi_circle ${getAQIColor(station.pollution.aqius)}`}> </div>
               </div>
             )
