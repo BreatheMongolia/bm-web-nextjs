@@ -110,9 +110,7 @@ export const MapComponent = ({
     }
     // hide location dropdown if it was open
     setSelectedLocation(location)
-    console.log(currentDropdown)
     if (currentDropdown === 'location') {
-      console.log(currentDropdown)
       setCurrentDropdown('none')
     }
     map?.flyTo({
