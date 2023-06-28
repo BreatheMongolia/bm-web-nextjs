@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next'
 import { SocialIcon } from 'react-social-icons'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 
 type Option = {
   value: string
@@ -23,9 +23,7 @@ const availableOptions: Options = {
 }
 
 export const Topbar = () => {
-  const router = useRouter()
-  const { pathname } = router
-  const [t, i18n] = useTranslation()
+  const { locale } = useRouter()
 
   const socialUrls = [
     SOCIAL_URLS.FACEBOOK,
@@ -36,9 +34,12 @@ export const Topbar = () => {
     SOCIAL_URLS.YOUTUBE,
   ]
 
-  const getURL = () => {
+  const getURL = locale => {
     const baseUrl = window.location.origin
-    return baseUrl + pathname
+    let pathname = window.location.pathname
+    pathname = pathname.replace(/^\/(en|mn)\b/, '')
+
+    return `${baseUrl}/${locale}${pathname}`
   }
 
   return (
@@ -67,7 +68,7 @@ export const Topbar = () => {
         {/* Language Selector */}
         <Menu as="div" className="relative inline-flex items-center justify-center">
           <Menu.Button className="flex w-full items-center justify-center rounded-md text-xs font-semibold text-white hover:bg-opacity-30">
-            <div>{availableOptions[i18n.language].label}</div>
+            <div>{availableOptions[locale].label}</div>
             <ChevronDownIcon className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100" aria-hidden="true" />
           </Menu.Button>
           <Transition
@@ -82,7 +83,7 @@ export const Topbar = () => {
             <Menu.Items className="absolute top-40 right-0 mt-2 w-64 origin-top-right rounded-md bg-bm-blue shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="px-1 py-1">
                 {Object.keys(availableOptions)
-                  .filter(x => x != i18n.language)
+                  .filter(x => x != locale)
                   .map(key => {
                     const option: Option = availableOptions[key]
 
@@ -93,7 +94,7 @@ export const Topbar = () => {
                             className={`${
                               active ? 'text-white bg-white' : 'text-white'
                             } justify-center w-full group flex items-center rounded-md px-2 py-2 text-xs bg-opacity-10`}
-                            href={getURL()}
+                            href={getURL(key)}
                             locale={key}
                           >
                             {option.label}
