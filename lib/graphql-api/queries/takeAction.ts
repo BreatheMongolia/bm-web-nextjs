@@ -11,6 +11,7 @@ export async function getTakeActionsPage(id: string, idType: PageIdType = PageId
               customFields {
                   ${TakeActionGQLQuerySections.takeAction}
               }
+              totalPledges
           }
       }
     `,
