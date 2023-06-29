@@ -34,12 +34,12 @@ export const Topbar = () => {
     SOCIAL_URLS.YOUTUBE,
   ]
 
-  const getURL = locale => {
+  const getURL = () => {
     const baseUrl = window.location.origin
     let pathname = window.location.pathname
     pathname = pathname.replace(/^\/(en|mn)\b/, '')
 
-    return `${baseUrl}/${locale}${pathname}`
+    return `${baseUrl}/${pathname}`
   }
 
   return (
@@ -94,7 +94,7 @@ export const Topbar = () => {
                             className={`${
                               active ? 'text-white bg-white' : 'text-white'
                             } justify-center w-full group flex items-center rounded-md px-2 py-2 text-xs bg-opacity-10`}
-                            href={getURL(key)}
+                            href={getURL()}
                             locale={key}
                           >
                             {option.label}
