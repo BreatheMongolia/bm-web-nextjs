@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-export default function Index() {
+const SearchPage = () => {
   const { t } = useTranslation()
   return (
     <div>
@@ -20,3 +21,11 @@ export default function Index() {
     </div>
   )
 }
+
+export default SearchPage
+
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'error'])),
+  },
+})
