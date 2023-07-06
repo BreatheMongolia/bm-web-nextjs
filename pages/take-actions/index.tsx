@@ -1,15 +1,30 @@
 import { PageImageBanner } from 'components/generic/PageImageBanner'
-import { News } from 'graphql/generated'
-// import { getNewsPosts } from '../api'
+import { TakeAction } from 'graphql/generated'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
-import { getTakeActionsPage } from 'lib/graphql-api/queries/takeAction'
+// import { getTakeActionsPage } from 'lib/graphql-api/queries/takeAction'
 
-const TakeActionsPage = ({ news }: { news: News[] }) => {
+type TakeAction = {
+  id: number
+  title: string
+  excerpt: string
+  date: any
+  totalPledges: number
+  additionalResources: []
+  introductionText: string
+  pledgeContent: string
+  listOfPhotos: []
+  listOfSubSections: []
+  listOfVideos: []
+  typeOfAction: []
+  featuredImage: string
+}
+
+const TakeActionsPage = ({ takeActions }: { takeActions: TakeAction }) => {
   const { t } = useTranslation()
   const router = useRouter()
   const { i18n } = useTranslation()
@@ -34,8 +49,10 @@ const TakeActionsPage = ({ news }: { news: News[] }) => {
           right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
         }}
       />
-      <TakeActionsGrid />
-      <DonateSection />
+      <div className="container mx-auto flex flex-col gap-20">
+        <TakeActionsGrid takeActions={TakeAction} />
+        <DonateSection />
+      </div>
     </div>
   )
 }
@@ -48,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['take-actions', 'nav', 'footer'])),
       news: [],
     },
     revalidate: 60,
