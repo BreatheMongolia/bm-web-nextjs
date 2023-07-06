@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-export default function Index() {
+const SearchPage = () => {
   const { t } = useTranslation()
   return (
     <div>
@@ -11,10 +12,6 @@ export default function Index() {
       </Head>
       <div>
         <PageImageBanner
-          imageUrl={{
-            en: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
-            mn: 'https://breathemon2.wpengine.com/wp-content/uploads/2022/12/banner2.png',
-          }}
           bottomText={{
             left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
             right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
@@ -24,3 +21,11 @@ export default function Index() {
     </div>
   )
 }
+
+export default SearchPage
+
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'error'])),
+  },
+})

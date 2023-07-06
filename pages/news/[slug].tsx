@@ -7,9 +7,12 @@ import { News } from 'graphql/generated'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 
-export default function NewsPostPage({ post }: { post: News }) {
+interface NewsPostPageProps {
+  post: News
+}
+
+export default function NewsPostPage({ post }: NewsPostPageProps) {
   const router = useRouter()
-  // const morePosts = posts?.edges
 
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -17,41 +20,33 @@ export default function NewsPostPage({ post }: { post: News }) {
 
   const { t } = useTranslation('common')
 
-  // console.log(post)
-  // console.log(post.customFields.featuredImage.image.mediaDetails)
-  // TODO: Get Image URL from the MediaDetails.sizes object
   return (
     <div>
       {router.isFallback ? (
-        // <PostTitle>Loading…</PostTitle>
         <>Loading</>
       ) : (
         <>
           <article>
             <Head>
               <title>{`${post.customFields.title} - Breathe Mongolia Clean Air Coalition`}</title>
-              {/* <meta property="og:image" content={post.customFields.featuredImage.image.mediaDetails} /> */}
             </Head>
             <div className="container max-w-screen-lg">
-              <h1 className="font-bold text-xl"> {post.customFields.title} </h1>
+              <h1 className="font-bold text-xl">{post.customFields.title}</h1>
               <div dangerouslySetInnerHTML={{ __html: post.customFields.body }}></div>
             </div>
           </article>
-
-          {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
         </>
       )}
     </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ params, preview = false, previewData, locale }) => {
+export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
   const post = await getNewsFull(params?.slug)
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
-      preview,
+      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map'])),
       post: post,
     },
     revalidate: 60,

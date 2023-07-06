@@ -135,6 +135,7 @@ p {
     @apply text-blue-400;
   }
 }
+
 .slick-arrow {
   z-index: 9;
 }
@@ -160,9 +161,11 @@ p {
   margin-bottom: 70px;
   min-height: 210px;
   position: relative;
+
   .slick-slide {
     height: auto !important;
   }
+
   .slick-slide img {
     width: 100%;
     min-height: 210px;
@@ -170,6 +173,7 @@ p {
     object-fit: cover;
     object-position: top;
   }
+
   .banner_bottom_text_bar {
     position: absolute;
     width: 100%;
@@ -181,9 +185,11 @@ p {
     justify-content: center;
     justify-items: center;
   }
+
   .banner_bottom_text_content {
     justify-content: space-between;
     height: 36px;
+
     p {
       font-family: "Open Sans";
       font-style: normal;
@@ -194,18 +200,22 @@ p {
       text-transform: uppercase;
       color: #ffffff;
       align-self: center;
+
       &:first-of-type {
         text-align: left;
       }
+
       &:last-of-type {
         text-align: right;
       }
     }
   }
-    }
-.news-carousel-section{
+}
+
+.news-carousel-section {
   .slick-slide {
     padding: 0 5px;
+
     div {
       transition: none;
     }
@@ -225,44 +235,48 @@ p {
   .slick-list {
     padding: 0 -5x;
   }
-    .slick-arrow {
-      z-index: 9;
-    }
-  
-    .slick-next {
-      right: 10 !important;
-    }
-  
-    .slick-next:before,
-    .slick-prev:before {
-      display: none !important;
-    }
-  
-    .slick-arrow.slick-next,
-    .slick-arrow.slick-prev {
-      width: 51px;
-      height: 51px;
-    }
+
+  .slick-arrow {
+    z-index: 9;
+  }
+
+  .slick-next {
+    right: 10 !important;
+  }
+
+  .slick-next:before,
+  .slick-prev:before {
+    display: none !important;
+  }
+
+  .slick-arrow.slick-next,
+  .slick-arrow.slick-prev {
+    width: 51px;
+    height: 51px;
+  }
 }
+
 .prev-gray-arrow,
 .next-gray-arrow {
   &::before {
     content: none;
   }
 
-    border: none;
-    opacity: 1;
-    backdrop-filter: blur(15px);
-    z-index: 9;
-    border-radius: 50%;
-    top: 50% !important;
-    display: flex !important;
-    align-items: center;
-    justify-content:center;
+  border: none;
+  opacity: 1;
+  backdrop-filter: blur(15px);
+  z-index: 9;
+  border-radius: 50%;
+  top: 50% !important;
+  display: flex !important;
+  align-items: center;
+  justify-content:center;
 }
+
 /* Join Breathe Mongolia styles start */
 .join-bm-slider-wrapper {
   background: #fafaff;
+
   h2 {
     font-family: "Open Sans";
     font-style: normal;
@@ -272,17 +286,21 @@ p {
     margin-top: 26px;
     margin-bottom: 12px;
   }
+
   .join_bm_carousel_sec {
     margin-top: 35px;
     display: flex;
     gap: 10px;
   }
+
   .membersPhoto {
     width: 62%;
   }
+
   .country_count_col:not(:nth-of-type(3)) {
     padding-right: 40px;
   }
+
   .slick-dots li button:before {
     content: "";
     width: 12px;
@@ -292,15 +310,18 @@ p {
     border-radius: 100%;
     opacity: 1 !important;
   }
+
   .slick-dots li.slick-active button:before {
     background: #646464;
   }
+
   .slick-arrow {
     top: 35% !important;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .join_bm_desc {
     p {
       font-family: "Open Sans";
@@ -312,6 +333,7 @@ p {
       margin: 0;
     }
   }
+
   .slider-image {
     width: fit-content;
     margin-left: auto;
@@ -319,20 +341,24 @@ p {
     height: 350px;
     outline: none;
   }
+
   .volunteer-count {
     margin: auto;
     width: fit-content;
   }
+
   .volunteer-count-section {
     justify-content: center;
     align-items: flex-start !important;
     width: 340px;
   }
+
   .flex-row {
     display: flex !important;
     flex-wrap: wrap !important;
     align-items: center;
   }
+
   .text-data-custom {
     >p {
       display: inline-block;
@@ -350,6 +376,7 @@ p {
       text-fill-color: transparent;
       margin: 0;
     }
+
     >pre {
       font-family: "Open Sans";
       font-style: normal;
@@ -366,8 +393,10 @@ p {
       margin: 0;
     }
   }
+
   .opportunity-section {
     margin-top: 30px;
+
     .title {
       font-family: "Open Sans";
       font-style: normal;
@@ -378,11 +407,13 @@ p {
       margin-top: 0 !important;
       margin-bottom: 8px;
     }
+
     .position-list {
       padding-left: 20px;
       list-style-type: disc;
       color: black;
     }
+
     .pos_link_url {
       font-family: "Open Sans";
       font-style: normal;
@@ -390,10 +421,12 @@ p {
       font-size: 14px;
       color: #2c2d41;
       transition: all 0.3s ease;
+
       &:hover {
         color: #3174d0;
       }
     }
+
     .apply_now_button {
       margin-top: 10px;
       display: inline-flex;
@@ -413,11 +446,13 @@ p {
       line-height: 14px;
       text-align: center;
       letter-spacing: normal;
+
       &:hover {
         background: #61b1ee;
       }
     }
   }
+
   .country-text {
     img {
       width: 20px;
@@ -427,37 +462,44 @@ p {
     }
   }
 }
+
 @media (max-width: 1064px) {
   .join-bm-slider-wrapper .volunteer-count {
     padding-left: 0;
   }
 }
+
 @media (max-width: 767px) {
   .join-bm-slider-wrapper {
     .volunteer-count {
       margin: auto;
       width: 90% !important;
       flex-direction: column;
+
       .volunteer-count-section {
         width: 350px;
         flex-wrap: nowrap !important;
       }
+
       .opportunity-section {
         width: 350px;
       }
     }
   }
+
   .banner-slider-wrapper {
-     padding-top: 0;
-   }
-     .news-carousel-section {
-       .slick-slide {
-         div {
-           width: 330px;
-         }
-       }
-     }
+    padding-top: 0;
+  }
+
+  .news-carousel-section {
+    .slick-slide {
+      div {
+        width: 330px;
+      }
+    }
+  }
 }
+
 @media (max-width: 950px) {
   .join-bm-slider-wrapper {
     .join_bm_desc {
@@ -466,24 +508,30 @@ p {
         font-size: 15px;
       }
     }
+
     .join_bm_carousel_sec {
       flex-direction: column;
       gap: 60px;
     }
+
     .membersPhoto {
+      display: none;
       width: 85%;
       margin: 0 auto;
     }
+
     .slider-image {
       object-position: top center;
       margin: 0 auto;
     }
+
     .volunteer-count {
       display: flex;
       width: 75%;
       gap: 40px;
       margin: 0 auto;
     }
+
     .opportunity-section {
       margin-top: 0px;
 
@@ -492,10 +540,10 @@ p {
       }
     }
   }
+
   /* Join Breathe Mongolia styles end */
   // Our-Partners Section custom styles
   .partner-logos-slider-wrapper {
-
 
     .slick-slide {
       padding: 0 5px;
@@ -522,7 +570,6 @@ p {
   }
 }
 
-
 .partner-logos-slider-wrapper {
   .slick-track {
     display: flex !important;
@@ -530,6 +577,130 @@ p {
     align-items: center;
   }
 }
+
+// TakeActionCarousel Styling Beginning
+.take-action-carousel {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  max-width: 236px;
+  width: 236px !important;
+  cursor: pointer;
+  text-decoration: none;
+  height: 200px;
+
+  &.big {
+    max-width: 487px;
+    width: 487px !important;
+    height: 410px;
+    grid-column: auto / span 2;
+    grid-row: auto / span 2;
+
+    .take-action-img {
+      height: 306px;
+    }
+
+    .take-action-info {
+      padding: 15px 20px;
+      height: 104px !important;
+
+      .take-action-title {
+        width: 375px;
+        font-size: 24px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .read-more-arrow {
+        width: 50px;
+
+        svg {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+
+  .take-action-img {
+    width: 100%;
+    height: 130px;
+    border-radius: 4px 4px 0px 0px;
+    object-fit: cover;
+  }
+
+  .take-action-info {
+    box-sizing: border-box;
+    background: #ffffff;
+    border: none;
+    border-radius: 0px 0px 4px 4px;
+    padding: 8px 13px;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    height: 70px;
+    min-height: 70px;
+    max-height: fit-content;
+
+    .take-action-type {
+      margin: 0;
+      padding: 0;
+      width: fit-content;
+      height: fit-content;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      background-color: transparent;
+
+      div {
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        margin-right: 5px;
+
+        span {
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .take-action-title {
+      width: 181px;
+      font-size: 16px;
+      line-height: 130%;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-weight: 600;
+      max-height: fit-content;
+    }
+
+    .read-more-arrow {
+      display: inline-block;
+      width: 24px;
+    }
+
+    &:hover {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}
+
+// TakeActionCarousel Styling End
+
 
 /* Our Work Carousel styles start */
 .campaign-slider-wrapper {
@@ -541,6 +712,7 @@ p {
     color: #2c2d41;
     position: relative;
   }
+
   .horizontal-divider {
     hr {
       border: 0;
@@ -548,6 +720,7 @@ p {
       width: 100%;
     }
   }
+
   .see-more-text {
     font-style: normal;
     font-weight: 700;
@@ -556,6 +729,7 @@ p {
     text-align: right;
     color: #2c2d41;
   }
+
   .campaignCard {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px !important;
@@ -569,6 +743,7 @@ p {
     cursor: pointer;
     background-color: #ffffff;
     margin-bottom: 15px;
+
     img {
       max-height: 253px;
       min-height: 253px;
@@ -578,6 +753,7 @@ p {
       object-position: center center;
       border-radius: 4px;
     }
+
     .campaign-content {
       display: flex;
       flex-direction: column;
@@ -586,16 +762,19 @@ p {
       padding: 10px 15px 20px 0px;
       max-height: 253px;
       min-height: 253px;
+
       .campaignCategory {
         display: flex;
         align-items: center;
         width: fit-content;
         margin-right: 5px;
         background-color: transparent;
+
         span {
           margin-right: 0;
         }
       }
+
       .campaign-title {
         font-weight: 700;
         font-size: 16px;
@@ -603,6 +782,7 @@ p {
         margin-bottom: 13px;
         margin: 8px 0 5px 0;
       }
+
       .campaign-desc {
         font-style: normal;
         font-weight: 400;
@@ -611,6 +791,7 @@ p {
         color: #524d42;
         margin: 0 !important;
         overflow: hidden;
+
         p {
           display: inline-block;
           font-style: normal;
@@ -622,10 +803,12 @@ p {
           overflow: hidden;
         }
       }
+
       .campaign-date {
         position: absolute;
         bottom: 0;
         right: 16px;
+
         span {
           font-weight: 700;
           font-size: 14px;
@@ -636,22 +819,27 @@ p {
     }
   }
 }
+
 @media (max-width: 767px) {
   .campaign-slider-wrapper {
+
     .slick-slider,
     .slick-list,
     .slick-track,
     .slick-slide {
       height: 540px !important;
     }
+
     .slick-slide {
       width: 386px;
       padding: 0;
       margin-right: 20px;
     }
+
     .slick-list {
       margin: 0px;
     }
+
     .campaignCard {
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 4px !important;
@@ -665,6 +853,7 @@ p {
       margin-bottom: 15px;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border: 0.5px solid rgba(0, 0, 0, 0.25);
+
       img {
         max-height: 253px;
         min-height: 253px;
@@ -674,6 +863,7 @@ p {
         object-position: center center;
         border-radius: 4px;
       }
+
       .campaign-content {
         padding: 0px 0px 20px 0px;
         max-height: 243px;
@@ -685,7 +875,6 @@ p {
     }
   }
 }
-/* Our Work Carousel styles end */
 
 .ta-actions {
   padding: 20px 0;
