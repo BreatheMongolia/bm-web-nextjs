@@ -1,17 +1,16 @@
 import { fetchAPI } from 'lib/graphql-api/api'
-import { Page, PageIdType } from 'graphql/generated'
+import { TakeAction, TakeActionIdType } from 'graphql/generated'
 
-export async function getTakeActionsPage(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {
+export async function getTakeActionsPage(id: string, idType: TakeActionIdType = TakeActionIdType.Uri): Promise<TakeAction> {
   const data = await fetchAPI(
     `
-      query page($id: ID!, $idType: PageIdType!) {
-          page(id: $id, idType: $idType) {
+      query takeAction($id: ID!, $idType: TakeActionIdType!) {
+          takeAction(id: $id, idType: $idType) {
               title
               dateGmt
               customFields {
-                  ${TakeActionGQLQuerySections.takeAction}
+                  ${TakeActionGQLQuerySections.takeActionPosts}
               }
-              totalPledges
           }
       }
     `,
@@ -19,10 +18,10 @@ export async function getTakeActionsPage(id: string, idType: PageIdType = PageId
       variables: { id, idType },
     },
   )
-  return data.page
+  return data.takeAction
 }
 const TakeActionGQLQuerySections = {
-  takeAction: `
+  takeActionPosts: `
     additionalResources {
       title
       titleMn
@@ -31,12 +30,12 @@ const TakeActionGQLQuerySections = {
     }
     introductionText
     introductionTextMn
-    pledgeTitle
-    pledgeTitleMn
     pledgeContent
     pledgeContentMn
     titleMn
     title
+    excerpt
+    excerptMn
     typeOfAction {
       customFields {
         name

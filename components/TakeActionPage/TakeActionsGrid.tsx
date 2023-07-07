@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef} from 'react'
-import { Page_Customfields_FeaturedTakeActionsLanding } from 'graphql/generated'
+import { TakeAction } from 'graphql/generated'
 import { useTranslation } from 'next-i18next'
 import { getTranslated } from 'lib/utils/getTranslated'
 import Link from 'next/link'
@@ -7,26 +7,26 @@ import PaginationComponent from './PaginationComponent'
 import Desktop from '../generic/Desktop'
 import Mobile from '../generic/Mobile'
 
-type TakeAction = {
-  id: number
-  title: string
-  excerpt: string
-  date: any
-  totalPledges: number
-  additionalResources: []
-  introductionText: string
-  pledgeContent: string
-  listOfPhotos: []
-  listOfSubSections: []
-  listOfVideos: []
-  typeOfAction: []
-  featuredImage: string
-}
+// type TakeAction = {
+//   id: number
+//   title: string
+//   excerpt: string
+//   date: any
+//   totalPledges: number
+//   additionalResources: []
+//   introductionText: string
+//   pledgeContent: string
+//   listOfPhotos: []
+//   listOfSubSections: []
+//   listOfVideos: []
+//   typeOfAction: []
+//   featuredImage: string
+// }
 
 export const TakeActionsGrid = ({
-  takeActions
+  takeAction
 } : {
-  takeActions: TakeAction[]
+  takeAction: TakeAction[]
 }) => {
   const { t } = useTranslation('take-actions')
   const [currentPage, setCurrentPage] = useState(1)
@@ -52,7 +52,7 @@ export const TakeActionsGrid = ({
 
   const getActionCategories = () => {
     const newActionCategories: any = []
-    takeActions.map((takeAction: any, index: number) => {
+    takeAction.map((takeAction: any, index: number) => {
       takeAction.typeOfAction.map((action: string) => {
         if (!newActionCategories.includes(action)) newActionCategories.push(action)
       })
@@ -81,7 +81,7 @@ export const TakeActionsGrid = ({
 
   const getFilteredTakeActions = () => {
     if (filteredCategories.length) {
-      const newFilteredTakeActions = takeActions.filter((takeAction) => {
+      const newFilteredTakeActions = takeAction.filter((takeAction) => {
         const matched = takeAction.typeOfAction.filter((category: string) => {
           return filteredCategories.includes(category)
         })
@@ -91,7 +91,7 @@ export const TakeActionsGrid = ({
 
       return newFilteredTakeActions
     } else {
-      return takeActions
+      return takeAction
     }
   }
 
@@ -125,17 +125,19 @@ export const TakeActionsGrid = ({
 
       <Desktop>
         <div className="actions-grid">
-          {getCurrentPost().map((takeAction: any, index: number) => (
-            <TakeActionTile
-              key={takeAction.id}
-              id={takeAction.id}
-              title={takeAction.title}
-              date={takeAction.date}
-              typeOfAction={takeAction.typeOfAction}
-              featuredImage={takeAction.featuredImage}
-              index={index}
-              pageNumberLimit={pageNumberLimit}
-            />
+          {getCurrentPost().map((x, idx) => (
+            <div key={idx}>
+            {/* // <TakeActionTile
+            //   key={takeAction.id}
+            //   id={takeAction.id}
+            //   title={takeAction.title}
+            //   date={takeAction.date}
+            //   typeOfAction={takeAction.typeOfAction}
+            //   featuredImage={takeAction.featuredImage}
+            //   index={index}
+            //   pageNumberLimit={pageNumberLimit}
+            // /> */}
+            </div>
           ))}
 
           {/* <div className={"action-item more"}>
@@ -144,7 +146,7 @@ export const TakeActionsGrid = ({
             </div>
           </div> */}
         </div>
-        {takeActions.length > 19 && (
+        {takeAction.length > 19 && (
           <div className="parent-pagination">
             <PaginationComponent
               currentPage={currentPage}
