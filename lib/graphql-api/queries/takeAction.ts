@@ -1,23 +1,19 @@
 import { fetchAPI } from 'lib/graphql-api/api'
-import { Page, PageIdType, TakeAction } from 'graphql/generated'
+import { Page, PageIdType, TakeAction, TakeActionIdType } from 'graphql/generated'
 
-export async function getTakeActionsDetail(id): Promise<Page> {
+export async function getTakeActionsDetail(id: string, idType: TakeActionIdType = TakeActionIdType.Uri): Promise<Page> {
   const data = await fetchAPI(
-    `query GetTakeActionById($id: [ID]) {
-      takeActions(where: { in: $id }) {
-        edges {
-          node {
-            ${TakeActionGQLQuerySections.takeActionDetail}
-            }
-          }
+    `query GetTakeActionById($id: ID!, $idType: TakeActionIdType!) {
+      takeAction(id: $id,idType: $idType) {
+          ${TakeActionGQLQuerySections.takeActionDetail}
         }
       }
     `,
     {
-      variables: { id },
+      variables: { id, idType },
     },
   )
-  return data.takeActions.edges[0].node || {}
+  return data.takeAction || {}
 }
 
 export async function getTakeActionsLatest() {
