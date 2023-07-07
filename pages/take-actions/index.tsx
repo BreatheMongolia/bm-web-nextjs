@@ -7,12 +7,15 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
-import { getTakeActionsPage } from 'lib/graphql-api/queries/takeAction'
+import { getFeaturedTakeActions, getTakeActionsLatest } from 'lib/graphql-api/queries/takeAction'
 
-const TakeActionsPage = ({ news }: { news: News[] }) => {
+const TakeActionsPage = ({ latest, featured }) => {
   const { t } = useTranslation()
   const router = useRouter()
   const { i18n } = useTranslation()
+
+  console.log(latest)
+  console.log(featured)
 
   useEffect(() => {
     // Get the current language from the URL (e.g., "mn" or "en")
@@ -39,13 +42,14 @@ const TakeActionsPage = ({ news }: { news: News[] }) => {
 export default TakeActionsPage
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  // TODO: Call the api for takeactions page
-  // const data = await getTakeActionsPage()
+  const featured = await getFeaturedTakeActions('/')
+  const latest = await getTakeActionsLatest()
 
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
-      news: [],
+      featured,
+      latest,
     },
     revalidate: 60,
   }
