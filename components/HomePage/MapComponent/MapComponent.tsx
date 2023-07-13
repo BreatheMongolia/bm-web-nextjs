@@ -13,7 +13,6 @@ import { LocationDropdown, RankDropdown, StationsDropdown } from './MapDropdowns
 import { RankType, StationType } from 'lib/air-pollution-map/types'
 import { StationDetail } from './StationDetail'
 import StationPin from './Helpers/StationPin'
-import { createRoot } from 'react-dom/client'
 import ReactDOM from 'react-dom'
 
 const MAP_BASE_CONFIG = {
