@@ -9,8 +9,8 @@ import { AnimatePresence } from 'framer-motion'
 import { createContext } from 'react'
 import { MapContextInterface } from 'lib/air-pollution-map/types'
 import { appWithTranslation } from 'next-i18next'
-import { i18n } from '../next-i18next.config'
 import { useRouter } from 'next/router'
+import NextNProgress from 'nextjs-progressbar'
 
 export const MapContext = createContext<MapContextInterface | null>(null)
 
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // FIXME: Givebutter doesn't seem to be working
   return (
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence mode="wait" initial={true}>
       <Layout>
         <Head>
           <Script src="https://js.givebutter.com/elements/latest.js" />
@@ -32,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           });`}
           </Script>
         </Head>
+        <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} />
         <Component {...pageProps} key={router.asPath} />
       </Layout>
     </AnimatePresence>
