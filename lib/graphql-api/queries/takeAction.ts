@@ -1,4 +1,5 @@
 import { fetchAPI } from 'lib/graphql-api/api'
+<<<<<<< HEAD
 import { Page, PageIdType, TakeAction } from 'graphql/generated'
 
 export async function getTakeActionsDetail(id): Promise<Page> {
@@ -10,14 +11,30 @@ export async function getTakeActionsDetail(id): Promise<Page> {
             ${TakeActionGQLQuerySections.takeActionDetail}
             }
           }
+=======
+import { Page, PageIdType, TakeAction, TakeActionIdType } from 'graphql/generated'
+
+export async function getTakeActionsDetail(id: string, idType: TakeActionIdType = TakeActionIdType.Uri): Promise<Page> {
+  const data = await fetchAPI(
+    `query GetTakeActionById($id: ID!, $idType: TakeActionIdType!) {
+      takeAction(id: $id,idType: $idType) {
+          ${TakeActionGQLQuerySections.takeActionDetail}
+>>>>>>> 69ddde1bff350c6b04f9bb9aaf6b292ce07930ae
         }
       }
     `,
     {
+<<<<<<< HEAD
       variables: { id },
     },
   )
   return data.takeActions.edges[0].node || {}
+=======
+      variables: { id, idType },
+    },
+  )
+  return data.takeAction || {}
+>>>>>>> 69ddde1bff350c6b04f9bb9aaf6b292ce07930ae
 }
 
 export async function getTakeActionsLatest() {
