@@ -51,7 +51,7 @@ export const Footer = () => {
     ]
     return (
       <div className="border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
-        <div className="container  footer_wrapper  uppercase tracking-widest text-slate-700 ">
+        <div className="container  footer_wrapper  uppercase tracking-widest text-slate-700 mobileRelative">
           <div className="footer_link_section ">
             {linkSections.map((x, idx) => {
               return (
@@ -69,28 +69,28 @@ export const Footer = () => {
                 </div>
               )
             })}
-          </div>
-          <div className="contact_section">
-            <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('nav.join')} </h2>
-            <div className=" social_icons_div flex justify-between w-[450px] pb-5">
-              {socialUrls.map((x, idx) => {
-                return (
-                  <div className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
-                    <SocialIcon
-                      url={x}
-                      key={idx}
-                      target="_blank"
-                      bgColor="transparent"
-                      fgColor="#3174D0"
-                      className="hover:bg-black/10 rounded-full"
-                      style={{ height: 40, width: 40 }}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-            <div className="mobile_style">
-              <Subscribe placeholder={t('subscribe.footerPlaceHolder')} isFooter />
+            <div className="contact_section relativeStyle">
+              <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('nav.join')} </h2>
+              <div className=" social_icons_div flex justify-between w-[450px] pb-5">
+                {socialUrls.map((x, idx) => {
+                  return (
+                    <div className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
+                      <SocialIcon
+                        url={x}
+                        key={idx}
+                        target="_blank"
+                        bgColor="transparent"
+                        fgColor="#3174D0"
+                        className="hover:bg-black/10 rounded-full"
+                        style={{ height: 40, width: 40 }}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="mobile_style">
+                <Subscribe placeholder={t('subscribe.footerPlaceHolder')} isFooter />
+              </div>
             </div>
           </div>
         </div>

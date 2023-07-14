@@ -46,7 +46,7 @@ const Subscribe: FC<Props> = ({ placeholder, isFooter, className }) => {
           id="EMAIL"
           type="email"
           placeholder="Enter your email to receive our newsletters"
-          className=" w-[330px] sm:w-[273px] h-[44px] rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4 "
+          className="subscribeInput  h-[44px] rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4 "
           value={fields.EMAIL}
           onChange={handleFieldChange}
         />
