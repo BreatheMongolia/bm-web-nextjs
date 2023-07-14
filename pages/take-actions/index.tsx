@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
-import { getFeaturedTakeActions, getTakeActionsLatest } from 'lib/graphql-api/queries/takeAction'
 
 const TakeActionsPage = ({ latest, featured }) => {
   const { t } = useTranslation()
