@@ -3,10 +3,21 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import { EXTERNAL_URLS } from 'lib/consts/urls'
 import Link from 'next/link'
+import FooterLogo from 'assets/icons/logoFooter'
+import Subscribe from 'components/Subscribe/Subscribe'
+import { SocialIcon } from 'react-social-icons'
+import { SOCIAL_URLS } from 'lib/consts/urls'
 
 export const Footer = () => {
   const [t, i18n] = useTranslation('footer')
-
+  const socialUrls = [
+    SOCIAL_URLS.INSTAGRAM,
+    SOCIAL_URLS.FACEBOOK,
+    SOCIAL_URLS.LINKEDIN,
+    SOCIAL_URLS.TWITTER,
+    SOCIAL_URLS.YOUTUBE,
+    SOCIAL_URLS.SLACK,
+  ]
   const FooterLinkSection = () => {
     const linkSections = [
       {
@@ -40,25 +51,47 @@ export const Footer = () => {
     ]
     return (
       <div className="border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
-        <div className="container flex flex-col sm:grid sm:grid-cols-5 px-7 gap-2 uppercase tracking-widest text-slate-700 ">
-          {linkSections.map((x, idx) => {
-            return (
-              <div key={idx}>
-                <h2 className="font-bold text-lg"> {x.title} </h2>
-                <div className="flex flex-col gap-4 text-sm font-semibold my-7">
-                  {x.urls.map((url, i) => {
-                    return (
-                      <Link href={url.url} target={url.target} key={i} className="hover:text-bm-blue">
-                        {url.title}
-                      </Link>
-                    )
-                  })}
+        <div className="container  footer_wrapper  uppercase tracking-widest text-slate-700 ">
+          <div className="footer_link_section ">
+            {linkSections.map((x, idx) => {
+              return (
+                <div key={idx} className="column_style">
+                  <h2 className="font-bold text-lg min-w-max"> {x.title} </h2>
+                  <div className="flex flex-col text-sm font-semibold my-7">
+                    {x.urls.map((url, i) => {
+                      return (
+                        <Link href={url.url} target={url.target} key={i} className="hover:text-bm-blue my-2">
+                          {url.title}
+                        </Link>
+                      )
+                    })}
+                  </div>
                 </div>
-              </div>
-            )
-          })}
-          <div className="col-span-2">
+              )
+            })}
+          </div>
+          <div className="contact_section">
             <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('nav.join')} </h2>
+            <div className=" social_icons_div flex justify-between w-[450px] pb-5">
+              {socialUrls.map((x, idx) => {
+                return (
+                  <div className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
+                    <SocialIcon
+                      url={x}
+                      key={idx}
+                      target="_blank"
+                      bgColor="transparent"
+                      fgColor="#3174D0"
+                      className="hover:bg-black/10 rounded-full"
+                      style={{ height: 40, width: 40 }}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+            <div className="mobile_style">
+              <Subscribe placeholder={t('subscribe.footerPlaceHolder')} isFooter />
+            </div>
           </div>
         </div>
       </div>
@@ -69,8 +102,9 @@ export const Footer = () => {
       <div className="bg-bm-blue text-white py-5 px-7 sm:px-0">
         <div className="container flex text-xs gap-5">
           <div className="flex gap-1 flex-col sm:flex-row">
-            <div className="h-20 w-20 relative bg-gray-300"></div>
-
+            <div className="h-20 w-20 relative">
+              <FooterLogo />
+            </div>
             <div className="h-20 w-20 relative">
               <a href="https://www.guidestar.org/profile/83-4376042" target="_blank">
                 <Image src="/images/candid-seal-gold-2023.png" alt="candidSeal" fill={true} />
