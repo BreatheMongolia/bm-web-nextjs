@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { getNewsFull, getNewsPostSlugs } from 'lib/graphql-api/queries/news'
 import { TakeAction } from 'graphql/generated'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
@@ -47,7 +46,7 @@ export const getStaticProps = async ({ params, locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map'])),
+      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer'])),
       takeAction,
     },
     revalidate: 60,
@@ -58,11 +57,7 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
   const takeActions = await getTakeActionSlugs()
 
   return {
-<<<<<<< HEAD
-    paths: takeActions.map((x, idx) => `/take-actions/${x.desiredSlug || x.slug || x.databaseId}`) || [],
-=======
     paths: takeActions.map((x, idx) => `/take-actions/${x.slug || x.databaseId}`) || [],
->>>>>>> 69ddde1bff350c6b04f9bb9aaf6b292ce07930ae
     fallback: true,
   }
 }
