@@ -3,7 +3,7 @@ import BM_WFH_Team from 'assets/images/BM_WFH_Team.jpg'
 import { useTranslation } from 'next-i18next'
 
 export const AboutUsHeader = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation('about')
   return (
     <div className="grid sm:grid-cols-2 w-full h-48">
       {/* FIXME: Update the gradient color to match old */}

@@ -91,13 +91,13 @@ export default function Index({
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
-          <OurWorkCarousel
+          {/* <OurWorkCarousel
             title={{
               en: page.customFields.campaignAndOurWorkTitle,
               mn: page.customFields.campaignAndOurWorkTitleMn,
             }}
             campaigns={page.customFields.campaignAndOurWorkSlider}
-          />
+          /> */}
           <JoinBMSection
             title={{
               en: page.customFields.joinBreatheMongoliaTitle,

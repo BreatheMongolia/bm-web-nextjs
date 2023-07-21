@@ -13,6 +13,6 @@ export default AboutPage
 
 export const getStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
+    ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
   },
 })
