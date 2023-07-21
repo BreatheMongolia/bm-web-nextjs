@@ -30,6 +30,8 @@ export default function TakeActionPostPage({ takeAction }) {
           <article>
             <Head>
               <title>{`${takeAction.customFields.title} - Breathe Mongolia Clean Air Coalition`}</title>
+              <meta property="og:title" content={takeAction.customFields.title} key="title" />
+              <meta name="description" content={takeAction.customFields.introductionText} />
             </Head>
             <div className="container max-w-screen-lg">
               <h2>{takeAction.customFields.title}</h2>
