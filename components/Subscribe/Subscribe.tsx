@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
-import cx from 'classnames'
 import { useMediaQuery } from 'react-responsive'
 import { HiPaperAirplane } from 'react-icons/hi'
 

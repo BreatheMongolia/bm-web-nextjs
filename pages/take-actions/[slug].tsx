@@ -15,7 +15,10 @@ interface TakeActionPageProps {
 export default function TakeActionPostPage({ takeAction }) {
   const router = useRouter()
 
-  if (!router.isFallback && !takeAction?.databaseId) {
+  if (router.isFallback) {
+    return <div> Loading... </div>
+  }
+  if (!takeAction || !takeAction?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
@@ -23,21 +26,15 @@ export default function TakeActionPostPage({ takeAction }) {
 
   return (
     <div>
-      {router.isFallback ? (
-        <>Loading</>
-      ) : (
-        <>
-          <article>
-            <Head>
-              <title>{`${takeAction.customFields.title} - Breathe Mongolia Clean Air Coalition`}</title>
-            </Head>
-            <div className="container max-w-screen-lg">
-              <h2>{takeAction.customFields.title}</h2>
-              <div dangerouslySetInnerHTML={{ __html: takeAction.customFields.introductionText }}></div>
-            </div>
-          </article>
-        </>
-      )}
+      <article>
+        <Head>
+          <title>{`${takeAction.customFields.title} - Breathe Mongolia Clean Air Coalition`}</title>
+        </Head>
+        <div className="container max-w-screen-lg">
+          <h2>{takeAction.customFields.title}</h2>
+          <div dangerouslySetInnerHTML={{ __html: takeAction.customFields.introductionText }}></div>
+        </div>
+      </article>
     </div>
   )
 }

@@ -13,47 +13,44 @@ interface NewsPostPageProps {
 
 export default function NewsPostPage({ post }: NewsPostPageProps) {
   const router = useRouter()
-
-  if (!router.isFallback && !post?.slug) {
+  if (router.isFallback) {
+    return <div> Loading... </div>
+  }
+  if (!post || !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
   const { t, i18n } = useTranslation('common')
 
   const title = {
-    mn: post.customFields.titleMn,
-    en: post.customFields.title,
+    mn: post.customFields?.titleMn,
+    en: post.customFields?.title,
   }
 
   const body = {
-    mn: post.customFields.bodyMn,
-    en: post.customFields.body,
+    mn: post.customFields?.bodyMn,
+    en: post.customFields?.body,
   }
 
   return (
     <div>
-      {router.isFallback ? (
-        <>Loading</>
-      ) : (
-        <>
-          <article>
-            <Head>
-              <title>{`${title[i18n.language]} - Breathe Mongolia Clean Air Coalition`}</title>
-            </Head>
-            <div className="container max-w-screen-lg">
-              <h1 className="font-bold text-xl">{title[i18n.language]}</h1>
-              <div dangerouslySetInnerHTML={{ __html: body[i18n.language] }}></div>
-            </div>
-          </article>
-        </>
-      )}
+      <article>
+        <Head>
+          <title>{`${title[i18n.language]} - Breathe Mongolia Clean Air Coalition`}</title>
+        </Head>
+        <div className="container max-w-screen-lg">
+          <h1 className="font-bold text-xl">{title[i18n.language]}</h1>
+          <div dangerouslySetInnerHTML={{ __html: body[i18n.language] }}></div>
+        </div>
+      </article>
     </div>
   )
 }
 
 export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
+  console.log('getStaticProps')
+  console.log(params?.slug)
   const post = await getNewsFull(params?.slug)
-
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
@@ -65,9 +62,16 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
 
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   const news = await getNewsPostSlugs()
-
+  const paths = []
+  news.map(x => {
+    if (x.desiredSlug || x.slug) {
+      paths.push(`/news/${x.desiredSlug || x.slug}`)
+    }
+  })
+  console.log('getStaticPaths')
+  console.log(paths)
   return {
-    paths: news.map(x => `/news/${x.desiredSlug || x.slug || x.databaseId}`) || [],
+    paths,
     fallback: true,
   }
 }
