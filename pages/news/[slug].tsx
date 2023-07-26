@@ -38,7 +38,7 @@ export default function NewsPostPage({ post }: NewsPostPageProps) {
         <>
           <article>
             <Head>
-              <title>{`${post.customFields.title} - Breathe Mongolia Clean Air Coalition`}</title>
+              <title>{`${title[i18n.language]} - Breathe Mongolia Clean Air Coalition`}</title>
             </Head>
             <div className="container max-w-screen-lg">
               <h1 className="font-bold text-xl">{title[i18n.language]}</h1>
