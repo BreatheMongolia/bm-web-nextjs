@@ -53,16 +53,16 @@ export const NewsCard = ({ news }: { news: News }) => {
           {news.categories && (
             <div className="category flex border-b-[0.5px] border-white w-fit  text-[12px] font-bold my-2">
               {news.categories?.nodes.length > 2
-                ? news.categories?.nodes?.slice(0, 2).map((data: any) => (
-                    <div key={Math.random()}>
-                      <div key={Math.random()}>
+                ? news.categories?.nodes?.slice(0, 2).map((data, idx) => (
+                    <div key={idx}>
+                      <div>
                         <TbPointFilled className="w-2 h-2 text-white mr-1 self-center " />
                         <span className=" text-white mr-1">{data.categoryCustomFields.name}</span>
                       </div>
                     </div>
                   ))
-                : news.categories?.nodes.map((data: any) => (
-                    <div className="flex ">
+                : news.categories?.nodes.map((data, idx) => (
+                    <div key={idx} className="flex ">
                       <TbPointFilled className="w-2 h-2 text-white mr-1 self-center " />
                       <span className=" text-white mr-1">{data.categoryCustomFields.name}</span>
                     </div>

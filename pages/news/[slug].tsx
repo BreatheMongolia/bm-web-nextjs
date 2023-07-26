@@ -18,7 +18,17 @@ export default function NewsPostPage({ post }: NewsPostPageProps) {
     return <ErrorPage statusCode={404} />
   }
 
-  const { t } = useTranslation('common')
+  const { t, i18n } = useTranslation('common')
+
+  const title = {
+    mn: post.customFields.titleMn,
+    en: post.customFields.title,
+  }
+
+  const body = {
+    mn: post.customFields.bodyMn,
+    en: post.customFields.body,
+  }
 
   return (
     <div>
@@ -31,8 +41,8 @@ export default function NewsPostPage({ post }: NewsPostPageProps) {
               <title>{`${post.customFields.title} - Breathe Mongolia Clean Air Coalition`}</title>
             </Head>
             <div className="container max-w-screen-lg">
-              <h1 className="font-bold text-xl">{post.customFields.title}</h1>
-              <div dangerouslySetInnerHTML={{ __html: post.customFields.body }}></div>
+              <h1 className="font-bold text-xl">{title[i18n.language]}</h1>
+              <div dangerouslySetInnerHTML={{ __html: body[i18n.language] }}></div>
             </div>
           </article>
         </>
@@ -46,7 +56,7 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
       post: post,
     },
     revalidate: 60,
@@ -57,7 +67,7 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
   const news = await getNewsPostSlugs()
 
   return {
-    paths: news.map((x, idx) => `/news/${x.desiredSlug || x.slug || x.databaseId}`) || [],
+    paths: news.map(x => `/news/${x.desiredSlug || x.slug || x.databaseId}`) || [],
     fallback: true,
   }
 }
