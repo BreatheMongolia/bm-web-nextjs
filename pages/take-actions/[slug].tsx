@@ -152,7 +152,16 @@ export const getStaticProps = async ({ params, locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'common', 'pledge', 'faq'])),
+      ...(await serverSideTranslations(locale, [
+        'home',
+        'nav',
+        'footer',
+        'map',
+        'common',
+        'pledge',
+        'faq',
+        'takeAction',
+      ])),
       takeAction: getTransformedData(takeAction, locale),
     },
     revalidate: 60,
