@@ -15,15 +15,16 @@ interface NewsPostPageProps {
 export default function NewsPostPage({ post }: NewsPostPageProps) {
   const router = useRouter()
 
-  if (!router.isFallback && !post?.slug) {
+  if (!router.isFallback && !post && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
   const { t } = useTranslation('common')
+
   const featuredImageBig = getImage(
-    post.customFields.featuredImage.image?.mediaDetails,
-    post.customFields.featuredImage.imageMn?.mediaDetails,
-    post.featuredImage?.node?.mediaDetails,
+    post?.customFields.featuredImage.image?.mediaDetails,
+    post?.customFields.featuredImage.imageMn?.mediaDetails,
+    post?.featuredImage?.node?.mediaDetails,
     'medium_large',
   )
 
