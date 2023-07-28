@@ -102,6 +102,7 @@
         line-height: 31px;
         color: #7f7f7f;
         margin-top: 0;
+        margin-bottom: 24px;
         font-style: italic;
       }
 
@@ -444,7 +445,21 @@
     font-size: 16px;
     line-height: 150%;
     color: #3c3e59;
+
+    p {
+      margin: 1em 0;
+    }
+
+    ul {
+      padding-left: 40px;
+      margin: 1em 0;
+      list-style: disc;
+    }
   }
+}
+
+.faq-mobile-title {
+  margin: 1em 0;
 }
 
 // Additional Resources
@@ -641,6 +656,7 @@
 
     img {
       max-width: 100px;
+      display: inline-block;
     }
   }
 
@@ -988,6 +1004,10 @@
       border-radius: 10px;
       background-color: #dfeffc;
       outline: none;
+      line-height: 22px;
+      padding: 10px 16px;
+      color: #666;
+      cursor: pointer;
 
       p {
         width: 100%;
@@ -1005,10 +1025,21 @@
     }
 
     .rc-collapse-content {
+      overflow: hidden;
+      color: #666;
+      padding: 0 16px;
+      background-color: #fff;
+
       .rc-collapse-content-box {
         font-size: 12px;
         line-height: 150%;
         color: #2c2d41;
+        margin-top: 16px;
+        margin-bottom: 16px;
+
+        img {
+          margin-bottom: 15px;
+        }
       }
     }
   }
@@ -1027,4 +1058,77 @@
 
 .svgBack {
   vertical-align: middle;
+}
+
+.social-share {
+  .social-items {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    li {
+      &:not(:last-child) {
+        margin-right: 33px;
+      }
+
+      button {
+        width: 42px;
+        height: 42px;
+        border-radius: 100%;
+        border: 2px solid #f4ac3d;
+        background-color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          border-color: #61b1ee;
+        }
+      }
+      .social-item-1 {
+        svg {
+          width: 10px;
+          height: 20px;
+        }
+      }
+      .social-item-2 {
+        svg {
+          width: 20px;
+          height: 16px;
+        }
+      }
+      .social-item-3 {
+        svg {
+          width: 17px;
+          height: 18px;
+        }
+      }
+
+      svg {
+        transition: all 0.3s ease;
+        fill: #f4ac3d;
+      }
+    }
+
+    li {
+      .btn-share {
+        &:hover {
+          svg {
+            fill: #61b1ee !important;
+          }
+        }
+      }
+    }
+
+    li {
+      button {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import Mobile from 'components/Mobile'
 import Desktop from 'components/Desktop'
 import Collapse from 'rc-collapse'
@@ -31,9 +31,8 @@ const options = {
 }
 
 export const FAQ: FC<FAQType> = ({ data }) => {
-  const { t } = useTranslation()
-  //   const lang = getLanguage()
-  const lang = 'mn'
+  const { t, i18n } = useTranslation('faq')
+  const lang = i18n.language
 
   const tabTitles: { title: string; key: string }[] = []
   const tabPanels: { content: string; key: string }[] = []
@@ -54,12 +53,12 @@ export const FAQ: FC<FAQType> = ({ data }) => {
   return (
     <>
       <Mobile>
-        <p className="faq-mobile-title">{t('faq.mobileTitle')}:</p>
+        <p className="faq-mobile-title">{t('mobileTitle')}:</p>
         <Collapse className="faq-collapse" accordion={true} openMotion={motion} expandIcon={expandIcon}>
           {data.map((tab: { title: string; titleMn: string; body: string; bodyMn: string }, index: any) => {
-            if (getTranslated(tab.body, tab.bodyMn)) {
+            if (getTranslated(tab.body, tab.bodyMn, lang)) {
               return (
-                <Panel key={index} header={<p>{getTranslated(tab.title, tab.titleMn)}</p>}>
+                <Panel key={index} header={<p>{getTranslated(tab.title, tab.titleMn, lang)}</p>}>
                   {parse(getTranslated(tab.body, tab.bodyMn), options)}
                 </Panel>
               )
@@ -68,12 +67,12 @@ export const FAQ: FC<FAQType> = ({ data }) => {
         </Collapse>
       </Mobile>
       <Desktop>
-        <p className="faq-mobile-title">{t('faq.mobileTitle')}:</p>
+        <p className="faq-mobile-title">{t('mobileTitle')}:</p>
         <Collapse className="faq-collapse" accordion={true} openMotion={motion} expandIcon={expandIcon}>
           {data.map((tab: { title: string; titleMn: string; body: string; bodyMn: string }, index: any) => {
-            if (getTranslated(tab.body, tab.bodyMn)) {
+            if (getTranslated(tab.body, tab.bodyMn, lang)) {
               return (
-                <Panel key={index} header={<p>{getTranslated(tab.title, tab.titleMn)}</p>}>
+                <Panel key={index} header={<p>{getTranslated(tab.title, tab.titleMn, lang)}</p>}>
                   {parse(getTranslated(tab.body, tab.bodyMn), options)}
                 </Panel>
               )

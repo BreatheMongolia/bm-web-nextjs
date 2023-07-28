@@ -5,7 +5,7 @@ import ActionFacebook from 'assets/icons/ActionFacebook'
 import ActionEmail from 'assets/icons/ActionEmail'
 import ActionLink from 'assets/icons/ActionLink'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, EmailShareButton } from 'react-share'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 type Props = {
   link: string

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import parse from 'html-react-parser'
 import ActionShare from 'components/ActionShare/ActionShare'
 
@@ -10,6 +10,11 @@ interface IProps {
 
 export const TextBody: FC<IProps> = (props: IProps) => {
   const { title, introText, typeOfAction } = props
+  const [currentUrl, setCurrentUrl] = useState('')
+
+  useEffect(() => {
+    setCurrentUrl(window.location.origin)
+  }, [])
 
   return (
     <div className="take-action-text-container">
@@ -25,7 +30,7 @@ export const TextBody: FC<IProps> = (props: IProps) => {
             })}
         </div>
         <div className="actions-share">
-          <ActionShare link={''} title={title} />
+          <ActionShare link={currentUrl} title={title} />
         </div>
       </div>
 
