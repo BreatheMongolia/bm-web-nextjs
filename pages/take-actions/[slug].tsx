@@ -172,7 +172,7 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
   const takeActions = await getTakeActionSlugs()
 
   return {
-    paths: takeActions.map((x, idx) => `/take-actions/${x.slug || x.databaseId}`) || [],
+    paths: takeActions.map(x => `/take-actions/${x.slug || x.databaseId}`) || [],
     fallback: true,
   }
 }
