@@ -1,7 +1,14 @@
 import { fetchAPI } from 'lib/graphql-api/api'
 import { TakeAction, TakeActionIdType } from 'graphql/generated'
 
+<<<<<<< HEAD
 export async function getTakeActionsDetail(id: string, idType: TakeActionIdType = TakeActionIdType.Uri): Promise<TakeAction> {
+=======
+export async function getTakeActionsDetail(
+  id: string,
+  idType: TakeActionIdType = TakeActionIdType.Slug,
+): Promise<Page> {
+>>>>>>> 331999d1e27b0da72012dc82a7e7ca2794914084
   const data = await fetchAPI(
     `query GetTakeActionById($id: ID!, $idType: TakeActionIdType!) {
       takeAction(id: $id,idType: $idType) {
@@ -13,7 +20,8 @@ export async function getTakeActionsDetail(id: string, idType: TakeActionIdType 
       variables: { id, idType },
     },
   )
-  return data.takeAction || {}
+
+  return data.takeAction
 }
 
 export async function getTakeActionsLatest() {
@@ -57,7 +65,6 @@ export async function getTakeActionSlugs(): Promise<TakeAction[]> {
         edges {
           node {
             databaseId
-            desiredSlug
             slug
             dateGmt
           }
@@ -124,6 +131,12 @@ const TakeActionGQLQuerySections = {
   takeActionDetail: `
     databaseId
     dateGmt
+    totalPledges
+    featuredImage {
+      node {
+        mediaItemUrl
+      }
+    }
     customFields {
       additionalResources {
         title

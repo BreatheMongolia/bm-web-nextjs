@@ -2,6 +2,7 @@ import { ArrowTopRightOnSquareIcon, PlayCircleIcon } from '@heroicons/react/24/s
 import { News } from 'graphql/generated'
 import { getImage } from 'lib/utils/getImage'
 import router from 'next/router'
+import { TbPointFilled } from 'react-icons/tb'
 
 export const NewsCard = ({ news }: { news: News }) => {
   // News Card types can be: blog, external_link, video
@@ -10,7 +11,7 @@ export const NewsCard = ({ news }: { news: News }) => {
     news.customFields.featuredImage.image?.mediaDetails,
     news.customFields.featuredImage.imageMn?.mediaDetails,
     news.featuredImage?.node?.mediaDetails,
-    'medium_large',
+    'medium',
   )
   const onCardClick = () => {
     if (news.customFields.newsContentType) {
@@ -42,14 +43,33 @@ export const NewsCard = ({ news }: { news: News }) => {
           </div>
         )}
         {news.customFields.newsContentType === 'video' && (
-          <div className="flex text-rose-500 items-center justify-center flex-auto">
+          <div className="flex text-rose-500 items-center justify-center flex-auto absolute right-0 left-0 top-1/3">
             <PlayCircleIcon className="h-11 w-11 group-hover:h-12 group-hover:w-12 transition-all ease-in-out bg-white rounded-full" />
           </div>
         )}
 
         {/* <img className="object-fill max-w-none h-full" src={featuredImageBig} /> */}
-        <div className="w-full p-4 ">
-          <div className="w-full text-white line-clamp-2"> {news.customFields.titleMn} </div>
+        <div className="w-full px-5 mb-4 h-20 absolute bottom-0  ">
+          {news.categories && (
+            <div className="category flex border-b-[0.5px] border-white w-fit  text-[12px] font-bold my-2">
+              {news.categories?.nodes.length > 2
+                ? news.categories?.nodes?.slice(0, 2).map((data, idx) => (
+                    <div key={idx}>
+                      <div>
+                        <TbPointFilled className="w-2 h-2 text-white mr-1 self-center " />
+                        <span className=" text-white mr-1">{data.categoryCustomFields.name}</span>
+                      </div>
+                    </div>
+                  ))
+                : news.categories?.nodes.map((data, idx) => (
+                    <div key={idx} className="flex ">
+                      <TbPointFilled className="w-2 h-2 text-white mr-1 self-center " />
+                      <span className=" text-white mr-1">{data.categoryCustomFields.name}</span>
+                    </div>
+                  ))}
+            </div>
+          )}
+          <p className="w-full text-white line-clamp-2 text-[16px] leading-[130%]"> {news.customFields.titleMn}</p>
         </div>
       </div>
     </div>

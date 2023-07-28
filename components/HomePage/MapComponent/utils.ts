@@ -5,7 +5,7 @@ export function getTransformedDataFromOpenAQ(res: any) {
   if (res.results.length) {
     const stationsMap = new Map<string, StationType>()
     for (let i = 0; i < res.results.length; i++) {
-      const PM25 = res.results[i].parameters.find((item: { displayName: string }) => item.displayName === 'PM2.5')
+      const PM25 = res.results[i].parameters.find((item: { displayName: string }) => item.displayName === 'PM2.5') ?? {}
       const name: string = res.results[i].name
 
       if (!isStationWithinMongoliaBBox(res.results[i].coordinates.longitude, res.results[i].coordinates.latitude)) {

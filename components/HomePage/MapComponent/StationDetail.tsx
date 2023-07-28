@@ -106,7 +106,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
     const p2 = station.pollution.p2
     return (
       <div className={`text-white px-2 py-1 flex flex-col items-center justify-center ${bgColors.bottomA}`}>
-        <div className="text-xs font-semibold"> {t('stationDetail.usaqi')}</div>
+        <div className="text-xs font-semibold uppercase"> {t('stationDetail.usaqi')}</div>
         <div className="font-bold text-5xl"> {station.pollution.aqius} </div>
         {p2 && (
           <div className="text-xs text-center">
