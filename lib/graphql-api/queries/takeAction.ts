@@ -1,14 +1,10 @@
 import { fetchAPI } from 'lib/graphql-api/api'
 import { TakeAction, TakeActionIdType } from 'graphql/generated'
 
-<<<<<<< HEAD
-export async function getTakeActionsDetail(id: string, idType: TakeActionIdType = TakeActionIdType.Uri): Promise<TakeAction> {
-=======
 export async function getTakeActionsDetail(
   id: string,
   idType: TakeActionIdType = TakeActionIdType.Slug,
 ): Promise<Page> {
->>>>>>> 331999d1e27b0da72012dc82a7e7ca2794914084
   const data = await fetchAPI(
     `query GetTakeActionById($id: ID!, $idType: TakeActionIdType!) {
       takeAction(id: $id,idType: $idType) {
