@@ -1,0 +1,10 @@
+{
+  "button": "take this pledge",
+  "pledged": "Congratulations!",
+  "pledgeTo": "I pledge to <1>{{title}}</1>",
+  "congrats": "Congratulations! You have pledged to:",
+  "tapToTakePledge": "Tap to take this pledge",
+  "joined": "You and {{totalPledge}} people have taken this pledge!",
+  "share": "Share Your Pledge Now!",
+  "mobileTitle": "Take This Pledge and Share with Your Network!"
+}

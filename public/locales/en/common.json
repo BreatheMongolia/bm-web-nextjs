@@ -1,4 +1,5 @@
 {
+
   "subfooter": "Stay connected:",
   "titleExplore": "explore",
   "title": {
@@ -12,6 +13,13 @@
     "subscribed": "Subscribed",
     "validEmail": "Please enter a valid email",
     "footerPlaceHolder":"Enter your email to receive our newsletters"
+
+  "backBtnText": "Back to Take Action Home",
+  "actionShare": {
+    "subject": "Take action against air pollution in Mongolia",
+    "bodyPart1": "I just pledged to",
+    "bodyPart2": "People need to know about this.",
+    "bodyPart3": "Thanks!"
 
   }
 }

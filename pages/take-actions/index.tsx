@@ -14,8 +14,6 @@ const TakeActionsPage = ({ latest, featured }) => {
   const router = useRouter()
   const { i18n } = useTranslation()
 
-  // console.log(latest)
-  // console.log(featured)
 
   useEffect(() => {
     // Get the current language from the URL (e.g., "mn" or "en")

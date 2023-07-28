@@ -39,7 +39,7 @@ export const Topbar = () => {
     let pathname = window.location.pathname
     pathname = pathname.replace(/^\/(en|mn)\b/, '')
 
-    return `${baseUrl}/${pathname}`
+    return `${baseUrl}${pathname}`
   }
 
   return (
@@ -96,6 +96,7 @@ export const Topbar = () => {
                             } justify-center w-full group flex items-center rounded-md px-2 py-2 text-xs bg-opacity-10`}
                             href={getURL()}
                             locale={key}
+                            scroll={false}
                           >
                             {option.label}
                           </Link>
