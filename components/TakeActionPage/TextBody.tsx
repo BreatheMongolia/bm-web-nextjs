@@ -13,7 +13,7 @@ export const TextBody: FC<IProps> = (props: IProps) => {
   const [currentUrl, setCurrentUrl] = useState('')
 
   useEffect(() => {
-    setCurrentUrl(window.location.origin)
+    setCurrentUrl(window.location.pathname)
   }, [])
 
   return (

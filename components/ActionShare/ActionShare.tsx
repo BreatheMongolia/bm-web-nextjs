@@ -13,22 +13,16 @@ type Props = {
 }
 
 const ActionShare: FC<Props> = ({ link, title }) => {
-  const [t, i18n] = useTranslation()
+  const [t, i18n] = useTranslation('common')
   const emailText =
     i18n.language === 'eng'
-      ? `
-${t('actionShareEmail.bodyPart1')} ${title}. ${t('actionShareEmail.bodyPart2')}
-
-${link}
-
-${t('actionShareEmail.bodyPart3')}
+      ? ` ${t('actionShare.bodyPart1')} ${title}. ${t('actionShare.bodyPart2')}
+${link}${t('actionShare.bodyPart3')}
 `
-      : `
-${t('actionShareEmail.bodyPart1')}
-
+      : ` ${t('actionShare.bodyPart1')}
 ${link}
 
-${t('actionShareEmail.bodyPart3')}
+${t('actionShare.bodyPart3')}
 `
 
   return (
@@ -61,7 +55,7 @@ ${t('actionShareEmail.bodyPart3')}
         <li>
           <EmailShareButton
             resetButtonStyle={true}
-            subject={t('actionShareEmail.subject')}
+            subject={t('actionShare.subject')}
             body={emailText}
             url={''}
             className="btn-share social-item-3"

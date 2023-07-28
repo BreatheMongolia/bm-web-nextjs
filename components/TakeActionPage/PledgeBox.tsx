@@ -36,7 +36,7 @@ export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, to
   const [currentUrl, setCurrentUrl] = useState('')
 
   useEffect(() => {
-    setCurrentUrl(window.location.origin)
+    setCurrentUrl(window.location.pathname)
   }, [])
 
   const now = dayjs()
