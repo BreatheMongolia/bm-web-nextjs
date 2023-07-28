@@ -876,9 +876,30 @@ p {
   }
 }
 
+// Take Action Page - Take Action Grid Styling
+.ta-category {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  padding: 8px;
+  margin: 3px;
+  height: 24px;
+  background: #e8e8e8;
+  color: #000000;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.selected {
+  color: #fafaff;
+  background: #f4ac3d;
+}
+
 .ta-actions {
   padding: 20px 0;
-  background-color: #ffce82;
+  background-color: #f4ac3d;
   .action-item.big {
     .action-title {
       .action-title-name {
@@ -897,31 +918,31 @@ p {
     }
   }
 
-  .ta-categories {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
+  // .ta-categories {
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: center;
+  //   align-items: flex-start;
+  //   flex-wrap: wrap;
 
-    .ta-category {
-      display: flex;
-      flex-direction: row;
-      justify-content: right;
-      align-items: center;
-      padding: 8px;
-      margin: 3px;
-      height: 24px;
-      background: #ffffff;
-      border-radius: 16px;
-      cursor: pointer;
-      font-size: 10px;
-    }
+  //   .ta-category {
+  //     display: flex;
+  //     flex-direction: row;
+  //     justify-content: right;
+  //     align-items: center;
+  //     padding: 8px;
+  //     margin: 3px;
+  //     height: 24px;
+  //     background: #ffffff;
+  //     border-radius: 16px;
+  //     cursor: pointer;
+  //     font-size: 10px;
+  //   }
 
-    .selected {
-      color: #f4ac3d;
-    }
-  }
+  //   .selected {
+  //     color: #f4ac3d;
+  //   }
+  // }
 
   .actions-title {
     font-weight: bold;
@@ -1022,6 +1043,6 @@ p {
           }
         }
       }
-    }
+     }
   }
 }
