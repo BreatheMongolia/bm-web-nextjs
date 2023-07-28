@@ -371,7 +371,7 @@ p {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-fill-color: transparent;
+      // text-fill-color: transparent;
       margin: 0;
     }
 
@@ -387,7 +387,7 @@ p {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-fill-color: transparent;
+      // text-fill-color: transparent;
       margin: 0;
     }
   }
@@ -869,6 +869,28 @@ p {
       }
     }
   }
+
+// Take Action Landing Page Styling
+
+  .ta-category {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    padding: 8px;
+    margin: 5px;
+    height: 24px;
+    background: #e8e8e8;
+    color: #000000;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .selected {
+    color: #fafaff;
+    background: #f4ac3d;
+  }
 }
 
-/* Our Work Carousel styles end */
+
