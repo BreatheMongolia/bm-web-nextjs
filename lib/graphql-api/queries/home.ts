@@ -101,6 +101,7 @@ const HomePageGQLQuerySections = {
     featuredTakeActions {
         ... on TakeAction {
             databaseId
+            slug
             dateGmt
             featuredImage {
                 node {

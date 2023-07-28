@@ -1,4 +1,5 @@
 const { i18n } = require('./next-i18next.config')
+
 if (!process.env.WORDPRESS_API_URL) {
   throw new Error(`
     Please provide a valid WordPress instance URL.
