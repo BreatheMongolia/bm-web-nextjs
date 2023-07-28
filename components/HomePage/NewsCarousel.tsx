@@ -5,51 +5,55 @@ import { useTranslation } from 'next-i18next'
 import Slider from 'react-slick'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import Arrow from 'components/generic/Arrow'
+import { getImage } from 'lib/utils/getImage'
+import { getTranslated } from 'lib/utils/getTranslated'
 
 export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields_FeaturedNews[] }) => {
-  const { t } = useTranslation('home')
-const settings = {
-  dots: false,
-  infinite: false,
-  speed: 800,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-  autoplay: false,
-  autoplaySpeed: 5000,
-  cssEase: "linear",
-  adaptiveHeight: true,
-  centerMode: false,
-  variableWidth: true,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        initialSlide: 1,
-        infinite: false
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false,
-        centerMode: false
-      }
-    }
-  ]
-}
+  const { t, i18n } = useTranslation('home')
+
+  const news = getFeaturedHomePageNews(featuredNews, i18n.language)
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: false,
+    autoplaySpeed: 5000,
+    cssEase: 'linear',
+    adaptiveHeight: true,
+    centerMode: false,
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          centerMode: false,
+        },
+      },
+    ],
+  }
   return (
     <div className="news-carousel-section">
       <H2
@@ -60,24 +64,72 @@ const settings = {
           url: '/news',
         }}
       />
-        <Slider
+      <Slider
         {...settings}
         prevArrow={
-           <Arrow check={0} classes="prev-gray-arrow">
+          <Arrow check={0} classes="prev-gray-arrow">
             <ChevronLeftIcon className="w-8 h-8 text-white" />
           </Arrow>
         }
         nextArrow={
-            <Arrow check={featuredNews?.length - 3} classes="next-gray-arrow">
+          <Arrow check={featuredNews?.length - 3} classes="next-gray-arrow">
             <ChevronRightIcon className="w-8 h-8 text-white" />
           </Arrow>
-
         }
       >
-        {featuredNews.map((data: News, idx) => (
-          <NewsCard key={idx} news={data}          />
+        {news.map((data: News, idx) => (
+          <NewsCard key={idx} news={data} />
         ))}
       </Slider>
     </div>
   )
+}
+
+function getFeaturedHomePageNews(featuredNewsNode: any[], locale) {
+  if (featuredNewsNode.length === 0) {
+    return []
+  }
+
+  const featuredHomePageNews: any[] = []
+  featuredNewsNode.map((news: any) => {
+    featuredHomePageNews.push({
+      id: news.databaseId,
+      desiredSlug: news.desiredSlug,
+      slug: news.slug,
+      sourceLink: news.customFields.sourceLink,
+      title:
+        getTranslated(news.customFields.title, news.customFields.titleMn, locale) !== null
+          ? getTranslated(news.customFields.title, news.customFields.titleMn, locale)
+          : '',
+      sourceName:
+        getTranslated(news.customFields.sourceName, news.customFields.sourceNameMn, locale) !== null
+          ? getTranslated(news.customFields.sourceName, news.customFields.sourceNameMn, locale)
+          : '',
+      sourceLanguage: news.customFields.sourceLanguage,
+      homePageFeatured: news.customFields.homePageFeatured,
+      categories: news?.categories?.nodes.map((cat: any) => {
+        return {
+          name:
+            getTranslated(cat.categoryCustomFields.name, cat.categoryCustomFields.nameMn, locale) !== null
+              ? getTranslated(cat.categoryCustomFields.name, cat.categoryCustomFields.nameMn, locale)
+              : '',
+        }
+      }),
+      newsContentType: news.customFields.newsContentType,
+      featuredImageSmall: getImage(
+        news.customFields.featuredImage.image?.mediaDetails,
+        news.customFields.featuredImage.imageMn?.mediaDetails,
+        news.featuredImage?.node?.mediaDetails,
+        'medium_large',
+      ),
+      featuredImageBig: getImage(
+        news.customFields.featuredImage.image?.mediaDetails,
+        news.customFields.featuredImage.imageMn?.mediaDetails,
+        news.featuredImage?.node?.mediaDetails,
+        'medium_large',
+      ),
+    })
+  })
+  featuredHomePageNews.reverse()
+  return featuredHomePageNews
 }

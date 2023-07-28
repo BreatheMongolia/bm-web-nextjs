@@ -77,10 +77,10 @@ figure {
   @apply table ml-0 mr-0;
 }
 
-.wp-block-image .alignleft>figcaption,
-.wp-block-image .alignright>figcaption,
-.wp-block-image .aligncenter>figcaption,
-.wp-block-image.is-resized>figcaption {
+.wp-block-image .alignleft > figcaption,
+.wp-block-image .alignright > figcaption,
+.wp-block-image .aligncenter > figcaption,
+.wp-block-image.is-resized > figcaption {
   @apply table-caption;
 
   caption-side: bottom;
@@ -155,7 +155,6 @@ p {
   height: 51px;
 }
 
-
 /* Banner section styles start */
 .banner-slider-wrapper {
   margin-bottom: 70px;
@@ -191,7 +190,7 @@ p {
     height: 36px;
 
     p {
-      font-family: "Open Sans";
+      font-family: 'Open Sans';
       font-style: normal;
       font-weight: 700;
       font-size: 13px;
@@ -270,7 +269,7 @@ p {
   top: 50% !important;
   display: flex !important;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
 }
 
 /* Join Breathe Mongolia styles start */
@@ -278,7 +277,7 @@ p {
   background: #fafaff;
 
   h2 {
-    font-family: "Open Sans";
+    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
     font-size: 26px;
@@ -302,7 +301,7 @@ p {
   }
 
   .slick-dots li button:before {
-    content: "";
+    content: '';
     width: 12px;
     height: 12px;
     background: #ffffff;
@@ -324,7 +323,7 @@ p {
 
   .join_bm_desc {
     p {
-      font-family: "Open Sans";
+      font-family: 'Open Sans';
       font-style: normal;
       font-weight: 500;
       font-size: 16px;
@@ -360,9 +359,9 @@ p {
   }
 
   .text-data-custom {
-    >p {
+    > p {
       display: inline-block;
-      font-family: "Open Sans";
+      font-family: 'Open Sans';
       font-style: normal;
       font-weight: 800;
       font-size: 38px;
@@ -377,8 +376,8 @@ p {
       margin: 0;
     }
 
-    >pre {
-      font-family: "Open Sans";
+    > pre {
+      font-family: 'Open Sans';
       font-style: normal;
       font-weight: 800;
       font-size: 12px;
@@ -398,7 +397,7 @@ p {
     margin-top: 30px;
 
     .title {
-      font-family: "Open Sans";
+      font-family: 'Open Sans';
       font-style: normal;
       font-weight: 600;
       font-size: 18px;
@@ -415,7 +414,7 @@ p {
     }
 
     .pos_link_url {
-      font-family: "Open Sans";
+      font-family: 'Open Sans';
       font-style: normal;
       font-weight: 400;
       font-size: 14px;
@@ -544,7 +543,6 @@ p {
   /* Join Breathe Mongolia styles end */
   // Our-Partners Section custom styles
   .partner-logos-slider-wrapper {
-
     .slick-slide {
       padding: 0 5px;
 
@@ -641,7 +639,7 @@ p {
     overflow: hidden;
     justify-content: space-between;
     align-items: center;
-    font-family: "Open Sans";
+    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
     height: 70px;
@@ -700,7 +698,6 @@ p {
 }
 
 // TakeActionCarousel Styling End
-
 
 /* Our Work Carousel styles start */
 .campaign-slider-wrapper {
@@ -822,7 +819,6 @@ p {
 
 @media (max-width: 767px) {
   .campaign-slider-wrapper {
-
     .slick-slider,
     .slick-list,
     .slick-track,
@@ -877,3 +873,77 @@ p {
 }
 
 /* Our Work Carousel styles end */
+
+//custom
+.custom_dot_green,
+.custom_dot_blue,
+.custom_dot_white {
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  border-radius: 100%;
+  margin-right: 2px;
+}
+.custom_dot_green {
+  background: #226629;
+}
+.custom_dot_blue {
+  background: #3a62c8;
+}
+.custom_dot_white {
+  background: #fff;
+}
+.custom_white_span,
+.custom_green_span,
+.custom_blue_span {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  margin-right: 8px;
+  margin-left: 4px;
+}
+.custom_white_span {
+  color: #ffffff;
+}
+.custom_green_span {
+  color: #226629;
+}
+
+.topic {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  position: absolute;
+  left: -1;
+  top: 5px;
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(30px);
+  border-radius: 0px 4px 4px 0px;
+  min-width: fit-content;
+  width: fit-content;
+  span {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: #3a62c8;
+    margin-right: 5px;
+    &:first-child {
+      text-transform: uppercase;
+    }
+    &:last-child {
+      margin-right: 0px;
+      margin-left: 0px;
+    }
+  }
+}
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  // padding: 1rem;
+  // border-radius: calc(0.25rem - 1px);
+}
