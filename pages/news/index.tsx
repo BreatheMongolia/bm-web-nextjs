@@ -7,11 +7,15 @@ import { News } from 'graphql/generated'
 import { getNewsPosts } from 'lib/graphql-api/queries/news'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Head from 'next/head'
 
 const NewsPage = ({ news }: { news: News[] }) => {
   const filteredNews = [...news]
   return (
     <div>
+      <Head>
+        <title> News - Breathe Mongolia - Clean Air Coalition </title>
+      </Head>
       <PageImageBanner
         bottomText={{
           left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
@@ -60,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map'])),
+      ...(await serverSideTranslations(locale, ['nav', 'footer', 'map', 'news'])),
       news: data,
     },
     revalidate: 60,
