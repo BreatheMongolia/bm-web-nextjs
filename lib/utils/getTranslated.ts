@@ -1,6 +1,11 @@
-export const getTranslated = (eng: string, mng: string): string => {
+export const getTranslated = (eng: string, mng: string, locale?: string): string => {
   // FIXME: language loading
   let language
+  try {
+    language = localStorage.getItem('language') || null
+  } catch (error) {}
+
+  if (locale) language = locale
 
   if (language === null) return mng !== null ? mng : eng
 
