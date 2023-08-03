@@ -11,6 +11,7 @@ import { TakeAction } from 'graphql/generated'
 
 export type TakeActionAll = {
   id: number
+  slug: string
   title: string
   date: any
   typeOfAction: []
@@ -23,6 +24,7 @@ const getTransformedData = (featured: TakeAction[]) => {
   featured.map((takeAction: any) =>
     takeActions.push({
       id: takeAction.databaseId,
+      slug: takeAction?.slug,
       date: takeAction.dateGmt,
       title:
         getTranslated(takeAction.customFields.title, takeAction.customFields.titleMn) !== null
@@ -46,6 +48,7 @@ const getLatestTakeActions = (latest: TakeAction[]) => {
   latest.map((takeAction: any) => {
     takeActions.push({
       id: takeAction?.node.databaseId,
+      slug: takeAction?.node.slug,
       date: takeAction?.node.dateGmt,
       title:
         getTranslated(takeAction?.node.customFields?.title, takeAction?.node.customFields?.titleMn) !== null

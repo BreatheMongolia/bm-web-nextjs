@@ -4,7 +4,7 @@ import { TakeAction, TakeActionIdType } from 'graphql/generated'
 export async function getTakeActionsDetail(
   id: string,
   idType: TakeActionIdType = TakeActionIdType.Slug,
-): Promise<Page> {
+): Promise<TakeAction> {
   const data = await fetchAPI(
     `query GetTakeActionById($id: ID!, $idType: TakeActionIdType!) {
       takeAction(id: $id,idType: $idType) {
@@ -77,6 +77,7 @@ const TakeActionGQLQuerySections = {
     featuredTakeActionsLanding {
       ... on TakeAction {
         databaseId
+        slug
         dateGmt
         customFields {
           titleMn
@@ -98,6 +99,7 @@ const TakeActionGQLQuerySections = {
   `,
   takeAction: `
       databaseId
+      slug
       date
       dateGmt
       customFields {

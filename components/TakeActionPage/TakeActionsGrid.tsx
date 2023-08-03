@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { H2 } from 'components/generic/Typography'
 import { useTranslation } from 'next-i18next'
-import { getTranslated } from 'lib/utils/getTranslated'
 import Link from 'next/link'
 import PaginationComponent from '../generic/PaginationComponent'
-import Desktop from '../generic/Desktop'
-import Mobile from '../generic/Mobile'
+import Desktop from '../Desktop'
+import Mobile from '../Mobile'
+import TakeActionTile from '../Cards/TakeActionTile'
 
 export type TakeActionAll = {
   id: number
+  slug: string
   title: string
   date: any
   typeOfAction: []
@@ -34,8 +35,6 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
   //   }
   //   willMount.current = false
   // }
-
-  const truncateByLength = (input: string, titleLength: number) => input
 
   const truncate = (input: string) => (input?.length > 95 ? `${input.substring(0, 95)}...` : input)
 
@@ -92,13 +91,11 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
   }
 
   return (
-    <div className="container mx-auto flex flex-col px-30">
+    // <div className="ta-actions">
+    <div className="container mx-auto flex flex-col px-30 ta-actions">
+      <H2 title={t('actionList.title')} />
 
-      <H2
-        title={t('actionList.title')}
-      />
-
-      <div className="flex flex-wrap flex-row items-start py-4">
+      <div className="ta-categories">
         <span className={'ta-category ' + (!filteredCategories.length ? 'selected' : '')} onClick={() => showAll()}>
           {t('actionList.categoryAll')}
         </span>
@@ -114,56 +111,19 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
       </div>
 
       <Desktop>
-        <div className="grid grid-cols-4 gap-4 col-start-1 col-span-2 row-span-2">
-          {getCurrentPost().map((x, idx) => (
-            <div key={idx}>
-              {x?.featuredImage !== null && (
-                <React.Fragment>
-                  <div
-                    className="take-action-carousel"
-                    onClick={() => window.open('/action/' + x.id)}
-                  >
-                    <img
-                      className="card-img-top take-action-img"
-                      src={
-                        x?.featuredImage !== null
-                          ? x?.featuredImage
-                          : ''
-                      }
-                    />
-                    <div className="take-action-info">
-                      <div className="take-action-title">
-                        {x.title !== null ? x.title : ''}
-                      </div>
-                      <div className="read-more-arrow ">
-                        <Link href={`/action/${x.id}`}>
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <rect width="24" height="24" rx="12" fill="#F4AC3D" />
-                            <path
-                              d="M15.6674 12.6249L16.334 12L11.0005 7L9.66732 8.24978L13.6668 12L9.66732 15.7502L11.0005 17L15.6674 12.6249Z"
-                              fill="#FAFAFF"
-                            />
-                          </svg>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </React.Fragment>
-              )}
-            </div>
+        <div className="actions-grid">
+          {getCurrentPost().map((takeAction, idx) => (
+            <TakeActionTile
+              // key={idx}
+              id={takeAction.id}
+              slug={takeAction.slug}
+              title={takeAction.title}
+              featuredImage={takeAction.featuredImage}
+              index={idx}
+              pageNumberLimit={pageNumberLimit}
+            />
           ))}
-          {/* <div className={'action-item more'}>
-            <div className="action-title">
-              <h2>{t('actionList.soon')}</h2>
-            </div>
-          </div> */}
-        </div> 
+        </div>
         {takeAction.length > 19 && (
           <div className="parent-pagination">
             <PaginationComponent
@@ -177,23 +137,18 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
       </Desktop>
       <Mobile>
         <div className="action-slider-items">
-          {getCurrentPost().map((takeAction: any, index: number) => (
-            <div
-              key={index}
-              className="action-slider-item"
-              onClick={() => (<Link href={'/action/' + takeAction.id}></Link>)}
-            >
-              <div className="action-right">
-                <img src={takeAction.featuredImage} />
-              </div>
-              <div className="action-left">
-                {takeAction.typeOfAction && takeAction.typeOfAction.length > 0 && <h4>{takeAction.typeOfAction[0]}</h4>}
-                <h2>{takeAction.title}</h2>
-                <p>{truncate(takeAction.excerpt)}</p>
-                <div className="action-button">
-                  <Link href={`/action/${takeAction.id}`}>{t('actionList.button')}</Link>
+          {getCurrentPost().map((takeAction, idx) => (
+            <div key={idx} className="action-slider-item">
+              <Link href={`/take-actions/${takeAction.slug}`}>
+                <div className="action-right">
+                  <img src={takeAction.featuredImage} />
                 </div>
-              </div>
+                <div className="action-left">
+                  {takeAction.typeOfAction && takeAction.typeOfAction.length > 0 && <h4>{takeAction.typeOfAction}</h4>}
+                  <h2>{takeAction.title}</h2>
+                  {/* <p>{truncate(takeAction.excerpt)}</p> */}
+                </div>
+              </Link>
             </div>
           ))}
         </div>
