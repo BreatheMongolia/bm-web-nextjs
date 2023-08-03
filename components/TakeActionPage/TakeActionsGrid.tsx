@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 import { H2 } from 'components/generic/Typography'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
-import PaginationComponent from '../generic/PaginationComponent'
-import Desktop from '../Desktop/index'
-import Mobile from '../Mobile/index'
-import TakeActionTile from '../Cards/TakeActionTile'
+import PaginationComponent from "../generic/PaginationComponent"
+import Desktop from "../Desktop/index"
+import Mobile from "../Mobile/index"
+import TakeActionTile from "../Cards/TakeActionTile"
 
 export type TakeActionAll = {
   id: number
