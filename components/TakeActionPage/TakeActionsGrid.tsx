@@ -3,8 +3,8 @@ import { H2 } from 'components/generic/Typography'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import PaginationComponent from '../generic/PaginationComponent'
-import Desktop from '../Desktop'
-import Mobile from '../Mobile'
+import Desktop from '../Desktop/index'
+import Mobile from '../Mobile/index'
 import TakeActionTile from '../Cards/TakeActionTile'
 
 export type TakeActionAll = {
@@ -91,7 +91,6 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
   }
 
   return (
-    // <div className="ta-actions">
     <div className="container mx-auto flex flex-col px-30 ta-actions">
       <H2 title={t('actionList.title')} />
 
@@ -114,7 +113,7 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
         <div className="actions-grid">
           {getCurrentPost().map((takeAction, idx) => (
             <TakeActionTile
-              // key={idx}
+              key={idx}
               id={takeAction.id}
               slug={takeAction.slug}
               title={takeAction.title}
