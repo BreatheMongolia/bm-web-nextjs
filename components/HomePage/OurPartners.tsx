@@ -53,7 +53,7 @@ export const OurPartners = ({
 
   return (
     <div className="our-partners">
-      <H2 title={title[i18n.language]} />
+      <H2 title={title} />
       <div className="partner-logos-slider-wrapper">
         <Slider {...settings}>
           {partnerLogos.map((x, idx) => (
