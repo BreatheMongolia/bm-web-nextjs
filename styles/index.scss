@@ -371,7 +371,7 @@ p {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-fill-color: transparent;
+      // text-fill-color: transparent;
       margin: 0;
     }
 
@@ -387,7 +387,7 @@ p {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-fill-color: transparent;
+      // text-fill-color: transparent;
       margin: 0;
     }
   }
@@ -575,7 +575,24 @@ p {
   }
 }
 
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: 4px;
+  border: none;
+}
+
+.card-img-top {
+  width: 100%;
+}
+
 // TakeActionCarousel Styling Beginning
+
 .take-action-carousel {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -871,4 +888,4 @@ p {
   }
 }
 
-/* Our Work Carousel styles end */
+

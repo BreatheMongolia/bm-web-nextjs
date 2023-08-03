@@ -1,3 +1,57 @@
 {
-  "additionalTitle": "Нэмэлт мэдээлэл"
+  "supportUs": {
+    "waysToDonate": "Мөнгөн хандив өгөх аргууд",
+    "donateDirectlyOn": "дээр хандив өгөх",
+    "donate": "Хандивлах",
+    "otherWaysToDonate": "Хандив өргөх бусад аргууд",
+    "startBirthdayFundraiser": "Facebook дээр төрсөн өдрийн хандивын аян эхлүүлээpэй:",
+    "facebookStepOnePart1": "Манай Фэйсбүүк хуудасны",
+    "facebookStepOnePart2": "рүү орнo",
+    "facebookStepTwo": "Create a fundraiser -> Raise Money товчин дээр дарна",
+    "facebookStepThree": "Мөнгөн дүнгээ тавиад, найзуудыгаа уриалаарай",
+    "addToSmileAmazon": "Амазоны",
+    "wontCostACent": "-р худалдаа хийж биднийг дэмжихэд таниас ямар ч зардал гарахгүй.",
+    "amazonSmileStepOne": "Get Started товчийг даран “Breathe Mongolia” гэж бичээд",
+    "amazonSmileStepTwo": "Breathe Mongolia - Clean Air Coalition-г олон сонгоорой",
+    "amazonSmileStepThreePart1": "Дандаа ",
+    "amazonSmileStepThreePart2": "-p худалдаа хийгээрэй",
+    "andBreak": "БAC",
+    "donateThroughEmployer": "Таны бидэнд өгөх хандивтай дүйцэхүйц хандивыг таны ажил олгогч нэмж өгөх боломжтой. Мөн таны ажил олгогч бидэнд шууд тэтгэлэг өгч болно. Манай байгууллага Benevity болон YouCause дээр бүртгэлтэй.",
+    "volunteerForUs": "Сайн дурын ажил",
+    "currentVolunteersNeeded": "Одоогоор хэрэгцээтэй байгаа сайн дурын ажлууд:",
+    "viewPosition": "Ажлын байр харах"
+  },
+  "pledge": {
+    "button": "Би амлаж байна",
+    "pledged": "Баяр хүргэе!",
+    "i": "Би",
+    "pledgeTo": "Би <1>{{title}}</1> гэж амлаж байна!",
+    "congrats": "Баяр хүргэе! Таны амлалт:",
+    "tapToTakePledge": "Би амлаж байна дээр дарна уу",
+    "joined": "Өөр {{totalPledge}} хүн энэ амлалтыг өгсөн байна!",
+    "share": "Амлалтаа бусадтай хуваалцаарай!",
+    "mobileTitle": "Амлалт өгөн бусадтай хуваалцаарай:"
+  },
+  "additionalResources": {
+    "title": "Нэмэлт мэдээлэл"
+  },
+  "actionList": {
+    "title": "Та юу хийж чадах вэ?",
+    "soon": "Нэмэлт мэдээлэл удахгүй орно",
+    "button": "Дэлгэрэнгүй",
+    "categoryAll": "Бүгд"
+  },
+  "userFeedback": {
+    "question": "Танд энэ мэдээлэл хэрэг болсон уу?",
+    "thankYou": "Санал хүсэлтээ илэрхийлсэнд баярлалаа!",
+    "yes": "Тийм",
+    "no": "Үгүй"
+  },
+  "faq": {
+    "title": "Мэдээлэл",
+    "mobileTitle": "Нийтлэг асуултууд",
+    "tabTitle1": "Хаанаас авах",
+    "tabTitle2": "Хаанаас авах 2",
+    "tabTitle3": "Хаанаас авах 3"
+  }
 }
