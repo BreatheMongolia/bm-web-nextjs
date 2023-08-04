@@ -2,7 +2,7 @@ import React from 'react'
 import { H2 } from 'components/generic/Typography'
 import { Page_Customfields_PartnersLogos } from 'graphql/generated'
 import Slider from 'react-slick'
-import { useTranslation } from 'next-i18next'
+import { getTranslated } from 'lib/utils/getTranslated'
 
 export const OurPartners = ({
   title,
@@ -11,7 +11,6 @@ export const OurPartners = ({
   title: { en: string; mn: string }
   partnerLogos: Page_Customfields_PartnersLogos[]
 }) => {
-  const { i18n } = useTranslation('home')
 
   // Styling the settings for partner-logo images within Slider
   const settings = {
@@ -53,7 +52,7 @@ export const OurPartners = ({
 
   return (
     <div className="our-partners">
-      <H2 title={title[i18n.language]} />
+      <H2 title={getTranslated(title.en, title.mn)} />
       <div className="partner-logos-slider-wrapper">
         <Slider {...settings}>
           {partnerLogos.map((x, idx) => (
