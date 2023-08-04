@@ -14,6 +14,7 @@ import { getTranslated } from 'lib/utils/getTranslated'
 import BreadCrumb from 'components/NewsPage/BreadCrumb'
 import ShareButton from 'components/NewsPage/ShareButton'
 import LatestNews from 'components/NewsPage/LatestNews'
+import { H2 } from 'components/generic/Typography'
 
 interface NewsPostPageProps {
   post: any
@@ -33,7 +34,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
 
   const breadCrumbItems = [
     { id: 1, item: t('title') },
-    { id: 2, item: 'post.title' },
+    { id: 2, item: post.title },
   ]
 
   return (
@@ -58,7 +59,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
               <div className="news-main-content">
                 <div className="article_news">
                   {post.categories && (
-                    <div className="category_news">
+                    <div className="category_news mb-5">
                       {post.categories?.map((data: any) => (
                         <div key={Math.random()}>
                           <span className="custom_dot_green"></span>
@@ -67,7 +68,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
                       ))}
                     </div>
                   )}
-                  <h2 className="article_header">{post.title}</h2>
+                  <H2 title={post.title} />
                   <div className="subSection">
                     <div className="authorAndDate">
                       <div className="authorsSection">
@@ -104,8 +105,8 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
                       bottom={true}
                     />
                   </div>
-                  <LatestNews data={getLatest} />
                 </div>
+                <LatestNews data={getLatest} />
               </div>
             </div>
           </article>
@@ -258,7 +259,6 @@ function getLatestNews(data: any[], locale: string) {
     })
   })
 
-  console.log(breathMongoliaNews)
   return breathMongoliaNews
 }
 

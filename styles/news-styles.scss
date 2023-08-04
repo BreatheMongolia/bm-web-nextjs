@@ -385,6 +385,9 @@
       font-size: 18px;
       line-height: 130%;
     }
+    p {
+      margin: 1em 0;
+    }
     .alignleft {
       float: left;
       margin-right: 25px;
@@ -429,6 +432,10 @@
       &.alignleft {
         float: left;
         margin-right: 25px;
+
+        img {
+          margin-bottom: 20px;
+        }
       }
       &.alignright {
         float: right;
