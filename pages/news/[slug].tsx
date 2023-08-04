@@ -119,7 +119,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
   )
 }
 
-export const getStaticProps: GetStaticProps<any> = async ({ params, locale }) => {
+export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
   const post = await getNewsFull(params?.slug)
   const bannerImage = await getNewsBannerImages('/news')
   const bannerText = await getBanner('/')

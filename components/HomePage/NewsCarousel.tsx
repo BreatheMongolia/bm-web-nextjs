@@ -5,13 +5,9 @@ import { useTranslation } from 'next-i18next'
 import Slider from 'react-slick'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import Arrow from 'components/generic/Arrow'
-import { getImage } from 'lib/utils/getImage'
-import { getTranslated } from 'lib/utils/getTranslated'
 
 export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields_FeaturedNews[] }) => {
-  const { t, i18n } = useTranslation('home')
-
-  const news = getFeaturedHomePageNews(featuredNews, i18n.language)
+  const { t } = useTranslation('home')
   const settings = {
     dots: false,
     infinite: false,
@@ -77,59 +73,10 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
           </Arrow>
         }
       >
-        {news.map((data: News, idx) => (
+        {featuredNews.map((data: News, idx) => (
           <NewsCard key={idx} news={data} />
         ))}
       </Slider>
     </div>
   )
-}
-
-function getFeaturedHomePageNews(featuredNewsNode: any[], locale) {
-  if (featuredNewsNode.length === 0) {
-    return []
-  }
-
-  const featuredHomePageNews: any[] = []
-  featuredNewsNode.map((news: any) => {
-    featuredHomePageNews.push({
-      id: news.databaseId,
-      desiredSlug: news.desiredSlug,
-      slug: news.slug,
-      sourceLink: news.customFields.sourceLink,
-      title:
-        getTranslated(news.customFields.title, news.customFields.titleMn, locale) !== null
-          ? getTranslated(news.customFields.title, news.customFields.titleMn, locale)
-          : '',
-      sourceName:
-        getTranslated(news.customFields.sourceName, news.customFields.sourceNameMn, locale) !== null
-          ? getTranslated(news.customFields.sourceName, news.customFields.sourceNameMn, locale)
-          : '',
-      sourceLanguage: news.customFields.sourceLanguage,
-      homePageFeatured: news.customFields.homePageFeatured,
-      categories: news?.categories?.nodes.map((cat: any) => {
-        return {
-          name:
-            getTranslated(cat.categoryCustomFields.name, cat.categoryCustomFields.nameMn, locale) !== null
-              ? getTranslated(cat.categoryCustomFields.name, cat.categoryCustomFields.nameMn, locale)
-              : '',
-        }
-      }),
-      newsContentType: news.customFields.newsContentType,
-      featuredImageSmall: getImage(
-        news.customFields.featuredImage.image?.mediaDetails,
-        news.customFields.featuredImage.imageMn?.mediaDetails,
-        news.featuredImage?.node?.mediaDetails,
-        'medium_large',
-      ),
-      featuredImageBig: getImage(
-        news.customFields.featuredImage.image?.mediaDetails,
-        news.customFields.featuredImage.imageMn?.mediaDetails,
-        news.featuredImage?.node?.mediaDetails,
-        'medium_large',
-      ),
-    })
-  })
-  featuredHomePageNews.reverse()
-  return featuredHomePageNews
 }

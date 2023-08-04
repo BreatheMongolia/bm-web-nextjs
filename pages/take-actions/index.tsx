@@ -8,6 +8,7 @@ import { useTranslation } from 'next-i18next'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
 import { TakeAction } from 'graphql/generated'
+import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
 export type TakeActionAll = {
   id: number
@@ -18,7 +19,24 @@ export type TakeActionAll = {
   featuredImage: string
 }
 
-const getTransformedData = (featured: TakeAction[]) => {
+const getTransformedBannerData = (data: any, locale: string) => {
+  return {
+    bannerTextLeft: getTranslated(data?.bannerTextLeft, data?.bannerTextLeftMn, locale),
+    bannerTextRight: data?.bannerTextRight.map((text: any) => {
+      return {
+        textContent: getTranslated(text?.categoryText, text?.categoryTextMn, locale),
+      }
+    }),
+    mediaItemUrl:
+      getTranslated(data?.takeActionsBanner?.mediaItemUrl, data?.takeActionsBannerMn?.mediaItemUrl, locale) !== null &&
+      getTranslated(data?.takeActionsBanner?.mediaItemUrl, data?.takeActionsBannerMn?.mediaItemUrl, locale) !==
+        undefined
+        ? getTranslated(data?.takeActionsBanner?.mediaItemUrl, data?.takeActionsBannerMn?.mediaItemUrl, locale)
+        : [],
+  }
+}
+
+const getTransformedData = (featured: TakeAction[], locale: string) => {
   const takeActions: TakeActionAll[] = []
 
   featured.map((takeAction: any) =>
@@ -27,12 +45,12 @@ const getTransformedData = (featured: TakeAction[]) => {
       slug: takeAction?.slug,
       date: takeAction.dateGmt,
       title:
-        getTranslated(takeAction.customFields.title, takeAction.customFields.titleMn) !== null
-          ? getTranslated(takeAction.customFields.title, takeAction.customFields.titleMn)
+        getTranslated(takeAction.customFields.title, takeAction.customFields.titleMn, locale) !== null
+          ? getTranslated(takeAction.customFields.title, takeAction.customFields.titleMn, locale)
           : '',
       typeOfAction: takeAction.customFields.typeOfAction?.map(
         (type: { customFields: { name: string; nameMn: string } }) =>
-          getTranslated(type.customFields.name, type.customFields.nameMn),
+          getTranslated(type.customFields.name, type.customFields.nameMn, locale),
       ),
       featuredImage: takeAction.featuredImage?.node.mediaItemUrl,
     }),
@@ -67,12 +85,8 @@ const getLatestTakeActions = (latest: TakeAction[]) => {
   return takeActions
 }
 
-const TakeActionsPage = ({ latest, featured }) => {
-  const { t } = useTranslation()
-  const router = useRouter()
-  const { i18n } = useTranslation()
-
-  const featuredTakeActions = getTransformedData(featured)
+const TakeActionsPage = ({ latest, featured, banner, locale }) => {
+  const featuredTakeActions = getTransformedData(featured, locale)
   const latestTakeActions = getLatestTakeActions(latest)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
   takeActions = takeActions.filter(
@@ -82,9 +96,10 @@ const TakeActionsPage = ({ latest, featured }) => {
   return (
     <div>
       <PageImageBanner
+        imageUrls={banner.mediaItemUrl}
         bottomText={{
-          left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
-          right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
+          left: banner.bannerTextLeft,
+          right: getBannerTextRight(banner.bannerTextRight, 'textContent'),
         }}
       />
       <div className="container mx-auto flex flex-col gap-20">
@@ -99,14 +114,17 @@ const TakeActionsPage = ({ latest, featured }) => {
 export default TakeActionsPage
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const featured = await getFeaturedTakeActions('/')
+  const featured: any = await getFeaturedTakeActions('/')
   const latest = await getTakeActionsLatest()
+  const dataBanner: any = featured ? getTransformedBannerData(featured, locale) : []
 
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'takeAction'])),
-      featured,
+      featured: featured.featuredTakeActionsLanding,
+      banner: dataBanner,
       latest,
+      locale,
     },
     revalidate: 60,
   }
