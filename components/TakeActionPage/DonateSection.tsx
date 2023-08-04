@@ -1,5 +1,13 @@
+import React, { useState } from 'react'
+import { useTranslation } from 'next-i18next'
+import Link from 'next/link'
+import Desktop from '../Desktop/index'
+import Mobile from '../Mobile/index'
+import { urls } from 'lib/utils/urls'
+import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+
 export const DonateSection = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('takeAction')
   const [isNavVisible, setNavVisible] = useState(false)
   const donateLinks = () => {
     return (

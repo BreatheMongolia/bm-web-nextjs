@@ -55,12 +55,12 @@ export const Footer = () => {
           <div className="footer_link_section ">
             {linkSections.map((x, idx) => {
               return (
-                <div key={idx} className="column_style">
+                <div key={'footer' + idx} className="column_style">
                   <h2 className="font-bold text-lg min-w-max"> {x.title} </h2>
                   <div className="flex flex-col text-sm font-semibold my-7">
                     {x.urls.map((url, i) => {
                       return (
-                        <Link href={url.url} target={url.target} key={i} className="hover:text-bm-blue my-2">
+                        <Link href={url.url} target={url.target} key={'url' + i} className="hover:text-bm-blue my-2">
                           {url.title}
                         </Link>
                       )
@@ -74,10 +74,12 @@ export const Footer = () => {
               <div className=" social_icons_div flex justify-between w-[450px] pb-5">
                 {socialUrls.map((x, idx) => {
                   return (
-                    <div className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
+                    <div
+                      key={'social' + idx}
+                      className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full "
+                    >
                       <SocialIcon
                         url={x}
-                        key={idx}
                         target="_blank"
                         bgColor="transparent"
                         fgColor="#3174D0"
