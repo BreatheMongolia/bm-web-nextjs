@@ -211,3 +211,33 @@ export async function getHomePage(id: string, idType: PageIdType = PageIdType.Ur
 
   return data.page
 }
+
+export async function getVolunteers(): Promise<Page> {
+  const data = await fetchAPI(
+    `query volunteerPositions {
+        volunteerPositions(first: 5) {
+          edges {
+            node {
+              content
+              customFields {
+                link {
+                  title
+                  url
+                  target
+                }
+                position
+                positionMn
+              }
+              databaseId
+              date
+              title
+            }
+          }
+        }
+      }
+        `,
+    {},
+  )
+
+  return data.volunteerPositions.edges
+}

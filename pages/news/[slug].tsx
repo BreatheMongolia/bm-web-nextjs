@@ -48,8 +48,6 @@ export default function NewsPostPage({ post }: NewsPostPageProps) {
 }
 
 export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
-  console.log('getStaticProps')
-  console.log(params?.slug)
   const post = await getNewsFull(params?.slug)
   return {
     props: {
@@ -68,8 +66,7 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
       paths.push(`/news/${x.desiredSlug || x.slug}`)
     }
   })
-  console.log('getStaticPaths')
-  console.log(paths)
+
   return {
     paths,
     fallback: true,

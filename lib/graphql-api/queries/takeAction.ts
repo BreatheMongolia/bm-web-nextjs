@@ -37,7 +37,10 @@ export async function getTakeActionsLatest() {
   return data.takeActions?.edges || []
 }
 
-export async function getFeaturedTakeActions(id: string, idType: TakeActionIdType = TakeActionIdType.Uri): Promise<TakeAction> {
+export async function getFeaturedTakeActions(
+  id: string,
+  idType: TakeActionIdType = TakeActionIdType.Uri,
+): Promise<TakeAction> {
   const data = await fetchAPI(
     `query page($id: ID!, $idType: PageIdType!) {
           page(id: $id, idType: $idType) {
@@ -51,7 +54,7 @@ export async function getFeaturedTakeActions(id: string, idType: TakeActionIdTyp
       variables: { id, idType },
     },
   )
-  return data.page?.customFields?.featuredTakeActionsLanding || []
+  return data.page?.customFields || []
 }
 
 export async function getTakeActionSlugs(): Promise<TakeAction[]> {
@@ -95,6 +98,18 @@ const TakeActionGQLQuerySections = {
           }
         }
       }
+    }
+    bannerTextLeft
+    bannerTextLeftMn
+    bannerTextRight {
+      categoryText
+      categoryTextMn
+    }
+    takeActionsBanner {
+      mediaItemUrl
+    }
+    takeActionsBannerMn {
+      mediaItemUrl
     }
   `,
   takeAction: `

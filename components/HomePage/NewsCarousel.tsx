@@ -8,48 +8,48 @@ import Arrow from 'components/generic/Arrow'
 
 export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields_FeaturedNews[] }) => {
   const { t } = useTranslation('home')
-const settings = {
-  dots: false,
-  infinite: false,
-  speed: 800,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-  autoplay: false,
-  autoplaySpeed: 5000,
-  cssEase: "linear",
-  adaptiveHeight: true,
-  centerMode: false,
-  variableWidth: true,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        initialSlide: 1,
-        infinite: false
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false,
-        centerMode: false
-      }
-    }
-  ]
-}
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: false,
+    autoplaySpeed: 5000,
+    cssEase: 'linear',
+    adaptiveHeight: true,
+    centerMode: false,
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          centerMode: false,
+        },
+      },
+    ],
+  }
   return (
     <div className="news-carousel-section">
       <H2
@@ -60,22 +60,21 @@ const settings = {
           url: '/news',
         }}
       />
-        <Slider
+      <Slider
         {...settings}
         prevArrow={
-           <Arrow check={0} classes="prev-gray-arrow">
+          <Arrow check={0} classes="prev-gray-arrow">
             <ChevronLeftIcon className="w-8 h-8 text-white" />
           </Arrow>
         }
         nextArrow={
-            <Arrow check={featuredNews?.length - 3} classes="next-gray-arrow">
+          <Arrow check={featuredNews?.length - 3} classes="next-gray-arrow">
             <ChevronRightIcon className="w-8 h-8 text-white" />
           </Arrow>
-
         }
       >
         {featuredNews.map((data: News, idx) => (
-          <NewsCard key={idx} news={data}          />
+          <NewsCard key={idx} news={data} />
         ))}
       </Slider>
     </div>
