@@ -114,6 +114,7 @@ export default function Index({
     </div>
   )
 }
+
 // This calls the API first and then loads the page
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')

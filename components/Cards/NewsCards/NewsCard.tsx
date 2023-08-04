@@ -1,6 +1,4 @@
 import { ArrowTopRightOnSquareIcon, PlayCircleIcon } from '@heroicons/react/24/solid'
-import { News } from 'graphql/generated'
-import { getImage } from 'lib/utils/getImage'
 import router from 'next/router'
 import { TbPointFilled } from 'react-icons/tb'
 

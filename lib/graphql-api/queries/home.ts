@@ -225,6 +225,10 @@ export async function getBanner(id: string, idType: PageIdType = PageIdType.Uri)
               bannerTextRight {
                 categoryText
                 categoryTextMn
+              }
+           }
+        }
+    }
                 `,
     {
       variables: { id, idType },
