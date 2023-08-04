@@ -11,11 +11,14 @@ import Arrow from 'components/generic/Arrow'
 import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
 import SliderRightArrow from 'assets/icons/SliderRightArrow'
 import { getTranslated } from 'lib/utils/getTranslated'
+
 export const OurWorkCarousel = ({
   title,
   campaigns,
+  locale,
 }: {
-  title: { en: string; mn: string }
+  title: string
+  locale: string
   campaigns: Page_Customfields_CampaignAndOurWorkSlider[]
 }) => {
   const { t } = useTranslation('home')
@@ -76,7 +79,7 @@ export const OurWorkCarousel = ({
   return (
     <div className="campaign-slider-wrapper custom-sections-gap">
       <H2
-        title={getTranslated(title.en, title.mn)}
+        title={title}
         trailingLineColor="yellow"
         extraButton={{
           title: t('campaignWork.seeMore'),
@@ -114,12 +117,18 @@ export const OurWorkCarousel = ({
               <div className="campaign-content">
                 <div className="campaignCategory">
                   <span className="custom_dot_green"></span>
-                  <span className="custom_green_span"> {campaign.campaignCategoryTextMn}</span>
+                  <span className="custom_green_span">
+                    {getTranslated(campaign.campaignCategoryText, campaign.campaignCategoryTextMn, locale)}
+                  </span>
                 </div>
                 {/* FIXME: there is a hydration error below */}
-                <h3 className="campaign-title">{campaign.campaignTitleMn}</h3>
+                <h3 className="campaign-title">
+                  {getTranslated(campaign.campaignTitle, campaign.campaignTitleMn, locale)}
+                </h3>
                 {campaign?.campaignDescription && (
-                  <div className="campaign-desc">{parse(campaign.campaignDescriptionMn)}</div>
+                  <div className="campaign-desc">
+                    {parse(getTranslated(campaign.campaignDescription, campaign.campaignDescriptionMn, locale))}
+                  </div>
                 )}
                 <div className="campaign-date">
                   <span>{formatMyDate(campaign.campaignDate)} </span>
