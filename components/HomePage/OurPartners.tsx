@@ -54,7 +54,7 @@ export const OurPartners = ({
 
   return (
     <div className="our-partners">
-      <H2 title={getTranslated(title.en, title.mn)} />
+      <H2 title={getTranslated(title.en, title.mn, locale)} />
       <div className="partner-logos-slider-wrapper">
         <Slider {...settings}>
           {partnerLogos.map((x, idx) => (
