@@ -11,20 +11,25 @@ import {
   Page_Customfields_CountriesInfoText,
   Page_Customfields_JoinBreatheMongoliaImageSlider,
 } from 'graphql/generated'
+import { getTranslated } from 'lib/utils/getTranslated'
+import { useTranslation } from 'next-i18next'
 
 export const JoinBMSection = ({
   title,
+  locale,
   descriptionHtml,
   slider,
   countriesInfoText,
+  volunteers,
 }: {
+  locale: string
   title: { en: string; mn: string }
   descriptionHtml: { en: string; mn: string }
   slider: Page_Customfields_JoinBreatheMongoliaImageSlider[]
   countriesInfoText: Page_Customfields_CountriesInfoText[]
+  volunteers: any
 }) => {
-  // TODO: Slider for the slider images
-
+  const { t } = useTranslation('home')
   const settings = {
     dots: true,
     infinite: false,
@@ -63,30 +68,13 @@ export const JoinBMSection = ({
     ],
   }
 
-  const volunteersTemp = [
-    {
-      title: 'Хандив хариуцсан менежер',
-      url: 'https://www.notion.so/breathemongolia/Fundraising-Manager-3c5a7d35aaad4b92939eaab909d270e4',
-    },
-    {
-      title: 'Сайн дурын ажлын байрны анкет',
-      url: 'https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u',
-    },
-  ]
-
-  const descriptionInMng = descriptionHtml.mn.substring(0, 326) + '.' + descriptionHtml.mn.substring(326)
-
-  // TODO: show countries info section
-  // TODO: Show volunteer positions section
-  // - Blocked: By API call for volunteer position, but show the UI for now
-
-  // console.log(`This is in console: ${descriptionHtml.mn}, ${descriptionHtml.mn.length}`);
-  // TEMP: object to test the Volunteers temp section
-
   return (
     <div className="join-bm-slider-wrapper custom-sections-gap">
       <div className="home-main-content">
-        <H2 title={title.mn} descriptionHtml={descriptionInMng} />
+        <H2
+          title={getTranslated(title.en, title.mn, locale)}
+          descriptionHtml={getTranslated(descriptionHtml.en, descriptionHtml.mn, locale)}
+        />
         <div className="join_bm_carousel_sec">
           <div className="membersPhoto">
             <Slider {...settings}>
@@ -103,32 +91,38 @@ export const JoinBMSection = ({
                 <div className="country_count_col" key={x.infoIcon.databaseId}>
                   <div className="text-center country-text">
                     <img src={x.infoIcon.mediaItemUrl} alt="" />
-                    {x.customTextMn && <div className="text-data-custom">{parse(x.customTextMn)}</div>}
+                    {x.customTextMn && (
+                      <div className="text-data-custom">
+                        {parse(getTranslated(x.customText, x.customTextMn, locale))}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
 
             <div className="opportunity-section">
-              {/* <p className="title">{t("home.joinBm.opportunities")}</p> */}
-              Нээлттэй ажлын байр
+              <p className="title">{t('joinBm.opportunities')}</p>
               <ul className="position-list">
-                {volunteersTemp.map((x, idx) => (
-                  <li className="position_list_el" key={idx}>
-                    <a className="pos_link_url" href={x.url} target="_blank">
-                      {/* {getTranslated(
+                {volunteers?.map((volunteerPos: any) => (
+                  <li className="position_list_el" key={volunteerPos?.node?.databaseId}>
+                    <a className="pos_link_url" href={volunteerPos?.node?.customFields?.link?.url} target="_blank">
+                      {getTranslated(
                         volunteerPos?.node?.customFields?.position,
-                        volunteerPos?.node?.customFields?.positionMn
-                      )} */}
-                      {x.title}
+                        volunteerPos?.node?.customFields?.positionMn,
+                        locale,
+                      )}
                     </a>
                   </li>
                 ))}
               </ul>
               <div className="apply_button_container">
-                <a className="apply_now_button" href="https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u" target="_blank">
-                  {/* {t("home.joinBm.applyNow")} */}
-                  АНКEТ БӨГЛӨХ
+                <a
+                  className="apply_now_button"
+                  href="https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u"
+                  target="_blank"
+                >
+                  {t('joinBm.applyNow')}
                 </a>
               </div>
             </div>

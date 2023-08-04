@@ -17,26 +17,10 @@ export type TakeActionAll = {
 }
 
 export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] }) => {
-  // console.log(takeAction)
-
   const { t } = useTranslation('takeAction')
   const [currentPage, setCurrentPage] = useState(1)
   const [pageNumberLimit, setPageNumberLimit] = useState(18)
-  // const [width, setWidth] = useState(window.innerWidth)
   const [filteredCategories, setFilteredCategories] = useState<string[]>([])
-
-  // if (willMount.current) {
-  //   if (window.innerWidth >= 768 && window.innerWidth <= 1063) {
-  //     setPageNumberLimit(12)
-  //   } else if (window.innerWidth <= 767) {
-  //     setPageNumberLimit(4)
-  //   } else {
-  //     setPageNumberLimit(18)
-  //   }
-  //   willMount.current = false
-  // }
-
-  const truncate = (input: string) => (input?.length > 95 ? `${input.substring(0, 95)}...` : input)
 
   const getActionCategories = () => {
     const newActionCategories: any = []

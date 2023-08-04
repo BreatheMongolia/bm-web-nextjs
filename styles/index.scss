@@ -888,4 +888,78 @@ p {
   }
 }
 
+/* Our Work Carousel styles end */
 
+//custom
+.custom_dot_green,
+.custom_dot_blue,
+.custom_dot_white {
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  border-radius: 100%;
+  margin-right: 2px;
+}
+.custom_dot_green {
+  background: #226629;
+}
+.custom_dot_blue {
+  background: #3a62c8;
+}
+.custom_dot_white {
+  background: #fff;
+}
+.custom_white_span,
+.custom_green_span,
+.custom_blue_span {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  margin-right: 8px;
+  margin-left: 4px;
+}
+.custom_white_span {
+  color: #ffffff;
+}
+.custom_green_span {
+  color: #226629;
+}
+
+.topic {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  position: absolute;
+  left: -1;
+  top: 5px;
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(30px);
+  border-radius: 0px 4px 4px 0px;
+  min-width: fit-content;
+  width: fit-content;
+  span {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: #3a62c8;
+    margin-right: 5px;
+    &:first-child {
+      text-transform: uppercase;
+    }
+    &:last-child {
+      margin-right: 0px;
+      margin-left: 0px;
+    }
+  }
+}
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  // padding: 1rem;
+  // border-radius: calc(0.25rem - 1px);
+}

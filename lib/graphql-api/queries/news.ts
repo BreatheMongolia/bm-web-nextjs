@@ -1,4 +1,4 @@
-import { News, NewsIdType } from 'graphql/generated'
+import { News, NewsIdType, Page, PageIdType } from 'graphql/generated'
 import { fetchAPI } from 'lib/graphql-api/api'
 
 export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Promise<News> {
@@ -10,7 +10,6 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
         desiredSlug
         slug
         dateGmt
-        
         customFields {
           authors {
             authorLink
@@ -75,6 +74,77 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
   return data.news
 }
 
+export async function getLastThree(): Promise<News[]> {
+  const data = await fetchAPI(
+    `
+    query getLatestNews {
+      newses(where: { orderby: { order: DESC, field: DATE } }, first: 3) {
+        edges {
+          node {
+            databaseId
+            date
+            dateGmt
+            customFields {
+              titleMn
+              title
+              sourceLink
+              sourceName
+              sourceNameMn
+              sourceLanguage
+              newsContentType
+              featuredImage {
+                image {
+                  mediaItemUrl
+                  mediaDetails {
+                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                      name
+                      sourceUrl
+                    }
+                  }
+                }
+                imageMn {
+                  mediaItemUrl
+                  mediaDetails {
+                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                      name
+                      sourceUrl
+                    }
+                  }
+                }
+                caption
+                captionMn
+              }
+            }
+            featuredImage {
+              node {
+                id
+                mediaItemUrl
+                mediaDetails {
+                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                    name
+                    sourceUrl
+                  }
+                }
+              }
+            }
+            categories {
+              nodes {
+                categoryCustomFields {
+                  name
+                  nameMn
+                  fieldGroupName
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    `,
+  )
+  return data.newses && data.newses.edges ? data.newses.edges.map(x => x.node as News) : []
+}
+
 export async function getNewsPostSlugs(): Promise<News[]> {
   const data = await fetchAPI(
     `
@@ -103,8 +173,6 @@ export async function getNewsPosts(): Promise<News[]> {
         edges {
           node {
             databaseId
-            desiredSlug
-            slug
             dateGmt
             customFields {
               titleMn
@@ -165,5 +233,45 @@ export async function getNewsPosts(): Promise<News[]> {
     }
     `,
   )
-  return data.newses && data.newses.edges ? data.newses.edges.map(x => x.node as News) : []
+  return data.newses && data.newses.edges ? data.newses.edges : []
+}
+
+export async function getNewsBannerImages(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {
+  const data = await fetchAPI(
+    `query getFeaturedNews($id: ID!, $idType: PageIdType!) {
+          page(id: $id, idType: $idType) {
+            news_general_fields {
+              banner {
+                fieldGroupName
+                bannerImage {
+                  mediaItemUrl
+                  mediaDetails {
+                    sizes(include: _1536X1536) {
+                      height
+                      width
+                      sourceUrl
+                    }
+                  }
+                }
+                bannerImageMn {
+                  mediaItemUrl
+                  mediaDetails {
+                    sizes(include: _1536X1536) {
+                      height
+                      width
+                      sourceUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    `,
+    {
+      variables: { id, idType },
+    },
+  )
+
+  return data.page
 }

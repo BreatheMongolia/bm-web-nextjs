@@ -55,7 +55,7 @@ export const Navbar = () => {
       </div>
       <div
         id="mobile-menu"
-        className={`bg-white w-full lg:hidden absolute py-10 flex flex-col gap-7 h-full z-30 px-10 
+        className={`bg-white w-full lg:hidden fixed py-10 flex flex-col gap-7 h-full z-30 px-10 
         uppercase text-lg font-semibold tracking-widest
         transition-all ease-in-out duration-200
         ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}

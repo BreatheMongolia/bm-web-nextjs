@@ -1,10 +1,3 @@
-import React, { useState } from "react"
-import { useTranslation } from "next-i18next"
-import Desktop from "../Desktop/index"
-import Mobile from "../Mobile/index"
-import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
-import { urls } from "lib/utils/urls"
-
 export const DonateSection = () => {
   const { t } = useTranslation()
   const [isNavVisible, setNavVisible] = useState(false)
@@ -13,17 +6,17 @@ export const DonateSection = () => {
       <ul>
         <li>
           <a href={urls.givebutter} target="_blank">
-            {t("donate.donateOnetime")}
+            {t('donate.donateOnetime')}
           </a>
         </li>
         <li>
           <a href={urls.yourCause} target="_blank">
-            {t("donate.donateYourcause")}
+            {t('donate.donateYourcause')}
           </a>
         </li>
         <li>
           <a href={urls.benevity} target="_blank">
-            {t("donate.donateBenevity")}
+            {t('donate.donateBenevity')}
           </a>
         </li>
       </ul>
@@ -32,7 +25,7 @@ export const DonateSection = () => {
   const donateBtn = () => {
     return (
       <a href={urls.givebutter} target="_blank" className="donate">
-        {t("donate.button")}
+        {t('donate.button')}
       </a>
     )
   }
@@ -43,7 +36,7 @@ export const DonateSection = () => {
   const btnSeeMore = () => {
     return (
       <div className="ta-mobile-seemore">
-        {t("donate.sidebarTitleMobile")}
+        {t('donate.sidebarTitleMobile')}
         <ChevronDownIcon />
       </div>
     )
@@ -51,7 +44,7 @@ export const DonateSection = () => {
   const btnSeeLess = () => {
     return (
       <div className="ta-mobile-seeless">
-        {t("donate.seeLess")}
+        {t('donate.seeLess')}
         <ChevronUpIcon />
       </div>
     )
@@ -61,19 +54,19 @@ export const DonateSection = () => {
     <div className="ta-section" id="donate-section">
       <Desktop>
         <div className="ta-content">
-          <h2 className="heading">{t("donate.title")}</h2>
-          <p>{t("donate.description")}</p>
+          <h2 className="heading">{t('donate.title')}</h2>
+          <p>{t('donate.description')}</p>
           {donateBtn()}
         </div>
         <div className="ta-sidebar">
-          <h2 className="subheading">{t("donate.sidebarTitle")}</h2>
+          <h2 className="subheading">{t('donate.sidebarTitle')}</h2>
           {donateLinks()}
         </div>
       </Desktop>
       <Mobile>
         <div className="ta-mobile-content">
-          <h2 className="heading">{t("donate.mobileTitle")}</h2>
-          <p>{t("donate.description")}</p>
+          <h2 className="heading">{t('donate.mobileTitle')}</h2>
+          <p>{t('donate.description')}</p>
           {donateBtn()}
           <div className="ta-mobile-sidebar">
             <a
