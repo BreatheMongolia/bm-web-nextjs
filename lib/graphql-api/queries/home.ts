@@ -44,6 +44,8 @@ const HomePageGQLQuerySections = {
     featuredNews {
         ... on News {
             databaseId
+            desiredSlug
+            slug
             dateGmt
             customFields {
                 titleMn
@@ -210,6 +212,30 @@ export async function getHomePage(id: string, idType: PageIdType = PageIdType.Ur
   )
 
   return data.page
+}
+
+export async function getBanner(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {
+  const data = await fetchAPI(
+    `
+      query homeBanner($id: ID!, $idType: PageIdType!) {
+          page(id: $id, idType: $idType) {
+            customFields {
+              bannerTextLeft
+              bannerTextLeftMn
+              bannerTextRight {
+                categoryText
+                categoryTextMn
+              }
+           }
+        }
+    }
+                `,
+    {
+      variables: { id, idType },
+    },
+  )
+
+  return data.page.customFields
 }
 
 export async function getVolunteers(): Promise<Page> {
