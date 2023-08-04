@@ -7,9 +7,11 @@ import { getTranslated } from 'lib/utils/getTranslated'
 export const OurPartners = ({
   title,
   partnerLogos,
+  locale,
 }: {
   title: { en: string; mn: string }
   partnerLogos: Page_Customfields_PartnersLogos[]
+  locale: string
 }) => {
 
   // Styling the settings for partner-logo images within Slider
