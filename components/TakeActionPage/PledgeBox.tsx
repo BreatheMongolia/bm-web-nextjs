@@ -1,20 +1,21 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import parse from 'html-react-parser'
-import { useTranslation, Trans } from 'react-i18next'
-import handImage from '../../../assets/images/hand.png'
-import mobileHandImage from '../../../assets/images/mobile-hand.png'
-import closeIcon from '../../../assets/images/close.png'
-import closeBlackIcon from '../../../assets/images/close-black.png'
+import { useTranslation, Trans } from 'next-i18next'
+import handImage from 'assets/images/hand.png'
+import mobileHandImage from 'assets/images/mobile-hand.png'
+import closeIcon from 'assets/images/close.png'
+import closeBlackIcon from 'assets/images/close-black.png'
 import SocialShare from 'components/SocialShare'
 import Desktop from 'components/Desktop'
 import Mobile from 'components/Mobile'
-import { useMutation } from '@apollo/client'
-// import { PLEDGE_MUTATION } from './queries/takeAction'
-// import { getLanguage } from '../../../utils/getLanguage'
+import { PLEDGE_MUTATION } from 'lib/graphql-api/mutations/takeAction'
 import { useMediaQuery } from 'react-responsive'
 import cx from 'classnames'
 import Modal from 'react-modal'
 import dayjs from 'dayjs'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { fetchAPI } from 'lib/graphql-api/api'
 
 type Props = {
   title: string
@@ -27,25 +28,19 @@ type Props = {
 Modal.setAppElement('#__next')
 
 export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, totalPledges }) => {
+  const { t, i18n } = useTranslation('pledge')
   const isMobile = useMediaQuery({ maxWidth: 912 })
   const [isPledged, setIsPledged] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [totalPledge, setTotalPledge] = useState(totalPledges)
+  const [currentUrl, setCurrentUrl] = useState('')
 
-  const { t, i18n } = useTranslation()
+  useEffect(() => {
+    setCurrentUrl(window.location.pathname)
+  }, [])
+
   const now = dayjs()
-  // const language = getLanguage()
-  const language = 'mn'
-
-  // const [pledgeMutation] = useMutation(PLEDGE_MUTATION, {
-  //   variables: {
-  //     id: actionId,
-  //     cid: actionId.toString(),
-  //     language: language,
-  //     date: now.format(),
-  //   },
-  // })
-  const pledgeMutation = () => {}
+  const language = i18n.language
 
   const pledgeAction = () => {
     if (isPledged) {
@@ -53,27 +48,36 @@ export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, to
       return
     }
 
-    // pledgeMutation().then(result => {
-    //   const { data } = result
-    //   setTotalPledge(data.addPledge.takeAction.totalPledges)
-    //   setIsPledged(true)
-    //   setShowModal(true)
-    // })
+    fetchAPI(PLEDGE_MUTATION, {
+      variables: {
+        id: actionId,
+        cid: actionId.toString(),
+        language: language,
+        date: now.format(),
+      },
+    }).then(result => {
+      setTotalPledge(result?.addPledge?.takeAction?.totalPledges)
+      setIsPledged(true)
+      setShowModal(true)
+    })
   }
 
   return (
     <>
       <Mobile>
-        <p className="mobile-pledge-title">{t('pledge.mobileTitle')}</p>
+        <p className="mobile-pledge-title">{t('mobileTitle')}</p>
       </Mobile>
       <Mobile>
-        <div className="pledge-hand">{/* <img src={mobileHandImage} /> */}</div>
+        <div className="pledge-hand">
+          <Image src={mobileHandImage} alt="Hand" />
+        </div>
       </Mobile>
       <div className="pledge-box">
         <div className="pledge-title">
           <h2>
             <Trans i18nKey="pledge.pledgeTo" values={{ title: pledgeTitle }}>
-              {/* I pledge to <span>{{ pledgeTitle }}</span> */}
+              {/* @ts-ignore */}
+              <br />I pledge to <span>{{ pledgeTitle }}</span>
             </Trans>
           </h2>
         </div>
@@ -83,11 +87,13 @@ export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, to
             <div className="pledge-content">
               {content && parse(content)}
               <div className={cx('pledge-button', isPledged && 'disabled')}>
-                <button onClick={() => pledgeAction()}>{isPledged ? t('pledge.pledged') : t('pledge.button')}</button>
+                <button onClick={() => pledgeAction()}>{isPledged ? t('pledged') : t('button')}</button>
               </div>
             </div>
             <Desktop>
-              <div className="pledge-hand">{/* <img src={handImage} /> */}</div>
+              <div className="pledge-hand">
+                <Image alt="Hand" src={handImage} />
+              </div>
             </Desktop>
           </div>
         </div>
@@ -124,19 +130,19 @@ export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, to
       >
         <div className="pledge-modal">
           <button className="close-modal" onClick={() => setShowModal(false)}>
-            {/* <img src={isMobile ? closeBlackIcon : closeIcon} /> */}
+            <Image src={isMobile ? closeBlackIcon : closeIcon} alt="Close" />
           </button>
-          <h2 className="heading">{t('pledge.congrats')}</h2>
+          <h2 className="heading">{t('congrats')}</h2>
           <h2 className="action-title">{pledgeTitle}</h2>
           <div className="pledge-hands">
-            {/* <img src={handImage} />
-            <img src={handImage} />
-            <img src={handImage} /> */}
+            <Image src={handImage} alt="Hand" />
+            <Image src={handImage} alt="Hand" />
+            <Image src={handImage} alt="Hand" />
           </div>
-          <p className="pledge-joined">{t('pledge.joined', { totalPledge })}</p>
+          <p className="pledge-joined">{t('joined', { totalPledge })}</p>
           <div className="pledge-share">
-            <h3>{t('pledge.share')}</h3>
-            <SocialShare title={title} link={''} />
+            <h3>{t('share')}</h3>
+            <SocialShare title={title} link={currentUrl} />
           </div>
         </div>
       </Modal>

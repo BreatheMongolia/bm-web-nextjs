@@ -52,36 +52,10 @@
   },
 
   "title": "this is landing page",
-  "pledge": {
-    "button": "take this pledge",
-    "pledged": "Congratulations!",
-    "pledgeTo": "I pledge to <1>{{title}}</1>",
-    "congrats": "Congratulations! You have pledged to:",
-    "tapToTakePledge": "Tap to take this pledge",
-    "joined": "You and {{totalPledge}} people have taken this pledge!",
-    "share": "Share Your Pledge Now!",
-    "mobileTitle": "Take This Pledge and Share with Your Network!"
-  },
-  "additionalResources": {
-    "title": "Additional Resources"
-  },
   "actionList": {
     "title": "What you can do:",
     "soon": "More Coming Soon! ",
     "button": "Read More"
-  },
-  "userFeedback": {
-    "question": "Did you find this information useful?",
-    "thankYou": "Thank you for your feedback!",
-    "yes": "Yes",
-    "no": "No"
-  },
-  "faq": {
-    "title": "FAQ",
-    "mobileTitle": "Frequently asked questions",
-    "tabTitle1": "Line 1",
-    "tabTitle2": "Line 2",
-    "tabTitle3": "Line 3"
   },
   "hero": {
     "title": "TAKE ACTION",
@@ -175,13 +149,6 @@
     "tov": "Tov",
     "uvs": "Uvs",
     "zavkhan": "Zavkhan"
-  },
-  "map": {},
-  "actionShareEmail": {
-    "subject": "Take action against air pollution in Mongolia",
-    "bodyPart1": "I just pledged to",
-    "bodyPart2": "People need to know about this.",
-    "bodyPart3": "Thanks!"
   },
   "stationDetail": {
     "uBWorldRanking": "UB World Ranking",

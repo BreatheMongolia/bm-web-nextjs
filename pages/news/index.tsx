@@ -14,7 +14,7 @@ const NewsPage = ({ news }: { news: News[] }) => {
           right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
         }}
       />
-      <div className="container grid sm:grid-cols-4 gap-2 py-5">
+      <div className="container flex flex-row flex-wrap gap-5 py-5 justify-evenly">
         {news.map((x, idx) => {
           return <NewsCard key={idx} news={x} />
         })}

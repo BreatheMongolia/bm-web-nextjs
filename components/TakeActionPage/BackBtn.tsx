@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { FC, FunctionComponent } from 'react'
+import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 
-export const BackBtn: FC<any> = () => {
+export const BackBtn: FunctionComponent = () => {
   const router = useRouter()
-
   const { t } = useTranslation('common')
+
   return (
     <div className="back-button">
       <svg
@@ -26,9 +26,9 @@ export const BackBtn: FC<any> = () => {
         />
       </svg>
 
-      <div onClick={() => router.back()} className="backBtnText">
+      <span onClick={() => router.push('/take-actions')} className="backBtnText">
         {t('backBtnText')}
-      </div>
+      </span>
     </div>
   )
 }

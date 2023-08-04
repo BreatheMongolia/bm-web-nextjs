@@ -26,7 +26,10 @@ interface NewsPostPageProps {
 export default function NewsPostPage({ post, bannerImage, bannerText, getLatest }: NewsPostPageProps) {
   const router = useRouter()
 
-  if (!router.isFallback && !post?.title) {
+  if (router.isFallback) {
+    return <div> Loading... </div>
+  }
+  if (!post || !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
@@ -136,9 +139,16 @@ export const getStaticProps: GetStaticProps<any> = async ({ params, locale }) =>
 
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   const news = await getNewsPostSlugs()
-
+  const paths = []
+  news.map(x => {
+    if (x.desiredSlug || x.slug) {
+      paths.push(`/news/${x.desiredSlug || x.slug}`)
+    }
+  })
+  console.log('getStaticPaths')
+  console.log(paths)
   return {
-    paths: news.map((x, idx) => `/news/${x.desiredSlug || x.slug || x.databaseId}`) || [],
+    paths,
     fallback: true,
   }
 }
