@@ -21,6 +21,7 @@ export const NewsCard = ({ news }: { news: any }) => {
       }
     }
   }
+
   return (
     <div
       className="relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer  bg-cover bg-center group w-[330px] h-[250px] "
@@ -31,7 +32,7 @@ export const NewsCard = ({ news }: { news: any }) => {
         {news.sourceLink && (
           <div className="text-bm-blue text-sm font-semibold pt-2 flex-1">
             <div className="bg-white/95 flex gap-x-1 items-center px-2 py-0.5 rounded-r-md w-fit group-hover:bg-bm-blue group-hover:text-white transition-all group-hover:pl-5">
-              {news.sourceNameMn}
+              {news.sourceName}
               <ArrowTopRightOnSquareIcon className="h-0 w-0 group-hover:h-4 group-hover:w-4" />
             </div>
           </div>

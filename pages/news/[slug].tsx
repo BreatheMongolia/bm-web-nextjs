@@ -75,9 +75,9 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
                   <div className="subSection">
                     <div className="authorAndDate">
                       <div className="authorsSection">
-                        {post.authors && (
+                        {/* {post?.authors && (
                           <>
-                            {post.authors?.map((author: any) => (
+                            {post?.authors?.map((author: any) => (
                               <a key={Math.random()} className="authors" href={author.authorLink} target="_blank">
                                 {' '}
                                 {author.name}
@@ -85,7 +85,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
                               </a>
                             ))}
                           </>
-                        )}
+                        )} */}
                       </div>
                       <span> {formatMyDate(post.date)} </span>
                     </div>
@@ -145,8 +145,7 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
       paths.push(`/news/${x.desiredSlug || x.slug}`)
     }
   })
-  console.log('getStaticPaths')
-  console.log(paths)
+
   return {
     paths,
     fallback: true,
@@ -194,15 +193,18 @@ const getNews = (news: News, locale: string): any => {
     sourceName: '',
     sourceLanguage: '',
     newsLandingPageFeatured: '',
-    authors: news?.customFields.authors?.map((author: any) => {
-      return {
-        name:
-          getTranslated(author.authorName, author.authorNameMn, locale) !== null
-            ? getTranslated(author.authorName, author.authorNameMn, locale)
-            : '',
-        authorLink: author.authorLink,
-      }
-    }),
+    authors:
+      news?.customFields.authors !== null
+        ? news?.customFields.authors?.map((author: any) => {
+            return {
+              name:
+                getTranslated(author.authorName, author.authorNameMn, locale) !== null
+                  ? getTranslated(author.authorName, author.authorNameMn, locale)
+                  : '',
+              authorLink: author.authorLink,
+            }
+          })
+        : null,
     categories: news?.categories?.nodes.map((cat: any) => {
       return {
         name:
@@ -216,7 +218,7 @@ const getNews = (news: News, locale: string): any => {
       news.customFields.featuredImage.image?.mediaDetails,
       news.customFields.featuredImage.imageMn?.mediaDetails,
       news.featuredImage?.node?.mediaDetails,
-      'medium_large',
+      'medium',
     ),
     caption: getTranslated(news.customFields.featuredImage.caption, news.customFields.featuredImage.captionMn, locale),
   }

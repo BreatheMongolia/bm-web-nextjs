@@ -10,7 +10,6 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
         desiredSlug
         slug
         dateGmt
-        
         customFields {
           authors {
             authorLink
@@ -174,8 +173,6 @@ export async function getNewsPosts(): Promise<News[]> {
         edges {
           node {
             databaseId
-            desiredSlug
-            slug
             dateGmt
             customFields {
               titleMn
@@ -236,7 +233,7 @@ export async function getNewsPosts(): Promise<News[]> {
     }
     `,
   )
-  return data.newses && data.newses.edges ? data.newses.edges.map(x => x.node as News) : []
+  return data.newses && data.newses.edges ? data.newses.edges : []
 }
 
 export async function getNewsBannerImages(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import cx from 'classnames'
 import CloseIcon from 'assets/icons/CloseIcon'
 import { useMediaQuery } from 'react-responsive'
