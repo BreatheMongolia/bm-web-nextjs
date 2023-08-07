@@ -51,7 +51,7 @@ export default function AboutPageSection({}) {
         {VALID_ROUTES.map((x, idx) => {
           return (
             <div key={idx} className="flex flex-1 text-center w-full">
-              <Link href={`/about/${x.route}`} className="w-full hover:bg-rose-200 bg-rose-100">
+              <Link href={`/about/${x.route}`} className="w-full hover:bg-gray-200 bg-gray-100">
                 <div className="w-full p-5">{t(x.title)}</div>
               </Link>
             </div>
