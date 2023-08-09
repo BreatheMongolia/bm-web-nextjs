@@ -3,6 +3,21 @@ import BuildingIcon from './about_us_icons/Building'
 import EducationIcon from './about_us_icons/Education'
 import MonitoringIcon from './about_us_icons/Monitoring'
 import PollutionParticlesBackground from './about_us_icons/PollutionParticlesBackground'
+import i18next from 'i18next'
+import EnGoodHealth from './about_us_icons/EnGoodHealth'
+import EnAffordableAndCleanEnergy from './about_us_icons/EnAffordableAndCleanEnergy'
+import EnSustainableCities from './about_us_icons/EnSustainableCities'
+import EnResponsibleConsumption from './about_us_icons/EnResponsibleConsumption'
+import EnClimateAction from './about_us_icons/EnClimateAction'
+import EnLifeOnLand from './about_us_icons/EnLifeOnLand'
+import EnPeaceJustice from './about_us_icons/EnPeaceJustice'
+import MngGoodHealth from './about_us_icons/MngGoodHealth'
+import MngAffordableAndCleanEnergy from './about_us_icons/MngAffordableAndCleanEnergy'
+import MngSustainableCities from './about_us_icons/MngSustainableCities'
+import MngResponsibleConsumption from './about_us_icons/MngResponsibleConsumption'
+import MngClimateAction from './about_us_icons/MngClimateAction'
+import MngLifeOnLand from './about_us_icons/MngLifeOnLand'
+import MngPeaceJustice from './about_us_icons/MngPeaceJustice'
 export const AboutUsInfoSection = () => {
   const { t, i18n } = useTranslation('about')
   const GOALS = [
@@ -69,6 +84,45 @@ export const AboutUsInfoSection = () => {
             <p className="what_we_do_desc">{t('monitoringDescription')}</p>
           </div>
         </div>
+      </div>
+      <div className="why_container">
+        <h1 className="why">{t('why')}</h1>
+        <br />
+        <p className="why_details">{t('whyDescription')}</p>
+        <br />
+        <h1 className="alignment">{t('ourAlignment')}</h1>
+        <br />
+        <p className="alignment_details">{t('ourAlignmentDescription')}</p>
+        <br />
+        <div className="goal_images">
+          {i18next.language === 'mng' ? (
+            <>
+              <MngGoodHealth />
+              <MngAffordableAndCleanEnergy />
+              <MngSustainableCities />
+              <MngResponsibleConsumption />
+              <MngClimateAction />
+              <MngLifeOnLand />
+              <MngPeaceJustice />
+            </>
+          ) : (
+            <>
+              <EnGoodHealth />
+              <EnAffordableAndCleanEnergy />
+              <EnSustainableCities />
+              <EnResponsibleConsumption />
+              <EnClimateAction />
+              <EnLifeOnLand />
+              <EnPeaceJustice />
+            </>
+          )}
+        </div>
+        <br />
+
+        <br />
+        <h1 className="vision">{t('vision')}</h1>
+        <br />
+        <p className="vision_details">{t('visionDescription')}</p>
       </div>
     </div>
   )
