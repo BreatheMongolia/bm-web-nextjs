@@ -29,6 +29,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
   if (router.isFallback) {
     return <div> Loading... </div>
   }
+
   if (!post || !post?.slug) {
     return <ErrorPage statusCode={404} />
   }

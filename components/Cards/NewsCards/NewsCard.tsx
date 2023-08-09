@@ -1,9 +1,11 @@
 import { ArrowTopRightOnSquareIcon, PlayCircleIcon } from '@heroicons/react/24/solid'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { TbPointFilled } from 'react-icons/tb'
 
 export const NewsCard = ({ news }: { news: any }) => {
   // News Card types can be: blog, external_link, video
+
+  const router = useRouter()
 
   const onCardClick = () => {
     if (news.newsContentType) {

@@ -7,6 +7,7 @@ import { SocialIcon } from 'react-social-icons'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Router, useRouter } from 'next/router'
+import SearchBar from 'components/SearchBar/SearchBar'
 
 type Option = {
   value: string
@@ -46,11 +47,8 @@ export const Topbar = () => {
     <div className="w-full bg-bm-blue text-white px-5 py-1">
       <div className="flex justify-end gap-x-2">
         {/* TODO: Replace with search bar */}
-        <Link href="/search">
-          <div className="h-[40px] w-[40px] hover:bg-black/10 rounded flex items-center justify-center">
-            <MagnifyingGlassIcon className="h-6 w-6 -scale-x-100" />
-          </div>
-        </Link>
+        <SearchBar />
+
         {/* Social URLS */}
         {socialUrls.map((x, idx) => {
           return (
