@@ -1,6 +1,6 @@
 import React, { FC, useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
-import { ArrowUpIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/router'
 
 type Props = {
@@ -9,11 +9,10 @@ type Props = {
 }
 
 const SearchBar: FC<Props> = ({ value, count }) => {
-  const [isOpen, setIsOpen] = useState(false)
   const [searchValue, setSearchValue] = useState(value)
   const inputRef = useRef(null)
   const router = useRouter()
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation('search')
   const matchUrl = `/${i18n.language}`
 
   useEffect(() => {
@@ -22,7 +21,6 @@ const SearchBar: FC<Props> = ({ value, count }) => {
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter' && e.target.value !== '') {
-      setIsOpen(true)
       router.push(`${matchUrl}/search?s=${e.target.value}`)
     }
   }

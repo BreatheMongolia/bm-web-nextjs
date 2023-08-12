@@ -12,6 +12,7 @@ Modal.setAppElement('#__next')
 
 type Props = {
   id: number
+  slug: string
   sourceLink: string
   title: string
   sourceName: string
@@ -32,6 +33,7 @@ type Props = {
 
 const NewsBgTile: FC<Props> = ({
   id,
+  slug,
   sourceLink,
   title,
   sourceName,
@@ -56,11 +58,11 @@ const NewsBgTile: FC<Props> = ({
     setVideoLoading(!videoLoading)
   }
   const matchUrl = `/${i18n.language}`
-  const handleClick = (id: number) => {
+  const handleClick = (slug: string) => {
     if (sourceLink) {
       window.open(sourceLink, '_blank')
     } else {
-      router.push(`${matchUrl}/news/` + id)
+      router.push(`${matchUrl}/news/` + slug)
     }
   }
   const [thumbnailURL, setThumbnailURL] = useState('')
@@ -95,7 +97,7 @@ const NewsBgTile: FC<Props> = ({
             : cx('news-item', cName ? index == 0 && cName : '', homePage, mobile, featured)
         }
         onClick={() => {
-          newsContentType === 'video' ? setOpen(true) : handleClick(id)
+          newsContentType === 'video' ? setOpen(true) : handleClick(slug)
         }}
         key={id}
       >

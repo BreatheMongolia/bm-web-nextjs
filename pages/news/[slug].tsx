@@ -234,6 +234,7 @@ function getLatestNews(data: any[], locale: string) {
   data.map((news: any) => {
     breathMongoliaNews.push({
       id: news.databaseId,
+      slug: news.slug,
       sourceLink: news.customFields.sourceLink,
       title:
         getTranslated(news.customFields.title, news.customFields.titleMn, locale) !== null

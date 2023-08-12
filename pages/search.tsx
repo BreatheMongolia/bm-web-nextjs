@@ -80,7 +80,6 @@ const SearchPage = ({ data, locale }) => {
         id: takeAction.node.databaseId,
         slug: takeAction.node.slug,
         date: takeAction.node.dateGmt,
-        // totalPledges: takeAction.node.totalPledges,
         title:
           getTranslated(takeAction.node.customFields.title, takeAction.node.customFields.titleMn) !== null
             ? getTranslated(takeAction.node.customFields.title, takeAction.node.customFields.titleMn, locale)

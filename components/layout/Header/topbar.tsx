@@ -40,7 +40,12 @@ export const Topbar = () => {
     let pathname = window.location.pathname
     pathname = pathname.replace(/^\/(en|mn)\b/, '')
 
-    return `${baseUrl}${pathname}`
+    const searchParams = new URLSearchParams(window.location.search)
+    const queryParams = searchParams.toString()
+
+    const urlWithParams = `${baseUrl}${pathname}${queryParams ? '?' + queryParams : ''}`
+
+    return urlWithParams
   }
 
   return (
