@@ -6,7 +6,7 @@ import SearchBar from 'components/SearchPage/SearchBar'
 import News from 'components/SearchPage/News'
 import TakeActions from 'components/SearchPage/TakeActions'
 import Teams from 'components/SearchPage/Teams'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { getSearchData } from 'lib/graphql-api/queries/search'
 import { useRouter } from 'next/router'
 import { getTranslated } from 'lib/utils/getTranslated'
@@ -201,7 +201,7 @@ const SearchPage = ({ data, locale }) => {
 
 export default SearchPage
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   const data: any = await getSearchData()
 
   return {
