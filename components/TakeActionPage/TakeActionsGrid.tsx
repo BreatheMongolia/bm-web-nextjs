@@ -24,7 +24,7 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
   const [newActionCategories, setNewActionCategories] = useState<string[]>([])
 
   const getActionCategories = () => {
-    // const newActionCategories: any = []
+    // setNewActionCategories([])
     takeAction.map(ta => {
       ta.typeOfAction.map((action: string) => {
         if (!newActionCategories.includes(action)) newActionCategories.push(action)
@@ -78,7 +78,7 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
   }
 
   return (
-    <div className="container mx-auto flex flex-col px-30 ta-actions">
+    <div className="ta-actions">
       <H2 title={t('actionList.title')} />
 
       <div className="ta-categories">

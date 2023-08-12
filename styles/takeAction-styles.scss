@@ -1168,7 +1168,7 @@
     cursor: pointer;
 
     &.more {
-      background-image: url("../assets/images/soon.jpg");
+      background-image: url('../assets/images/soon.jpg');
 
       .action-title {
         position: static;
@@ -1276,7 +1276,6 @@
     }
   }
 }
-
 
 .ta-categories {
   display: flex;
@@ -1402,8 +1401,8 @@
 }
 
 .ta-section {
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
   padding: 30px 0 40px;
   border-bottom: 1px solid #000;
 
@@ -1412,12 +1411,8 @@
   }
 
   .ta-content {
-    max-width: 625px;
-    width: 625px;
-
-    .heading {
-      margin-top: 0;
-    }
+    // max-width: 625px;
+    // width: 625px;
 
     p {
       font-size: 18px;
@@ -1481,7 +1476,7 @@
 
 .ta-mobile-content {
   display: grid;
-  padding: 0 40px;
+  padding: 0 20px;
 
   h2 {
     font-size: 18px;
@@ -1489,6 +1484,7 @@
     font-weight: normal;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    margin-bottom: 0;
   }
 
   p {
@@ -1537,14 +1533,14 @@
       line-height: 28px;
       letter-spacing: 0.04em;
       text-align: left;
+      color: #2c2d41;
 
-      ul {
-        list-style-type: none;
-
-        li {
-          color: #2c2d41;
-        }
-      }
+      // ul {
+      //   // list-style-type: none;
+      //   li {
+      //     color: #2c2d41;
+      //   }
+      // }
 
       a {
         color: #2c2d41;
@@ -1558,9 +1554,6 @@
 }
 
 @media (min-width: 768px) and (max-width: 1063px) {
-  .container-landing {
-    width: 90%;
-  }
   .actions-grid {
     display: grid;
     max-width: 768px;
@@ -1614,10 +1607,6 @@
 
   .ta-section {
     border: none;
-  }
-
-  #donate-section {
-    margin-top: 40px;
   }
 
   .ta-actions {

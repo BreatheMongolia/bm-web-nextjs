@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
+import { H2 } from 'components/generic/Typography'
 import Desktop from '../Desktop/index'
 import Mobile from '../Mobile/index'
 import { urls } from 'lib/utils/urls'
@@ -9,23 +10,24 @@ import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 export const DonateSection = () => {
   const { t } = useTranslation('takeAction')
   const [isNavVisible, setNavVisible] = useState(false)
+
   const donateLinks = () => {
     return (
-      <ul>
+      <ul className="list-disc">
         <li>
-          <a href={urls.givebutter} target="_blank">
+          <Link href={urls.givebutter} target={'_blank'} className="text-black hover:text-bm-blue my-2">
             {t('donate.donateOnetime')}
-          </a>
+          </Link>
         </li>
         <li>
-          <a href={urls.yourCause} target="_blank">
+          <Link href={urls.yourCause} target={'_blank'} className="hover:text-bm-blue my-2">
             {t('donate.donateYourcause')}
-          </a>
+          </Link>
         </li>
         <li>
-          <a href={urls.benevity} target="_blank">
+          <Link href={urls.benevity} target={'_blank'} className="hover:text-bm-blue my-2">
             {t('donate.donateBenevity')}
-          </a>
+          </Link>
         </li>
       </ul>
     )
@@ -45,7 +47,7 @@ export const DonateSection = () => {
     return (
       <div className="ta-mobile-seemore">
         {t('donate.sidebarTitleMobile')}
-        <ChevronDownIcon />
+        <ChevronDownIcon className="w-5 h-5 text-black" />
       </div>
     )
   }
@@ -53,30 +55,35 @@ export const DonateSection = () => {
     return (
       <div className="ta-mobile-seeless">
         {t('donate.seeLess')}
-        <ChevronUpIcon />
+        <ChevronUpIcon className="w-5 h-5 text-black" />
       </div>
     )
   }
 
   return (
-    <div className="ta-section" id="donate-section">
+    <div>
       <Desktop>
-        <div className="ta-content">
-          <h2 className="heading">{t('donate.title')}</h2>
-          <p>{t('donate.description')}</p>
-          {donateBtn()}
+        <div className="flex flex-row ta-section">
+          <div className="basis-2/3 ta-content">
+            <H2 title={t('donate.title')} />
+            <p>{t('donate.description')}</p>
+            {donateBtn()}
+          </div>
+          <div className="basis-1/3 my-5 ta-sidebar">
+            <h2 className="my-5 subheading">{t('donate.sidebarTitle')}</h2>
+            {donateLinks()}
+          </div>
         </div>
-        <div className="ta-sidebar">
-          <h2 className="subheading">{t('donate.sidebarTitle')}</h2>
-          {donateLinks()}
+        <div className="flex py-10 text-lg text-justify">
+          <p>{t('donate.disclosure')}</p>
         </div>
       </Desktop>
       <Mobile>
         <div className="ta-mobile-content">
-          <h2 className="heading">{t('donate.mobileTitle')}</h2>
-          <p>{t('donate.description')}</p>
+          <H2 title={t('donate.mobileTitle')} />
+          <p className="mb-5">{t('donate.description')}</p>
           {donateBtn()}
-          <div className="ta-mobile-sidebar">
+          <div className="my-5 inline-block ta-mobile-sidebar">
             <a
               className="subheading"
               onClick={() => {
