@@ -9,7 +9,7 @@ export const fetchOpenAQStations = async () => {
   await axios
     .get(OPEN_AQ_URL)
     .then(res => {
-      if (res.data) {
+      if (res && res.data) {
         const transformedData = getTransformedDataFromOpenAQ(res.data)
         for (const [_, station] of Object.entries(transformedData)) {
           if (hasStationUpdatedWithinLastWeek(station.date, 'openAQ')) {

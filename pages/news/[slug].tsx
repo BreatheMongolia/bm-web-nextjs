@@ -29,6 +29,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
   if (router.isFallback) {
     return <div> Loading... </div>
   }
+
   if (!post || !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
@@ -233,6 +234,7 @@ function getLatestNews(data: any[], locale: string) {
   data.map((news: any) => {
     breathMongoliaNews.push({
       id: news.databaseId,
+      slug: news.slug,
       sourceLink: news.customFields.sourceLink,
       title:
         getTranslated(news.customFields.title, news.customFields.titleMn, locale) !== null

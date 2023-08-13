@@ -30,6 +30,7 @@ const LatestNews: any = ({ data: newses }) => {
             key={index}
             index={index}
             id={data.id}
+            slug={data.slug}
             sourceLink={data.sourceLink}
             title={data.title}
             sourceName={data.sourceName}

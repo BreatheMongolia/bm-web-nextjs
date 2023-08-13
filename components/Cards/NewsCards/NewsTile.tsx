@@ -1,19 +1,19 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import cx from 'classnames'
+import { useRouter } from 'next/router'
 import CloseIcon from 'assets/icons/CloseIcon'
 import { useMediaQuery } from 'react-responsive'
 import PlayButton from 'assets/icons/PlayButton'
 import Modal from 'react-modal'
-import ShareButton from './ShareButton'
-import { useRouter } from 'next/router'
+import ShareButton from 'components/NewsPage/ShareButton'
 
 Modal.setAppElement('#__next')
 
 type Props = {
   id: number
-  slug: string
   sourceLink: string
+  slug: string
   title: string
   sourceName: string
   sourceLanguage: string
@@ -27,7 +27,6 @@ type Props = {
   mobile?: string
   featuredImageSmall?: string
   featuredImageBig?: string
-  featuredImage?: string
   featured?: string
 }
 
@@ -49,10 +48,10 @@ const NewsBgTile: FC<Props> = ({
   featured,
 }) => {
   const [t, i18n] = useTranslation()
-  let router = useRouter()
   const isMobile = useMediaQuery({ maxWidth: 912 })
   const [isOpen, setOpen] = useState(false)
   const [videoLoading, setVideoLoading] = useState(true)
+  const router = useRouter()
 
   const spinner = () => {
     setVideoLoading(!videoLoading)
