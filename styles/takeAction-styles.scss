@@ -1535,12 +1535,13 @@
       text-align: left;
       color: #2c2d41;
 
-      // ul {
-      //   // list-style-type: none;
-      //   li {
-      //     color: #2c2d41;
-      //   }
-      // }
+      ul {
+        list-style-type: none;
+        margin-left: 30px;
+        li {
+          color: #2c2d41;
+        }
+      }
 
       a {
         color: #2c2d41;

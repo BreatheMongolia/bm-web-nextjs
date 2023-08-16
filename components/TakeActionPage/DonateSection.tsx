@@ -45,7 +45,7 @@ export const DonateSection = () => {
 
   const btnSeeMore = () => {
     return (
-      <div className="ta-mobile-seemore">
+      <div className="inline-block ta-mobile-seemore">
         {t('donate.sidebarTitleMobile')}
         <ChevronDownIcon className="w-5 h-5 text-black" />
       </div>
@@ -53,7 +53,7 @@ export const DonateSection = () => {
   }
   const btnSeeLess = () => {
     return (
-      <div className="ta-mobile-seeless">
+      <div className="inline-block ta-mobile-seeless">
         {t('donate.seeLess')}
         <ChevronUpIcon className="w-5 h-5 text-black" />
       </div>
@@ -83,9 +83,9 @@ export const DonateSection = () => {
           <H2 title={t('donate.mobileTitle')} />
           <p className="mb-5">{t('donate.description')}</p>
           {donateBtn()}
-          <div className="my-5 inline-block ta-mobile-sidebar">
+          <div className="my-5 ta-mobile-sidebar">
             <a
-              className="subheading"
+              className="static subheading"
               onClick={() => {
                 setNavVisible(!isNavVisible)
               }}
