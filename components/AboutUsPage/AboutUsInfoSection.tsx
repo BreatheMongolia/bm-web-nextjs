@@ -23,21 +23,21 @@ export const AboutUsInfoSection = () => {
   const GOALS = [
     {
       title: '#6',
-      goalKeyWord: t('aboutUs.goal6KeyWord'),
-      firstParagraph: t('aboutUs.improveEnvironment'),
-      secondParagraph: t('aboutUs.improveEnvironmentDetails'),
+      goalKeyWord: t('goal6KeyWord'),
+      firstParagraph: t('improveEnvironment'),
+      secondParagraph: t('improveEnvironmentDetails'),
     },
     {
       title: '#8',
-      goalKeyWord: t('aboutUs.goal8KeyWord'),
-      firstParagraph: t('aboutUs.preserveBalance'),
-      secondParagraph: t('aboutUs.preserveBalanceDetails'),
+      goalKeyWord: t('goal8KeyWord'),
+      firstParagraph: t('preserveBalance'),
+      secondParagraph: t('preserveBalanceDetails'),
     },
     {
       title: '#10',
-      goalKeyWord: t('aboutUs.goal10KeyWord'),
-      firstParagraph: t('aboutUs.buildGovernance'),
-      secondParagraph: t('aboutUs.buildGovernanceDetails'),
+      goalKeyWord: t('goal10KeyWord'),
+      firstParagraph: t('buildGovernance'),
+      secondParagraph: t('buildGovernanceDetails'),
     },
   ]
 
@@ -62,7 +62,9 @@ export const AboutUsInfoSection = () => {
       </div>
       <div className="what_we_do_container">
         <h1 className="what_we_do_title">{t('whatWeDo')}</h1>
+        <br />
         <p className="what_we_do_paragraph">{t('whatWeDoDescription')}</p>
+        <br />
 
         <div className="details_container">
           <div className="education_container">
@@ -94,32 +96,40 @@ export const AboutUsInfoSection = () => {
         <br />
         <p className="alignment_details">{t('ourAlignmentDescription')}</p>
         <br />
-        <div className="goal_images">
-          {i18next.language === 'mng' ? (
-            <>
-              <MngGoodHealth />
-              <MngAffordableAndCleanEnergy />
-              <MngSustainableCities />
-              <MngResponsibleConsumption />
-              <MngClimateAction />
-              <MngLifeOnLand />
-              <MngPeaceJustice />
-            </>
-          ) : (
-            <>
-              <EnGoodHealth />
-              <EnAffordableAndCleanEnergy />
-              <EnSustainableCities />
-              <EnResponsibleConsumption />
-              <EnClimateAction />
-              <EnLifeOnLand />
-              <EnPeaceJustice />
-            </>
-          )}
+        <div className="goal_images_container">
+          <div className="goal_images_one">
+            {i18next.language === 'mng' ? (
+              <>
+                <MngGoodHealth />
+                <MngAffordableAndCleanEnergy />
+                <MngSustainableCities />
+                <MngResponsibleConsumption />
+              </>
+            ) : (
+              <>
+                <EnGoodHealth />
+                <EnAffordableAndCleanEnergy />
+                <EnSustainableCities />
+                <EnResponsibleConsumption />
+              </>
+            )}
+          </div>{' '}
+          <div className="goal_images_two">
+            {i18next.language === 'mng' ? (
+              <>
+                <MngClimateAction />
+                <MngLifeOnLand />
+                <MngPeaceJustice />
+              </>
+            ) : (
+              <>
+                <EnClimateAction />
+                <EnLifeOnLand />
+                <EnPeaceJustice />
+              </>
+            )}
+          </div>
         </div>
-        <br />
-
-        <br />
         <h1 className="vision">{t('vision')}</h1>
         <br />
         <p className="vision_details">{t('visionDescription')}</p>

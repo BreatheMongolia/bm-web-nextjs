@@ -40,7 +40,7 @@
 .what_we_do_container {
   color: white;
   background: rgba(44, 45, 65, 1);
-  height: 430px;
+  height: 490px;
   position: relative;
   padding-top: 20px;
   margin-top: 40px;
@@ -60,7 +60,7 @@
   .what_we_do_title {
     font-family: Open Sans;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 32px;
     line-height: 41px;
   }
 
@@ -68,6 +68,7 @@
     max-width: 800px;
     font-weight: bold;
     width: 100%;
+    padding-top: 2%;
     font-size: 18px;
     margin: auto;
   }
@@ -101,6 +102,9 @@
     .monitoring_container {
       width: 350px;
       height: auto;
+    }
+    .what_we_do_desc {
+      padding-top: 20px;
     }
   }
 }
@@ -149,7 +153,7 @@
     padding: 0px 20px 40px 20px;
   }
   .what_we_do {
-    font-size: 20px;
+    font-size: 20pxpx;
   }
 
   .what_we_do_container {
