@@ -6,16 +6,14 @@ import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
-import Link  from 'next/link'
-// import { useHistory } from "react-router-dom"
+import Link from 'next/link'
 
 export const TakeActionCarousel = ({
-  takeActionPosts
+  takeActionPosts,
 }: {
   takeActionPosts: Page_Customfields_FeaturedTakeActions[]
 }) => {
   const { t } = useTranslation('home')
-  // takeActionPosts.filter((value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index)
 
   // Styling the settings for take-action-carousel within Slider
   const settings = {
@@ -83,12 +81,8 @@ export const TakeActionCarousel = ({
       >
         {takeActionPosts.map((x, idx) => (
           <div key={idx}>
-          { x?.featuredImage?.node?.mediaDetails.sizes !== null
-            && <React.Fragment>
-            <div
-              className="relative flex flex-col m-1.5 take-action-carousel"
-              onClick={() => window.open('/action/' + x.databaseId)}
-            >
+            {x?.featuredImage?.node?.mediaDetails.sizes !== null && (
+              <Link href={`/take-actions/${x.slug}`} className="relative flex flex-col m-1.5 take-action-carousel">
                 <img
                   className="card-img-top take-action-img"
                   src={
@@ -101,11 +95,9 @@ export const TakeActionCarousel = ({
                   <div className="take-action-title">
                     {getTranslated(x?.customFields?.title, x?.customFields?.titleMn) !== null
                       ? getTranslated(x?.customFields?.title, x?.customFields?.titleMn)
-                      : ""
-                    }
+                      : ''}
                   </div>
                   <div className="read-more-arrow ">
-                    <Link href={`/action/${x.databaseId}`}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="24" height="24" rx="12" fill="#F4AC3D" />
                       <path
@@ -113,13 +105,11 @@ export const TakeActionCarousel = ({
                         fill="#FAFAFF"
                       />
                     </svg>
-                    </Link>
                   </div>
                 </div>
-            </div>
-          </React.Fragment>
-          }
-        </div>
+              </Link>
+            )}
+          </div>
         ))}
       </Slider>
     </div>

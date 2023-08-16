@@ -3,14 +3,12 @@ import Head from 'next/head'
 import { Layout } from '../components/layout/layout'
 import 'styles/index.scss'
 import 'styles/map-styles.scss'
-import 'styles/about-us.scss'
-import 'styles/our-mission.scss'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import 'styles/goal-styles.scss'
 import 'styles/why-section.scss'
 import Script from 'next/script'
 import { AnimatePresence } from 'framer-motion'
-import { createContext } from 'react'
+import { createContext, useEffect } from 'react'
 import { MapContextInterface } from 'lib/air-pollution-map/types'
 import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
@@ -20,6 +18,11 @@ export const MapContext = createContext<MapContextInterface | null>(null)
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
+  const { locale } = useRouter()
+
+  useEffect(() => {
+    localStorage.setItem('language', locale)
+  }, [locale])
 
   // FIXME: Givebutter doesn't seem to be working
   return (

@@ -1,0 +1,125 @@
+{
+  "supportUs": {
+    "waysToDonate": "Ways to Donate Money",
+    "donateDirectlyOn": "Donate directly on",
+    "donate": "DONATE",
+    "otherWaysToDonate": "Other Ways to Donate",
+    "startBirthdayFundraiser": "Start a birthday fundraiser on Facebook",
+    "facebookStepOnePart1": "Visit our Facebook page, click on",
+    "facebookStepOnePart2": "tab",
+    "facebookStepTwo": "Click on “Raise Money” on Create a Fundraiser section",
+    "facebookStepThree": "Set the amount, motivation text and invite your friends",
+    "addToSmileAmazon": "Add Breathe Mongolia - Clean Air Coalition on",
+    "wontCostACent": ", It won't cost a single cent",
+    "amazonSmileStepOne": "Click on “Get Started” and search for “Breathe Mongolia” ",
+    "amazonSmileStepTwo": "Select Breathe Mongolia - Clean Air Coalition",
+    "amazonSmileStepThreePart1": "Always shop from ",
+    "amazonSmileStepThreePart2": "",
+    "andBreak": "AND",
+    "donateThroughEmployer": "Donate through your employer. Get matching donations from your employer or have employer give us corporate grants. We’re on Benevity and YouCause",
+    "volunteerForUs": "Volunteer for Us",
+    "currentVolunteersNeeded": "Current Volunteers Needed",
+    "viewPosition": "View Position"
+  },
+  "pledge": {
+    "button": "take this pledge",
+    "pledged": "Congratulations!",
+    "pledgeTo": "I pledge to <1>{{title}}</1>",
+    "congrats": "Congratulations! You have pledged to:",
+    "tapToTakePledge": "Tap to take this pledge",
+    "joined": "You and {{totalPledge}} people have taken this pledge!",
+    "share": "Share Your Pledge Now!",
+    "mobileTitle": "Take This Pledge and Share with Your Network!"
+  },
+  "additionalResources": {
+    "title": "Additional Resources"
+  },
+  "actionList": {
+    "title": "What you can do:",
+    "soon": "More Coming Soon! ",
+    "button": "Read More",
+    "categoryAll": "All"
+  },
+  "userFeedback": {
+    "question": "Did you find this information useful?",
+    "thankYou": "Thank you for your feedback!",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "faq": {
+    "title": "FAQ",
+    "mobileTitle": "Frequently asked questions",
+    "tabTitle1": "Line 1",
+    "tabTitle2": "Line 2",
+    "tabTitle3": "Line 3"
+  },
+  "hero": {
+    "title": "TAKE ACTION",
+    "description": "Tackling air pollution starts with each and every one of us. Learn about the actions you can take to reduce your emission and protect the health of your loved ones.",
+    "mobileDescription": "Tackling air pollution starts with each and every one of us. Learn about the actions you can take to reduce your emission and protect the health of your loved ones.",
+    "learnMore": "Learn More"
+  },
+  "backBtnText": "Back to Take Action Home",
+  "donate": {
+    "title": "Donate",
+    "mobileTitle": "Help reduce air pollution",
+    "description": "Please donate to Breathe Mongolia! Your generous donation would help Breathe Mongolia educate adults and children about air pollution, how to protect their health, and help reduce pollution.",
+    "button": "DONATE",
+    "sidebarTitle": "More ways to Give",
+    "sidebarTitleMobile": "See more ways to give",
+    "seeLess": "See less",
+    "donateOnetime": "One-time donation",
+    "donateFacebook": "Donate on Facebook",
+    "donateFacebookFund": "Start a Facebook Fundraiser",
+    "donateAmazonSmile": "Shop on AmazonSmile for BM",
+    "donateYourcause": "Employer donation on Yourcause",
+    "donateBenevity": "Employer donation on Benevity",
+    "donateMore": "Learn more about donations to BM"
+  },
+  "subscribe": {
+    "mobileTitle": "Connect with us!",
+    "mobileDescription": "We’re social! Follow us on social media, expand your network, and help raise awareness about air pollution in Mongolia. ",
+    "title": "Stay Connected",
+    "description": "Join our mailing list and follow us on social media.",
+    "sidebarTitle": "More ways to Connect ",
+    "email": "Email Us",
+    "slack": "Join Agaar Neg community on Slack",
+    "facebook": "Follow us on Facebook",
+    "twitter": "Follow us on Twitter",
+    "instagram": "Follow us on Instagram",
+    "youtube": "Subscribe to our Youtube channel",
+    "btn": "subscribe",
+    "subscribed": "Subscribed",
+    "validEmail": "Please enter a valid email",
+    "placeholder": "Your E-mail...",
+    "placeholder1": "Join our email list",
+    "footerPlaceHolder": "Enter your email to receive our newsletters"
+  },
+  "footer": {},
+  "join": {
+    "title": "Join Our Cause",
+    "description": "Our work depends on the hard-working, genuine volunteers that dedicate their time to the organization. Sign up to volunteer!",
+    "sidebarTitle": "Join breathe Mongolia",
+    "volunteer": "Sign up to be a volunteer",
+    "share": "Join our advisory board",
+    "ask": "Apply for a job",
+    "mobileVolunteer": "Become a Volunteer!",
+    "mobileShare": "Join our advisory board",
+    "mobileAsk": "Apply for a job"
+  },
+  "download": {
+    "title": "Download Resources",
+    "mobileTitle": "Resources",
+    "description": "Download resources to educate yourself, your family, and to prevent against harmful effects of air pollution.",
+    "sidebarTitle": "Download",
+    "book": "Children’s comic book",
+    "mobileBook": "Download our children’s book",
+    "mobileDescription": "Download resources to educate yourself, your family, and to prevent against harmful effects of air pollution."
+  },
+  "actionCategory": {
+    "protect": "Act",
+    "donate": "Donate",
+    "volunteer": "Join us",
+    "connect": "Connect"
+  }
+}

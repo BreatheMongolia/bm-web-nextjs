@@ -8,7 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Page } from 'graphql/generated'
 import { RankType, StationType } from 'lib/air-pollution-map/types'
 // lib functions/queries
-import { getHomePage } from 'lib/graphql-api/queries/home'
+import { getHomePage, getVolunteers } from 'lib/graphql-api/queries/home'
 import {
   fetchPurpleAirStations,
   fetchOpenAQStations,
@@ -27,6 +27,8 @@ import {
   NewsCarousel,
   OurWorkCarousel,
 } from 'components/HomePage'
+import { getTranslated } from 'lib/utils/getTranslated'
+import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
 // TODO: Detect the current language and update fields based on the current language
 // TODO: Add a util function to extract the correct image size for the imageUrl
@@ -34,31 +36,16 @@ import {
 export default function Index({
   page,
   stations,
+  volunteers,
   globalRanks,
+  locale,
 }: {
   page: Page
   stations: StationType[]
   globalRanks: RankType[]
+  volunteers: any
+  locale: string
 }) {
-  const { t } = useTranslation()
-  const router = useRouter()
-  const { i18n } = useTranslation()
-
-  useEffect(() => {
-    // Get the current language from the URL (e.g., "mn" or "en")
-    const { locale } = router
-    if (locale) {
-      i18n.changeLanguage(locale)
-    }
-  }, [])
-  const getBannerTextRight = bannerTextRight => {
-    var text: string = ''
-    for (let i = 0; i < bannerTextRight.length; i++) {
-      text += bannerTextRight[i].categoryText
-      text += bannerTextRight?.length - 1 !== i ? '・' : ''
-    }
-    return text
-  }
   return (
     <div>
       <Head>
@@ -69,7 +56,7 @@ export default function Index({
           imageUrls={page.customFields.banners}
           bottomText={{
             left: page.customFields.bannerTextLeft,
-            right: getBannerTextRight(page.customFields.bannerTextRight),
+            right: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
           }}
         />
         <div className="container mx-auto flex flex-col gap-20">
@@ -91,24 +78,28 @@ export default function Index({
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
-          {/* <OurWorkCarousel
-            title={{
-              en: page.customFields.campaignAndOurWorkTitle,
-              mn: page.customFields.campaignAndOurWorkTitleMn,
-            }}
+          <OurWorkCarousel
+            title={getTranslated(
+              page.customFields.campaignAndOurWorkTitle,
+              page.customFields.campaignAndOurWorkTitleMn,
+              locale,
+            )}
             campaigns={page.customFields.campaignAndOurWorkSlider}
-          /> */}
+            locale={locale}
+          />
           <JoinBMSection
             title={{
               en: page.customFields.joinBreatheMongoliaTitle,
               mn: page.customFields.joinBreatheMongoliaTitleMn,
             }}
+            locale={locale}
             descriptionHtml={{
               en: page.customFields.joinBreatheMongoliaDescription,
               mn: page.customFields.joinBreatheMongoliaDescriptionMn,
             }}
             slider={page.customFields.joinBreatheMongoliaImageSlider}
             countriesInfoText={page.customFields.countriesInfoText}
+            volunteers={volunteers}
           />
           <OurPartners
             title={{
@@ -116,15 +107,18 @@ export default function Index({
               mn: page.customFields.partnersLogosTitleMn,
             }}
             partnerLogos={page.customFields.partnersLogos}
+            locale={locale}
           />
         </div>
       </div>
     </div>
   )
 }
+
 // This calls the API first and then loads the page
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
+  const volunteers = await getVolunteers()
 
   const purpleAirStations = await fetchPurpleAirStations()
   const openAQStations = await fetchOpenAQStations()
@@ -141,7 +135,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
+      locale,
       page,
+      volunteers,
       stations,
       globalRanks: airVisualGlobalRanks,
     },

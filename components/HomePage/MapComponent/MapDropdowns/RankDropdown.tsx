@@ -30,7 +30,9 @@ export const RankDropdown = ({
         }`}
         onClick={() => setTitleClick(!open)}
       >
-        <div className="grow text-xs">{t('stationDetail.uBWorldRanking')}</div>
+        <div className="grow text-xs">
+          {t('stationDetail.uBWorldRanking')} #{ubRank}
+        </div>
         <div className="px-3">
           <ChevronDownIcon className={`h-5 w-5 transition-all ${open && 'rotate-180'}`} />
         </div>

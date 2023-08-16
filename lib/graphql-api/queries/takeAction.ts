@@ -1,7 +1,10 @@
 import { fetchAPI } from 'lib/graphql-api/api'
-import { Page, PageIdType, TakeAction, TakeActionIdType } from 'graphql/generated'
+import { TakeAction, TakeActionIdType } from 'graphql/generated'
 
-export async function getTakeActionsDetail(id: string, idType: TakeActionIdType = TakeActionIdType.Uri): Promise<Page> {
+export async function getTakeActionsDetail(
+  id: string,
+  idType: TakeActionIdType = TakeActionIdType.Slug,
+): Promise<TakeAction> {
   const data = await fetchAPI(
     `query GetTakeActionById($id: ID!, $idType: TakeActionIdType!) {
       takeAction(id: $id,idType: $idType) {
@@ -13,13 +16,14 @@ export async function getTakeActionsDetail(id: string, idType: TakeActionIdType 
       variables: { id, idType },
     },
   )
-  return data.takeAction || {}
+
+  return data.takeAction
 }
 
 export async function getTakeActionsLatest() {
   const data = await fetchAPI(
     `query getLatestTakeActions {
-      takeActions(where: { orderby: { order: DESC, field: DATE } }, first: 9) {
+      takeActions(where: { orderby: { order: DESC, field: DATE } }, first: 100) {
         edges {
           node {
             ${TakeActionGQLQuerySections.takeAction}
@@ -33,7 +37,10 @@ export async function getTakeActionsLatest() {
   return data.takeActions?.edges || []
 }
 
-export async function getFeaturedTakeActions(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {
+export async function getFeaturedTakeActions(
+  id: string,
+  idType: TakeActionIdType = TakeActionIdType.Uri,
+): Promise<TakeAction> {
   const data = await fetchAPI(
     `query page($id: ID!, $idType: PageIdType!) {
           page(id: $id, idType: $idType) {
@@ -47,18 +54,16 @@ export async function getFeaturedTakeActions(id: string, idType: PageIdType = Pa
       variables: { id, idType },
     },
   )
-  return data.page?.customFields?.featuredTakeActionsLanding || []
+  return data.page?.customFields || []
 }
 
 export async function getTakeActionSlugs(): Promise<TakeAction[]> {
   const data = await fetchAPI(
-    `
-    query getAllTakeActions {
-      takeActions(first: 1000) {
+    `query getAllTakeActions {
+      takeActions(first: 100) {
         edges {
           node {
             databaseId
-            desiredSlug
             slug
             dateGmt
           }
@@ -75,40 +80,16 @@ const TakeActionGQLQuerySections = {
     featuredTakeActionsLanding {
       ... on TakeAction {
         databaseId
+        slug
         dateGmt
         customFields {
-          additionalResources {
-            title
-            titleMn
-            url
-            urlMn
-          }
-          introductionText
-          introductionTextMn
-          pledgeContent
-          pledgeContentMn
           titleMn
           title
-          excerpt
-          excerptMn
           typeOfAction {
             customFields {
               name
               nameMn
             }
-          }
-          listOfPhotos {
-            mediaItemUrl
-            caption
-          }
-          listOfVideos {
-            videoLink
-          }
-          listOfSubSections {
-            title
-            titleMn
-            bodyMn
-            body
           }
         }
         featuredImage {
@@ -118,9 +99,22 @@ const TakeActionGQLQuerySections = {
         }
       }
     }
+    bannerTextLeft
+    bannerTextLeftMn
+    bannerTextRight {
+      categoryText
+      categoryTextMn
+    }
+    takeActionsBanner {
+      mediaItemUrl
+    }
+    takeActionsBannerMn {
+      mediaItemUrl
+    }
   `,
   takeAction: `
       databaseId
+      slug
       date
       dateGmt
       customFields {
@@ -150,6 +144,12 @@ const TakeActionGQLQuerySections = {
   takeActionDetail: `
     databaseId
     dateGmt
+    totalPledges
+    featuredImage {
+      node {
+        mediaItemUrl
+      }
+    }
     customFields {
       additionalResources {
         title

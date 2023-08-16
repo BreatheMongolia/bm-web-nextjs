@@ -45,36 +45,10 @@
   },
 
   "title": "this is landing page",
-  "pledge": {
-    "button": "take this pledge",
-    "pledged": "Congratulations!",
-    "pledgeTo": "I pledge to <1>{{title}}</1>",
-    "congrats": "Congratulations! You have pledged to:",
-    "tapToTakePledge": "Tap to take this pledge",
-    "joined": "You and {{totalPledge}} people have taken this pledge!",
-    "share": "Share Your Pledge Now!",
-    "mobileTitle": "Take This Pledge and Share with Your Network!"
-  },
-  "additionalResources": {
-    "title": "Additional Resources"
-  },
   "actionList": {
     "title": "What you can do:",
     "soon": "More Coming Soon! ",
     "button": "Read More"
-  },
-  "userFeedback": {
-    "question": "Did you find this information useful?",
-    "thankYou": "Thank you for your feedback!",
-    "yes": "Yes",
-    "no": "No"
-  },
-  "faq": {
-    "title": "FAQ",
-    "mobileTitle": "Frequently asked questions",
-    "tabTitle1": "Line 1",
-    "tabTitle2": "Line 2",
-    "tabTitle3": "Line 3"
   },
   "hero": {
     "title": "TAKE ACTION",
@@ -168,13 +142,6 @@
     "tov": "Tov",
     "uvs": "Uvs",
     "zavkhan": "Zavkhan"
-  },
-  "map": {},
-  "actionShareEmail": {
-    "subject": "Take action against air pollution in Mongolia",
-    "bodyPart1": "I just pledged to",
-    "bodyPart2": "People need to know about this.",
-    "bodyPart3": "Thanks!"
   },
   "stationDetail": {
     "uBWorldRanking": "UB World Ranking",
@@ -294,28 +261,7 @@
     "Khan Uul": "Хан Khan Uul",
     "Nalaikh": "Nalaikh"
   },
-  "home": {},
-  "news": {
-    "title": "News",
-    "featuredNews": "Featured news",
-    "featuredVideos": "Featured videos",
-    "morevideos": "see more videos",
-    "latestOnAirPollution": "Latest on air pollution",
-    "latestOnAirPollutionText": "We curate relevant Mongolian and English articles, in addition to writing original pieces about air pollution in Mongolia and worldwide . If you have suggestions, contact <a href='mailto: hello@breathemongolia.org'> hello@breathemongolia.org </a>",
-    "morefilter": "More filter",
-    "agaarNegPlatform": "Agaar Neg platfrom by Breathe Mongolia",
-    "latestOnBm": "Latest on Breathe Mongolia",
-    "seemore": "See more",
-    "allvideos": "Videos",
-    "agaarneg.mn": "agaarneg.mn",
-    "seemoreon": "see more on",
-    "bannerText": "Stay up-to-date with the latest on air pollution and related topics in Mongolia and worldwide",
-    "latestNews": "Latest news",
-    "sourceLanguageEng": "Eng",
-    "sourceLanguageMgl": "Mgl",
-    "all": "All",
-    "teams": "Teams"
-  },
+
   "givebutter": {
     "support": "Support us"
   },
