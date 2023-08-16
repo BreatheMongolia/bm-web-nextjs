@@ -9,7 +9,7 @@ export const fetchAirVisualGlobalStations = async () => {
   await axios
     .get(AIRVISUAL_STATIONS_URL)
     .then(res => {
-      if (res.data) {
+      if (res && res.data) {
         if (res.data.data) {
           ranks = [...res.data.data]
         }

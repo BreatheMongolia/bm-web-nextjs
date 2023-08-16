@@ -82,6 +82,7 @@ export async function getLastThree(): Promise<News[]> {
         edges {
           node {
             databaseId
+            slug
             date
             dateGmt
             customFields {

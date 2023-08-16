@@ -39,11 +39,13 @@ export const fetchPurpleAirStations = async () => {
       return null
     }),
   ).then(result => {
-    result.map(res => {
-      if (res.status === 'fulfilled' && res.value) {
-        stations.push(res.value)
-      }
-    })
+    if (result) {
+      result.map(res => {
+        if (res.status === 'fulfilled' && res.value) {
+          stations.push(res.value)
+        }
+      })
+    }
   })
   return stations
 }
