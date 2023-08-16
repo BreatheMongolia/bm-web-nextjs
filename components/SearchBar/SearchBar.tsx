@@ -1,5 +1,5 @@
 import React, { FC, useState, useRef, useEffect } from 'react'
-import { ArrowUpIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import cx from 'classnames'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'

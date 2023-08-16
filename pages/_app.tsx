@@ -3,6 +3,8 @@ import Head from 'next/head'
 import { Layout } from '../components/layout/layout'
 import 'styles/index.scss'
 import 'styles/map-styles.scss'
+import 'styles/about-us.scss'
+import 'styles/our-mission.scss'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import 'styles/goal-styles.scss'
 import 'styles/why-section.scss'
@@ -26,23 +28,23 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // FIXME: Givebutter doesn't seem to be working
   return (
-    <AnimatePresence mode="wait" initial={true}>
-      <Layout>
-        <Head>
-          <Script src="https://js.givebutter.com/elements/latest.js" />
-          <Script id="give-butter-config">
-            {`window.Givebutter=window.Givebutter||function(){(Givebutter.q=Givebutter.q||[]).push(arguments)};Givebutter.l=+new Date;
+    // <AnimatePresence mode="wait" initial={true}>
+    <Layout>
+      <Head>
+        <Script src="https://js.givebutter.com/elements/latest.js" />
+        <Script id="give-butter-config">
+          {`window.Givebutter=window.Givebutter||function(){(Givebutter.q=Givebutter.q||[]).push(arguments)};Givebutter.l=+new Date;
           window.Givebutter('setOptions', {
               accountId: "cU8eUohIqzvZNZza",
               forceHttps: true,
               bubble: false
           });`}
-          </Script>
-        </Head>
-        <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} />
-        <Component {...pageProps} key={router.asPath} />
-      </Layout>
-    </AnimatePresence>
+        </Script>
+      </Head>
+      {/* <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} /> */}
+      <Component {...pageProps} key={router.asPath} />
+    </Layout>
+    // </AnimatePresence>
   )
 }
 

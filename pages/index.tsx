@@ -122,16 +122,15 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const purpleAirStations = await fetchPurpleAirStations()
   const openAQStations = await fetchOpenAQStations()
-  const airVisualOutdoorStations = await fetchAirVisualOutdoorStations()
-  const airVisualIndoorStations = await fetchAirVisualIndoorStations()
-  const airVisualGlobalRanks = await fetchAirVisualGlobalStations()
+
+  // adding a isNotDev check to disable api calls locally as it consumes api credits
+  const isNotDev = process.env.NODE_ENV !== 'development'
+  const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
+  const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
+  const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
 
-  // console.log('fetched stations => ', stations.length, ' station(s)')
-  // this return passes it to the above component
-
-  // console.log('fetched ranks', airVisualGlobalRanks.length, 'cities')
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
