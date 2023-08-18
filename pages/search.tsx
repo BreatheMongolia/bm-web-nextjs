@@ -16,9 +16,28 @@ const SearchPage = ({ data, locale }) => {
   const { t } = useTranslation()
   const router = useRouter()
   const { s } = router.query
-  const searchValue: string = s?.toString()
+  const searchValue: string = s?.toString() ?? ''
 
-  if (searchValue === undefined) return null
+  if (searchValue === '') {
+    return (
+      <div>
+        <Head>
+          <title>{`Search Results - Breathe Mongolia`}</title>
+        </Head>
+        <div>
+          <PageImageBanner
+            bottomText={{
+              left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
+              right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
+            }}
+          />
+          <div className="search-page-container">
+            <SearchBar value={searchValue} count={0} />
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   function getLatestNews(data: any[]) {
     if (data.length === 0) {
@@ -202,6 +221,7 @@ const SearchPage = ({ data, locale }) => {
 export default SearchPage
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  // FIXME: Should use the search value from router here instead of getting all
   const data: any = await getSearchData()
 
   return {
@@ -210,6 +230,5 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
       locale,
       data,
     },
-    revalidate: 60,
   }
 }

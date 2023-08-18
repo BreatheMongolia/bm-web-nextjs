@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 export const AboutUsHeader = () => {
   const { t, i18n } = useTranslation('about')
   return (
-    <div className="grid sm:grid-cols-2 w-full h-48">
+    <div className="grid sm:grid-cols-2 w-full">
       {/* FIXME: Update the gradient color to match old */}
       <div className="flex justify-center items-center bg-bm-blue bg-gradient-to-r from-bm-blue to-[#61b1ee] text-white">
         <div className="text-left w-96">
