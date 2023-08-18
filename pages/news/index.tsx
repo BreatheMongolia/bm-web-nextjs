@@ -8,10 +8,13 @@ import { getNewsPosts } from 'lib/graphql-api/queries/news'
 import { getImage } from 'lib/utils/getImage'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 
 const NewsPage = ({ news }: { news: News[] }) => {
+  const { t } = useTranslation('news')
+
   const filteredNews = [...news]
   return (
     <div>
@@ -26,13 +29,13 @@ const NewsPage = ({ news }: { news: News[] }) => {
       />
       <div className="container mx-auto flex flex-col gap-20">
         <div>
-          <H2 title={'featuredNews'} descriptionHtml={''} trailingLineColor="blue" />
+          <H2 title={t('featuredNews')} descriptionHtml={''} trailingLineColor="blue" />
         </div>
         <div>
-          <H2 title={'latestNews'} descriptionHtml={''} trailingLineColor="blue" />
+          <H2 title={t('latestNews')} descriptionHtml={''} trailingLineColor="blue" />
         </div>
         <div>
-          <H2 title={'Agaar Neg News'} descriptionHtml={''} />
+          <H2 title={t('agaarNegPlatform')} descriptionHtml={''} />
           <div className="flex gap-5">
             <AgaarNegCard />
             <AgaarNegCard />
@@ -41,7 +44,7 @@ const NewsPage = ({ news }: { news: News[] }) => {
           </div>
         </div>
         <div>
-          <H2 title={'Breathe Mongolia News'} descriptionHtml={''} trailingLineColor="blue" />
+          <H2 title={t('latestOnBm')} descriptionHtml={''} trailingLineColor="blue" />
         </div>
       </div>
       <div className="container grid sm:grid-cols-4 gap-2 py-5">
