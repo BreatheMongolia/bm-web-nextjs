@@ -1,43 +1,41 @@
-import React, { useState } from "react"
-import { useTranslation } from "next-i18next"
-import Desktop  from "../Desktop/index"
-import Mobile  from "../Mobile/index"
+import React, { useState } from 'react'
+import { useTranslation } from 'next-i18next'
+import Link from 'next/link'
+import { H2 } from 'components/generic/Typography'
+import Desktop from '../Desktop/index'
+import Mobile from '../Mobile/index'
+import { urls } from 'lib/utils/urls'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
-import { urls } from "../../lib/utils/urls"
 
 export const DonateSection = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('takeAction')
   const [isNavVisible, setNavVisible] = useState(false)
+
   const donateLinks = () => {
     return (
-      <ul>
+      <ul className="list-disc">
         <li>
-          <a href={urls.givebutter} target="_blank">
-            {t("donate.donateOnetime")}
-          </a>
+          <Link href={urls.givebutter} target={'_blank'} className="text-black hover:text-bm-blue my-2">
+            {t('donate.donateOnetime')}
+          </Link>
         </li>
         <li>
-          <a href={urls.yourCause} target="_blank">
-            {t("donate.donateYourcause")}
-          </a>
+          <Link href={urls.yourCause} target={'_blank'} className="hover:text-bm-blue my-2">
+            {t('donate.donateYourcause')}
+          </Link>
         </li>
         <li>
-          <a href={urls.benevity} target="_blank">
-            {t("donate.donateBenevity")}
-          </a>
+          <Link href={urls.benevity} target={'_blank'} className="hover:text-bm-blue my-2">
+            {t('donate.donateBenevity')}
+          </Link>
         </li>
-        {/* <li>
-          <a href={urls.aboutUs} target="_blank">
-            {t("donate.donateMore")}
-          </a>
-        </li> */}
       </ul>
     )
   }
   const donateBtn = () => {
     return (
       <a href={urls.givebutter} target="_blank" className="donate">
-        {t("donate.button")}
+        {t('donate.button')}
       </a>
     )
   }
@@ -47,42 +45,47 @@ export const DonateSection = () => {
 
   const btnSeeMore = () => {
     return (
-      <div className="ta-mobile-seemore">
-        {t("donate.sidebarTitleMobile")}
-        <ChevronDownIcon />
+      <div className="inline-block ta-mobile-seemore">
+        {t('donate.sidebarTitleMobile')}
+        <ChevronDownIcon className="w-5 h-5 text-black" />
       </div>
     )
   }
   const btnSeeLess = () => {
     return (
-      <div className="ta-mobile-seeless">
-        {t("donate.seeLess")}
-        <ChevronUpIcon />
+      <div className="inline-block ta-mobile-seeless">
+        {t('donate.seeLess')}
+        <ChevronUpIcon className="w-5 h-5 text-black" />
       </div>
     )
   }
 
   return (
-    <div className="ta-section" id="donate-section">
+    <div>
       <Desktop>
-        <div className="ta-content">
-          <h2 className="heading">{t("donate.title")}</h2>
-          <p>{t("donate.description")}</p>
-          {donateBtn()}
+        <div className="flex flex-row ta-section">
+          <div className="basis-2/3 ta-content">
+            <H2 title={t('donate.title')} />
+            <p>{t('donate.description')}</p>
+            {donateBtn()}
+          </div>
+          <div className="basis-1/3 my-5 ta-sidebar">
+            <h2 className="my-5 subheading">{t('donate.sidebarTitle')}</h2>
+            {donateLinks()}
+          </div>
         </div>
-        <div className="ta-sidebar">
-          <h2 className="subheading">{t("donate.sidebarTitle")}</h2>
-          {donateLinks()}
+        <div className="flex py-10 text-lg text-justify">
+          <p>{t('donate.disclosure')}</p>
         </div>
       </Desktop>
       <Mobile>
         <div className="ta-mobile-content">
-          <h2 className="heading">{t("donate.mobileTitle")}</h2>
-          <p>{t("donate.description")}</p>
+          <H2 title={t('donate.mobileTitle')} />
+          <p className="mb-5">{t('donate.description')}</p>
           {donateBtn()}
-          <div className="ta-mobile-sidebar">
+          <div className="my-5 ta-mobile-sidebar">
             <a
-              className="subheading"
+              className="static subheading"
               onClick={() => {
                 setNavVisible(!isNavVisible)
               }}
@@ -96,6 +99,3 @@ export const DonateSection = () => {
     </div>
   )
 }
-
-export default DonateSection
-
