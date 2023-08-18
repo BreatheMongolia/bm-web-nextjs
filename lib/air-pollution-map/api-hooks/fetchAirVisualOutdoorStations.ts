@@ -15,15 +15,18 @@ export const fetchAirVisualOutdoorStations = async () => {
   const activeStations = await axios
     .get(AIRVISUAL_STATIONS_URL)
     .then(res => {
-      if (res.data) {
+      if (res && res.data) {
         // get active stations
         return res.data.data
       }
       return []
     })
-    .catch(err => console.log(err))
+    .catch(err => console.error(err))
 
   // get the detail active actions
+  if (!activeStations) {
+    return []
+  }
   await Promise.allSettled(
     activeStations.map(async (d: any) => {
       try {
@@ -60,11 +63,13 @@ export const fetchAirVisualOutdoorStations = async () => {
       }
     }),
   ).then(result => {
-    result.map(res => {
-      if (res.status === 'fulfilled' && res.value) {
-        stations.push(res.value)
-      }
-    })
+    if (result) {
+      result.map(res => {
+        if (res.status === 'fulfilled' && res.value) {
+          stations.push(res.value)
+        }
+      })
+    }
   })
 
   return stations

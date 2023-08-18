@@ -2,7 +2,7 @@ import { MediaDetails } from 'graphql/generated'
 import { getTranslated } from './getTranslated'
 
 export const checknull = (image: MediaDetails, name: string) => {
-  let res
+  let res = null
   if (image) {
     image.sizes?.map(img => {
       if (img.name === name) res = img.sourceUrl
