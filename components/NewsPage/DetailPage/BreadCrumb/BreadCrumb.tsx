@@ -7,7 +7,7 @@ interface IProps {
   breadCrumbItems: BreadCrumbItem[]
 }
 
-const BreadCrumb: FC<IProps> = ({ breadCrumbItems }) => {
+export const BreadCrumb: FC<IProps> = ({ breadCrumbItems }) => {
   return (
     <div className="breadCrumbs">
       {breadCrumbItems.map((breadCrumbItem, idx) => {
@@ -21,5 +21,3 @@ const BreadCrumb: FC<IProps> = ({ breadCrumbItems }) => {
     </div>
   )
 }
-
-export default BreadCrumb

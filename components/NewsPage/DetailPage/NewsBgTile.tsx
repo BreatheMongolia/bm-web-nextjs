@@ -31,7 +31,7 @@ type Props = {
   featured?: string
 }
 
-const NewsBgTile: FC<Props> = ({
+export const NewsBgTile: FC<Props> = ({
   id,
   slug,
   sourceLink,
@@ -219,5 +219,3 @@ const NewsBgTile: FC<Props> = ({
     </>
   )
 }
-
-export default NewsBgTile

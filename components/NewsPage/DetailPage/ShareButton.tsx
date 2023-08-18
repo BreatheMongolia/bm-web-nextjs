@@ -7,7 +7,7 @@ type Props = {
   title: string
   bottom: boolean
 }
-const ShareButton: FC<Props> = ({ url, title, bottom }) => {
+export const ShareButton: FC<Props> = ({ url, title, bottom }) => {
   function copy() {
     const el = document.createElement('input')
     el.value = window.location.href
@@ -88,4 +88,3 @@ const ShareButton: FC<Props> = ({ url, title, bottom }) => {
     </div>
   )
 }
-export default ShareButton

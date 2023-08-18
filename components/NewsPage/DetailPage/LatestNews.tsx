@@ -1,15 +1,12 @@
-import { useQuery } from '@apollo/client'
-import React, { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'next-i18next'
 import NewsBgTile from './NewsBgTile'
 
 // import { HashLink } from 'react-router-hash-link'
-import { getImage } from 'lib/utils/getImage'
-import { getTranslated } from 'lib/utils/getTranslated'
 import Link from 'next/link'
 
-const LatestNews: any = ({ data: newses }) => {
-  const [t, i18n] = useTranslation('news')
+export const LatestNews: any = ({ data: newses }) => {
+  const [t] = useTranslation('news')
 
   return (
     <div style={{ paddingTop: '50px' }}>
@@ -48,5 +45,3 @@ const LatestNews: any = ({ data: newses }) => {
     </div>
   )
 }
-
-export default LatestNews
