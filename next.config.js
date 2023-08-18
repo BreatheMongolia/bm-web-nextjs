@@ -9,6 +9,30 @@ if (!process.env.WORDPRESS_API_URL) {
 
 /** @type {import('next').NextConfig} */
 module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/about',
+        destination: '/about/info',
+        permanent: true,
+      },
+      {
+        source: '/about/ourstory',
+        destination: '/about/our-story',
+        permanent: true,
+      },
+      {
+        source: '/about/ourteam',
+        destination: '/about/our-team',
+        permanent: true,
+      },
+      {
+        source: '/about/supportus',
+        destination: '/about/support-us',
+        permanent: true,
+      },
+    ]
+  },
   i18n,
   images: {
     domains: [
