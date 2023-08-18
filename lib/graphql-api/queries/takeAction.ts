@@ -85,6 +85,8 @@ const TakeActionGQLQuerySections = {
         customFields {
           titleMn
           title
+          excerpt
+          excerptMn
           typeOfAction {
             customFields {
               name
