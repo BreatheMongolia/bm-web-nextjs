@@ -1858,6 +1858,11 @@ core-js@^3:
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.30.2.tgz"
   integrity sha512-uBJiDmwqsbJCWHAwjrx3cvjbMXP7xD72Dmsn5LOJpiRmE3WbBbN5rCqQ2Qh6Ek6/eOrjlWngEynBWo4VxerQhg==
 
+core-js@^3.0.0:
+  version "3.32.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.0.tgz#7643d353d899747ab1f8b03d2803b0312a0fb3b6"
+  integrity sha512-rd4rYZNlF3WuoYuRIDEmbR/ga9CeuWX9U05umAvgrrZoHY4Z++cp/xwPQMvUpBB4Ag6J8KfD80G0zwCyaSxDww==
+
 cosmiconfig@8.0.0:
   version "8.0.0"
   resolved "https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-8.0.0.tgz"
@@ -3424,9 +3429,9 @@ quickselect@^2.0.0:
   integrity sha512-RKJ22hX8mHe3Y6wH/N3wCM6BWtjaxIyyUIkpHOvfFnxdI4yD4tBXEBKSbriGujF6jnSVkJrffuo6vxACiSSxIw==
 
 rc-collapse@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/rc-collapse/-/rc-collapse-3.7.0.tgz#75116b7142371940ff9fdce61a9e48561b53bbfc"
-  integrity sha512-Cir1c89cENiK5wryd9ut+XltrIfx/+KH1/63uJIVjuXkgfrIvIy6W1fYGgEYtttbHW2fEfxg1s31W+Vm98fSRw==
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/rc-collapse/-/rc-collapse-3.7.1.tgz#bda1f7f80adccf3433c1c15d4d9f9ca09910c727"
+  integrity sha512-N/7ejyiTf3XElNJBBpxqnZBUuMsQWEOPjB2QkfNvZ/Ca54eAvJXuOD1EGbCWCk2m7v/MSxku7mRpdeaLOCd4Gg==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"
@@ -3443,12 +3448,17 @@ rc-motion@^2.3.4, rc-motion@^2.7.3:
     rc-util "^5.21.0"
 
 rc-util@^5.21.0, rc-util@^5.27.0:
-  version "5.34.1"
-  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-5.34.1.tgz#0becf411d8f09bdb0f1b61322964f27efeeba642"
-  integrity sha512-SqiUT8Ssgh5C+hu4y887xwCrMNcxLm6ScOo8AFlWYYF3z9uNNiPpwwSjvicqOlWd79rNw1g44rnP7tz9MrO1ZQ==
+  version "5.36.0"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-5.36.0.tgz#be21995071e148f81141edb6f767062db5170224"
+  integrity sha512-a4uUvT+UNHvYL+awzbN8H8zAjfduwY4KAp2wQy40wOz3NyBdo3Xhx/EAAPyDkHLoGm535jIACaMhIqExGiAjHw==
   dependencies:
     "@babel/runtime" "^7.18.3"
     react-is "^16.12.0"
+
+react-children-utilities@^1.2.1:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/react-children-utilities/-/react-children-utilities-1.3.3.tgz#4d6725b51471c119e5319a309d07c51543b65cb2"
+  integrity sha512-4VnHQweSerPlsKS65dBeKuAPDhHAOllDgsjDLLdluMOZ+1yOE29pFqdGAnnOnFVfhIhvYnGyRbiJ7NtMemsu7w==
 
 react-dom@^18.2.0:
   version "18.2.0"
@@ -3571,6 +3581,14 @@ react-social-icons@^5.15.0:
   integrity sha512-khfDgUiUwEBe34T6br2+mkXQg3hLVDdviVjexxZoVCsogMgxTy/m8+KlX/j6Wa7P2BPxgZ7yZ2jXw3X06pUUFQ==
   dependencies:
     prop-types "^15.7.2"
+
+react-svg-unique-id@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/react-svg-unique-id/-/react-svg-unique-id-1.3.3.tgz#277a0f8d752bd3cbf8565bc7ee7c487bf4586eff"
+  integrity sha512-Cbm4jz1svWHUm9eGN4nALt3vzA9nZXw//oDYOYQIK5qgUPze3wru7od6I5Omhq6lRtUlOYPE5Rhx5659sLWcrw==
+  dependencies:
+    core-js "^3.0.0"
+    react-children-utilities "^1.2.1"
 
 react@^18.2.0:
   version "18.2.0"
