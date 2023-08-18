@@ -133,10 +133,7 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
                   {takeAction.typeOfAction && takeAction.typeOfAction.length > 0 && <h4>{takeAction.typeOfAction}</h4>}
                   <h2>{takeAction.title}</h2>
                   <p>{truncate(takeAction.excerpt)}</p>
-                  {/* <div className="action-button"> */}
                   <h6 className="mt-2 text-[8px] font-bold underline text-sky-400">{t('actionList.button')}</h6>
-                  {/* <p>{t('actionList.button')}</p> */}
-                  {/* </div> */}
                 </div>
               </Link>
             </div>
