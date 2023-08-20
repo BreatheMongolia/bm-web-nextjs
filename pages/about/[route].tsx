@@ -1,9 +1,15 @@
+import ErrorPage from 'next/error'
 import { AboutUsHeader, AboutUsInfoSection } from 'components/AboutUsPage'
 import { GetStaticPaths } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { getPeople } from 'lib/graphql-api/queries/people'
+import { getTranslated } from 'lib/utils/getTranslated'
+import AboutUsOurTeam from 'components/AboutUsPage/AboutUsOurTeam'
+import { getHomePage } from 'lib/graphql-api/queries/home'
+import { OurPartners } from 'components/HomePage'
 
 const VALID_ROUTES = [
   {
@@ -12,31 +18,40 @@ const VALID_ROUTES = [
   },
   {
     route: 'our-story',
-    title: 'subNavigationTabs.aboutUs',
+    title: 'subNavigationTabs.ourStory',
   },
   {
     route: 'impact',
-    title: 'subNavigationTabs.aboutUs',
+    title: 'subNavigationTabs.impact',
   },
   {
     route: 'our-team',
-    title: 'subNavigationTabs.aboutUs',
+    title: 'subNavigationTabs.ourTeam',
   },
   {
     route: 'support-us',
-    title: 'subNavigationTabs.aboutUs',
+    title: 'subNavigationTabs.supportUs',
   },
 ]
 
-export default function AboutPageSection({}) {
+export default function AboutPageSection({ people, page, locale }) {
   const router = useRouter()
   const { t, i18n } = useTranslation('about')
 
+  if (router.isFallback) {
+    return <div> Loading... </div>
+  }
+
+  if (!page || !page?.customFields) {
+    return <ErrorPage statusCode={404} />
+  }
+
   const getAboutSectionByRoute = (route: string) => {
-    console.log(route)
     switch (route) {
       case '/about/info':
         return <AboutUsInfoSection />
+      case '/about/our-team':
+        return <AboutUsOurTeam people={people} />
       case '/about/impact':
         return
       default:
@@ -60,15 +75,62 @@ export default function AboutPageSection({}) {
       </div>
       {/* Content */}
       <div>{getAboutSectionByRoute(router.asPath)}</div>
+
+      {router.asPath !== 'support-us' && (
+        <div className="container mx-auto flex flex-col gap-20">
+          <OurPartners
+            title={{
+              en: page.customFields.partnersLogosTitle,
+              mn: page.customFields.partnersLogosTitleMn,
+            }}
+            partnerLogos={page.customFields.partnersLogos}
+            locale={locale}
+          />
+        </div>
+      )}
     </div>
   )
 }
 
-export const getStaticProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
-  },
-})
+const getTransformedPeople = (PplData: string | any[], locale: string) => {
+  const people = []
+  for (let i = 0; i < PplData.length; i++) {
+    people.push({
+      name: getTranslated(PplData[i].node.title, PplData[i].node.customFields.nameMn, locale),
+      imgSrc: PplData[i].node.featuredImage.node.mediaItemUrl,
+      role: getTranslated(PplData[i].node.customFields.role, PplData[i].node.customFields.roleMn, locale),
+      description: getTranslated(
+        PplData[i].node.customFields.description,
+        PplData[i].node.customFields.descriptionMn,
+        locale,
+      ),
+      memberSince: getTranslated(
+        PplData[i].node.customFields.memberSince,
+        PplData[i].node.customFields.memberSinceMn,
+        locale,
+      ),
+      featured: PplData[i].node.customFields.featured,
+      linkedin: PplData[i].node.customFields.linkedin,
+      sortBy: PplData[i].node.customFields.memberSince,
+    })
+  }
+
+  return people
+}
+
+export const getStaticProps = async ({ locale }) => {
+  const people = await getPeople()
+  const page = await getHomePage('/')
+
+  return {
+    props: {
+      people: getTransformedPeople(people, locale),
+      page,
+      locale,
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
+    },
+  }
+}
 
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   return {

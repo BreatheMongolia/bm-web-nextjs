@@ -18,6 +18,7 @@ import {
 } from 'components/TakeActionPage'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { getImage } from 'lib/utils/getImage'
+import { removeTags } from 'lib/utils/htmlParser'
 
 interface TakeActionPageProps {
   post: TakeAction
@@ -58,9 +59,8 @@ export default function TakeActionPostPage({ takeAction }) {
           <article>
             <Head>
               <title>{`${takeAction.title} - Breathe Mongolia Clean Air Coalition`}</title>
-              <meta name="description" content={takeAction.introductionText} />
+              <meta name="description" content={removeTags(takeAction.introductionText)} />
               <meta property="og:title" content={takeAction.title} />
-              <meta property="og:description" content={takeAction.introductionText} />
               {featuredImageBig && <meta property="og:image" content={featuredImageBig} />}
             </Head>
             <div className="container max-w-screen-lg">
@@ -157,10 +157,10 @@ export const getStaticProps = async ({ params, locale }) => {
         'nav',
         'footer',
         'map',
-        'common',
         'pledge',
         'faq',
         'takeAction',
+        'common',
       ])),
       takeAction: getTransformedData(takeAction, locale),
     },
