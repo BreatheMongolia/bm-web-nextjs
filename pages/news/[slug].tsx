@@ -15,6 +15,8 @@ import BreadCrumb from 'components/NewsPage/BreadCrumb'
 import ShareButton from 'components/NewsPage/ShareButton'
 import LatestNews from 'components/NewsPage/LatestNews'
 import { H2 } from 'components/generic/Typography'
+import parse from 'html-react-parser'
+import { removeTags } from 'lib/utils/htmlParser'
 
 interface NewsPostPageProps {
   post: any
@@ -50,9 +52,8 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
           <article>
             <Head>
               <title>{`${post.title} - Breathe Mongolia Clean Air Coalition`}</title>
-              <meta name="description" content={post.body} />
+              <meta name="description" content={removeTags(post.excerpt)} />
               <meta property="og:title" content={post.title} />
-              <meta property="og:description" content={post.body} />
               {post?.featuredImageBig && <meta property="og:image" content={post?.featuredImageBig} />}
             </Head>
             <Desktop>
@@ -194,6 +195,10 @@ const getNews = (news: News, locale: string): any => {
     sourceName: '',
     sourceLanguage: '',
     newsLandingPageFeatured: '',
+    excerpt:
+      getTranslated(news.customFields.excerpt, news.customFields.excerptMn, locale) !== null
+        ? getTranslated(news.customFields.excerpt, news.customFields.titleMn, locale)
+        : '',
     authors:
       news?.customFields.authors !== null
         ? news?.customFields.authors?.map((author: any) => {
@@ -219,7 +224,7 @@ const getNews = (news: News, locale: string): any => {
       news.customFields.featuredImage.image?.mediaDetails,
       news.customFields.featuredImage.imageMn?.mediaDetails,
       news.featuredImage?.node?.mediaDetails,
-      'medium',
+      'large',
     ),
     caption: getTranslated(news.customFields.featuredImage.caption, news.customFields.featuredImage.captionMn, locale),
   }
@@ -268,7 +273,7 @@ function getLatestNews(data: any[], locale: string) {
           news.customFields.featuredImage.image?.mediaDetails,
           news.customFields.featuredImage.imageMn?.mediaDetails,
           news.featuredImage?.node?.mediaDetails,
-          'medium_large',
+          'large',
         ) || '',
     })
   })
