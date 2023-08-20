@@ -1,0 +1,30 @@
+import React, { FC } from 'react'
+import Linkedin from 'assets/icons/Linkedin'
+
+type Props = {
+  person: any
+}
+const FeaturedMemberCard: FC<Props> = ({ person }) => {
+  return (
+    <div className="member_card">
+      <div className="member_card_left">
+        <img src={person.imgSrc} className="member_img" />
+      </div>
+      <div className="member_card_right">
+        <div className="member_info">
+          <h4 className="member_name">{person.name}</h4>
+          <h5 className="member_role">{person.role}</h5>
+          <p className="member_bio">{person.description}</p>
+          <p className="member_since">{person.memberSince}</p>
+          <div className="social_btns">
+            <a href={person.linkedin} target="_blank">
+              <Linkedin />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default FeaturedMemberCard
