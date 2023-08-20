@@ -1,3 +1,4 @@
+import ErrorPage from 'next/error'
 import { AboutUsHeader, AboutUsInfoSection } from 'components/AboutUsPage'
 import { GetStaticPaths } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -36,6 +37,14 @@ const VALID_ROUTES = [
 export default function AboutPageSection({ people, page, locale }) {
   const router = useRouter()
   const { t, i18n } = useTranslation('about')
+
+  if (router.isFallback) {
+    return <div> Loading... </div>
+  }
+
+  if (!page || !page?.customFields) {
+    return <ErrorPage statusCode={404} />
+  }
 
   const getAboutSectionByRoute = (route: string) => {
     switch (route) {
