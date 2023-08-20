@@ -33,7 +33,6 @@ export default function AboutPageSection({}) {
   const { t, i18n } = useTranslation('about')
 
   const getAboutSectionByRoute = (route: string) => {
-    console.log(route)
     switch (route) {
       case '/about/info':
         return <AboutUsInfoSection />
