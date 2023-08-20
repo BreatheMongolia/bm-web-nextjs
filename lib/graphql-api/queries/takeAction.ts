@@ -1,6 +1,25 @@
 import { fetchAPI } from 'lib/graphql-api/api'
 import { TakeAction, TakeActionIdType } from 'graphql/generated'
 
+export async function getTakeActionsFeedback(
+  id: string,
+  idType: TakeActionIdType = TakeActionIdType.DatabaseId,
+): Promise<TakeAction> {
+  const data = await fetchAPI(
+    `query GetTakeActionFeedback($id: ID!, $idType: TakeActionIdType!) {
+      takeAction(id: $id,idType: $idType) {
+          ${TakeActionGQLQuerySections.takeActionFeedback}
+        }
+      }
+    `,
+    {
+      variables: { id, idType },
+    },
+  )
+
+  return data.takeAction?.customFields?.userFeedbacks || []
+}
+
 export async function getTakeActionsDetail(
   id: string,
   idType: TakeActionIdType = TakeActionIdType.Slug,
@@ -143,6 +162,11 @@ const TakeActionGQLQuerySections = {
         }
       }
     `,
+  takeActionFeedback: `customFields {
+      userFeedbacks {
+        value
+      }
+    }`,
   takeActionDetail: `
     databaseId
     dateGmt

@@ -6,9 +6,14 @@ import dislikeIcon from 'assets/images/no.png'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { fetchAPI } from 'lib/graphql-api/api'
+import { getTakeActionsFeedback } from 'lib/graphql-api/queries/takeAction'
 
 type Props = {
   actionId: number
+}
+
+type FeedBack = {
+  value: string
 }
 
 export const UserFeedback: FC<Props> = ({ actionId }) => {
@@ -29,8 +34,18 @@ export const UserFeedback: FC<Props> = ({ actionId }) => {
         value,
       },
     }).then(result => {
-      setTotalFeedbacks(result.addUserFeedback.takeAction.totalUserFeedbacks)
-      setIsClicked(true)
+      let yesCount: number = 0,
+        noCount: number = 0
+      getTakeActionsFeedback(actionId.toString()).then((feedbackResult: any) => {
+        yesCount = feedbackResult.filter(item => item.value === 'yes').length
+        noCount = feedbackResult.filter(item => item.value === 'no').length
+
+        setTotalFeedbacks({
+          yes: yesCount,
+          no: noCount,
+        })
+        setIsClicked(true)
+      })
     })
   }
 
