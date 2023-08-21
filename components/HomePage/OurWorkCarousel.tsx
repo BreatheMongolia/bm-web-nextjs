@@ -83,7 +83,7 @@ export const OurWorkCarousel = ({
         trailingLineColor="yellow"
         extraButton={{
           title: t('campaignWork.seeMore'),
-          url: '/news',
+          url: '/about/impact',
         }}
       />
       <Slider
