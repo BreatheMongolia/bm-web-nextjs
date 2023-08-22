@@ -1,16 +1,21 @@
-import { NewsCard } from 'components/Cards'
-import { AgaarNegCard } from 'components/Cards/NewsCards/AgaarNegCard'
-import { PageImageBanner } from 'components/generic/PageImageBanner'
-import { H2 } from 'components/generic/Typography'
 import dayjs from 'dayjs'
-import { News } from 'graphql/generated'
-import { getNewsPosts } from 'lib/graphql-api/queries/news'
-import { getImage } from 'lib/utils/getImage'
+import Head from 'next/head'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import Head from 'next/head'
+// generic components
+import { H2 } from 'components/generic/Typography'
+import { NewsCard } from 'components/Cards'
+import { AgaarNegCard } from 'components/Cards/NewsCards/AgaarNegCard'
+import { PageImageBanner } from 'components/generic/PageImageBanner'
+// news components
+import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
+
+// api/utils
+import { News } from 'graphql/generated'
+import { getNewsPosts } from 'lib/graphql-api/queries/news'
+import { getImage } from 'lib/utils/getImage'
 
 const NewsPage = ({ news }: { news: News[] }) => {
   const { t } = useTranslation('news')
@@ -30,9 +35,19 @@ const NewsPage = ({ news }: { news: News[] }) => {
       <div className="container mx-auto flex flex-col gap-20">
         <div>
           <H2 title={t('featuredNews')} descriptionHtml={''} trailingLineColor="blue" />
+          <FeaturedNews />
         </div>
         <div>
           <H2 title={t('latestNews')} descriptionHtml={''} trailingLineColor="blue" />
+          <NewsGrid numCols={4}>
+            <div className="h-48 bg-gray-200 col-span-2"></div>
+            <div className="h-48 bg-gray-200"></div>
+            <div className="h-48 bg-gray-200"></div>
+            <div className="h-48 bg-gray-200"></div>
+            <div className="h-48 bg-gray-200"></div>
+            <div className="h-48 bg-gray-200"></div>
+            <div className="h-48 bg-gray-200"></div>
+          </NewsGrid>
         </div>
         <div>
           <H2 title={t('agaarNegPlatform')} descriptionHtml={''} />
@@ -45,18 +60,17 @@ const NewsPage = ({ news }: { news: News[] }) => {
         </div>
         <div>
           <H2 title={t('latestOnBm')} descriptionHtml={''} trailingLineColor="blue" />
+          <NewsGrid numCols={4}>
+            {filteredNews
+              .sort((a, b) => {
+                return dayjs(b.dateGmt ?? '').unix() - dayjs(a.dateGmt ?? '').unix()
+              })
+              .filter((_, idx) => idx < 8) // Move 8 to const MAX_NEWS when in separate component
+              .map((x, idx) => {
+                return <NewsCard key={idx} news={x} />
+              })}
+          </NewsGrid>
         </div>
-      </div>
-      <div className="container grid sm:grid-cols-4 gap-2 py-5">
-        {/* Sort by date desc, show only latest 8 */}
-        {filteredNews
-          .sort((a, b) => {
-            return dayjs(b.dateGmt ?? '').unix() - dayjs(a.dateGmt ?? '').unix()
-          })
-          .filter((_, idx) => idx < 8) // Move 8 to const MAX_NEWS when in separate component
-          .map((x, idx) => {
-            return <NewsCard key={idx} news={x} />
-          })}
       </div>
     </div>
   )

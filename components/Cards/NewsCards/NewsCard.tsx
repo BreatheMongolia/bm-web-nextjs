@@ -24,7 +24,7 @@ export const NewsCard = ({ news }: { news: any }) => {
 
   return (
     <div
-      className="relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer  bg-cover bg-center group w-[330px] h-[250px] "
+      className="relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group h-[250px]"
       style={{ backgroundImage: `url(${news.featuredImageBig})` }}
       onClick={onCardClick}
     >
