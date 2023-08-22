@@ -8,6 +8,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Router, useRouter } from 'next/router'
 import SearchBar from 'components/SearchBar/SearchBar'
+import Desktop from 'components/Desktop'
 
 type Option = {
   value: string
@@ -26,14 +27,8 @@ const availableOptions: Options = {
 export const Topbar = () => {
   const { locale } = useRouter()
 
-  const socialUrls = [
-    SOCIAL_URLS.FACEBOOK,
-    SOCIAL_URLS.INSTAGRAM,
-    SOCIAL_URLS.SLACK,
-    SOCIAL_URLS.TWITTER,
-    SOCIAL_URLS.LINKEDIN,
-    SOCIAL_URLS.YOUTUBE,
-  ]
+  const socialUrls: string[] = [SOCIAL_URLS.FACEBOOK, SOCIAL_URLS.INSTAGRAM, SOCIAL_URLS.SLACK, SOCIAL_URLS.TWITTER]
+  const socialUrlsDesktop: string[] = [SOCIAL_URLS.LINKEDIN, SOCIAL_URLS.YOUTUBE]
 
   const getURL = () => {
     const baseUrl = window.location.origin
@@ -51,7 +46,6 @@ export const Topbar = () => {
   return (
     <div className="w-full bg-bm-blue text-white px-5 py-1">
       <div className="flex justify-end gap-x-2">
-        {/* TODO: Replace with search bar */}
         <SearchBar />
 
         {/* Social URLS */}
@@ -63,11 +57,26 @@ export const Topbar = () => {
               target="_blank"
               bgColor="transparent"
               fgColor="#ffffff"
-              className="hover:bg-black/10 rounded"
+              className={`hover:bg-black/10 rounded`}
               style={{ height: 40, width: 40 }}
             />
           )
         })}
+        <Desktop>
+          {socialUrlsDesktop.map((x, idx) => {
+            return (
+              <SocialIcon
+                url={x}
+                key={idx}
+                target="_blank"
+                bgColor="transparent"
+                fgColor="#ffffff"
+                className={`hover:bg-black/10 rounded`}
+                style={{ height: 40, width: 40 }}
+              />
+            )
+          })}
+        </Desktop>
         {/* Language Selector */}
         <Menu as="div" className="relative inline-flex items-center justify-center">
           <Menu.Button className="flex w-full items-center justify-center rounded-md text-xs font-semibold text-white hover:bg-opacity-30">

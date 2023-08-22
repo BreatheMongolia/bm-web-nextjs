@@ -20,10 +20,12 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
           titleMn
           body
           bodyMn
+          excerpt
+          excerptMn
           featuredImage {
             image {
               mediaDetails {
-                sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                sizes(include: [MEDIUM, MEDIUM_LARGE, LARGE]) {
                   name
                   sourceUrl
                 }
@@ -31,7 +33,7 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
             }
             imageMn {
               mediaDetails {
-                sizes(include: [MEDIUM,MEDIUM_LARGE]) {
+                sizes(include: [MEDIUM,MEDIUM_LARGE, LARGE]) {
                   name
                   sourceUrl
                 }
@@ -56,7 +58,7 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
         featuredImage {
           node {
             mediaDetails {
-              sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+              sizes(include: [MEDIUM, MEDIUM_LARGE, LARGE]) {
                 name
                 sourceUrl
               }

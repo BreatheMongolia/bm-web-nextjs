@@ -1,10 +1,5 @@
-import React, { FC, useState, useRef, useEffect } from 'react'
+import React, { FC } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import cx from 'classnames'
-import { useTranslation } from 'next-i18next'
-import { useRouter } from 'next/router'
-import Desktop from '../Desktop'
-import Mobile from '../Mobile'
 import Link from 'next/link'
 
 type Props = {
@@ -12,8 +7,6 @@ type Props = {
 }
 
 const SearchBar: FC<Props> = () => {
-  // const matchUrl = `/${i18n.language}`
-
   return (
     <div className="header-search-container">
       <Link href="/search">

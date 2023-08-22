@@ -36,5 +36,10 @@
   "preserveBalanceDetails": "and to be placed among first 30 countries on the rankings of the countries by the Green economy index in the world",
   "goal10KeyWord": "Build",
   "buildGovernance": "professional, stable and participative governance,",
-  "buildGovernanceDetails": "free of corruption that is adept at implementing development policies at all levels."
+  "buildGovernanceDetails": "free of corruption that is adept at implementing development policies at all levels.",
+  "ourTeam": {
+    "whereOurTeamIsLocated": "Where Our Team Is Located",
+    "featuredMembers": "Featured Team Members",
+    "ourTeam": "Our Team"
+  }
 }

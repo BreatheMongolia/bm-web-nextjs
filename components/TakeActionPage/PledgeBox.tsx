@@ -14,7 +14,6 @@ import cx from 'classnames'
 import Modal from 'react-modal'
 import dayjs from 'dayjs'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import { fetchAPI } from 'lib/graphql-api/api'
 
 type Props = {
@@ -74,12 +73,7 @@ export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, to
       </Mobile>
       <div className="pledge-box">
         <div className="pledge-title">
-          <h2>
-            <Trans i18nKey="pledge.pledgeTo" values={{ title: pledgeTitle }}>
-              {/* @ts-ignore */}
-              <br />I pledge to <span>{{ pledgeTitle }}</span>
-            </Trans>
-          </h2>
+          <h2>{parse(t('pledgeTo', { title }))}</h2>
         </div>
 
         <div className="pledge-body">

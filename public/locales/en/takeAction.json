@@ -1,4 +1,5 @@
 {
+  "additionalTitle": "Additional Resources",
   "supportUs": {
     "waysToDonate": "Ways to Donate Money",
     "donateDirectlyOn": "Donate directly on",
@@ -20,16 +21,6 @@
     "volunteerForUs": "Volunteer for Us",
     "currentVolunteersNeeded": "Current Volunteers Needed",
     "viewPosition": "View Position"
-  },
-  "pledge": {
-    "button": "take this pledge",
-    "pledged": "Congratulations!",
-    "pledgeTo": "I pledge to <1>{{title}}</1>",
-    "congrats": "Congratulations! You have pledged to:",
-    "tapToTakePledge": "Tap to take this pledge",
-    "joined": "You and {{totalPledge}} people have taken this pledge!",
-    "share": "Share Your Pledge Now!",
-    "mobileTitle": "Take This Pledge and Share with Your Network!"
   },
   "additionalResources": {
     "title": "Additional Resources"
@@ -59,7 +50,6 @@
     "mobileDescription": "Tackling air pollution starts with each and every one of us. Learn about the actions you can take to reduce your emission and protect the health of your loved ones.",
     "learnMore": "Learn More"
   },
-  "backBtnText": "Back to Take Action Home",
   "donate": {
     "title": "Donate",
     "mobileTitle": "Help reduce air pollution",
@@ -69,12 +59,9 @@
     "sidebarTitleMobile": "See more ways to give",
     "seeLess": "See less",
     "donateOnetime": "One-time donation",
-    "donateFacebook": "Donate on Facebook",
-    "donateFacebookFund": "Start a Facebook Fundraiser",
-    "donateAmazonSmile": "Shop on AmazonSmile for BM",
     "donateYourcause": "Employer donation on Yourcause",
     "donateBenevity": "Employer donation on Benevity",
-    "donateMore": "Learn more about donations to BM"
+    "disclosure": "Breathe Mongolia - Clean Air Coalition nonprofit (“NGO”) seeks to inform and guide the public to research and learn about health-protecting and pollution-reducing solutions based on publicly available information. The NGO is not endorsing any specific resource and cannot validate or guarantee the effectiveness of the resources. Under no circumstances will the NGO be held liable whatsoever for any claims, damages, losses, expenses, or costs raised from the consumer’s choice. We advise consumers to conduct their own research and consult with industry experts before purchasing products and services."
   },
   "subscribe": {
     "mobileTitle": "Connect with us!",
