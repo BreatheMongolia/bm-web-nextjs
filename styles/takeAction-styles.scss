@@ -135,7 +135,7 @@
 
       &.disabled {
         button {
-          // background-color: #f4ac3d;
+          background-color: #f4ac3d;
         }
       }
     }
@@ -1489,13 +1489,6 @@
       text-decoration-line: underline;
       text-transform: uppercase;
       color: #2c2d41;
-
-      .ta-mobile-seemore,
-      .ta-mobile-seeless {
-        svg {
-          margin-left: 5px;
-        }
-      }
     }
 
     .ta-mobile-donate-nav {

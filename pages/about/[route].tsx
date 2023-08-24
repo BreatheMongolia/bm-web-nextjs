@@ -6,10 +6,12 @@ import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { getPeople } from 'lib/graphql-api/queries/people'
+import { getStories } from 'lib/graphql-api/queries/ourStories'
 import { getTranslated } from 'lib/utils/getTranslated'
 import AboutUsOurTeam from 'components/AboutUsPage/AboutUsOurTeam'
 import { getHomePage } from 'lib/graphql-api/queries/home'
 import { OurPartners } from 'components/HomePage'
+import AboutUsOurStory from 'components/AboutUsPage/AboutUsOurStory'
 
 const VALID_ROUTES = [
   {
@@ -17,7 +19,6 @@ const VALID_ROUTES = [
     title: 'subNavigationTabs.aboutUs',
   },
   {
-    route: 'our-story',
     title: 'subNavigationTabs.ourStory',
   },
   {
@@ -34,7 +35,7 @@ const VALID_ROUTES = [
   },
 ]
 
-export default function AboutPageSection({ people, page, locale }) {
+export default function AboutPageSection({ people, stories, page, locale }) {
   const router = useRouter()
   const { t, i18n } = useTranslation('about')
 
@@ -50,6 +51,8 @@ export default function AboutPageSection({ people, page, locale }) {
     switch (route) {
       case '/about/info':
         return <AboutUsInfoSection />
+      case '/about/our-story':
+        return <AboutUsOurStory stories={stories} locale={locale} />
       case '/about/our-team':
         return <AboutUsOurTeam people={people} />
       case '/about/impact':
@@ -118,16 +121,34 @@ const getTransformedPeople = (PplData: string | any[], locale: string) => {
   return people
 }
 
+const getAllStories = (StoriesData: string | any[], locale: string) => {
+  const stories = []
+  for (let i = 0; i < StoriesData.length; i++) {
+    stories.push({
+      title: getTranslated(StoriesData[i].node.customFields.title, StoriesData[i].node.customFields.titleMn, locale),
+      description: getTranslated(
+        StoriesData[i].node.customFields.description,
+        StoriesData[i].node.customFields.descriptionMn,
+        locale,
+      ),
+    })
+  }
+
+  return stories
+}
+
 export const getStaticProps = async ({ locale }) => {
   const people = await getPeople()
+  const stories = await getStories()
   const page = await getHomePage('/')
 
   return {
     props: {
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
       people: getTransformedPeople(people, locale),
+      stories: getAllStories(stories, locale),
       page,
       locale,
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
     },
   }
 }
