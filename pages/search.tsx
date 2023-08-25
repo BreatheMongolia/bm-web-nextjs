@@ -11,12 +11,28 @@ import { getSearchData } from 'lib/graphql-api/queries/search'
 import { useRouter } from 'next/router'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { getImage } from 'lib/utils/getImage'
+import { getNewsBannerImages } from 'lib/graphql-api/queries/news'
+import { getBannerText } from 'lib/graphql-api/queries/home'
+import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
-const SearchPage = ({ data, locale }) => {
-  const { t } = useTranslation()
+const SearchPage = ({ data, locale, banner }) => {
+  const { t, i18n } = useTranslation()
   const router = useRouter()
   const { s } = router.query
   const searchValue: string = s?.toString() ?? ''
+
+  const pageBanner =
+    i18n.language === 'en'
+      ? {
+          imageUrl: banner.bannerImage.mediaItemUrl,
+          leftText: banner.bannerTextLeft,
+          rightText: getBannerTextRight(banner.bannerTextRight, 'categoryText'),
+        }
+      : {
+          imageUrl: banner.bannerImageMn.mediaItemUrl,
+          leftText: banner.bannerTextLeftMn,
+          rightText: getBannerTextRight(banner.bannerTextRight, 'categoryTextMn'),
+        }
 
   if (searchValue === '') {
     return (
@@ -26,9 +42,10 @@ const SearchPage = ({ data, locale }) => {
         </Head>
         <div>
           <PageImageBanner
+            imageUrls={[{ mediaItemUrl: pageBanner.imageUrl }]}
             bottomText={{
-              left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
-              right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
+              left: pageBanner.leftText,
+              right: pageBanner.rightText,
             }}
           />
           <div className="search-page-container">
@@ -201,9 +218,10 @@ const SearchPage = ({ data, locale }) => {
       </Head>
       <div>
         <PageImageBanner
+          imageUrls={[{ mediaItemUrl: pageBanner.imageUrl }]}
           bottomText={{
-            left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
-            right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
+            left: pageBanner.leftText,
+            right: pageBanner.rightText,
           }}
         />
         <div className="search-page-container">
@@ -223,12 +241,18 @@ export default SearchPage
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   // FIXME: Should use the search value from router here instead of getting all
   const data: any = await getSearchData()
+  const bannerImageData = await getNewsBannerImages('/news')
+  const bannerTextData = await getBannerText()
 
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'search'])),
       locale,
       data,
+      banner: {
+        ...bannerImageData.news_general_fields.banner,
+        ...bannerTextData,
+      },
     },
   }
 }

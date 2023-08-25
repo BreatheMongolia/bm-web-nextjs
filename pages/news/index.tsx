@@ -1,6 +1,4 @@
-import dayjs from 'dayjs'
 import Head from 'next/head'
-import { getTranslated } from 'lib/utils/getTranslated'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -15,7 +13,6 @@ import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
 // api/utils
 import { News, Page_Customfields, Page_NewsGeneralFields_Banner } from 'graphql/generated'
 import { getFeaturedNews, getNewsBannerImages, getNewsPosts } from 'lib/graphql-api/queries/news'
-import { getImage } from 'lib/utils/getImage'
 import { getBannerText } from 'lib/graphql-api/queries/home'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
