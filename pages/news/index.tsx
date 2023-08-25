@@ -144,11 +144,11 @@ const getTransformedData = (data: News[]) => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  // fetch the data
   const data = await getNewsPosts()
   const bannerImageData = await getNewsBannerImages('/news')
   const bannerTextData = await getBannerText()
 
-  console.log(bannerTextData)
   return {
     props: {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news'])),
@@ -158,6 +158,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         ...bannerTextData,
       },
     },
-    revalidate: 60,
+    revalidate: 60 * 5, // every 5 minutes
   }
 }
