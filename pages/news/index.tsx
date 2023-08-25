@@ -13,13 +13,21 @@ import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
 
 // api/utils
-import { News, Page, Page_Customfields, Page_NewsGeneralFields_Banner } from 'graphql/generated'
-import { getNewsBannerImages, getNewsPosts } from 'lib/graphql-api/queries/news'
+import { News, Page_Customfields, Page_NewsGeneralFields_Banner } from 'graphql/generated'
+import { getFeaturedNews, getNewsBannerImages, getNewsPosts } from 'lib/graphql-api/queries/news'
 import { getImage } from 'lib/utils/getImage'
 import { getBannerText } from 'lib/graphql-api/queries/home'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
-const NewsPage = ({ news, banner }: { news: News[]; banner: Page_NewsGeneralFields_Banner & Page_Customfields }) => {
+const NewsPage = ({
+  news,
+  banner,
+  featuredNews,
+}: {
+  news: News[]
+  featuredNews: News[]
+  banner: Page_NewsGeneralFields_Banner & Page_Customfields
+}) => {
   const { t, i18n } = useTranslation('news')
 
   const filteredNews = [...news]
@@ -51,7 +59,7 @@ const NewsPage = ({ news, banner }: { news: News[]; banner: Page_NewsGeneralFiel
       <div className="container mx-auto flex flex-col gap-20">
         <div>
           <H2 title={t('featuredNews')} descriptionHtml={''} trailingLineColor="blue" />
-          <FeaturedNews />
+          <FeaturedNews news={featuredNews} />
         </div>
         <div>
           <H2 title={t('latestNews')} descriptionHtml={''} trailingLineColor="blue" />
@@ -77,14 +85,9 @@ const NewsPage = ({ news, banner }: { news: News[]; banner: Page_NewsGeneralFiel
         <div>
           <H2 title={t('latestOnBm')} descriptionHtml={''} trailingLineColor="blue" />
           <NewsGrid>
-            {filteredNews
-              .sort((a, b) => {
-                return dayjs(b.dateGmt ?? '').unix() - dayjs(a.dateGmt ?? '').unix()
-              })
-              .filter((_, idx) => idx < 8) // Move 8 to const MAX_NEWS when in separate component
-              .map((x, idx) => {
-                return <NewsCard key={idx} news={x} />
-              })}
+            {filteredNews.map((x, idx) => {
+              return <NewsCard key={idx} news={x} />
+            })}
           </NewsGrid>
         </div>
       </div>
@@ -94,65 +97,18 @@ const NewsPage = ({ news, banner }: { news: News[]; banner: Page_NewsGeneralFiel
 
 export default NewsPage
 
-const getTransformedData = (data: News[]) => {
-  if (data.length === 0) {
-    return []
-  }
-  const allNews: any[] = []
-
-  data.map((news: any) => {
-    allNews.push({
-      id: news.node.databaseId,
-      sourceLink: news.node.customFields.sourceLink,
-      title:
-        getTranslated(news.node.customFields.title, news.node.customFields.titleMn) !== null
-          ? getTranslated(news.node.customFields.title, news.node.customFields.titleMn)
-          : '',
-      sourceName:
-        getTranslated(news.node.customFields.sourceName, news.node.customFields.sourceNameMn) !== null
-          ? getTranslated(news.node.customFields.sourceName, news.node.customFields.sourceNameMn)
-          : '',
-      sourceLanguage: news.node.customFields.sourceLanguage,
-      newsLandingPageFeatured: news.node.customFields.newsLandingPageFeatured,
-      categories: news?.node?.categories?.nodes.map((cat: any) => {
-        return {
-          id: cat.categoryId,
-          idString: cat.id,
-          name:
-            getTranslated(cat.categoryCustomFields.name, cat.categoryCustomFields.nameMn) !== null
-              ? getTranslated(cat.categoryCustomFields.name, cat.categoryCustomFields.nameMn)
-              : '',
-          slug: cat.slug,
-        }
-      }),
-      newsContentType: news.node.customFields.newsContentType,
-      featuredImageSmall: getImage(
-        news.node.customFields.featuredImage?.image?.mediaDetails,
-        news.node.customFields.featuredImage?.imageMn?.mediaDetails,
-        news.node.featuredImage?.node?.mediaDetails,
-        'medium',
-      ),
-      featuredImageBig: getImage(
-        news.node.customFields.featuredImage?.image?.mediaDetails,
-        news.node.customFields.featuredImage?.imageMn?.mediaDetails,
-        news.node.featuredImage?.node?.mediaDetails,
-        'medium_large',
-      ),
-    })
-  })
-  return allNews
-}
-
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // fetch the data
-  const data = await getNewsPosts()
+  const newsData = await getNewsPosts()
   const bannerImageData = await getNewsBannerImages('/news')
   const bannerTextData = await getBannerText()
+  const featuredNews = await getFeaturedNews()
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news'])),
-      news: getTransformedData(data),
+      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
+      news: newsData,
+      featuredNews,
       banner: {
         ...bannerImageData.news_general_fields.banner,
         ...bannerTextData,

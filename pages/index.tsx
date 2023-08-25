@@ -158,7 +158,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       stations,
       globalRanks: airVisualGlobalRanks,
     },
-    // This tells the page how often to refetch from the API (in seconds)
+    // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,
   }
 }
