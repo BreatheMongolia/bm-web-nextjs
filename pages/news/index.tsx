@@ -13,23 +13,39 @@ import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
 
 // api/utils
-import { News } from 'graphql/generated'
-import { getNewsPosts } from 'lib/graphql-api/queries/news'
+import { News, Page, Page_Customfields, Page_NewsGeneralFields_Banner } from 'graphql/generated'
+import { getNewsBannerImages, getNewsPosts } from 'lib/graphql-api/queries/news'
 import { getImage } from 'lib/utils/getImage'
+import { getBannerText } from 'lib/graphql-api/queries/home'
+import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
-const NewsPage = ({ news }: { news: News[] }) => {
-  const { t } = useTranslation('news')
+const NewsPage = ({ news, banner }: { news: News[]; banner: Page_NewsGeneralFields_Banner & Page_Customfields }) => {
+  const { t, i18n } = useTranslation('news')
 
   const filteredNews = [...news]
+  // get banner image by language
+  const pageBanner =
+    i18n.language === 'en'
+      ? {
+          imageUrl: banner.bannerImage.mediaItemUrl,
+          leftText: banner.bannerTextLeft,
+          rightText: getBannerTextRight(banner.bannerTextRight, 'categoryText'),
+        }
+      : {
+          imageUrl: banner.bannerImageMn.mediaItemUrl,
+          leftText: banner.bannerTextLeftMn,
+          rightText: getBannerTextRight(banner.bannerTextRight, 'categoryTextMn'),
+        }
   return (
     <div>
       <Head>
         <title> News - Breathe Mongolia - Clean Air Coalition </title>
       </Head>
       <PageImageBanner
+        imageUrls={[{ mediaItemUrl: pageBanner.imageUrl }]}
         bottomText={{
-          left: 'АГААРЫН БОХИРДЛЫГ ХАМТДАА БУУРУУЛЦГААЯ!',
-          right: 'БОЛОВСРОЛ ・ХАМТЫН АЖИЛЛАГАА ・ХАРИУЦЛАГА',
+          left: pageBanner.leftText,
+          right: pageBanner.rightText,
         }}
       />
       <div className="container mx-auto flex flex-col gap-20">
@@ -39,7 +55,7 @@ const NewsPage = ({ news }: { news: News[] }) => {
         </div>
         <div>
           <H2 title={t('latestNews')} descriptionHtml={''} trailingLineColor="blue" />
-          <NewsGrid numCols={4}>
+          <NewsGrid>
             <div className="h-48 bg-gray-200 col-span-2"></div>
             <div className="h-48 bg-gray-200"></div>
             <div className="h-48 bg-gray-200"></div>
@@ -60,7 +76,7 @@ const NewsPage = ({ news }: { news: News[] }) => {
         </div>
         <div>
           <H2 title={t('latestOnBm')} descriptionHtml={''} trailingLineColor="blue" />
-          <NewsGrid numCols={4}>
+          <NewsGrid>
             {filteredNews
               .sort((a, b) => {
                 return dayjs(b.dateGmt ?? '').unix() - dayjs(a.dateGmt ?? '').unix()
@@ -129,11 +145,18 @@ const getTransformedData = (data: News[]) => {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const data = await getNewsPosts()
+  const bannerImageData = await getNewsBannerImages('/news')
+  const bannerTextData = await getBannerText()
 
+  console.log(bannerTextData)
   return {
     props: {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news'])),
       news: getTransformedData(data),
+      banner: {
+        ...bannerImageData.news_general_fields.banner,
+        ...bannerTextData,
+      },
     },
     revalidate: 60,
   }

@@ -46,6 +46,19 @@ export default function Index({
   volunteers: any
   locale: string
 }) {
+  const { i18n } = useTranslation()
+
+  // get banner image by language
+  const pageBanner =
+    i18n.language === 'en'
+      ? {
+          leftText: page.customFields.bannerTextLeft,
+          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
+        }
+      : {
+          leftText: page.customFields.bannerTextLeftMn,
+          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
+        }
   return (
     <div>
       <Head>
@@ -53,10 +66,15 @@ export default function Index({
       </Head>
       <div>
         <PageImageBanner
-          imageUrls={page.customFields.banners}
+          imageUrls={page.customFields.banners.map(x => {
+            return {
+              mediaItemUrl: x.bannerImage.mediaItemUrl,
+              url: x.bannerImageUrl,
+            }
+          })}
           bottomText={{
-            left: page.customFields.bannerTextLeft,
-            right: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
+            left: pageBanner.leftText,
+            right: pageBanner.rightText,
           }}
         />
         <div className="container mx-auto flex flex-col gap-20">

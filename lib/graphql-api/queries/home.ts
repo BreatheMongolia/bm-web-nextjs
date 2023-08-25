@@ -1,5 +1,5 @@
 import { fetchAPI } from 'lib/graphql-api/api'
-import { Page, PageIdType, MediaItemSizeEnum } from 'graphql/generated'
+import { Page, PageIdType, MediaItemSizeEnum, Page_Customfields } from 'graphql/generated'
 
 const HomePageGQLQuerySections = {
   banner: `
@@ -214,25 +214,20 @@ export async function getHomePage(id: string, idType: PageIdType = PageIdType.Ur
   return data.page
 }
 
-export async function getBanner(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {
+export async function getBannerText(): Promise<Page_Customfields> {
   const data = await fetchAPI(
-    `
-      query homeBanner($id: ID!, $idType: PageIdType!) {
-          page(id: $id, idType: $idType) {
-            customFields {
-              bannerTextLeft
-              bannerTextLeftMn
-              bannerTextRight {
-                categoryText
-                categoryTextMn
-              }
-           }
+    `query homeBanner {
+        page(id: "/", idType: URI) {
+          customFields {
+            bannerTextLeft
+            bannerTextLeftMn
+            bannerTextRight {
+              categoryText
+              categoryTextMn
+            }
+          }
         }
-    }
-                `,
-    {
-      variables: { id, idType },
-    },
+      }`,
   )
 
   return data.page.customFields

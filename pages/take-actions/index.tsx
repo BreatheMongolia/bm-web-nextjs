@@ -21,6 +21,7 @@ export type TakeActionAll = {
 }
 
 const getTransformedBannerData = (data: any, locale: string) => {
+  console.log(data)
   return {
     bannerTextLeft: getTranslated(data?.bannerTextLeft, data?.bannerTextLeftMn, locale),
     bannerTextRight: data?.bannerTextRight.map((text: any) => {
@@ -101,10 +102,11 @@ const TakeActionsPage = ({ latest, featured, banner, locale }) => {
     (value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index,
   )
 
+  console.log(banner)
   return (
     <div>
       <PageImageBanner
-        imageUrls={banner.mediaItemUrl}
+        imageUrls={[{ mediaItemUrl: banner.mediaItemUrl }]}
         bottomText={{
           left: banner.bannerTextLeft,
           right: getBannerTextRight(banner.bannerTextRight, 'textContent'),

@@ -1,6 +1,8 @@
 import { News, NewsIdType, Page, PageIdType } from 'graphql/generated'
 import { fetchAPI } from 'lib/graphql-api/api'
 
+// Detail Pages
+
 export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Promise<News> {
   const data = await fetchAPI(
     `
