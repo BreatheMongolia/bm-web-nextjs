@@ -52,7 +52,7 @@ export default function AboutPageSection({ people, stories, page, locale }) {
       case '/about/info':
         return <AboutUsInfoSection />
       case '/about/our-story':
-        return <AboutUsOurStory stories={stories} locale={locale} />
+        return <AboutUsOurStory stories={stories} />
       case '/about/our-team':
         return <AboutUsOurTeam people={people} />
       case '/about/impact':

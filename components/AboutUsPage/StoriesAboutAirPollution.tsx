@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import AirPollutionStoryCard from './AirPollutionStoryCard'
 import { useTranslation } from 'next-i18next'
 // import { Spinner } from "../../../components"
@@ -8,7 +8,7 @@ export type OurStoriesAll = {
   description: string
 }
 
-export const StoriesAboutAirPollution = ({ stories, locale }: { stories: OurStoriesAll[]; locale: string }) => {
+export const StoriesAboutAirPollution = ({ stories }: { stories: OurStoriesAll[] }) => {
   const { t } = useTranslation('about')
   // const { loading, data } = language === 'mng' ? useQuery(GET_STORIES_MN) : useQuery(GET_STORIES)
   // if (loading) return <Spinner />

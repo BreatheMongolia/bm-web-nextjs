@@ -7,7 +7,6 @@ import PaginationComponent from '../generic/PaginationComponent'
 import Desktop from '../Desktop/index'
 import Mobile from '../Mobile/index'
 import TakeActionTile from '../Cards/TakeActionTile'
-import { locale } from 'dayjs'
 
 export type TakeActionAll = {
   id: number
@@ -19,7 +18,7 @@ export type TakeActionAll = {
   featuredImage: string
 }
 
-export const TakeActionsGrid = ({ takeAction, locale }: { takeAction: TakeActionAll[]; locale: string }) => {
+export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] }) => {
   const { t } = useTranslation('takeAction')
   const [currentPage, setCurrentPage] = useState(1)
   const [pageNumberLimit, setPageNumberLimit] = useState(18)

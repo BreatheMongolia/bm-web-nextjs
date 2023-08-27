@@ -7,11 +7,11 @@ export type OurStoriesAll = {
   description: string
 }
 
-export const AboutUsOurStory = ({ stories, locale }: { stories: OurStoriesAll[]; locale: string }) => {
+export const AboutUsOurStory = ({ stories }: { stories: OurStoriesAll[] }) => {
   return (
     <div className="OurStory_StoriesAboutAirPollution_container">
       <OurStorySection />
-      <StoriesAboutAirPollution stories={stories} locale={locale} />
+      <StoriesAboutAirPollution stories={stories} />
     </div>
   )
 }
