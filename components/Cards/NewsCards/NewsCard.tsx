@@ -1,27 +1,17 @@
 import { ArrowTopRightOnSquareIcon, PlayCircleIcon } from '@heroicons/react/24/solid'
 import { News } from 'graphql/generated'
-import { getImage } from 'lib/utils/getImage'
-import { getTranslated } from 'lib/utils/getTranslated'
+import { getTransformedNews } from 'lib/utils/gql-data-transform/getTransformedNews'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { TbPointFilled } from 'react-icons/tb'
 
-export const NewsCard = ({
-  news,
-  cardHeight = 'normal',
-  hasDarkOverlay = false,
-}: {
-  news: News
-  cardHeight?: 'normal' | 'fill'
-  hasDarkOverlay?: boolean
-}) => {
+export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeight?: 'normal' | 'fill' }) => {
   const { t, i18n } = useTranslation()
   // News Card types can be: blog, external_link, video
-
   const router = useRouter()
 
   // transform the data
-  const transformedNews = getTransformedNews(news, i18n)
+  const transformedNews = getTransformedNews(news, i18n.language === 'en' ? 'en' : 'mn')
   // handlers
   const onCardClick = () => {
     if (transformedNews.newsContentType) {
@@ -90,45 +80,4 @@ export const NewsCard = ({
       </div>
     </div>
   )
-}
-
-// util function
-function getTransformedNews(news: News, locale) {
-  return {
-    id: news.databaseId,
-    desiredSlug: news.desiredSlug,
-    slug: news.slug,
-    sourceLink: news.customFields?.sourceLink,
-    title:
-      getTranslated(news.customFields?.title, news.customFields?.titleMn, locale) !== null
-        ? getTranslated(news.customFields?.title, news.customFields?.titleMn, locale)
-        : '',
-    sourceName:
-      getTranslated(news.customFields?.sourceName, news.customFields?.sourceNameMn, locale) !== null
-        ? getTranslated(news.customFields?.sourceName, news.customFields?.sourceNameMn, locale)
-        : '',
-    sourceLanguage: news.customFields?.sourceLanguage,
-    homePageFeatured: news.customFields?.homePageFeatured,
-    categories: news?.categories?.nodes?.map((cat: any) => {
-      return {
-        name:
-          getTranslated(cat.categoryCustomFields?.name, cat.categoryCustomFields?.nameMn, locale) !== null
-            ? getTranslated(cat.categoryCustomFields?.name, cat.categoryCustomFields?.nameMn, locale)
-            : '',
-      }
-    }),
-    newsContentType: news.customFields?.newsContentType,
-    featuredImageSmall: getImage(
-      news.customFields?.featuredImage.image?.mediaDetails,
-      news.customFields?.featuredImage.imageMn?.mediaDetails,
-      news.featuredImage?.node?.mediaDetails,
-      'medium_large',
-    ),
-    featuredImageBig: getImage(
-      news.customFields?.featuredImage.image?.mediaDetails,
-      news.customFields?.featuredImage.imageMn?.mediaDetails,
-      news.featuredImage?.node?.mediaDetails,
-      'medium_large',
-    ),
-  }
 }
