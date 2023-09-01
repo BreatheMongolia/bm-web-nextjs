@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import quotationMark from '../../assets/images/Quotation Mark (2).png'
+import quotationMark from '../../assets/images/quotation-mark.png'
 import Image from 'next/image'
 
 type Props = {
