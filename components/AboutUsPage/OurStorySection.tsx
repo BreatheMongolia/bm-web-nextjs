@@ -14,8 +14,8 @@ export const OurStorySection = () => {
         <p className="our_stories_content">{t('ourStory.ourStoryDetails')}</p>
         <Link href={'/news/1365'}>
           <button className="btn">
-            <span className="btn_text desktop">{t('ourStory.moreAboutOurStory')}</span>
-            <span className="btn_text mobile">{t('ourStory.moreAboutOurStory')}</span>
+            <div className="btn_text desktop">{t('ourStory.moreAboutOurStory')}</div>
+            <div className="btn_text mobile">{t('ourStory.moreAboutOurStory')}</div>
           </button>
         </Link>
       </div>

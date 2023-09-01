@@ -19,6 +19,7 @@ const VALID_ROUTES = [
     title: 'subNavigationTabs.aboutUs',
   },
   {
+    route: 'our-story',
     title: 'subNavigationTabs.ourStory',
   },
   {
