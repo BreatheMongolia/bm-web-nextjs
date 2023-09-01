@@ -112,7 +112,6 @@ const TakeActionsPage = ({ latest, featured, banner, locale }) => {
       />
       <div className="container mx-auto flex flex-col gap-20 items-center">
         <TakeActionsGrid takeAction={takeActions} />
-
         <DonateSection />
       </div>
     </div>

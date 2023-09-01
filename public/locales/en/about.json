@@ -41,5 +41,12 @@
     "whereOurTeamIsLocated": "Where Our Team Is Located",
     "featuredMembers": "Featured Team Members",
     "ourTeam": "Our Team"
+  },
+  "ourStory": {
+    "title": "Our Story",
+    "ourStoryDetails": "Young Mongols decided to organize a protest in New York City, raising awareness about the deadly air pollution in Mongolia under #BreatheMongolia hashtag. The protest inspired other concerned Mongols and global citizens across the world and our founders met and created Breathe Mongolia - Clean Air Coalition nonprofit. Now, Breathe Mongolia platform serves as a central collaboration, watchdog and knowledge center hub for the fight against air pollution in Mongolia, run by volunteers in 10 countries from diverse professions such as atmospheric chemist, software engineer, urban planner, medical doctor and policy analyst. We are determined to bring all the stakeholders together and equip them with tools to eliminate the source of pollution in our homeland.",
+    "moreAboutOurStory": "MORE ABOUT OUR STORY",
+    "storiesAirPollution": "Stories About Air Pollution",
+    "readMoreStories": "READ MORE STORIES"
   }
 }
