@@ -124,6 +124,7 @@ const getTransformedPeople = (PplData: string | any[], locale: string) => {
 
 const getAllStories = (StoriesData: string | any[], locale: string) => {
   const stories = []
+
   for (let i = 0; i < StoriesData.length; i++) {
     stories.push({
       title: getTranslated(StoriesData[i].node.customFields.title, StoriesData[i].node.customFields.titleMn, locale),
@@ -134,7 +135,6 @@ const getAllStories = (StoriesData: string | any[], locale: string) => {
       ),
     })
   }
-
   return stories
 }
 

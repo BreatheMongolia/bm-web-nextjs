@@ -12,7 +12,7 @@ export const OurStorySection = () => {
       <div className="left_container">
         <h1 className="our_stories_title">{t('ourStory.title')}</h1>
         <p className="our_stories_content">{t('ourStory.ourStoryDetails')}</p>
-        <Link href={'/news/1365'}>
+        <Link href={'/news/зохион-байгуулалттай-жагсаалаас-ашг'}>
           <button className="btn">
             <div className="btn_text desktop">{t('ourStory.moreAboutOurStory')}</div>
             <div className="btn_text mobile">{t('ourStory.moreAboutOurStory')}</div>

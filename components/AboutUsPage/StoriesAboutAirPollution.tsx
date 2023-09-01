@@ -1,7 +1,6 @@
 import React from 'react'
 import AirPollutionStoryCard from './AirPollutionStoryCard'
 import { useTranslation } from 'next-i18next'
-// import { Spinner } from "../../../components"
 
 export type OurStoriesAll = {
   title: string
@@ -10,9 +9,6 @@ export type OurStoriesAll = {
 
 export const StoriesAboutAirPollution = ({ stories }: { stories: OurStoriesAll[] }) => {
   const { t } = useTranslation('about')
-  // const { loading, data } = language === 'mng' ? useQuery(GET_STORIES_MN) : useQuery(GET_STORIES)
-  // if (loading) return <Spinner />
-
   return (
     <div className="mb-8 stories_air_pollution">
       <h1 className="air_pollution_title">{t('ourStory.storiesAirPollution')}</h1>
