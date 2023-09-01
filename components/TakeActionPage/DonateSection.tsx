@@ -45,17 +45,17 @@ export const DonateSection = () => {
 
   const btnSeeMore = () => {
     return (
-      <div className="inline-block ta-mobile-seemore">
+      <div className="static ta-mobile-seemore">
         {t('donate.sidebarTitleMobile')}
-        <ChevronDownIcon className="w-5 h-5 text-black" />
+        <ChevronDownIcon className="inline-block w-5 h-5 text-black" />
       </div>
     )
   }
   const btnSeeLess = () => {
     return (
-      <div className="inline-block ta-mobile-seeless">
+      <div className="static ta-mobile-seeless">
         {t('donate.seeLess')}
-        <ChevronUpIcon className="w-5 h-5 text-black" />
+        <ChevronUpIcon className="inline-block w-5 h-5 text-black" />
       </div>
     )
   }
