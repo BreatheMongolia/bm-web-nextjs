@@ -1603,6 +1603,10 @@
       }
     }
 
+    .ta-mobile-header {
+      margin-left: 10px;
+    }
+
     .ta-categories {
       display: flex;
       flex-direction: row;
@@ -1657,8 +1661,6 @@
 
     .action-slider-items {
       .action-slider-item {
-        // display: flex;
-        // flex-direction: row;
         margin: 10px;
         border-radius: 10px;
         background-color: #fff;
@@ -1682,7 +1684,6 @@
           justify-content: center;
           align-items: flex-start;
           padding: 15px 15px 15px 25px;
-          // width: 70%;
 
           h4 {
             font-weight: bold;
