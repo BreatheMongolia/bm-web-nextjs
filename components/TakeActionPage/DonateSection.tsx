@@ -74,7 +74,7 @@ export const DonateSection = () => {
             {donateLinks()}
           </div>
         </div>
-        <div className="flex py-10 text-lg text-justify">
+        <div className="flex py-10 text-sm">
           <p>{t('donate.disclosure')}</p>
         </div>
       </Desktop>
@@ -94,6 +94,9 @@ export const DonateSection = () => {
             </a>
             {isNavVisible ? nav() : null}
           </div>
+        </div>
+        <div className="flex p-5 text-xs">
+          <p>{t('donate.disclosure')}</p>
         </div>
       </Mobile>
     </div>

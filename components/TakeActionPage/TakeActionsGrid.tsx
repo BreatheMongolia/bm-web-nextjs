@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { H2 } from 'components/generic/Typography'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
@@ -20,8 +20,21 @@ export type TakeActionAll = {
 export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeActionAll[]; categories: string[] }) => {
   const { t } = useTranslation('takeAction')
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageNumberLimit, setPageNumberLimit] = useState(18)
+  const [pageNumberLimit, setPageNumberLimit] = useState(9)
   const [filteredCategories, setFilteredCategories] = useState<string[]>([])
+  // const [width, setWidth] = useState(window.innerWidth)
+  // const willMount = useRef(true)
+
+  // if (willMount.current) {
+  //   if (window.innerWidth >= 768 && window.innerWidth <= 1063) {
+  //     setPageNumberLimit(12)
+  //   } else if (window.innerWidth <= 767) {
+  //     setPageNumberLimit(4)
+  //   } else {
+  //     setPageNumberLimit(18)
+  //   }
+  //   willMount.current = false
+  // }
 
   useEffect(() => {
     getFilteredTakeActions()
@@ -104,7 +117,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
             />
           ))}
         </div>
-        {takeAction.length > 19 && (
+        {takeAction.length > 10 && (
           <div className="parent-pagination">
             <PaginationComponent
               currentPage={currentPage}

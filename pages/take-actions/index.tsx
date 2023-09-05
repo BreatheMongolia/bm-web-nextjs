@@ -121,9 +121,9 @@ const TakeActionsPage = ({ latest, featured, banner, locale }) => {
           right: getBannerTextRight(banner.bannerTextRight, 'textContent'),
         }}
       />
-      <div className="container mx-auto flex flex-col gap-20 items-center">
+      <div className="container mx-auto flex flex-col">
         <TakeActionsGrid takeAction={takeActions} categories={actionCategories} />
-        
+
         <DonateSection />
       </div>
     </div>
