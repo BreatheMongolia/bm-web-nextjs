@@ -2,12 +2,12 @@
   "subfooter": "Stay connected:",
   "titleExplore": "explore",
   "title": {
-    "explore": "explore",
-    "getInvolved": "getInvolved",
+    "explore": "Explore",
+    "getInvolved": "Get Involved",
     "aboutUs": "About Us"
   },
   "subscribe": {
-    "btn": "subscribe",
+    "btn": "Subscribe",
     "subscribed": "Subscribed",
     "validEmail": "Please enter a valid email",
     "footerPlaceHolder": "Enter your email to receive our newsletters"

@@ -2,8 +2,8 @@
   "subfooter": "Stay connected:",
   "titleExplore": "explore",
   "title": {
-    "explore": "explore",
-    "getInvolved": "getInvolved",
+    "explore": "Explore",
+    "getInvolved": "Get Involved",
     "aboutUs": "About Us"
   },
   "nav": {
@@ -31,6 +31,12 @@
     "iqApp": "IQAir app",
     "followUs": "Follow Us:",
     "join": "join the conversation"
+  },
+  "subscribe": {
+    "btn": "Subscribe",
+    "subscribed": "Subscribed",
+    "validEmail": "Please enter a valid email",
+    "footerPlaceHolder": "Enter your email to receive our newsletters"
   },
   "disclosure": "Breathe Mongolia - Clean Air Coalition nonprofit (“NGO”) seeks to inform and guide the public to research and learn about health-protecting and pollution-reducing solutions based on publicly available information. The NGO is not endorsing any specific resource and cannot validate or guarantee the effectiveness of the resources. Under no circumstances will the NGO be held liable whatsoever for any claims, damages, losses, expenses, or costs raised from the consumer’s choice. We advise consumers to conduct their own research and consult with industry experts before purchasing products and services.",
   "name": "Breathe Mongolia - Clean Air Coalition is a 501(c)3 nonprofit in the US (Agaariin Kharuul nonprofit in Mongolia).",

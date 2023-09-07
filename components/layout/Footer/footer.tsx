@@ -9,7 +9,7 @@ import { SocialIcon } from 'react-social-icons'
 import { SOCIAL_URLS } from 'lib/consts/urls'
 
 export const Footer = () => {
-  const [t, i18n] = useTranslation('footer')
+  const { t } = useTranslation('footer')
   const socialUrls = [
     SOCIAL_URLS.INSTAGRAM,
     SOCIAL_URLS.FACEBOOK,
@@ -43,7 +43,7 @@ export const Footer = () => {
       {
         title: t('title.aboutUs'),
         urls: [
-          { title: t('nav.ourStory'), url: '/about' },
+          { title: t('nav.ourStory'), url: '/about/info' },
           { title: t('nav.impact'), url: '/about/impact' },
           { title: t('nav.ourTeam'), url: '/about/ourteam' },
         ],
@@ -91,7 +91,7 @@ export const Footer = () => {
                 })}
               </div>
               <div className="mobile_style">
-                <Subscribe placeholder={t('subscribe.footerPlaceHolder')} isFooter />
+                <Subscribe isFooter={true} />
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ export const Footer = () => {
   const BottomFooter = () => {
     return (
       <div className="bg-bm-blue text-white py-5 px-7 sm:px-0">
-        <div className="container flex text-xs gap-5">
+        <div className="container flex text-xs gap-5 static">
           <div className="flex gap-1 flex-col sm:flex-row">
             <div className="h-20 w-20 relative">
               <FooterLogo />
