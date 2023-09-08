@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { H2 } from 'components/generic/Typography'
 import { useTranslation } from 'next-i18next'
-import { getTranslated } from 'lib/utils/getTranslated'
 import Link from 'next/link'
 import PaginationComponent from '../generic/PaginationComponent'
 import Desktop from '../Desktop/index'
@@ -14,26 +13,15 @@ export type TakeActionAll = {
   title: string
   excerpt?: string
   date: any
-  typeOfAction: []
+  typeOfAction: string[]
   featuredImage: string
 }
 
-export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] }) => {
+export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeActionAll[]; categories: string[] }) => {
   const { t } = useTranslation('takeAction')
   const [currentPage, setCurrentPage] = useState(1)
   const [pageNumberLimit, setPageNumberLimit] = useState(18)
   const [filteredCategories, setFilteredCategories] = useState<string[]>([])
-  const [newActionCategories, setNewActionCategories] = useState<string[]>([])
-
-  const getActionCategories = () => {
-    // setNewActionCategories([])
-    takeAction.map(ta => {
-      ta.typeOfAction.map((action: string) => {
-        if (!newActionCategories.includes(action)) newActionCategories.push(action)
-      })
-    })
-    return newActionCategories
-  }
 
   useEffect(() => {
     getFilteredTakeActions()
@@ -42,9 +30,9 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
   const truncate = (input: string) => (input?.length > 95 ? `${input.substring(0, 95)}...` : input)
 
   const updateCategoryFilter = (category: string) => {
-    setNewActionCategories([])
+    let newActionCategories: any = []
     if (filteredCategories.includes(category)) {
-      setNewActionCategories(filteredCategories.filter(actionCategory => actionCategory !== category))
+      newActionCategories = filteredCategories.filter(actionCategory => actionCategory !== category)
     } else {
       newActionCategories.push(...filteredCategories, category)
     }
@@ -53,11 +41,9 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
 
   const showAll = () => {
     setFilteredCategories([])
-    setNewActionCategories([])
   }
 
   const getFilteredTakeActions = () => {
-    // let newActionCategories: any = []
     if (filteredCategories.length) {
       const newFilteredTakeActions = takeAction.filter(ta => {
         const matched = ta.typeOfAction.filter((category: string) => {
@@ -65,7 +51,12 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
         })
         return matched.length
       })
-      return newFilteredTakeActions
+      if (newFilteredTakeActions.length) {
+        return newFilteredTakeActions
+      } else {
+        setFilteredCategories([])
+        return takeAction
+      }
     } else {
       return takeAction
     }
@@ -82,13 +73,13 @@ export const TakeActionsGrid = ({ takeAction }: { takeAction: TakeActionAll[] })
 
   return (
     <div className="ta-actions">
-      <H2 title={t('actionList.title')} />
+      <H2 title={t('actionList.title')} className="ta-mobile-header" />
 
       <div className="ta-categories">
         <div className={'ta-category ' + (!filteredCategories.length ? 'selected' : '')} onClick={() => showAll()}>
           {t('actionList.categoryAll')}
         </div>
-        {getActionCategories().map((category: string) => (
+        {categories.map((category: string) => (
           <div
             className={'ta-category ' + (filteredCategories.includes(category) ? 'selected' : '')}
             key={category}

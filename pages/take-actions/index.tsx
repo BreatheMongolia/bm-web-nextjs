@@ -1,10 +1,8 @@
+import React, { useState } from 'react'
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { getFeaturedTakeActions, getTakeActionsLatest } from 'lib/graphql-api/queries/takeAction'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { useTranslation } from 'next-i18next'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
 import { TakeAction } from 'graphql/generated'
@@ -16,7 +14,7 @@ export type TakeActionAll = {
   title: string
   excerpt?: string
   date: any
-  typeOfAction: []
+  typeOfAction: string[]
   featuredImage: string
 }
 
@@ -98,11 +96,23 @@ const TakeActionsPage = ({ latest, featured, banner, locale }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
+
   takeActions = takeActions.filter(
     (value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index,
   )
 
-  console.log(banner)
+  const getActionCategories = () => {
+    let newActionCategories: any = []
+    takeActions.map(ta => {
+      ta.typeOfAction.map((action: string) => {
+        if (!newActionCategories.includes(action)) newActionCategories.push(action)
+      })
+    })
+    return newActionCategories
+  }
+
+  const actionCategories = getActionCategories()
+
   return (
     <div>
       <PageImageBanner
@@ -113,7 +123,7 @@ const TakeActionsPage = ({ latest, featured, banner, locale }) => {
         }}
       />
       <div className="container mx-auto flex flex-col gap-20 items-center">
-        <TakeActionsGrid takeAction={takeActions} />
+        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} />
 
         <DonateSection />
       </div>
