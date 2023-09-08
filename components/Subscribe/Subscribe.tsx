@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 import { HiPaperAirplane } from 'react-icons/hi'
 
 type Props = {
-  // placeholder?: string
+  languageJson?: string
   isFooter?: boolean
   className?: string
 }
@@ -16,22 +16,17 @@ const validateEmail = (email: string) => {
   )
 }
 
-const Subscribe: FC<Props> = ({ isFooter, className }) => {
+const Subscribe: FC<Props> = ({ languageJson, isFooter, className }) => {
   const bmUrl =
     'https://breathemongolia.us19.list-manage.com/subscribe/post?u=d20df36438b159bbb8b7252df&id=69af699988&f_id=00ba81e4f0'
-  const { t } = useTranslation('footer')
+  const { t } = useTranslation(languageJson)
   const { loading, error, success, message, handleSubmit } = useMailChimpForm(bmUrl)
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: '',
   })
 
-  // let btnClass = 'btn'
-  // let inputClass = 'input-email'
-  // if (isFooter) {
-  //   btnClass += '-footer'
-  //   inputClass += '-footer'
-  // }
   const isMobileSub = useMediaQuery({ maxWidth: 600 })
+  let placeholderText = isFooter ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')
 
   return (
     <div>
@@ -44,8 +39,8 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
         <input
           id="EMAIL"
           type="email"
-          placeholder={t('subscribe.footerPlaceHolder')}
-          className="subscribeInput h-[44px] rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4 "
+          placeholder={placeholderText}
+          className="subscribeInput h-[44px] rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4"
           value={fields.EMAIL}
           onChange={handleFieldChange}
         />

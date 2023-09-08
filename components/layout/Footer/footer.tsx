@@ -3,7 +3,7 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import { EXTERNAL_URLS } from 'lib/consts/urls'
 import Link from 'next/link'
-import FooterLogo from 'assets/icons/logoFooter'
+import FooterLogo from 'assets/icons/FooterLogo'
 import Subscribe from 'components/Subscribe/Subscribe'
 import { SocialIcon } from 'react-social-icons'
 import { SOCIAL_URLS } from 'lib/consts/urls'
@@ -51,7 +51,7 @@ export const Footer = () => {
     ]
     return (
       <div className="border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
-        <div className="container  footer_wrapper  uppercase tracking-widest text-slate-700 mobileRelative">
+        <div className="container footer_wrapper uppercase tracking-widest text-slate-700 mobileRelative">
           <div className="footer_link_section ">
             {linkSections.map((x, idx) => {
               return (
@@ -91,7 +91,7 @@ export const Footer = () => {
                 })}
               </div>
               <div className="mobile_style">
-                <Subscribe isFooter={true} />
+                <Subscribe languageJson={'footer'} isFooter={true} />
               </div>
             </div>
           </div>
@@ -101,22 +101,22 @@ export const Footer = () => {
   }
   const BottomFooter = () => {
     return (
-      <div className="bg-bm-blue text-white py-5 px-7 sm:px-0">
-        <div className="container flex text-xs gap-5 static">
-          <div className="flex gap-1 flex-col sm:flex-row">
+      <div className="bg-bm-blue text-white py-5">
+        <div className="container xl-auto flex text-xs gap-5">
+          <div className="flex gap-1 flex-col sm:flex-row static">
             <div className="h-20 w-20 relative">
               <FooterLogo />
             </div>
             <div className="h-20 w-20 relative">
-              <a href="https://www.guidestar.org/profile/83-4376042" target="_blank">
-                <Image src="/images/candid-seal-gold-2023.png" alt="candidSeal" fill={true} />
-              </a>
+              <Link href="https://www.guidestar.org/profile/83-4376042" target={'_blank'}>
+                <Image src="/images/candid-seal-gold-2023.png" alt="candidSeal" width={77} height={77} />
+              </Link>
             </div>
           </div>
-          <div className="text-xsm sm:text-sm font-normal leading-5">
+          <div className="text-xs sm:text-sm font-normal">
             <p>
               ©2019-{dayjs().year().toString()}
-              {t('copyright')} <br></br>
+              {t('copyright')}
               {t('name')}
             </p>
             <p className="mt-4">{t('responsible')}</p>

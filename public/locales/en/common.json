@@ -10,6 +10,8 @@
     "btn": "Subscribe",
     "subscribed": "Subscribed",
     "validEmail": "Please enter a valid email",
+    "placeholder": "Your E-mail...",
+    "placeholder1": "Join our email list",
     "footerPlaceHolder": "Enter your email to receive our newsletters"
   },
   "backBtnText": "Back to Take Action Home",
