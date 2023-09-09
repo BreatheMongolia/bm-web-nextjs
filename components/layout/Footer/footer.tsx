@@ -50,12 +50,12 @@ export const Footer = () => {
       },
     ]
     return (
-      <div className="border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
-        <div className="container footer_wrapper uppercase tracking-widest text-slate-700 mobileRelative">
+      <div className="container">
+        <div className="uppercase tracking-widest text-slate-700 mobileRelative">
           <div className="footer_link_section ">
             {linkSections.map((x, idx) => {
               return (
-                <div key={'footer' + idx} className="column_style">
+                <div key={'footer' + idx}>
                   <h2 className="font-bold text-lg min-w-max"> {x.title} </h2>
                   <div className="flex flex-col text-sm font-semibold my-7">
                     {x.urls.map((url, i) => {
@@ -69,9 +69,9 @@ export const Footer = () => {
                 </div>
               )
             })}
-            <div className="contact_section relativeStyle">
+            <div className="contact_section">
               <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('nav.join')} </h2>
-              <div className=" social_icons_div flex justify-between w-[450px] pb-5">
+              <div className=" social_icons_div flex justify-between w-[450px] pb-10">
                 {socialUrls.map((x, idx) => {
                   return (
                     <div
@@ -101,34 +101,36 @@ export const Footer = () => {
   }
   const BottomFooter = () => {
     return (
-      <div className="bg-bm-blue text-white py-5">
-        <div className="container xl-auto flex text-xs gap-5">
-          <div className="flex gap-1 flex-col sm:flex-row static">
-            <div className="h-20 w-20 relative">
-              <FooterLogo />
-            </div>
-            <div className="h-20 w-20 relative">
-              <Link href="https://www.guidestar.org/profile/83-4376042" target={'_blank'}>
-                <Image src="/images/candid-seal-gold-2023.png" alt="candidSeal" width={77} height={77} />
-              </Link>
-            </div>
+      <div className="container flex text-xs gap-5">
+        <div className="flex gap-1 flex-col sm:flex-row static">
+          <div className="h-20 w-20 relative">
+            <FooterLogo />
           </div>
-          <div className="text-xs sm:text-sm font-normal">
-            <p>
-              ©2019-{dayjs().year().toString()}
-              {t('copyright')}
-              {t('name')}
-            </p>
-            <p className="mt-4">{t('responsible')}</p>
+          <div className="h-20 w-20 relative">
+            <Link href="https://www.guidestar.org/profile/83-4376042" target={'_blank'}>
+              <Image src="/images/candid-seal-gold-2023.png" alt="candidSeal" width={77} height={77} />
+            </Link>
           </div>
+        </div>
+        <div className="text-xs font-normal">
+          <p>
+            ©2019-{dayjs().year().toString()}
+            {t('copyright')}
+            {t('name')}
+          </p>
+          <p className="mt-4">{t('responsible')}</p>
         </div>
       </div>
     )
   }
   return (
     <>
-      <FooterLinkSection />
-      <BottomFooter />
+      <div className="footer_wrapper border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
+        <FooterLinkSection />
+      </div>
+      <div className="bottom_wrapper bg-bm-blue text-white py-5">
+        <BottomFooter />
+      </div>
     </>
   )
 }

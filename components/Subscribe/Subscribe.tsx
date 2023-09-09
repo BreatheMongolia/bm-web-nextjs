@@ -40,7 +40,7 @@ const Subscribe: FC<Props> = ({ languageJson, isFooter, className }) => {
           id="EMAIL"
           type="email"
           placeholder={placeholderText}
-          className="subscribeInput h-[44px] rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4"
+          className="subscribeInput h-[44px] rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-3"
           value={fields.EMAIL}
           onChange={handleFieldChange}
         />
@@ -59,7 +59,7 @@ const Subscribe: FC<Props> = ({ languageJson, isFooter, className }) => {
           </button>
         ) : (
           <button
-            className=" bg-orange-400 uppercase text-white absolute h-[44px] rounded-xl border-none border-l-0 rounded-l-none px-4"
+            className=" bg-orange-400 uppercase text-white absolute h-[44px] rounded-xl border-none border-l-0 rounded-l-none px-3"
             onClick={() => {
               if (!validateEmail(fields.EMAIL)) {
                 alert(t('subscribe.validEmail'))
