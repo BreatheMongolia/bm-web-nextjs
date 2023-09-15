@@ -123,20 +123,13 @@ export const pinIndoorStationsAPI = [
   'https://device.iqair.com/v2/6343df1a5d5160689849dbb9',
 ]
 
-export const purpleAirIndoorStationsAPI = [
-  'https://api.purpleair.com/v1/sensors/103150?api_key=A060ACF0-510E-11EB-9893-42010A8001E8',
-  'https://api.purpleair.com/v1/sensors/131823?api_key=A060ACF0-510E-11EB-9893-42010A8001E8',
-]
-
-export const purpleAirOutdoorStationsAPI = [
-  'https://www.purpleair.com/json?key=68C53ROV5RQ7H3C0&show=35963',
-  'https://www.purpleair.com/json?key=EJLAF3DWDO7GLJF6&show=35989',
-  'https://www.purpleair.com/json?key=FI913OTX4290QQNM&show=35519',
-  'https://www.purpleair.com/json?key=891BY758Q9NKSA4V&show=39299',
-  'https://www.purpleair.com/json?key=U06DW5A33IAIMG1A&show=36091',
-  'https://www.purpleair.com/json?key=JLSZEPAIYB5VX03A&show=39315',
-  'https://www.purpleair.com/json?key=EI8A6GXGBO1QDD81&show=35729',
-]
+export const PA_MONGOLIA_BOUNDING_BOX_COORDS = {
+  NW_LAT: 52.128434,
+  NW_LNG: 87.756845,
+  SE_LAT: 42.209709,
+  SE_LNG: 120.416821,
+}
+export const PURPLE_AIR_API_KEY = 'A060ACF0-510E-11EB-9893-42010A8001E8'
 
 export const PML_OutdoorSensorPurpleAir =
   'https://api.openaq.org/v2/measurements?country=MN&sensorType=low-cost%20sensor'

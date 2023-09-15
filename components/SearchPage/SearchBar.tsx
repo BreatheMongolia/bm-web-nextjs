@@ -53,9 +53,12 @@ const SearchBar: FC<Props> = ({ value, count }) => {
           <MagnifyingGlassIcon />
         </div>
       </div>
-
       <div className="search-result">
-        <b>{count}</b> {t('results')} <b>"{searchValue}"</b>
+        {searchValue.length > 0 && (
+          <>
+            <b>{count}</b> {t('results')} <b>"{searchValue}"</b>
+          </>
+        )}
       </div>
     </div>
   )

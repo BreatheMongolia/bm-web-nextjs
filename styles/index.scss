@@ -77,10 +77,10 @@ figure {
   @apply table ml-0 mr-0;
 }
 
-.wp-block-image .alignleft > figcaption,
-.wp-block-image .alignright > figcaption,
-.wp-block-image .aligncenter > figcaption,
-.wp-block-image.is-resized > figcaption {
+.wp-block-image .alignleft>figcaption,
+.wp-block-image .alignright>figcaption,
+.wp-block-image .aligncenter>figcaption,
+.wp-block-image.is-resized>figcaption {
   @apply table-caption;
 
   caption-side: bottom;
@@ -157,7 +157,7 @@ p {
 
 /* Banner section styles start */
 .banner-slider-wrapper {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
   min-height: 210px;
   position: relative;
 
@@ -167,8 +167,6 @@ p {
 
   .slick-slide img {
     width: 100%;
-    min-height: 210px;
-    height: 210px;
     object-fit: cover;
     object-position: top;
   }
@@ -210,6 +208,7 @@ p {
     }
   }
 }
+
 .news-carousel-section {
   .slick-slide {
     padding: 0 5px;
@@ -358,7 +357,7 @@ p {
   }
 
   .text-data-custom {
-    > p {
+    >p {
       display: inline-block;
       font-family: 'Open Sans';
       font-style: normal;
@@ -375,7 +374,7 @@ p {
       margin: 0;
     }
 
-    > pre {
+    >pre {
       font-family: 'Open Sans';
       font-style: normal;
       font-weight: 800;
@@ -541,6 +540,7 @@ p {
 
   /* Join Breathe Mongolia styles end */
   // Our-Partners Section custom styles
+
   .partner-logos-slider-wrapper {
     .slick-slide {
       padding: 0 5px;
@@ -603,9 +603,10 @@ p {
   height: 200px;
 
   &.big {
+    margin: 6px;
     max-width: 487px;
     width: 487px !important;
-    height: 410px;
+    height: 422px;
     grid-column: auto / span 2;
     grid-row: auto / span 2;
 
@@ -661,33 +662,6 @@ p {
     height: 70px;
     min-height: 70px;
     max-height: fit-content;
-
-    .take-action-type {
-      margin: 0;
-      padding: 0;
-      width: fit-content;
-      height: fit-content;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      background-color: transparent;
-
-      div {
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        margin-right: 5px;
-
-        span {
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-
-        &:last-child {
-          margin-right: 0;
-        }
-      }
-    }
 
     .take-action-title {
       width: 181px;
@@ -835,6 +809,7 @@ p {
 
 @media (max-width: 767px) {
   .campaign-slider-wrapper {
+
     .slick-slider,
     .slick-list,
     .slick-track,
@@ -900,15 +875,19 @@ p {
   border-radius: 100%;
   margin-right: 2px;
 }
+
 .custom_dot_green {
   background: #226629;
 }
+
 .custom_dot_blue {
   background: #3a62c8;
 }
+
 .custom_dot_white {
   background: #fff;
 }
+
 .custom_white_span,
 .custom_green_span,
 .custom_blue_span {
@@ -918,9 +897,11 @@ p {
   margin-right: 8px;
   margin-left: 4px;
 }
+
 .custom_white_span {
   color: #ffffff;
 }
+
 .custom_green_span {
   color: #226629;
 }
@@ -938,15 +919,18 @@ p {
   border-radius: 0px 4px 4px 0px;
   min-width: fit-content;
   width: fit-content;
+
   span {
     font-weight: 700;
     font-size: 12px;
     line-height: 16px;
     color: #3a62c8;
     margin-right: 5px;
+
     &:first-child {
       text-transform: uppercase;
     }
+
     &:last-child {
       margin-right: 0px;
       margin-left: 0px;
@@ -1178,6 +1162,7 @@ p {
   .team-container {
     margin-top: 30px;
   }
+
   .news-grid {
     margin-left: auto;
     margin-right: auto;
@@ -1187,6 +1172,7 @@ p {
     grid-gap: 35px 35px;
     margin-bottom: 20px;
   }
+
   .teams-grid {
     margin-left: auto;
     margin-right: auto;
@@ -1223,6 +1209,7 @@ p {
         }
       }
     }
+
     .scrollSection {
       max-height: 450px;
       margin-left: auto;
@@ -1234,12 +1221,14 @@ p {
       padding-bottom: 10px;
       overflow-x: hidden;
       overflow: scroll;
+
       &::-webkit-scrollbar {
         background-color: #efefef;
         width: 10px;
         height: 90%;
         border-radius: 5px;
       }
+
       &::-webkit-scrollbar-thumb {
         background-color: #a3a3a3;
         border-radius: 1.25em;
@@ -1297,9 +1286,11 @@ p {
 .pagination-wrapper {
   user-select: none;
   padding-top: 10px;
+
   ul.pagination {
     padding-inline-start: 0;
   }
+
   .pagination {
     margin-right: auto;
     list-style: none;
@@ -1309,6 +1300,7 @@ p {
     gap: 40px;
     justify-content: center;
     align-items: center;
+
     .pageNumber {
       width: 50px;
       height: 50px;
@@ -1321,6 +1313,7 @@ p {
       align-items: center;
       justify-content: center;
       cursor: pointer;
+
       &:hover:not([disabled]) {
         background: #f4ac3d;
         width: 50px;
@@ -1328,6 +1321,7 @@ p {
         border-radius: 100%;
         border: none;
         color: #fff;
+
         svg {
           path {
             fill: #fff;
@@ -1335,6 +1329,7 @@ p {
         }
       }
     }
+
     .pagination_active {
       background: #f4ac3d;
       color: #fff;
@@ -1350,11 +1345,13 @@ p {
       height: 50px;
       border: 0.2px solid #524d42;
       border-radius: 50px;
+
       &.next {
         svg {
           transform: rotate(180deg);
         }
       }
+
       &:hover:not([disabled]) {
         background: #f4ac3d;
         width: 50px;
@@ -1362,6 +1359,7 @@ p {
         border-radius: 100%;
         border: none;
         color: #fff;
+
         svg {
           path {
             fill: #fff;
@@ -1371,6 +1369,7 @@ p {
     }
   }
 }
+
 @media (max-width: 800px) {
   .pagination-wrapper {
     .pagination {

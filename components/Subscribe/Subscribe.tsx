@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
-import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
 import { useMediaQuery } from 'react-responsive'
+import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
 import { HiPaperAirplane } from 'react-icons/hi'
 
 type Props = {
@@ -23,6 +23,11 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: '',
   })
+  const [buttonText, setButtonText] = useState('')
+  const buttonStates = {
+    active: 'subscribe.btn',
+    subscribed: 'subscribe.subscribed',
+  }
 
   const isMobileSub = useMediaQuery({ maxWidth: 600 })
   let placeholderText = isFooter ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')
@@ -70,6 +75,24 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
             {success && !error ? t('subscribe.subscribed') : t('subscribe.btn')}
           </button>
         )}
+          placeholder="Enter your email to receive our newsletters"
+          className="grow h-11 rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4"
+          value={fields.EMAIL}
+          onChange={handleFieldChange}
+        />
+        <button
+          className="bg-orange-400 h-11 text-white rounded-xl rounded-l-none px-1 hover:bg-orange-500"
+          onClick={() => {
+            if (!validateEmail(fields.EMAIL)) {
+              alert(t('subscribe.validEmail'))
+            } else {
+              handleSubmit(fields)
+            }
+          }}
+        >
+          <HiPaperAirplane className="h-4 w-4 m-3 rotate-45 hidden md:block" />
+          <div className="md:hidden">{t(buttonText)}</div>
+        </button>
       </form>
     </div>
   )
