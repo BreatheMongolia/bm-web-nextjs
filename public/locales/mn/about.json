@@ -6,7 +6,7 @@
   "subNavigationTabs": {
     "aboutUs": "Бидний тухай",
     "ourStory": "Бидний түүх",
-    "impact": "хийсэн ажил",
+    "impact": "Хийсэн ажил",
     "ourTeam": "Манай хамт олон",
     "supportUs": "Биднийг дэмжих"
   },
@@ -48,5 +48,13 @@
     "moreAboutOurStory": "дэлгэрэнгүй",
     "storiesAirPollution": "Агаарын бохирдлын тухай түүхүүд",
     "readMoreStories": "Бусад түүхийг унших"
+  },
+  "reports": {
+    "title": "Тайлан"
+  },
+  "impact": {
+    "ourAccomplishments": "Бидний хийсэн ажлууд",
+    "accomplishment": "Хийсэн ажил",
+    "loadMore": "цааш үзэх"
   }
 }

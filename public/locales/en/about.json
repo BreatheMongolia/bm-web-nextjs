@@ -48,5 +48,13 @@
     "moreAboutOurStory": "MORE ABOUT OUR STORY",
     "storiesAirPollution": "Stories About Air Pollution",
     "readMoreStories": "READ MORE STORIES"
+  },
+  "reports": {
+    "title": "Reports"
+  },
+  "impact": {
+    "ourAccomplishments": "Our Accomplishments",
+    "accomplishment": "Accomplishment",
+    "loadMore": "LOAD MORE"
   }
 }
