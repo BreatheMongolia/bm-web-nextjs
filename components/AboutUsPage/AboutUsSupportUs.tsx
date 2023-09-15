@@ -17,6 +17,7 @@ export const AboutUsSupportUs = ({
 }) => {
   const { t } = useTranslation('about')
   const isMobile = useMediaQuery({ maxWidth: 1100 })
+  const isMobile = useMediaQuery({ maxWidth: 1100 })
 
   return (
     <div className="main_support_us_wrapper support_us_wrapper">

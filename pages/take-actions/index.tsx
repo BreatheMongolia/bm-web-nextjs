@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { getFeaturedTakeActions, getTakeActionsLatest } from 'lib/graphql-api/queries/takeAction'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -72,7 +72,7 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
   return takeActions
 }
 
-const TakeActionsPage = ({ latest, featured, banner, locale }) => {
+const TakeActionsPage = ({ latest, featured, locale }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
