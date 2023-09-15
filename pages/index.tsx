@@ -92,7 +92,7 @@ export default function Index({
 
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
-          <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} />
+          <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} locale={locale} />
           <OurWorkCarousel
             title={getTranslated(
               page.customFields.campaignAndOurWorkTitle,

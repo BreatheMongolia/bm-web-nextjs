@@ -540,6 +540,7 @@ p {
 
   /* Join Breathe Mongolia styles end */
   // Our-Partners Section custom styles
+
   .partner-logos-slider-wrapper {
     .slick-slide {
       padding: 0 5px;
@@ -602,9 +603,10 @@ p {
   height: 200px;
 
   &.big {
+    margin: 6px;
     max-width: 487px;
     width: 487px !important;
-    height: 410px;
+    height: 422px;
     grid-column: auto / span 2;
     grid-row: auto / span 2;
 
@@ -660,33 +662,6 @@ p {
     height: 70px;
     min-height: 70px;
     max-height: fit-content;
-
-    .take-action-type {
-      margin: 0;
-      padding: 0;
-      width: fit-content;
-      height: fit-content;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      background-color: transparent;
-
-      div {
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        margin-right: 5px;
-
-        span {
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-
-        &:last-child {
-          margin-right: 0;
-        }
-      }
-    }
 
     .take-action-title {
       width: 181px;

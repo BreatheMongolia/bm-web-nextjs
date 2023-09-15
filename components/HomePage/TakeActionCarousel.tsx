@@ -5,12 +5,53 @@ import Slider from 'react-slick'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
+import { getTranslated } from 'lib/utils/getTranslated'
+import TakeActionTile from '../Cards/TakeActionTile'
+
+export type TakeActionAll = {
+  id: number
+  slug: string
+  title: string
+  excerpt?: string
+  date: any
+  typeOfAction: string[]
+  featuredImage: string
+}
+
+const getFeaturedTakeActions = (featured: Page_Customfields_FeaturedTakeActions[], locale: string) => {
+  if (featured.length === 0) {
+    return []
+  }
+  const takeActions: TakeActionAll[] = []
+  featured.map((takeAction: any) => {
+    takeActions.push({
+      id: takeAction?.databaseId,
+      date: takeAction?.dateGmt,
+      slug: takeAction?.slug,
+      title:
+        getTranslated(takeAction?.customFields?.title, takeAction?.customFields?.titleMn, locale) !== null
+          ? getTranslated(takeAction?.customFields?.title, takeAction?.customFields?.titleMn, locale)
+          : '',
+      excerpt: '',
+      typeOfAction: takeAction?.customFields.typeOfAction?.map(
+        (type: { customFields: { name: string; nameMn: string } }) =>
+          getTranslated(type.customFields.name, type.customFields.nameMn, locale),
+      ),
+      featuredImage:
+        takeAction?.featuredImage?.node?.mediaDetails.sizes !== null
+          ? takeAction?.featuredImage?.node?.mediaDetails?.sizes[0].sourceUrl
+          : '',
+    })
+  })
+  return takeActions
+}
 
 export const TakeActionCarousel = ({
   takeActionPosts,
+  locale,
 }: {
   takeActionPosts: Page_Customfields_FeaturedTakeActions[]
+  locale: string
 }) => {
   const { t, i18n } = useTranslation('home')
 
@@ -55,6 +96,11 @@ export const TakeActionCarousel = ({
     ],
   }
 
+  var featuredTakeActions = getFeaturedTakeActions(takeActionPosts, locale)
+  featuredTakeActions = featuredTakeActions.filter(
+    (value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index,
+  )
+
   return (
     <div className="take-action-carousel-section">
       <H2
@@ -78,37 +124,17 @@ export const TakeActionCarousel = ({
           </Arrow>
         }
       >
-        {takeActionPosts.map((x, idx) => {
-          const title = (i18n.language === 'en' ? x?.customFields?.title : x?.customFields?.titleMn) ?? ''
-          return (
-            <div key={idx}>
-              {x?.featuredImage?.node?.mediaDetails.sizes !== null && (
-                <Link href={`/take-actions/${x.slug}`} className="relative flex flex-col m-1.5 take-action-carousel">
-                  <img
-                    className="card-img-top take-action-img"
-                    src={
-                      x?.featuredImage?.node?.mediaDetails.sizes !== null
-                        ? x?.featuredImage?.node?.mediaDetails.sizes[0].sourceUrl
-                        : ''
-                    }
-                  />
-                  <div className="take-action-info">
-                    <div className="take-action-title">{title}</div>
-                    <div className="read-more-arrow ">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="24" height="24" rx="12" fill="#F4AC3D" />
-                        <path
-                          d="M15.6674 12.6249L16.334 12L11.0005 7L9.66732 8.24978L13.6668 12L9.66732 15.7502L11.0005 17L15.6674 12.6249Z"
-                          fill="#FAFAFF"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </Link>
-              )}
-            </div>
-          )
-        })}
+        {featuredTakeActions.map((takeAction, idx) => (
+          <TakeActionTile
+            key={idx}
+            id={takeAction.id}
+            slug={takeAction.slug}
+            title={takeAction.title}
+            featuredImage={takeAction.featuredImage}
+            index={1}
+            pageNumberLimit={5}
+          />
+        ))}
       </Slider>
     </div>
   )
