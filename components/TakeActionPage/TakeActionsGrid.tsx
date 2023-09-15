@@ -22,19 +22,6 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
   const [currentPage, setCurrentPage] = useState(1)
   const [pageNumberLimit, setPageNumberLimit] = useState(9)
   const [filteredCategories, setFilteredCategories] = useState<string[]>([])
-  // const [width, setWidth] = useState(window.innerWidth)
-  // const willMount = useRef(true)
-
-  // if (willMount.current) {
-  //   if (window.innerWidth >= 768 && window.innerWidth <= 1063) {
-  //     setPageNumberLimit(12)
-  //   } else if (window.innerWidth <= 767) {
-  //     setPageNumberLimit(4)
-  //   } else {
-  //     setPageNumberLimit(18)
-  //   }
-  //   willMount.current = false
-  // }
 
   useEffect(() => {
     getFilteredTakeActions()

@@ -5,7 +5,6 @@ import { useMediaQuery } from 'react-responsive'
 import { HiPaperAirplane } from 'react-icons/hi'
 
 type Props = {
-  languageJson?: string
   isFooter?: boolean
   className?: string
 }
@@ -16,10 +15,10 @@ const validateEmail = (email: string) => {
   )
 }
 
-const Subscribe: FC<Props> = ({ languageJson, isFooter, className }) => {
+const Subscribe: FC<Props> = ({ isFooter, className }) => {
   const bmUrl =
     'https://breathemongolia.us19.list-manage.com/subscribe/post?u=d20df36438b159bbb8b7252df&id=69af699988&f_id=00ba81e4f0'
-  const { t } = useTranslation(languageJson)
+  const { t } = useTranslation('footer')
   const { loading, error, success, message, handleSubmit } = useMailChimpForm(bmUrl)
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: '',
