@@ -12,42 +12,20 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
   const news = featuredNews
   const settings = {
     dots: false,
-    infinite: false,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    speed: 600,
+    slidesToShow: 4,
+    slidesToScroll: 2,
     arrows: true,
-    autoplay: false,
-    autoplaySpeed: 5000,
-    cssEase: 'linear',
+    cssEase: 'ease-in-out',
     adaptiveHeight: true,
     centerMode: false,
-    variableWidth: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1280,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-          infinite: false,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: false,
-          centerMode: false,
+          variableWidth: true,
         },
       },
     ],
