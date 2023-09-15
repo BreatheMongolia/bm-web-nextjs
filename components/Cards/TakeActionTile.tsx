@@ -15,11 +15,8 @@ export const TakeActionTile: FC<Props> = ({ id, slug, title, featuredImage, inde
   return (
     <>
       <div
-        className={cx(
-          'card take-action-carousel',
-          index % (pageNumberLimit == 18 ? 9 : 6) === 0 ? 'big' : 'relative flex flex-col m-1.5',
-        )}
-        key={id}
+        className={cx('card take-action-carousel', index % (pageNumberLimit == 9 ? 9 : 6) === 0 && 'big')}
+        key={index}
       >
         {featuredImage !== null && (
           <Link href={`/take-actions/${slug}`}>

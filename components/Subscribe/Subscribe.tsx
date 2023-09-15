@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
+import { useMediaQuery } from 'react-responsive'
 import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
 import { HiPaperAirplane } from 'react-icons/hi'
 
 type Props = {
-  placeholder: string
   isFooter?: boolean
   className?: string
 }
@@ -15,10 +15,10 @@ const validateEmail = (email: string) => {
   )
 }
 
-const Subscribe: FC<Props> = ({ placeholder, isFooter, className }) => {
+const Subscribe: FC<Props> = ({ isFooter, className }) => {
   const bmUrl =
     'https://breathemongolia.us19.list-manage.com/subscribe/post?u=d20df36438b159bbb8b7252df&id=69af699988&f_id=00ba81e4f0'
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('footer')
   const { loading, error, success, message, handleSubmit } = useMailChimpForm(bmUrl)
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: '',
@@ -29,26 +29,13 @@ const Subscribe: FC<Props> = ({ placeholder, isFooter, className }) => {
     subscribed: 'subscribe.subscribed',
   }
 
-  let btnClass = 'btn'
-  let inputClass = 'input-email'
-
-  if (isFooter) {
-    btnClass += '-footer'
-    inputClass += '-footer'
-  }
-
-  useEffect(() => {
-    if (success && !error) {
-      setButtonText(buttonStates.subscribed)
-    } else {
-      setButtonText(buttonStates.active)
-    }
-  }, [success, error])
+  const isMobileSub = useMediaQuery({ maxWidth: 600 })
+  let placeholderText = isFooter ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')
 
   return (
     <div>
       <form
-        className="relative flex justify-center items-center"
+        className="h-[44px] w-[450px] relative"
         onSubmit={event => {
           event.preventDefault()
         }}
@@ -56,6 +43,38 @@ const Subscribe: FC<Props> = ({ placeholder, isFooter, className }) => {
         <input
           id="EMAIL"
           type="email"
+          placeholder={placeholderText}
+          className="subscribeInput h-[44px] rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-3"
+          value={fields.EMAIL}
+          onChange={handleFieldChange}
+        />
+        {isFooter && isMobileSub ? (
+          <button
+            className=" bg-orange-400 text-white absolute h-[44px] rounded-xl border-none  border-l-0 rounded-l-none w-[45px] align-text-top self-start justify-self-start text-start "
+            onClick={() => {
+              if (!validateEmail(fields.EMAIL)) {
+                alert(t('subscribe.validEmail'))
+              } else {
+                handleSubmit(fields)
+              }
+            }}
+          >
+            <HiPaperAirplane className="h-4 w-4 m-3 rotate-45" />
+          </button>
+        ) : (
+          <button
+            className=" bg-orange-400 uppercase text-white absolute h-[44px] rounded-xl border-none border-l-0 rounded-l-none px-3"
+            onClick={() => {
+              if (!validateEmail(fields.EMAIL)) {
+                alert(t('subscribe.validEmail'))
+              } else {
+                handleSubmit(fields)
+              }
+            }}
+          >
+            {success && !error ? t('subscribe.subscribed') : t('subscribe.btn')}
+          </button>
+        )}
           placeholder="Enter your email to receive our newsletters"
           className="grow h-11 rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4"
           value={fields.EMAIL}

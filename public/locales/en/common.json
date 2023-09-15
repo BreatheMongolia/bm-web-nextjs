@@ -1,9 +1,18 @@
 {
+  "subfooter": "Stay connected:",
+  "titleExplore": "explore",
+  "title": {
+    "explore": "Explore",
+    "getInvolved": "Get Involved",
+    "aboutUs": "About Us"
+  },
   "emptyState": "This list is empty",
   "subscribe": {
-    "btn": "subscribe",
+    "btn": "Subscribe",
     "subscribed": "Subscribed",
     "validEmail": "Please enter a valid email",
+    "placeholder": "Your E-mail...",
+    "placeholder1": "Join our email list",
     "footerPlaceHolder": "Enter your email to receive our newsletters"
   },
   "backBtnText": "Back to Take Action Home",
