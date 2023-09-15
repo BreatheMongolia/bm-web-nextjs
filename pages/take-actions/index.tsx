@@ -72,7 +72,7 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
   return takeActions
 }
 
-const TakeActionsPage = ({ latest, featured, banner, locale }) => {
+const TakeActionsPage = ({ latest, featured, locale }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]

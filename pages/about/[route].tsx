@@ -160,7 +160,6 @@ export const getStaticProps = async ({ locale }) => {
   const stories = await getStories()
   const page = await getHomePage('/')
   const volunteers = await getVolunteers()
-  console.log(volunteers)
 
   return {
     props: {
