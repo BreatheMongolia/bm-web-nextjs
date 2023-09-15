@@ -8,11 +8,9 @@ import { News } from 'graphql/generated'
 import { getTranslated } from 'lib/utils/getTranslated'
 import Desktop from 'components/Desktop'
 import { H2 } from 'components/generic/Typography'
-import parse from 'html-react-parser'
 import { removeTags } from 'lib/utils/htmlParser'
 
 import { getImage } from 'lib/utils/getImage'
-import { getBanner } from 'lib/graphql-api/queries/home'
 import { getNewsBannerImages, getNewsFull, getNewsPostSlugs, getLastThree } from 'lib/graphql-api/queries/news'
 import { BreadCrumb, ShareButton, LatestNews, Banner } from 'components/NewsPage/DetailPage'
 
@@ -25,7 +23,7 @@ interface NewsPostPageProps {
 
 export default function NewsPostPage({ post, bannerImage, bannerText, getLatest }: NewsPostPageProps) {
   const router = useRouter()
-
+  console.log(post)
   if (router.isFallback) {
     return <div> Loading... </div>
   }
@@ -127,7 +125,7 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news'])),
+      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
       post: getNews(post, locale),
       bannerImage: getTransformedData(bannerImage, locale),
       bannerText: getTransformedDataText(bannerText, locale),
