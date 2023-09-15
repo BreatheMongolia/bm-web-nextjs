@@ -91,7 +91,7 @@ export const Footer = () => {
                 })}
               </div>
               <div className="mobile_style">
-                <Subscribe languageJson={'footer'} isFooter={true} />
+                <Subscribe isFooter={true} />
               </div>
             </div>
           </div>

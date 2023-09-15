@@ -6,6 +6,7 @@
     "getInvolved": "Get Involved",
     "aboutUs": "About Us"
   },
+  "emptyState": "This list is empty",
   "subscribe": {
     "btn": "Subscribe",
     "subscribed": "Subscribed",
