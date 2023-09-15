@@ -6,6 +6,11 @@ import DonateThroughEmployerCard from './SupportUs/DonateThroughEmployerCard'
 import { useTranslation } from 'next-i18next'
 import { useMediaQuery } from 'react-responsive'
 
+export type openPositions = {
+  position: string
+  link: string
+}
+
 export const AboutUsSupportUs = ({
   volunteers,
   countriesInfoText,
@@ -16,7 +21,6 @@ export const AboutUsSupportUs = ({
   locale: string
 }) => {
   const { t } = useTranslation('about')
-  const isMobile = useMediaQuery({ maxWidth: 1100 })
   const isMobile = useMediaQuery({ maxWidth: 1100 })
 
   return (
