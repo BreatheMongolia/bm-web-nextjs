@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import bg from '../../assets/images/giveButterBg.png'
+import bg from 'assets/images/giveButterBg.png'
 import VolunteerCard from './SupportUs/VolunteerCard'
 import DonateThroughEmployerCard from './SupportUs/DonateThroughEmployerCard'
 import { useTranslation } from 'next-i18next'

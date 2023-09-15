@@ -146,27 +146,11 @@ const getAllStories = (StoriesData: string | any[], locale: string) => {
   return stories
 }
 
-// const getVolunteerPositions = (PositionsData: any, locale: string) => {
-//   const positions = []
-//   for (let i = 0; i < PositionsData.length; i++) {
-//     positions.push({
-//       position: getTranslated(
-//         PositionsData[i].node.customFields.position,
-//         PositionsData[i].node.customFields.positionMn,
-//         locale,
-//       ),
-//       link: PositionsData[i].node.customFields.link.url,
-//     })
-//   }
-//   return positions
-// }
-
 export const getStaticProps = async ({ locale }) => {
   const people = await getPeople()
   const stories = await getStories()
   const page = await getHomePage('/')
   const volunteers = await getVolunteers()
-  console.log(volunteers)
 
   return {
     props: {

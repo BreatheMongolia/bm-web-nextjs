@@ -766,9 +766,8 @@ button.read_more_btn:hover {
 /* SUPPORT US SECTION STYLING */
 
 .main_support_us_wrapper {
-  background: #fafaff;
   margin: 0 auto;
-  padding: 40px;
+  padding: 50px 15%;
 }
 
 .ways_to_donate,
@@ -952,23 +951,31 @@ p.and_spacer {
 }
 .through_employer_icons {
   display: flex;
-  flex: 1 1 0;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 40px 40px 0 40px;
+  justify-content: space-evenly;
+}
+.title {
+  font-size: 26px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: left;
 }
 
-.through_employer_description {
+.text_description,
+.supportSubtitle {
   display: flex;
-  flex: 1 1 0;
-  flex-direction: column;
-  width: 696px;
   font-family: 'Open Sans';
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
   text-align: left;
-  padding: 25px 0 60px 20px;
+}
+.text_description {
+  padding: 50px 0;
+}
+.supportSubtitle {
+  padding: 0 0 50px 0;
 }
 
 hr.other_ways_to_donate_break {
@@ -976,6 +983,27 @@ hr.other_ways_to_donate_break {
   height: 2px;
   background-color: rgba(82, 143, 236, 0.25);
   border: none;
+}
+.giveButterSection {
+  position: relative;
+  height: 590px;
+  display: flex;
+  justify-content: flex-start;
+  img {
+    height: initial;
+    max-height: 588px;
+    border-radius: 8px;
+  }
+
+  .givebutterForm {
+    border: none;
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+    min-height: 590px !important;
+    width: 650px;
+  }
 }
 
 .volunteer_title_wrapper {
@@ -1039,6 +1067,9 @@ hr.other_ways_to_donate_break {
   .main_support_us_wrapper {
     display: block;
     padding: 0px;
+  }
+  .support_us_wrapper {
+    padding: 0 10%;
   }
 
   h2.ways_to_donate_title {
@@ -1191,6 +1222,49 @@ hr.other_ways_to_donate_break {
     border: 3px solid #528fec;
     height: fit-content;
     width: 335px;
+  }
+}
+
+@media only screen and (max-width: 721px) {
+  .giveButterSection {
+    height: 780px;
+
+    .givebutterForm {
+      height: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 441px) {
+  .giveButterSection {
+    min-height: 950px;
+    height: 100%;
+  }
+  .text_description {
+    padding-top: 0 !important;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .giveButterSection {
+    min-height: 860px;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .support_us_wrapper {
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .text_description,
+    .supportSubtitle {
+      font-weight: 400;
+      font-size: 14px;
+    }
+    .text_description {
+      padding: 50px 0;
+    }
+    .supportSubtitle {
+      padding: 0 0 50px 0;
+    }
   }
 }
 

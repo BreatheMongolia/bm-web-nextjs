@@ -18,10 +18,10 @@ export const VolunteerCard = ({
   return (
     <div className="volunteer-count">
       <div className="volunteer-count-section  flex-row">
-        {countriesInfoText.map(info => (
-          <div className="country_count_col" key={info.infoIcon.databaseId}>
+        {countriesInfoText.map((info, idx) => (
+          <div className="country_count_col" key={'support' + idx}>
             <div className="text-center country-text">
-              <Image src={info.infoIcon.mediaItemUrl} alt="" />
+              <img src={info.infoIcon.mediaItemUrl} alt="" />
               {info.customTextMn && (
                 <div className="text-data-custom">
                   {parse(getTranslated(info.customText, info.customTextMn, locale))}
