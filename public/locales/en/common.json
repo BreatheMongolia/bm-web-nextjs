@@ -1,11 +1,5 @@
 {
-  "subfooter": "Stay connected:",
-  "titleExplore": "explore",
-  "title": {
-    "explore": "explore",
-    "getInvolved": "getInvolved",
-    "aboutUs": "About Us"
-  },
+  "emptyState": "This list is empty",
   "subscribe": {
     "btn": "subscribe",
     "subscribed": "Subscribed",

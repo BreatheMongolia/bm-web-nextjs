@@ -53,18 +53,18 @@ export const TakeActionCarousel = ({
   takeActionPosts: Page_Customfields_FeaturedTakeActions[]
   locale: string
 }) => {
-  const { t } = useTranslation('home')
+  const { t, i18n } = useTranslation('home')
 
   // Styling the settings for take-action-carousel within Slider
   const settings = {
     dots: false,
     infinite: false,
-    speed: 800,
+    speed: 600,
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: true,
     autoplaySpeed: 5000,
-    cssEase: 'linear',
+    cssEase: 'ease-in-out',
     adaptiveHeight: true,
     centerMode: false,
     variableWidth: true,

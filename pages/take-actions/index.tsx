@@ -19,6 +19,7 @@ export type TakeActionAll = {
 }
 
 const getTransformedBannerData = (data: any, locale: string) => {
+  console.log(data)
   return {
     bannerTextLeft: getTranslated(data?.bannerTextLeft, data?.bannerTextLeftMn, locale),
     bannerTextRight: data?.bannerTextRight.map((text: any) => {
@@ -115,7 +116,7 @@ const TakeActionsPage = ({ latest, featured, banner, locale }) => {
   return (
     <div>
       <PageImageBanner
-        imageUrls={banner.mediaItemUrl}
+        imageUrls={[{ mediaItemUrl: banner.mediaItemUrl }]}
         bottomText={{
           left: banner.bannerTextLeft,
           right: getBannerTextRight(banner.bannerTextRight, 'textContent'),
@@ -123,7 +124,7 @@ const TakeActionsPage = ({ latest, featured, banner, locale }) => {
       />
       <div className="container mx-auto flex flex-col gap-20 items-center">
         <TakeActionsGrid takeAction={takeActions} categories={actionCategories} />
-        
+
         <DonateSection />
       </div>
     </div>
@@ -139,7 +140,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'takeAction'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'takeAction', 'common'])),
       featured: featured.featuredTakeActionsLanding,
       banner: dataBanner,
       latest,
