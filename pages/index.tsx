@@ -135,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
   const volunteers = await getVolunteers()
 
-  const purpleAirStations = [] // await fetchPurpleAirStations()
+  const purpleAirStations = await fetchPurpleAirStations()
   const openAQStations = await fetchOpenAQStations()
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
