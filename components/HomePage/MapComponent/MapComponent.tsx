@@ -14,6 +14,8 @@ import { RankType, StationType } from 'lib/air-pollution-map/types'
 import { StationDetail } from './StationDetail'
 import StationPin from './Helpers/StationPin'
 import ReactDOM from 'react-dom'
+import { useWidth } from 'lib/utils/useWidth'
+import { CELL_PHONE_MAX_WIDTH } from 'lib/consts/widths'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -42,6 +44,7 @@ export const MapComponent = ({
   const map = mapContext?.mapCurrent
   // refs
   const mapContainer = useRef(null)
+  const windowWidth = useWidth()
   // states
   const [zoom, setZoom] = useState(MAP_BASE_CONFIG.zoom)
   const [showStationDetail, setShowStationDetail] = useState(false)
@@ -81,6 +84,14 @@ export const MapComponent = ({
     } else {
       // need to replace the dom node with the saved map instance container div
       document.getElementById('map').replaceWith(map.getContainer())
+    }
+    // check width to hide controller
+    if (windowWidth < CELL_PHONE_MAX_WIDTH) {
+      console.log('we here')
+      setCurrentDropdown('none')
+    } else {
+      console.log('we here 12')
+      setCurrentDropdown('location')
     }
   }, [])
 
@@ -170,7 +181,7 @@ export const MapComponent = ({
 
   return (
     <div className="aqi-map-wrapper">
-      <H2 className="mb-20 md:mb-12" title={title[i18n.language]} descriptionHtml={descriptionHtml[i18n.language]} />
+      <H2 className="mb-24 md:mb-12" title={title[i18n.language]} descriptionHtml={descriptionHtml[i18n.language]} />
       <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map" ref={mapContainer} className="map-wrapper"></div>
         <MapDropdownWrapper title={t(`province.${selectedLocation.value}`)}>
