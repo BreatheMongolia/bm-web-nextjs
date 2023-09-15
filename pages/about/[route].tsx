@@ -60,7 +60,13 @@ export default function AboutPageSection({ people, stories, page, volunteers, lo
       case '/about/impact':
         return
       case '/about/support-us':
-        return <AboutUsSupportUs volunteers={volunteers} />
+        return (
+          <AboutUsSupportUs
+            volunteers={volunteers}
+            countriesInfoText={page.customFields.countriesInfoText}
+            locale={locale}
+          />
+        )
       default:
         return <div> Not Found</div>
     }
@@ -140,20 +146,20 @@ const getAllStories = (StoriesData: string | any[], locale: string) => {
   return stories
 }
 
-const getVolunteerPositions = (PositionsData: any, locale: string) => {
-  const positions = []
-  for (let i = 0; i < PositionsData.length; i++) {
-    positions.push({
-      position: getTranslated(
-        PositionsData[i].node.customFields.position,
-        PositionsData[i].node.customFields.positionMn,
-        locale,
-      ),
-      link: PositionsData[i].node.customFields.link.url,
-    })
-  }
-  return positions
-}
+// const getVolunteerPositions = (PositionsData: any, locale: string) => {
+//   const positions = []
+//   for (let i = 0; i < PositionsData.length; i++) {
+//     positions.push({
+//       position: getTranslated(
+//         PositionsData[i].node.customFields.position,
+//         PositionsData[i].node.customFields.positionMn,
+//         locale,
+//       ),
+//       link: PositionsData[i].node.customFields.link.url,
+//     })
+//   }
+//   return positions
+// }
 
 export const getStaticProps = async ({ locale }) => {
   const people = await getPeople()
@@ -168,7 +174,7 @@ export const getStaticProps = async ({ locale }) => {
       people: getTransformedPeople(people, locale),
       stories: getAllStories(stories, locale),
       page,
-      volunteers: getVolunteerPositions(volunteers, locale),
+      volunteers,
       locale,
     },
   }

@@ -116,8 +116,8 @@ export const Footer = () => {
           <p>
             ©2019-{dayjs().year().toString()}
             {t('copyright')}
-            {t('name')}
           </p>
+          <p className="mt-1">{t('name')}</p>
           <p className="mt-4">{t('responsible')}</p>
         </div>
       </div>
