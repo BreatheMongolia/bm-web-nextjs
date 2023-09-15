@@ -43,6 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               bubble: false
           });`}
           </Script>
+          <link rel="shortcut icon" href="/favicon/favicon.ico" />
         </Head>
         <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} />
         <Component {...pageProps} key={router.asPath} />

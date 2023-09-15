@@ -1,7 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
-import { useMediaQuery } from 'react-responsive'
 import { HiPaperAirplane } from 'react-icons/hi'
 
 type Props = {
@@ -24,6 +23,11 @@ const Subscribe: FC<Props> = ({ languageJson, isFooter, className }) => {
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: '',
   })
+  const [buttonText, setButtonText] = useState('')
+  const buttonStates = {
+    active: 'subscribe.btn',
+    subscribed: 'subscribe.subscribed',
+  }
 
   const isMobileSub = useMediaQuery({ maxWidth: 600 })
   let placeholderText = isFooter ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')

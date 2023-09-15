@@ -6,7 +6,7 @@ import CloseIcon from 'assets/icons/CloseIcon'
 import { useMediaQuery } from 'react-responsive'
 import PlayButton from 'assets/icons/PlayButton'
 import Modal from 'react-modal'
-import ShareButton from 'components/NewsPage/ShareButton'
+import { ShareButton } from 'components/NewsPage/DetailPage'
 
 Modal.setAppElement('#__next')
 

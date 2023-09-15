@@ -154,7 +154,7 @@ export const getStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about', 'common'])),
       people: getTransformedPeople(people, locale),
       stories: getAllStories(stories, locale),
       page,
