@@ -70,8 +70,8 @@ export const Footer = () => {
               )
             })}
             <div className="contact_section">
-              <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('nav.join')} </h2>
-              <div className=" social_icons_div flex justify-between w-[450px] pb-10">
+              <h2 className="font-bold text-lg hidden sm:block"> {t('nav.join')} </h2>
+              <div className=" social_icons_div flex justify-between w-[450px] py-5">
                 {socialUrls.map((x, idx) => {
                   return (
                     <div
@@ -91,7 +91,7 @@ export const Footer = () => {
                 })}
               </div>
               <div className="mobile_style">
-                <Subscribe languageJson={'footer'} isFooter={true} />
+                <Subscribe isFooter={true} />
               </div>
             </div>
           </div>
