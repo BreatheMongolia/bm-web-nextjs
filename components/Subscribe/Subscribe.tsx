@@ -4,7 +4,6 @@ import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
 import { HiPaperAirplane } from 'react-icons/hi'
 
 type Props = {
-  placeholder: string
   isFooter?: boolean
   className?: string
 }
@@ -15,10 +14,10 @@ const validateEmail = (email: string) => {
   )
 }
 
-const Subscribe: FC<Props> = ({ placeholder, isFooter, className }) => {
+const Subscribe: FC<Props> = ({ isFooter, className }) => {
   const bmUrl =
     'https://breathemongolia.us19.list-manage.com/subscribe/post?u=d20df36438b159bbb8b7252df&id=69af699988&f_id=00ba81e4f0'
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('footer')
   const { loading, error, success, message, handleSubmit } = useMailChimpForm(bmUrl)
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: '',
@@ -27,14 +26,6 @@ const Subscribe: FC<Props> = ({ placeholder, isFooter, className }) => {
   const buttonStates = {
     active: 'subscribe.btn',
     subscribed: 'subscribe.subscribed',
-  }
-
-  let btnClass = 'btn'
-  let inputClass = 'input-email'
-
-  if (isFooter) {
-    btnClass += '-footer'
-    inputClass += '-footer'
   }
 
   useEffect(() => {
