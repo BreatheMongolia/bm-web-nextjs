@@ -52,9 +52,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
               <meta property="og:title" content={post.title} />
               {post?.featuredImageBig && <meta property="og:image" content={post?.featuredImageBig} />}
             </Head>
-            <Desktop>
-              <Banner bannerImages={bannerImage} bannerText={bannerText} />
-            </Desktop>
+            <Desktop>{/* <Banner bannerImages={bannerImage} bannerText={bannerText} /> */}</Desktop>
             <BreadCrumb breadCrumbItems={breadCrumbItems} />
             <div className="container">
               <div className="news-main-content">
@@ -120,7 +118,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
 export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
   const post = await getNewsFull(params?.slug)
   const bannerImage = await getNewsBannerImages('/news')
-  const bannerText = await getBanner('/')
+  // const bannerText = await getBanner('/')
   const getLatest = await getLastThree()
 
   return {
@@ -128,7 +126,7 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
       post: getNews(post, locale),
       bannerImage: getTransformedData(bannerImage, locale),
-      bannerText: getTransformedDataText(bannerText, locale),
+      bannerText: null, //getTransformedDataText(bannerText, locale),
       getLatest: getLatestNews(getLatest, locale),
     },
     revalidate: 60,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'next-i18next'
-import NewsBgTile from './NewsBgTile'
+import { NewsBgTile } from './NewsBgTile'
 
 // import { HashLink } from 'react-router-hash-link'
 import Link from 'next/link'
