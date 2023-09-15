@@ -1,14 +1,11 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
-import { ArrowUpIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { Fragment } from 'react'
 import { SOCIAL_URLS } from 'lib/consts/urls'
 import Link from 'next/link'
-import { useTranslation } from 'next-i18next'
 import { SocialIcon } from 'react-social-icons'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import SearchBar from 'components/SearchBar/SearchBar'
-import Desktop from 'components/Desktop'
 
 type Option = {
   value: string
@@ -24,11 +21,11 @@ const availableOptions: Options = {
   mn: { value: 'mn', label: 'MNG' },
 }
 
+const socialUrls: string[] = [SOCIAL_URLS.FACEBOOK, SOCIAL_URLS.INSTAGRAM, SOCIAL_URLS.SLACK, SOCIAL_URLS.TWITTER]
+const socialUrlsDesktop: string[] = [SOCIAL_URLS.LINKEDIN, SOCIAL_URLS.YOUTUBE]
+
 export const Topbar = () => {
   const { locale } = useRouter()
-
-  const socialUrls: string[] = [SOCIAL_URLS.FACEBOOK, SOCIAL_URLS.INSTAGRAM, SOCIAL_URLS.SLACK, SOCIAL_URLS.TWITTER]
-  const socialUrlsDesktop: string[] = [SOCIAL_URLS.LINKEDIN, SOCIAL_URLS.YOUTUBE]
 
   const getURL = () => {
     const baseUrl = window.location.origin
@@ -53,8 +50,8 @@ export const Topbar = () => {
           return (
             <SocialIcon
               url={x}
-              key={idx}
               target="_blank"
+              key={idx}
               bgColor="transparent"
               fgColor="#ffffff"
               className={`hover:bg-black/10 rounded`}
@@ -62,21 +59,19 @@ export const Topbar = () => {
             />
           )
         })}
-        <Desktop>
-          {socialUrlsDesktop.map((x, idx) => {
-            return (
-              <SocialIcon
-                url={x}
-                key={idx}
-                target="_blank"
-                bgColor="transparent"
-                fgColor="#ffffff"
-                className={`hover:bg-black/10 rounded`}
-                style={{ height: 40, width: 40 }}
-              />
-            )
-          })}
-        </Desktop>
+        {socialUrlsDesktop.map((x, idx) => {
+          return (
+            <SocialIcon
+              url={x}
+              target="_blank"
+              key={idx}
+              bgColor="transparent"
+              fgColor="#ffffff"
+              className={`hover:bg-black/10 rounded hidden md:block`}
+              style={{ height: 40, width: 40 }}
+            />
+          )
+        })}
         {/* Language Selector */}
         <Menu as="div" className="relative inline-flex items-center justify-center">
           <Menu.Button className="flex w-full items-center justify-center rounded-md text-xs font-semibold text-white hover:bg-opacity-30">

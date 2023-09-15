@@ -1,7 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
-import { useMediaQuery } from 'react-responsive'
 import { HiPaperAirplane } from 'react-icons/hi'
 
 type Props = {
