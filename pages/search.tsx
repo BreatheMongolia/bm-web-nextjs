@@ -246,7 +246,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'search'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'search', 'common'])),
       locale,
       data,
       banner: {

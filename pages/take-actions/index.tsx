@@ -140,7 +140,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'takeAction'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'takeAction', 'common'])),
       featured: featured.featuredTakeActionsLanding,
       banner: dataBanner,
       latest,
