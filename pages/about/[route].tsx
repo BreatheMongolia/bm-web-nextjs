@@ -7,11 +7,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { getPeople } from 'lib/graphql-api/queries/people'
 import { getStories } from 'lib/graphql-api/queries/ourStories'
+import { getHomePage, getVolunteers } from 'lib/graphql-api/queries/home'
 import { getTranslated } from 'lib/utils/getTranslated'
 import AboutUsOurTeam from 'components/AboutUsPage/AboutUsOurTeam'
-import { getHomePage } from 'lib/graphql-api/queries/home'
-import { OurPartners } from 'components/HomePage'
 import AboutUsOurStory from 'components/AboutUsPage/AboutUsOurStory'
+import AboutUsSupportUs from 'components/AboutUsPage/AboutUsSupportUs'
+import { OurPartners } from 'components/HomePage'
 
 const VALID_ROUTES = [
   {
@@ -36,9 +37,9 @@ const VALID_ROUTES = [
   },
 ]
 
-export default function AboutPageSection({ people, stories, page, locale }) {
+export default function AboutPageSection({ people, stories, page, volunteers, locale }) {
   const router = useRouter()
-  const { t, i18n } = useTranslation('about')
+  const { t } = useTranslation('about')
 
   if (router.isFallback) {
     return <div> Loading... </div>
@@ -58,6 +59,8 @@ export default function AboutPageSection({ people, stories, page, locale }) {
         return <AboutUsOurTeam people={people} />
       case '/about/impact':
         return
+      case '/about/support-us':
+        return <AboutUsSupportUs volunteers={volunteers} />
       default:
         return <div> Not Found</div>
     }
@@ -124,7 +127,6 @@ const getTransformedPeople = (PplData: string | any[], locale: string) => {
 
 const getAllStories = (StoriesData: string | any[], locale: string) => {
   const stories = []
-
   for (let i = 0; i < StoriesData.length; i++) {
     stories.push({
       title: getTranslated(StoriesData[i].node.customFields.title, StoriesData[i].node.customFields.titleMn, locale),
@@ -138,10 +140,26 @@ const getAllStories = (StoriesData: string | any[], locale: string) => {
   return stories
 }
 
+const getVolunteerPositions = (PositionsData: any, locale: string) => {
+  const positions = []
+  for (let i = 0; i < PositionsData.length; i++) {
+    positions.push({
+      position: getTranslated(
+        PositionsData[i].node.customFields.position,
+        PositionsData[i].node.customFields.positionMn,
+        locale,
+      ),
+      link: PositionsData[i].node.customFields.link.url,
+    })
+  }
+  return positions
+}
+
 export const getStaticProps = async ({ locale }) => {
   const people = await getPeople()
   const stories = await getStories()
   const page = await getHomePage('/')
+  const volunteers = await getVolunteers()
 
   return {
     props: {
@@ -149,6 +167,7 @@ export const getStaticProps = async ({ locale }) => {
       people: getTransformedPeople(people, locale),
       stories: getAllStories(stories, locale),
       page,
+      volunteers: getVolunteerPositions(volunteers, locale),
       locale,
     },
   }

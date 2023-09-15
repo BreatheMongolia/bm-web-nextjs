@@ -71,7 +71,7 @@ export const Footer = () => {
             })}
             <div className="contact_section">
               <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('nav.join')} </h2>
-              <div className=" social_icons_div flex justify-between w-[450px] pb-10">
+              <div className=" social_icons_div flex justify-between w-[450px] pb-6">
                 {socialUrls.map((x, idx) => {
                   return (
                     <div
