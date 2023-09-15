@@ -30,9 +30,6 @@ import {
 import { getTranslated } from 'lib/utils/getTranslated'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
-// TODO: Detect the current language and update fields based on the current language
-// TODO: Add a util function to extract the correct image size for the imageUrl
-
 export default function Index({
   page,
   stations,
@@ -138,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
   const volunteers = await getVolunteers()
 
-  const purpleAirStations = await fetchPurpleAirStations()
+  const purpleAirStations = [] // await fetchPurpleAirStations()
   const openAQStations = await fetchOpenAQStations()
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
@@ -148,10 +145,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
-
+  console.log('PA: ' + purpleAirStations.length, 'OpenAQ: ' + openAQStations.length)
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'common'])),
       locale,
       page,
       volunteers,
