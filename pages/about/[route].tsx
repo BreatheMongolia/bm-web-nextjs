@@ -69,12 +69,12 @@ export default function AboutPageSection({ people, stories, page, volunteers, lo
     <div>
       <AboutUsHeader />
       {/* Tab Navbar */}
-      <div className="flex p-5 gap-4">
+      <div className="tab-nav-container shadow-lg">
         {VALID_ROUTES.map((x, idx) => {
           return (
             <div key={idx} className="flex flex-1 text-center w-full">
-              <Link href={`/about/${x.route}`} className="w-full hover:bg-gray-200 bg-gray-100">
-                <div className="w-full p-5">{t(x.title)}</div>
+              <Link href={`/about/${x.route}`} className="w-full hover:bg-gray-100">
+                <div className="tab-titles flex p-5">{t(x.title)}</div>
               </Link>
             </div>
           )
