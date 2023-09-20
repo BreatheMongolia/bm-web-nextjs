@@ -6,12 +6,12 @@ import { useTranslation } from 'next-i18next'
 const DonateThroughEmployer: FC = () => {
   const { t } = useTranslation('about')
   return (
-    <div className="through_employer_flex">
-      <div className="through_employer_icons">
+    <div className="flex flex-col">
+      <div className="font-normal text-md md:font-bold md:text-lg py-5">{t('supportUs.donateThroughEmployer')}</div>
+      <div className="flex flex-wrap grid grid-cols-1 sm:grid-cols-2 justify-items-center gap-5 my-5">
         <YourCause />
         <Brev />
       </div>
-      <div className="through_employer_description">{t('supportUs.donateThroughEmployer')}</div>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import bg from 'assets/images/giveButterBg.png'
 import VolunteerCard from './SupportUs/VolunteerCard'
 import DonateThroughEmployerCard from './SupportUs/DonateThroughEmployerCard'
 import { useTranslation } from 'next-i18next'
-import { useMediaQuery } from 'react-responsive'
+import { H2 } from 'components/generic/Typography'
 
 export type openPositions = {
   position: string
@@ -21,18 +21,20 @@ export const AboutUsSupportUs = ({
   locale: string
 }) => {
   const { t } = useTranslation('about')
-  const isMobile = useMediaQuery({ maxWidth: 1100 })
+  const isMobile = typeof window !== 'undefined' && window.innerWidth
 
   return (
-    <div className="main_support_us_wrapper support_us_wrapper">
-      <h2 className="title">{t('supportUs.title')}</h2>
-      <p className="supportSubtitle">{t('supportUs.subtitle')}</p>
-      <div className="giveButterSection">
-        {!isMobile && <Image src={bg} alt="GiveButterSection" />}
+    <div className="container mx-auto flex flex-col gap-5">
+      <H2 className="title" title={t('supportUs.title')} />
+      <p className="font-normal text-md md:font-bold md:text-lg">{t('supportUs.subtitle')}</p>
+      <div className="relative flex flex-row h-[590px] justify-center md:justify-start giveButterSection">
+        {isMobile > 1100 && (
+          <Image className="rounded-lg" height={590} src={bg} priority={false} alt="GiveButterSectionBM" />
+        )}
         <iframe
-          className="givebutterForm"
+          className="relative flex h-[590px] md:w-[650px] lg:absolute lg:top-0 lg:right-0 givebutterForm"
           src="https://givebutter.com/embed/c/donatebreathemongolia"
-          name="givebutter"
+          name="givebutterBM"
           seamless
         ></iframe>
         <script src="https://givebutter.com/js/widget.js"></script>
