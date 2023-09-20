@@ -767,7 +767,6 @@ button.read_more_btn:hover {
 
 .text-data-custom {
   > p {
-    // display: inline-block;
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 800;
@@ -779,7 +778,6 @@ button.read_more_btn:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    // text-fill-color: transparent;
     margin: 0;
   }
 
@@ -795,7 +793,6 @@ button.read_more_btn:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    // text-fill-color: transparent;
     margin: 0;
   }
 }
