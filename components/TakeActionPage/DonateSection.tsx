@@ -40,7 +40,7 @@ export const DonateSection = () => {
     )
   }
   const nav = () => {
-    return <div className="ta-mobile-donate-nav">{donateLinks()}</div>
+    return <div className="my-5 ta-mobile-donate-nav">{donateLinks()}</div>
   }
 
   const btnSeeMore = () => {
@@ -74,7 +74,7 @@ export const DonateSection = () => {
             {donateLinks()}
           </div>
         </div>
-        <div className="flex py-10 text-lg text-justify">
+        <div className="flex py-10 text-sm">
           <p>{t('donate.disclosure')}</p>
         </div>
       </Desktop>
@@ -85,7 +85,7 @@ export const DonateSection = () => {
           {donateBtn()}
           <div className="my-5 ta-mobile-sidebar">
             <a
-              className="static subheading"
+              className="subheading"
               onClick={() => {
                 setNavVisible(!isNavVisible)
               }}
@@ -94,6 +94,9 @@ export const DonateSection = () => {
             </a>
             {isNavVisible ? nav() : null}
           </div>
+        </div>
+        <div className="flex p-5 text-xs">
+          <p>{t('donate.disclosure')}</p>
         </div>
       </Mobile>
     </div>

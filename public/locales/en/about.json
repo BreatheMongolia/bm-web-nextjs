@@ -42,6 +42,28 @@
     "featuredMembers": "Featured Team Members",
     "ourTeam": "Our Team"
   },
+  "supportUs": {
+    "waysToDonate": "Ways to Donate Money",
+    "donateDirectlyOn": "Donate directly on",
+    "donate": "DONATE",
+    "otherWaysToDonate": "Other Ways to Donate",
+    "startBirthdayFundraiser": "Start a birthday fundraiser on Facebook",
+    "facebookStepOnePart1": "Visit our Facebook page, click on",
+    "facebookStepOnePart2": "tab",
+    "facebookStepTwo": "Click on “Raise Money” on Create a Fundraiser section",
+    "facebookStepThree": "Set the amount, motivation text and invite your friends",
+    "addToSmileAmazon": "Add Breathe Mongolia - Clean Air Coalition on",
+    "wontCostACent": ", It won't cost a single cent",
+    "amazonSmileStepOne": "Click on “Get Started” and search for “Breathe Mongolia” ",
+    "amazonSmileStepTwo": "Select Breathe Mongolia - Clean Air Coalition",
+    "amazonSmileStepThreePart1": "Always shop from ",
+    "amazonSmileStepThreePart2": "",
+    "andBreak": "AND",
+    "donateThroughEmployer": "Donate through your employer. Get matching donations from your employer or have employer give us corporate grants. We’re on Benevity and YouCause",
+    "volunteerForUs": "Volunteer for Us",
+    "currentVolunteersNeeded": "Current Volunteers Needed",
+    "viewPosition": "View Position"
+  },
   "ourStory": {
     "title": "Our Story",
     "ourStoryDetails": "Young Mongols decided to organize a protest in New York City, raising awareness about the deadly air pollution in Mongolia under #BreatheMongolia hashtag. The protest inspired other concerned Mongols and global citizens across the world and our founders met and created Breathe Mongolia - Clean Air Coalition nonprofit. Now, Breathe Mongolia platform serves as a central collaboration, watchdog and knowledge center hub for the fight against air pollution in Mongolia, run by volunteers in 10 countries from diverse professions such as atmospheric chemist, software engineer, urban planner, medical doctor and policy analyst. We are determined to bring all the stakeholders together and equip them with tools to eliminate the source of pollution in our homeland.",
