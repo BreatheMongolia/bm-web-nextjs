@@ -21,18 +21,21 @@ export const AboutUsSupportUs = ({
   locale: string
 }) => {
   const { t } = useTranslation('about')
-  const isMobile = typeof window !== 'undefined' && window.innerWidth
 
   return (
     <div className="container mx-auto flex flex-col gap-5">
       <H2 className="title" title={t('supportUs.title')} />
       <p className="font-normal text-md md:font-bold md:text-lg">{t('supportUs.subtitle')}</p>
-      <div className="relative flex flex-row h-[590px] justify-center md:justify-start giveButterSection">
-        {isMobile > 1100 && (
-          <Image className="rounded-lg" height={590} src={bg} priority={false} alt="GiveButterSectionBM" />
-        )}
+      <div className="relative flex flex-row h-[590px] justify-center md:justify-start">
+        <Image
+          className="rounded-lg hidden lg:block"
+          height={590}
+          src={bg}
+          priority={false}
+          alt="GiveButterSectionBM"
+        />
         <iframe
-          className="relative flex h-[590px] md:w-[650px] lg:absolute lg:top-0 lg:right-0 givebutterForm"
+          className="relative flex flex-wrap h-[590px] w-auto md:w-[650px] lg:absolute lg:top-0 lg:right-0"
           src="https://givebutter.com/embed/c/donatebreathemongolia"
           name="givebutterBM"
           seamless

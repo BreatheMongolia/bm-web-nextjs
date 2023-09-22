@@ -14,12 +14,14 @@ export const VolunteerCard = ({
   locale: string
 }) => {
   const { t } = useTranslation('about')
+  const APPLY_URL =
+    'https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u'
   return (
     <div className="flex flex-col mb-5">
       <div className="font-normal text-md md:font-bold md:text-lg py-5">{t('supportUs.volunteer')}</div>
-      <div className="flex flex-wrap grid grid-cols-1 sm:grid-cols-2 justify-items-center gap-5 my-5">
+      <div className="flex flex-wrap grid grid-cols-1 sm:grid-cols-2 justify-items-center gap-5">
         {/* BreatheMongolia Volunteers */}
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-3 gap-5 my-5">
           {countriesInfoText.map((info, idx) => (
             <div className="inline-block" key={'support' + idx}>
               <img className="w-5 h-5 mb-2 ml-8" src={info.infoIcon.mediaItemUrl} alt="Join Us" />
@@ -32,7 +34,7 @@ export const VolunteerCard = ({
           ))}
         </div>
         {/* Job Opportunity */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 my-5">
           <p className="font-bold text-lg text-slate-700">{t('joinBm.opportunities')}</p>
           <ul className="list-disc pl-5 text-black">
             {volunteers?.map((volunteerPos: any) => (
@@ -53,11 +55,7 @@ export const VolunteerCard = ({
           </ul>
           <div className="flex-start">
             <button className="bg-[#f4ac3d] rounded-md">
-              <Link
-                className="apply_now_button font-bold text-md text-white p-5"
-                href="https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u"
-                target="_blank"
-              >
+              <Link className="apply_now_button font-bold text-md text-white p-5" href={APPLY_URL} target="_blank">
                 {t('joinBm.applyNow')}
               </Link>
             </button>
