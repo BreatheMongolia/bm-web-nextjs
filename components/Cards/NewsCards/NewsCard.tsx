@@ -30,7 +30,7 @@ export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeig
 
   return (
     <div
-      className={`relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group ${
+      className={`relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow ${
         cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
       }`}
       style={{ backgroundImage: `url(${transformedNews})` }}

@@ -19,10 +19,16 @@ export const FeaturedNews = ({ news }: { news: News[] }) => {
           <NewsCard news={bigNews} cardHeight="fill" />
         </div>
       </div>
-      <div className="flex flex-col gap-2">
-        {otherNews.map((x, idx) => {
-          return <NewsHorizontalCard news={x} key={idx} />
-        })}
+      <div className="flex overflow-hidden h-full relative">
+        <div className="overflow-y-auto pr-4 pb-4 absolute top-0 bottom-0 right-0 left-0 gap-3 flex flex-col">
+          {otherNews.map((x, idx) => {
+            return (
+              <div className="flex-1 w-full" key={idx}>
+                <NewsHorizontalCard news={x} />
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
