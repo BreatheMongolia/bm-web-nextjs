@@ -87,10 +87,8 @@ export const MapComponent = ({
     }
     // check width to hide controller
     if (windowWidth < CELL_PHONE_MAX_WIDTH) {
-      console.log('we here')
       setCurrentDropdown('none')
     } else {
-      console.log('we here 12')
       setCurrentDropdown('location')
     }
   }, [])

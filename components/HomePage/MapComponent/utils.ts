@@ -18,7 +18,6 @@ export function getTransformedDataFromOpenAQ(res: any) {
       if (!hasStationUpdatedWithinLastWeek(PM25.lastUpdated, 'openAQ')) {
         continue
       }
-      console.log(station)
       const name: string = res.results[i].name
       if (!stationsMap[name]) {
         stationsMap[name] = {

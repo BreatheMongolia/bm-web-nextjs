@@ -9,6 +9,7 @@ export function getTransformedNews(news: News, language: 'en' | 'mn') {
     desiredSlug: news.desiredSlug,
     slug: news.slug,
     sourceLink: news.customFields?.sourceLink,
+    dateGmt: news.dateGmt,
     title:
       getTranslated(news.customFields?.title, news.customFields?.titleMn, language) !== null
         ? getTranslated(news.customFields?.title, news.customFields?.titleMn, language)

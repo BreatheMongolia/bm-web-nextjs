@@ -9,7 +9,9 @@ export async function getFeaturedNews(): Promise<News[]> {
         id
         slug
         uri
-        customFields {
+        date
+        dateGmt
+          customFields {
           featuredNews {
             ... on News {
               databaseId
