@@ -29,8 +29,13 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
     subscribed: 'subscribe.subscribed',
   }
 
-  const isMobileSub = useMediaQuery({ maxWidth: 600 })
-  let placeholderText = isFooter ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')
+  useEffect(() => {
+    if (success && !error) {
+      setButtonText(buttonStates.subscribed)
+    } else {
+      setButtonText(buttonStates.active)
+    }
+  }, [success, error])
 
   return (
     <div>

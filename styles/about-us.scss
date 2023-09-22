@@ -52,6 +52,51 @@
   }
 }
 
+.tab-nav-container {
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  .tab-titles {
+    flex: 1;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2.5rem 2.5rem;
+    transition: 0.1s;
+    justify-content: center;
+    &:hover {
+      color: rgba(82, 143, 236, 1);
+      border-bottom: 2px solid;
+      border-bottom-color: rgba(82, 143, 236, 1);
+    }
+    a {
+      color: black;
+    }
+  }
+  .tab-titles.focused {
+    border-bottom-color: rgba(82, 143, 236, 1);
+    border-bottom-style: solid;
+    font-weight: 500;
+    a {
+      color: rgba(82, 143, 236, 1);
+    }
+  }
+}
+@media only screen and (max-width: 1064px) {
+  .tab-nav-container {
+    width: 100%;
+    .tab-titles {
+      font-size: 14px;
+      justify-content: unset;
+      padding-left: 16px;
+      li {
+        padding: 1.5rem 1rem;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
 /*WHERE OUR TEAM IS LOCATED*/
 
 .our_team_wrapper {
