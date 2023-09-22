@@ -2,7 +2,6 @@ import React from 'react'
 import DonateThroughEmployerCard from './SupportUs/DonateThroughEmployerCard'
 import { useTranslation } from 'next-i18next'
 import VolunteerCard from './SupportUs/VolunteerCard'
-import bg from '../../../assets/images/giveButterBg.png'
 import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
 
@@ -20,7 +19,6 @@ export const AboutUsSupportUs = ({ volunteers }: { volunteers: openPositions[] }
       <h2 className="title">{t('supportUs.title')}</h2>
       <p className="supportSubtitle">{t('supportUs.subtitle')}</p>
       <div className="giveButterSection">
-        {!isMobile && <Image src={bg} alt="Support Us Mobile" />}
         <iframe
           className="givebutterForm"
           src="https://givebutter.com/embed/c/donatebreathemongolia"
