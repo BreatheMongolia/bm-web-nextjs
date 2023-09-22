@@ -3,13 +3,13 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import { EXTERNAL_URLS } from 'lib/consts/urls'
 import Link from 'next/link'
-import FooterLogo from 'assets/icons/logoFooter'
+import FooterLogo from 'assets/icons/FooterLogo'
 import Subscribe from 'components/Subscribe/Subscribe'
 import { SocialIcon } from 'react-social-icons'
 import { SOCIAL_URLS } from 'lib/consts/urls'
 
 export const Footer = () => {
-  const [t, i18n] = useTranslation('footer')
+  const { t } = useTranslation('footer')
   const socialUrls = [
     SOCIAL_URLS.INSTAGRAM,
     SOCIAL_URLS.FACEBOOK,
@@ -43,19 +43,19 @@ export const Footer = () => {
       {
         title: t('title.aboutUs'),
         urls: [
-          { title: t('nav.ourStory'), url: '/about' },
+          { title: t('nav.ourStory'), url: '/about/info' },
           { title: t('nav.impact'), url: '/about/impact' },
           { title: t('nav.ourTeam'), url: '/about/ourteam' },
         ],
       },
     ]
     return (
-      <div className="border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
-        <div className="container  footer_wrapper  uppercase tracking-widest text-slate-700 mobileRelative">
+      <div className="container">
+        <div className="uppercase tracking-widest text-slate-700 mobileRelative">
           <div className="footer_link_section ">
             {linkSections.map((x, idx) => {
               return (
-                <div key={'footer' + idx} className="column_style">
+                <div key={'footer' + idx}>
                   <h2 className="font-bold text-lg min-w-max"> {x.title} </h2>
                   <div className="flex flex-col text-sm font-semibold my-7">
                     {x.urls.map((url, i) => {
@@ -69,9 +69,9 @@ export const Footer = () => {
                 </div>
               )
             })}
-            <div className="contact_section relativeStyle">
-              <h2 className="font-bold text-lg mb-4 hidden sm:block"> {t('nav.join')} </h2>
-              <div className=" social_icons_div flex justify-between w-[450px] pb-5">
+            <div className="contact_section">
+              <h2 className="font-bold text-lg hidden sm:block"> {t('nav.join')} </h2>
+              <div className=" social_icons_div flex justify-between w-[450px] py-5">
                 {socialUrls.map((x, idx) => {
                   return (
                     <div
@@ -91,7 +91,7 @@ export const Footer = () => {
                 })}
               </div>
               <div className="mobile_style">
-                <Subscribe placeholder={t('subscribe.footerPlaceHolder')} isFooter />
+                <Subscribe isFooter={true} />
               </div>
             </div>
           </div>
@@ -101,34 +101,36 @@ export const Footer = () => {
   }
   const BottomFooter = () => {
     return (
-      <div className="bg-bm-blue text-white py-5 px-7 sm:px-0">
-        <div className="container flex text-xs gap-5">
-          <div className="flex gap-1 flex-col sm:flex-row">
-            <div className="h-20 w-20 relative">
-              <FooterLogo />
-            </div>
-            <div className="h-20 w-20 relative">
-              <a href="https://www.guidestar.org/profile/83-4376042" target="_blank">
-                <Image src="/images/candid-seal-gold-2023.png" alt="candidSeal" fill={true} />
-              </a>
-            </div>
+      <div className="container flex text-xs gap-5">
+        <div className="flex gap-1 flex-col sm:flex-row static">
+          <div className="h-20 w-20 relative">
+            <FooterLogo />
           </div>
-          <div className="text-xsm sm:text-sm font-normal leading-5">
-            <p>
-              ©2019-{dayjs().year().toString()}
-              {t('copyright')} <br></br>
-              {t('name')}
-            </p>
-            <p className="mt-4">{t('responsible')}</p>
+          <div className="h-20 w-20 relative">
+            <Link href="https://www.guidestar.org/profile/83-4376042" target={'_blank'}>
+              <Image src="/images/candid-seal-gold-2023.png" alt="candidSeal" width={77} height={77} />
+            </Link>
           </div>
+        </div>
+        <div className="text-xs font-normal">
+          <p>
+            ©2019-{dayjs().year().toString()}
+            {t('copyright')}
+          </p>
+          <p className="mt-1">{t('name')}</p>
+          <p className="mt-4">{t('responsible')}</p>
         </div>
       </div>
     )
   }
   return (
     <>
-      <FooterLinkSection />
-      <BottomFooter />
+      <div className="footer_wrapper border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
+        <FooterLinkSection />
+      </div>
+      <div className="bottom_wrapper bg-bm-blue text-white py-5">
+        <BottomFooter />
+      </div>
     </>
   )
 }

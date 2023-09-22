@@ -52,6 +52,51 @@
   }
 }
 
+.tab-nav-container {
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  .tab-titles {
+    flex: 1;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2.5rem 2.5rem;
+    transition: 0.1s;
+    justify-content: center;
+    &:hover {
+      color: rgba(82, 143, 236, 1);
+      border-bottom: 2px solid;
+      border-bottom-color: rgba(82, 143, 236, 1);
+    }
+    a {
+      color: black;
+    }
+  }
+  .tab-titles.focused {
+    border-bottom-color: rgba(82, 143, 236, 1);
+    border-bottom-style: solid;
+    font-weight: 500;
+    a {
+      color: rgba(82, 143, 236, 1);
+    }
+  }
+}
+@media only screen and (max-width: 1064px) {
+  .tab-nav-container {
+    width: 100%;
+    .tab-titles {
+      font-size: 14px;
+      justify-content: unset;
+      padding-left: 16px;
+      li {
+        padding: 1.5rem 1rem;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
 /*WHERE OUR TEAM IS LOCATED*/
 
 .our_team_wrapper {
@@ -757,23 +802,42 @@ button.read_more_btn:hover {
     width: 330px;
   }
 
-  // p.story_card_story {
-  //   display: flex;
-  //   align-items: center;
-  //   padding: 0 30px 0 30px;
-  //   overflow-y: auto;
-  // }
-
-  // p.story_card_name {
-  //   align-self: flex-end;
-  //   justify-self: flex-end;
-  //   padding: 0 30px;
-  //   font-size: 14px;
-  //   color: #528fec;
-  // }
-
   .mobile-display {
     /*changes button text from 'read more stories' to 'read more'*/
     display: none;
+  }
+}
+
+/* SUPPORT US SECTION STYLING */
+
+.text-data-custom {
+  > p {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 52px;
+    text-align: center;
+    letter-spacing: 1.07288e-6px;
+    background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+  }
+
+  > pre {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 1.07288e-6px;
+    background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
   }
 }

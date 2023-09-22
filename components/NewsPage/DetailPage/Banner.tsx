@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Banner: any = ({ bannerImages, bannerText }) => {
+export const Banner: any = ({ bannerImages, bannerText }) => {
   return (
     <div className="banner-wrapper">
       <div>
@@ -15,5 +15,3 @@ const Banner: any = ({ bannerImages, bannerText }) => {
     </div>
   )
 }
-
-export default Banner

@@ -30,9 +30,6 @@ import {
 import { getTranslated } from 'lib/utils/getTranslated'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
-// TODO: Detect the current language and update fields based on the current language
-// TODO: Add a util function to extract the correct image size for the imageUrl
-
 export default function Index({
   page,
   stations,
@@ -46,6 +43,19 @@ export default function Index({
   volunteers: any
   locale: string
 }) {
+  const { i18n } = useTranslation()
+
+  // get banner image by language
+  const pageBanner =
+    i18n.language === 'en'
+      ? {
+          leftText: page.customFields.bannerTextLeft,
+          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
+        }
+      : {
+          leftText: page.customFields.bannerTextLeftMn,
+          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
+        }
   return (
     <div>
       <Head>
@@ -53,10 +63,15 @@ export default function Index({
       </Head>
       <div>
         <PageImageBanner
-          imageUrls={page.customFields.banners}
+          imageUrls={page.customFields.banners.map(x => {
+            return {
+              mediaItemUrl: x.bannerImage.mediaItemUrl,
+              url: x.bannerImageUrl,
+            }
+          })}
           bottomText={{
-            left: page.customFields.bannerTextLeft,
-            right: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
+            left: pageBanner.leftText,
+            right: pageBanner.rightText,
           }}
         />
         <div className="container mx-auto flex flex-col gap-20">
@@ -130,17 +145,17 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
-
+  console.log('PA: ' + purpleAirStations.length, 'OpenAQ: ' + openAQStations.length)
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'common'])),
       locale,
       page,
       volunteers,
       stations,
       globalRanks: airVisualGlobalRanks,
     },
-    // This tells the page how often to refetch from the API (in seconds)
+    // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,
   }
 }

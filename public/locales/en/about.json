@@ -42,11 +42,41 @@
     "featuredMembers": "Featured Team Members",
     "ourTeam": "Our Team"
   },
+  "supportUs": {
+    "title":"Support Breathe Mongolia with your donation and volunteer work!",
+    "subtitle":"100% of your donation will directly fund initiatives that prevent air pollution emissions and help people protect their health. We use reliable fundraising platforms that do not charge any fees to process your online donation.",
+    "waysToDonate": "Ways to Donate Money",
+    "donateDirectlyOn": "Donate directly on",
+    "donate": "DONATE",
+    "otherWaysToDonate": "Other Ways to Donate",
+    "startBirthdayFundraiser": "Start a birthday fundraiser on Facebook",
+    "facebookStepOnePart1": "Visit our Facebook page, click on",
+    "facebookStepOnePart2": "tab",
+    "facebookStepTwo": "Click on “Raise Money” on Create a Fundraiser section",
+    "facebookStepThree": "Set the amount, motivation text and invite your friends",
+    "addToSmileAmazon": "Add Breathe Mongolia - Clean Air Coalition on",
+    "wontCostACent": ", It won't cost a single cent",
+    "amazonSmileStepOne": "Click on “Get Started” and search for “Breathe Mongolia” ",
+    "amazonSmileStepTwo": "Select Breathe Mongolia - Clean Air Coalition",
+    "amazonSmileStepThreePart1": "Always shop from ",
+    "amazonSmileStepThreePart2": "",
+    "andBreak": "AND",
+    "donateThroughEmp": "Donate through your employer. Get matching donations from your employer or have employer give us corporate grants. We’re on Benevity and YouCause",
+    "donateThroughEmployer": "You can also find Breathe Mongolia - Clean Air Coalilition (EIN:....) in your workplace Giving portals such as Benevity and YourCause and donate, get matching donations and log in your volunteers hours to earn a grant for us.",
+    "volunteer": "Fight air pollution in Mongolia with your science, tech, design and business skills from anywhere in the world. Check out the 10 perks of working with us.",
+    "volunteerForUs": "Volunteer for Us",
+    "currentVolunteersNeeded": "Current Volunteers Needed",
+    "viewPosition": "View Position"
+  },
   "ourStory": {
     "title": "Our Story",
     "ourStoryDetails": "Young Mongols decided to organize a protest in New York City, raising awareness about the deadly air pollution in Mongolia under #BreatheMongolia hashtag. The protest inspired other concerned Mongols and global citizens across the world and our founders met and created Breathe Mongolia - Clean Air Coalition nonprofit. Now, Breathe Mongolia platform serves as a central collaboration, watchdog and knowledge center hub for the fight against air pollution in Mongolia, run by volunteers in 10 countries from diverse professions such as atmospheric chemist, software engineer, urban planner, medical doctor and policy analyst. We are determined to bring all the stakeholders together and equip them with tools to eliminate the source of pollution in our homeland.",
     "moreAboutOurStory": "MORE ABOUT OUR STORY",
     "storiesAirPollution": "Stories About Air Pollution",
     "readMoreStories": "READ MORE STORIES"
+  },
+  "joinBm": {
+    "opportunities": "Open positions",
+    "applyNow": "Apply Now"
   }
 }

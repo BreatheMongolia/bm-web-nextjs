@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { getTransformedDataFromOpenAQ, hasStationUpdatedWithinLastWeek } from 'components/HomePage/MapComponent/utils'
 import { StationType } from '../types'
-
-const OPEN_AQ_URL = 'https://api.openaq.org/v2/locations?country_id=MN'
+// country id = 103 -> Mongolia
+const OPEN_AQ_URL = 'https://api.openaq.org/v2/locations?country_id=104&limit=500&parameter_id=2'
 export const fetchOpenAQStations = async () => {
   const stations: StationType[] = []
   // update
@@ -12,9 +12,7 @@ export const fetchOpenAQStations = async () => {
       if (res && res.data) {
         const transformedData = getTransformedDataFromOpenAQ(res.data)
         for (const [_, station] of Object.entries(transformedData)) {
-          if (hasStationUpdatedWithinLastWeek(station.date, 'openAQ')) {
-            stations.push(station)
-          }
+          stations.push(station)
         }
       }
     })

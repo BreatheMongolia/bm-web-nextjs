@@ -28,7 +28,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           bottomA: 'bg-[#92ba2a]',
           bottomB: 'bg-[#c8dd94]',
           right: 'bg-[#deeabf]',
-          otherBox: 'bg-[#e9f0d2]',
+          otherBox: 'md:bg-[#e9f0d2]',
         }
       case 'yellow':
         return {
@@ -36,7 +36,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           bottomA: 'bg-[#E2C62E]',
           bottomB: 'bg-[#F0E497]',
           right: 'bg-[#F6EEC1]',
-          otherBox: 'bg-[#f9f3d4]',
+          otherBox: 'md:bg-[#f9f3d4]',
         }
       case 'orange':
         return {
@@ -44,7 +44,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           bottomA: 'bg-[#f9963b]',
           bottomB: 'bg-[#fccb9d]',
           right: 'bg-[#fce0c4]',
-          otherBox: 'bg-[#fee9d6]',
+          otherBox: 'md:bg-[#fee9d6]',
         }
       case 'red':
         return {
@@ -52,7 +52,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           bottomA: 'bg-[#ea3224]',
           bottomB: 'bg-[#f59891]',
           right: 'bg-[#f9c2bd]',
-          otherBox: 'bg-[#fbd4d1]',
+          otherBox: 'md:bg-[#fbd4d1]',
         }
       case 'purple':
         return {
@@ -60,7 +60,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           bottomA: 'bg-[#b136d1]',
           bottomB: 'bg-[#deafdb]',
           right: 'bg-[#e8c3f1]',
-          otherBox: 'bg-[#f0d5f5]',
+          otherBox: 'md:bg-[#f0d5f5]',
         }
       case 'brown':
         return {
@@ -88,7 +88,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
     return (
       <div className={`px-4 py-3 text-white ${bgColors.topLeft}`}>
         <span className="font-bold">{station.name}</span>
-        <div className="text-[10px] flex justify-between">
+        <div className="text-[10px] flex flex-col md:flex-row gap-y-1 justify-between">
           <div> {getFormattedDate()} </div>
           {station.sponsoredBy && (
             <div className="flex">
@@ -107,10 +107,10 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
     return (
       <div className={`text-white px-2 py-1 flex flex-col items-center justify-center ${bgColors.bottomA}`}>
         <div className="text-xs font-semibold uppercase"> {t('stationDetail.usaqi')}</div>
-        <div className="font-bold text-5xl"> {station.pollution.aqius} </div>
+        <div className="font-bold text-3xl md:text-5xl"> {station.pollution.aqius} </div>
         {p2 && (
           <div className="text-xs text-center">
-            <div className="font-light"> PM2.5 </div>
+            <div className="font-regular"> PM2.5 </div>
             <div className="font-bold"> {p2 ? p2.conc || p2 : ''} μg/m3 </div>
           </div>
         )}
@@ -119,7 +119,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
   }
   const ContentBottomAreaB = () => {
     return (
-      <div className={`col-span-2 px-4 py-1 flex items-center justify-center space-x-1 ${bgColors.bottomB}`}>
+      <div className={`col-span-2 px-1 md:px-4 py-1 flex items-center justify-center space-x-1 ${bgColors.bottomB}`}>
         <div className={`health_category_icon ${healthCategoryDetails.className}`}></div>
         <div className="font-bold text-sm" style={{ lineHeight: '18px' }}>
           {t(`stationDetail.${station.type}Text.${healthCategory}.category_text`)}
@@ -129,28 +129,37 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
   }
   const ContentRightArea = () => {
     return (
-      <div className={`flex-grow px-4 py-3 ${bgColors.right}`}>
+      <div className={`flex-grow px-1 md:px-4 py-0.5 md:py-3 ${bgColors.right}`}>
         <div className="flex items-center">
-          <span className="grow font-bold">{t('stationDetail.Recommendations')}</span>
-          <div onClick={() => setHidden(true)} className="cursor-pointer hover:text-black/30">
+          <span className="grow font-bold hidden md:inline-block">{t('stationDetail.Recommendations')}</span>
+          <div
+            onClick={() => setHidden(true)}
+            className="cursor-pointer hover:text-black/30 absolute right-1 top-1 text-white md:relative md:right-auto md:top-auto md:text-inherit"
+          >
             <XMarkIcon className="h-5 w-5" />
           </div>
         </div>
         {/* Recommended Area */}
-        <div className="grid grid-cols-2 gap-1">
-          <div className={`${bgColors.otherBox} rounded p-3 flex space-x-2 items-center justify-center`}>
+        <div className="grid grid-cols-3 md:grid-cols-1 xl:grid-cols-2 gap-1">
+          <div
+            className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
+          >
             <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.first_advice}`}></div>
             <div className="text-xs font-semibold">
               {t(`stationDetail.${station.type}Text.${healthCategory}.first_advice`)}
             </div>
           </div>
-          <div className={`${bgColors.otherBox} rounded p-3 flex space-x-2 items-center justify-center`}>
+          <div
+            className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
+          >
             <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.second_advice}`}></div>
             <div className="text-xs font-semibold">
               {t(`stationDetail.${station.type}Text.${healthCategory}.second_advice`)}
             </div>
           </div>
-          <div className={`${bgColors.otherBox} rounded p-3 flex space-x-2 items-center justify-center`}>
+          <div
+            className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
+          >
             <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.third_advice}`}></div>
             <div className="text-xs font-semibold">
               {t(`stationDetail.${station.type}Text.${healthCategory}.third_advice`)}
@@ -169,11 +178,11 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
-          className="absolute bottom-2 left-1 z-20 w-3/5 rounded-sm overflow-hidden
+          className="absolute bottom-24 md:bottom-2 md:left-1 z-20 w-full md:w-3/5 rounded-sm overflow-hidden
           border-[0.5px] border-black/20 backdrop-blur-xl
           "
         >
-          <div className={`${aqiColor} flex items-stretch`}>
+          <div className={`${aqiColor} flex flex-col md:flex-row items-stretch`}>
             <div className="flex flex-col grow">
               {/* top left */}
               <ContentTopLeftArea />
