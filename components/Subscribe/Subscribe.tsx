@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
+import { useMediaQuery } from 'react-responsive'
 import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
 import { HiPaperAirplane } from 'react-icons/hi'
 

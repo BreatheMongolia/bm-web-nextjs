@@ -43,6 +43,8 @@
     "ourTeam": "Our Team"
   },
   "supportUs": {
+    "title":"Support Breathe Mongolia with your donation and volunteer work!",
+    "subtitle":"100% of your donation will directly fund initiatives that prevent air pollution emissions and help people protect their health. We use reliable fundraising platforms that do not charge any fees to process your online donation.",
     "waysToDonate": "Ways to Donate Money",
     "donateDirectlyOn": "Donate directly on",
     "donate": "DONATE",
@@ -59,7 +61,9 @@
     "amazonSmileStepThreePart1": "Always shop from ",
     "amazonSmileStepThreePart2": "",
     "andBreak": "AND",
-    "donateThroughEmployer": "Donate through your employer. Get matching donations from your employer or have employer give us corporate grants. We’re on Benevity and YouCause",
+    "donateThroughEmp": "Donate through your employer. Get matching donations from your employer or have employer give us corporate grants. We’re on Benevity and YouCause",
+    "donateThroughEmployer": "You can also find Breathe Mongolia - Clean Air Coalilition (EIN:....) in your workplace Giving portals such as Benevity and YourCause and donate, get matching donations and log in your volunteers hours to earn a grant for us.",
+    "volunteer": "Fight air pollution in Mongolia with your science, tech, design and business skills from anywhere in the world. Check out the 10 perks of working with us.",
     "volunteerForUs": "Volunteer for Us",
     "currentVolunteersNeeded": "Current Volunteers Needed",
     "viewPosition": "View Position"
@@ -70,5 +74,9 @@
     "moreAboutOurStory": "MORE ABOUT OUR STORY",
     "storiesAirPollution": "Stories About Air Pollution",
     "readMoreStories": "READ MORE STORIES"
+  },
+  "joinBm": {
+    "opportunities": "Open positions",
+    "applyNow": "Apply Now"
   }
 }
