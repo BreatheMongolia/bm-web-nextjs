@@ -45,7 +45,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
   }
 
   const refreshPageNumberLimit = () => {
-    if (isMobile <= 600) setPageNumberLimit(6)
+    if (isMobile <= 700) setPageNumberLimit(6)
     else setPageNumberLimit(18)
   }
 
@@ -96,7 +96,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
         ))}
       </div>
 
-      {isMobile > 600 ? (
+      {isMobile > 700 ? (
         <div className="actions-grid">
           {getCurrentPost().map((takeAction, idx) => (
             <TakeActionTile

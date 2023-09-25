@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { H2 } from 'components/generic/Typography'
-import Desktop from '../Desktop/index'
-import Mobile from '../Mobile/index'
 import { urls } from 'lib/utils/urls'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { useWidth } from 'lib/utils/useWidth'
@@ -13,14 +11,7 @@ export const DonateSection = () => {
   const [isNavVisible, setNavVisible] = useState(false)
   let isMobile = useWidth()
 
-  useEffect(() => {
-    // refreshWidth()
-  }, [isMobile])
-
-  // const refreshWidth = () => {
-  //   if (isMobile <= 600) setPageNumberLimit(6)
-  //   else setPageNumberLimit(18)
-  // }
+  useEffect(() => {}, [isMobile])
 
   const donateLinks = () => {
     return (
@@ -73,7 +64,7 @@ export const DonateSection = () => {
 
   return (
     <div>
-      {isMobile > 600 ? (
+      {isMobile > 700 ? (
         <div className="flex flex-row ta-section">
           <div className="basis-2/3 ta-content">
             <H2 title={t('donate.title')} />
