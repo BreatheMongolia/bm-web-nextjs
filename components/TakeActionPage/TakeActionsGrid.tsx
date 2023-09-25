@@ -6,6 +6,7 @@ import PaginationComponent from '../generic/PaginationComponent'
 import Desktop from '../Desktop/index'
 import Mobile from '../Mobile/index'
 import TakeActionTile from '../Cards/TakeActionTile'
+import { useWidth } from 'lib/utils/useWidth'
 
 export type TakeActionAll = {
   id: number
@@ -20,12 +21,14 @@ export type TakeActionAll = {
 export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeActionAll[]; categories: string[] }) => {
   const { t } = useTranslation('takeAction')
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageNumberLimit, setPageNumberLimit] = useState(9)
+  const [pageNumberLimit, setPageNumberLimit] = useState(18)
   const [filteredCategories, setFilteredCategories] = useState<string[]>([])
+  let isMobile = useWidth()
 
   useEffect(() => {
     getFilteredTakeActions()
-  }, [filteredCategories])
+    refreshPageNumberLimit()
+  }, [filteredCategories, isMobile])
 
   const truncate = (input: string) => (input?.length > 95 ? `${input.substring(0, 95)}...` : input)
 
@@ -41,6 +44,11 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
 
   const showAll = () => {
     setFilteredCategories([])
+  }
+
+  const refreshPageNumberLimit = () => {
+    if (isMobile <= 600) setPageNumberLimit(6)
+    else setPageNumberLimit(18)
   }
 
   const getFilteredTakeActions = () => {
@@ -90,7 +98,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
         ))}
       </div>
 
-      <Desktop>
+      {isMobile > 600 ? (
         <div className="actions-grid">
           {getCurrentPost().map((takeAction, idx) => (
             <TakeActionTile
@@ -104,18 +112,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
             />
           ))}
         </div>
-        {takeAction.length > 10 && (
-          <div className="parent-pagination">
-            <PaginationComponent
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              pageNumberLimit={pageNumberLimit}
-              totalPosts={getFilteredTakeActions().length}
-            />
-          </div>
-        )}
-      </Desktop>
-      <Mobile>
+      ) : (
         <div className="action-slider-items">
           {getCurrentPost().map((takeAction, idx) => (
             <div key={idx} className="flex flex-row action-slider-item">
@@ -133,6 +130,8 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
             </div>
           ))}
         </div>
+      )}
+      {takeAction.length > pageNumberLimit && (
         <div className="parent-pagination">
           <PaginationComponent
             currentPage={currentPage}
@@ -141,7 +140,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
             totalPosts={getFilteredTakeActions().length}
           />
         </div>
-      </Mobile>
+      )}
     </div>
   )
 }

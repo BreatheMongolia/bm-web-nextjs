@@ -77,10 +77,10 @@ figure {
   @apply table ml-0 mr-0;
 }
 
-.wp-block-image .alignleft>figcaption,
-.wp-block-image .alignright>figcaption,
-.wp-block-image .aligncenter>figcaption,
-.wp-block-image.is-resized>figcaption {
+.wp-block-image .alignleft > figcaption,
+.wp-block-image .alignright > figcaption,
+.wp-block-image .aligncenter > figcaption,
+.wp-block-image.is-resized > figcaption {
   @apply table-caption;
 
   caption-side: bottom;
@@ -357,7 +357,7 @@ p {
   }
 
   .text-data-custom {
-    >p {
+    > p {
       display: inline-block;
       font-family: 'Open Sans';
       font-style: normal;
@@ -374,7 +374,7 @@ p {
       margin: 0;
     }
 
-    >pre {
+    > pre {
       font-family: 'Open Sans';
       font-style: normal;
       font-weight: 800;
@@ -594,6 +594,7 @@ p {
 // TakeActionCarousel Styling Beginning
 
 .take-action-carousel {
+  margin: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   max-width: 236px;
@@ -603,7 +604,6 @@ p {
   height: 200px;
 
   &.big {
-    margin: 6px;
     max-width: 487px;
     width: 487px !important;
     height: 422px;
@@ -809,7 +809,6 @@ p {
 
 @media (max-width: 767px) {
   .campaign-slider-wrapper {
-
     .slick-slider,
     .slick-list,
     .slick-track,

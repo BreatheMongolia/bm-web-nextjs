@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { H2 } from 'components/generic/Typography'
@@ -6,10 +6,21 @@ import Desktop from '../Desktop/index'
 import Mobile from '../Mobile/index'
 import { urls } from 'lib/utils/urls'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import { useWidth } from 'lib/utils/useWidth'
 
 export const DonateSection = () => {
   const { t } = useTranslation('takeAction')
   const [isNavVisible, setNavVisible] = useState(false)
+  let isMobile = useWidth()
+
+  useEffect(() => {
+    // refreshWidth()
+  }, [isMobile])
+
+  // const refreshWidth = () => {
+  //   if (isMobile <= 600) setPageNumberLimit(6)
+  //   else setPageNumberLimit(18)
+  // }
 
   const donateLinks = () => {
     return (
@@ -62,7 +73,7 @@ export const DonateSection = () => {
 
   return (
     <div>
-      <Desktop>
+      {isMobile > 600 ? (
         <div className="flex flex-row ta-section">
           <div className="basis-2/3 ta-content">
             <H2 title={t('donate.title')} />
@@ -74,11 +85,7 @@ export const DonateSection = () => {
             {donateLinks()}
           </div>
         </div>
-        <div className="flex py-10 text-sm">
-          <p>{t('donate.disclosure')}</p>
-        </div>
-      </Desktop>
-      <Mobile>
+      ) : (
         <div className="ta-mobile-content">
           <H2 title={t('donate.mobileTitle')} />
           <p className="mb-5">{t('donate.description')}</p>
@@ -95,10 +102,10 @@ export const DonateSection = () => {
             {isNavVisible ? nav() : null}
           </div>
         </div>
-        <div className="flex p-5 text-xs">
-          <p>{t('donate.disclosure')}</p>
-        </div>
-      </Mobile>
+      )}
+      <div className="flex py-10 text-sm ta-section md:p-5 md:text-xs">
+        <p>{t('donate.disclosure')}</p>
+      </div>
     </div>
   )
 }
