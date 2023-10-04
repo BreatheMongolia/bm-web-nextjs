@@ -28,11 +28,11 @@ export const NewsHorizontalCard = ({ news, className }: { news: News; className?
   }
   return (
     <div
-      className={`grid grid-cols-7 bg-white overflow-hidden shadow-lg rounded cursor-pointer ${className}`}
+      className={`grid grid-cols-7 group bg-white overflow-hidden shadow-lg rounded cursor-pointer hover:bg-gray-50 ${className}`}
       onClick={onCardClick}
     >
-      <div className="col-span-2 overflow-hidden max-h-[118px] relative">
-        <img className="min-h-[118px] w-full" src={transformedNews.featuredImageBig} />
+      <div className="col-span-2 overflow-hidden max-h-[118px] relative bg-black">
+        <img className="min-h-[118px] w-full group-hover:opacity-80" src={transformedNews.featuredImageBig} />
         {transformedNews.newsContentType === 'video' && (
           <div className="flex text-rose-500 items-center justify-center flex-auto absolute right-0 left-0 top-1/3">
             <PlayCircleIcon className="h-11 w-11 group-hover:h-12 group-hover:w-12 transition-all ease-in-out bg-white rounded-full" />
