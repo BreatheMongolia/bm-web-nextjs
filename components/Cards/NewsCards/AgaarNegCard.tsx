@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import Link from 'next/link'
-import agaarNegCloudImage from '../../../public/images/cloud.png'
+import agaarNegCloudImage from '/public/images/agaar-neg/cloud.png'
 
 type Props = {
   news: {

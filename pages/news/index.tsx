@@ -1,19 +1,19 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 // generic components
 import { H2 } from 'components/generic/Typography'
 import { NewsCard } from 'components/Cards'
 import { AgaarNegCard } from 'components/Cards/NewsCards/AgaarNegCard'
 // news components
 import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
-
+import agaarNegIcon from 'public/images/agaar-neg/agaar-neg-icon.png'
 // api/utils
 import { News, Page_Customfields, Page_NewsGeneralFields_Banner } from 'graphql/generated'
 import { getAgaarNegNews, getFeaturedNews, getNewsPosts } from 'lib/graphql-api/queries/news'
-import Link from 'next/link'
-import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 
 const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featuredNews: News[]; agaarNegNews }) => {
   const { t } = useTranslation('news')
@@ -42,23 +42,23 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
           </NewsGrid>
         </div>
         <div>
-          <H2 title={t('agaarNegPlatform')} descriptionHtml={''} />
+          <H2 iconImage={agaarNegIcon} title={t('agaarNegPlatform')} descriptionHtml={''} />
           <div className="gap-5 grid grid-cols-4">
             {agaarNegNews.map((x, idx) => {
               console.log(x)
               return <AgaarNegCard news={x} key={idx} />
             })}
-          </div>
-          <div className="flex w-full justify-end mt-4">
-            <Link href="https://agaarneg.mn/news_stories" target="_blank">
-              <div className="bg-[#00aeef] text-white flex px-6 py-4 items-center justify-center gap-2 font-semibold rounded-full shadow-lg group hover:shadow-xl hover:bg-sky-600 transition-all">
-                <span className="text-xs">{t('seemoreon')} </span>
-                <h1>AgaarNeg.mn</h1>
-                <span>
-                  <ArrowRightCircleIcon className="h-5 w-5 group-hover:-mr-1 transition-all" />
-                </span>
-              </div>
-            </Link>
+            <div className="flex justify-center items-center">
+              <Link href="https://agaarneg.mn/news_stories" target="_blank">
+                <div className="bg-[#00aeef] text-white flex px-6 py-4 items-center justify-center gap-2 font-semibold rounded-full shadow-lg group hover:shadow-xl hover:bg-sky-600 transition-all">
+                  <span className="text-xs">{t('seemoreon')} </span>
+                  <h1>AgaarNeg.mn</h1>
+                  <span>
+                    <ArrowRightCircleIcon className="h-5 w-5 group-hover:-mr-1 transition-all" />
+                  </span>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
         <div>
