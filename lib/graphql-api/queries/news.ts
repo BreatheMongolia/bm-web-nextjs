@@ -157,6 +157,71 @@ export async function getNewsPosts(): Promise<News[]> {
   }
   return []
 }
+export async function getAgaarNegNews(): Promise<
+  {
+    id: string
+    title: { en: string; mn: string }
+    keywords: string[]
+  }[]
+> {
+  const MAX_NUM_RESOURCES = 8
+  // override api request url, as host server is different
+  const news = []
+  const data = await fetchAPI(
+    `
+    query GetAllAgaarNegNews {
+      newsStories (first: ${MAX_NUM_RESOURCES})  {
+        edges {
+          node {
+            databaseId
+            customFields {
+              title
+              titleMn
+              keywords {
+                customFields {
+                  name
+                  nameMn
+                }
+              }
+            }
+          }
+        }
+      }
+      keywords {
+        edges {
+          node {
+            customFields {
+              name
+              nameMn
+            }
+          }
+        }
+      }
+    }
+    `,
+    {
+      apiUrl: 'https://agaarneg.wpengine.com/graphql',
+    },
+  )
+
+  if (data && data.newsStories) {
+    data.newsStories.edges.map(x => {
+      console.log(x)
+      try {
+        news.push({
+          id: x.node.databaseId,
+          title: {
+            en: x.node.customFields.title,
+            mn: x.node.customFields.titleMn,
+          },
+          keywords: x.node.keywords ?? [],
+        })
+      } catch (e) {}
+    })
+  }
+
+  return news
+}
 // Detail Pages
 
 export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Promise<News> {

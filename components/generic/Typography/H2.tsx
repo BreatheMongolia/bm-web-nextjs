@@ -35,7 +35,7 @@ export const H2 = ({
   return (
     <div className={`mt-2 mb-5 ${className}`}>
       <div className="flex items-center gap-x-10">
-        <div>
+        <div className={`${!trailingLineColor && 'grow'}`}>
           <h2 className="font-bold text-lg sm:text-3xl text-zinc-800 mt-2 mb-1"> {title} </h2>
         </div>
         {/* Trailing line */}

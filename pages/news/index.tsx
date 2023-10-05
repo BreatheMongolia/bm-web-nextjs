@@ -11,17 +11,11 @@ import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
 
 // api/utils
 import { News, Page_Customfields, Page_NewsGeneralFields_Banner } from 'graphql/generated'
-import { getFeaturedNews, getNewsPosts } from 'lib/graphql-api/queries/news'
+import { getAgaarNegNews, getFeaturedNews, getNewsPosts } from 'lib/graphql-api/queries/news'
+import Link from 'next/link'
+import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 
-const NewsPage = ({
-  news,
-  banner,
-  featuredNews,
-}: {
-  news: News[]
-  featuredNews: News[]
-  banner: Page_NewsGeneralFields_Banner & Page_Customfields
-}) => {
+const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featuredNews: News[]; agaarNegNews }) => {
   const { t } = useTranslation('news')
 
   const filteredNews = [...news]
@@ -30,7 +24,7 @@ const NewsPage = ({
       <Head>
         <title> News - Breathe Mongolia - Clean Air Coalition </title>
       </Head>
-      <div className="container mx-auto flex flex-col gap-20">
+      <div className="container mx-auto flex flex-col gap-16">
         <div>
           <H2 title={t('featuredNews')} descriptionHtml={''} trailingLineColor="blue" />
           <FeaturedNews news={featuredNews} />
@@ -49,11 +43,22 @@ const NewsPage = ({
         </div>
         <div>
           <H2 title={t('agaarNegPlatform')} descriptionHtml={''} />
-          <div className="flex gap-5">
-            <AgaarNegCard />
-            <AgaarNegCard />
-            <AgaarNegCard />
-            <AgaarNegCard />
+          <div className="gap-5 grid grid-cols-4">
+            {agaarNegNews.map((x, idx) => {
+              console.log(x)
+              return <AgaarNegCard news={x} key={idx} />
+            })}
+          </div>
+          <div className="flex w-full justify-end mt-4">
+            <Link href="https://agaarneg.mn/news_stories" target="_blank">
+              <div className="bg-[#00aeef] text-white flex px-6 py-4 items-center justify-center gap-2 font-semibold rounded-full shadow-lg group hover:shadow-xl hover:bg-sky-600 transition-all">
+                <span className="text-xs">{t('seemoreon')} </span>
+                <h1>AgaarNeg.mn</h1>
+                <span>
+                  <ArrowRightCircleIcon className="h-5 w-5 group-hover:-mr-1 transition-all" />
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
         <div>
@@ -76,11 +81,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const newsData = await getNewsPosts()
   const featuredNews = await getFeaturedNews()
 
+  const agaarNegNews = await getAgaarNegNews()
   return {
     props: {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
       news: newsData,
       featuredNews,
+      agaarNegNews,
     },
     revalidate: 60 * 5, // every 5 minutes
   }
