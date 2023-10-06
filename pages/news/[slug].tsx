@@ -23,7 +23,6 @@ interface NewsPostPageProps {
 
 export default function NewsPostPage({ post, bannerImage, bannerText, getLatest }: NewsPostPageProps) {
   const router = useRouter()
-  console.log(post)
   if (router.isFallback) {
     return <div> Loading... </div>
   }

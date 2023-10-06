@@ -13,7 +13,7 @@ export const FeaturedNews = ({ news }: { news: News[] }) => {
   const otherNews = news.slice(1)
 
   return (
-    <div className="grid gap-5 sm:grid-cols-2">
+    <div className="grid gap-5 sm:grid-cols-2 h-[660px] sm:h-[460px]">
       <div>
         <div className="bg-gray-200 h-full">
           <NewsCard news={bigNews} cardHeight="fill" />

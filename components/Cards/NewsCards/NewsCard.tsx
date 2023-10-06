@@ -33,10 +33,10 @@ export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeig
       className={`relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow ${
         cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
       }`}
-      style={{ backgroundImage: `url(${transformedNews})` }}
+      style={{ backgroundImage: `url(${transformedNews.featuredImageBig})` }}
       onClick={onCardClick}
     >
-      <div className="flex flex-col h-full justify-end">
+      <div className="flex flex-col h-full justify-end pr-10">
         {transformedNews.sourceLink && (
           <div className="text-bm-blue text-sm font-semibold pt-2 flex-1 absolute top-1 left-0 z-20">
             <div className="bg-white/95 flex gap-x-1 items-center px-2 py-0.5 rounded-r-md w-fit group-hover:bg-bm-blue group-hover:text-white transition-all group-hover:pl-5">
@@ -51,9 +51,6 @@ export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeig
           </div>
         )}
 
-        <div className="h-full top-0 left-0 z-0 text-center">
-          <img className="object-cover h-full " src={transformedNews.featuredImageBig} />
-        </div>
         <div className="w-full px-5 mb-4 h-20 absolute bottom-0 z-30">
           {transformedNews.categories && (
             <div className="flex border-b-[0.5px] border-white w-fit text-[12px] font-bold my-2">

@@ -71,7 +71,8 @@ export async function getFeaturedNews(): Promise<News[]> {
     }
     `,
     {},
-  )
+  ).catch(err => console.error('Failed to fetch featuredeNews:', err))
+  console.log(data.page.customFields.featuredNews)
 
   if (data?.page) {
     const page = data.page as Page
@@ -206,7 +207,6 @@ export async function getAgaarNegNews(): Promise<
 
   if (data && data.newsStories) {
     data.newsStories.edges.map(x => {
-      console.log(x)
       try {
         news.push({
           id: x.node.databaseId,

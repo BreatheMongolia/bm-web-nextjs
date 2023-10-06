@@ -15,10 +15,17 @@ import agaarNegIcon from 'public/images/agaar-neg/agaar-neg-icon.png'
 import { News, Page_Customfields, Page_NewsGeneralFields_Banner } from 'graphql/generated'
 import { getAgaarNegNews, getFeaturedNews, getNewsPosts } from 'lib/graphql-api/queries/news'
 
+// FIXME: Featured News not showing up
 const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featuredNews: News[]; agaarNegNews }) => {
   const { t } = useTranslation('news')
-
   const filteredNews = [...news]
+  // filter to categories for BM related news, slice recent 8
+  const bmNews = filteredNews
+    .filter(x => {
+      return x.categories.nodes.some(c => c.slug === 'about-us' || c.slug === 'press-release')
+    })
+    .slice(0, 8)
+  console.log(featuredNews.length)
   return (
     <div>
       <Head>
@@ -32,20 +39,19 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
         <div>
           <H2 title={t('latestNews')} descriptionHtml={''} trailingLineColor="blue" />
           <NewsGrid>
-            <div className="h-48 bg-gray-200 col-span-2"></div>
-            <div className="h-48 bg-gray-200"></div>
-            <div className="h-48 bg-gray-200"></div>
-            <div className="h-48 bg-gray-200"></div>
-            <div className="h-48 bg-gray-200"></div>
-            <div className="h-48 bg-gray-200"></div>
-            <div className="h-48 bg-gray-200"></div>
+            {filteredNews.slice(0, 11).map((x, idx) => {
+              return (
+                <div key={idx} className={`${idx === 0 && 'col-span-2'}`}>
+                  <NewsCard key={idx} news={x} />
+                </div>
+              )
+            })}
           </NewsGrid>
         </div>
         <div>
           <H2 iconImage={agaarNegIcon} title={t('agaarNegPlatform')} descriptionHtml={''} />
           <div className="gap-5 grid grid-cols-4">
             {agaarNegNews.map((x, idx) => {
-              console.log(x)
               return <AgaarNegCard news={x} key={idx} />
             })}
             <div className="flex justify-center items-center">
@@ -64,7 +70,7 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
         <div>
           <H2 title={t('latestOnBm')} descriptionHtml={''} trailingLineColor="blue" />
           <NewsGrid>
-            {filteredNews.map((x, idx) => {
+            {bmNews.map((x, idx) => {
               return <NewsCard key={idx} news={x} />
             })}
           </NewsGrid>
@@ -80,8 +86,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // fetch the data
   const newsData = await getNewsPosts()
   const featuredNews = await getFeaturedNews()
-
   const agaarNegNews = await getAgaarNegNews()
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
