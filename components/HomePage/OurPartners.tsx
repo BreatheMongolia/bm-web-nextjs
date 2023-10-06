@@ -13,7 +13,6 @@ export const OurPartners = ({
   partnerLogos: Page_Customfields_PartnersLogos[]
   locale: string
 }) => {
-
   // Styling the settings for partner-logo images within Slider
   const settings = {
     dots: false,
@@ -59,7 +58,7 @@ export const OurPartners = ({
         <Slider {...settings}>
           {partnerLogos.map((x, idx) => (
             <div key={idx}>
-              <a href={x.partnersLogosUrls} target="_blank" className="flex justify-center">
+              <a href={x.partnersLogosUrls} target="_blank" className="flex justify-center items-center">
                 <img src={x.partnersLogosImage.mediaItemUrl} alt="" loading="lazy" />
               </a>
             </div>

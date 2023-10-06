@@ -1,12 +1,11 @@
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
+import footerLogoBM from 'assets/images/footerLogo.png'
 import dayjs from 'dayjs'
-import { EXTERNAL_URLS } from 'lib/consts/urls'
+import { EXTERNAL_URLS, SOCIAL_URLS } from 'lib/consts/urls'
 import Link from 'next/link'
-import FooterLogo from 'assets/icons/FooterLogo'
 import Subscribe from 'components/Subscribe/Subscribe'
 import { SocialIcon } from 'react-social-icons'
-import { SOCIAL_URLS } from 'lib/consts/urls'
 
 export const Footer = () => {
   const { t } = useTranslation('footer')
@@ -91,7 +90,7 @@ export const Footer = () => {
                 })}
               </div>
               <div className="mobile_style">
-                <Subscribe isFooter={true} />
+                <Subscribe />
               </div>
             </div>
           </div>
@@ -104,7 +103,7 @@ export const Footer = () => {
       <div className="container flex text-xs gap-5">
         <div className="flex gap-1 flex-col sm:flex-row static">
           <div className="h-20 w-20 relative">
-            <FooterLogo />
+            <Image src={footerLogoBM} alt="footerLogoBM" />
           </div>
           <div className="h-20 w-20 relative">
             <Link href="https://www.guidestar.org/profile/83-4376042" target={'_blank'}>

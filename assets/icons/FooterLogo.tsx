@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 
-const FooterLogo = (props: any) => {
+const FooterLogo = () => {
   const spacing = {
-    marginBottom: "16px"
+    marginBottom: '16px',
   }
   return (
     <svg

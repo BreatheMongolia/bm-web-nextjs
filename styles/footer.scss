@@ -11,10 +11,6 @@
   }
 }
 
-.subscribeInput {
-  width: 346px;
-}
-
 @media (max-width: 1064px) {
   .footer_wrapper {
     width: 100%;
@@ -28,9 +24,6 @@
 }
 
 @media (max-width: 600px) {
-  .subscribeInput {
-    width: 300px;
-  }
   .mobileRelative {
     position: relative;
   }
@@ -58,8 +51,9 @@
       }
       .mobile_style {
         position: absolute;
-        right: -115px;
-        bottom: -90px;
+        width: 310px;
+        right: 10px;
+        bottom: -80px;
       }
     }
   }

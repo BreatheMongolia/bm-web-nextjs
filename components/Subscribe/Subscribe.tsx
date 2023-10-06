@@ -1,13 +1,8 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
-import { useMediaQuery } from 'react-responsive'
+import { useWidth } from 'lib/utils/useWidth'
 import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
 import { HiPaperAirplane } from 'react-icons/hi'
-
-type Props = {
-  isFooter?: boolean
-  className?: string
-}
 
 const validateEmail = (email: string) => {
   return email.match(
@@ -15,7 +10,7 @@ const validateEmail = (email: string) => {
   )
 }
 
-const Subscribe: FC<Props> = ({ isFooter, className }) => {
+const Subscribe = () => {
   const bmUrl =
     'https://breathemongolia.us19.list-manage.com/subscribe/post?u=d20df36438b159bbb8b7252df&id=69af699988&f_id=00ba81e4f0'
   const { t } = useTranslation('footer')
@@ -28,6 +23,7 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
     active: 'subscribe.btn',
     subscribed: 'subscribe.subscribed',
   }
+  let isMobile = useWidth()
 
   useEffect(() => {
     if (success && !error) {
@@ -35,7 +31,7 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
     } else {
       setButtonText(buttonStates.active)
     }
-  }, [success, error])
+  }, [success, error, isMobile])
 
   return (
     <div>
@@ -48,7 +44,7 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
         <input
           id="EMAIL"
           type="email"
-          placeholder="Enter your email to receive our newsletters"
+          placeholder={isMobile > 600 ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')}
           className="grow h-11 rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4"
           value={fields.EMAIL}
           onChange={handleFieldChange}
@@ -63,8 +59,11 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
             }
           }}
         >
-          <HiPaperAirplane className="h-4 w-4 m-3 rotate-45 hidden md:block" />
-          <div className="md:hidden">{t(buttonText)}</div>
+          {isMobile > 600 ? (
+            <div className="block">{t(buttonText)}</div>
+          ) : (
+            <HiPaperAirplane className="h-4 w-4 m-3 rotate-45" />
+          )}
         </button>
       </form>
     </div>
