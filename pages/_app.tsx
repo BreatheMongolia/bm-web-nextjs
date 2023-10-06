@@ -29,6 +29,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     localStorage.setItem('language', locale)
   }, [locale])
 
+  const title = pageProps.title ? pageProps.title : 'Breathe Mongolia Clean Air Coalition'
+  const description = pageProps.description ? pageProps.description : 'Breathe Mongolia Clean Air Coalition'
+  const image = pageProps.image ? pageProps.image : locale === 'en' ? '/images/og-en.jpg' : '/images/og-mn.jpg'
+
   // FIXME: Givebutter doesn't seem to be working
   return (
     <AnimatePresence mode="wait" initial={true}>
@@ -45,8 +49,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Script>
           <link rel="shortcut icon" href="/favicon/favicon.ico" />
           <meta name="keywords" content="air pollution, clean air, public health, mongolia"></meta>
-          <title>Breathe Mongolia</title>
-          <meta property="og:image" content={locale === 'en' ? '/images/og-en.jpg' : '/images/og-mn.jpg'} />
+
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <meta property="og:title" content={title} />
+          <meta property="og:image" content={image} />
         </Head>
         <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} />
         <Component {...pageProps} key={router.asPath} />

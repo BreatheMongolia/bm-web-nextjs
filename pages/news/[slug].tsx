@@ -23,7 +23,7 @@ interface NewsPostPageProps {
 
 export default function NewsPostPage({ post, bannerImage, bannerText, getLatest }: NewsPostPageProps) {
   const router = useRouter()
-  console.log(post)
+
   if (router.isFallback) {
     return <div> Loading... </div>
   }
@@ -46,12 +46,6 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
       ) : (
         <>
           <article>
-            <Head>
-              <title>{`${post.title} - Breathe Mongolia Clean Air Coalition`}</title>
-              <meta name="description" content={removeTags(post.excerpt)} />
-              <meta property="og:title" content={post.title} />
-              {post?.featuredImageBig && <meta property="og:image" content={post?.featuredImageBig} />}
-            </Head>
             <Desktop>{/* <Banner bannerImages={bannerImage} bannerText={bannerText} /> */}</Desktop>
             <BreadCrumb breadCrumbItems={breadCrumbItems} />
             <div className="container">
@@ -120,14 +114,18 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
   const bannerImage = await getNewsBannerImages('/news')
   // const bannerText = await getBanner('/')
   const getLatest = await getLastThree()
+  const transformedPost = getNews(post, locale)
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
-      post: getNews(post, locale),
+      post: transformedPost,
       bannerImage: getTransformedData(bannerImage, locale),
       bannerText: null, //getTransformedDataText(bannerText, locale),
       getLatest: getLatestNews(getLatest, locale),
+      title: transformedPost.title,
+      description: removeTags(transformedPost?.excerpt),
+      image: transformedPost?.featuredImageBig,
     },
     revalidate: 60,
   }

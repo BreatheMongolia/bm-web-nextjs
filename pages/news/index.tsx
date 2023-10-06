@@ -27,9 +27,6 @@ const NewsPage = ({
   const filteredNews = [...news]
   return (
     <div>
-      <Head>
-        <title> News - Breathe Mongolia - Clean Air Coalition </title>
-      </Head>
       <div className="container mx-auto flex flex-col gap-20">
         <div>
           <H2 title={t('featuredNews')} descriptionHtml={''} trailingLineColor="blue" />
@@ -81,6 +78,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
       news: newsData,
       featuredNews,
+      title: 'News - Breathe Mongolia - Clean Air Coalition',
     },
     revalidate: 60 * 5, // every 5 minutes
   }
