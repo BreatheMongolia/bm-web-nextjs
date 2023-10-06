@@ -44,6 +44,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           });`}
           </Script>
           <link rel="shortcut icon" href="/favicon/favicon.ico" />
+          <meta name="keywords" content="air pollution, clean air, public health, mongolia"></meta>
+          <title>Breathe Mongolia</title>
+          <meta property="og:image" content={locale === 'en' ? '/images/og-en.jpg' : '/images/og-mn.jpg'} />
         </Head>
         <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} />
         <Component {...pageProps} key={router.asPath} />
