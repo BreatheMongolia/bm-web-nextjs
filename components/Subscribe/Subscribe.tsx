@@ -23,7 +23,7 @@ const Subscribe = () => {
     active: 'subscribe.btn',
     subscribed: 'subscribe.subscribed',
   }
-  let isMobile = useWidth()
+  let screenWidth = useWidth()
 
   useEffect(() => {
     if (success && !error) {
@@ -31,7 +31,7 @@ const Subscribe = () => {
     } else {
       setButtonText(buttonStates.active)
     }
-  }, [success, error, isMobile])
+  }, [success, error, screenWidth])
 
   return (
     <div>
@@ -44,13 +44,13 @@ const Subscribe = () => {
         <input
           id="EMAIL"
           type="email"
-          placeholder={isMobile > 600 ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')}
+          placeholder={screenWidth > 600 ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')}
           className="grow h-11 rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4"
           value={fields.EMAIL}
           onChange={handleFieldChange}
         />
         <button
-          className="bg-orange-400 h-11 text-white rounded-xl rounded-l-none px-1 hover:bg-orange-500"
+          className="bg-orange-400 h-11 text-white rounded-xl rounded-l-none px-2 hover:bg-orange-500"
           onClick={() => {
             if (!validateEmail(fields.EMAIL)) {
               alert(t('subscribe.validEmail'))
@@ -59,7 +59,7 @@ const Subscribe = () => {
             }
           }}
         >
-          {isMobile > 600 ? (
+          {screenWidth > 600 ? (
             <div className="block">{t(buttonText)}</div>
           ) : (
             <HiPaperAirplane className="h-4 w-4 m-3 rotate-45" />
