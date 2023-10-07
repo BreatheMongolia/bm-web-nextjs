@@ -31,7 +31,7 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
       <Head>
         <title> News - Breathe Mongolia - Clean Air Coalition </title>
       </Head>
-      <div className="container mx-auto flex flex-col gap-16">
+      <div className="lg:container px-4 w-full mx-auto flex flex-col gap-16">
         <div>
           <H2 title={t('featuredNews')} descriptionHtml={''} trailingLineColor="blue" />
           <FeaturedNews news={featuredNews} />
@@ -41,8 +41,11 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
           <NewsGrid>
             {filteredNews.slice(0, 11).map((x, idx) => {
               return (
-                <div key={idx} className={`${idx === 0 && 'col-span-2'}`}>
-                  <NewsCard key={idx} news={x} />
+                <div
+                  key={idx}
+                  className={`h-32 sm:h-60 ${idx === 0 && 'md:col-span-2'} ${idx > 3 && 'hidden md:block'}`}
+                >
+                  <NewsCard key={idx} news={x} cardHeight="fill" />
                 </div>
               )
             })}
@@ -50,13 +53,13 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
         </div>
         <div>
           <H2 iconImage={agaarNegIcon} title={t('agaarNegPlatform')} descriptionHtml={''} />
-          <div className="gap-5 grid grid-cols-4">
+          <NewsGrid defaultRows={2}>
             {agaarNegNews.map((x, idx) => {
-              return <AgaarNegCard news={x} key={idx} />
+              return <AgaarNegCard className={idx > 3 ? 'hidden md:block' : ''} news={x} key={idx} />
             })}
             <div className="flex justify-center items-center">
               <Link href="https://agaarneg.mn/news_stories" target="_blank">
-                <div className="bg-[#00aeef] text-white flex px-6 py-4 items-center justify-center gap-2 font-semibold rounded-full shadow-lg group hover:shadow-xl hover:bg-sky-600 transition-all">
+                <div className="bg-[#00aeef] text-white flex px-6 py-4 items-center justify-center gap-2 font-semibold rounded-full shadow-lg group hover:shadow-xl hover:bg-sky-600 transition-all w-full">
                   <span className="text-xs">{t('seemoreon')} </span>
                   <h1>AgaarNeg.mn</h1>
                   <span>
@@ -65,13 +68,21 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
                 </div>
               </Link>
             </div>
-          </div>
+          </NewsGrid>
         </div>
         <div>
-          <H2 title={t('latestOnBm')} descriptionHtml={''} trailingLineColor="blue" />
+          <H2
+            title={t('latestOnBm')}
+            descriptionHtml={''}
+            trailingLineColor="blue"
+            extraButton={{
+              title: t('seeMore'),
+              url: '/news',
+            }}
+          />
           <NewsGrid>
             {bmNews.map((x, idx) => {
-              return <NewsCard key={idx} news={x} />
+              return <NewsCard key={idx} news={x} className={idx > 1 ? 'hidden md:block' : ''} />
             })}
           </NewsGrid>
         </div>

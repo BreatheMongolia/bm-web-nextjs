@@ -9,15 +9,16 @@ type Props = {
     title: { en: string; mn: string }
     keywords: string[]
   }
+  className?: string
 }
-export const AgaarNegCard = ({ news }: Props) => {
+export const AgaarNegCard = ({ news, className }: Props) => {
   const { i18n } = useTranslation()
 
   const title = i18n.language === 'mn' ? news.title.mn : news.title.en
   const url = `https://agaarneg.mn/news/${news.id}`
   return (
     <Link href={url} target="_blank">
-      <div className="w-full bg-white rounded shadow-md overflow-hidden group">
+      <div className={`w-full bg-white rounded shadow-md overflow-hidden group ${className}`}>
         <div className="w-full bg-[#00aeef] group-hover:bg-sky-600 transition-all">
           <Image src={agaarNegCloudImage} alt="AgaarNeg Image" />
         </div>

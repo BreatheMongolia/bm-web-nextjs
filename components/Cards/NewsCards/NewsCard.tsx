@@ -5,7 +5,15 @@ import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { TbPointFilled } from 'react-icons/tb'
 
-export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeight?: 'normal' | 'fill' }) => {
+export const NewsCard = ({
+  news,
+  cardHeight = 'normal',
+  className,
+}: {
+  news: News
+  cardHeight?: 'normal' | 'fill'
+  className?: string
+}) => {
   const { t, i18n } = useTranslation()
   // News Card types can be: blog, external_link, video
   const router = useRouter()
@@ -32,7 +40,7 @@ export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeig
     <div
       className={`relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow ${
         cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
-      }`}
+      } ${className}`}
       style={{ backgroundImage: `url(${transformedNews.featuredImageBig})` }}
       onClick={onCardClick}
     >
