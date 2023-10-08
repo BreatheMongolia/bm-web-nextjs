@@ -21,12 +21,12 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
   const [currentPage, setCurrentPage] = useState(1)
   const [pageNumberLimit, setPageNumberLimit] = useState(18)
   const [filteredCategories, setFilteredCategories] = useState<string[]>([])
-  let isMobile = useWidth()
+  let screenWidth = useWidth()
 
   useEffect(() => {
     getFilteredTakeActions()
-    refreshPageNumberLimit()
-  }, [filteredCategories, isMobile])
+    getPageNumberLimit()
+  }, [filteredCategories, screenWidth])
 
   const truncate = (input: string) => (input?.length > 95 ? `${input.substring(0, 95)}...` : input)
 
@@ -44,8 +44,9 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
     setFilteredCategories([])
   }
 
-  const refreshPageNumberLimit = () => {
-    if (isMobile <= 700) setPageNumberLimit(6)
+  const getPageNumberLimit = () => {
+    if (screenWidth <= 700) setPageNumberLimit(6)
+    else if (screenWidth <= 1024) setPageNumberLimit(9)
     else setPageNumberLimit(18)
   }
 
@@ -78,7 +79,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
   }
 
   return (
-    <div className="ta-actions">
+    <div className="flex flex-col justify-center ta-actions">
       <H2 title={t('actionList.title')} className="ta-mobile-header" />
 
       <div className="ta-categories">
@@ -96,7 +97,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
         ))}
       </div>
 
-      {isMobile > 700 ? (
+      {screenWidth > 700 ? (
         <div className="actions-grid">
           {getCurrentPost().map((takeAction, idx) => (
             <TakeActionTile

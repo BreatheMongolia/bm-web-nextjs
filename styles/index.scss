@@ -597,18 +597,15 @@ p {
   margin: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  max-width: 236px;
-  width: 236px !important;
   cursor: pointer;
   text-decoration: none;
-  height: 200px;
 
   &.big {
-    max-width: 487px;
-    width: 487px !important;
-    height: 422px;
     grid-column: auto / span 2;
     grid-row: auto / span 2;
+    width: auto;
+    height: auto;
+    margin-right: 5px;
 
     .take-action-img {
       height: 306px;

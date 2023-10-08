@@ -9,9 +9,7 @@ import { useWidth } from 'lib/utils/useWidth'
 export const DonateSection = () => {
   const { t } = useTranslation('takeAction')
   const [isNavVisible, setNavVisible] = useState(false)
-  let isMobile = useWidth()
-
-  useEffect(() => {}, [isMobile])
+  let screenWidth = useWidth()
 
   const donateLinks = () => {
     return (
@@ -64,14 +62,14 @@ export const DonateSection = () => {
 
   return (
     <div>
-      {isMobile > 700 ? (
+      {screenWidth > 700 ? (
         <div className="flex flex-row ta-section">
           <div className="basis-2/3 ta-content">
             <H2 title={t('donate.title')} />
-            <p>{t('donate.description')}</p>
+            <p className="pr-5">{t('donate.description')}</p>
             {donateBtn()}
           </div>
-          <div className="basis-1/3 my-5 ta-sidebar">
+          <div className="basis-1/3 m-5 ta-sidebar">
             <h2 className="my-5 subheading">{t('donate.sidebarTitle')}</h2>
             {donateLinks()}
           </div>
@@ -94,7 +92,7 @@ export const DonateSection = () => {
           </div>
         </div>
       )}
-      <div className="flex py-10 text-sm ta-section md:p-5 md:text-xs">
+      <div className="flex p-5 text-xs md:py-10 md:px-0 md:text-sm">
         <p>{t('donate.disclosure')}</p>
       </div>
     </div>
