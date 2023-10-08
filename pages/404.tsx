@@ -26,6 +26,6 @@ export default NotFoundPage
 
 export const getStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'error'])),
+    ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'error', 'common'])),
   },
 })

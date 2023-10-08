@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
-import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
 import { useMediaQuery } from 'react-responsive'
+import { useFormFields, useMailChimpForm } from 'use-mailchimp-form'
 import { HiPaperAirplane } from 'react-icons/hi'
 
 type Props = {
@@ -23,14 +23,24 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: '',
   })
+  const [buttonText, setButtonText] = useState('')
+  const buttonStates = {
+    active: 'subscribe.btn',
+    subscribed: 'subscribe.subscribed',
+  }
 
-  const isMobileSub = useMediaQuery({ maxWidth: 600 })
-  let placeholderText = isFooter ? t('subscribe.footerPlaceHolder') : t('subscribe.placeholder')
+  useEffect(() => {
+    if (success && !error) {
+      setButtonText(buttonStates.subscribed)
+    } else {
+      setButtonText(buttonStates.active)
+    }
+  }, [success, error])
 
   return (
     <div>
       <form
-        className="h-[44px] w-[450px] relative"
+        className="relative flex justify-center items-center"
         onSubmit={event => {
           event.preventDefault()
         }}
@@ -38,38 +48,24 @@ const Subscribe: FC<Props> = ({ isFooter, className }) => {
         <input
           id="EMAIL"
           type="email"
-          placeholder={placeholderText}
-          className="subscribeInput h-[44px] rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-3"
+          placeholder="Enter your email to receive our newsletters"
+          className="grow h-11 rounded-xl border-solid border-[#6a6a6a] border-[0.5px] border-r-0 rounded-r-none px-4"
           value={fields.EMAIL}
           onChange={handleFieldChange}
         />
-        {isFooter && isMobileSub ? (
-          <button
-            className=" bg-orange-400 text-white absolute h-[44px] rounded-xl border-none  border-l-0 rounded-l-none w-[45px] align-text-top self-start justify-self-start text-start "
-            onClick={() => {
-              if (!validateEmail(fields.EMAIL)) {
-                alert(t('subscribe.validEmail'))
-              } else {
-                handleSubmit(fields)
-              }
-            }}
-          >
-            <HiPaperAirplane className="h-4 w-4 m-3 rotate-45" />
-          </button>
-        ) : (
-          <button
-            className=" bg-orange-400 uppercase text-white absolute h-[44px] rounded-xl border-none border-l-0 rounded-l-none px-3"
-            onClick={() => {
-              if (!validateEmail(fields.EMAIL)) {
-                alert(t('subscribe.validEmail'))
-              } else {
-                handleSubmit(fields)
-              }
-            }}
-          >
-            {success && !error ? t('subscribe.subscribed') : t('subscribe.btn')}
-          </button>
-        )}
+        <button
+          className="bg-orange-400 h-11 text-white rounded-xl rounded-l-none px-1 hover:bg-orange-500"
+          onClick={() => {
+            if (!validateEmail(fields.EMAIL)) {
+              alert(t('subscribe.validEmail'))
+            } else {
+              handleSubmit(fields)
+            }
+          }}
+        >
+          <HiPaperAirplane className="h-4 w-4 m-3 rotate-45 hidden md:block" />
+          <div className="md:hidden">{t(buttonText)}</div>
+        </button>
       </form>
     </div>
   )

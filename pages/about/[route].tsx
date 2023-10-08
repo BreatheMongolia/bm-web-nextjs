@@ -7,11 +7,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { getPeople } from 'lib/graphql-api/queries/people'
 import { getStories } from 'lib/graphql-api/queries/ourStories'
+import { getHomePage, getVolunteers } from 'lib/graphql-api/queries/home'
 import { getTranslated } from 'lib/utils/getTranslated'
 import AboutUsOurTeam from 'components/AboutUsPage/AboutUsOurTeam'
-import { getHomePage } from 'lib/graphql-api/queries/home'
-import { OurPartners } from 'components/HomePage'
 import AboutUsOurStory from 'components/AboutUsPage/AboutUsOurStory'
+import AboutUsSupportUs from 'components/AboutUsPage/AboutUsSupportUs'
+import { OurPartners } from 'components/HomePage'
 
 const VALID_ROUTES = [
   {
@@ -36,9 +37,9 @@ const VALID_ROUTES = [
   },
 ]
 
-export default function AboutPageSection({ people, stories, page, locale }) {
+export default function AboutPageSection({ people, stories, page, volunteers, locale }) {
   const router = useRouter()
-  const { t, i18n } = useTranslation('about')
+  const { t } = useTranslation('about')
 
   if (router.isFallback) {
     return <div> Loading... </div>
@@ -58,6 +59,14 @@ export default function AboutPageSection({ people, stories, page, locale }) {
         return <AboutUsOurTeam people={people} />
       case '/about/impact':
         return
+      case '/about/support-us':
+        return (
+          <AboutUsSupportUs
+            volunteers={volunteers}
+            countriesInfoText={page.customFields.countriesInfoText}
+            locale={locale}
+          />
+        )
       default:
         return <div> Not Found</div>
     }
@@ -66,12 +75,12 @@ export default function AboutPageSection({ people, stories, page, locale }) {
     <div>
       <AboutUsHeader />
       {/* Tab Navbar */}
-      <div className="flex p-5 gap-4">
+      <div className="tab-nav-container shadow-lg">
         {VALID_ROUTES.map((x, idx) => {
           return (
             <div key={idx} className="flex flex-1 text-center w-full">
-              <Link href={`/about/${x.route}`} className="w-full hover:bg-gray-200 bg-gray-100">
-                <div className="w-full p-5">{t(x.title)}</div>
+              <Link href={`/about/${x.route}`} className="w-full hover:bg-gray-100">
+                <div className="tab-titles flex p-5">{t(x.title)}</div>
               </Link>
             </div>
           )
@@ -124,7 +133,6 @@ const getTransformedPeople = (PplData: string | any[], locale: string) => {
 
 const getAllStories = (StoriesData: string | any[], locale: string) => {
   const stories = []
-
   for (let i = 0; i < StoriesData.length; i++) {
     stories.push({
       title: getTranslated(StoriesData[i].node.customFields.title, StoriesData[i].node.customFields.titleMn, locale),
@@ -142,13 +150,15 @@ export const getStaticProps = async ({ locale }) => {
   const people = await getPeople()
   const stories = await getStories()
   const page = await getHomePage('/')
+  const volunteers = await getVolunteers()
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about', 'common'])),
       people: getTransformedPeople(people, locale),
       stories: getAllStories(stories, locale),
       page,
+      volunteers,
       locale,
     },
   }

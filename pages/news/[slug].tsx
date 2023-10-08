@@ -1,22 +1,18 @@
 import { useRouter } from 'next/router'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import { getNewsBannerImages, getNewsFull, getNewsPostSlugs, getLastThree } from 'lib/graphql-api/queries/news'
-import { getBanner } from 'lib/graphql-api/queries/home'
-import { News } from 'graphql/generated'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
-import { getImage } from 'lib/utils/getImage'
-import Desktop from 'components/Desktop'
-import Banner from 'components/NewsPage/Banner'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { News } from 'graphql/generated'
 import { getTranslated } from 'lib/utils/getTranslated'
-import BreadCrumb from 'components/NewsPage/BreadCrumb'
-import ShareButton from 'components/NewsPage/ShareButton'
-import LatestNews from 'components/NewsPage/LatestNews'
+import Desktop from 'components/Desktop'
 import { H2 } from 'components/generic/Typography'
-import parse from 'html-react-parser'
 import { removeTags } from 'lib/utils/htmlParser'
+
+import { getImage } from 'lib/utils/getImage'
+import { getNewsBannerImages, getNewsFull, getNewsPostSlugs, getLastThree } from 'lib/graphql-api/queries/news'
+import { BreadCrumb, ShareButton, LatestNews, Banner } from 'components/NewsPage/DetailPage'
 
 interface NewsPostPageProps {
   post: any
@@ -50,15 +46,7 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
       ) : (
         <>
           <article>
-            <Head>
-              <title>{`${post.title} - Breathe Mongolia Clean Air Coalition`}</title>
-              <meta name="description" content={removeTags(post.excerpt)} />
-              <meta property="og:title" content={post.title} />
-              {post?.featuredImageBig && <meta property="og:image" content={post?.featuredImageBig} />}
-            </Head>
-            <Desktop>
-              <Banner bannerImages={bannerImage} bannerText={bannerText} />
-            </Desktop>
+            <Desktop>{/* <Banner bannerImages={bannerImage} bannerText={bannerText} /> */}</Desktop>
             <BreadCrumb breadCrumbItems={breadCrumbItems} />
             <div className="container">
               <div className="news-main-content">
@@ -124,16 +112,20 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
 export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
   const post = await getNewsFull(params?.slug)
   const bannerImage = await getNewsBannerImages('/news')
-  const bannerText = await getBanner('/')
+  // const bannerText = await getBanner('/')
   const getLatest = await getLastThree()
+  const transformedPost = getNews(post, locale)
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news'])),
-      post: getNews(post, locale),
+      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
+      post: transformedPost,
       bannerImage: getTransformedData(bannerImage, locale),
-      bannerText: getTransformedDataText(bannerText, locale),
+      bannerText: null, //getTransformedDataText(bannerText, locale),
       getLatest: getLatestNews(getLatest, locale),
+      title: transformedPost.title,
+      description: removeTags(transformedPost?.excerpt),
+      image: transformedPost?.featuredImageBig,
     },
     revalidate: 60,
   }
