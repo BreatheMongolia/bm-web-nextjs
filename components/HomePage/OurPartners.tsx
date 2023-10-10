@@ -13,7 +13,6 @@ export const OurPartners = ({
   partnerLogos: Page_Customfields_PartnersLogos[]
   locale: string
 }) => {
-
   // Styling the settings for partner-logo images within Slider
   const settings = {
     dots: false,
@@ -24,6 +23,9 @@ export const OurPartners = ({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
+    // cssEase: 'linear',
+    // adaptiveHeight: false,
+    // centerMode: false,
     responsive: [
       {
         breakpoint: 1024,

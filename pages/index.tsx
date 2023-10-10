@@ -94,11 +94,10 @@ export default function Index({
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} locale={locale} />
           <OurWorkCarousel
-            title={getTranslated(
-              page.customFields.campaignAndOurWorkTitle,
-              page.customFields.campaignAndOurWorkTitleMn,
-              locale,
-            )}
+            title={{
+              en: page.customFields.campaignAndOurWorkTitle,
+              mn: page.customFields.campaignAndOurWorkTitleMn,
+            }}
             campaigns={page.customFields.campaignAndOurWorkSlider}
             locale={locale}
           />

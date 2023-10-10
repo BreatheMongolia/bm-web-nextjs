@@ -1,5 +1,5 @@
+import React from 'react'
 import { H2 } from 'components/generic/Typography'
-import React, { FC } from 'react'
 import { Page_Customfields_CampaignAndOurWorkSlider } from 'graphql/generated'
 import { useTranslation } from 'next-i18next'
 import 'slick-carousel/slick/slick.css'
@@ -13,11 +13,9 @@ import SliderRightArrow from 'assets/icons/SliderRightArrow'
 import { getTranslated } from 'lib/utils/getTranslated'
 
 export const OurWorkCarousel = ({
-  title,
   campaigns,
   locale,
 }: {
-  title: string
   locale: string
   campaigns: Page_Customfields_CampaignAndOurWorkSlider[]
 }) => {
@@ -77,9 +75,9 @@ export const OurWorkCarousel = ({
       dayjs(a.campaignDate).isBefore(dayjs(b.campaignDate)) ? 1 : -1,
   )
   return (
-    <div className="campaign-slider-wrapper custom-sections-gap">
+    <div className="campaign-slider-wrapper">
       <H2
-        title={title}
+        title={t('campaignWork.title')}
         trailingLineColor="yellow"
         extraButton={{
           title: t('campaignWork.seeMore'),
