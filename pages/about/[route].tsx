@@ -62,6 +62,11 @@ export default function AboutPageSection({ people, stories, page, volunteers, lo
       case '/about/support-us':
         return (
           <AboutUsSupportUs
+            descriptionHtml={getTranslated(
+              page.customFields.joinBreatheMongoliaDescription,
+              page.customFields.joinBreatheMongoliaDescriptionMn,
+              locale,
+            )}
             volunteers={volunteers}
             countriesInfoText={page.customFields.countriesInfoText}
             locale={locale}

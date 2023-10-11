@@ -3,12 +3,15 @@ import { useTranslation } from 'next-i18next'
 import { getTranslated } from 'lib/utils/getTranslated'
 import parse from 'html-react-parser'
 import Link from 'next/link'
+import { H2 } from 'components/generic/Typography'
 
 export const VolunteerCard = ({
+  joinText,
   volunteers,
   countriesInfoText,
   locale,
 }: {
+  joinText: string
   volunteers: any[]
   countriesInfoText: any[]
   locale: string
@@ -18,7 +21,7 @@ export const VolunteerCard = ({
     'https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u'
   return (
     <div className="flex flex-col mb-5">
-      <div className="font-normal text-md md:font-bold md:text-lg py-5">{t('supportUs.volunteer')}</div>
+      <p className="font-normal text-md md:font-bold md:text-lg py-5">{joinText}</p>
       <div className="flex flex-wrap grid grid-cols-1 sm:grid-cols-2 justify-items-center gap-5">
         {/* BreatheMongolia Volunteers */}
         <div className="grid grid-cols-3 gap-5 my-5">

@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import bg from 'assets/images/giveButterBg.png'
-import VolunteerCard from './SupportUs/VolunteerCard'
+import VolunteerPosition from './SupportUs/VolunteerPosition'
 import DonateThroughEmployerCard from './SupportUs/DonateThroughEmployerCard'
 import { useTranslation } from 'next-i18next'
 import { H2 } from 'components/generic/Typography'
@@ -12,10 +12,12 @@ export type openPositions = {
 }
 
 export const AboutUsSupportUs = ({
+  descriptionHtml,
   volunteers,
   countriesInfoText,
   locale,
 }: {
+  descriptionHtml: string
   volunteers: any[]
   countriesInfoText: any[]
   locale: string
@@ -44,7 +46,12 @@ export const AboutUsSupportUs = ({
       </div>
 
       <DonateThroughEmployerCard />
-      <VolunteerCard volunteers={volunteers} countriesInfoText={countriesInfoText} locale={locale} />
+      <VolunteerPosition
+        joinDescription={descriptionHtml}
+        volunteers={volunteers}
+        countriesInfoText={countriesInfoText}
+        locale={locale}
+      />
     </div>
   )
 }
