@@ -4,7 +4,8 @@ import { Menu } from '@headlessui/react'
 import { NewsCard } from 'components/Cards'
 import { News } from 'graphql/generated'
 import { NewsGrid } from '../LandingPage'
-import { FunnelIcon } from '@heroicons/react/24/solid'
+import { ChevronLeftIcon, ChevronRightIcon, FunnelIcon } from '@heroicons/react/24/solid'
+import CategoryButton from './CategoryButton'
 
 type Props = {
   news: News[]
@@ -32,23 +33,7 @@ const getUniqueCategories = (news: News[]) => {
   return uniqueCategories
 }
 
-const CategoryButton = ({ name, category, onClick, isActive }) => {
-  return (
-    <div
-      className={` px-4 py-2 cursor-pointer rounded-full text-[15px]
-      ${
-        isActive
-          ? 'bg-[#f09c4f] hover:opacity-80 text-white font-bold'
-          : 'bg-zinc-200 hover:bg-[#f09c4f] hover:text-white text-zinc-400 font-semibold'
-      }`}
-      onClick={() => {
-        onClick(category)
-      }}
-    >
-      {name}
-    </div>
-  )
-}
+const ITEMS_PER_PAGE = 11 // 3 rows
 
 const FullNewsGrid = ({ news }: Props) => {
   const { t, i18n } = useTranslation('news')
@@ -56,9 +41,11 @@ const FullNewsGrid = ({ news }: Props) => {
   const [shownCategories, setShownCategories] = useState([])
   const [showAll, setShowAll] = useState(true)
   const [filteredNews, setFilteredNews] = useState([])
+  const [currentPage, setCurrentPage] = useState(0)
 
   const uniqueCategories = getUniqueCategories(news)
 
+  // sets what categories to show on the toolbar
   useEffect(() => {
     const categoriesToShow = uniqueCategories.filter(x => activeCategories.some(c => c.slug === x.slug))
     const MIN_NUM_CATEGORIES = 3
@@ -77,7 +64,7 @@ const FullNewsGrid = ({ news }: Props) => {
     categoriesToShow.sort((a, b) => a.ctId - b.ctId)
     setShownCategories(categoriesToShow)
   }, [activeCategories])
-
+  // updates what shows on the newsgrid
   useEffect(() => {
     if (activeCategories.length === 0) {
       setShowAll(true)
@@ -87,13 +74,22 @@ const FullNewsGrid = ({ news }: Props) => {
       if (showAll) {
         return true
       }
-      // active categories
+      //   // active categories
       const cats = x.categories.nodes.map(ca => ca.id)
       return activeCategories.some(c => cats.indexOf(c.id) >= 0)
     })
     setFilteredNews(fNews)
   }, [activeCategories, showAll])
 
+  const onPageClick = pageNum => {
+    if (pageNum < 0) setCurrentPage(0)
+    const maxPages = Math.ceil(filteredNews.length / ITEMS_PER_PAGE)
+    if (pageNum >= maxPages) {
+      setCurrentPage(maxPages - 1)
+    }
+    setCurrentPage(pageNum)
+  }
+  // on click event function
   const setActiveCategory = category => {
     if (category) {
       if (activeCategories.some(x => x.id === category.id)) {
@@ -103,11 +99,24 @@ const FullNewsGrid = ({ news }: Props) => {
       }
       setShowAll(false)
     } else {
-      setShowAll(true)
       setActiveCategories([])
     }
   }
 
+  const pages = []
+  const MAX_PAGES = Math.ceil(filteredNews.length / ITEMS_PER_PAGE)
+  for (let i = 0; i < Math.ceil(filteredNews.length / ITEMS_PER_PAGE); i++) {
+    pages.push(
+      <div
+        onClick={() => setCurrentPage(i)}
+        className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#f09c4f]/80 hover:text-white ${
+          currentPage === i && 'bg-[#f09c4f] text-white'
+        }`}
+      >
+        {i + 1}
+      </div>,
+    )
+  }
   return (
     <div>
       <div className="flex pt-5 pb-8 ">
@@ -143,7 +152,7 @@ const FullNewsGrid = ({ news }: Props) => {
             <Menu.Items className="absolute top-10 right-0 bg-white z-50 rounded border border-[#f09c4f] w-60">
               {uniqueCategories.map((x, idx) => {
                 return (
-                  <Menu.Item>
+                  <Menu.Item key={idx}>
                     {() => {
                       const isActive = activeCategories.some(c => c.id === x.id)
                       return (
@@ -168,14 +177,43 @@ const FullNewsGrid = ({ news }: Props) => {
       </div>
 
       <NewsGrid>
-        {filteredNews.map((x, idx) => {
-          return (
-            <div key={idx} className={`h-32 sm:h-60 ${idx === 0 && 'md:col-span-2'} ${idx > 3 && 'hidden md:block'}`}>
-              <NewsCard key={idx} news={x} cardHeight="fill" />
-            </div>
-          )
-        })}
+        {filteredNews
+          .slice(ITEMS_PER_PAGE * currentPage, ITEMS_PER_PAGE * currentPage + ITEMS_PER_PAGE)
+          .map((x, idx) => {
+            return (
+              <div key={idx} className={`h-32 sm:h-60 ${idx === 0 && 'md:col-span-2'} ${idx > 3 && 'hidden md:block'}`}>
+                <NewsCard key={idx} news={x} cardHeight="fill" />
+              </div>
+            )
+          })}
       </NewsGrid>
+
+      {/* Pagination */}
+      <div className="mx-auto pt-8 pb-3 font-bold text-xl">
+        <div className="flex gap-5 justify-center items-center">
+          <div
+            className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${
+              currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
+            }`}
+            onClick={() => onPageClick(currentPage - 1)}
+          >
+            <span className="p-3 block">
+              <ChevronLeftIcon className="w-5 h-5" />
+            </span>
+          </div>
+          {pages}
+          <div
+            className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white border-black border hover:border-[#f09c4f]/80 rounded-full ${
+              currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
+            }`}
+            onClick={() => onPageClick(currentPage + 1)}
+          >
+            <span className="p-3 block">
+              <ChevronRightIcon className="w-5 h-5" />
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

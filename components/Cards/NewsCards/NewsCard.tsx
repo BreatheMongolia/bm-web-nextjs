@@ -38,7 +38,7 @@ export const NewsCard = ({
 
   return (
     <div
-      className={`relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow ${
+      className={`relative bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow ${
         cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
       } ${className}`}
       style={{ backgroundImage: `url(${transformedNews.featuredImageBig})` }}
@@ -46,7 +46,7 @@ export const NewsCard = ({
     >
       <div className="flex flex-col h-full justify-end pr-10">
         {transformedNews.sourceLink && (
-          <div className="text-bm-blue text-sm font-semibold pt-2 flex-1 absolute top-1 left-0 z-20">
+          <div className="text-bm-blue text-sm font-semibold pt-2 flex-1 absolute top-1 left-0 z-20 right-10">
             <div className="bg-white/95 flex gap-x-1 items-center px-2 py-0.5 rounded-r-md w-fit group-hover:bg-bm-blue group-hover:text-white transition-all group-hover:pl-5">
               {transformedNews.sourceName}
               <ArrowTopRightOnSquareIcon className="h-0 w-0 group-hover:h-4 group-hover:w-4" />
