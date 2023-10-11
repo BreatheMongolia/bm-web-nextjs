@@ -197,7 +197,7 @@ const FullNewsGrid = ({ news }: Props) => {
             className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${
               currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
             }`}
-            onClick={() => onPageClick(currentPage - 1)}
+            onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
           >
             <span className="p-3 block">
               <ChevronLeftIcon className="w-5 h-5" />
@@ -208,7 +208,7 @@ const FullNewsGrid = ({ news }: Props) => {
             className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white border-black border hover:border-[#f09c4f]/80 rounded-full ${
               currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
             }`}
-            onClick={() => onPageClick(currentPage + 1)}
+            onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
           >
             <span className="p-3 block">
               <ChevronRightIcon className="w-5 h-5" />

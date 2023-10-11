@@ -33,13 +33,14 @@ export function getTransformedNews(news: News, language: 'en' | 'mn') {
       news.customFields?.featuredImage.image?.mediaDetails,
       news.customFields?.featuredImage.imageMn?.mediaDetails,
       news.featuredImage?.node?.mediaDetails,
-      'medium_large',
+      'medium',
     ),
-    featuredImageBig: getImage(
-      news.customFields?.featuredImage.image?.mediaDetails,
-      news.customFields?.featuredImage.imageMn?.mediaDetails,
-      news.featuredImage?.node?.mediaDetails,
-      'medium_large',
-    ),
+    featuredImageBig:
+      getImage(
+        news.customFields?.featuredImage.image?.mediaDetails,
+        news.customFields?.featuredImage.imageMn?.mediaDetails,
+        news.featuredImage?.node?.mediaDetails,
+        'medium_large',
+      ) ?? news.featuredImage?.node?.mediaItemUrl,
   }
 }

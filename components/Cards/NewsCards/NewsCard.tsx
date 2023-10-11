@@ -3,6 +3,7 @@ import { News } from 'graphql/generated'
 import { getTransformedNews } from 'lib/utils/gql-data-transform/getTransformedNews'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { TbPointFilled } from 'react-icons/tb'
 
 export const NewsCard = ({
@@ -17,6 +18,18 @@ export const NewsCard = ({
   const { t, i18n } = useTranslation()
   // News Card types can be: blog, external_link, video
   const router = useRouter()
+
+  const [thumbnailURL, setThumbnailURL] = useState('')
+
+  useEffect(() => {
+    fetch('https://noembed.com/embed?url=' + news.customFields.sourceLink)
+      .then(res => {
+        return res.json()
+      })
+      .then(response => {
+        setThumbnailURL(response.thumbnail_url)
+      })
+  }, [news])
 
   // transform the data
   const transformedNews = getTransformedNews(news, i18n.language === 'en' ? 'en' : 'mn')
@@ -35,13 +48,22 @@ export const NewsCard = ({
       }
     }
   }
-
+  const backgroundImageUrl = () => {
+    if (transformedNews.newsContentType === 'video') {
+      return thumbnailURL
+    }
+    return transformedNews.featuredImageSmall ?? transformedNews.featuredImageBig
+  }
+  if (backgroundImageUrl() === null) {
+    console.log(news)
+    console.log(transformedNews)
+  }
   return (
     <div
       className={`relative bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow ${
         cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
       } ${className}`}
-      style={{ backgroundImage: `url(${transformedNews.featuredImageBig})` }}
+      style={{ backgroundImage: `url(${backgroundImageUrl()})` }}
       onClick={onCardClick}
     >
       <div className="flex flex-col h-full justify-end pr-10">
