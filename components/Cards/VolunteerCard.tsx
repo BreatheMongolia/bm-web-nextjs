@@ -3,15 +3,12 @@ import { useTranslation } from 'next-i18next'
 import { getTranslated } from 'lib/utils/getTranslated'
 import parse from 'html-react-parser'
 import Link from 'next/link'
-import { H2 } from 'components/generic/Typography'
 
 export const VolunteerCard = ({
-  joinText,
   volunteers,
   countriesInfoText,
   locale,
 }: {
-  joinText: string
   volunteers: any[]
   countriesInfoText: any[]
   locale: string
@@ -21,8 +18,7 @@ export const VolunteerCard = ({
     'https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u'
   return (
     <div className="flex flex-col mb-5">
-      <p className="font-normal text-md md:font-bold md:text-lg py-5">{joinText}</p>
-      <div className="flex flex-wrap grid grid-cols-1 sm:grid-cols-2 justify-items-center gap-5">
+      <div className="flex flex-wrap grid grid-cols-1 justify-items-start sm:grid-cols-2 sm:justify-items-center gap-5">
         {/* BreatheMongolia Volunteers */}
         <div className="grid grid-cols-3 gap-5 my-5">
           {countriesInfoText.map((info, idx) => (
@@ -37,7 +33,7 @@ export const VolunteerCard = ({
           ))}
         </div>
         {/* Job Opportunity */}
-        <div className="flex flex-col gap-5 my-5">
+        <div className="flex flex-col gap-5 m-5">
           <p className="font-bold text-lg text-slate-700">{t('joinBm.opportunities')}</p>
           <ul className="list-disc pl-5 text-black">
             {volunteers?.map((volunteerPos: any) => (
