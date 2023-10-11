@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
-import { Menu } from '@headlessui/react'
-import { NewsCard } from 'components/Cards'
-import { News } from 'graphql/generated'
-import { NewsGrid } from '../LandingPage'
 import { ChevronLeftIcon, ChevronRightIcon, FunnelIcon } from '@heroicons/react/24/solid'
+import { Menu } from '@headlessui/react'
+// data
+import { News } from 'graphql/generated'
+// custom componnets
+import { NewsCard } from 'components/Cards'
+import { NewsGrid } from '../LandingPage'
 import CategoryButton from './CategoryButton'
 
 type Props = {

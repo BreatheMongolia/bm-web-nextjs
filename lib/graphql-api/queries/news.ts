@@ -72,7 +72,6 @@ export async function getFeaturedNews(): Promise<News[]> {
     `,
     {},
   ).catch(err => console.error('Failed to fetch featuredeNews:', err))
-  console.log(data.page.customFields.featuredNews)
 
   if (data?.page) {
     const page = data.page as Page

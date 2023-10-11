@@ -6,13 +6,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 // generic components
 import { H2 } from 'components/generic/Typography'
-import { NewsCard } from 'components/Cards'
-import { AgaarNegCard } from 'components/Cards/NewsCards/AgaarNegCard'
+import { NewsCard, AgaarNegCard } from 'components/Cards'
 // news components
 import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
+// images
 import agaarNegIcon from 'public/images/agaar-neg/agaar-neg-icon.png'
+import bmLogoBlueIcon from 'public/images/logoBlue.png'
 // api/utils
-import { News, Page_Customfields, Page_NewsGeneralFields_Banner } from 'graphql/generated'
+import { News } from 'graphql/generated'
 import { getAgaarNegNews, getFeaturedNews, getNewsPosts } from 'lib/graphql-api/queries/news'
 import FullNewsGrid from 'components/NewsPage/FullNewsGrid'
 
@@ -59,12 +60,13 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
             </div>
           </NewsGrid>
         </div>
-        <div>
+        <div className="mb-20">
           <H2
             title={t('latestOnBm')}
             trailingLineColor="blue"
+            iconImage={bmLogoBlueIcon}
             extraButton={{
-              title: t('seeMore'),
+              title: t('seemore'),
               url: '/news',
             }}
           />
