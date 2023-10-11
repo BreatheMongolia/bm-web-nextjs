@@ -129,6 +129,7 @@ export const AboutUsInfoSection = () => {
               </>
             )}
           </div>
+          <br />
         </div>
         <h1 className="vision">{t('vision')}</h1>
         <br />
