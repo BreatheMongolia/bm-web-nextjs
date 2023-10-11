@@ -31,7 +31,7 @@ const Subscribe = () => {
     } else {
       setButtonText(buttonStates.active)
     }
-  }, [success, error, screenWidth])
+  }, [success, error])
 
   return (
     <div>
@@ -59,11 +59,8 @@ const Subscribe = () => {
             }
           }}
         >
-          {screenWidth > 600 ? (
-            <div className="block">{t(buttonText)}</div>
-          ) : (
-            <HiPaperAirplane className="h-4 w-4 m-3 rotate-45" />
-          )}
+          <div className="hidden sm:block">{t(buttonText)}</div>
+          <HiPaperAirplane className="h-4 w-4 m-3 rotate-45 sm:hidden" />
         </button>
       </form>
     </div>

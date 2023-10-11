@@ -49,58 +49,95 @@ export const Footer = () => {
       },
     ]
     return (
-      <div className="container">
-        <div className="uppercase tracking-widest text-slate-700 mobileRelative">
-          <div className="footer_link_section ">
-            {linkSections.map((x, idx) => {
-              return (
-                <div key={'footer' + idx}>
-                  <h2 className="font-bold text-lg min-w-max"> {x.title} </h2>
-                  <div className="flex flex-col text-sm font-semibold my-7">
-                    {x.urls.map((url, i) => {
-                      return (
-                        <Link href={url.url} target={url.target} key={'url' + i} className="hover:text-bm-blue my-2">
-                          {url.title}
-                        </Link>
-                      )
-                    })}
-                  </div>
+      <div className="container flex flex-row uppercase tracking-widest text-slate-700">
+        {/* Desktop */}
+        <div className="hidden sm:flex flex-row gap-20 justify-content">
+          {linkSections.map((x, idx) => {
+            return (
+              <div key={'footer' + idx}>
+                <h2 className="font-bold text-lg min-w-max">{x.title}</h2>
+                <div className="flex flex-col text-sm font-semibold my-7">
+                  {x.urls.map((url, i) => {
+                    return (
+                      <Link href={url.url} target={url.target} key={'url' + i} className="hover:text-bm-blue my-2">
+                        {url.title}
+                      </Link>
+                    )
+                  })}
                 </div>
-              )
-            })}
-            <div className="contact_section">
-              <h2 className="font-bold text-lg hidden sm:block"> {t('nav.join')} </h2>
-              <div className=" social_icons_div flex justify-between w-[450px] py-5">
-                {socialUrls.map((x, idx) => {
-                  return (
-                    <div
-                      key={'social' + idx}
-                      className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full "
-                    >
-                      <SocialIcon
-                        url={x}
-                        target="_blank"
-                        bgColor="transparent"
-                        fgColor="#3174D0"
-                        className="hover:bg-black/10 rounded-full"
-                        style={{ height: 40, width: 40 }}
-                      />
-                    </div>
-                  )
-                })}
               </div>
-              <div className="mobile_style">
-                <Subscribe />
-              </div>
+            )
+          })}
+          <div className="flex flex-col">
+            <h2 className="font-bold text-lg"> {t('nav.join')} </h2>
+            <div className="flex justify-between w-[450px] py-5">
+              {socialUrls.map((x, idx) => {
+                return (
+                  <div key={'social' + idx} className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
+                    <SocialIcon
+                      url={x}
+                      target="_blank"
+                      bgColor="transparent"
+                      fgColor="#3174D0"
+                      className="hover:bg-black/10 rounded-full"
+                      style={{ height: 40, width: 40 }}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+            <div className="block">
+              <Subscribe />
             </div>
           </div>
+        </div>
+        {/* Mobile */}
+        <div className="flex flex-col sm:hidden w-[100%]">
+          <div className="flex flex-row justify-between">
+            <div className="flex flex-col gap-5">
+              {linkSections.map((x, idx) => {
+                return (
+                  <div key={'footer' + idx}>
+                    <h2 className="font-bold text-lg min-w-max">{x.title}</h2>
+                    <div className="flex flex-col text-sm font-semibold my-7">
+                      {x.urls.map((url, i) => {
+                        return (
+                          <Link href={url.url} target={url.target} key={'url' + i} className="hover:text-bm-blue my-2">
+                            {url.title}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <div className="flex flex-col w-[50px] gap-12">
+              {socialUrls.map((x, idx) => {
+                return (
+                  <div key={'social' + idx} className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
+                    <SocialIcon
+                      url={x}
+                      target="_blank"
+                      bgColor="transparent"
+                      fgColor="#3174D0"
+                      className="hover:bg-black/10 rounded-full"
+                      style={{ height: 40, width: 40 }}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <Subscribe />
         </div>
       </div>
     )
   }
+
   const BottomFooter = () => {
     return (
-      <div className="container flex text-xs gap-5">
+      <div className="container flex flex-row gap-5">
         <div className="flex gap-1 flex-col sm:flex-row static">
           <div className="h-20 w-20 relative">
             <Image src={footerLogoBM} alt="footerLogoBM" />
@@ -111,7 +148,7 @@ export const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="text-xs font-normal">
+        <div className="flex flex-col text-xs font-normal">
           <p>
             ©2019-{dayjs().year().toString()}
             {t('copyright')}
@@ -124,10 +161,10 @@ export const Footer = () => {
   }
   return (
     <>
-      <div className="footer_wrapper border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
+      <div className="flex flex-row border-t-4 border-bm-blue pt-10 pb-5 bg-inherit">
         <FooterLinkSection />
       </div>
-      <div className="bottom_wrapper bg-bm-blue text-white py-5">
+      <div className="flex flex-row bg-bm-blue text-white py-5">
         <BottomFooter />
       </div>
     </>
