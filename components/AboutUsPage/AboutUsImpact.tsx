@@ -7,6 +7,7 @@ import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
 import SliderRightArrow from 'assets/icons/SliderRightArrow'
 import Arrow from 'components/generic/Arrow'
 import { useMediaQuery } from 'react-responsive'
+import AccomplishmentMobileCard from './AccomplishmentMobileCard'
 
 interface Impact {
   accomplishments: any[]
@@ -23,11 +24,16 @@ const Impact: FC<Impact> = ({ accomplishments, reports }) => {
 
   return (
     <>
-      <div className="impact-container">
+      <div className="impact-container sm:mb-100">
         <p className="our_accomplishment_title">{t('impact.ourAccomplishments')}</p>
-        <div className="timeline">
+        <div className="timeline hidden sm:block">
           {accomplishments.map((acc, id) => (
             <AccomplishmentCard key={id} {...acc} />
+          ))}
+        </div>
+        <div className="timeline sm:hidden">
+          {accomplishments.map((acc, id) => (
+            <AccomplishmentMobileCard key={id} {...acc} />
           ))}
         </div>
       </div>
