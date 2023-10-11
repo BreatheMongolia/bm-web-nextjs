@@ -9907,6 +9907,7 @@ export type TakeAction_Customfields = {
   additionalResources?: Maybe<Array<Maybe<TakeAction_Customfields_AdditionalResources>>>;
   excerpt?: Maybe<Scalars['String']>;
   excerptMn?: Maybe<Scalars['String']>;
+  featuredImage?: Maybe<MediaItem>;
   fieldGroupName?: Maybe<Scalars['String']>;
   introductionText?: Maybe<Scalars['String']>;
   introductionTextMn?: Maybe<Scalars['String']>;

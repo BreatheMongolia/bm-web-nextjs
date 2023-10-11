@@ -4,20 +4,6 @@ import EducationIcon from './about_us_icons/Education'
 import MonitoringIcon from './about_us_icons/Monitoring'
 import PollutionParticlesBackground from './about_us_icons/PollutionParticlesBackground'
 import i18next from 'i18next'
-import EnGoodHealth from './about_us_icons/EnGoodHealth'
-import EnAffordableAndCleanEnergy from './about_us_icons/EnAffordableAndCleanEnergy'
-import EnSustainableCities from './about_us_icons/EnSustainableCities'
-import EnResponsibleConsumption from './about_us_icons/EnResponsibleConsumption'
-import EnClimateAction from './about_us_icons/EnClimateAction'
-import EnLifeOnLand from './about_us_icons/EnLifeOnLand'
-import EnPeaceJustice from './about_us_icons/EnPeaceJustice'
-import MngGoodHealth from './about_us_icons/MngGoodHealth'
-import MngAffordableAndCleanEnergy from './about_us_icons/MngAffordableAndCleanEnergy'
-import MngSustainableCities from './about_us_icons/MngSustainableCities'
-import MngResponsibleConsumption from './about_us_icons/MngResponsibleConsumption'
-import MngClimateAction from './about_us_icons/MngClimateAction'
-import MngLifeOnLand from './about_us_icons/MngLifeOnLand'
-import MngPeaceJustice from './about_us_icons/MngPeaceJustice'
 export const AboutUsInfoSection = () => {
   const { t, i18n } = useTranslation('about')
   const GOALS = [
@@ -98,36 +84,15 @@ export const AboutUsInfoSection = () => {
         <br />
         <div className="goal_images_container">
           <div className="goal_images_one">
-            {i18next.language === 'mng' ? (
-              <>
-                <MngGoodHealth />
-                <MngAffordableAndCleanEnergy />
-                <MngSustainableCities />
-                <MngResponsibleConsumption />
-              </>
-            ) : (
-              <>
-                <EnGoodHealth />
-                <EnAffordableAndCleanEnergy />
-                <EnSustainableCities />
-                <EnResponsibleConsumption />
-              </>
-            )}
-          </div>{' '}
+            <img src="/images/Goal 3.png" width={130} height={130} />
+            <img src="/images/Goal 4.png" width={130} height={130} />
+            <img src="/images/Goal 5.png" width={130} height={130} />
+            <img src="/images/Goal 6.png" width={130} height={130} />
+          </div>
           <div className="goal_images_two">
-            {i18next.language === 'mng' ? (
-              <>
-                <MngClimateAction />
-                <MngLifeOnLand />
-                <MngPeaceJustice />
-              </>
-            ) : (
-              <>
-                <EnClimateAction />
-                <EnLifeOnLand />
-                <EnPeaceJustice />
-              </>
-            )}
+            <img src="/images/Goal 7.png" width={130} height={130} />
+            <img src="/images/Goal 8.png" width={130} height={130} />
+            <img src="/images/Goal 9.png" width={130} height={130} />
           </div>
           <br />
         </div>
