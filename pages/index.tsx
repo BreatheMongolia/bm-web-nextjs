@@ -145,6 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'common'])),
