@@ -5,18 +5,25 @@ export function getTransformedDataFromOpenAQ(res: any) {
   if (res.results.length) {
     const stationsMap = new Map<string, StationType>()
     for (let i = 0; i < res.results.length; i++) {
-      const PM25 = res.results[i].parameters.find((item: { displayName: string }) => item.displayName === 'PM2.5') ?? {}
-      const name: string = res.results[i].name
-
-      if (!isStationWithinMongoliaBBox(res.results[i].coordinates.longitude, res.results[i].coordinates.latitude)) {
+      const station = res.results[i]
+      // skip if purple air, since we already call their api
+      if (station.manufacturers.find(x => x.manufacturerName === 'PurpleAir')) {
         continue
       }
 
+      const manufacturerName = station.manufacturers.length > 0 ? station.manufacturers[0] : 'OpenAQ Unknown'
+      // item.id = 2 -> PM2.5
+      const PM25 = res.results[i].parameters.find(item => item.id === 2) ?? {}
+      // skip if it hasnt been updated in a week
+      if (!hasStationUpdatedWithinLastWeek(PM25.lastUpdated, 'openAQ')) {
+        continue
+      }
+      const name: string = res.results[i].name
       if (!stationsMap[name]) {
         stationsMap[name] = {
           name: name,
           date: PM25.lastUpdated,
-          sponsoredBy: 'Purple Air',
+          sponsoredBy: manufacturerName.manufacturerName,
           location: { coordinates: [res.results[i].coordinates.longitude, res.results[i].coordinates.latitude] },
           pollution: {
             p2: parseInt(PM25.lastValue),

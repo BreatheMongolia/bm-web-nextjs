@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-import { PageImageBanner } from 'components/generic/PageImageBanner'
+import React from 'react'
 import { getFeaturedTakeActions, getTakeActionsLatest } from 'lib/graphql-api/queries/takeAction'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
 import { TakeAction } from 'graphql/generated'
-import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 
 export type TakeActionAll = {
   id: number
@@ -16,23 +14,6 @@ export type TakeActionAll = {
   date: any
   typeOfAction: string[]
   featuredImage: string
-}
-
-const getTransformedBannerData = (data: any, locale: string) => {
-  return {
-    bannerTextLeft: getTranslated(data?.bannerTextLeft, data?.bannerTextLeftMn, locale),
-    bannerTextRight: data?.bannerTextRight.map((text: any) => {
-      return {
-        textContent: getTranslated(text?.categoryText, text?.categoryTextMn, locale),
-      }
-    }),
-    mediaItemUrl:
-      getTranslated(data?.takeActionsBanner?.mediaItemUrl, data?.takeActionsBannerMn?.mediaItemUrl, locale) !== null &&
-      getTranslated(data?.takeActionsBanner?.mediaItemUrl, data?.takeActionsBannerMn?.mediaItemUrl, locale) !==
-        undefined
-        ? getTranslated(data?.takeActionsBanner?.mediaItemUrl, data?.takeActionsBannerMn?.mediaItemUrl, locale)
-        : [],
-  }
 }
 
 const getTransformedData = (featured: TakeAction[], locale: string) => {
@@ -91,7 +72,7 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
   return takeActions
 }
 
-const TakeActionsPage = ({ latest, featured, banner, locale }) => {
+const TakeActionsPage = ({ latest, featured, locale }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
@@ -114,16 +95,9 @@ const TakeActionsPage = ({ latest, featured, banner, locale }) => {
 
   return (
     <div>
-      <PageImageBanner
-        imageUrls={banner.mediaItemUrl}
-        bottomText={{
-          left: banner.bannerTextLeft,
-          right: getBannerTextRight(banner.bannerTextRight, 'textContent'),
-        }}
-      />
-      <div className="container mx-auto flex flex-col gap-20 items-center">
+      <div className="container mx-auto flex flex-col">
         <TakeActionsGrid takeAction={takeActions} categories={actionCategories} />
-        
+
         <DonateSection />
       </div>
     </div>
@@ -135,13 +109,11 @@ export default TakeActionsPage
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const featured: any = await getFeaturedTakeActions('/')
   const latest = await getTakeActionsLatest()
-  const dataBanner: any = featured ? getTransformedBannerData(featured, locale) : []
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'takeAction'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'takeAction', 'common'])),
       featured: featured.featuredTakeActionsLanding,
-      banner: dataBanner,
       latest,
       locale,
     },

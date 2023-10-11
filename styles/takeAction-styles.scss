@@ -1449,6 +1449,7 @@
 .ta-mobile-content {
   display: grid;
   padding: 0 20px;
+  border-bottom: 1px solid #000;
 
   h2 {
     font-size: 18px;
@@ -1569,10 +1570,6 @@
     margin-top: 0;
     font-weight: normal;
     margin-bottom: 30px;
-  }
-
-  .ta-section {
-    border: none;
   }
 
   .ta-actions {

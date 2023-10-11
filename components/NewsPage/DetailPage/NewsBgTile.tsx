@@ -5,7 +5,7 @@ import CloseIcon from 'assets/icons/CloseIcon'
 import { useMediaQuery } from 'react-responsive'
 import PlayButton from 'assets/icons/PlayButton'
 import Modal from 'react-modal'
-import ShareButton from './ShareButton'
+import { ShareButton } from './ShareButton'
 import { useRouter } from 'next/router'
 
 Modal.setAppElement('#__next')
@@ -31,7 +31,7 @@ type Props = {
   featured?: string
 }
 
-const NewsBgTile: FC<Props> = ({
+export const NewsBgTile: FC<Props> = ({
   id,
   slug,
   sourceLink,
@@ -219,5 +219,3 @@ const NewsBgTile: FC<Props> = ({
     </>
   )
 }
-
-export default NewsBgTile

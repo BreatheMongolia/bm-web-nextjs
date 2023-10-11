@@ -48,7 +48,6 @@ export default function TakeActionPostPage({ takeAction }) {
   }
 
   const { t } = useTranslation('common')
-  const featuredImageBig = takeAction?.featuredImage?.node?.mediaItemUrl || takeAction?.listOfPhotos[0].mediaItemUrl
 
   return (
     <div>
@@ -57,12 +56,6 @@ export default function TakeActionPostPage({ takeAction }) {
       ) : (
         <>
           <article>
-            <Head>
-              <title>{`${takeAction.title} - Breathe Mongolia Clean Air Coalition`}</title>
-              <meta name="description" content={removeTags(takeAction.introductionText)} />
-              <meta property="og:title" content={takeAction.title} />
-              {featuredImageBig && <meta property="og:image" content={featuredImageBig} />}
-            </Head>
             <div className="container max-w-screen-lg">
               <BackBtn />
               <div>
@@ -150,6 +143,10 @@ export const getStaticProps = async ({ params, locale }) => {
 
   if (!takeAction) return { notFound: true }
 
+  const transformedTakeAction: any = getTransformedData(takeAction, locale)
+
+  const featuredImageBig =
+    transformedTakeAction?.featuredImage?.node?.mediaItemUrl || transformedTakeAction?.listOfPhotos[0].mediaItemUrl
   return {
     props: {
       ...(await serverSideTranslations(locale, [
@@ -162,7 +159,10 @@ export const getStaticProps = async ({ params, locale }) => {
         'takeAction',
         'common',
       ])),
-      takeAction: getTransformedData(takeAction, locale),
+      takeAction: transformedTakeAction,
+      title: transformedTakeAction.title,
+      description: removeTags(transformedTakeAction?.introductionText),
+      image: featuredImageBig,
     },
     revalidate: 60,
   }
