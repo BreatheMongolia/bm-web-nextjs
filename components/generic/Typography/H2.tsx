@@ -50,7 +50,7 @@ export const H2 = ({
       </div>
 
       {descriptionHtml && (
-        <div className="mt-2 mb-5 text-zinc-600" dangerouslySetInnerHTML={{ __html: descriptionHtml }}></div>
+        <div className="mt-2 pt-4 mb-5 text-zinc-600" dangerouslySetInnerHTML={{ __html: descriptionHtml }}></div>
       )}
     </div>
   )
