@@ -97,39 +97,39 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
         ))}
       </div>
 
-      {screenWidth > 700 ? (
-        <div className="actions-grid">
-          {getCurrentPost().map((takeAction, idx) => (
-            <TakeActionTile
-              key={idx}
-              id={takeAction.id}
-              slug={takeAction.slug}
-              title={takeAction.title}
-              featuredImage={takeAction.featuredImage}
-              index={idx}
-              pageNumberLimit={pageNumberLimit}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="action-slider-items">
-          {getCurrentPost().map((takeAction, idx) => (
-            <div key={idx} className="flex flex-row action-slider-item">
-              <Link href={`/take-actions/${takeAction.slug}`} className="grid grid-cols-3">
-                <div className="action-right">
-                  <img src={takeAction.featuredImage} />
-                </div>
-                <div className="col-span-2 action-left">
-                  {takeAction.typeOfAction && takeAction.typeOfAction.length > 0 && <h4>{takeAction.typeOfAction}</h4>}
-                  <h2>{takeAction.title}</h2>
-                  <p>{truncate(takeAction.excerpt)}</p>
-                  <h6 className="mt-2 text-[8px] font-bold underline text-sky-400">{t('actionList.button')}</h6>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Desktop */}
+      <div className="hidden md:grid actions-grid">
+        {getCurrentPost().map((takeAction, idx) => (
+          <TakeActionTile
+            key={idx}
+            id={takeAction.id}
+            slug={takeAction.slug}
+            title={takeAction.title}
+            featuredImage={takeAction.featuredImage}
+            index={idx}
+            pageNumberLimit={pageNumberLimit}
+          />
+        ))}
+      </div>
+      {/* Mobile */}
+      <div className="action-slider-items sm:hidden">
+        {getCurrentPost().map((takeAction, idx) => (
+          <div key={idx} className="flex flex-row action-slider-item">
+            <Link href={`/take-actions/${takeAction.slug}`} className="grid grid-cols-3">
+              <div className="action-right">
+                <img src={takeAction.featuredImage} />
+              </div>
+              <div className="col-span-2 action-left">
+                {takeAction.typeOfAction && takeAction.typeOfAction.length > 0 && <h4>{takeAction.typeOfAction}</h4>}
+                <h2>{takeAction.title}</h2>
+                <p>{truncate(takeAction.excerpt)}</p>
+                <h6 className="mt-2 text-[8px] font-bold underline text-sky-400">{t('actionList.button')}</h6>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+      {/* Pagination */}
       {takeAction.length > pageNumberLimit && (
         <div className="parent-pagination">
           <PaginationComponent

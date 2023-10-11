@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { H2 } from 'components/generic/Typography'
 import { urls } from 'lib/utils/urls'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
-import { useWidth } from 'lib/utils/useWidth'
 
 export const DonateSection = () => {
   const { t } = useTranslation('takeAction')
   const [isNavVisible, setNavVisible] = useState(false)
-  let screenWidth = useWidth()
 
   const donateLinks = () => {
     return (
@@ -62,36 +60,36 @@ export const DonateSection = () => {
 
   return (
     <div>
-      {screenWidth > 700 ? (
-        <div className="flex flex-row ta-section">
-          <div className="basis-2/3 ta-content">
-            <H2 title={t('donate.title')} />
-            <p className="pr-5">{t('donate.description')}</p>
-            {donateBtn()}
-          </div>
-          <div className="basis-1/3 m-5 ta-sidebar">
-            <h2 className="my-5 subheading">{t('donate.sidebarTitle')}</h2>
-            {donateLinks()}
-          </div>
-        </div>
-      ) : (
-        <div className="ta-mobile-content">
-          <H2 title={t('donate.mobileTitle')} />
-          <p className="mb-5">{t('donate.description')}</p>
+      {/* Desktop */}
+      <div className="hidden md:flex flex-row ta-section">
+        <div className="basis-2/3 ta-content">
+          <H2 title={t('donate.title')} />
+          <p className="pr-5">{t('donate.description')}</p>
           {donateBtn()}
-          <div className="my-5 ta-mobile-sidebar">
-            <a
-              className="subheading"
-              onClick={() => {
-                setNavVisible(!isNavVisible)
-              }}
-            >
-              {isNavVisible ? btnSeeLess() : btnSeeMore()}
-            </a>
-            {isNavVisible ? nav() : null}
-          </div>
         </div>
-      )}
+        <div className="basis-1/3 m-5 ta-sidebar">
+          <h2 className="my-5 subheading">{t('donate.sidebarTitle')}</h2>
+          {donateLinks()}
+        </div>
+      </div>
+      {/* Mobile */}
+      <div className="grid md:hidden ta-mobile-content">
+        <H2 title={t('donate.mobileTitle')} />
+        <p className="mb-5">{t('donate.description')}</p>
+        {donateBtn()}
+        <div className="my-5 ta-mobile-sidebar">
+          <a
+            className="subheading"
+            onClick={() => {
+              setNavVisible(!isNavVisible)
+            }}
+          >
+            {isNavVisible ? btnSeeLess() : btnSeeMore()}
+          </a>
+          {isNavVisible ? nav() : null}
+        </div>
+      </div>
+      {/* Disclosure */}
       <div className="flex p-5 text-xs md:py-10 md:px-0 md:text-sm">
         <p>{t('donate.disclosure')}</p>
       </div>
