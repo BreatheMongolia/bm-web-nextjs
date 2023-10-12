@@ -107,22 +107,31 @@ const FullNewsGrid = ({ news }: Props) => {
 
   const pages = []
   const MAX_PAGES = Math.ceil(filteredNews.length / ITEMS_PER_PAGE)
-  for (let i = 0; i < Math.ceil(filteredNews.length / ITEMS_PER_PAGE); i++) {
-    pages.push(
-      <div
-        onClick={() => setCurrentPage(i)}
-        className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#f09c4f]/80 hover:text-white ${
-          currentPage === i && 'bg-[#f09c4f] text-white'
-        }`}
-      >
-        {i + 1}
-      </div>,
-    )
+  let repeated = false
+  for (let i = 0; i < MAX_PAGES; i++) {
+    if (i === 0 || i === MAX_PAGES - 1 || (i < currentPage + 2 && i > currentPage - 2)) {
+      pages.push(
+        <div
+          onClick={() => setCurrentPage(i)}
+          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#f09c4f]/80 hover:text-white ${
+            currentPage === i && 'bg-[#f09c4f] text-white'
+          }`}
+        >
+          {i + 1}
+        </div>,
+      )
+      repeated = false
+    } else {
+      if (!repeated) {
+        pages.push(<div>...</div>)
+        repeated = true
+      }
+    }
   }
   return (
     <div>
-      <div className="flex pt-5 pb-8 ">
-        <div className="flex gap-2 grow">
+      <div className="flex flex-col sm:flex-row gap-5 pt-5 pb-8 ">
+        <div className="flex w-full flex-wrap gap-2 grow">
           <CategoryButton
             name={t('all')}
             category={null}
@@ -145,7 +154,7 @@ const FullNewsGrid = ({ news }: Props) => {
             )
           })}
         </div>
-        <div className="relative">
+        <div className="relative flex place-content-end">
           <Menu>
             <Menu.Button className="bg-[#f09c4f] text-white font-bold text-[15px] py-2 px-4 rounded-full hover:opacity-80 active:opacity-80 flex gap-3 justify-center items-center">
               {t('morefilter')}
@@ -191,8 +200,8 @@ const FullNewsGrid = ({ news }: Props) => {
       </NewsGrid>
 
       {/* Pagination */}
-      <div className="mx-auto pt-8 pb-3 font-bold text-xl">
-        <div className="flex gap-5 justify-center items-center">
+      <div className="mx-auto pt-8 pb-3 font-bold text-lg sm:text-xl">
+        <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
           <div
             className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${
               currentPage === 0 ? 'opacity-0' : 'cursor-pointer'

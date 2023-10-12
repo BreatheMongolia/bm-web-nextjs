@@ -43,11 +43,11 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
         </div>
         <div>
           <H2 iconImage={agaarNegIcon} title={t('agaarNegPlatform')} />
-          <NewsGrid defaultRows={2}>
+          <NewsGrid defaultRows={1}>
             {agaarNegNews.map((x, idx) => {
               return <AgaarNegCard className={idx > 3 ? 'hidden md:block' : ''} news={x} key={idx} />
             })}
-            <div className="flex justify-center items-center">
+            <div className="col-span-2 sm:col-span-1 flex justify-center items-center">
               <Link href="https://agaarneg.mn/news_stories" target="_blank">
                 <div className="bg-[#00aeef] text-white flex px-6 py-4 items-center justify-center gap-2 font-semibold rounded-full shadow-lg group hover:shadow-xl hover:bg-sky-600 transition-all w-full">
                   <span className="text-xs">{t('seemoreon')} </span>
