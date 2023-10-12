@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import YourCause from '../support_us_icons/YourCause'
 import Brev from '../support_us_icons/Brev'
 import { useTranslation } from 'next-i18next'

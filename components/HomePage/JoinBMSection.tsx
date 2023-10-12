@@ -2,7 +2,6 @@ import { H2 } from 'components/generic/Typography'
 import React from 'react'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import parse from 'html-react-parser'
 import Slider from 'react-slick'
 import {
   Page_Customfields_CountriesInfoText,
@@ -10,6 +9,7 @@ import {
 } from 'graphql/generated'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { useTranslation } from 'next-i18next'
+import VolunteerCard from '../Cards/VolunteerCard'
 
 export const JoinBMSection = ({
   title,
@@ -66,64 +66,28 @@ export const JoinBMSection = ({
   }
 
   return (
-    <div className="join-bm-slider-wrapper custom-sections-gap">
-      <div className="home-main-content">
-        <H2
-          title={getTranslated(title.en, title.mn, locale)}
-          descriptionHtml={getTranslated(descriptionHtml.en, descriptionHtml.mn, locale)}
-        />
-        <div className="join_bm_carousel_sec">
-          <div className="membersPhoto">
-            <Slider {...settings}>
-              {slider.map(x => (
-                <div key={x.sliderImage.databaseId}>
-                  <img className="slider-image" src={x.sliderImage.mediaItemUrl} />
-                </div>
-              ))}
-            </Slider>
-          </div>
-          <div className="volunteer-count">
-            <div className="volunteer-count-section  flex-row">
-              {countriesInfoText.map(x => (
-                <div className="country_count_col" key={x.infoIcon.databaseId}>
-                  <div className="text-center country-text">
-                    <img src={x.infoIcon.mediaItemUrl} alt="" />
-                    {x.customTextMn && (
-                      <div className="text-data-custom">
-                        {parse(getTranslated(x.customText, x.customTextMn, locale))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="opportunity-section">
-              <p className="title">{t('joinBm.opportunities')}</p>
-              <ul className="position-list">
-                {volunteers?.map((volunteerPos: any) => (
-                  <li className="position_list_el" key={volunteerPos?.node?.databaseId}>
-                    <a className="pos_link_url" href={volunteerPos?.node?.customFields?.link?.url} target="_blank">
-                      {getTranslated(
-                        volunteerPos?.node?.customFields?.position,
-                        volunteerPos?.node?.customFields?.positionMn,
-                        locale,
-                      )}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <div className="apply_button_container">
-                <a
-                  className="apply_now_button"
-                  href="https://forms.office.com/Pages/ResponsePage.aspx?id=rcJswrNeK0ewIXlMcbu4hPE6s_QwYeRChSapguhJZ8dUMVRFQUpDTzBaMkZLR01YOE5IRDkxSTBKSy4u"
-                  target="_blank"
-                >
-                  {t('joinBm.applyNow')}
-                </a>
+    <div className="flex flex-col">
+      <H2
+        title={getTranslated(title.en, title.mn, locale)}
+        descriptionHtml={getTranslated(descriptionHtml.en, descriptionHtml.mn, locale)}
+      />
+      <div className="flex flex-row gap-10 justify-start">
+        <div className="hidden lg:block lg:w-[60%]">
+          <Slider {...settings}>
+            {slider.map(x => (
+              <div key={x.sliderImage.databaseId}>
+                <img className="slider-image" src={x.sliderImage.mediaItemUrl} />
               </div>
-            </div>
-          </div>
+            ))}
+          </Slider>
+        </div>
+        <div className="flex flex-col gap-5">
+          <VolunteerCard
+            usedPage={'home'}
+            volunteers={volunteers}
+            countriesInfoText={countriesInfoText}
+            locale={locale}
+          />
         </div>
       </div>
     </div>

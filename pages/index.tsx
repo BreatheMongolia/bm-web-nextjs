@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
@@ -94,10 +93,10 @@ export default function Index({
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} locale={locale} />
           <OurWorkCarousel
-            title={{
-              en: page.customFields.campaignAndOurWorkTitle,
-              mn: page.customFields.campaignAndOurWorkTitleMn,
-            }}
+            // title={{
+            //   en: page.customFields.campaignAndOurWorkTitle,
+            //   mn: page.customFields.campaignAndOurWorkTitleMn,
+            // }}
             campaigns={page.customFields.campaignAndOurWorkSlider}
             locale={locale}
           />
