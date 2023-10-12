@@ -43,8 +43,8 @@
     "ourTeam": "Our Team"
   },
   "supportUs": {
-    "title":"Support Breathe Mongolia with your donation and volunteer work!",
-    "subtitle":"100% of your donation will directly fund initiatives that prevent air pollution emissions and help people protect their health. We use reliable fundraising platforms that do not charge any fees to process your online donation.",
+    "title": "Support Breathe Mongolia with your donation and volunteer work!",
+    "subtitle": "100% of your donation will directly fund initiatives that prevent air pollution emissions and help people protect their health. We use reliable fundraising platforms that do not charge any fees to process your online donation.",
     "waysToDonate": "Ways to Donate Money",
     "donateDirectlyOn": "Donate directly on",
     "donate": "DONATE",
@@ -74,6 +74,14 @@
     "moreAboutOurStory": "MORE ABOUT OUR STORY",
     "storiesAirPollution": "Stories About Air Pollution",
     "readMoreStories": "READ MORE STORIES"
+  },
+  "reports": {
+    "title": "Reports"
+  },
+  "impact": {
+    "ourAccomplishments": "Our Accomplishments",
+    "accomplishment": "Accomplishment",
+    "loadMore": "LOAD MORE"
   },
   "joinBm": {
     "opportunities": "Open positions",

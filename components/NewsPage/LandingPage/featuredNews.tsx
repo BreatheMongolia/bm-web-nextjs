@@ -13,16 +13,22 @@ export const FeaturedNews = ({ news }: { news: News[] }) => {
   const otherNews = news.slice(1)
 
   return (
-    <div className="grid gap-5 sm:grid-cols-2">
+    <div className="grid gap-5 md:grid-cols-2 h-[660px] md:h-[460px]">
       <div>
         <div className="bg-gray-200 h-full">
           <NewsCard news={bigNews} cardHeight="fill" />
         </div>
       </div>
-      <div className="flex flex-col gap-2">
-        {otherNews.map((x, idx) => {
-          return <NewsHorizontalCard news={x} key={idx} />
-        })}
+      <div className="flex overflow-hidden h-full relative">
+        <div className="overflow-y-auto pr-4 pb-4 absolute top-0 bottom-0 right-0 left-0 gap-3 flex flex-col">
+          {otherNews.map((x, idx) => {
+            return (
+              <div className="flex-1 w-full" key={idx}>
+                <NewsHorizontalCard news={x} />
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

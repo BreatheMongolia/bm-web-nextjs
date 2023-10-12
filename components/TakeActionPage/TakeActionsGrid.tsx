@@ -3,9 +3,8 @@ import { H2 } from 'components/generic/Typography'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import PaginationComponent from '../generic/PaginationComponent'
-import Desktop from '../Desktop/index'
-import Mobile from '../Mobile/index'
 import TakeActionTile from '../Cards/TakeActionTile'
+import { useWidth } from 'lib/utils/useWidth'
 
 export type TakeActionAll = {
   id: number
@@ -20,12 +19,14 @@ export type TakeActionAll = {
 export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeActionAll[]; categories: string[] }) => {
   const { t } = useTranslation('takeAction')
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageNumberLimit, setPageNumberLimit] = useState(9)
+  const [pageNumberLimit, setPageNumberLimit] = useState(18)
   const [filteredCategories, setFilteredCategories] = useState<string[]>([])
+  let screenWidth = useWidth()
 
   useEffect(() => {
     getFilteredTakeActions()
-  }, [filteredCategories])
+    getPageNumberLimit()
+  }, [filteredCategories, screenWidth])
 
   const truncate = (input: string) => (input?.length > 95 ? `${input.substring(0, 95)}...` : input)
 
@@ -41,6 +42,12 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
 
   const showAll = () => {
     setFilteredCategories([])
+  }
+
+  const getPageNumberLimit = () => {
+    if (screenWidth <= 700) setPageNumberLimit(6)
+    else if (screenWidth <= 1024) setPageNumberLimit(9)
+    else setPageNumberLimit(18)
   }
 
   const getFilteredTakeActions = () => {
@@ -72,7 +79,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
   }
 
   return (
-    <div className="ta-actions">
+    <div className="flex flex-col justify-center ta-actions">
       <H2 title={t('actionList.title')} className="ta-mobile-header" />
 
       <div className="ta-categories">
@@ -90,49 +97,40 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
         ))}
       </div>
 
-      <Desktop>
-        <div className="actions-grid">
-          {getCurrentPost().map((takeAction, idx) => (
-            <TakeActionTile
-              key={idx}
-              id={takeAction.id}
-              slug={takeAction.slug}
-              title={takeAction.title}
-              featuredImage={takeAction.featuredImage}
-              index={idx}
-              pageNumberLimit={pageNumberLimit}
-            />
-          ))}
-        </div>
-        {takeAction.length > 10 && (
-          <div className="parent-pagination">
-            <PaginationComponent
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              pageNumberLimit={pageNumberLimit}
-              totalPosts={getFilteredTakeActions().length}
-            />
+      {/* Desktop */}
+      <div className="hidden md:grid actions-grid">
+        {getCurrentPost().map((takeAction, idx) => (
+          <TakeActionTile
+            key={idx}
+            id={takeAction.id}
+            slug={takeAction.slug}
+            title={takeAction.title}
+            featuredImage={takeAction.featuredImage}
+            index={idx}
+            pageNumberLimit={pageNumberLimit}
+          />
+        ))}
+      </div>
+      {/* Mobile */}
+      <div className="action-slider-items sm:hidden">
+        {getCurrentPost().map((takeAction, idx) => (
+          <div key={idx} className="flex flex-row action-slider-item">
+            <Link href={`/take-actions/${takeAction.slug}`} className="grid grid-cols-3">
+              <div className="action-right">
+                <img src={takeAction.featuredImage} />
+              </div>
+              <div className="col-span-2 action-left">
+                {takeAction.typeOfAction && takeAction.typeOfAction.length > 0 && <h4>{takeAction.typeOfAction}</h4>}
+                <h2>{takeAction.title}</h2>
+                <p>{truncate(takeAction.excerpt)}</p>
+                <h6 className="mt-2 text-[8px] font-bold underline text-sky-400">{t('actionList.button')}</h6>
+              </div>
+            </Link>
           </div>
-        )}
-      </Desktop>
-      <Mobile>
-        <div className="action-slider-items">
-          {getCurrentPost().map((takeAction, idx) => (
-            <div key={idx} className="flex flex-row action-slider-item">
-              <Link href={`/take-actions/${takeAction.slug}`} className="grid grid-cols-3">
-                <div className="action-right">
-                  <img src={takeAction.featuredImage} />
-                </div>
-                <div className="col-span-2 action-left">
-                  {takeAction.typeOfAction && takeAction.typeOfAction.length > 0 && <h4>{takeAction.typeOfAction}</h4>}
-                  <h2>{takeAction.title}</h2>
-                  <p>{truncate(takeAction.excerpt)}</p>
-                  <h6 className="mt-2 text-[8px] font-bold underline text-sky-400">{t('actionList.button')}</h6>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
+        ))}
+      </div>
+      {/* Pagination */}
+      {takeAction.length > pageNumberLimit && (
         <div className="parent-pagination">
           <PaginationComponent
             currentPage={currentPage}
@@ -141,7 +139,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
             totalPosts={getFilteredTakeActions().length}
           />
         </div>
-      </Mobile>
+      )}
     </div>
   )
 }

@@ -9,7 +9,9 @@ export async function getFeaturedNews(): Promise<News[]> {
         id
         slug
         uri
-        customFields {
+        date
+        dateGmt
+          customFields {
           featuredNews {
             ... on News {
               databaseId
@@ -69,7 +71,7 @@ export async function getFeaturedNews(): Promise<News[]> {
     }
     `,
     {},
-  )
+  ).catch(err => console.error('Failed to fetch featuredeNews:', err))
 
   if (data?.page) {
     const page = data.page as Page
@@ -154,6 +156,70 @@ export async function getNewsPosts(): Promise<News[]> {
     }
   }
   return []
+}
+export async function getAgaarNegNews(): Promise<
+  {
+    id: string
+    title: { en: string; mn: string }
+    keywords: string[]
+  }[]
+> {
+  const MAX_NUM_RESOURCES = 7
+  // override api request url, as host server is different
+  const news = []
+  const data = await fetchAPI(
+    `
+    query GetAllAgaarNegNews {
+      newsStories (first: ${MAX_NUM_RESOURCES})  {
+        edges {
+          node {
+            databaseId
+            customFields {
+              title
+              titleMn
+              keywords {
+                customFields {
+                  name
+                  nameMn
+                }
+              }
+            }
+          }
+        }
+      }
+      keywords {
+        edges {
+          node {
+            customFields {
+              name
+              nameMn
+            }
+          }
+        }
+      }
+    }
+    `,
+    {
+      apiUrl: 'https://agaarneg.wpengine.com/graphql',
+    },
+  )
+
+  if (data && data.newsStories) {
+    data.newsStories.edges.map(x => {
+      try {
+        news.push({
+          id: x.node.databaseId,
+          title: {
+            en: x.node.customFields.title,
+            mn: x.node.customFields.titleMn,
+          },
+          keywords: x.node.keywords ?? [],
+        })
+      } catch (e) {}
+    })
+  }
+
+  return news
 }
 // Detail Pages
 
