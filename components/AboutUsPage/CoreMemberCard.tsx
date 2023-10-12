@@ -7,7 +7,7 @@ type Props = {
 
 const CoreMemberCard: FC<Props> = ({ person }) => {
   return (
-    <div className="core-member-card">
+    <div className="core-member-card text-center">
       <img src={person.imgSrc} alt="Member profile image" className="profile_icon core" />
       <h4 className="member_name core">{person.name}</h4>
       <h5 className="member_role core">{person.role}</h5>

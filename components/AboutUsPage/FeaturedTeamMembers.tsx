@@ -12,7 +12,7 @@ type Props = {
 }
 
 const settings = {
-  dots: false,
+  dots: true,
   infinite: false,
   speed: 800,
   slidesToShow: 1,
@@ -23,7 +23,6 @@ const settings = {
   cssEase: 'linear',
   adaptiveHeight: true,
   centerMode: true,
-  variableWidth: true,
   responsive: [
     {
       breakpoint: 1024,
