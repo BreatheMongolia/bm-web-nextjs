@@ -1,15 +1,14 @@
 const API_URL = process.env.WORDPRESS_API_URL
 
-export async function fetchAPI(query = '', { variables }: Record<string, any> = {}) {
+export async function fetchAPI(query = '', { variables, apiUrl }: Record<string, any> = {}) {
   const headers = { 'Content-Type': 'application/json' }
-
   if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
     headers['Authorization'] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`
   }
 
   // TODO: Change API_URL
   // WPGraphQL Plugin must be enabled
-  const res = await fetch('https://breathemon2.wpengine.com/graphql', {
+  const res = await fetch(apiUrl ?? API_URL, {
     headers,
     method: 'POST',
     body: JSON.stringify({

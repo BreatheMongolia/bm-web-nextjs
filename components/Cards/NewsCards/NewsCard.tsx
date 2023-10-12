@@ -3,12 +3,33 @@ import { News } from 'graphql/generated'
 import { getTransformedNews } from 'lib/utils/gql-data-transform/getTransformedNews'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { TbPointFilled } from 'react-icons/tb'
 
-export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeight?: 'normal' | 'fill' }) => {
+export const NewsCard = ({
+  news,
+  cardHeight = 'normal',
+  className,
+}: {
+  news: News
+  cardHeight?: 'normal' | 'fill'
+  className?: string
+}) => {
   const { t, i18n } = useTranslation()
   // News Card types can be: blog, external_link, video
   const router = useRouter()
+
+  const [thumbnailURL, setThumbnailURL] = useState('')
+
+  useEffect(() => {
+    fetch('https://noembed.com/embed?url=' + news.customFields.sourceLink)
+      .then(res => {
+        return res.json()
+      })
+      .then(response => {
+        setThumbnailURL(response.thumbnail_url)
+      })
+  }, [news])
 
   // transform the data
   const transformedNews = getTransformedNews(news, i18n.language === 'en' ? 'en' : 'mn')
@@ -27,19 +48,24 @@ export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeig
       }
     }
   }
-
+  const backgroundImageUrl = () => {
+    if (transformedNews.newsContentType === 'video') {
+      return thumbnailURL
+    }
+    return transformedNews.featuredImageSmall ?? transformedNews.featuredImageBig
+  }
   return (
     <div
-      className={`relative transition-all bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group ${
+      className={`relative bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow ${
         cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
-      }`}
-      style={{ backgroundImage: `url(${transformedNews})` }}
+      } ${className}`}
+      style={{ backgroundImage: `url(${backgroundImageUrl()})` }}
       onClick={onCardClick}
     >
-      <div className="flex flex-col h-full justify-end">
+      <div className="flex flex-col h-full justify-end pr-10">
         {transformedNews.sourceLink && (
-          <div className="text-bm-blue text-sm font-semibold pt-2 flex-1 absolute top-1 left-0 z-20">
-            <div className="bg-white/95 flex gap-x-1 items-center px-2 py-0.5 rounded-r-md w-fit group-hover:bg-bm-blue group-hover:text-white transition-all group-hover:pl-5">
+          <div className="text-bm-blue text-xs font-bold pt-1 flex-1 absolute top-0.5 left-0 z-20 right-10">
+            <div className="bg-white/95 flex gap-x-1 items-center px-2 py-0.5 rounded-r-md w-fit group-hover:bg-bm-blue group-hover:text-white transition-all group-hover:pl-5 uppercase">
               {transformedNews.sourceName}
               <ArrowTopRightOnSquareIcon className="h-0 w-0 group-hover:h-4 group-hover:w-4" />
             </div>
@@ -51,9 +77,6 @@ export const NewsCard = ({ news, cardHeight = 'normal' }: { news: News; cardHeig
           </div>
         )}
 
-        <div className="h-full top-0 left-0 z-0 text-center">
-          <img className="object-cover h-full " src={transformedNews.featuredImageBig} />
-        </div>
         <div className="w-full px-5 mb-4 h-20 absolute bottom-0 z-30">
           {transformedNews.categories && (
             <div className="flex border-b-[0.5px] border-white w-fit text-[12px] font-bold my-2">
