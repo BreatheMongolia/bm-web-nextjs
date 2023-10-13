@@ -93,6 +93,7 @@ const FullNewsGrid = ({ news }: Props) => {
   }
   // on click event function
   const setActiveCategory = category => {
+    setCurrentPage(0)
     if (category) {
       if (activeCategories.some(x => x.id === category.id)) {
         setActiveCategories(activeCategories.filter(x => x.id !== category.id))
@@ -130,8 +131,8 @@ const FullNewsGrid = ({ news }: Props) => {
   }
   return (
     <div>
-      <div className="flex flex-col sm:flex-row gap-5 pt-5 pb-8 ">
-        <div className="flex w-full flex-wrap gap-2 grow">
+      <div className="flex flex-col gap-5 pt-5 pb-8 sm:flex-row ">
+        <div className="flex flex-wrap w-full gap-2 grow">
           <CategoryButton
             name={t('all')}
             category={null}
@@ -158,7 +159,7 @@ const FullNewsGrid = ({ news }: Props) => {
           <Menu>
             <Menu.Button className="bg-[#f09c4f] text-white font-bold text-[15px] py-2 px-4 rounded-full hover:opacity-80 active:opacity-80 flex gap-3 justify-center items-center">
               {t('morefilter')}
-              <FunnelIcon className="h-4 w-4" />
+              <FunnelIcon className="w-4 h-4" />
             </Menu.Button>
             <Menu.Items className="absolute top-10 right-0 bg-white z-50 rounded border border-[#f09c4f] w-60">
               {uniqueCategories.map((x, idx) => {
@@ -200,7 +201,7 @@ const FullNewsGrid = ({ news }: Props) => {
       </NewsGrid>
 
       {/* Pagination */}
-      <div className="mx-auto pt-8 pb-3 font-bold text-lg sm:text-xl">
+      <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
         <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
           <div
             className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${
@@ -208,7 +209,7 @@ const FullNewsGrid = ({ news }: Props) => {
             }`}
             onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
           >
-            <span className="p-3 block">
+            <span className="block p-3">
               <ChevronLeftIcon className="w-5 h-5" />
             </span>
           </div>
@@ -219,7 +220,7 @@ const FullNewsGrid = ({ news }: Props) => {
             }`}
             onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
           >
-            <span className="p-3 block">
+            <span className="block p-3">
               <ChevronRightIcon className="w-5 h-5" />
             </span>
           </div>
