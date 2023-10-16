@@ -179,7 +179,7 @@ export const MapComponent = ({
 
   return (
     <div className="aqi-map-wrapper">
-      <H2 className="mb-24 md:mb-12" title={title[i18n.language]} descriptionHtml={descriptionHtml[i18n.language]} />
+      <H2 className="block !mb-24 !md:mb-12" title={title[i18n.language]} descriptionHtml={descriptionHtml[i18n.language]} />
       <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map" ref={mapContainer} className="map-wrapper"></div>
         <MapDropdownWrapper title={t(`province.${selectedLocation.value}`)}>
