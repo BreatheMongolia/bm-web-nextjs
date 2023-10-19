@@ -23,9 +23,6 @@ export const OurPartners = ({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
-    // cssEase: 'linear',
-    // adaptiveHeight: false,
-    // centerMode: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -55,7 +52,7 @@ export const OurPartners = ({
   }
 
   return (
-    <div className="our-partners">
+    <div className="flex flex-col">
       <H2 title={getTranslated(title.en, title.mn, locale)} />
       <div className="partner-logos-slider-wrapper">
         <Slider {...settings}>

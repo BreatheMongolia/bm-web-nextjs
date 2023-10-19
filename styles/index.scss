@@ -458,7 +458,7 @@ p {
 // TakeActionCarousel Styling End
 
 /* Our Work Carousel styles start */
-.campaign-slider-wrapper {
+.our-work-carousel {
   .campaignCard {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px !important;
@@ -479,7 +479,7 @@ p {
       max-width: 245px;
       min-width: 245px;
       object-fit: cover;
-      object-position: center center;
+      object-position: center;
       border-radius: 4px;
     }
 
@@ -550,7 +550,7 @@ p {
 }
 
 @media (max-width: 767px) {
-  .campaign-slider-wrapper {
+  .our-work-carousel {
     .slick-slider,
     .slick-list,
     .slick-track,
