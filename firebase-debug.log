@@ -1,0 +1,278 @@
+[debug] [2023-10-20T17:27:59.430Z] ----------------------------------------------------------------------
+[debug] [2023-10-20T17:27:59.431Z] Command:       /usr/local/bin/firebase /Users/tem/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy
+[debug] [2023-10-20T17:27:59.432Z] CLI Version:   12.7.0
+[debug] [2023-10-20T17:27:59.432Z] Platform:      darwin
+[debug] [2023-10-20T17:27:59.433Z] Node Version:  v16.16.0
+[debug] [2023-10-20T17:27:59.441Z] Time:          Fri Oct 20 2023 12:27:59 GMT-0500 (Central Daylight Time)
+[debug] [2023-10-20T17:27:59.441Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-10-20T17:27:59.550Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-10-20T17:27:59.554Z] > authorizing via signed-in user (temuulen@breathemongolia.org)
+[debug] [2023-10-20T17:27:59.554Z] [iam] checking project breathe-mongolia-dev for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-10-20T17:27:59.558Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/breathe-mongolia-dev:testIamPermissions [none]
+[debug] [2023-10-20T17:27:59.558Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/breathe-mongolia-dev:testIamPermissions x-goog-quota-user=projects/breathe-mongolia-dev
+[debug] [2023-10-20T17:27:59.559Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/breathe-mongolia-dev:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-10-20T17:27:59.815Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/breathe-mongolia-dev:testIamPermissions 200
+[debug] [2023-10-20T17:27:59.818Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/breathe-mongolia-dev:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-10-20T17:27:59.822Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/breathe-mongolia-dev [none]
+[debug] [2023-10-20T17:28:00.126Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/breathe-mongolia-dev 200
+[debug] [2023-10-20T17:28:00.127Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/breathe-mongolia-dev {"projectId":"breathe-mongolia-dev","projectNumber":"552436346108","displayName":"Breathe Mongolia Dev","name":"projects/breathe-mongolia-dev","resources":{"hostingSite":"breathe-mongolia-dev"},"state":"ACTIVE","etag":"1_a110e29f-3e81-44e6-9253-fe35a4b1e1e4"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[info] - info Loaded env from /Users/tem/Documents/GitHub/bm-web-nextjs/.env
+
+[info] - info Linting and checking validity of types...
+
+[info] - info Creating an optimized production build...
+
+[info] - info Downloading WASM swc package...
+
+[info] - info Using wasm build of next-swc
+
+[info] - warn Attempted to load @next/swc-darwin-x64, but it was not installed
+
+[info] - info Compiled successfully
+
+[info] - info Collecting page data...
+
+[info] - info Generating static pages (0/141)
+
+[info] react-i18next:: You will need to pass in an i18next instance by using initReactI18next
+
+[info] react-i18next:: You will need to pass in an i18next instance by using initReactI18next
+
+[info] react-i18next:: You will need to pass in an i18next instance by using initReactI18next
+
+[info] react-i18next:: You will need to pass in an i18next instance by using initReactI18next
+
+[info] - info Generating static pages (35/141)
+
+[info] - info Generating static pages (70/141)
+
+[info] - info Generating static pages (105/141)
+
+[info] react-i18next:: You will need to pass in an i18next instance by using initReactI18next
+
+[info] react-i18next:: You will need to pass in an i18next instance by using initReactI18next
+
+[info] Warning: data for page "/news/breathemongolia" is 193 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+
+[info] Warning: data for page "/news/breathemongolia" is 202 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+
+[info] Warning: data for page "/news" is 216 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+
+[info] Warning: data for page "/news" is 207 kB which exceeds the threshold of 128 kB, this amount of data can reduce performance.
+See more info here: https://nextjs.org/docs/messages/large-page-data
+
+[info] - info Generating static pages (141/141)
+
+[info] - info Finalizing page optimization...
+
+[info] 
+
+[info] Route (pages)                                                          Size     First Load JS
+┌ ● /                                                                  1.89 kB         497 kB
+├   /_app                                                              0 B             190 kB
+├ ○ /404                                                               805 B           191 kB
+├ ● /about/[route] (18468 ms)                                          562 kB         1.07 MB
+├   ├ /mn/about/info (4111 ms)
+├   ├ /mn/about/our-story (4071 ms)
+├   ├ /mn/about/our-team (3820 ms)
+├   ├ /mn/about/impact (3233 ms)
+├   └ /mn/about/support-us (3233 ms)
+├ ○ /actions/[slug]                                                    242 B           190 kB
+├ λ /api/exit-preview                                                  0 B             190 kB
+├ ● /news                                                              4.34 kB         199 kB
+├ ● /news/[slug] (ISR: 60 Seconds) (113264 ms)                         4.16 kB         213 kB
+├   ├ /mn/news/агаарын-бохирдол-таны-арьсанд-хэрхэн (1295 ms)
+├   ├ /mn/news/2021-онд-цахилгаан-эх-үүсвэрт-холбогдох-89-м (1293 ms)
+├   ├ /mn/news/video-how-to-protect-from-ap-eagle-news (1289 ms)
+├   ├ /mn/news/монгол-улсын-агаарын-бохирдлын-асууд (1281 ms)
+├   ├ /mn/news/хүхэрлэг-хийг-маск-зүүгээд-ч-шүүж-чада (1279 ms)
+├   ├ /mn/news/is-improved-coal-working (1278 ms)
+├   ├ /mn/news/mental-health-and-air-pollution (1262 ms)
+├   └ [+91 more paths] (avg 1146 ms)
+├ ● /news/breathemongolia                                              5.81 kB         219 kB
+├ λ /search                                                            15.8 kB         240 kB
+├ ● /take-actions                                                      930 B           267 kB
+└ ● /take-actions/[slug] (ISR: 60 Seconds) (11735 ms)                  762 B           267 kB
+    ├ /mn/take-actions/safe-cleaning-product (1443 ms)
+    ├ /mn/take-actions/lets-use-an-electric-heaters (1373 ms)
+    ├ /mn/take-actions/мод-тарьцгаая (1365 ms)
+    ├ /mn/take-actions/safe-construction-materials (1138 ms)
+    ├ /mn/take-actions/prevent-co-poisoning (714 ms)
+    ├ /mn/take-actions/test (697 ms)
+    ├ /mn/take-actions/эрчим-хүчээ-хэмнэцгээе (606 ms)
+    └ [+9 more paths] (avg 489 ms)
++ First Load JS shared by all                                          224 kB
+  ├ chunks/framework-305cb810cde7afac.js                               45.2 kB
+  ├ chunks/main-85281faa3afd6034.js                                    28.4 kB
+  ├ chunks/pages/_app-3ae4744a90d4973f.js                              116 kB
+  ├ chunks/webpack-59c5c889f52620d6.js                                 819 B
+  └ css/9d1a644acb516b4c.css                                           34.1 kB
+
+
+[info] λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
+   (ISR)     incremental static regeneration (uses revalidate in getStaticProps)
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • Image Optimization
+[info]  • use of fallback /about/[route]
+[info]  • use of fallback /take-actions/[slug]
+[info]  • use of fallback /news/[slug]
+[info]  • use of revalidate null
+[debug] [2023-10-20T17:28:56.241Z]  • use of revalidate /take-actions/[slug]
+[debug] [2023-10-20T17:28:56.241Z]  • use of revalidate /news/[slug]
+[debug] [2023-10-20T17:28:56.241Z]  • non-static route /404
+[debug] [2023-10-20T17:28:56.241Z]  • non-static route /api/exit-preview
+[debug] [2023-10-20T17:28:56.241Z]  • non-static route /
+[debug] [2023-10-20T17:28:56.241Z]  • non-static route /news/breathemongolia
+[debug] [2023-10-20T17:28:56.241Z]  • non-static route /news
+[debug] [2023-10-20T17:28:56.241Z]  • non-static route /search
+[debug] [2023-10-20T17:28:56.241Z]  • non-static route /take-actions
+[info]  • and 9 other reasons, use --debug to see more
+[info] 
+[debug] [2023-10-20T17:28:57.461Z] skipping /mn/news due to revalidate
+[debug] [2023-10-20T17:28:57.462Z] skipping /en/news due to revalidate
+[debug] [2023-10-20T17:28:57.462Z] skipping /mn/news/breathemongolia due to revalidate
+[debug] [2023-10-20T17:28:57.462Z] skipping /en/news/breathemongolia due to revalidate
+[debug] [2023-10-20T17:28:57.462Z] skipping /mn/take-actions due to revalidate
+[debug] [2023-10-20T17:28:57.462Z] skipping /en/take-actions due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /en due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/safe-construction-materials due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/safe-cleaning-product due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/lets-use-an-electric-heaters due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/мод-тарьцгаая due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/эрчим-хүчээ-хэмнэцгээе due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/агаарын-чанараа-шалгацгаая due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/public-transportation due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/house-insulation due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/insulate-your-ger due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/use-air-purifier due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/prevent-co-poisoning due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/test due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/green-loans due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/ride-a-bicycle due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/cigarette-smoke due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/take-actions/minimize-vehicle-emissions due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/агаарын-бохирдол-нь-хүний-биед-антиби due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/агаарын-бохирдлын-түвшинг-олон-нийтэ due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/цэвэр-агаарын-төлөөх-адал-явдал-хүүх due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/агаарын-бохирдол-нь-ковид-19-туссан-өвчт due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/nasa-shares-first-images-from-us-pollution-monitoring-instrument due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/a-deep-dive-on-the-economic-impacts-of-air-pollution due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/how-safe-is-your-office-air-theres-one-way-to-find-out due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/air-pollution-is-deadlier-than-you-think due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/poor-air-filtration-in-schools-is-driving-absences-and-tanking-productivity-but-the-fix-is-simple due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/air-quality-monitoring-in-construction-zones-minimizing-health-risks-and-enhancing-sustainability due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/safe-levels-of-air-pollution-can-negatively-impact-brain-development-and-cause-cognitive-issues due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/new-findings-on-air-pollution-for-brain-function-and-mental-health-issues due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/air-pollution-causes-harm-at-all-stages-of-life-report due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/9-changes-we-need-to-see-in-2023 due to revalidate
+[debug] [2023-10-20T17:28:57.463Z] skipping /mn/news/жайка-шахмал-түлшинд-шилжсэнээр-рм10-ын due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/world-environment-day-2023-6-startling-facts-about-air-pollution-that-demand-immediate-action due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/long-term-exposure-to-air-pollution-linked-to-severe-covid due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/call-for-dementia-risk-to-be-included-in-uk-air-pollution-policies due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/хямд-өртөгт-сенсорыг-ашиглан-хаана-ч-а due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/өвөлюуболов-агаарын-чанарыг-сенсоро-4 due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/air-pollution-and-human-right due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/how-can-a-government-source-add-data-to-openaq due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/the-links-between-pollution-and-miscarriage-this-is-the-stuff-nightmares-are-made-of due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/electricity-tariff-twice-cheaper-than-its-cost due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/health-impact-of-tyre-particles-causing-increasing-concern-say-scientists due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/өвөлюуболов-агаарын-чанарыг-сенсоро-3 due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/өвөлюуболов-агаарын-чанарыг-сенсоро-2 due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/өвөлюуболов-агаарын-чанарыг-сенсоро due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/krakows-low-emission-zone-first-ever-in-central-and-eastern-europe due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/air-pollution-may-increase-risk-for-dementia due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/what-needs-to-be-done-to-lower-long-term-exposure-to-carbon-monoxide due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/air-pollution-and-general-health due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/air-pollution-lambeth-students-build-filters-for-their-classrooms due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/the-impact-of-air-pollution-on-human-health-in-mongolia-was-presented-at-the-asia-pacific-clean-air-high-level-forum due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/only-13-countries-and-territories-had-healthy-air-quality-in-2022 due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/a-healthy-environment-is-our-legacy due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/human-right-to-live-in-a-healthy-and-safe-environment-air-pollution-scientific-evidence-and-solutions-science-and-technology-conference due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/the-air-quality-is-very-polluted-in-five-parts-of-the-capital-including-sharhad-i-khoroolol-and-khailaast due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/one-trillion-mnt-was-spent-to-reduce-air-pollution-in-a-decade due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/is-improved-coal-working due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/10-perks-of-volunteering due to revalidate
+[debug] [2023-10-20T17:28:57.464Z] skipping /mn/news/инверс-ба-агаарын-бохирдол due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/цэвэр-агаарт-таны-оролцоо-төсөл-ам due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/уур-амьсгал-агаарын-бохирдлын-сэдэвт due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/video-pmi-webinar due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/video-acms-lecture due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/агаарын-бохирдлын-эсрэг-бид-юу-хийж-ча due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/астразенека-breathe-mongolia-д-агаарын-бохирдолтой due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/video-recommendation-7-how-to-measure-indoor-air-quality due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/external-breathe-mongolia-feature-by-sustainability-for-students due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/аргал-биш-нүүрсний-утаа-боргилсон-оро due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/external-az-grant-announcement due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/video-sightline-interview-with-azjargal due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/ysc-lecture-air-pollution-and-youth-involvement due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/video-changing-skies-campaign due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/нүб-ын-хүний-эрхийн-зөвлөл-цэвэр-эрүүл due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/үргүйдэл-ба-эр-бэлэг-эрхтэний-агчил-аг due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/breathe-mongolia-багийнхан-unleash-hacks-mongolia-2021-хакатоны-хамтр due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/цөлжилт-болон-цөлжилтийн-монголд-үзү due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/хөгжиж-буй-орнуудын-агаарын-бохирдлы-2 due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/аж-үйлдвэрийн-бохирдол-төмсөггүй-төр due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/video-chip-promo-by-toc due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/aгаарын-бохирдлын-мэдээллийн-нэгдсэн due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/тамхидалт-болон-тахлын-аюултай-огтло due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/агаарын-бохирдол-таны-арьсанд-хэрхэн due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/external-bm-profile due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/2021-онд-цахилгаан-эх-үүсвэрт-холбогдох-89-м due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/монгол-улсын-агаарын-бохирдлын-асууд due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/цахим-цагаан-сар-цар-тахлын-үеэр-цагаа due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/хүхэрлэг-хийг-маск-зүүгээд-ч-шүүж-чада due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/улаанбаатарын-өвлийг-давахад-туслах-5 due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/covid-19той-холбоотой-санхүүжилтийн-талаар-br due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/dying-to-breathe-how-mongolia-is-killing-its-future due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/mental-health-and-air-pollution due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/монгол-залуучууд-ба-агаарын-бохирдол due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/ковид-19-болон-агаарын-бохирдлын-уялдаа due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/зохион-байгуулалттай-жагсаалаас-ашг due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/монгол-улсад-ковид-19той-холбоотой-513-5-сая due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/агаарын-бохирдол-нь-коронавирусаар-н due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/дэлхийн-хамгийн-их-бохирдолтой-хотуу due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/covid-19-болж-буй-энэ-үед-цэвэр-гар-аян-250н-гэр-б due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/нүүрсийг-шүтсэн-монголын-байдал due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/аутизм-ба-агаарын-бохирдол due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/дулааны-насос-сэргээгдэх-эрчим-хүчни due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/хүүхдийн-хөгжилд-агаарын-бохирдол-ст due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/external-city-of-smoke due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/амны-хаалтны-талаарх-зөвлөгөө due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/коронавирус-ба-агаарын-бохирдол-та-юу due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/агаарын-бохирдол-нь-чимээгүй-зулбах due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/pollution-pushes-mongolias-herders-to-reconsider-city-life-2 due to revalidate
+[debug] [2023-10-20T17:28:57.465Z] skipping /mn/news/kids-suffer-most-in-one-of-earths-most-polluted-cities-2 due to revalidate
+[debug] [2023-10-20T17:28:57.466Z] skipping /mn/news/mongolias-air-pollution-crisis-is-the-future-of-our-cities-2 due to revalidate
+[debug] [2023-10-20T17:28:57.466Z] skipping /mn/news/mongolias-capital-banned-coal-to-fix-its-pollution-problem-will-it-work-2 due to revalidate
+[debug] [2023-10-20T17:28:57.466Z] skipping /mn/news/video-120-80-discussion-how-air-pollution-affects-childrens-health due to revalidate
+[debug] [2023-10-20T17:28:57.466Z] skipping /mn/news/kids-suffer-most-in-one-of-earths-most-polluted-cities due to revalidate
+[debug] [2023-10-20T17:28:57.466Z] skipping /mn/news/video-day-in-the-life due to revalidate
+[debug] [2023-10-20T17:28:57.466Z] skipping /mn/news/video-smog-chocked-children-of-ub due to revalidate
+[debug] [2023-10-20T17:28:57.466Z] skipping /mn/news/video-how-to-protect-from-ap-eagle-news due to revalidate
+[debug] [2023-10-20T17:30:06.272Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:828:11)
+    at Object.execSync (node:child_process:899:15)
+    at execSync (pkg/prelude/bootstrap.js:2111:30)
+    at prepareFrameworks (/Users/tem/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/frameworks/index.js:367:42)
+    at async deploy (/Users/tem/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/deploy/index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.

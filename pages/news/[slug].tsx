@@ -4,7 +4,7 @@ import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { News } from 'graphql/generated'
+import { News, NewsIdType } from 'graphql/generated'
 import { getTranslated } from 'lib/utils/getTranslated'
 import Desktop from 'components/Desktop'
 import { H2 } from 'components/generic/Typography'
@@ -118,6 +118,9 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
 export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
   // check if it is slug or post-id
   const slug = params?.slug as string
+  if (slug == '1458' || slug == '3630') {
+    console.log('woowee', params)
+  }
   // this shouldn't happen, but base case
   if (!slug || slug.length === 0) {
     return {
@@ -129,11 +132,13 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
   }
   // check if it is trying to come in with a postid
   const isPostId = slug.match(/^[0-9]+$/)
-  console.log('woohoo', slug, isPostId)
-  const post = await getNewsFull(params?.slug)
   if (isPostId) {
     const res = await getNewsSlugByPostID(slug)
+    if (slug == '1458' || slug == '3630') {
+      console.log(isPostId, res)
+    }
     if (res.desiredSlug || res.slug) {
+      console.log(res)
       return {
         redirect: {
           destination: '/news/' + (res.desiredSlug || res.slug),
@@ -142,6 +147,8 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
       }
     }
   }
+  const post = await getNewsFull(params?.slug, isPostId ? NewsIdType.DatabaseId : NewsIdType.Slug)
+
   const bannerImage = await getNewsBannerImages('/news')
   // const bannerText = await getBanner('/')
   const getLatest = await getLastThree()
@@ -165,8 +172,8 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
   const news = await getNewsPostSlugs()
   const paths = []
   news.map(x => {
-    if (x.desiredSlug || x.slug || x.id) {
-      paths.push(`/news/${x.desiredSlug || x.slug || x.id}`)
+    if (x.desiredSlug || x.slug) {
+      paths.push(`/news/${x.desiredSlug || x.slug}`)
     }
   })
 
@@ -194,7 +201,6 @@ const getTransformedData = (banner: any, locale: string) => {
 }
 
 const getNews = (news: News, locale: string): any => {
-  console.log(news)
   return {
     id: news.databaseId,
     date: news.dateGmt,

@@ -300,7 +300,6 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
 }
 
 export async function getNewsSlugByPostID(id: string): Promise<{ desiredSlug: string; slug: string }> {
-  console.log('getNews', id)
   const data = await fetchAPI(
     `
     query getNewsSlugByPostID($id: ID!, $idType: NewsIdType!) {
