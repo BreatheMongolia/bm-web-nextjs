@@ -90,6 +90,8 @@ export async function getNewsPosts(): Promise<News[]> {
           node {
             databaseId
             dateGmt
+            desiredSlug
+            slug
             customFields {
               titleMn
               title
@@ -222,7 +224,6 @@ export async function getAgaarNegNews(): Promise<
   return news
 }
 // Detail Pages
-
 export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Promise<News> {
   const data = await fetchAPI(
     `
@@ -292,6 +293,26 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
     `,
     {
       variables: { id, idType },
+    },
+  )
+
+  return data.news
+}
+
+export async function getNewsSlugByPostID(id: string): Promise<{ desiredSlug: string; slug: string }> {
+  console.log('getNews', id)
+  const data = await fetchAPI(
+    `
+    query getNewsSlugByPostID($id: ID!, $idType: NewsIdType!) {
+      news(id: $id, idType: $idType) {
+        databaseId
+        desiredSlug
+        slug
+      }
+    }
+    `,
+    {
+      variables: { id, idType: NewsIdType.DatabaseId },
     },
   )
 

@@ -67,7 +67,7 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
             iconImage={bmLogoBlueIcon}
             extraButton={{
               title: t('seemore'),
-              url: '/news',
+              url: '/news/breathemongolia',
             }}
           />
           <NewsGrid>

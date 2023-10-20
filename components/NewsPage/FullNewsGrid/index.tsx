@@ -113,6 +113,7 @@ const FullNewsGrid = ({ news }: Props) => {
     if (i === 0 || i === MAX_PAGES - 1 || (i < currentPage + 2 && i > currentPage - 2)) {
       pages.push(
         <div
+          key={i}
           onClick={() => setCurrentPage(i)}
           className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#f09c4f]/80 hover:text-white ${
             currentPage === i && 'bg-[#f09c4f] text-white'
@@ -132,7 +133,7 @@ const FullNewsGrid = ({ news }: Props) => {
   return (
     <div>
       <div className="flex flex-col gap-5 pt-5 pb-8 sm:flex-row ">
-        <div className="flex flex-wrap w-full gap-2 grow">
+        <div className="flex flex-wrap w-full gap-2 grow items-center">
           <CategoryButton
             name={t('all')}
             category={null}
@@ -145,8 +146,8 @@ const FullNewsGrid = ({ news }: Props) => {
             return (
               <CategoryButton
                 name={i18n.language === 'mn' ? x.nameMn : x.name}
+                key={x.name + idx}
                 category={x}
-                key={idx}
                 isActive={activeCategories.some(c => c.id === x.id)}
                 onClick={cat => {
                   setActiveCategory(cat)
@@ -155,7 +156,7 @@ const FullNewsGrid = ({ news }: Props) => {
             )
           })}
         </div>
-        <div className="relative flex place-content-end">
+        <div className="relative flex place-content-end whitespace-nowrap">
           <Menu>
             <Menu.Button className="bg-[#f09c4f] text-white font-bold text-[15px] py-2 px-4 rounded-full hover:opacity-80 active:opacity-80 flex gap-3 justify-center items-center">
               {t('morefilter')}
@@ -194,7 +195,7 @@ const FullNewsGrid = ({ news }: Props) => {
           .map((x, idx) => {
             return (
               <div key={idx} className={`h-32 sm:h-60 ${idx === 0 && 'md:col-span-2'} ${idx > 3 && 'hidden md:block'}`}>
-                <NewsCard key={idx} news={x} cardHeight="fill" />
+                <NewsCard news={x} cardHeight="fill" />
               </div>
             )
           })}
