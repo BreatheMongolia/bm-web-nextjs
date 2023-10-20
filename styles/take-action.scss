@@ -1145,7 +1145,6 @@
 }
 
 .actions-grid {
-  display: grid;
   grid-template-columns: 236px 236px 236px 236px;
   grid-gap: 10px 15px;
   padding-bottom: 30px;
@@ -1373,8 +1372,6 @@
 }
 
 .ta-section {
-  // display: flex;
-  // justify-content: space-between;
   padding: 30px 0 40px;
   border-bottom: 1px solid #000;
 
@@ -1383,9 +1380,6 @@
   }
 
   .ta-content {
-    // max-width: 625px;
-    // width: 625px;
-
     p {
       font-size: 18px;
       line-height: 25px;
@@ -1447,7 +1441,6 @@
 }
 
 .ta-mobile-content {
-  display: grid;
   padding: 0 20px;
   border-bottom: 1px solid #000;
 

@@ -77,10 +77,10 @@ figure {
   @apply table ml-0 mr-0;
 }
 
-.wp-block-image .alignleft>figcaption,
-.wp-block-image .alignright>figcaption,
-.wp-block-image .aligncenter>figcaption,
-.wp-block-image.is-resized>figcaption {
+.wp-block-image .alignleft > figcaption,
+.wp-block-image .alignright > figcaption,
+.wp-block-image .aligncenter > figcaption,
+.wp-block-image.is-resized > figcaption {
   @apply table-caption;
 
   caption-side: bottom;
@@ -271,307 +271,78 @@ p {
 }
 
 /* Join Breathe Mongolia styles start */
-.join-bm-slider-wrapper {
-  background: #fafaff;
 
-  h2 {
+.slider-image {
+  width: fit-content;
+  height: 350px;
+  outline: none;
+}
+
+// Volunteer Statistics Design
+.text-data-custom {
+  > p {
+    display: inline-block;
     font-family: 'Open Sans';
     font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 35px;
-    margin-top: 26px;
-    margin-bottom: 12px;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 52px;
+    text-align: center;
+    letter-spacing: 1.07288e-6px;
+    background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
   }
 
-  .join_bm_carousel_sec {
-    margin-top: 35px;
-    display: flex;
-    gap: 10px;
-  }
-
-  .membersPhoto {
-    width: 62%;
-  }
-
-  .country_count_col:not(:nth-of-type(3)) {
-    padding-right: 40px;
-  }
-
-  .slick-dots li button:before {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background: #ffffff;
-    border: 1px solid #646464;
-    border-radius: 100%;
-    opacity: 1 !important;
-  }
-
-  .slick-dots li.slick-active button:before {
-    background: #646464;
-  }
-
-  .slick-arrow {
-    top: 35% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .join_bm_desc {
-    p {
-      font-family: 'Open Sans';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 150%;
-      color: #524d42;
-      margin: 0;
-    }
-  }
-
-  .slider-image {
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    height: 350px;
-    outline: none;
-  }
-
-  .volunteer-count {
-    margin: auto;
-    width: fit-content;
-  }
-
-  .volunteer-count-section {
-    justify-content: center;
-    align-items: flex-start !important;
-    width: 340px;
-  }
-
-  .flex-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    align-items: center;
-  }
-
-  .text-data-custom {
-    >p {
-      display: inline-block;
-      font-family: 'Open Sans';
-      font-style: normal;
-      font-weight: 800;
-      font-size: 38px;
-      line-height: 52px;
-      text-align: center;
-      letter-spacing: 1.07288e-6px;
-      background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      // text-fill-color: transparent;
-      margin: 0;
-    }
-
-    >pre {
-      font-family: 'Open Sans';
-      font-style: normal;
-      font-weight: 800;
-      font-size: 12px;
-      line-height: 16px;
-      text-align: center;
-      letter-spacing: 1.07288e-6px;
-      background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      // text-fill-color: transparent;
-      margin: 0;
-    }
-  }
-
-  .opportunity-section {
-    margin-top: 30px;
-
-    .title {
-      font-family: 'Open Sans';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 18px;
-      line-height: 150%;
-      color: #2c2d41;
-      margin-top: 0 !important;
-      margin-bottom: 8px;
-    }
-
-    .position-list {
-      padding-left: 20px;
-      list-style-type: disc;
-      color: black;
-    }
-
-    .pos_link_url {
-      font-family: 'Open Sans';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      color: #2c2d41;
-      transition: all 0.3s ease;
-
-      &:hover {
-        color: #3174d0;
-      }
-    }
-
-    .apply_now_button {
-      margin-top: 10px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      height: 30px;
-      width: 116px;
-      max-width: 116px;
-      padding: 0;
-      background: #f4ac3d;
-      border-radius: 8px;
-      text-transform: uppercase;
-      color: #ffffff;
-      font-style: normal;
-      font-weight: 800;
-      font-size: 12px;
-      line-height: 14px;
-      text-align: center;
-      letter-spacing: normal;
-
-      &:hover {
-        background: #61b1ee;
-      }
-    }
-  }
-
-  .country-text {
-    img {
-      width: 20px;
-      height: 20px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  > pre {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 1.07288e-6px;
+    background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
   }
 }
+/* Join Breathe Mongolia styles end */
 
-@media (max-width: 1064px) {
-  .join-bm-slider-wrapper .volunteer-count {
-    padding-left: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .join-bm-slider-wrapper {
-    .volunteer-count {
-      margin: auto;
-      width: 90% !important;
-      flex-direction: column;
-
-      .volunteer-count-section {
-        width: 350px;
-        flex-wrap: nowrap !important;
-      }
-
-      .opportunity-section {
-        width: 350px;
-      }
-    }
-  }
-
-  .banner-slider-wrapper {
-    padding-top: 0;
-  }
-
-  .news-carousel-section {
-    .slick-slide {
-      div {
-        width: 330px;
-      }
-    }
-  }
-}
-
-@media (max-width: 950px) {
-  .join-bm-slider-wrapper {
-    .join_bm_desc {
-      p {
-        font-weight: 400;
-        font-size: 15px;
-      }
-    }
-
-    .join_bm_carousel_sec {
-      flex-direction: column;
-      gap: 60px;
-    }
-
-    .membersPhoto {
-      display: none;
-      width: 85%;
-      margin: 0 auto;
-    }
-
-    .slider-image {
-      object-position: top center;
-      margin: 0 auto;
-    }
-
-    .volunteer-count {
-      display: flex;
-      width: 75%;
-      gap: 40px;
-      margin: 0 auto;
-    }
-
-    .opportunity-section {
-      margin-top: 0px;
-
-      .title {
-        padding-top: 0;
-      }
-    }
-  }
-
-  /* Join Breathe Mongolia styles end */
-  // Our-Partners Section custom styles
-
-  .partner-logos-slider-wrapper {
-    .slick-slide {
-      padding: 0 5px;
-
-      div {
-        transition: none;
-      }
-
-      &:first-child {
-        margin-left: 0;
-        padding-left: 0;
-      }
-
-      &:last-child {
-        margin-right: 18px;
-        padding-right: 10px;
-      }
-    }
-
-    /* the parent */
-    .slick-list {
-      padding: 0 -5x;
-    }
-  }
-}
+// Our Partners Section custom styling
 
 .partner-logos-slider-wrapper {
   .slick-track {
     display: flex !important;
     justify-content: center;
     align-items: center;
+  }
+
+  .slick-slide {
+    padding: 0 5px;
+
+    div {
+      transition: none;
+    }
+
+    &:first-child {
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 18px;
+      padding-right: 10px;
+    }
+  }
+
+  /* the parent */
+  .slick-list {
+    padding: 0 -5x;
   }
 }
 
@@ -594,21 +365,18 @@ p {
 // TakeActionCarousel Styling Beginning
 
 .take-action-carousel {
+  margin: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  max-width: 236px;
-  width: 236px !important;
   cursor: pointer;
   text-decoration: none;
-  height: 200px;
 
   &.big {
-    margin: 6px;
-    max-width: 487px;
-    width: 487px !important;
-    height: 422px;
     grid-column: auto / span 2;
     grid-row: auto / span 2;
+    width: auto;
+    height: auto;
+    margin-right: 5px;
 
     .take-action-img {
       height: 306px;
@@ -690,33 +458,7 @@ p {
 // TakeActionCarousel Styling End
 
 /* Our Work Carousel styles start */
-.campaign-slider-wrapper {
-  h2 {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 30px;
-    color: #2c2d41;
-    position: relative;
-  }
-
-  .horizontal-divider {
-    hr {
-      border: 0;
-      border-bottom: 2px solid #3c65ca;
-      width: 100%;
-    }
-  }
-
-  .see-more-text {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
-    text-align: right;
-    color: #2c2d41;
-  }
-
+.our-work-carousel {
   .campaignCard {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px !important;
@@ -737,7 +479,7 @@ p {
       max-width: 245px;
       min-width: 245px;
       object-fit: cover;
-      object-position: center center;
+      object-position: center;
       border-radius: 4px;
     }
 
@@ -808,8 +550,7 @@ p {
 }
 
 @media (max-width: 767px) {
-  .campaign-slider-wrapper {
-
+  .our-work-carousel {
     .slick-slider,
     .slick-list,
     .slick-track,

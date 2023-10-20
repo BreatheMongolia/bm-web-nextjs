@@ -21,7 +21,23 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
     centerMode: false,
     responsive: [
       {
-        breakpoint: 1280,
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          variableWidth: false,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          variableWidth: true,
+        },
+      },
+      {
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -42,6 +58,7 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
       />
       <Slider
         {...settings}
+        className="w-full"
         prevArrow={
           <Arrow check={0} classes="prev-gray-arrow">
             <ChevronLeftIcon className="w-8 h-8 text-white" />
@@ -54,7 +71,9 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
         }
       >
         {news.map((data: News, idx) => (
-          <NewsCard key={idx} news={data} />
+          <div className="">
+            <NewsCard key={idx} news={data} />
+          </div>
         ))}
       </Slider>
     </div>

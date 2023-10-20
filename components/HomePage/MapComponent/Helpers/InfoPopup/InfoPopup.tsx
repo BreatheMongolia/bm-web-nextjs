@@ -26,7 +26,7 @@ const InfoPopup = () => {
         <div className="info_popup_description" dangerouslySetInnerHTML={{ __html: t('pinDesc') }}></div>
       </div>
       <div onClick={() => setHidden(true)} className="cursor-pointer hover:text-black/50">
-        <XMarkIcon className="h-5 w-5" />
+        <XMarkIcon className="w-5 h-5" />
       </div>
     </div>
   )

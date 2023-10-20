@@ -11,7 +11,13 @@ import { H2 } from 'components/generic/Typography'
 import { removeTags } from 'lib/utils/htmlParser'
 
 import { getImage } from 'lib/utils/getImage'
-import { getNewsBannerImages, getNewsFull, getNewsPostSlugs, getLastThree } from 'lib/graphql-api/queries/news'
+import {
+  getNewsBannerImages,
+  getNewsFull,
+  getNewsPostSlugs,
+  getLastThree,
+  getNewsSlugByPostID,
+} from 'lib/graphql-api/queries/news'
 import { BreadCrumb, ShareButton, LatestNews, Banner } from 'components/NewsPage/DetailPage'
 
 interface NewsPostPageProps {
@@ -110,12 +116,36 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
 }
 
 export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
+  // check if it is slug or post-id
+  const slug = params?.slug as string
+  // this shouldn't happen, but base case
+  if (!slug || slug.length === 0) {
+    return {
+      redirect: {
+        destination: '/news',
+        permanent: false,
+      },
+    }
+  }
+  // check if it is trying to come in with a postid
+  const isPostId = slug.match(/^[0-9]+$/)
+  console.log('woohoo', slug, isPostId)
   const post = await getNewsFull(params?.slug)
+  if (isPostId) {
+    const res = await getNewsSlugByPostID(slug)
+    if (res.desiredSlug || res.slug) {
+      return {
+        redirect: {
+          destination: '/news/' + (res.desiredSlug || res.slug),
+          permanent: true,
+        },
+      }
+    }
+  }
   const bannerImage = await getNewsBannerImages('/news')
   // const bannerText = await getBanner('/')
   const getLatest = await getLastThree()
   const transformedPost = getNews(post, locale)
-
   return {
     props: {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
@@ -135,23 +165,14 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
   const news = await getNewsPostSlugs()
   const paths = []
   news.map(x => {
-    if (x.desiredSlug || x.slug) {
-      paths.push(`/news/${x.desiredSlug || x.slug}`)
+    if (x.desiredSlug || x.slug || x.id) {
+      paths.push(`/news/${x.desiredSlug || x.slug || x.id}`)
     }
   })
 
   return {
     paths,
     fallback: true,
-  }
-}
-
-const getTransformedDataText = (bannersNode: any, locale: string) => {
-  return {
-    bannerTextLeft: getTranslated(bannersNode?.bannerTextLeft, bannersNode?.bannerTextLeftMn, locale),
-    bannerTextRight: bannersNode?.bannerTextRight.map((text: any) => {
-      return getTranslated(text?.categoryText, text?.categoryTextMn, locale)
-    }),
   }
 }
 
@@ -173,6 +194,7 @@ const getTransformedData = (banner: any, locale: string) => {
 }
 
 const getNews = (news: News, locale: string): any => {
+  console.log(news)
   return {
     id: news.databaseId,
     date: news.dateGmt,

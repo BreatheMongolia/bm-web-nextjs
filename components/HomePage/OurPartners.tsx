@@ -13,7 +13,6 @@ export const OurPartners = ({
   partnerLogos: Page_Customfields_PartnersLogos[]
   locale: string
 }) => {
-
   // Styling the settings for partner-logo images within Slider
   const settings = {
     dots: false,
@@ -53,7 +52,7 @@ export const OurPartners = ({
   }
 
   return (
-    <div className="our-partners">
+    <div className="flex flex-col">
       <H2 title={getTranslated(title.en, title.mn, locale)} />
       <div className="partner-logos-slider-wrapper">
         <Slider {...settings}>

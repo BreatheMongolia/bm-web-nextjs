@@ -95,7 +95,7 @@ const TakeActionsPage = ({ latest, featured, locale }) => {
 
   return (
     <div>
-      <div className="container mx-auto flex flex-col">
+      <div className="container mx-auto flex flex-col px-[1rem] lg:px-[6rem] xl:px-[9rem] 2xl:px-[16rem]">
         <TakeActionsGrid takeAction={takeActions} categories={actionCategories} />
 
         <DonateSection />

@@ -1,4 +1,5 @@
 import { H2 } from 'components/generic/Typography'
+import { createRoot } from 'react-dom/client'
 import mapboxgl from 'mapbox-gl'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { InfoPopup } from './Helpers'
@@ -86,12 +87,21 @@ export const MapComponent = ({
       document.getElementById('map').replaceWith(map.getContainer())
     }
     // check width to hide controller
+    console.log(windowWidth, CELL_PHONE_MAX_WIDTH)
     if (windowWidth < CELL_PHONE_MAX_WIDTH) {
       setCurrentDropdown('none')
     } else {
       setCurrentDropdown('location')
     }
   }, [])
+
+  useEffect(() => {
+    if (windowWidth < CELL_PHONE_MAX_WIDTH) {
+      setCurrentDropdown('none')
+    } else {
+      setCurrentDropdown('location')
+    }
+  }, [windowWidth])
 
   useEffect(() => {
     if (!loadedPins && map) {
@@ -160,7 +170,9 @@ export const MapComponent = ({
   const loadStationPins = () => {
     stations.map((x, idx) => {
       const pin = document.createElement('div')
-      ReactDOM.render(
+      // NOTE: This createRoot can potentially create problems for the pins, need to monitor this
+      const root = createRoot(pin)
+      root.render(
         <StationPin
           key={x.name + '-' + idx}
           station={x}
@@ -168,7 +180,6 @@ export const MapComponent = ({
             onStationClick(x)
           }}
         />,
-        pin,
       )
       mapContext.addPin(pin)
       const coords: [number, number] = [x.location.coordinates[0] ?? 0, x.location.coordinates[1] ?? 0]
@@ -179,7 +190,11 @@ export const MapComponent = ({
 
   return (
     <div className="aqi-map-wrapper">
-      <H2 className="mb-24 md:mb-12" title={title[i18n.language]} descriptionHtml={descriptionHtml[i18n.language]} />
+      <H2
+        className="block !mb-24 md:!mb-16"
+        title={title[i18n.language]}
+        descriptionHtml={descriptionHtml[i18n.language]}
+      />
       <div className={`map-container bg-zinc-100 rounded-md ${showStationDetail && 'station-detail-open'}`}>
         <div id="map" ref={mapContainer} className="map-wrapper"></div>
         <MapDropdownWrapper title={t(`province.${selectedLocation.value}`)}>

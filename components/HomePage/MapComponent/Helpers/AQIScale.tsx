@@ -13,7 +13,7 @@ const AQIScale = () => {
     <div
       className={`
       absolute left-1.5 z-10
-      -bottom-2 sm:bottom-2
+      -bottom-6 sm:bottom-2
       w-11/12 md:w-[400px]
       overflow-hidden rounded-md bg-white text-xsm
       border-[0.5px] border-black/20 backdrop-blur-xl	
@@ -21,12 +21,12 @@ const AQIScale = () => {
     `}
     >
       <div
-        className="flex px-3 py-1 items-center bg-slate-100 cursor-pointer hover:bg-slate-200 transition-all text-xs"
+        className="flex items-center px-3 py-1 text-xs transition-all cursor-pointer bg-slate-100 hover:bg-slate-200"
         onClick={() => setShown(!shown)}
       >
-        <h2 className="grow font-bold">{t('aqiTitle')}</h2>
+        <h2 className="font-bold grow">{t('aqiTitle')}</h2>
         <div className="aqi-scale-btn">
-          <Bars2Icon className="h-5 w-5" />
+          <Bars2Icon className="w-5 h-5" />
         </div>
       </div>
       {shown && (
