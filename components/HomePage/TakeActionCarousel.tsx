@@ -4,7 +4,9 @@ import { Page_Customfields_FeaturedTakeActions } from 'graphql/generated'
 import Slider from 'react-slick'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+// import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
+import SliderRightArrow from 'assets/icons/SliderRightArrow'
 import { getTranslated } from 'lib/utils/getTranslated'
 import TakeActionTile from '../Cards/TakeActionTile'
 
@@ -15,7 +17,7 @@ export const TakeActionCarousel = ({
   takeActionPosts: Page_Customfields_FeaturedTakeActions[]
   locale: string
 }) => {
-  const { t, i18n } = useTranslation('home')
+  const { t } = useTranslation('home')
 
   // Styling the settings for take-action-carousel within Slider
   const settings = {
@@ -59,7 +61,7 @@ export const TakeActionCarousel = ({
   }
 
   return (
-    <div className="take-action-carousel-section">
+    <div className="flex flex-col">
       <H2
         title={t('takeAction.title')}
         trailingLineColor="yellow"
@@ -72,12 +74,14 @@ export const TakeActionCarousel = ({
         {...settings}
         prevArrow={
           <Arrow check={0} classes="prev-gray-arrow">
-            <ChevronLeftIcon className="w-8 h-8 text-white" />
+            {/* <ChevronLeftIcon className="w-8 h-8 text-white" /> */}
+            <SliderLeftArrow />
           </Arrow>
         }
         nextArrow={
           <Arrow check={takeActionPosts?.length - 4} classes="next-gray-arrow">
-            <ChevronRightIcon className="w-8 h-8 text-white" />
+            {/* <ChevronRightIcon className="w-8 h-8 text-white" /> */}
+            <SliderRightArrow />
           </Arrow>
         }
       >

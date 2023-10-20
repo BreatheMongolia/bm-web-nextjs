@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
@@ -27,8 +26,9 @@ import {
   NewsCarousel,
   OurWorkCarousel,
 } from 'components/HomePage'
-import { getTranslated } from 'lib/utils/getTranslated'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
+import { Page_Customfields_CampaignAndOurWorkSlider } from 'graphql/generated'
+import dayjs from 'dayjs'
 
 export default function Index({
   page,
@@ -44,6 +44,11 @@ export default function Index({
   locale: string
 }) {
   const { i18n } = useTranslation()
+  const campaigns = page.customFields.campaignAndOurWorkSlider
+  const sortedCampaigns = campaigns.sort(
+    (a: Page_Customfields_CampaignAndOurWorkSlider, b: Page_Customfields_CampaignAndOurWorkSlider) =>
+      dayjs(a?.campaignDate).isBefore(dayjs(b?.campaignDate)) ? 1 : -1,
+  )
 
   // get banner image by language
   const pageBanner =
@@ -93,15 +98,7 @@ export default function Index({
           {/* Add other page level components here */}
           <NewsCarousel featuredNews={page.customFields.featuredNews} />
           <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} locale={locale} />
-          <OurWorkCarousel
-            title={getTranslated(
-              page.customFields.campaignAndOurWorkTitle,
-              page.customFields.campaignAndOurWorkTitleMn,
-              locale,
-            )}
-            campaigns={page.customFields.campaignAndOurWorkSlider}
-            locale={locale}
-          />
+          <OurWorkCarousel campaigns={sortedCampaigns} locale={locale} />
           <JoinBMSection
             title={{
               en: page.customFields.joinBreatheMongoliaTitle,
