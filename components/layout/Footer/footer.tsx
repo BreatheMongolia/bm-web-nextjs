@@ -31,7 +31,7 @@ export const Footer = () => {
         title: t('title.getInvolved'),
         urls: [
           { title: t('nav.action'), url: '/take-actions' },
-          { title: t('nav.waysToDonate'), url: '/about/supportus' },
+          { title: t('nav.waysToDonate'), url: '/about/support-us' },
           {
             title: t('nav.volunteer'),
             url: EXTERNAL_URLS.VOLUNTEER_FORM,
@@ -42,16 +42,16 @@ export const Footer = () => {
       {
         title: t('title.aboutUs'),
         urls: [
-          { title: t('nav.ourStory'), url: '/about/info' },
+          { title: t('nav.ourStory'), url: '/about/our-story' },
           { title: t('nav.impact'), url: '/about/impact' },
-          { title: t('nav.ourTeam'), url: '/about/ourteam' },
+          { title: t('nav.ourTeam'), url: '/about/our-team' },
         ],
       },
     ]
     return (
       <div className="container flex flex-row uppercase tracking-widest text-slate-700">
         {/* Desktop */}
-        <div className="hidden sm:flex flex-row gap-20 justify-content">
+        <div className="hidden sm:flex flex-row gap-14">
           {linkSections.map((x, idx) => {
             return (
               <div key={'footer' + idx}>
@@ -69,7 +69,7 @@ export const Footer = () => {
             )
           })}
           <div className="flex flex-col">
-            <h2 className="font-bold text-lg"> {t('nav.join')} </h2>
+            <h2 className="font-bold text-lg">{t('nav.join')} </h2>
             <div className="flex justify-between w-[450px] py-5">
               {socialUrls.map((x, idx) => {
                 return (
@@ -112,7 +112,7 @@ export const Footer = () => {
                 )
               })}
             </div>
-            <div className="flex flex-col w-[50px] gap-12">
+            <div className="flex flex-col w-[50px] gap-16">
               {socialUrls.map((x, idx) => {
                 return (
                   <div key={'social' + idx} className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
