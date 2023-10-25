@@ -6,8 +6,9 @@ type Props = {
   url: string
   title: string
   bottom: boolean
+  className?: string
 }
-export const ShareButton: FC<Props> = ({ url, title, bottom }) => {
+export const ShareButton: FC<Props> = ({ url, title, bottom, className }) => {
   function copy() {
     const el = document.createElement('input')
     el.value = window.location.href
@@ -17,8 +18,8 @@ export const ShareButton: FC<Props> = ({ url, title, bottom }) => {
     document.body.removeChild(el)
   }
   return (
-    <div className={cx('shareButton', bottom ? 'withoutBg' : '')}>
-      <TwitterShareButton url={url} title={title}>
+    <div className={cx('shareButton', bottom ? 'withoutBg' : '', className)}>
+      <TwitterShareButton url={url} title={title} className="hover:opacity-80">
         <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M26 10.8899C25.2642 11.2117 24.474 11.429 23.6432 11.5256C24.4902 11.0259 25.141 10.2345 25.448 9.29172C24.6547 9.75388 23.7769 10.0911 22.8423 10.2714C22.0934 9.4868 21.0269 8.99634 19.846 8.99634C17.5798 8.99634 15.7437 10.8043 15.7437 13.0351C15.7437 13.3514 15.7793 13.6603 15.8493 13.9557C12.4391 13.7871 9.41585 12.1791 7.3916 9.73541C7.03901 10.3323 6.83646 11.0259 6.83646 11.7662C6.83646 13.168 7.56102 14.4037 8.66129 15.1286C7.98925 15.1071 7.35659 14.9262 6.80333 14.6234C6.8027 14.64 6.8027 14.6579 6.8027 14.6739C6.8027 16.6314 8.2168 18.264 10.0941 18.6351C9.75031 18.7268 9.38772 18.7766 9.01325 18.7766C8.74819 18.7766 8.49187 18.7514 8.24181 18.7046C8.76319 20.3083 10.2792 21.4763 12.074 21.5096C10.6705 22.5926 8.90135 23.2394 6.97899 23.2394C6.64766 23.2394 6.32071 23.2203 6 23.1828C7.81545 24.3274 9.97224 24.9963 12.2897 24.9963C19.8366 24.9963 23.9645 18.8419 23.9645 13.504C23.9645 13.3293 23.9595 13.1545 23.952 12.981C24.7541 12.4117 25.4492 11.701 26 10.8899Z"
@@ -26,7 +27,8 @@ export const ShareButton: FC<Props> = ({ url, title, bottom }) => {
           />
         </svg>
       </TwitterShareButton>
-      <LinkedinShareButton url={url} title={title}>
+
+      <LinkedinShareButton url={url} title={title} className="hover:opacity-80">
         <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M9.93812 8.99634C8.86746 8.99634 8 9.86577 8 10.9384C8 12.011 8.86746 12.8805 9.93812 12.8805C11.0088 12.8805 11.8762 12.011 11.8762 10.9384C11.8762 9.86577 11.0088 8.99634 9.93812 8.99634ZM20.0892 14.0528V14.0541C19.8703 14.0533 19.6579 14.0621 19.38 14.0765C18.7706 14.108 17.3473 14.7684 16.8261 15.8225C16.8261 15.3649 16.8314 14.9445 16.8314 14.3173C16.2071 14.3173 15.3902 14.3212 13.6841 14.3212C13.6841 16.2366 13.663 23.0196 13.663 24.996H16.9669C16.9669 23.8235 16.9827 20.8784 16.9827 19.029C16.9827 18.408 17.3581 16.9738 18.8985 16.9738C20.2971 16.9738 20.6892 18.1526 20.6892 19.029C20.6892 20.9551 20.6747 23.6777 20.6747 24.996H23.9983C23.9983 23.7074 24.0102 20.2071 23.9707 17.9988C23.9228 15.3174 22.2941 14.1734 20.8326 14.0831C20.5319 14.0645 20.3081 14.0536 20.0892 14.0528V14.0528ZM8.27894 14.3633L8.27894 24.9907H11.592L11.592 14.3633H8.27894Z"
@@ -34,7 +36,7 @@ export const ShareButton: FC<Props> = ({ url, title, bottom }) => {
           />
         </svg>
       </LinkedinShareButton>
-      <FacebookShareButton url={url} title={title}>
+      <FacebookShareButton url={url} title={title} className="hover:opacity-80">
         <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M13.7724 24.9963H17.3202V16.9954H19.6866L20 14.2386H17.3202L17.324 12.8584C17.324 12.1395 17.3973 11.7541 18.5043 11.7541H19.9836V8.99634H17.6162C14.7724 8.99634 13.7724 10.3343 13.7724 12.5834V14.2386H12V16.9963H13.7724L13.7724 24.9963Z"
@@ -42,7 +44,7 @@ export const ShareButton: FC<Props> = ({ url, title, bottom }) => {
           />
         </svg>
       </FacebookShareButton>
-      <div className="withoutFill" onClick={copy}>
+      <div className="withoutFill hover:opacity-80" onClick={copy}>
         <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M17.3316 15.8892C17.6359 16.1873 17.8777 16.5432 18.0427 16.936C18.2078 17.3288 18.2928 17.7505 18.2928 18.1766C18.2928 18.6026 18.2078 19.0244 18.0427 19.4172C17.8777 19.81 17.6359 20.1658 17.3316 20.464L14.7148 23.0351C14.4166 23.3394 14.0607 23.5812 13.6679 23.7462C13.2751 23.9113 12.8534 23.9963 12.4273 23.9963C12.0013 23.9963 11.5795 23.9113 11.1867 23.7462C10.794 23.5812 10.4381 23.3394 10.1399 23.0351C9.83558 22.7369 9.59382 22.381 9.42877 21.9882C9.26372 21.5955 9.17871 21.1737 9.17871 20.7477C9.17871 20.3216 9.26372 19.8999 9.42877 19.5071C9.59382 19.1143 9.83558 18.7584 10.1399 18.4602L10.9268 17.6734"
@@ -61,6 +63,7 @@ export const ShareButton: FC<Props> = ({ url, title, bottom }) => {
         </svg>
       </div>
       <a
+        className="flex items-center px-1 hover:opacity-80"
         href={
           'mailto:?subject=' +
           title +

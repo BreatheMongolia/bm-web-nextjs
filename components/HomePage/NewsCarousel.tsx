@@ -71,7 +71,7 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
         }
       >
         {news.map((data: News, idx) => (
-          <div className="">
+          <div key={idx} className="">
             <NewsCard key={idx} news={data} />
           </div>
         ))}

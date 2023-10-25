@@ -1,16 +1,19 @@
+import dayjs from 'dayjs'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
+import { useAtom } from 'jotai'
 import { useRouter } from 'next/router'
 import { News } from 'graphql/generated'
 import { getTransformedNews } from 'lib/utils/gql-data-transform/getTransformedNews'
 import { TbPointFilled } from 'react-icons/tb'
 import { PlayCircleIcon } from '@heroicons/react/24/solid'
-import dayjs from 'dayjs'
-import { useEffect, useState } from 'react'
+import { videoNewsDialogAtom } from 'lib/consts/atoms'
 
 export const NewsHorizontalCard = ({ news, className }: { news: News; className?: string }) => {
   const { t, i18n } = useTranslation()
   const router = useRouter()
   const [thumbnailURL, setThumbnailURL] = useState('')
+  const [_, setVideoDialogUrl] = useAtom(videoNewsDialogAtom)
 
   useEffect(() => {
     fetch('https://noembed.com/embed?url=' + news.customFields.sourceLink)
@@ -31,6 +34,7 @@ export const NewsHorizontalCard = ({ news, className }: { news: News; className?
           window.open(transformedNews.sourceLink, '_blank')
           return
         case 'video':
+          setVideoDialogUrl(transformedNews.sourceLink)
           return
         default:
           router.push(`/news/${transformedNews.desiredSlug || transformedNews.slug || transformedNews.id}`)

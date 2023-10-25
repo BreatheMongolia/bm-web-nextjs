@@ -1,10 +1,12 @@
+import { useEffect, useState } from 'react'
+import { useAtom } from 'jotai'
+import { useRouter } from 'next/router'
+import { TbPointFilled } from 'react-icons/tb'
+import { useTranslation } from 'next-i18next'
 import { ArrowTopRightOnSquareIcon, PlayCircleIcon } from '@heroicons/react/24/solid'
 import { News } from 'graphql/generated'
 import { getTransformedNews } from 'lib/utils/gql-data-transform/getTransformedNews'
-import { useTranslation } from 'next-i18next'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { TbPointFilled } from 'react-icons/tb'
+import { videoNewsDialogAtom } from 'lib/consts/atoms'
 
 export const NewsCard = ({
   news,
@@ -20,6 +22,7 @@ export const NewsCard = ({
   const router = useRouter()
 
   const [thumbnailURL, setThumbnailURL] = useState('')
+  const [_, setVideoDialogUrl] = useAtom(videoNewsDialogAtom)
 
   useEffect(() => {
     fetch('https://noembed.com/embed?url=' + news.customFields.sourceLink)
@@ -41,6 +44,7 @@ export const NewsCard = ({
           window.open(transformedNews.sourceLink, '_blank')
           return
         case 'video':
+          setVideoDialogUrl(transformedNews.sourceLink)
           return
         default:
           router.push(`/news/${transformedNews.desiredSlug || transformedNews.slug || transformedNews.id}`)
@@ -73,7 +77,7 @@ export const NewsCard = ({
         )}
         {transformedNews.newsContentType === 'video' && (
           <div className="flex text-rose-500 items-center justify-center flex-auto absolute right-0 left-0 top-1/3">
-            <PlayCircleIcon className="h-11 w-11 group-hover:h-12 group-hover:w-12 transition-all ease-in-out bg-white rounded-full" />
+            <PlayCircleIcon className="z-30 mt-1 h-11 w-11 group-hover:mt-0.5 group-hover:h-12 group-hover:w-12 transition-all ease-in-out bg-white rounded-full" />
           </div>
         )}
 
