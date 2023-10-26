@@ -23,19 +23,20 @@ export const CampaignCard: FC<Props> = ({ id, title, campaignDate, url, descript
 
   return (
     <div className="our-work-carousel">
-      {campaignImage !== null && (
-        <div key={'campaignCard' + id} className="campaignCard">
-          <img className="slider-image" src={campaignImage !== null ? campaignImage : ''} />
-          <div className="campaign-content">
-            <div className="custom_green_dot campaignCategory">{category}</div>
-            <Link href={url} target="_blank">
-              <h3 className="campaign-title">{title}</h3>
-              {description && <div className="campaign-desc">{parse(truncate(description))}</div>}
-              <div className="campaign-date">{campaignDate !== '' ? formatMyDate(campaignDate) : ''}</div>
-            </Link>
+      <div key={'campaignCard' + id} className="campaignCard">
+        <img className="slider-image" src={campaignImage !== null ? campaignImage : ''} />
+        <div className="campaign-content">
+          <div className="flex flex-row content-center">
+            <div className="mt-2 custom_dot_green"></div>
+            <div className="campaignCategory">{category}</div>
           </div>
+          <Link href={url} target="_blank">
+            <h3 className="campaign-title">{title}</h3>
+            {description && <div className="campaign-desc">{parse(truncate(description))}</div>}
+            <div className="campaign-date">{campaignDate !== null ? formatMyDate(campaignDate) : ''}</div>
+          </Link>
         </div>
-      )}
+      </div>
     </div>
   )
 }

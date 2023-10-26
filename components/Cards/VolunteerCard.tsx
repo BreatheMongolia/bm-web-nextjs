@@ -42,7 +42,7 @@ export const VolunteerCard = ({
             <div className="inline-block" key={'support' + idx}>
               <img className="w-5 h-5 mb-2 ml-8" src={info.infoIcon.mediaItemUrl} alt="Join Us" />
               {info.customTextMn && (
-                <div className="text-data-custom">
+                <div className="place-items-center text-data-custom">
                   {parse(getTranslated(info.customText, info.customTextMn, locale))}
                 </div>
               )}

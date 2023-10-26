@@ -29,17 +29,11 @@ export const AboutUsSupportUs = ({
       <H2 className="title" title={t('supportUs.title')} />
       <p className="font-normal text-md md:font-bold md:text-lg">{t('supportUs.subtitle')}</p>
       <div className="relative flex flex-row h-[590px] justify-center md:justify-start">
-        <Image
-          className="rounded-lg hidden lg:block"
-          height={590}
-          src={bg}
-          priority={false}
-          alt="GiveButterSectionBM"
-        />
+        <Image className="rounded-lg hidden lg:block" height={590} src={bg} priority={false} alt="giveButterImage" />
         <iframe
           className="relative flex flex-wrap h-[590px] w-auto md:w-[650px] lg:absolute lg:top-0 lg:right-0"
           src="https://givebutter.com/embed/c/donatebreathemongolia"
-          name="givebutterBM"
+          name="givebutterFrame"
           seamless
         ></iframe>
         <script src="https://givebutter.com/js/widget.js"></script>

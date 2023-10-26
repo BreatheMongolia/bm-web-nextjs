@@ -281,7 +281,7 @@ p {
 // Volunteer Statistics Design
 .text-data-custom {
   > p {
-    display: inline-block;
+    display: block;
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 800;
@@ -488,16 +488,16 @@ p {
       flex-direction: column;
       color: #2c2d41;
       position: relative;
-      padding: 10px 15px 20px 0px;
+      padding: 0px 15px 20px 0px;
       max-height: 253px;
       min-height: 253px;
 
       .campaignCategory {
-        display: flex;
-        align-items: center;
-        width: fit-content;
-        margin-right: 5px;
-        background-color: transparent;
+        width: 200px;
+        margin-left: 4px;
+        color: #226629;
+        font-weight: bold;
+        font-size: 14px;
 
         span {
           margin-right: 0;
