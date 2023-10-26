@@ -12,9 +12,9 @@ const AQIScale = () => {
   return (
     <div
       className={`
-      absolute left-1.5 z-10
-      -bottom-6 sm:bottom-2
-      w-11/12 md:w-[400px]
+      absolute sm:left-1.5 z-10
+      -bottom-4 sm:bottom-2
+      w-full sm:w-11/12 md:w-[400px]
       overflow-hidden rounded-md bg-white text-xsm
       border-[0.5px] border-black/20 backdrop-blur-xl	
       ${!shown && 'folded'}
@@ -30,9 +30,9 @@ const AQIScale = () => {
         </div>
       </div>
       {shown && (
-        <div className="flex flex-row px-5">
+        <div className="flex flex-row sm:px-5">
           {AQIScales.map(item => (
-            <div className="text-center text-[10px] flex-1 py-1" key={item.value}>
+            <div className="text-center text-[10px] flex-1 py-1 leading-tight sm:leading-normal" key={item.value}>
               <AQIBox key={item.color} color={item.color} value={item.value} />
               <AQIText key={item.text} title={t(item.text)} />
             </div>

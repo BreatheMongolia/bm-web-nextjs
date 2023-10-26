@@ -25,7 +25,6 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          variableWidth: false,
         },
       },
       {
@@ -33,7 +32,6 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          variableWidth: true,
         },
       },
       {
@@ -41,7 +39,6 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          variableWidth: true,
         },
       },
     ],
@@ -71,7 +68,7 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
         }
       >
         {news.map((data: News, idx) => (
-          <div className="">
+          <div key={idx} className="">
             <NewsCard key={idx} news={data} />
           </div>
         ))}

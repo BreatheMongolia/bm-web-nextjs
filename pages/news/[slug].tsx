@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import ErrorPage from 'next/error'
-import Head from 'next/head'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { News } from 'graphql/generated'
+import { News, NewsIdType } from 'graphql/generated'
 import { getTranslated } from 'lib/utils/getTranslated'
 import Desktop from 'components/Desktop'
 import { H2 } from 'components/generic/Typography'
@@ -129,8 +128,6 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
   }
   // check if it is trying to come in with a postid
   const isPostId = slug.match(/^[0-9]+$/)
-  console.log('woohoo', slug, isPostId)
-  const post = await getNewsFull(params?.slug)
   if (isPostId) {
     const res = await getNewsSlugByPostID(slug)
     if (res.desiredSlug || res.slug) {
@@ -142,6 +139,7 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
       }
     }
   }
+  const post = await getNewsFull(slug, isPostId ? NewsIdType.DatabaseId : NewsIdType.Slug)
   const bannerImage = await getNewsBannerImages('/news')
   // const bannerText = await getBanner('/')
   const getLatest = await getLastThree()
@@ -161,13 +159,15 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async ({}) => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const news = await getNewsPostSlugs()
   const paths = []
-  news.map(x => {
-    if (x.desiredSlug || x.slug || x.id) {
-      paths.push(`/news/${x.desiredSlug || x.slug || x.id}`)
-    }
+  locales.map(loc => {
+    news.map(x => {
+      if (x.desiredSlug || x.slug) {
+        paths.push({ params: { slug: `${x.desiredSlug || x.slug}` }, locale: loc })
+      }
+    })
   })
 
   return {
@@ -194,7 +194,6 @@ const getTransformedData = (banner: any, locale: string) => {
 }
 
 const getNews = (news: News, locale: string): any => {
-  console.log(news)
   return {
     id: news.databaseId,
     date: news.dateGmt,

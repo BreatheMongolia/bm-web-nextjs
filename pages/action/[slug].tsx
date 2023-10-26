@@ -168,11 +168,21 @@ export const getStaticProps = async ({ params, locale }) => {
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async ({}) => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const takeActions = await getTakeActionSlugs()
-
+  const paths = []
+  locales.map(loc => {
+    takeActions.map(x => {
+      paths.push({
+        params: {
+          slug: `${x.slug || x.databaseId}`,
+        },
+        locale: loc,
+      })
+    })
+  })
   return {
-    paths: takeActions.map(x => `/take-actions/${x.slug || x.databaseId}`) || [],
+    paths,
     fallback: true,
   }
 }

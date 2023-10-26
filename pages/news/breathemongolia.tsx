@@ -39,6 +39,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common'])),
+      locale,
       news: newsData,
       title: 'Breathe Mongolia News - Breathe Mongolia - Clean Air Coalition',
     },

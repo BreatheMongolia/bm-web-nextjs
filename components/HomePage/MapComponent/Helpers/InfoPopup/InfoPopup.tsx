@@ -11,7 +11,7 @@ const InfoPopup = () => {
     <div
       className={`
       flex flex-row justify-center absolute z-10
-      left-2 md:right-[350px] md:left-auto
+      left-0 sm:left-2 md:right-[350px] md:left-auto
       bottom-24 md:bottom-auto md:top-2 
       space-x-2
       w-[290px] rounded-md p-2 bg-slate-100 text-xs

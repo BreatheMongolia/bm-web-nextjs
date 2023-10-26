@@ -87,7 +87,6 @@ export const MapComponent = ({
       document.getElementById('map').replaceWith(map.getContainer())
     }
     // check width to hide controller
-    console.log(windowWidth, CELL_PHONE_MAX_WIDTH)
     if (windowWidth < CELL_PHONE_MAX_WIDTH) {
       setCurrentDropdown('none')
     } else {

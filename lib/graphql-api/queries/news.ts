@@ -294,13 +294,12 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
     {
       variables: { id, idType },
     },
-  )
+  ).catch(err => console.error('Failed to fetch news', err))
 
   return data.news
 }
 
 export async function getNewsSlugByPostID(id: string): Promise<{ desiredSlug: string; slug: string }> {
-  console.log('getNews', id)
   const data = await fetchAPI(
     `
     query getNewsSlugByPostID($id: ID!, $idType: NewsIdType!) {
@@ -314,7 +313,7 @@ export async function getNewsSlugByPostID(id: string): Promise<{ desiredSlug: st
     {
       variables: { id, idType: NewsIdType.DatabaseId },
     },
-  )
+  ).catch(err => console.error('failed to getNewsSlugByPostID', id, err))
 
   return data.news
 }

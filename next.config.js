@@ -31,6 +31,11 @@ module.exports = {
         destination: '/about/support-us',
         permanent: true,
       },
+      {
+        source: '/take-actions',
+        destination: '/take-action',
+        permanent: true,
+      },
     ]
   },
   i18n,
