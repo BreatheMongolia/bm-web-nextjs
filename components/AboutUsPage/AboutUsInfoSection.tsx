@@ -3,9 +3,9 @@ import BuildingIcon from './about_us_icons/Building'
 import EducationIcon from './about_us_icons/Education'
 import MonitoringIcon from './about_us_icons/Monitoring'
 import PollutionParticlesBackground from './about_us_icons/PollutionParticlesBackground'
-import i18next from 'i18next'
+
 export const AboutUsInfoSection = () => {
-  const { t, i18n } = useTranslation('about')
+  const { t } = useTranslation('about')
   const GOALS = [
     {
       title: '#6',

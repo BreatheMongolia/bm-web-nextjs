@@ -1,12 +1,8 @@
-import React, { FC } from 'react'
+import React from 'react'
 import WhereOurTeamIsLocated from './WhereOurTeamIsLocated'
 import TeamMembersContainer from './TeamMembersContainer'
 
-type Props = {
-  people: any[]
-}
-
-const AboutUsOurTeam: FC<Props> = ({ people }) => {
+const AboutUsOurTeam = ({ people }) => {
   return (
     <div className="our_team_wrapper">
       <WhereOurTeamIsLocated />

@@ -1,3 +1,6 @@
 export * from './AboutUsHeader'
 export * from './AboutUsInfoSection'
+export * from './AboutUsOurStory'
+export * from './AboutUsImpact'
 export * from './AboutUsOurTeam'
+export * from './AboutUsSupportUs'

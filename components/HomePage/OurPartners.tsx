@@ -59,7 +59,7 @@ export const OurPartners = ({
           {partnerLogos.map((x, idx) => (
             <div key={idx}>
               <a href={x.partnersLogosUrls} target="_blank" className="flex justify-center">
-                <img src={x.partnersLogosImage.mediaItemUrl} alt="" loading="lazy" />
+                <img src={x.partnersLogosImage.mediaItemUrl} alt="ourPartnerLogos" loading="lazy" />
               </a>
             </div>
           ))}
