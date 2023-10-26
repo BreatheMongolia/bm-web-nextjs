@@ -54,7 +54,7 @@ const TakeActions: FC<Props> = ({ takeActions }) => {
               className={'action-item'}
               key={takeAction.id}
               style={{ backgroundImage: takeAction.featuredImage && `url(${takeAction.featuredImage})` }}
-              onClick={() => (window.location.href = '/take-actions/' + takeAction.slug)}
+              onClick={() => (window.location.href = '/action/' + takeAction.slug)}
             >
               <div className="action-title">
                 <div className="action-title-name">
@@ -64,7 +64,7 @@ const TakeActions: FC<Props> = ({ takeActions }) => {
                   <h2 title={takeAction.title}>{truncateByLength(takeAction.title, 40)}</h2>
                 </div>
                 <div className="action-title-button">
-                  <Link href={`/take-actions/${takeAction.slug}`}>
+                  <Link href={`/action/${takeAction.slug}`}>
                     <button className="circled-arrow-button">{'>'}</button>
                   </Link>
                 </div>
@@ -96,7 +96,7 @@ const TakeActions: FC<Props> = ({ takeActions }) => {
                       </h2>
                     </div>
                     <div className="action-title-button">
-                      <Link href={`/take-actions/${takeAction.slug}`}>
+                      <Link href={`/action/${takeAction.slug}`}>
                         <button className="circled-arrow-button">{'>'}</button>
                       </Link>
                     </div>
@@ -110,7 +110,7 @@ const TakeActions: FC<Props> = ({ takeActions }) => {
                 <div
                   key={index}
                   className="action-slider-item"
-                  onClick={() => (window.location.href = '/take-actions/' + takeAction.slug)}
+                  onClick={() => (window.location.href = '/action/' + takeAction.slug)}
                 >
                   <div className="action-right">
                     <img src={takeAction.featuredImage} />
@@ -122,7 +122,7 @@ const TakeActions: FC<Props> = ({ takeActions }) => {
                     <h2>{takeAction.title}</h2>
                     <p>{truncate(takeAction.excerpt)}</p>
                     <div className="action-button">
-                      <Link href={`/take-actions/${takeAction.slug}`}>{t('actionListButton')}</Link>
+                      <Link href={`/action/${takeAction.slug}`}>{t('actionListButton')}</Link>
                     </div>
                   </div>
                 </div>

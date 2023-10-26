@@ -115,7 +115,7 @@ export const TakeActionsGrid = ({ takeAction, categories }: { takeAction: TakeAc
       <div className="action-slider-items sm:hidden">
         {getCurrentPost().map((takeAction, idx) => (
           <div key={idx} className="flex flex-row action-slider-item">
-            <Link href={`/take-actions/${takeAction.slug}`} className="grid grid-cols-3">
+            <Link href={`/action/${takeAction.slug}`} className="grid grid-cols-3">
               <div className="action-right">
                 <img src={takeAction.featuredImage} />
               </div>
