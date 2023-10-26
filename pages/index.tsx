@@ -27,7 +27,6 @@ import {
   OurWorkCarousel,
 } from 'components/HomePage'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
-import { Page_Customfields_CampaignAndOurWorkSlider } from 'graphql/generated'
 import dayjs from 'dayjs'
 
 export default function Index({
@@ -44,10 +43,11 @@ export default function Index({
   locale: string
 }) {
   const { i18n } = useTranslation()
-  const campaigns = page.customFields.campaignAndOurWorkSlider
-  const sortedCampaigns = campaigns.sort(
-    (a: Page_Customfields_CampaignAndOurWorkSlider, b: Page_Customfields_CampaignAndOurWorkSlider) =>
-      dayjs(a?.campaignDate).isBefore(dayjs(b?.campaignDate)) ? 1 : -1,
+
+  // OurWorkCarousel
+  const campaigns = [...page?.customFields?.campaignAndOurWorkSlider]
+  const sortedCampaigns = campaigns.sort((a: any, b: any) =>
+    dayjs(a?.campaignDate).isBefore(dayjs(b?.campaignDate)) ? 1 : -1,
   )
 
   // get banner image by language

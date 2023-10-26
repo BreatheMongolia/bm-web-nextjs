@@ -25,7 +25,7 @@ export const TakeActionCarousel = ({
     infinite: true,
     speed: 600,
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     arrows: true,
     autoplaySpeed: 5000,
     cssEase: 'ease-in-out',
@@ -37,7 +37,7 @@ export const TakeActionCarousel = ({
         breakpoint: 1024,
         settings: {
           slidesToShow: 5,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           infinite: true,
           dots: true,
         },
