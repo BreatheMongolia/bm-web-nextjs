@@ -117,9 +117,6 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
 export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params, locale }) => {
   // check if it is slug or post-id
   const slug = params?.slug as string
-  if (slug == '1458' || slug == '3630') {
-    console.log('woowee', params)
-  }
   // this shouldn't happen, but base case
   if (!slug || slug.length === 0) {
     return {
@@ -133,11 +130,7 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
   const isPostId = slug.match(/^[0-9]+$/)
   if (isPostId) {
     const res = await getNewsSlugByPostID(slug)
-    if (slug == '1458' || slug == '3630') {
-      console.log(isPostId, res)
-    }
     if (res.desiredSlug || res.slug) {
-      console.log(res)
       return {
         redirect: {
           destination: '/news/' + (res.desiredSlug || res.slug),
@@ -146,8 +139,7 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
       }
     }
   }
-  const post = await getNewsFull(params?.slug, isPostId ? NewsIdType.DatabaseId : NewsIdType.Slug)
-
+  const post = await getNewsFull(slug, isPostId ? NewsIdType.DatabaseId : NewsIdType.Slug)
   const bannerImage = await getNewsBannerImages('/news')
   // const bannerText = await getBanner('/')
   const getLatest = await getLastThree()
@@ -167,13 +159,15 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async ({}) => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const news = await getNewsPostSlugs()
   const paths = []
-  news.map(x => {
-    if (x.desiredSlug || x.slug) {
-      paths.push(`/news/${x.desiredSlug || x.slug}`)
-    }
+  locales.map(loc => {
+    news.map(x => {
+      if (x.desiredSlug || x.slug) {
+        paths.push({ params: { slug: `${x.desiredSlug || x.slug}` }, locale: loc })
+      }
+    })
   })
 
   return {
