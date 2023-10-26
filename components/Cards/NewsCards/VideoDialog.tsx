@@ -22,7 +22,6 @@ function VideoDialog() {
   }
 
   useEffect(() => {
-    console.log('we here', videoNewsDialogUrl)
     setOpen(videoNewsDialogUrl.length > 0)
   }, [videoNewsDialogUrl])
 

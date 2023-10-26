@@ -1,17 +1,18 @@
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
-import Image from 'next/image'
 import { MenuItem } from './menuItem'
-import SimpleButton from 'components/generic/SimpleButton'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useAtom } from 'jotai'
+import { giveButterDialogAtom } from 'lib/consts/atoms'
 
 export const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
   const path = router.pathname.toLowerCase()
   const { t } = useTranslation('nav')
+  const [_, setDialogOpen] = useAtom(giveButterDialogAtom)
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -34,11 +35,10 @@ export const Navbar = () => {
 
           {/* GiveButter Button */}
           <button
-            className="bg-action-red hover:bg-red-300 text-white rounded-md px-6 py-1.5 font-semibold tracking-[1px] cursor-pointer"
-            givebutter-element="button"
-            givebutter-campaign="donatebreathemongolia"
-            givebutter-theme="click-only"
-            force-https="true"
+            className="bg-action-red hover:bg-red-300 text-white rounded-md px-6 py-1.5 font-semibold tracking-[1px] cursor-pointer uppercase"
+            onClick={() => {
+              setDialogOpen(true)
+            }}
           >
             {t('donate')}
           </button>
