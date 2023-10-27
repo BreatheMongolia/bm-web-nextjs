@@ -1,11 +1,12 @@
 import { useTranslation } from 'next-i18next'
+import GoalsCard from './GoalsCard'
 import BuildingIcon from './about_us_icons/Building'
 import EducationIcon from './about_us_icons/Education'
 import MonitoringIcon from './about_us_icons/Monitoring'
 import PollutionParticlesBackground from './about_us_icons/PollutionParticlesBackground'
-import i18next from 'i18next'
+
 export const AboutUsInfoSection = () => {
-  const { t, i18n } = useTranslation('about')
+  const { t } = useTranslation('about')
   const GOALS = [
     {
       title: '#6',
@@ -29,43 +30,31 @@ export const AboutUsInfoSection = () => {
 
   return (
     <div>
-      <div className="our_mission_container">
+      <div className="flex flex-col">
         <div className="our_mission_background">
           <PollutionParticlesBackground />
           <div className="mission_vision_wrapper">
-            <p className="our_mission">
-              <span className="our_mission_title">{t('ourMission')}</span>
-              <br />
-              <span className="mission_paragraph">{t('missionStatement')}</span>{' '}
-            </p>
-            <p className="our_mission">
-              <span className="our_mission_title">{t('ourVision')}</span>
-              <br />
-              <span className="mission_paragraph">{t('visionStatement')}</span>{' '}
-            </p>
+            <div className="our_mission_title mb-2">{t('ourMission')}</div>
+            <div className="mission_paragraph mb-5">{t('missionStatement')}</div>
+            <div className="our_mission_title mb-2">{t('ourVision')}</div>
+            <div className="mission_paragraph mb-5">{t('visionStatement')}</div>
           </div>
         </div>
       </div>
       <div className="what_we_do_container">
         <h1 className="what_we_do_title">{t('whatWeDo')}</h1>
-        <br />
         <p className="what_we_do_paragraph">{t('whatWeDoDescription')}</p>
-        <br />
-
         <div className="details_container">
           <div className="education_container">
             <EducationIcon />
-
             <h3 className="what_we_do">{t('education')}</h3>
             <p className="what_we_do_desc">{t('educationDescription')}</p>
           </div>
-
           <div className="building_container">
             <BuildingIcon />
             <h3 className="what_we_do">{t('building')}</h3>
             <p className="what_we_do_desc">{t('buildingDescription')}</p>
           </div>
-
           <div className="monitoring_container">
             <MonitoringIcon />
             <h3 className="what_we_do">{t('monitoring')}</h3>
@@ -75,13 +64,13 @@ export const AboutUsInfoSection = () => {
       </div>
       <div className="why_container">
         <h1 className="why">{t('why')}</h1>
-        <br />
+
         <p className="why_details">{t('whyDescription')}</p>
-        <br />
+
         <h1 className="alignment">{t('ourAlignment')}</h1>
-        <br />
+
         <p className="alignment_details">{t('ourAlignmentDescription')}</p>
-        <br />
+
         <div className="goal_images_container">
           <div className="goal_images_one">
             <img src="/images/Goal 3.png" width={130} height={130} />
@@ -94,11 +83,22 @@ export const AboutUsInfoSection = () => {
             <img src="/images/Goal 8.png" width={130} height={130} />
             <img src="/images/Goal 9.png" width={130} height={130} />
           </div>
-          <br />
         </div>
+
         <h1 className="vision">{t('vision')}</h1>
-        <br />
+
         <p className="vision_details">{t('visionDescription')}</p>
+      </div>
+      <div className="goals_container">
+        {GOALS.map((goal, idx) => (
+          <GoalsCard
+            key={'goals' + idx}
+            title={goal.title}
+            goalKeyWord={goal.goalKeyWord}
+            firstParagraph={goal.firstParagraph}
+            secondParagraph={goal.secondParagraph}
+          />
+        ))}
       </div>
     </div>
   )
