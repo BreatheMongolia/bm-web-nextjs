@@ -5,14 +5,12 @@
 }
 .mission_vision_wrapper {
   position: absolute;
-  display: block;
+  display: flex;
+  flex-direction: column;
   top: 18%;
   left: 25%;
   right: 25%;
   text-align: center;
-}
-.our_mission {
-  margin-bottom: 3vh;
 }
 .our_mission_title {
   font-family: Open Sans;

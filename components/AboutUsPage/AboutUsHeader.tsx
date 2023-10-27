@@ -3,6 +3,29 @@ import teamBreatheMongolia from 'assets/images/teamBreatheMongolia.jpg'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 
+const VALID_ROUTES = [
+  {
+    route: 'info',
+    title: 'subNavigationTabs.aboutUs',
+  },
+  {
+    route: 'our-story',
+    title: 'subNavigationTabs.ourStory',
+  },
+  {
+    route: 'impact',
+    title: 'subNavigationTabs.impact',
+  },
+  {
+    route: 'our-team',
+    title: 'subNavigationTabs.ourTeam',
+  },
+  {
+    route: 'support-us',
+    title: 'subNavigationTabs.supportUs',
+  },
+]
+
 export const AboutUsHeader = () => {
   const { t } = useTranslation('about')
 
@@ -23,31 +46,15 @@ export const AboutUsHeader = () => {
 
       {/* Tab Navbar */}
       <div className="tab-nav-container shadow-lg">
-        <div className="flex flex-1 text-center w-full">
-          <Link href={'/about/info'} className="w-full hover:bg-gray-100">
-            <div className="tab-titles flex p-5">{t('subNavigationTabs.aboutUs')}</div>
-          </Link>
-        </div>
-        <div className="flex flex-1 text-center w-full">
-          <Link href={'/about/our-story'} className="w-full hover:bg-gray-100">
-            <div className="tab-titles flex p-5">{t('subNavigationTabs.ourStory')}</div>
-          </Link>
-        </div>
-        <div className="flex flex-1 text-center w-full">
-          <Link href={'/about/impact'} className="w-full hover:bg-gray-100">
-            <div className="tab-titles flex p-5">{t('subNavigationTabs.impact')}</div>
-          </Link>
-        </div>
-        <div className="flex flex-1 text-center w-full">
-          <Link href={'/about/our-team'} className="w-full hover:bg-gray-100">
-            <div className="tab-titles flex p-5">{t('subNavigationTabs.ourTeam')}</div>
-          </Link>
-        </div>
-        <div className="flex flex-1 text-center w-full">
-          <Link href={'/about/support-us'} className="w-full hover:bg-gray-100">
-            <div className="tab-titles flex p-5">{t('subNavigationTabs.supportUs')}</div>
-          </Link>
-        </div>
+        {VALID_ROUTES.map((x, idx) => {
+          return (
+            <div key={'routes' + idx} className="flex flex-1 text-center w-full">
+              <Link href={`/about/${x.route}`} className="w-full hover:bg-gray-100">
+                <div className="tab-titles flex p-5">{t(x.title)}</div>
+              </Link>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
