@@ -67,7 +67,7 @@ export const TakeActionCarousel = ({
         trailingLineColor="yellow"
         extraButton={{
           title: t('takeAction.seeMore'),
-          url: '/take-actions',
+          url: '/take-action',
         }}
       />
       <Slider

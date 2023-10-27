@@ -30,7 +30,7 @@ export const Footer = () => {
       {
         title: t('title.getInvolved'),
         urls: [
-          { title: t('nav.action'), url: '/take-actions' },
+          { title: t('nav.action'), url: '/take-action' },
           { title: t('nav.waysToDonate'), url: '/about/support-us' },
           {
             title: t('nav.volunteer'),

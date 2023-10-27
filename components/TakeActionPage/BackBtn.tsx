@@ -26,7 +26,7 @@ export const BackBtn: FunctionComponent = () => {
         />
       </svg>
 
-      <span onClick={() => router.push('/take-actions')} className="backBtnText">
+      <span onClick={() => router.push('/take-action')} className="backBtnText">
         {t('backBtnText')}
       </span>
     </div>
