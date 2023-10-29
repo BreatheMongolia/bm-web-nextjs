@@ -53,15 +53,12 @@
 }
 
 .tab-nav-container {
-  background: #ffffff;
-  display: flex;
-  justify-content: center;
   .tab-titles {
     flex: 1;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 2.5rem 2.5rem;
+    font-size: 14px;
     transition: 0.1s;
     justify-content: center;
     &:hover {
@@ -79,20 +76,6 @@
     font-weight: 500;
     a {
       color: rgba(82, 143, 236, 1);
-    }
-  }
-}
-@media only screen and (max-width: 1064px) {
-  .tab-nav-container {
-    width: 100%;
-    .tab-titles {
-      font-size: 14px;
-      justify-content: unset;
-      padding-left: 16px;
-      li {
-        padding: 1.5rem 1rem;
-        white-space: nowrap;
-      }
     }
   }
 }
@@ -858,7 +841,6 @@ button.read_more_btn:hover {
   background-repeat: no-repeat;
   background-position-x: center;
   background-size: 75%;
-  background-repeat-y: repeat;
   margin-top: 50px;
 
   .accomplishment_card {
@@ -1152,25 +1134,5 @@ button.read_more_btn:hover {
     text-align: center;
     color: #7f7f7f;
     margin: 5px;
-  }
-}
-
-@media only screen and (max-width: 1064px) {
-  .goal_card {
-    width: 300px;
-    height: 190px;
-
-    .goal_title {
-      font-size: 25px;
-      margin: 10px;
-    }
-
-    .first_paragraph {
-      font-size: 18px;
-    }
-
-    .second_paragraph {
-      font-size: 14px;
-    }
   }
 }
