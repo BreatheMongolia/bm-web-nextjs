@@ -70,26 +70,31 @@ export const Footer = () => {
               )
             })}
           </div>
-          <div className="">
+          <div className="flex md:flex-row lg:flex-col gap-5">
             <h2 className="font-bold text-lg">{t('nav.join')} </h2>
-            <div className="flex justify-between py-5">
-              {socialUrls.map((x, idx) => {
-                return (
-                  <div key={'social' + idx} className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
-                    <SocialIcon
-                      url={x}
-                      target="_blank"
-                      bgColor="transparent"
-                      fgColor="#3174D0"
-                      className="hover:bg-black/10 rounded-full"
-                      style={{ height: 40, width: 40 }}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-            <div className="block">
-              <Subscribe />
+            <div className="flex flex-col grow">
+              <div className="flex justify-between pb-5">
+                {socialUrls.map((x, idx) => {
+                  return (
+                    <div
+                      key={'social' + idx}
+                      className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full "
+                    >
+                      <SocialIcon
+                        url={x}
+                        target="_blank"
+                        bgColor="transparent"
+                        fgColor="#3174D0"
+                        className="hover:bg-black/10 rounded-full"
+                        style={{ height: 40, width: 40 }}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="block">
+                <Subscribe />
+              </div>
             </div>
           </div>
         </div>
