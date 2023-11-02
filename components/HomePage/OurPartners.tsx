@@ -57,8 +57,8 @@ export const OurPartners = ({
       <div className="partner-logos-slider-wrapper">
         <Slider {...settings}>
           {partnerLogos.map((x, idx) => (
-            <div key={idx} className="pr-10">
-              <a href={x.partnersLogosUrls} target="_blank">
+            <div key={idx}>
+              <a href={x.partnersLogosUrls} target="_blank" className="flex items-center">
                 <img src={x.partnersLogosImage.mediaItemUrl} alt="ourPartnerLogos" loading="lazy" />
               </a>
             </div>

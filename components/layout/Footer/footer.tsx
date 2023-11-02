@@ -51,7 +51,7 @@ export const Footer = () => {
     return (
       <div className="container flex flex-col uppercase tracking-widest text-slate-700">
         {/* Desktop */}
-        <div className="hidden sm:grid md:grid-row-2 lg:grid-cols-2 lg:gap-20">
+        <div className="hidden sm:grid md:grid-row-2 lg:grid-cols-2 lg:gap-5 xl:gap-20">
           <div className="flex flex-row justify-between">
             {linkSections.map((x, idx) => {
               return (
