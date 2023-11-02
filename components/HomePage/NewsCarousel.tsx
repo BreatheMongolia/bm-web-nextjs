@@ -3,7 +3,10 @@ import { H2 } from 'components/generic/Typography'
 import { News, Page_Customfields_FeaturedNews } from 'graphql/generated'
 import { useTranslation } from 'next-i18next'
 import Slider from 'react-slick'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+// import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
+import SliderRightArrow from 'assets/icons/SliderRightArrow'
+
 import Arrow from 'components/generic/Arrow'
 
 export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields_FeaturedNews[] }) => {
@@ -58,12 +61,14 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
         className="w-full"
         prevArrow={
           <Arrow check={0} classes="prev-gray-arrow">
-            <ChevronLeftIcon className="w-8 h-8 text-white" />
+            {/* <ChevronLeftIcon className="w-8 h-8 text-white" /> */}
+            <SliderLeftArrow />
           </Arrow>
         }
         nextArrow={
           <Arrow check={featuredNews?.length - 3} classes="next-gray-arrow">
-            <ChevronRightIcon className="w-8 h-8 text-white" />
+            {/* <ChevronRightIcon className="w-8 h-8 text-white" /> */}
+            <SliderRightArrow />
           </Arrow>
         }
       >

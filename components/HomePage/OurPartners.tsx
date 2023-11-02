@@ -58,7 +58,7 @@ export const OurPartners = ({
         <Slider {...settings}>
           {partnerLogos.map((x, idx) => (
             <div key={idx}>
-              <a href={x.partnersLogosUrls} target="_blank" className="flex justify-center">
+              <a href={x.partnersLogosUrls} target="_blank" className="flex items-center">
                 <img src={x.partnersLogosImage.mediaItemUrl} alt="ourPartnerLogos" loading="lazy" />
               </a>
             </div>

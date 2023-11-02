@@ -49,45 +49,52 @@ export const Footer = () => {
       },
     ]
     return (
-      <div className="container flex flex-row uppercase tracking-widest text-slate-700">
+      <div className="container flex flex-col uppercase tracking-widest text-slate-700">
         {/* Desktop */}
-        <div className="hidden sm:flex flex-row gap-14">
-          {linkSections.map((x, idx) => {
-            return (
-              <div key={'footer' + idx}>
-                <h2 className="font-bold text-lg min-w-max">{x.title}</h2>
-                <div className="flex flex-col text-sm font-semibold my-7">
-                  {x.urls.map((url, i) => {
-                    return (
-                      <Link href={url.url} target={url.target} key={'url' + i} className="hover:text-bm-blue my-2">
-                        {url.title}
-                      </Link>
-                    )
-                  })}
-                </div>
-              </div>
-            )
-          })}
-          <div className="flex flex-col">
-            <h2 className="font-bold text-lg">{t('nav.join')} </h2>
-            <div className="flex justify-between w-[450px] py-5">
-              {socialUrls.map((x, idx) => {
-                return (
-                  <div key={'social' + idx} className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">
-                    <SocialIcon
-                      url={x}
-                      target="_blank"
-                      bgColor="transparent"
-                      fgColor="#3174D0"
-                      className="hover:bg-black/10 rounded-full"
-                      style={{ height: 40, width: 40 }}
-                    />
+        <div className="hidden sm:grid md:grid-row-2 lg:grid-cols-2 lg:gap-5 xl:gap-20">
+          <div className="flex flex-row justify-between">
+            {linkSections.map((x, idx) => {
+              return (
+                <div key={'footer' + idx}>
+                  <h2 className="font-bold text-lg min-w-max">{x.title}</h2>
+                  <div className="flex flex-col text-sm font-semibold my-7">
+                    {x.urls.map((url, i) => {
+                      return (
+                        <Link href={url.url} target={url.target} key={'url' + i} className="hover:text-bm-blue my-2">
+                          {url.title}
+                        </Link>
+                      )
+                    })}
                   </div>
-                )
-              })}
-            </div>
-            <div className="block">
-              <Subscribe />
+                </div>
+              )
+            })}
+          </div>
+          <div className="flex md:flex-row lg:flex-col gap-5">
+            <h2 className="font-bold text-lg">{t('nav.join')} </h2>
+            <div className="flex flex-col grow">
+              <div className="flex justify-between pb-5">
+                {socialUrls.map((x, idx) => {
+                  return (
+                    <div
+                      key={'social' + idx}
+                      className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full "
+                    >
+                      <SocialIcon
+                        url={x}
+                        target="_blank"
+                        bgColor="transparent"
+                        fgColor="#3174D0"
+                        className="hover:bg-black/10 rounded-full"
+                        style={{ height: 40, width: 40 }}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="block">
+                <Subscribe />
+              </div>
             </div>
           </div>
         </div>
