@@ -49,28 +49,30 @@ export const Footer = () => {
       },
     ]
     return (
-      <div className="container flex flex-row uppercase tracking-widest text-slate-700">
+      <div className="container flex flex-col uppercase tracking-widest text-slate-700">
         {/* Desktop */}
-        <div className="hidden sm:flex flex-row gap-14">
-          {linkSections.map((x, idx) => {
-            return (
-              <div key={'footer' + idx}>
-                <h2 className="font-bold text-lg min-w-max">{x.title}</h2>
-                <div className="flex flex-col text-sm font-semibold my-7">
-                  {x.urls.map((url, i) => {
-                    return (
-                      <Link href={url.url} target={url.target} key={'url' + i} className="hover:text-bm-blue my-2">
-                        {url.title}
-                      </Link>
-                    )
-                  })}
+        <div className="hidden sm:grid md:grid-row-2 lg:grid-cols-2 lg:gap-20">
+          <div className="flex flex-row justify-between">
+            {linkSections.map((x, idx) => {
+              return (
+                <div key={'footer' + idx}>
+                  <h2 className="font-bold text-lg min-w-max">{x.title}</h2>
+                  <div className="flex flex-col text-sm font-semibold my-7">
+                    {x.urls.map((url, i) => {
+                      return (
+                        <Link href={url.url} target={url.target} key={'url' + i} className="hover:text-bm-blue my-2">
+                          {url.title}
+                        </Link>
+                      )
+                    })}
+                  </div>
                 </div>
-              </div>
-            )
-          })}
-          <div className="flex flex-col">
+              )
+            })}
+          </div>
+          <div className="">
             <h2 className="font-bold text-lg">{t('nav.join')} </h2>
-            <div className="flex justify-between w-[450px] py-5">
+            <div className="flex justify-between py-5">
               {socialUrls.map((x, idx) => {
                 return (
                   <div key={'social' + idx} className=" h-11 w-11 border-solid border-[#3174D0] border-2 rounded-full ">

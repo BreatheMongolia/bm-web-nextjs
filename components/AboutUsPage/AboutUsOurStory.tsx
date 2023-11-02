@@ -9,7 +9,7 @@ export type OurStoriesAll = {
 
 export const AboutUsOurStory = ({ stories }: { stories: OurStoriesAll[] }) => {
   return (
-    <div className="OurStory_StoriesAboutAirPollution_container">
+    <div className="flex flex-col">
       <OurStorySection />
       <StoriesAboutAirPollution stories={stories} />
     </div>
