@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import Head from 'next/head'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import { TakeAction } from 'graphql/generated'
+import { GetStaticPaths } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { getTakeActionSlugs, getTakeActionsDetail } from 'lib/graphql-api/queries/takeAction'
@@ -17,12 +15,8 @@ import {
   UserFeedback,
 } from 'components/TakeActionPage'
 import { getTranslated } from 'lib/utils/getTranslated'
-import { getImage } from 'lib/utils/getImage'
 import { removeTags } from 'lib/utils/htmlParser'
-
-interface TakeActionPageProps {
-  post: TakeAction
-}
+import LoadingPage from 'components/generic/LoadingPage'
 
 export type TakeActionDetail = {
   id: number
@@ -47,12 +41,10 @@ export default function TakeActionPostPage({ takeAction }) {
     return <ErrorPage statusCode={404} />
   }
 
-  const { t } = useTranslation('common')
-
   return (
     <div>
       {router.isFallback ? (
-        <>Loading</>
+        <LoadingPage />
       ) : (
         <>
           <article>
@@ -164,7 +156,7 @@ export const getStaticProps = async ({ params, locale }) => {
       description: removeTags(transformedTakeAction?.introductionText),
       image: featuredImageBig,
     },
-    revalidate: 60,
+    revalidate: 60 * 10, // 10 minutes
   }
 }
 
