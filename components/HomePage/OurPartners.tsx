@@ -23,6 +23,7 @@ export const OurPartners = ({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
+    adaptiveHeight: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -58,7 +59,7 @@ export const OurPartners = ({
         <Slider {...settings}>
           {partnerLogos.map((x, idx) => (
             <div key={idx}>
-              <a href={x.partnersLogosUrls} target="_blank" className="flex items-center">
+              <a href={x.partnersLogosUrls} target="_blank">
                 <img src={x.partnersLogosImage.mediaItemUrl} alt="ourPartnerLogos" loading="lazy" />
               </a>
             </div>

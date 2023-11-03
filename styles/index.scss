@@ -318,9 +318,26 @@ p {
 .partner-logos-slider-wrapper {
   .slick-track {
     display: flex !important;
-    justify-content: center;
     align-items: center;
-    height: min-content;
+  }
+
+  div {
+    height: auto !important;
+    display: flex;
+    align-items: center;
+    margin-right: 55px;
+    &:last-child {
+      margin-right: 0;
+    }
+    a {
+      outline: none !important;
+    }
+    img {
+      width: 100% !important;
+      min-width: 120px;
+      max-width: 120px !important;
+      outline: none !important;
+    }
   }
 }
 
