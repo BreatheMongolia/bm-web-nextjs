@@ -27,6 +27,7 @@
         color: black;
       }
     }
+
     li.focused {
       border-bottom-color: rgba(82, 143, 236, 1);
       border-bottom-style: solid;
@@ -37,6 +38,7 @@
     }
   }
 }
+
 @media only screen and (max-width: 1064px) {
   .sub-nav-container {
     width: 100%;
@@ -70,13 +72,11 @@
       color: black;
     }
   }
-  .tab-titles.focused {
+  .focused {
     border-bottom-color: rgba(82, 143, 236, 1);
     border-bottom-style: solid;
     font-weight: 500;
-    a {
-      color: rgba(82, 143, 236, 1);
-    }
+    // color: rgba(82, 143, 236, 1);
   }
 }
 
