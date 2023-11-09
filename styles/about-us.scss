@@ -1,92 +1,6 @@
-.sub-nav-container {
-  background: #ffffff;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+/* OUR TEAM SECTION*/
 
-  ul {
-    overflow-x: auto;
-    list-style: none;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    li {
-      flex: 1;
-      border-bottom-style: solid;
-      border-bottom-color: white;
-      display: inline-block;
-      cursor: pointer;
-      text-transform: uppercase;
-      white-space: nowrap;
-      padding: 2.5rem 2.5rem;
-      letter-spacing: 1px;
-      transition: 0.1s;
-      &:hover {
-        color: rgba(82, 143, 236, 1);
-      }
-      a {
-        color: black;
-      }
-    }
-
-    li.focused {
-      border-bottom-color: rgba(82, 143, 236, 1);
-      border-bottom-style: solid;
-      font-weight: 500;
-      a {
-        color: rgba(82, 143, 236, 1);
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 1064px) {
-  .sub-nav-container {
-    width: 100%;
-    ul {
-      font-size: 14px;
-      justify-content: unset;
-      padding-left: 16px;
-      li {
-        padding: 1.5rem 1rem;
-        white-space: nowrap;
-      }
-    }
-  }
-}
-
-.tab-nav-container {
-  .tab-titles {
-    flex: 1;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 14px;
-    transition: 0.1s;
-    justify-content: center;
-    &:hover {
-      color: rgba(82, 143, 236, 1);
-      border-bottom: 2px solid;
-      border-bottom-color: rgba(82, 143, 236, 1);
-    }
-    a {
-      color: black;
-    }
-  }
-  .focused {
-    border-bottom-color: rgba(82, 143, 236, 1);
-    border-bottom-style: solid;
-    font-weight: 500;
-    // color: rgba(82, 143, 236, 1);
-  }
-}
-
-/*WHERE OUR TEAM IS LOCATED*/
-
-.our_team_wrapper {
-  background: #fafaff;
-  padding-bottom: 40px;
-}
-h1.where_our_team_title {
+h1.our_team_section_title {
   text-align: center;
   display: block;
   margin: 0 auto;
@@ -98,277 +12,153 @@ h1.where_our_team_title {
   font-size: 30px;
   line-height: 40.85px;
 }
-img.map_img {
+
+/* FEATURED CARD */
+
+.member_card {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: row;
+  background-color: #fff;
+  box-shadow: 0px 4px 20px rgba(138, 138, 138, 0.25);
+  border-radius: 20px;
+  max-width: 850px;
+  min-height: 430px;
+  z-index: 10;
+}
+
+.member_card_left {
+  flex: 1;
+  max-width: 350px;
+  max-height: 430px;
+}
+
+.member_img {
   width: 100%;
-  max-width: 823px;
-  height: auto;
-}
-.flag {
-  padding: 3px;
-}
-/*FEATURED TEAM MEMBER CAROUSEL*/
-
-.FeaturedTeamMembers_component {
-  display: block;
-  margin: auto;
   height: 100%;
+  border-radius: 20px 0 0 20px;
+  object-fit: cover;
+}
 
-  h1.featured_team_title {
-    text-align: center;
-    display: block;
-    margin: auto;
-    color: #528fec;
-    padding-top: 56px;
-    padding-bottom: 40px;
-    font-weight: 700;
+.member_card_right {
+  flex: 1;
+  max-width: 500px;
+  line-height: 24px;
+}
+
+.member_info {
+  margin: 42px 50px 0px 40px;
+  text-align: left;
+  line-height: 24px;
+
+  .member_name {
+    font-size: 20px;
     font-style: normal;
-    font-size: 30px;
-    line-height: 40.85px;
+    font-weight: 700;
+    margin-bottom: 0;
   }
-  .carousel_container {
-    width: 100%;
-    overflow: hidden;
-    margin: auto;
-    .carousel-root {
-      width: 100%;
-      .carousel-slider {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 550px;
-        overflow: visible;
-      }
-    }
-    .carousel_slides {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .arrow {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: none;
-      background-color: #fafaff;
-      box-shadow: 0px 4px 8px rgba(5, 4, 4, 0.15);
-      cursor: pointer;
-      position: absolute;
-    }
-    .arrow:hover {
-      background-color: #2c2d41;
-      border: none;
-    }
-    .arrow:hover svg path {
-      fill: #fafaff;
-    }
-    .arrow:focus {
-      border-color: transparent;
-      outline: none;
-    }
-    .previous {
-      left: calc((100% - 795px) / 2 - 130px);
-      z-index: 11;
-    }
-    .next {
-      right: calc((100% - 795px) / 2 - 130px);
-      transform: matrix(-1, 0, 0, 1, 0, 0);
-    }
-    .indicators_wrapper {
-      display: flex;
-      justify-content: center;
-    }
-    svg {
-      margin-left: 5px;
-      margin-right: 5px;
-      cursor: pointer;
-    }
-    .inactive svg circle {
-      fill: #c4c4c4;
-    }
-    .active svg circle {
-      fill: #2b2d42;
-    }
-    .carousel .slide {
-      background: transparent;
-    }
-    .carousel .control-dots {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    .carousel .slider-wrapper {
-      overflow: visible;
-    }
-  }
-  /*FEATURED CARD STYLING*/
 
-  .member_card {
-    display: flex;
+  .member_role {
+    font-size: 18px;
+    margin: 6px 0px 10px 0px;
+  }
+
+  .member_role,
+  .member_bio,
+  .member_since {
+    color: rgba(44, 45, 65, 0.5);
+  }
+
+  .member_bio {
+    font-size: 16px;
+    margin: 0 0 20px 0;
+    min-height: 145px;
+  }
+
+  .member_since {
+    font-style: italic;
+    font-size: 14px;
+    margin: 0;
+    padding-bottom: 30px;
+  }
+
+  .linkedin_icon {
     margin: 0 auto;
-    flex-direction: row;
-    background-color: #fff;
+    padding-bottom: 10px;
+  }
+
+  .social_btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      width: 35px;
+      height: 35px;
+      background-color: #0077b5;
+    }
+  }
+}
+
+/* CORE TEAM CARD */
+
+.core-team-members-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .core-member-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    margin: 40px 20px 40px 20px;
+    padding-top: 20px;
     box-shadow: 0px 4px 20px rgba(138, 138, 138, 0.15);
     border-radius: 20px;
-    max-width: 850px;
-    min-height: 430px;
-    z-index: 10;
-  }
+    height: 435px;
+    width: 290px;
 
-  .member_card_left {
-    flex: 1;
-    max-width: 350px;
-    max-height: 430px;
-  }
-
-  .member_img {
-    width: 100%;
-    height: 100%;
-    border-radius: 20px 0 0 20px;
-    object-fit: cover;
-  }
-
-  .member_card_right {
-    flex: 1;
-    max-width: 500px;
-    line-height: 24px;
-  }
-
-  .member_info {
-    margin: 42px 50px 0px 40px;
-    text-align: left;
-    line-height: 24px;
-
-    .member_name {
-      font-size: 20px;
+    h4.member_name.core {
+      font-size: 18px;
       font-style: normal;
       font-weight: 700;
-      margin-bottom: 0;
+      margin: 9px;
     }
 
-    .member_role {
-      font-size: 18px;
-      margin: 6px 0px 10px 0px;
-    }
-
-    .member_role,
-    .member_bio,
-    .member_since {
+    h5.member_role.core {
+      font-size: 14px;
+      margin: 0 10px 10px 10px;
       color: rgba(44, 45, 65, 0.5);
     }
 
-    .member_bio {
-      font-size: 16px;
-      margin: 0 0 20px 0;
-      min-height: 145px;
+    img.profile_icon.core {
+      display: block;
+      margin: 0px auto;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      padding: 0;
+      border: 7px solid rgba(82, 143, 236, 0.25);
     }
 
-    .member_since {
-      font-style: italic;
-      font-size: 14px;
-      margin: 0;
-      padding-bottom: 30px;
+    .core_member_break {
+      background-color: rgba(82, 143, 236, 0.25);
+      height: 2px;
+      border: none;
+      margin: 0 20px 0 20px;
     }
 
-    .linkedin_icon {
-      margin: 0 auto;
-      padding-bottom: 10px;
-    }
-
-    .social_btns {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 15px 0;
-
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 100%;
-        width: 35px;
-        height: 35px;
-        background-color: #0077b5;
-      }
-    }
-  }
-}
-
-/*CORE TEAM CARD STYLING*/
-.core-team-members-component {
-  display: block;
-  margin: auto;
-  height: 100%;
-
-  h1.our_team_title {
-    text-align: center;
-    display: block;
-    margin: 0 auto;
-    color: #528fec;
-    padding-top: 56px;
-    padding-bottom: 40px;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 30px;
-    line-height: 40.85px;
-  }
-  .core-team-members-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-
-    .core-member-card {
-      display: flex;
-      flex-direction: column;
-      flex: 1 1 32%;
-      background: #ffffff;
-      margin: 40px 20px 40px 20px;
-      padding-top: 20px;
-      box-shadow: 0px 4px 20px rgba(138, 138, 138, 0.15);
-      border-radius: 20px;
-      max-height: 435px;
-      max-width: 375px;
-      border-radius: 20px;
-
-      h4.member_name.core {
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 700;
-        margin: 9px;
-      }
-
-      .member_role.core {
-        font-size: 14px;
-        margin: 0 10px 10px 10px;
-        color: rgba(44, 45, 65, 0.5);
-      }
-
-      img.profile_icon.core {
-        display: block;
-        margin: 0px auto;
-        border-radius: 50%;
-        width: 80px;
-        height: 80px;
-        padding: 0;
-        border: 7px solid rgba(82, 143, 236, 0.25);
-      }
-
-      .core-member-break {
-        background-color: rgba(82, 143, 236, 0.25);
-        height: 2px;
-        border: none;
-        margin: 0 20px 0 20px;
-      }
-
-      .member_bio.core {
+    .core_member_info {
+      .member_bio {
         font-size: 14px;
         margin: 20px 17px 20px 17px;
         color: rgba(44, 45, 65, 0.5);
-        height: 50%;
-        overflow-y: auto;
-      }
-      .linkedin_icon {
-        margin: 0 auto;
-        padding-bottom: 16px;
+        height: 145px;
       }
 
       .social_btns {
@@ -391,154 +181,57 @@ img.map_img {
   }
 }
 
-/*MOBILE SIZING*/
+/* MOBILE SIZING */
 
 @media only screen and (max-width: 1064px) {
-  h1.where_our_team_title {
+  h1.our_team_section_title {
     font-size: 20px;
     padding-top: 25px;
     padding-bottom: 20px;
   }
-  .FeaturedTeamMembers_component {
-    h1.featured_team_title {
-      font-size: 20px;
-      padding-top: 25px;
-      padding-bottom: 0px;
-      margin-bottom: 20px;
-    }
 
-    .carousel_container {
-      width: 100%;
-      margin: auto;
-      overflow: hidden;
-      .carousel-root {
-        width: 100%;
-        .carousel-slider {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 800px;
-        }
-      }
-      .carousel_slides {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .indicators_wrapper {
-        display: flex;
-        justify-content: center;
-      }
-      svg {
-        margin-left: 5px;
-        margin-right: 5px;
-        cursor: pointer;
-      }
-      .inactive svg circle {
-        fill: #c4c4c4;
-      }
-      .active svg circle {
-        fill: #2b2d42;
-      }
-      .carousel .slide {
-        background: transparent;
-      }
-      .carousel .control-dots {
-        display: flex;
-        justify-content: center;
-        position: absolute;
-        top: 96%;
-      }
-      .carousel .slider-wrapper {
-        overflow: visible;
-      }
-    }
-
-    .member_card {
-      flex-direction: column;
-      max-width: 300px;
-      max-height: 655px;
-      padding-bottom: 15px;
-    }
-
-    .member_card_left {
-      width: 100%;
-      max-width: 300px;
-      max-height: 250px;
-    }
-
-    .member_img {
-      border-radius: 20px 20px 0px 0px;
-    }
-
-    .member_card_right {
-      flex: 1;
-      max-width: 300px;
-      max-height: 450px;
-      margin-top: 20px;
-    }
-
-    .member_info {
-      margin: 0px 20px 0px 20px;
-
-      .member_name {
-        font-size: 18px;
-        padding-top: 10px;
-      }
-      .member_role {
-        font-size: 14px;
-        margin: 5px 0px 10px 0px;
-      }
-
-      .member_bio {
-        font-size: 14px;
-        padding-top: 0px;
-        margin: 0;
-      }
-
-      .member_since {
-        font-size: 12px;
-        padding: 10px 0px 10px 0px;
-      }
-    }
+  .member_card {
+    flex-direction: column;
+    max-width: 300px;
+    max-height: 655px;
   }
 
-  .core-team-members-component {
-    display: block;
-    margin-top: 40px;
-
-    h1.our_team_title {
-      font-size: 20px;
-      padding-top: 25px;
-      padding-bottom: 0px;
-    }
-
-    .core-team-members-grid {
-      display: block;
-      margin: auto;
-      justify-content: space-evenly;
-      flex-wrap: nowrap;
-      flex-direction: column;
-
-      .core-member-card {
-        display: block;
-        margin: 20px auto;
-        padding-top: 20px;
-        max-height: 435px;
-        max-width: 335px;
-      }
-    }
+  .member_card_left {
+    width: 300px;
+    height: 250px;
   }
-}
 
-@media only screen and (min-width: 1640px) {
-  .core-team-members-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    max-width: 1580px;
-    margin: auto;
+  .member_img {
+    border-radius: 20px 20px 0px 0px;
+  }
+
+  .member_card_right {
+    width: 300px;
+    height: 405px;
+  }
+
+  .member_info {
+    margin: 0px 20px 0px 20px;
+
+    .member_name {
+      font-size: 18px;
+      padding-top: 10px;
+    }
+    .member_role {
+      font-size: 14px;
+      margin: 5px 0px 10px 0px;
+    }
+
+    .member_bio {
+      font-size: 14px;
+      padding-top: 0px;
+      margin: 0;
+    }
+
+    .member_since {
+      font-size: 12px;
+      padding: 10px 0px 0px 0px;
+    }
   }
 }
 
@@ -549,7 +242,7 @@ img.map_img {
   flex-direction: row;
   background: #528fec;
   align-items: center;
-  width: fit-content;
+  // width: fit-content;
 }
 
 .left_container {
