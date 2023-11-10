@@ -18,6 +18,7 @@ import {
   getNewsSlugByPostID,
 } from 'lib/graphql-api/queries/news'
 import { BreadCrumb, ShareButton, LatestNews, Banner } from 'components/NewsPage/DetailPage'
+import LoadingPage from 'components/generic/LoadingPage'
 
 interface NewsPostPageProps {
   post: any
@@ -43,11 +44,10 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
     { id: 1, item: t('title') },
     { id: 2, item: post.title },
   ]
-
   return (
     <div>
       {router.isFallback ? (
-        <>Loading</>
+        <LoadingPage />
       ) : (
         <>
           <article>
@@ -140,6 +140,11 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
     }
   }
   const post = await getNewsFull(slug, isPostId ? NewsIdType.DatabaseId : NewsIdType.Slug)
+  if (!post) {
+    return {
+      notFound: true,
+    }
+  }
   const bannerImage = await getNewsBannerImages('/news')
   // const bannerText = await getBanner('/')
   const getLatest = await getLastThree()
@@ -194,6 +199,9 @@ const getTransformedData = (banner: any, locale: string) => {
 }
 
 const getNews = (news: News, locale: string): any => {
+  if (!news) {
+    return
+  }
   return {
     id: news.databaseId,
     date: news.dateGmt,
