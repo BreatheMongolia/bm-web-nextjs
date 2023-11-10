@@ -3,7 +3,6 @@ import { OurPartners } from 'components/HomePage'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getHomePage } from 'lib/graphql-api/queries/home'
-import { Page } from 'graphql/generated'
 
 export default function InfoSectionPage({ page, locale }) {
   return (

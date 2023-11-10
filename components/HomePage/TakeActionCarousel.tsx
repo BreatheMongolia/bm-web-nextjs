@@ -4,9 +4,7 @@ import { Page_Customfields_FeaturedTakeActions } from 'graphql/generated'
 import Slider from 'react-slick'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
-// import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
-import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
-import SliderRightArrow from 'assets/icons/SliderRightArrow'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import TakeActionTile from '../Cards/TakeActionTile'
 
@@ -39,7 +37,6 @@ export const TakeActionCarousel = ({
           slidesToShow: 5,
           slidesToScroll: 2,
           infinite: true,
-          dots: true,
         },
       },
       {
@@ -74,14 +71,12 @@ export const TakeActionCarousel = ({
         {...settings}
         prevArrow={
           <Arrow check={0} classes="prev-gray-arrow">
-            {/* <ChevronLeftIcon className="w-8 h-8 text-white" /> */}
-            <SliderLeftArrow />
+            <ChevronLeftIcon className="w-8 h-8 text-white" />
           </Arrow>
         }
         nextArrow={
           <Arrow check={takeActionPosts?.length - 4} classes="next-gray-arrow">
-            {/* <ChevronRightIcon className="w-8 h-8 text-white" /> */}
-            <SliderRightArrow />
+            <ChevronRightIcon className="w-8 h-8 text-white" />
           </Arrow>
         }
       >

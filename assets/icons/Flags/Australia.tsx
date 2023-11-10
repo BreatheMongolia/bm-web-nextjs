@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 
 const AustraliaFlag: FC = () => {
   return (
-    <svg width="105" height="70" viewBox="0 0 105 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="flag">
-      <g clip-path="url(#clip0_2589_9229)">
+    <svg width="105" height="70" viewBox="0 0 105 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_2589_9229)">
         <path
           d="M5.41905 0.552381H101.581C103.716 0.552381 105.448 2.28355 105.448 4.41905V65.581C105.448 67.7165 103.716 69.4476 101.581 69.4476H5.41904C3.28354 69.4476 1.55238 67.7165 1.55238 65.5809V4.41904C1.55238 2.28354 3.28355 0.552381 5.41905 0.552381Z"
           fill="#012169"

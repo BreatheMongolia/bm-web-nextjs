@@ -68,19 +68,21 @@ export const AboutUsInfoSection = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col mt-20 mb-10 gap-8 mx-[5%] md:mx-[10%] lg:mx-[25%] text-center">
+      <div className="flex flex-col mt-20 mb-10 gap-8 mx-[5%] md:mx-[10%] lg:mx-[25%] text-center justify-center">
         <h1 className="font-bold text-xl md:text-3xl text-[#528fec]">{t('why')}</h1>
         <p className="text-base text-[#2c2d41]">{t('whyDescription')}</p>
         <h1 className="font-bold text-xl md:text-3xl text-[#528fec]">{t('ourAlignment')}</h1>
         <p className="text-base text-[#2c2d41]">{t('ourAlignmentDescription')}</p>
-        <div className="flex flex-wrap p-5 justify-center gap-5 w-[350px] sm:w-[650px]">
-          <img src="/images/Goal 3.png" width={130} height={130} />
-          <img src="/images/Goal 4.png" width={130} height={130} />
-          <img src="/images/Goal 5.png" width={130} height={130} />
-          <img src="/images/Goal 6.png" width={130} height={130} />
-          <img src="/images/Goal 7.png" width={130} height={130} />
-          <img src="/images/Goal 8.png" width={130} height={130} />
-          <img src="/images/Goal 9.png" width={130} height={130} />
+        <div className="place-self-center">
+          <div className="flex flex-wrap p-5 justify-center gap-5 w-[350px] sm:w-[650px]">
+            <img src="/images/Goal 3.png" width={130} height={130} />
+            <img src="/images/Goal 4.png" width={130} height={130} />
+            <img src="/images/Goal 5.png" width={130} height={130} />
+            <img src="/images/Goal 6.png" width={130} height={130} />
+            <img src="/images/Goal 7.png" width={130} height={130} />
+            <img src="/images/Goal 8.png" width={130} height={130} />
+            <img src="/images/Goal 9.png" width={130} height={130} />
+          </div>
         </div>
         <h1 className="font-bold text-xl md:text-3xl text-[#528fec]">{t('vision')}</h1>
         <p className="text-base text-[#2c2d41]">{t('visionDescription')}</p>

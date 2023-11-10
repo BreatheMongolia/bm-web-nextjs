@@ -4,7 +4,7 @@ import TeamMembersContainer from './TeamMembersContainer'
 
 const AboutUsOurTeam = ({ people }) => {
   return (
-    <div className="our_team_wrapper">
+    <div className="container mx-auto flex flex-col">
       <WhereOurTeamIsLocated />
       <TeamMembersContainer people={people} />
     </div>

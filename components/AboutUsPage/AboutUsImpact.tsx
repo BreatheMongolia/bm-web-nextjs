@@ -3,11 +3,10 @@ import AccomplishmentCard from './AccomplishmentCard'
 import { useTranslation } from 'next-i18next'
 import Report from './Report'
 import Slider from 'react-slick'
-import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
-import SliderRightArrow from 'assets/icons/SliderRightArrow'
 import Arrow from 'components/generic/Arrow'
-import { useMediaQuery } from 'react-responsive'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import AccomplishmentMobileCard from './AccomplishmentMobileCard'
+import { H2 } from 'components/generic/Typography'
 
 interface Impact {
   accomplishments: any[]
@@ -15,8 +14,7 @@ interface Impact {
 }
 
 const Impact: FC<Impact> = ({ accomplishments, reports }) => {
-  const { t, i18n } = useTranslation('about')
-  const isMobile = useMediaQuery({ maxWidth: 950 })
+  const { t } = useTranslation('about')
 
   // Sort accomplishments by newest to oldest
   //   @ts-ignore
@@ -25,46 +23,73 @@ const Impact: FC<Impact> = ({ accomplishments, reports }) => {
   return (
     <>
       <div className="impact-container sm:mb-100">
-        <p className="our_accomplishment_title">{t('impact.ourAccomplishments')}</p>
+        <h1 className="our_accomplishment_title">{t('impact.ourAccomplishments')}</h1>
+        {/* Mobile */}
         <div className="timeline hidden sm:block">
           {accomplishments.map((acc, id) => (
-            <AccomplishmentCard key={id} {...acc} />
+            <AccomplishmentCard key={'ac-mobile' + id} {...acc} />
           ))}
         </div>
+        {/* Desktop */}
         <div className="timeline sm:hidden">
           {accomplishments.map((acc, id) => (
-            <AccomplishmentMobileCard key={id} {...acc} />
+            <AccomplishmentMobileCard key={'ac-desktop' + id} {...acc} />
           ))}
         </div>
       </div>
-      <div className="report-container">
-        <h2>{t('reports.title')}</h2>
-        <div className="report-grid">
-          {isMobile ? (
-            <Slider
-              {...settings}
-              prevArrow={
-                <Arrow check={0} classes="prev-gray-arrow">
-                  <SliderLeftArrow />
-                </Arrow>
-              }
-              nextArrow={
-                <Arrow check={reports.length - 3} classes="prev-gray-arrow">
-                  <SliderRightArrow />
-                </Arrow>
-              }
-            >
-              {reports.map((data: any, index: number) => (
-                <Report key={index} id={data.id} title={data.title} urlMn={data.urlMn} urlEng={data.urlEng} />
-              ))}
-            </Slider>
-          ) : (
-            <>
-              {reports.map((data: any, index: number) => (
-                <Report key={index} id={data.id} title={data.title} urlMn={data.urlMn} urlEng={data.urlEng} />
-              ))}
-            </>
-          )}
+      <div className="container mx-auto flex flex-col">
+        <H2 title={t('reports.title')} />
+        {/* Desktop */}
+        <div className="hidden sm:report-grid">
+          <Slider
+            {...settings}
+            prevArrow={
+              <Arrow check={0} classes="prev-gray-arrow">
+                <ChevronLeftIcon className="w-8 h-8 text-white" />
+              </Arrow>
+            }
+            nextArrow={
+              <Arrow check={reports.length - 1} classes="prev-gray-arrow">
+                <ChevronRightIcon className="w-8 h-8 text-white" />
+              </Arrow>
+            }
+          >
+            {reports.map((data: any, index: number) => (
+              <Report
+                key={'report-mobile' + index}
+                id={data.id}
+                title={data.title}
+                urlMn={data.urlMn}
+                urlEng={data.urlEng}
+              />
+            ))}
+          </Slider>
+        </div>
+        {/* Mobile */}
+        <div className="sm:hidden report-grid">
+          <Slider
+            {...settings}
+            prevArrow={
+              <Arrow check={0} classes="prev-gray-arrow">
+                <ChevronLeftIcon className="w-8 h-8 text-white" />
+              </Arrow>
+            }
+            nextArrow={
+              <Arrow check={reports.length - 4} classes="prev-gray-arrow">
+                <ChevronRightIcon className="w-8 h-8 text-white" />
+              </Arrow>
+            }
+          >
+            {reports.map((data, index) => (
+              <Report
+                key={'report-desktop' + index}
+                id={data.id}
+                title={data.title}
+                urlMn={data.urlMn}
+                urlEng={data.urlEng}
+              />
+            ))}
+          </Slider>
         </div>
       </div>
     </>
@@ -72,11 +97,12 @@ const Impact: FC<Impact> = ({ accomplishments, reports }) => {
 }
 
 export default Impact
+
 const settings = {
   dots: false,
   infinite: false,
   speed: 800,
-  slidesToShow: 1,
+  slidesToShow: 3,
   slidesToScroll: 1,
   arrows: true,
   autoplay: false,
@@ -89,7 +115,7 @@ const settings = {
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 3,
         slidesToScroll: 1,
         infinite: false,
       },
@@ -97,7 +123,7 @@ const settings = {
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         initialSlide: 1,
         infinite: false,
