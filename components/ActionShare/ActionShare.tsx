@@ -15,7 +15,7 @@ type Props = {
 const ActionShare: FC<Props> = ({ link, title }) => {
   const [t, i18n] = useTranslation('common')
   const emailText =
-    i18n.language === 'eng'
+    i18n.language === 'en'
       ? ` ${t('actionShare.bodyPart1')} ${title}. ${t('actionShare.bodyPart2')}
 ${link}${t('actionShare.bodyPart3')}
 `
