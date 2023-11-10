@@ -11,6 +11,8 @@ export type openPositions = {
   link: string
 }
 
+const FORM_URL = 'https://givebutter.com/embed/c/donatebreathemongolia'
+
 export const AboutUsSupportUs = ({
   descriptionHtml,
   volunteers,
@@ -25,14 +27,14 @@ export const AboutUsSupportUs = ({
   const { t } = useTranslation('about')
 
   return (
-    <div className="container mx-auto flex flex-col gap-5">
+    <div className="container mx-auto mt-10 flex flex-col gap-5">
       <H2 className="title" title={t('supportUs.title')} />
       <p className="font-normal text-md md:font-bold md:text-lg">{t('supportUs.subtitle')}</p>
       <div className="relative flex flex-row h-[590px] justify-center md:justify-start">
         <Image className="rounded-lg hidden lg:block" height={590} src={bg} priority={false} alt="giveButterImage" />
         <iframe
-          className="relative flex flex-wrap h-[590px] w-auto md:w-[650px] lg:absolute lg:top-0 lg:right-0"
-          src="https://givebutter.com/embed/c/donatebreathemongolia"
+          className="flex h-[590px] w-full md:w-[650px] lg:absolute lg:top-0 lg:right-0 bg-white rounded-lg border-inherit border-2"
+          src={FORM_URL}
           name="givebutterFrame"
           seamless
         ></iframe>

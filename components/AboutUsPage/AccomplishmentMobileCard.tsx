@@ -7,7 +7,7 @@ interface IProps {
   description?: string
 }
 const AccomplishmentMobileCard: FC<IProps> = ({ description, date, image }) => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <div className="accomplishment_card_mobile">
@@ -16,9 +16,7 @@ const AccomplishmentMobileCard: FC<IProps> = ({ description, date, image }) => {
       </div>
       <div className="accomplishment_content_card_mobile">
         <h1 className="title_mobile">{date}</h1>
-        <p className="body_mobile">
-          <span dangerouslySetInnerHTML={{ __html: description }} />
-        </p>
+        {description && <div className="body_mobile" dangerouslySetInnerHTML={{ __html: description }}></div>}
       </div>
     </div>
   )

@@ -3,8 +3,7 @@ import { H2 } from 'components/generic/Typography'
 import { useTranslation } from 'next-i18next'
 import Slider from 'react-slick'
 import Arrow from 'components/generic/Arrow'
-import SliderLeftArrow from 'assets/icons/SliderLeftArrow'
-import SliderRightArrow from 'assets/icons/SliderRightArrow'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import CampaignCard from 'components/Cards/CampaignCard'
 import { Page_Customfields_CampaignAndOurWorkSlider } from 'graphql/generated'
@@ -76,12 +75,12 @@ export const OurWorkCarousel = ({
         {...settings}
         prevArrow={
           <Arrow check={0} classes="prev-gray-arrow">
-            <SliderLeftArrow />
+            <ChevronLeftIcon className="w-8 h-8 text-white" />
           </Arrow>
         }
         nextArrow={
           <Arrow check={campaigns.length - 1} classes="next-gray-arrow">
-            <SliderRightArrow />
+            <ChevronRightIcon className="w-8 h-8 text-white" />
           </Arrow>
         }
       >

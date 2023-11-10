@@ -16,7 +16,7 @@ const GiveButterDialog = () => {
           <button onClick={() => setDialogOpen(false)} className="absolute right-6 top-4">
             <XMarkIcon className="h-5 w-5" />
           </button>
-          <iframe className="mt-2 min-h-[600px] w-full" src={FORM_URL} />
+          <iframe className="min-h-[600px] w-full bg-white rounded-lg border-inherit border-2" src={FORM_URL} />
         </Dialog.Panel>
       </div>
     </Dialog>
