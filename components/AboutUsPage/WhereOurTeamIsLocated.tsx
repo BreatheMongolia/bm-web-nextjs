@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import Image from 'next/image'
 import WorldMap from 'assets/images/WorldMap'
 import UsFlag from 'assets/icons/Flags/US'
 import MongoliaFlag from 'assets/icons/Flags/Mongolia'
