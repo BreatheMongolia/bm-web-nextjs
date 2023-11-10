@@ -3,7 +3,6 @@ import teamBreatheMongolia from 'assets/images/teamBreatheMongolia.jpg'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { log } from 'console'
 
 const VALID_ROUTES = [
   {
@@ -31,7 +30,6 @@ const VALID_ROUTES = [
 export const AboutUsHeader = () => {
   const { t } = useTranslation('about')
   const pathname = usePathname()
-  console.log(pathname)
 
   return (
     <div className="flex flex-col">
