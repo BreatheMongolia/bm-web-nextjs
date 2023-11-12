@@ -15,35 +15,7 @@ const settings = {
   autoplaySpeed: 5000,
   cssEase: 'linear',
   adaptiveHeight: true,
-  centerMode: true,
   variableWidth: false,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: false,
-        variableWidth: true,
-      },
-    },
-  ],
 }
 
 type People = {
@@ -63,7 +35,6 @@ const FeaturedTeamMembers = ({ people }: { people: People[] }) => {
     <>
       <div className="flex flex-col justify-center">
         <h1 className="our_team_section_title">{t('ourTeam.featuredMembers')}</h1>
-        {/* <div className="carousel_container"> */}
         <Slider
           {...settings}
           prevArrow={
@@ -81,7 +52,6 @@ const FeaturedTeamMembers = ({ people }: { people: People[] }) => {
             <FeaturedMemberCard key={person.linkedin} person={person} />
           ))}
         </Slider>
-        {/* </div> */}
       </div>
     </>
   )
