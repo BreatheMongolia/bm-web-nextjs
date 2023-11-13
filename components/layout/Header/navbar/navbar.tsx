@@ -31,7 +31,7 @@ export const Navbar = () => {
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
           <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
           <MenuItem title={t('agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
-          <MenuItem title={t('aboutUs')} href="/about/info" isActive={path.includes('about/info')} />
+          <MenuItem title={t('aboutUs')} href="/about/info" isActive={path.includes('about')} />
 
           {/* GiveButter Button */}
           <button

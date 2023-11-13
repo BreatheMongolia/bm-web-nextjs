@@ -184,7 +184,7 @@ h1.our_team_section_title {
 
 /* MOBILE SIZING */
 
-@media only screen and (max-width: 1064px) {
+@media only screen and (max-width: 1000px) {
   h1.our_team_section_title {
     font-size: 20px;
     padding-top: 25px;
@@ -212,30 +212,30 @@ h1.our_team_section_title {
   .member_card_right {
     width: 300px;
     height: 300px;
-  }
 
-  .member_info {
-    margin: 0px 20px 0px 20px;
-    height: 290px;
+    .member_info {
+      margin: 0px 20px 0px 20px;
+      height: 290px;
 
-    .member_name {
-      font-size: 18px;
-      padding-top: 10px;
-    }
-    .member_role {
-      font-size: 14px;
-      margin: 5px 0px 10px 0px;
-    }
+      .member_name {
+        font-size: 18px;
+        padding-top: 10px;
+      }
+      .member_role {
+        font-size: 14px;
+        margin: 5px 0px 10px 0px;
+      }
 
-    .member_bio {
-      font-size: 14px;
-      padding-top: 0px;
-      margin: 0;
-    }
+      .member_bio {
+        font-size: 14px;
+        padding-top: 0px;
+        margin: 0;
+      }
 
-    .member_since {
-      font-size: 12px;
-      padding: 10px 0px 0px 0px;
+      .member_since {
+        font-size: 12px;
+        padding: 10px 0px 0px 0px;
+      }
     }
   }
 }

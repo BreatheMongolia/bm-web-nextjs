@@ -17,8 +17,8 @@ const FeaturedMemberCard: FC<Props> = ({ person }) => {
         <div className="member_info">
           <h4 className="member_name">{person.name}</h4>
           <h5 className="member_role">{person.role}</h5>
-          <p className="hidden xl:block member_bio">{person.description}</p>
-          <p className="xl:hidden member_bio">{truncate(person.description)}</p>
+          <p className="hidden lg:block member_bio">{person.description}</p>
+          <p className="lg:hidden member_bio">{truncate(person.description)}</p>
           <p className="member_since">{person.memberSince}</p>
         </div>
         <div className="social_btns">
