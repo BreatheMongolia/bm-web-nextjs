@@ -1,5 +1,5 @@
 import React from 'react'
-import { getFeaturedTakeActions, getTakeActionsLatest } from 'lib/graphql-api/queries/takeAction'
+import { getFeaturedTakeActions, getTakeActionsLatest, getTakeActionText } from 'lib/graphql-api/queries/takeAction'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getTranslated } from 'lib/utils/getTranslated'
@@ -72,7 +72,7 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
   return takeActions
 }
 
-const TakeActionsPage = ({ latest, featured, locale }) => {
+const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
@@ -96,7 +96,7 @@ const TakeActionsPage = ({ latest, featured, locale }) => {
   return (
     <div>
       <div className="container mx-auto flex flex-col px-[1rem] lg:px-[6rem] xl:px-[9rem] 2xl:px-[16rem]">
-        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} />
+        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} text={takeActionText}/>
 
         <DonateSection />
       </div>
@@ -109,6 +109,8 @@ export default TakeActionsPage
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const featured: any = await getFeaturedTakeActions('/')
   const latest = await getTakeActionsLatest()
+  const takeActionText = await getTakeActionText()
+  console.log("take action text:", takeActionText)
 
   return {
     props: {
@@ -116,6 +118,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       featured: featured.featuredTakeActionsLanding,
       latest,
       locale,
+      takeActionText
     },
     revalidate: 60,
   }
