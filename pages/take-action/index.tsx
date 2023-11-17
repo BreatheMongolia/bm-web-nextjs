@@ -76,6 +76,9 @@ const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
+  console.log(takeActionText)
+  const { whatYouCanDo, whatYouCanDoMn, whatYouCanDoText, whatYouCanDoTextMn, ...donationsText } = takeActionText;
+  const { donationText, donationTextMn, donationTitle, donationTitleMn, disclaimerText, disclaimerTextMn, waysToGive, waysToGiveMn, ...actionText } = takeActionText;
 
   takeActions = takeActions.filter(
     (value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index,
@@ -96,9 +99,9 @@ const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   return (
     <div>
       <div className="container mx-auto flex flex-col px-[1rem] lg:px-[6rem] xl:px-[9rem] 2xl:px-[16rem]">
-        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} text={takeActionText}/>
+        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} text={actionText}/>
 
-        <DonateSection />
+        <DonateSection text={donationsText}/>
       </div>
     </div>
   )
@@ -110,7 +113,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const featured: any = await getFeaturedTakeActions('/')
   const latest = await getTakeActionsLatest()
   const takeActionText = await getTakeActionText()
-  console.log("take action text:", takeActionText)
 
   return {
     props: {

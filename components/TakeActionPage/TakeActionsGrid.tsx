@@ -6,6 +6,7 @@ import Link from 'next/link'
 import PaginationComponent from '../generic/PaginationComponent'
 import TakeActionTile from '../Cards/TakeActionTile'
 import { useWidth } from 'lib/utils/useWidth'
+import { getTranslated } from 'lib/utils/getTranslated'
 
 export type TakeActionAll = {
   id: number
@@ -20,6 +21,8 @@ export type TakeActionAll = {
 export type TakeActionText = {
   whatYouCanDo: string,
   whatYouCanDoMn: string,
+  whatYouCanDoText: string,
+  whatYouCanDoTextMn: string,
 }
 
 export const TakeActionsGrid = ({ takeAction, categories, text }: { takeAction: TakeActionAll[]; categories: string[]; text: TakeActionText }) => {
@@ -28,7 +31,6 @@ export const TakeActionsGrid = ({ takeAction, categories, text }: { takeAction: 
   const [pageNumberLimit, setPageNumberLimit] = useState(18)
   const [filteredCategories, setFilteredCategories] = useState<string[]>([])
   let screenWidth = useWidth()
-  const router = useRouter()
 
   useEffect(() => {
     getFilteredTakeActions()
@@ -87,7 +89,8 @@ export const TakeActionsGrid = ({ takeAction, categories, text }: { takeAction: 
 
   return (
     <div className="flex flex-col justify-center ta-actions">
-      <H2 title={router.locale == "mn" ? text.whatYouCanDoMn : text.whatYouCanDo} className="ta-mobile-header" />
+      <H2 title={getTranslated(text.whatYouCanDo, text.whatYouCanDoMn)} className="ta-mobile-header" />
+      <p>{getTranslated(text.whatYouCanDoText, text.whatYouCanDoTextMn)}</p>
 
       <div className="ta-categories">
         <div className={'ta-category ' + (!filteredCategories.length ? 'selected' : '')} onClick={() => showAll()}>

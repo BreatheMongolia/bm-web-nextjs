@@ -60,8 +60,24 @@ export async function getTakeActionText() {
     `query getTakeActionTexts {
       pageSettings {
         TakeActionTexts {
+          waysToGive {
+            title
+            url
+            }
+          waysToGiveMn {
+            title
+            url
+            }
           whatYouCanDo
           whatYouCanDoMn
+          whatYouCanDoText
+          whatYouCanDoTextMn
+          donationTitleMn
+          donationTitle
+          donationTextMn
+          donationText
+          disclaimerTextMn
+          disclaimerText
           }
         }
       }
