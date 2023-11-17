@@ -9,7 +9,7 @@ import { getAccomplishments, getReports } from 'lib/graphql-api/queries/aboutUs'
 
 export default function ImpactPage({ page, reports, accomplishments, locale }) {
   return (
-    <div className="flex flex-col h-full bg-[#FAFAFF] overflow-x-hidden">
+    <div className="flex flex-col bg-[#FAFAFF]">
       <AboutUsHeader />
 
       {/* Content */}

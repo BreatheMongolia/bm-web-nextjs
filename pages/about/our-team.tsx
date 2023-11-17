@@ -9,7 +9,7 @@ import { getPeople } from 'lib/graphql-api/queries/people'
 
 export default function OurTeamPage({ page, people, locale }) {
   return (
-    <div className="flex flex-col h-full bg-[#FAFAFF] overflow-x-hidden">
+    <div className="flex flex-col bg-[#FAFAFF]">
       <AboutUsHeader />
 
       {/* Content */}

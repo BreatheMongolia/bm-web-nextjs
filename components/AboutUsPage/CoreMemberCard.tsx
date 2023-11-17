@@ -6,7 +6,7 @@ type Props = {
 }
 
 const CoreMemberCard: FC<Props> = ({ person }) => {
-  const truncate = (input: string) => (input?.length > 255 ? `${input.substring(0, 255)}...` : input)
+  const truncate = (input: string) => (input?.length > 270 ? `${input.substring(0, 270)}...` : input)
 
   return (
     <div className="core-member-card text-center">
