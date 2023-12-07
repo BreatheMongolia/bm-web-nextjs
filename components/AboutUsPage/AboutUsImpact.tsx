@@ -1,19 +1,19 @@
 import React, { FC } from 'react'
-import AccomplishmentCard from './AccomplishmentCard'
 import { useTranslation } from 'next-i18next'
 import Report from './Report'
 import Slider from 'react-slick'
 import Arrow from 'components/generic/Arrow'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
-import AccomplishmentMobileCard from './AccomplishmentMobileCard'
 import { H2 } from 'components/generic/Typography'
+import CampaignCard from 'components/Cards/CampaignCard'
 
 interface Impact {
   accomplishments: any[]
   reports: any[]
+  locale: string
 }
 
-const Impact: FC<Impact> = ({ accomplishments, reports }) => {
+const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
   const { t } = useTranslation('about')
 
   // Sort accomplishments by newest to oldest
@@ -24,17 +24,21 @@ const Impact: FC<Impact> = ({ accomplishments, reports }) => {
     <>
       <div className="impact-container sm:mb-100">
         <h1 className="our_accomplishment_title">{t('impact.ourAccomplishments')}</h1>
-        {/* Mobile */}
-        <div className="timeline hidden sm:block">
-          {accomplishments.map((acc, id) => (
-            <AccomplishmentCard key={'ac-mobile' + id} {...acc} />
-          ))}
-        </div>
-        {/* Desktop */}
-        <div className="timeline sm:hidden">
-          {accomplishments.map((acc, id) => (
-            <AccomplishmentMobileCard key={'ac-desktop' + id} {...acc} />
-          ))}
+
+        <div className="timeline">
+          {accomplishments.map((acc, id) => {
+            return (
+              <CampaignCard
+                key={'accomplishment' + id}
+                id={id}
+                title={acc.title}
+                campaignDate={acc.date}
+                description={acc.description}
+                category={acc.category}
+                campaignImage={acc.image}
+              />
+            )
+          })}
         </div>
       </div>
       <div className="container mx-auto flex flex-col">

@@ -13,7 +13,7 @@ export default function ImpactPage({ page, reports, accomplishments, locale }) {
       <AboutUsHeader />
 
       {/* Content */}
-      <AboutUsImpact reports={reports} accomplishments={accomplishments} />
+      <AboutUsImpact reports={reports} accomplishments={accomplishments} locale={locale} />
 
       <div className="container mx-auto flex flex-col gap-20">
         <OurPartners
@@ -34,12 +34,14 @@ const getTransformedAccomplishment = (accData: string | any[], locale: string) =
 
   for (let i = 0; i < accData.length; i++) {
     accomplishments.push({
+      title: getTranslated(accData[i].node.customFields.title, accData[i].node.customFields.titleMn, locale),
+      category: getTranslated(accData[i].node.customFields.category, accData[i].node.customFields.categoryMn, locale),
       description: getTranslated(
         accData[i].node.customFields.description,
         accData[i].node.customFields.descriptionMn,
         locale,
       ),
-      date: getTranslated(accData[i].node.customFields.date, accData[i].node.customFields.dateMn, locale),
+      date: accData[i].node.customFields.date,
       image:
         accData[i].node.customFields.image?.mediaDetails?.sizes !== null
           ? accData[i].node.customFields.image?.mediaDetails?.sizes[0]?.sourceUrl

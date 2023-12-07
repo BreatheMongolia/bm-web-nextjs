@@ -88,6 +88,7 @@ export const OurWorkCarousel = ({
           <CampaignCard
             key={'campaign' + idx}
             id={idx}
+            isTruncate={true}
             title={getTranslated(campaign.campaignTitle, campaign.campaignTitleMn, locale)}
             campaignDate={campaign.campaignDate}
             url={campaign.campaignCatgeoryUrl}
