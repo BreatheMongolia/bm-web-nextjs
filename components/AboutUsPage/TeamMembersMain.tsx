@@ -1,11 +1,6 @@
-import React, { FC } from 'react'
+import React from 'react'
 import CoreTeamMembers from './CoreTeamMembers'
 import FeaturedTeamMembers from './FeaturedTeamMembers'
-import People from './TeamMembersContainer'
-
-type Props = {
-  people: People[]
-}
 
 type People = {
   name: string
@@ -17,7 +12,7 @@ type People = {
   linkedin: string
 }
 
-const TeamMembers: FC<Props> = ({ people }) => {
+const TeamMembersMain = ({ people }: { people: People[] }) => {
   return (
     <div>
       <FeaturedTeamMembers people={people.filter(person => person.featured)} />
@@ -26,4 +21,4 @@ const TeamMembers: FC<Props> = ({ people }) => {
   )
 }
 
-export default TeamMembers
+export default TeamMembersMain

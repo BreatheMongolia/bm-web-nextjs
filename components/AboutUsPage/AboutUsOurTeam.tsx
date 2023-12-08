@@ -1,12 +1,12 @@
 import React from 'react'
 import WhereOurTeamIsLocated from './WhereOurTeamIsLocated'
-import TeamMembersContainer from './TeamMembersContainer'
+import TeamMembersMain from './TeamMembersMain'
 
 const AboutUsOurTeam = ({ people }) => {
   return (
-    <div className="container mx-auto flex flex-col">
+    <div className="container mx-auto flex flex-col gap-10">
       <WhereOurTeamIsLocated />
-      <TeamMembersContainer people={people} />
+      <TeamMembersMain people={people} />
     </div>
   )
 }

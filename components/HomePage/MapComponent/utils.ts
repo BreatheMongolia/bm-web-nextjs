@@ -7,9 +7,9 @@ export function getTransformedDataFromOpenAQ(res: any) {
     for (let i = 0; i < res.results.length; i++) {
       const station = res.results[i]
       // skip if purple air, since we already call their api
-      if (station.manufacturers.find(x => x.manufacturerName === 'PurpleAir')) {
-        continue
-      }
+      // if (station.manufacturers.find(x => x.manufacturerName === 'PurpleAir')) {
+      //   continue
+      // }
 
       const manufacturerName = station.manufacturers.length > 0 ? station.manufacturers[0] : 'OpenAQ Unknown'
       // item.id = 2 -> PM2.5
