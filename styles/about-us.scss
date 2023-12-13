@@ -22,15 +22,16 @@ h1.our_team_section_title {
   background-color: #fff;
   box-shadow: 0px 4px 20px rgba(138, 138, 138, 0.25);
   border-radius: 20px;
-  max-width: 850px;
-  min-height: 430px;
+  width: 850px;
+  height: 430px;
+  margin-bottom: 20px;
+  margin-top: 10px;
   z-index: 10;
 }
 
 .member_card_left {
-  flex: 1;
-  max-width: 350px;
-  max-height: 430px;
+  width: 350px;
+  height: 430px;
 }
 
 .member_img {
@@ -41,15 +42,15 @@ h1.our_team_section_title {
 }
 
 .member_card_right {
-  flex: 1;
-  max-width: 500px;
+  width: 500px;
+  height: 430px;
   line-height: 24px;
 }
 
 .member_info {
-  margin: 42px 50px 0px 40px;
+  margin: 30px 30px 0px 30px;
   text-align: left;
-  line-height: 24px;
+  height: 325px;
 
   .member_name {
     font-size: 20px;
@@ -60,6 +61,7 @@ h1.our_team_section_title {
 
   .member_role {
     font-size: 18px;
+    font-weight: bold;
     margin: 6px 0px 10px 0px;
   }
 
@@ -72,36 +74,30 @@ h1.our_team_section_title {
   .member_bio {
     font-size: 16px;
     margin: 0 0 20px 0;
-    min-height: 145px;
   }
 
   .member_since {
     font-style: italic;
     font-size: 14px;
     margin: 0;
-    padding-bottom: 30px;
-  }
-
-  .linkedin_icon {
-    margin: 0 auto;
     padding-bottom: 10px;
   }
+}
 
-  .social_btns {
+.social_btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+
+  a {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px 0;
-
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 100%;
-      width: 35px;
-      height: 35px;
-      background-color: #0077b5;
-    }
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    background-color: #0077b5;
   }
 }
 
@@ -120,20 +116,33 @@ h1.our_team_section_title {
     padding-top: 20px;
     box-shadow: 0px 4px 20px rgba(138, 138, 138, 0.15);
     border-radius: 20px;
-    height: 435px;
-    width: 290px;
+    height: 440px;
+    width: 310px;
 
-    h4.member_name.core {
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 700;
-      margin: 9px;
-    }
+    .core_member_title {
+      height: 90px;
 
-    h5.member_role.core {
-      font-size: 14px;
-      margin: 0 10px 10px 10px;
-      color: rgba(44, 45, 65, 0.5);
+      h4.member_name.core {
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        margin: 9px;
+      }
+
+      h5.member_role.core {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 10px 10px 10px;
+        color: rgba(44, 45, 65, 0.5);
+        height: 35px;
+      }
+
+      .core_member_break {
+        background-color: rgba(82, 143, 236, 0.25);
+        height: 2px;
+        border: none;
+        margin: 0 20px 0 20px;
+      }
     }
 
     img.profile_icon.core {
@@ -142,23 +151,15 @@ h1.our_team_section_title {
       border-radius: 50%;
       width: 80px;
       height: 80px;
-      padding: 0;
       border: 7px solid rgba(82, 143, 236, 0.25);
-    }
-
-    .core_member_break {
-      background-color: rgba(82, 143, 236, 0.25);
-      height: 2px;
-      border: none;
-      margin: 0 20px 0 20px;
     }
 
     .core_member_info {
       .member_bio {
         font-size: 14px;
-        margin: 20px 17px 20px 17px;
+        margin: 10px 20px;
         color: rgba(44, 45, 65, 0.5);
-        height: 145px;
+        height: 170px;
       }
 
       .social_btns {
@@ -183,7 +184,7 @@ h1.our_team_section_title {
 
 /* MOBILE SIZING */
 
-@media only screen and (max-width: 1064px) {
+@media only screen and (max-width: 1000px) {
   h1.our_team_section_title {
     font-size: 20px;
     padding-top: 25px;
@@ -192,45 +193,49 @@ h1.our_team_section_title {
 
   .member_card {
     flex-direction: column;
-    max-width: 300px;
-    max-height: 655px;
+    width: 300px;
+    height: 655px;
+    margin-bottom: 20px;
   }
 
   .member_card_left {
     width: 300px;
-    height: 250px;
+    height: 300px;
   }
 
   .member_img {
     border-radius: 20px 20px 0px 0px;
+    width: 300px;
+    height: 300px;
   }
 
   .member_card_right {
     width: 300px;
-    height: 405px;
-  }
+    height: 300px;
 
-  .member_info {
-    margin: 0px 20px 0px 20px;
+    .member_info {
+      margin: 0px 20px 0px 20px;
+      height: 290px;
 
-    .member_name {
-      font-size: 18px;
-      padding-top: 10px;
-    }
-    .member_role {
-      font-size: 14px;
-      margin: 5px 0px 10px 0px;
-    }
+      .member_name {
+        font-size: 18px;
+        padding-top: 10px;
+      }
+      .member_role {
+        font-size: 14px;
+        margin: 5px 0px 10px 0px;
+      }
 
-    .member_bio {
-      font-size: 14px;
-      padding-top: 0px;
-      margin: 0;
-    }
+      .member_bio {
+        font-size: 14px;
+        padding-top: 0px;
+        margin: 0;
+      }
 
-    .member_since {
-      font-size: 12px;
-      padding: 10px 0px 0px 0px;
+      .member_since {
+        font-size: 12px;
+        padding: 10px 0px 0px 0px;
+      }
     }
   }
 }
@@ -242,7 +247,6 @@ h1.our_team_section_title {
   flex-direction: row;
   background: #528fec;
   align-items: center;
-  // width: fit-content;
 }
 
 .left_container {
@@ -674,7 +678,7 @@ button.read_more_btn:hover {
 
 .report {
   width: 310px;
-  min-width: 310px;
+  // min-width: 310px;
   height: 118px;
   background: #ffffff;
   border: 0.3px solid #b5b5b5;

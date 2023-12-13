@@ -1,26 +1,18 @@
-import { AboutUsHeader, AboutUsSupportUs } from 'components/AboutUsPage'
+import { AboutUsHeader, AboutUsOurStory } from 'components/AboutUsPage'
 import { OurPartners } from 'components/HomePage'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getHomePage, getVolunteers } from 'lib/graphql-api/queries/home'
+import { getHomePage } from 'lib/graphql-api/queries/home'
 import { getTranslated } from 'lib/utils/getTranslated'
+import { getStories } from 'lib/graphql-api/queries/ourStories'
 
-export default function SupportUsPage({ page, volunteers, locale }) {
+export default function OurStoryPage({ page, stories, locale }) {
   return (
-    <div className="flex flex-col h-full bg-[#FAFAFF] overflow-x-hidden">
+    <div className="flex flex-col bg-[#FAFAFF]">
       <AboutUsHeader />
 
       {/* Content */}
-      <AboutUsSupportUs
-        descriptionHtml={getTranslated(
-          page.customFields.joinBreatheMongoliaDescription,
-          page.customFields.joinBreatheMongoliaDescriptionMn,
-          locale,
-        )}
-        volunteers={volunteers}
-        countriesInfoText={page.customFields.countriesInfoText}
-        locale={locale}
-      />
+      <AboutUsOurStory stories={stories} />
 
       <div className="container mx-auto flex flex-col gap-20">
         <OurPartners
@@ -36,14 +28,29 @@ export default function SupportUsPage({ page, volunteers, locale }) {
   )
 }
 
+const getAllStories = (StoriesData: string | any[], locale: string) => {
+  const stories = []
+  for (let i = 0; i < StoriesData.length; i++) {
+    stories.push({
+      title: getTranslated(StoriesData[i].node.customFields.title, StoriesData[i].node.customFields.titleMn, locale),
+      description: getTranslated(
+        StoriesData[i].node.customFields.description,
+        StoriesData[i].node.customFields.descriptionMn,
+        locale,
+      ),
+    })
+  }
+  return stories
+}
+
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
-  const volunteers = await getVolunteers()
+  const stories = await getStories()
 
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
-      volunteers,
+      stories: getAllStories(stories, locale),
       locale,
       page,
     },
