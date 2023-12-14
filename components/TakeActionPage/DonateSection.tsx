@@ -32,7 +32,7 @@ export const DonateSection = ({ text }: {text: DonationsText} ) => {
         {
           text.waysToGive.map( (pair, idx) => {
             return (
-              <li>
+              <li key={idx}>
                 <Link href={getTranslated(pair.url, text.waysToGiveMn[idx].url)} target={'_blank'} className="text-black hover:text-bm-blue my-2">
                   {getTranslated(pair.title, text.waysToGiveMn[idx].title)}
                 </Link>
