@@ -176,12 +176,15 @@ export type AccomplishmentToPreviewConnectionEdge = AccomplishmentConnectionEdge
 /** Field Group */
 export type Accomplishment_Customfields = {
   __typename?: 'Accomplishment_Customfields';
+  category?: Maybe<Scalars['String']>;
+  categoryMn?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['String']>;
-  dateMn?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   descriptionMn?: Maybe<Scalars['String']>;
   fieldGroupName?: Maybe<Scalars['String']>;
   image?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
 };
 
 /** The actionType type */
