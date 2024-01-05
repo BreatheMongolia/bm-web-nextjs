@@ -68,3 +68,28 @@ export async function getReports(): Promise<any> {
 
   return data?.reports?.edges || []
 }
+
+export async function getInfoSettings(): Promise<any> {
+  const data = await fetchAPI(
+    `query GetInfoSettings {
+      pageSettings {
+        aboutUs {
+          description
+          descriptionMn
+          title
+          titleMn
+          image {
+            mediaItemUrl
+          }
+          imageMn {
+            mediaItemUrl
+            }
+          }
+        }
+      }
+    `,
+    {},
+  )
+  return data?.pageSettings?.aboutUs || []
+
+}
