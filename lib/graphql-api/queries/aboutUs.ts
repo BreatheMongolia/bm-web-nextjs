@@ -11,7 +11,6 @@ export async function getAccomplishments(): Promise<any> {
             node {
               id 
               customFields {
-                dateMn
                 date
                 image {
                   mediaItemUrl
@@ -23,6 +22,10 @@ export async function getAccomplishments(): Promise<any> {
                     }
                     }
                 }
+                category
+                categoryMn
+                title
+                titleMn
                 description
                 descriptionMn
                 fieldGroupName
