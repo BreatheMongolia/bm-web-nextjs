@@ -72,17 +72,19 @@ export async function getReports(): Promise<any> {
 export async function getInfoSettings(): Promise<any> {
   const data = await fetchAPI(
     `query GetInfoSettings {
-      pageSettings {
+      aboutUsPageSettings {
         aboutUs {
-          description
-          descriptionMn
-          title
-          titleMn
-          image {
-            mediaItemUrl
-          }
-          imageMn {
-            mediaItemUrl
+          info {
+            description
+            descriptionMn
+            title
+            titleMn
+            image {
+              mediaItemUrl
+            }
+            imageMn {
+              mediaItemUrl
+              }
             }
           }
         }
@@ -90,6 +92,114 @@ export async function getInfoSettings(): Promise<any> {
     `,
     {},
   )
-  return data?.pageSettings?.aboutUs || []
+  return data?.aboutUsPageSettings.aboutUs?.info || []
+
+}
+
+export async function getImpactSettings(): Promise<any> {
+  const data = await fetchAPI(
+    `query GetImpactSettings {
+      aboutUsPageSettings {
+        aboutUs {
+          ourWork {
+            description
+            descriptionMn
+            title
+            titleMn
+            image {
+              mediaItemUrl
+            }
+            imageMn {
+              mediaItemUrl
+              }
+            }
+          }
+        }
+      }
+    `,
+    {},
+  )
+  return data?.aboutUsPageSettings.aboutUs?.ourWork || []
+
+}
+
+export async function getOurStorySettings(): Promise<any> {
+  const data = await fetchAPI(
+    `query GetOurStorySettings {
+      aboutUsPageSettings {
+        aboutUs {
+          ourStory {
+            description
+            descriptionMn
+            title
+            titleMn
+            image {
+              mediaItemUrl
+            }
+            imageMn {
+              mediaItemUrl
+              }
+            }
+          }
+        }
+      }
+    `,
+    {},
+  )
+  return data?.aboutUsPageSettings.aboutUs?.ourStory || []
+
+}
+
+export async function getOurTeamSettings(): Promise<any> {
+  const data = await fetchAPI(
+    `query GetOurTeamSettings {
+      aboutUsPageSettings {
+        aboutUs {
+          ourTeam {
+            description
+            descriptionMn
+            title
+            titleMn
+            image {
+              mediaItemUrl
+            }
+            imageMn {
+              mediaItemUrl
+              }
+            }
+          }
+        }
+      }
+    `,
+    {},
+  )
+  return data?.aboutUsPageSettings.aboutUs?.ourTeam || []
+
+}
+
+export async function getSupportUsSettings(): Promise<any> {
+  const data = await fetchAPI(
+    `query GetSupportUsSettings {
+      aboutUsPageSettings {
+        aboutUs {
+          supportUs {
+            description
+            descriptionMn
+            title
+            titleMn
+            image {
+              mediaItemUrl
+            }
+            imageMn {
+              mediaItemUrl
+              }
+            }
+          }
+        }
+      }
+    `,
+    {},
+  )
+  return data?.aboutUsPageSettings.aboutUs?.supportUs || []
 
 }

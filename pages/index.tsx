@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Page } from 'graphql/generated'
 import { RankType, StationType } from 'lib/air-pollution-map/types'
 // lib functions/queries
-import { getHomePage, getVolunteers } from 'lib/graphql-api/queries/home'
+import { getHomeLandingPageSettings, getHomePage, getVolunteers } from 'lib/graphql-api/queries/home'
 import {
   fetchPurpleAirStations,
   fetchOpenAQStations,
@@ -27,6 +27,7 @@ import {
 } from 'components/HomePage'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 import dayjs from 'dayjs'
+import { getTranslated } from 'lib/utils/getTranslated'
 
 export default function Index({
   page,
@@ -142,6 +143,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   // const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const stations = [...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+  const data = await getHomeLandingPageSettings()
 
   return {
     props: {
@@ -151,6 +153,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       volunteers,
       stations,
       globalRanks: airVisualGlobalRanks,
+      title: getTranslated(data.title, data.titleMn, locale),
+      description: getTranslated(data.description, data.descriptionMn, locale),
+      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,

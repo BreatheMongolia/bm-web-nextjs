@@ -76,6 +76,31 @@ export async function getFeaturedTakeActions(
   return data.page?.customFields || []
 }
 
+export async function getTakeActionLandingPageSettings(): Promise<any> {
+  const data = await fetchAPI(
+    `query getTakeActionLandingPageSettings {
+      takeActionSettings {
+        TakeActionTexts {
+          landingPage {
+            description
+            descriptionMn
+            title
+            titleMn
+            landingPageImage {
+              mediaItemUrl
+            }
+            landingPageImageMn {
+              mediaItemUrl
+              }
+            }
+          }
+        }
+      }
+    `,
+  )
+  return data.takeActionSettings.TakeActionTexts?.landingPage || []
+}
+
 export async function getTakeActionSlugs(): Promise<TakeAction[]> {
   const data = await fetchAPI(
     `query getAllTakeActions {
