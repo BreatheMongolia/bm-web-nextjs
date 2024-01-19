@@ -100,7 +100,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       agaarNegNews,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.landingPageImage?.mediaItemUrl, data.landingPageImageMn?.mediaItemUrl, locale)
+      image: getTranslated(data.landingPageImage.mediaItemUrl, data.landingPageImageMn.mediaItemUrl, locale)
     },
     revalidate: 60 * 5, // every 5 minutes
   }
