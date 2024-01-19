@@ -7,6 +7,7 @@ import PaginationComponent from '../generic/PaginationComponent'
 import TakeActionTile from '../Cards/TakeActionTile'
 import { useWidth } from 'lib/utils/useWidth'
 import { getTranslated } from 'lib/utils/getTranslated'
+import parse from 'html-react-parser'
 
 export type TakeActionAll = {
   id: number
@@ -90,7 +91,7 @@ export const TakeActionsGrid = ({ takeAction, categories, text }: { takeAction: 
   return (
     <div className="flex flex-col justify-center ta-actions">
       <H2 title={getTranslated(text.whatYouCanDo, text.whatYouCanDoMn)} className="ta-mobile-header" />
-      <p>{getTranslated(text.whatYouCanDoText, text.whatYouCanDoTextMn)}</p>
+      {parse(getTranslated(text.whatYouCanDoText, text.whatYouCanDoTextMn))}
 
       <div className="ta-categories">
         <div className={'ta-category ' + (!filteredCategories.length ? 'selected' : '')} onClick={() => showAll()}>

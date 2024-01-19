@@ -58,7 +58,7 @@ export async function getTakeActionsLatest() {
 export async function getTakeActionText() {
   const data = await fetchAPI(
     `query getTakeActionTexts {
-      pageSettings {
+      takeActionSettings {
         TakeActionTexts {
           waysToGive {
             title
@@ -84,7 +84,7 @@ export async function getTakeActionText() {
     `,
   )
 
-  return data.pageSettings?.TakeActionTexts || []
+  return data.takeActionSettings?.TakeActionTexts || []
 }
 
 export async function getFeaturedTakeActions(

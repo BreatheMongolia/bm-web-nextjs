@@ -5,6 +5,7 @@ import { H2 } from 'components/generic/Typography'
 import { urls } from 'lib/utils/urls'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
+import parse from 'html-react-parser'
 
 export type DonationsText = {
   donationText: string,
@@ -77,7 +78,7 @@ export const DonateSection = ({ text }: {text: DonationsText} ) => {
       <div className="hidden md:flex flex-row ta-section">
         <div className="basis-2/3 ta-content">
           <H2 title={getTranslated(text.donationTitle, text.donationTitleMn)} />
-          <p className="pr-5">{getTranslated(text.donationText, text.donationTextMn)}</p>
+          <p className="pr-5">{parse(getTranslated(text.donationText, text.donationTextMn))}</p>
           {donateBtn()}
         </div>
         <div className="basis-1/3 m-5 ta-sidebar">
@@ -104,7 +105,7 @@ export const DonateSection = ({ text }: {text: DonationsText} ) => {
       </div>
       {/* Disclosure */}
       <div className="flex p-5 text-xs md:py-10 md:px-0 md:text-sm">
-        <p>{getTranslated(text.disclaimerText, text.disclaimerTextMn)}</p>
+        <p>{parse(getTranslated(text.disclaimerText, text.disclaimerTextMn))}</p>
       </div>
     </div>
   )
