@@ -84,16 +84,16 @@ export async function getFeaturedNews(): Promise<News[]> {
 export async function getNewsLandingPageSettings(): Promise<any> {
   const data = await fetchAPI(
     `query getNewsLandingPageSettings {
-      pageSettings {
-        TakeActionTexts {
-          landingPageImage {
-            mediaItemUrl
-          }
+      newsPageSettings {
+        newsLanding {
           description
           descriptionMn
           title
           titleMn
-          landingPageImageMn {
+          image {
+            mediaItemUrl
+          }
+          imageMn {
             mediaItemUrl
             }
           }
@@ -101,7 +101,7 @@ export async function getNewsLandingPageSettings(): Promise<any> {
       }
     `,
   )
-  return data.pageSettings.TakeActionTexts || []
+  return data.newsPageSettings.newsLanding || []
 }
 
 
