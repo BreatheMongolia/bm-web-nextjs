@@ -23,6 +23,85 @@ export type Acf_Link = {
   url?: Maybe<Scalars['String']>;
 };
 
+/** About us Page Settings options */
+export type AboutUsPageSettings = {
+  __typename?: 'AboutUsPageSettings';
+  aboutUs?: Maybe<AboutUsPageSettings_Aboutus>;
+  pageSlug?: Maybe<Scalars['String']>;
+  pageTitle?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type AboutUsPageSettings_Aboutus = {
+  __typename?: 'AboutUsPageSettings_Aboutus';
+  fieldGroupName?: Maybe<Scalars['String']>;
+  info?: Maybe<AboutUsPageSettings_Aboutus_Info>;
+  ourStory?: Maybe<AboutUsPageSettings_Aboutus_OurStory>;
+  ourTeam?: Maybe<AboutUsPageSettings_Aboutus_OurTeam>;
+  ourWork?: Maybe<AboutUsPageSettings_Aboutus_OurWork>;
+  supportUs?: Maybe<AboutUsPageSettings_Aboutus_SupportUs>;
+};
+
+/** Field Group */
+export type AboutUsPageSettings_Aboutus_Info = {
+  __typename?: 'AboutUsPageSettings_Aboutus_Info';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type AboutUsPageSettings_Aboutus_OurStory = {
+  __typename?: 'AboutUsPageSettings_Aboutus_OurStory';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type AboutUsPageSettings_Aboutus_OurTeam = {
+  __typename?: 'AboutUsPageSettings_Aboutus_OurTeam';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type AboutUsPageSettings_Aboutus_OurWork = {
+  __typename?: 'AboutUsPageSettings_Aboutus_OurWork';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type AboutUsPageSettings_Aboutus_SupportUs = {
+  __typename?: 'AboutUsPageSettings_Aboutus_SupportUs';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
 /** The accomplishment type */
 export type Accomplishment = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & {
   __typename?: 'Accomplishment';
@@ -176,12 +255,15 @@ export type AccomplishmentToPreviewConnectionEdge = AccomplishmentConnectionEdge
 /** Field Group */
 export type Accomplishment_Customfields = {
   __typename?: 'Accomplishment_Customfields';
+  category?: Maybe<Scalars['String']>;
+  categoryMn?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['String']>;
-  dateMn?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   descriptionMn?: Maybe<Scalars['String']>;
   fieldGroupName?: Maybe<Scalars['String']>;
   image?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
 };
 
 /** The actionType type */
@@ -210,7 +292,7 @@ export type ActionType = DatabaseIdentifier & HierarchicalNode & HierarchicalTer
   enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
   /** Connection between the TermNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
@@ -842,7 +924,7 @@ export type Category = DatabaseIdentifier & HierarchicalNode & HierarchicalTermN
   enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
   /** Connection between the TermNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
@@ -1806,7 +1888,7 @@ export type ContentNode = {
   enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']>;
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
@@ -4379,7 +4461,7 @@ export type MenuItemConnectionPageInfo = {
 export type MenuItemLinkable = {
   /** The unique identifier stored in the database */
   databaseId: Scalars['Int'];
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
@@ -4820,6 +4902,26 @@ export enum NewsIdType {
   /** Identify a resource by the URI. */
   Uri = 'URI'
 }
+
+/** News Page Settings options */
+export type NewsPageSettings = {
+  __typename?: 'NewsPageSettings';
+  newsLanding?: Maybe<NewsPageSettings_Newslanding>;
+  pageSlug?: Maybe<Scalars['String']>;
+  pageTitle?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type NewsPageSettings_Newslanding = {
+  __typename?: 'NewsPageSettings_Newslanding';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
 
 /** Connection between the News type and the actionType type */
 export type NewsToActionTypeConnection = ActionTypeConnection & Connection & {
@@ -6474,7 +6576,7 @@ export type PostFormat = DatabaseIdentifier & Node & TermNode & UniformResourceI
   enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
   /** Connection between the TermNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
@@ -8226,6 +8328,8 @@ export type RootMutationUpdateVolunteer_PositionArgs = {
 /** The root entry point into the Graph */
 export type RootQuery = {
   __typename?: 'RootQuery';
+  /** About us Page Settings options */
+  aboutUsPageSettings?: Maybe<AboutUsPageSettings>;
   /** An object of the accomplishment Type.  */
   accomplishment?: Maybe<Accomplishment>;
   /**
@@ -8285,6 +8389,8 @@ export type RootQuery = {
    * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
    */
   newsBy?: Maybe<News>;
+  /** News Page Settings options */
+  newsPageSettings?: Maybe<NewsPageSettings>;
   /** Connection between the RootQuery type and the news type */
   newses?: Maybe<RootQueryToNewsConnection>;
   /** Fetches an object given its ID */
@@ -8372,6 +8478,8 @@ export type RootQuery = {
    * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
    */
   takeActionBy?: Maybe<TakeAction>;
+  /** Take Action Settings options */
+  takeActionSettings?: Maybe<TakeActionSettings>;
   /** Connection between the RootQuery type and the takeAction type */
   takeActions?: Maybe<RootQueryToTakeActionConnection>;
   /** Connection between the RootQuery type and the Taxonomy type */
@@ -11114,7 +11222,7 @@ export type Tag = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & Unif
   enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
   /** Connection between the TermNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
@@ -11602,6 +11710,61 @@ export enum TakeActionIdType {
   /** Identify a resource by the URI. */
   Uri = 'URI'
 }
+
+/** Take Action Settings options */
+export type TakeActionSettings = {
+  __typename?: 'TakeActionSettings';
+  TakeActionTexts?: Maybe<TakeActionSettings_Takeactiontexts>;
+  pageSlug?: Maybe<Scalars['String']>;
+  pageTitle?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type TakeActionSettings_Takeactiontexts = {
+  __typename?: 'TakeActionSettings_Takeactiontexts';
+  disclaimerText?: Maybe<Scalars['String']>;
+  disclaimerTextMn?: Maybe<Scalars['String']>;
+  donationText?: Maybe<Scalars['String']>;
+  donationTextMn?: Maybe<Scalars['String']>;
+  donationTitle?: Maybe<Scalars['String']>;
+  donationTitleMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  landingPage?: Maybe<TakeActionSettings_Takeactiontexts_LandingPage>;
+  waysToGive?: Maybe<Array<Maybe<TakeActionSettings_Takeactiontexts_WaysToGive>>>;
+  waysToGiveMn?: Maybe<Array<Maybe<TakeActionSettings_Takeactiontexts_WaysToGiveMn>>>;
+  whatYouCanDo?: Maybe<Scalars['String']>;
+  whatYouCanDoMn?: Maybe<Scalars['String']>;
+  whatYouCanDoText?: Maybe<Scalars['String']>;
+  whatYouCanDoTextMn?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type TakeActionSettings_Takeactiontexts_LandingPage = {
+  __typename?: 'TakeActionSettings_Takeactiontexts_LandingPage';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  landingPageImage?: Maybe<MediaItem>;
+  landingPageImageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type TakeActionSettings_Takeactiontexts_WaysToGive = {
+  __typename?: 'TakeActionSettings_Takeactiontexts_waysToGive';
+  fieldGroupName?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type TakeActionSettings_Takeactiontexts_WaysToGiveMn = {
+  __typename?: 'TakeActionSettings_Takeactiontexts_waysToGiveMn';
+  fieldGroupName?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
 
 /** Connection between the TakeAction type and the actionType type */
 export type TakeActionToActionTypeConnection = ActionTypeConnection & Connection & {
@@ -12103,7 +12266,7 @@ export type TermNode = {
   enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
   /** Connection between the TermNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
@@ -12339,7 +12502,7 @@ export type TimelineTemplate = ContentTemplate & {
 
 /** Any node that has a URI */
 export type UniformResourceIdentifiable = {
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
