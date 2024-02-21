@@ -24,15 +24,15 @@ const SearchPage = ({ data, locale, banner }) => {
   const pageBanner =
     i18n.language === 'en'
       ? {
-          imageUrl: banner.bannerImage.mediaItemUrl,
-          leftText: banner.bannerTextLeft,
-          rightText: getBannerTextRight(banner.bannerTextRight, 'categoryText'),
-        }
+        imageUrl: banner.bannerImage.mediaItemUrl,
+        leftText: banner.bannerTextLeft,
+        rightText: getBannerTextRight(banner.bannerTextRight, 'categoryText'),
+      }
       : {
-          imageUrl: banner.bannerImageMn.mediaItemUrl,
-          leftText: banner.bannerTextLeftMn,
-          rightText: getBannerTextRight(banner.bannerTextRight, 'categoryTextMn'),
-        }
+        imageUrl: banner.bannerImageMn.mediaItemUrl,
+        leftText: banner.bannerTextLeftMn,
+        rightText: getBannerTextRight(banner.bannerTextRight, 'categoryTextMn'),
+      }
 
   if (searchValue === '') {
     return (
@@ -127,13 +127,13 @@ const SearchPage = ({ data, locale, banner }) => {
         additionalResources:
           takeAction.node.customFields.additionalResources != null
             ? takeAction.node.customFields.additionalResources.map(
-                (resource: { title: string; titleMn: string; url: string; urlMn: string }) => {
-                  return {
-                    title: getTranslated(resource.title, resource.titleMn),
-                    url: getTranslated(resource.url, resource.urlMn, locale),
-                  }
-                },
-              )
+              (resource: { title: string; titleMn: string; url: string; urlMn: string }) => {
+                return {
+                  title: getTranslated(resource.title, resource.titleMn),
+                  url: getTranslated(resource.url, resource.urlMn, locale),
+                }
+              },
+            )
             : [],
         pledgeContent: getTranslated(
           takeAction.node.customFields.pledgeContent,
@@ -185,29 +185,29 @@ const SearchPage = ({ data, locale, banner }) => {
     searchValue === ''
       ? newses
       : newses.filter(
-          item =>
-            item.title?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-            item.body?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
-        )
+        item =>
+          item.title?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          item.body?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
+      )
 
   const newFilteredTakeActions =
     searchValue === ''
       ? takeActions
       : takeActions.filter(
-          takeAction =>
-            takeAction.title?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-            takeAction.pledgeContent?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-            takeAction.excerpt?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
-        )
+        takeAction =>
+          takeAction.title?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          takeAction.pledgeContent?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          takeAction.excerpt?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
+      )
 
   const filteredPeople =
     searchValue === ''
       ? people
       : people.filter(
-          item =>
-            item.name?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-            item.description?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
-        )
+        item =>
+          item.name?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          item.description?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
+      )
 
   const count = filteredNews.length + filteredPeople.length + newFilteredTakeActions.length
 
@@ -238,7 +238,7 @@ const SearchPage = ({ data, locale, banner }) => {
 
 export default SearchPage
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetServerSideProps = async ({ locale }) => {
   // FIXME: Should use the search value from router here instead of getting all
   const data: any = await getSearchData()
   const bannerImageData = await getNewsBannerImages('/news')
