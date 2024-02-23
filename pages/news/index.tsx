@@ -9,9 +9,6 @@ import { H2 } from 'components/generic/Typography'
 import { NewsCard, AgaarNegCard } from 'components/Cards'
 // news components
 import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
-// images
-import agaarNegIcon from 'public/images/agaar-neg/agaar-neg-icon.png'
-import bmLogoBlueIcon from 'public/images/logoBlue.png'
 // api/utils
 import { News } from 'graphql/generated'
 import { getAgaarNegNews, getFeaturedNews, getNewsPosts } from 'lib/graphql-api/queries/news'
@@ -42,7 +39,7 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
           <FullNewsGrid news={filteredNews} />
         </div>
         <div>
-          <H2 iconImage={agaarNegIcon} title={t('agaarNegPlatform')} />
+          <H2 iconImage={'/images/agaar-neg/agaar-neg-icon.png'} title={t('agaarNegPlatform')} />
           <NewsGrid defaultRows={1}>
             {agaarNegNews.map((x, idx) => {
               return <AgaarNegCard className={idx > 3 ? 'hidden md:block' : ''} news={x} key={idx} />
@@ -64,7 +61,7 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
           <H2
             title={t('latestOnBm')}
             trailingLineColor="blue"
-            iconImage={bmLogoBlueIcon}
+            iconImage={'/images/logoBlue.png'}
             extraButton={{
               title: t('seemore'),
               url: '/news/breathemongolia',
