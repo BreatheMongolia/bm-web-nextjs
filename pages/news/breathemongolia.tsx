@@ -4,7 +4,6 @@ import { getNewsPosts } from 'lib/graphql-api/queries/news'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import bmLogoBlueIcon from 'public/images/logoBlue.png'
 import FullNewsGrid from 'components/NewsPage/FullNewsGrid'
 import { BreadCrumb } from 'components/NewsPage/DetailPage'
 
@@ -23,7 +22,7 @@ const BreatheMongoliaNewsPage = ({ news }: { news: News[] }) => {
     <div className="pt-10">
       <BreadCrumb breadCrumbItems={breadCrumbItems} />
       <div className="container">
-        <H2 title={t('latestOnBm')} trailingLineColor="blue" iconImage={bmLogoBlueIcon} />
+        <H2 title={t('latestOnBm')} trailingLineColor="blue" iconImage={'/images/logoBlue.png'} />
         <FullNewsGrid news={bmNews} />
       </div>
     </div>

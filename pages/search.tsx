@@ -239,7 +239,6 @@ const SearchPage = ({ data, locale, banner }) => {
 export default SearchPage
 
 export const getStaticProps: GetServerSideProps = async ({ locale }) => {
-  // FIXME: Should use the search value from router here instead of getting all
   const data: any = await getSearchData()
   const bannerImageData = await getNewsBannerImages('/news')
   const bannerTextData = await getBannerText()
