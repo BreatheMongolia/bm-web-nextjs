@@ -27,6 +27,7 @@ import {
 } from 'components/HomePage'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 import dayjs from 'dayjs'
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export default function Index({
   page,
@@ -53,13 +54,13 @@ export default function Index({
   const pageBanner =
     i18n.language === 'en'
       ? {
-          leftText: page.customFields.bannerTextLeft,
-          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
-        }
+        leftText: page.customFields.bannerTextLeft,
+        rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
+      }
       : {
-          leftText: page.customFields.bannerTextLeftMn,
-          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
-        }
+        leftText: page.customFields.bannerTextLeftMn,
+        rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
+      }
   return (
     <div>
       <Head>
@@ -122,6 +123,7 @@ export default function Index({
           />
         </div>
       </div>
+      <GoogleAnalytics gaId="G-Z26ZSKR6S9" />
     </div>
   )
 }
