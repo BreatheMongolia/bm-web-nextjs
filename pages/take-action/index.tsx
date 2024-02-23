@@ -120,7 +120,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       featured: featured.featuredTakeActionsLanding,
       latest,
       locale,
-      takeActionText
+      takeActionText,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
       image: getTranslated(data.landingPageImage.mediaItemUrl, data.landingPageImageMn.mediaItemUrl, locale)
