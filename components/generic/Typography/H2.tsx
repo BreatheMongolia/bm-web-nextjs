@@ -36,7 +36,7 @@ export const H2 = ({
     )
   }
   const IconImage = () => {
-    return <Image src={iconImage} alt={title} className="h-10 w-10" />
+    return <Image src={iconImage} alt={title} className="h-10 w-10" width={40} height={40} />
   }
   return (
     <div className={`mt-2 mb-5 ${className}`}>

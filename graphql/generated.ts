@@ -3863,6 +3863,120 @@ export type HierarchicalTermNodeEnqueuedStylesheetsArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+/** Home Page Settings options */
+export type HomePageSettings = {
+  __typename?: 'HomePageSettings';
+  customFields?: Maybe<HomePageSettings_Customfields>;
+  pageSlug?: Maybe<Scalars['String']>;
+  pageTitle?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type HomePageSettings_Customfields = {
+  __typename?: 'HomePageSettings_Customfields';
+  bannerTextLeft?: Maybe<Scalars['String']>;
+  bannerTextLeftMn?: Maybe<Scalars['String']>;
+  bannerTextRight?: Maybe<Array<Maybe<HomePageSettings_Customfields_BannerTextRight>>>;
+  banners?: Maybe<Array<Maybe<HomePageSettings_Customfields_Banners>>>;
+  campaignAndOurWorkSlider?: Maybe<Array<Maybe<HomePageSettings_Customfields_CampaignAndOurWorkSlider>>>;
+  campaignAndOurWorkTitle?: Maybe<Scalars['String']>;
+  campaignAndOurWorkTitleMn?: Maybe<Scalars['String']>;
+  countriesInfoText?: Maybe<Array<Maybe<HomePageSettings_Customfields_CountriesInfoText>>>;
+  featuredNews?: Maybe<Array<Maybe<HomePageSettings_Customfields_FeaturedNews>>>;
+  featuredTakeActions?: Maybe<Array<Maybe<HomePageSettings_Customfields_FeaturedTakeActions>>>;
+  featuredTakeActionsLanding?: Maybe<Array<Maybe<HomePageSettings_Customfields_FeaturedTakeActionsLanding>>>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  joinBreatheMongoliaDescription?: Maybe<Scalars['String']>;
+  joinBreatheMongoliaDescriptionMn?: Maybe<Scalars['String']>;
+  joinBreatheMongoliaImageSlider?: Maybe<Array<Maybe<HomePageSettings_Customfields_JoinBreatheMongoliaImageSlider>>>;
+  joinBreatheMongoliaTitle?: Maybe<Scalars['String']>;
+  joinBreatheMongoliaTitleMn?: Maybe<Scalars['String']>;
+  mapDescription?: Maybe<Scalars['String']>;
+  mapDescriptionMn?: Maybe<Scalars['String']>;
+  mapTitle?: Maybe<Scalars['String']>;
+  mapTitleMn?: Maybe<Scalars['String']>;
+  partnersLogos?: Maybe<Array<Maybe<HomePageSettings_Customfields_PartnersLogos>>>;
+  partnersLogosTitle?: Maybe<Scalars['String']>;
+  partnersLogosTitleMn?: Maybe<Scalars['String']>;
+  socialMediaShare?: Maybe<HomePageSettings_Customfields_SocialMediaShare>;
+  takeActionsBanner?: Maybe<MediaItem>;
+  takeActionsBannerMn?: Maybe<MediaItem>;
+};
+
+export type HomePageSettings_Customfields_FeaturedNews = News;
+
+export type HomePageSettings_Customfields_FeaturedTakeActions = TakeAction;
+
+export type HomePageSettings_Customfields_FeaturedTakeActionsLanding = TakeAction;
+
+/** Field Group */
+export type HomePageSettings_Customfields_SocialMediaShare = {
+  __typename?: 'HomePageSettings_Customfields_SocialMediaShare';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type HomePageSettings_Customfields_BannerTextRight = {
+  __typename?: 'HomePageSettings_Customfields_bannerTextRight';
+  categoryText?: Maybe<Scalars['String']>;
+  categoryTextMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type HomePageSettings_Customfields_Banners = {
+  __typename?: 'HomePageSettings_Customfields_banners';
+  bannerImage?: Maybe<MediaItem>;
+  bannerImageUrl?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type HomePageSettings_Customfields_CampaignAndOurWorkSlider = {
+  __typename?: 'HomePageSettings_Customfields_campaignAndOurWorkSlider';
+  campaignCategoryText?: Maybe<Scalars['String']>;
+  campaignCategoryTextMn?: Maybe<Scalars['String']>;
+  campaignCatgeoryUrl?: Maybe<Scalars['String']>;
+  campaignDate?: Maybe<Scalars['String']>;
+  campaignDescription?: Maybe<Scalars['String']>;
+  campaignDescriptionMn?: Maybe<Scalars['String']>;
+  campaignTitle?: Maybe<Scalars['String']>;
+  campaignTitleMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  volunteerImage?: Maybe<MediaItem>;
+};
+
+/** Field Group */
+export type HomePageSettings_Customfields_CountriesInfoText = {
+  __typename?: 'HomePageSettings_Customfields_countriesInfoText';
+  customText?: Maybe<Scalars['String']>;
+  customTextMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  infoIcon?: Maybe<MediaItem>;
+};
+
+/** Field Group */
+export type HomePageSettings_Customfields_JoinBreatheMongoliaImageSlider = {
+  __typename?: 'HomePageSettings_Customfields_joinBreatheMongoliaImageSlider';
+  fieldGroupName?: Maybe<Scalars['String']>;
+  sliderImage?: Maybe<MediaItem>;
+  sliderImageLink?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type HomePageSettings_Customfields_PartnersLogos = {
+  __typename?: 'HomePageSettings_Customfields_partnersLogos';
+  fieldGroupName?: Maybe<Scalars['String']>;
+  partnersLogosImage?: Maybe<MediaItem>;
+  partnersLogosUrls?: Maybe<Scalars['String']>;
+};
+
 /** File details for a Media Item */
 export type MediaDetails = {
   __typename?: 'MediaDetails';
@@ -5975,6 +6089,7 @@ export type Page_Customfields = {
   partnersLogos?: Maybe<Array<Maybe<Page_Customfields_PartnersLogos>>>;
   partnersLogosTitle?: Maybe<Scalars['String']>;
   partnersLogosTitleMn?: Maybe<Scalars['String']>;
+  socialMediaShare?: Maybe<Page_Customfields_SocialMediaShare>;
   takeActionsBanner?: Maybe<MediaItem>;
   takeActionsBannerMn?: Maybe<MediaItem>;
 };
@@ -5984,6 +6099,18 @@ export type Page_Customfields_FeaturedNews = News;
 export type Page_Customfields_FeaturedTakeActions = TakeAction;
 
 export type Page_Customfields_FeaturedTakeActionsLanding = TakeAction;
+
+/** Field Group */
+export type Page_Customfields_SocialMediaShare = {
+  __typename?: 'Page_Customfields_SocialMediaShare';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
 
 /** Field Group */
 export type Page_Customfields_BannerTextRight = {
@@ -8365,6 +8492,8 @@ export type RootQuery = {
   discussionSettings?: Maybe<DiscussionSettings>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
+  /** Home Page Settings options */
+  homePageSettings?: Maybe<HomePageSettings>;
   /** An object of the mediaItem Type.  */
   mediaItem?: Maybe<MediaItem>;
   /**

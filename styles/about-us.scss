@@ -492,17 +492,24 @@ button.read_more_btn:hover {
   line-height: 41px;
   margin-bottom: 30px;
   color: rgba(44, 45, 65, 1);
+  text-align: center;
 }
 
 .timeline {
   margin: 0 auto;
   position: relative;
   width: 960px;
-  background-image: url('../assets/images/timeline-bg.png');
-  background-repeat: no-repeat;
-  background-position-x: center;
-  background-size: 75%;
   margin-top: 50px;
+
+  &::before {
+    content: "";
+    width: 8px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: calc(50% - 4px);
+    background-color: #d8e5fb;
+  }
 
   .our-work-carousel {
     &:first-child {
@@ -513,7 +520,6 @@ button.read_more_btn:hover {
       cursor: inherit;
     }
 
-    width: 390px;
     border-radius: 10px;
     position: relative;
     margin-bottom: 50px;
@@ -521,7 +527,8 @@ button.read_more_btn:hover {
     line-height: 25px;
 
     &:nth-child(even) {
-      margin-left: auto;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }
@@ -557,7 +564,6 @@ button.read_more_btn:hover {
   }
 
   .timeline {
-    margin: 0 auto;
     width: 375px;
     background: none;
 

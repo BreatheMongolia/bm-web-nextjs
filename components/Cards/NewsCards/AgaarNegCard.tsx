@@ -1,7 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import Link from 'next/link'
-import agaarNegCloudImage from '/public/images/agaar-neg/cloud.png'
 
 type Props = {
   news: {
@@ -20,7 +19,7 @@ export const AgaarNegCard = ({ news, className }: Props) => {
     <Link href={url} target="_blank">
       <div className={`w-full bg-white rounded shadow-md overflow-hidden group ${className}`}>
         <div className="w-full bg-[#00aeef] group-hover:bg-sky-600 transition-all">
-          <Image src={agaarNegCloudImage} alt="AgaarNeg Image" />
+          <Image src={'/images/agaar-neg/cloud.png'} alt="AgaarNeg Image" width={610} height={228} />
         </div>
         <div className="border-b-2 border-gray-300 mb-3 mx-5 text-xs">
           {news.keywords.map((x, idx) => {
