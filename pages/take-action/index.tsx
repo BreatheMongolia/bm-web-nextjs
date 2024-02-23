@@ -1,5 +1,5 @@
 import React from 'react'
-import { getFeaturedTakeActions, getTakeActionLandingPageSettings, getTakeActionsLatest } from 'lib/graphql-api/queries/takeAction'
+import { getFeaturedTakeActions, getTakeActionLandingPageSettings, getTakeActionsLatest, getTakeActionText } from 'lib/graphql-api/queries/takeAction'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getTranslated } from 'lib/utils/getTranslated'
@@ -72,10 +72,12 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
   return takeActions
 }
 
-const TakeActionsPage = ({ latest, featured, locale }) => {
+const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
+  const { whatYouCanDo, whatYouCanDoMn, whatYouCanDoText, whatYouCanDoTextMn, ...donationsText } = takeActionText;
+  const { donationText, donationTextMn, donationTitle, donationTitleMn, disclaimerText, disclaimerTextMn, waysToGive, waysToGiveMn, ...actionText } = takeActionText;
 
   takeActions = takeActions.filter(
     (value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index,
@@ -96,9 +98,9 @@ const TakeActionsPage = ({ latest, featured, locale }) => {
   return (
     <div>
       <div className="container mx-auto flex flex-col px-[1rem] lg:px-[6rem] xl:px-[9rem] 2xl:px-[16rem]">
-        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} />
+        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} text={actionText}/>
 
-        <DonateSection />
+        <DonateSection text={donationsText}/>
       </div>
     </div>
   )
@@ -109,6 +111,7 @@ export default TakeActionsPage
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const featured: any = await getFeaturedTakeActions('/')
   const latest = await getTakeActionsLatest()
+  const takeActionText = await getTakeActionText()
   const data = await getTakeActionLandingPageSettings()
 
   return {
@@ -117,6 +120,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       featured: featured.featuredTakeActionsLanding,
       latest,
       locale,
+      takeActionText
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
       image: getTranslated(data.landingPageImage.mediaItemUrl, data.landingPageImageMn.mediaItemUrl, locale)

@@ -52,8 +52,39 @@ export async function getTakeActionsLatest() {
       }
     `,
   )
-
   return data.takeActions?.edges || []
+}
+
+export async function getTakeActionText() {
+  const data = await fetchAPI(
+    `query getTakeActionTexts {
+      takeActionSettings {
+        TakeActionTexts {
+          waysToGive {
+            title
+            url
+            }
+          waysToGiveMn {
+            title
+            url
+            }
+          whatYouCanDo
+          whatYouCanDoMn
+          whatYouCanDoText
+          whatYouCanDoTextMn
+          donationTitleMn
+          donationTitle
+          donationTextMn
+          donationText
+          disclaimerTextMn
+          disclaimerText
+          }
+        }
+      }
+    `,
+  )
+
+  return data.takeActionSettings?.TakeActionTexts || []
 }
 
 export async function getFeaturedTakeActions(
