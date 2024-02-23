@@ -4,29 +4,43 @@ import Link from 'next/link'
 import { H2 } from 'components/generic/Typography'
 import { urls } from 'lib/utils/urls'
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import { getTranslated } from 'lib/utils/getTranslated'
+import parse from 'html-react-parser'
 
-export const DonateSection = () => {
+export type DonationsText = {
+  donationText: string,
+  donationTextMn: string,
+  donationTitle: string,
+  donationTitleMn: string,
+  disclaimerText: string,
+  disclaimerTextMn: string,
+  waysToGive: DonationMethod[],
+  waysToGiveMn: DonationMethod[]
+}
+
+export type DonationMethod = {
+  title: string,
+  url: string
+}
+
+export const DonateSection = ({ text }: {text: DonationsText} ) => {
   const { t } = useTranslation('takeAction')
   const [isNavVisible, setNavVisible] = useState(false)
 
   const donateLinks = () => {
     return (
       <ul className="list-disc">
-        <li>
-          <Link href={urls.givebutter} target={'_blank'} className="text-black hover:text-bm-blue my-2">
-            {t('donate.donateOnetime')}
-          </Link>
-        </li>
-        <li>
-          <Link href={urls.yourCause} target={'_blank'} className="hover:text-bm-blue my-2">
-            {t('donate.donateYourcause')}
-          </Link>
-        </li>
-        <li>
-          <Link href={urls.benevity} target={'_blank'} className="hover:text-bm-blue my-2">
-            {t('donate.donateBenevity')}
-          </Link>
-        </li>
+        {
+          text.waysToGive.map( (pair, idx) => {
+            return (
+              <li key={idx}>
+                <Link href={getTranslated(pair.url, text.waysToGiveMn[idx].url)} target={'_blank'} className="text-black hover:text-bm-blue my-2">
+                  {getTranslated(pair.title, text.waysToGiveMn[idx].title)}
+                </Link>
+              </li>
+            )
+          })
+        }
       </ul>
     )
   }
@@ -63,8 +77,8 @@ export const DonateSection = () => {
       {/* Desktop */}
       <div className="hidden md:flex flex-row ta-section">
         <div className="basis-2/3 ta-content">
-          <H2 title={t('donate.title')} />
-          <p className="pr-5">{t('donate.description')}</p>
+          <H2 title={getTranslated(text.donationTitle, text.donationTitleMn)} />
+          <p className="pr-5">{parse(getTranslated(text.donationText, text.donationTextMn))}</p>
           {donateBtn()}
         </div>
         <div className="basis-1/3 m-5 ta-sidebar">
@@ -91,7 +105,7 @@ export const DonateSection = () => {
       </div>
       {/* Disclosure */}
       <div className="flex p-5 text-xs md:py-10 md:px-0 md:text-sm">
-        <p>{t('donate.disclosure')}</p>
+        <p>{parse(getTranslated(text.disclaimerText, text.disclaimerTextMn))}</p>
       </div>
     </div>
   )
