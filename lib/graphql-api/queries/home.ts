@@ -259,6 +259,32 @@ export async function getVolunteers(): Promise<Page> {
         `,
     {},
   )
+  
 
   return data.volunteerPositions.edges
 }
+
+export async function getHomeLandingPageSettings(): Promise<any> {
+    const data = await fetchAPI(
+      `query getHomeLandingPageSettings {
+        homePageSettings {
+            customFields {
+              socialMediaShare {
+                description
+                descriptionMn
+                title
+                titleMn
+                image {
+                  mediaItemUrl
+                }
+                imageMn {
+                  mediaItemUrl
+                }
+              }
+            }
+          }
+        }
+      `,
+    )
+    return data.homePageSettings.customFields?.socialMediaShare || []
+  }
