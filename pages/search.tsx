@@ -63,6 +63,7 @@ const SearchPage = ({ data, locale, banner }) => {
     const newsData: any[] = []
 
     data.map((news: any) => {
+      console.log('news', news)
       newsData.push({
         id: news.node.databaseId,
         slug: news.node.slug,
@@ -211,6 +212,8 @@ const SearchPage = ({ data, locale, banner }) => {
 
   const count = filteredNews.length + filteredPeople.length + newFilteredTakeActions.length
 
+  console.log(filteredNews)
+
   return (
     <div>
       <Head>
@@ -239,7 +242,6 @@ const SearchPage = ({ data, locale, banner }) => {
 export default SearchPage
 
 export const getStaticProps: GetServerSideProps = async ({ locale }) => {
-  // FIXME: Should use the search value from router here instead of getting all
   const data: any = await getSearchData()
   const bannerImageData = await getNewsBannerImages('/news')
   const bannerTextData = await getBannerText()

@@ -36,7 +36,7 @@ const News: FC<{ data: any[] }> = ({ data: newsData }) => {
               categories={data.categories}
               newsContentType={data.newsContentType}
               newsLandingPageFeatured={data.newsLandingPageFeatured}
-              featuredImageSmall={data.featuredImage}
+              featuredImageSmall={data.featuredImageBig || data.featuredImageSmall || data.featuredImage}
               cName=""
             />
           ))}
