@@ -81,6 +81,30 @@ export async function getFeaturedNews(): Promise<News[]> {
   return []
 }
 
+export async function getNewsLandingPageSettings(): Promise<any> {
+  const data = await fetchAPI(
+    `query getNewsLandingPageSettings {
+      newsPageSettings {
+        newsLanding {
+          description
+          descriptionMn
+          title
+          titleMn
+          image {
+            mediaItemUrl
+          }
+          imageMn {
+            mediaItemUrl
+            }
+          }
+        }
+      }
+    `,
+  )
+  return data.newsPageSettings.newsLanding || []
+}
+
+
 export async function getNewsPosts(): Promise<News[]> {
   const data = await fetchAPI(
     `

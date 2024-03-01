@@ -1,5 +1,5 @@
 import React from 'react'
-import { getFeaturedTakeActions, getTakeActionsLatest, getTakeActionText } from 'lib/graphql-api/queries/takeAction'
+import { getFeaturedTakeActions, getTakeActionLandingPageSettings, getTakeActionsLatest, getTakeActionText } from 'lib/graphql-api/queries/takeAction'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getTranslated } from 'lib/utils/getTranslated'
@@ -112,6 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const featured: any = await getFeaturedTakeActions('/')
   const latest = await getTakeActionsLatest()
   const takeActionText = await getTakeActionText()
+  const data = await getTakeActionLandingPageSettings()
 
   return {
     props: {
@@ -119,7 +120,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       featured: featured.featuredTakeActionsLanding,
       latest,
       locale,
-      takeActionText
+      takeActionText,
+      title: getTranslated(data.title, data.titleMn, locale),
+      description: getTranslated(data.description, data.descriptionMn, locale),
+      image: getTranslated(data.landingPageImage.mediaItemUrl, data.landingPageImageMn.mediaItemUrl, locale)
     },
     revalidate: 60,
   }

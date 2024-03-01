@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getHomePage } from 'lib/graphql-api/queries/home'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { getPeople } from 'lib/graphql-api/queries/people'
+import { getOurTeamSettings } from 'lib/graphql-api/queries/aboutUs'
 
 export default function OurTeamPage({ page, people, locale }) {
   return (
@@ -58,6 +59,7 @@ const getTransformedPeople = (PplData: string | any[], locale: string) => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
   const people = await getPeople()
+  const data = await getOurTeamSettings()
 
   return {
     props: {
@@ -65,6 +67,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       people: getTransformedPeople(people, locale),
       locale,
       page,
+      title: getTranslated(data.title, data.titleMn, locale),
+      description: getTranslated(data.description, data.descriptionMn, locale),
+      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,

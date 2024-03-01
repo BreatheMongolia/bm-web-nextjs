@@ -11,8 +11,9 @@ import { NewsCard, AgaarNegCard } from 'components/Cards'
 import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
 // api/utils
 import { News } from 'graphql/generated'
-import { getAgaarNegNews, getFeaturedNews, getNewsPosts } from 'lib/graphql-api/queries/news'
+import { getAgaarNegNews, getFeaturedNews, getNewsLandingPageSettings, getNewsPosts } from 'lib/graphql-api/queries/news'
 import FullNewsGrid from 'components/NewsPage/FullNewsGrid'
+import { getTranslated } from 'lib/utils/getTranslated'
 
 // FIXME: Featured News not showing up
 const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featuredNews: News[]; agaarNegNews }) => {
@@ -85,6 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const newsData = await getNewsPosts()
   const featuredNews = await getFeaturedNews()
   const agaarNegNews = await getAgaarNegNews()
+  const data = await getNewsLandingPageSettings()
 
   return {
     props: {
@@ -93,7 +95,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       locale,
       featuredNews,
       agaarNegNews,
-      title: 'News - Breathe Mongolia - Clean Air Coalition',
+      title: getTranslated(data.title, data.titleMn, locale),
+      description: getTranslated(data.description, data.descriptionMn, locale),
+      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale)
     },
     revalidate: 60 * 5, // every 5 minutes
   }
