@@ -194,8 +194,13 @@ const FullNewsGrid = ({ news }: Props) => {
           .slice(ITEMS_PER_PAGE * currentPage, ITEMS_PER_PAGE * currentPage + ITEMS_PER_PAGE)
           .map((x, idx) => {
             return (
-              <div key={idx} className={`h-32 sm:h-60 ${idx === 0 && 'md:col-span-2'} ${idx > 3 && 'hidden md:block'}`}>
-                <NewsCard news={x} cardHeight="fill" />
+              <div
+                key={idx}
+                className={`h-[250px]  sm:h-60 ${idx === 0 ? 'md:col-span-2' : 'w-[330px]'} ${
+                  idx > 3 && 'hidden md:block'
+                }`}
+              >
+                <NewsCard idx={idx} news={x} cardHeight="fill" />
               </div>
             )
           })}

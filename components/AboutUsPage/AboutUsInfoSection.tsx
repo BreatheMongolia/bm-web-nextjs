@@ -30,7 +30,7 @@ export const AboutUsInfoSection = () => {
 
   return (
     <div>
-      <div className="flex flex-col">
+      <div className=" flex flex-col">
         <div className="sm:hidden flex justify-center items-center bg-bm-blue bg-gradient-to-r from-bm-blue to-[#61b1ee] text-white">
           <div className="p-5 sm:w-96 text-center">
             <h1 className="text-xl mb-5 font-bold">{t('header.title')}</h1>
@@ -39,7 +39,7 @@ export const AboutUsInfoSection = () => {
         </div>
         <div className="our_mission_background">
           <PollutionParticlesBackground />
-          <div className="mission_vision_wrapper">
+          <div className=" mission_vision_wrapper">
             <div className="our_mission_title sm:mb-2">{t('ourMission')}</div>
             <div className="mission_paragraph sm:mb-5">{t('missionStatement')}</div>
             <div className="our_mission_title sm:mb-2">{t('ourVision')}</div>
@@ -50,7 +50,7 @@ export const AboutUsInfoSection = () => {
       <div className="what_we_do_container py-5">
         <h1 className="what_we_do_title text-xl sm:text-3xl">{t('whatWeDo')}</h1>
         <p className="what_we_do_paragraph my-5">{t('whatWeDoDescription')}</p>
-        <div className="details_container">
+        <div className=" container details_container">
           <div className="education_container">
             <EducationIcon />
             <h3 className="what_we_do">{t('education')}</h3>
@@ -87,7 +87,7 @@ export const AboutUsInfoSection = () => {
         <h1 className="font-bold text-xl md:text-3xl text-[#528fec]">{t('vision')}</h1>
         <p className="text-base text-[#2c2d41]">{t('visionDescription')}</p>
       </div>
-      <div className="flex flex-wrap justify-evenly mb-10 gap-10">
+      <div className=" container flex flex-wrap justify-between mb-10 gap-10">
         {GOALS.map((goal, idx) => (
           <GoalsCard
             key={'goals' + idx}

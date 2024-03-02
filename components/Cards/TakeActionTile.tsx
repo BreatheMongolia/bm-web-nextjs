@@ -14,7 +14,14 @@ export type Props = {
 export const TakeActionTile: FC<Props> = ({ id, slug, title, featuredImage, index, pageNumberLimit }) => {
   return (
     <>
-      <div className={cx('card take-action-carousel', index % (pageNumberLimit >= 9 ? 9 : 6) === 0 && 'big')} key={id}>
+      <div
+        className={cx(
+          'card take-action-carousel',
+          index % (pageNumberLimit >= 9 ? 9 : 6) === 0 && 'big',
+          'w-[236px] h-[200px]',
+        )}
+        key={id}
+      >
         {featuredImage !== null && (
           <Link href={`/action/${slug}`}>
             <img className="card-img-top take-action-img" src={featuredImage !== null ? featuredImage : ''} />
