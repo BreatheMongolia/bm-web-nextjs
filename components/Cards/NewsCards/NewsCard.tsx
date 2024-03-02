@@ -60,7 +60,6 @@ export const NewsCard = ({
     }
     return transformedNews.featuredImageSmall ?? transformedNews.featuredImageBig
   }
-  console.log(idx)
   return (
     <div
       className={`relative bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow  ${
