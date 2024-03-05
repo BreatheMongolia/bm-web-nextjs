@@ -26,7 +26,9 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Set up database
-        run: echo "{\"WORDPRESS_API_URL\":\"http://breathemon2.wpengine.com/graphql\",\"MAPBOX_TOKEN\":\"pk.eyJ1IjoiYnJlYXRoZW1vbmdvbGlhIiwiYSI6ImNrMjhnMHU4bDEwOXkzaXFodnFiaW1heHIifQ.7MPVleYVPDUY10UE200Zow\"}" > .env
+        run: |
+            echo "WORDPRESS_API_URL: 'http://breathemon2.wpengine.com/graphql'" > .env
+            echo "MAPBOX_TOKEN: 'pk.eyJ1IjoiYnJlYXRoZW1vbmdvbGlhIiwiYSI6ImNrMjhnMHU4bDEwOXkzaXFodnFiaW1heHIifQ.7MPVleYVPDUY10UE200Zow'" >> .env
 
       - name: Build
         run: npm run build
