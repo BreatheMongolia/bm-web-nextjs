@@ -51,7 +51,10 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
       ) : (
         <>
           <article>
-            <Desktop>{/* <Banner bannerImages={bannerImage} bannerText={bannerText} /> */}</Desktop>
+            <Desktop>
+              <div className="pt-14"></div>
+              {/* <Banner bannerImages={bannerImage} bannerText={bannerText} /> */}
+            </Desktop>
             <BreadCrumb breadCrumbItems={breadCrumbItems} />
             <div className="container">
               <div className="news-main-content">
@@ -104,7 +107,9 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
                     />
                   </div>
                 </div>
-                <LatestNews data={getLatest} />
+                <div className="article_news">
+                  <LatestNews data={getLatest} />
+                </div>
               </div>
             </div>
           </article>

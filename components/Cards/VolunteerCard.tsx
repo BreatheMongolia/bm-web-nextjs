@@ -70,7 +70,7 @@ export const VolunteerCard = ({
             ))}
           </ul>
           <div className="flex-start">
-            <button className="bg-[#f4ac3d] rounded-md">
+            <button className="bg-[#f4ac3d] rounded-lg p-2 ">
               <Link className="apply_now_button font-bold text-md text-white p-5" href={APPLY_URL} target="_blank">
                 {t('joinBm.applyNow')}
               </Link>
