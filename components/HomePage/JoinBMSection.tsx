@@ -66,13 +66,13 @@ export const JoinBMSection = ({
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <H2
         title={getTranslated(title.en, title.mn, locale)}
         descriptionHtml={getTranslated(descriptionHtml.en, descriptionHtml.mn, locale)}
       />
-      <div className="flex flex-row gap-10 justify-start">
-        <div className="hidden lg:block lg:w-[60%]">
+      <div className="flex flex-row gap-10 justify-center">
+        <div className="hidden lg:block lg:w-[50%] join-bm-slider">
           <Slider {...settings}>
             {slider.map(x => (
               <div key={x.sliderImage.databaseId}>

@@ -41,7 +41,7 @@ const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
           })}
         </div>
       </div>
-      <div className="container mx-auto flex flex-col">
+      <div className="container mx-auto flex flex-col mb-20">
         <H2 title={t('reports.title')} />
         {/* Desktop */}
         <div className="hidden sm:report-grid">

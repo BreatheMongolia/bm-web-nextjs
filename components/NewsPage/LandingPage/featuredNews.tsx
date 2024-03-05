@@ -16,7 +16,7 @@ export const FeaturedNews = ({ news }: { news: News[] }) => {
     <div className="grid gap-5 md:grid-cols-2 h-[660px] md:h-[460px]">
       <div>
         <div className="bg-gray-200 h-full">
-          <NewsCard news={bigNews} cardHeight="fill" />
+          <NewsCard news={bigNews} cardHeight="fill" idx={0} />
         </div>
       </div>
       <div className="flex overflow-hidden h-full relative">
