@@ -1,0 +1,62 @@
+name: Build and Deploy to Production
+
+on:
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+
+jobs:
+  build:
+    if: github.actor == 'tinaselenge' || github.actor == 'tgldr' || github.actor == 'terdenek' || github.actor == 'uyanga-gb' || github.actor == 'azjargalkhan' || github.actor == 'enkhuun'
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Set up database
+        run: echo "{\"WORDPRESS_API_URL\":\"http://breathemon2.wpengine.com/graphql\",\"MAPBOX_TOKEN\":\"pk.eyJ1IjoiYnJlYXRoZW1vbmdvbGlhIiwiYSI6ImNrMjhnMHU4bDEwOXkzaXFodnFiaW1heHIifQ.7MPVleYVPDUY10UE200Zow\"}" > .env
+
+      - name: Build
+        run: npm run build
+
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+          retention-days: 7
+
+  deploy:
+    if: github.actor == 'tinaselenge' || github.actor == 'tgldr' || github.actor == 'terdenek' || github.actor == 'uyanga-gb' || github.actor == 'azjargalkhan' || github.actor == 'enkhuun'
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          GCP_SA_KEY: ${{ secrets.GOOGLE_CREDENTIALS_PRODUCTION }}
