@@ -10,7 +10,7 @@ export type OurStoriesAll = {
 export const StoriesAboutAirPollution = ({ stories }: { stories: OurStoriesAll[] }) => {
   const { t } = useTranslation('about')
   return (
-    <div className="mb-8 stories_air_pollution">
+    <div className="container mb-8 stories_air_pollution">
       <h1 className="air_pollution_title">{t('ourStory.storiesAirPollution')}</h1>
       <div className="stories_wrapper">
         {stories.map((story, idx) => (

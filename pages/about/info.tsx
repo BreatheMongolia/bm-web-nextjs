@@ -8,7 +8,7 @@ import { getTranslated } from 'lib/utils/getTranslated'
 
 export default function InfoSectionPage({ page, locale }) {
   return (
-    <div className="flex flex-col bg-[#FAFAFF]">
+    <div className=" flex flex-col bg-[#FAFAFF]">
       <AboutUsHeader />
 
       {/* Content */}
@@ -45,4 +45,3 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     revalidate: 60 * 60,
   }
 }
-

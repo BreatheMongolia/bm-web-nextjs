@@ -20,13 +20,21 @@ export type TakeActionAll = {
 }
 
 export type TakeActionText = {
-  whatYouCanDo: string,
-  whatYouCanDoMn: string,
-  whatYouCanDoText: string,
-  whatYouCanDoTextMn: string,
+  whatYouCanDo: string
+  whatYouCanDoMn: string
+  whatYouCanDoText: string
+  whatYouCanDoTextMn: string
 }
 
-export const TakeActionsGrid = ({ takeAction, categories, text }: { takeAction: TakeActionAll[]; categories: string[]; text: TakeActionText }) => {
+export const TakeActionsGrid = ({
+  takeAction,
+  categories,
+  text,
+}: {
+  takeAction: TakeActionAll[]
+  categories: string[]
+  text: TakeActionText
+}) => {
   const { t } = useTranslation('takeAction')
   const [currentPage, setCurrentPage] = useState(1)
   const [pageNumberLimit, setPageNumberLimit] = useState(18)
@@ -89,7 +97,7 @@ export const TakeActionsGrid = ({ takeAction, categories, text }: { takeAction: 
   }
 
   return (
-    <div className="flex flex-col justify-center ta-actions">
+    <div className="flex flex-col justify-center ta-actions pt-14">
       <H2 title={getTranslated(text.whatYouCanDo, text.whatYouCanDoMn)} className="ta-mobile-header" />
       {parse(getTranslated(text.whatYouCanDoText, text.whatYouCanDoTextMn))}
 
