@@ -51,7 +51,10 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
       ) : (
         <>
           <article>
-            <Desktop>{/* <Banner bannerImages={bannerImage} bannerText={bannerText} /> */}</Desktop>
+            <Desktop>
+              <div className="pt-14"></div>
+              {/* <Banner bannerImages={bannerImage} bannerText={bannerText} /> */}
+            </Desktop>
             <BreadCrumb breadCrumbItems={breadCrumbItems} />
             <div className="container">
               <div className="news-main-content">
@@ -104,7 +107,9 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
                     />
                   </div>
                 </div>
-                <LatestNews data={getLatest} />
+                <div className="article_news">
+                  <LatestNews data={getLatest} />
+                </div>
               </div>
             </div>
           </article>
@@ -118,27 +123,27 @@ export const getStaticProps: GetStaticProps<NewsPostPageProps> = async ({ params
   // check if it is slug or post-id
   const slug = params?.slug as string
   // this shouldn't happen, but base case
-  if (!slug || slug.length === 0) {
-    return {
-      redirect: {
-        destination: '/news',
-        permanent: false,
-      },
-    }
-  }
+  // if (!slug || slug.length === 0) {
+  //   return {
+  //     redirect: {
+  //       destination: '/news',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
   // check if it is trying to come in with a postid
   const isPostId = slug.match(/^[0-9]+$/)
-  if (isPostId) {
-    const res = await getNewsSlugByPostID(slug)
-    if (res.desiredSlug || res.slug) {
-      return {
-        redirect: {
-          destination: '/news/' + (res.desiredSlug || res.slug),
-          permanent: true,
-        },
-      }
-    }
-  }
+  // if (isPostId) {
+  //   const res = await getNewsSlugByPostID(slug)
+  //   if (res.desiredSlug || res.slug) {
+  //     return {
+  //       redirect: {
+  //         destination: '/news/' + (res.desiredSlug || res.slug),
+  //         permanent: true,
+  //       },
+  //     }
+  //   }
+  // }
   const post = await getNewsFull(slug, isPostId ? NewsIdType.DatabaseId : NewsIdType.Slug)
   if (!post) {
     return {

@@ -212,6 +212,7 @@ p {
 .news-carousel-section {
   .slick-slide {
     padding: 0 5px;
+    width: auto !important;
 
     div {
       transition: none;
@@ -271,6 +272,11 @@ p {
 
 /* Join Breathe Mongolia styles start */
 
+.join-bm-slider {
+  .slick-initialized .slick-slide img {
+    margin: 0 auto;
+  }
+}
 .slider-image {
   width: fit-content;
   height: 350px;
@@ -311,31 +317,30 @@ p {
   }
 }
 /* Join Breathe Mongolia styles end */
-
 // Our Partners Section custom styling
 
 .partner-logos-slider-wrapper {
-  .slick-track {
+  padding-bottom: 50px;
+  .slick-slide {
+    width: auto !important;
+    height: 140px;
     display: flex !important;
     align-items: center;
-  }
+    .slick-track {
+      display: flex !important;
+      align-items: center;
+    }
 
-  div {
-    height: auto !important;
-    display: flex;
-    align-items: center;
-    margin-right: 55px;
-    &:last-child {
-      margin-right: 0;
-    }
-    a {
-      outline: none !important;
-    }
-    img {
-      width: 100% !important;
-      min-width: 120px;
-      max-width: 120px !important;
-      outline: none !important;
+    div {
+      height: auto !important;
+      margin-right: 90px;
+      a {
+        outline: none !important;
+      }
+      img {
+        width: 170px;
+        outline: none !important;
+      }
     }
   }
 }
@@ -368,7 +373,7 @@ p {
   &.big {
     grid-column: auto / span 2;
     grid-row: auto / span 2;
-    width: auto;
+    width: 100%;
     height: auto;
     margin-right: 5px;
 
@@ -482,7 +487,7 @@ p {
       flex-direction: column;
       color: #2c2d41;
       position: relative;
-      padding: 0px 15px 20px 0px;
+      padding: 15px 15px 20px 2px;
       max-height: 253px;
       min-height: 253px;
 
@@ -529,7 +534,7 @@ p {
 
       .campaign-date {
         position: absolute;
-        bottom: 0;
+        bottom: 10px;
         right: 16px;
 
         span {

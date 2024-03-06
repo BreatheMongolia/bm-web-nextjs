@@ -11,7 +11,12 @@ import { NewsCard, AgaarNegCard } from 'components/Cards'
 import { NewsGrid, FeaturedNews } from 'components/NewsPage/LandingPage'
 // api/utils
 import { News } from 'graphql/generated'
-import { getAgaarNegNews, getFeaturedNews, getNewsLandingPageSettings, getNewsPosts } from 'lib/graphql-api/queries/news'
+import {
+  getAgaarNegNews,
+  getFeaturedNews,
+  getNewsLandingPageSettings,
+  getNewsPosts,
+} from 'lib/graphql-api/queries/news'
 import FullNewsGrid from 'components/NewsPage/FullNewsGrid'
 import { getTranslated } from 'lib/utils/getTranslated'
 
@@ -30,7 +35,7 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
       <Head>
         <title> News - Breathe Mongolia - Clean Air Coalition </title>
       </Head>
-      <div className="lg:container px-4 w-full mx-auto flex flex-col gap-16">
+      <div className="lg:container px-4 w-full mx-auto flex flex-col gap-16 pt-14">
         <div>
           <H2 title={t('featuredNews')} trailingLineColor="blue" />
           <FeaturedNews news={featuredNews} />
@@ -97,7 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       agaarNegNews,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale)
+      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
     },
     revalidate: 60 * 5, // every 5 minutes
   }

@@ -73,7 +73,7 @@ export const Footer = () => {
           <div className="flex md:flex-row lg:flex-col gap-5">
             <h2 className="font-bold text-lg">{t('nav.join')} </h2>
             <div className="flex flex-col grow">
-              <div className="flex justify-between pb-5">
+              <div className="flex gap-7 pb-5">
                 {socialUrls.map((x, idx) => {
                   return (
                     <div

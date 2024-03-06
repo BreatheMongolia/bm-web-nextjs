@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta property="og:title" content={title} />
           <meta property="og:image" content={image} />
         </Head>
-        <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} />
+        <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} options={{ showSpinner: false }} />
         <Component {...pageProps} key={router.asPath} />
       </Layout>
     </AnimatePresence>

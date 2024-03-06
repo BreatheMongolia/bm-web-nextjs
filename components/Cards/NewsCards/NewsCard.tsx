@@ -9,10 +9,12 @@ import { getTransformedNews } from 'lib/utils/gql-data-transform/getTransformedN
 import { videoNewsDialogAtom } from 'lib/consts/atoms'
 
 export const NewsCard = ({
+  idx,
   news,
   cardHeight = 'normal',
   className,
 }: {
+  idx?
   news: News
   cardHeight?: 'normal' | 'fill'
   className?: string
@@ -60,9 +62,10 @@ export const NewsCard = ({
   }
   return (
     <div
-      className={`relative bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow ${
+      className={`relative bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow  ${
         cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
-      } ${className}`}
+      }
+      ${idx === 0 ? 'w-full' : 'w-[330px]'} ${className}`}
       style={{ backgroundImage: `url(${backgroundImageUrl()})` }}
       onClick={onCardClick}
     >
