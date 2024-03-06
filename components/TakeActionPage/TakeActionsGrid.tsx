@@ -91,7 +91,7 @@ export const TakeActionsGrid = ({ takeAction, categories, text }: { takeAction: 
   return (
     <div className="flex flex-col justify-center ta-actions">
       <H2 title={getTranslated(text.whatYouCanDo, text.whatYouCanDoMn)} className="ta-mobile-header" />
-      {parse(getTranslated(text.whatYouCanDoText, text.whatYouCanDoTextMn))}
+      <div className='mt-5'>{parse(getTranslated(text.whatYouCanDoText, text.whatYouCanDoTextMn))}</div>
 
       <div className="ta-categories">
         <div className={'ta-category ' + (!filteredCategories.length ? 'selected' : '')} onClick={() => showAll()}>
