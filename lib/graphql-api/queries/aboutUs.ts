@@ -75,8 +75,6 @@ export async function getInfoSettings(): Promise<any> {
       aboutUsPageSettings {
         aboutUs {
           info {
-            description
-            descriptionMn
             title
             titleMn
             image {
@@ -102,8 +100,6 @@ export async function getImpactSettings(): Promise<any> {
       aboutUsPageSettings {
         aboutUs {
           ourWork {
-            description
-            descriptionMn
             title
             titleMn
             image {
@@ -129,8 +125,6 @@ export async function getOurStorySettings(): Promise<any> {
       aboutUsPageSettings {
         aboutUs {
           ourStory {
-            description
-            descriptionMn
             title
             titleMn
             image {
@@ -156,8 +150,6 @@ export async function getOurTeamSettings(): Promise<any> {
       aboutUsPageSettings {
         aboutUs {
           ourTeam {
-            description
-            descriptionMn
             title
             titleMn
             image {
@@ -183,8 +175,6 @@ export async function getSupportUsSettings(): Promise<any> {
       aboutUsPageSettings {
         aboutUs {
           supportUs {
-            description
-            descriptionMn
             title
             titleMn
             image {

@@ -112,9 +112,7 @@ export async function getTakeActionLandingPageSettings(): Promise<any> {
     `query getTakeActionLandingPageSettings {
       takeActionSettings {
         TakeActionTexts {
-          landingPage {
-            description
-            descriptionMn
+          socialMediaShare {
             title
             titleMn
             landingPageImage {
@@ -129,7 +127,7 @@ export async function getTakeActionLandingPageSettings(): Promise<any> {
       }
     `,
   )
-  return data.takeActionSettings.TakeActionTexts?.landingPage || []
+  return data.takeActionSettings.TakeActionTexts?.socialMediaShare || []
 }
 
 export async function getTakeActionSlugs(): Promise<TakeAction[]> {

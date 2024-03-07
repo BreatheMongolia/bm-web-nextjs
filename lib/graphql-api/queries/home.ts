@@ -270,8 +270,6 @@ export async function getHomeLandingPageSettings(): Promise<any> {
         homePageSettings {
             customFields {
               socialMediaShare {
-                description
-                descriptionMn
                 title
                 titleMn
                 image {

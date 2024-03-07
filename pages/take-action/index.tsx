@@ -122,7 +122,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       locale,
       takeActionText,
       title: getTranslated(data.title, data.titleMn, locale),
-      description: getTranslated(data.description, data.descriptionMn, locale),
       image: getTranslated(data.landingPageImage.mediaItemUrl, data.landingPageImageMn.mediaItemUrl, locale)
     },
     revalidate: 60,

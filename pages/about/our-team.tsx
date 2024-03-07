@@ -68,7 +68,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       locale,
       page,
       title: getTranslated(data.title, data.titleMn, locale),
-      description: getTranslated(data.description, data.descriptionMn, locale),
       image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
