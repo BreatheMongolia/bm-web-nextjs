@@ -25,13 +25,12 @@ export const RankDropdown = ({
   return (
     <div className="font-semibold">
       <div
-        className={`flex items-center pl-4 cursor-pointer bg-sky-50 text-black hover:bg-slate-300 py-2 ${
-          open && 'border-b-[1px] border-[#4870d7]/50 '
-        }`}
+        className={`flex items-center pl-4 cursor-pointer bg-sky-50 text-black hover:bg-slate-300 py-2 ${open && 'border-b-[1px] border-[#4870d7]/50 '
+          }`}
         onClick={() => setTitleClick(!open)}
       >
         <div className="grow text-xs">
-          {t('stationDetail.uBWorldRanking')} #{ubRank}
+          {t('stationDetail.uBWorldRanking')} #{ubRank === -1 ? 1 : ubRank}
         </div>
         <div className="px-3">
           <ChevronDownIcon className={`h-5 w-5 transition-all ${open && 'rotate-180'}`} />
