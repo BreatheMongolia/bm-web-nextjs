@@ -48,9 +48,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="keywords" content="air pollution, clean air, public health, mongolia"></meta>
 
           <title>{title}</title>
-          <meta name="description" content={description} />
+          <meta property="og:description" content=" " />
           <meta property="og:title" content={title} />
           <meta property="og:image" content={image} />
+          <meta name="description" content={description} />
         </Head>
         <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} options={{ showSpinner: false }} />
         <Component {...pageProps} key={router.asPath} />

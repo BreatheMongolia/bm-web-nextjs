@@ -137,8 +137,14 @@ export type Accomplishment = ContentNode & DatabaseIdentifier & MenuItemLinkable
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the accomplishment object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -294,8 +300,14 @@ export type ActionType = DatabaseIdentifier & HierarchicalNode & HierarchicalTer
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>;
   /** Whether the node is a Term */
@@ -926,8 +938,14 @@ export type Category = DatabaseIdentifier & HierarchicalNode & HierarchicalTermN
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>;
   /** Whether the node is a Term */
@@ -1461,7 +1479,7 @@ export type Category_Categorycustomfields = {
 };
 
 /** A Comment object */
-export type Comment = DatabaseIdentifier & Node & {
+export type Comment = DatabaseIdentifier & Node & UniformResourceIdentifiable & {
   __typename?: 'Comment';
   /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
   agent?: Maybe<Scalars['String']>;
@@ -1491,10 +1509,22 @@ export type Comment = DatabaseIdentifier & Node & {
   dateGmt?: Maybe<Scalars['String']>;
   /** The globally unique identifier for the comment object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean'];
   /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
   karma?: Maybe<Scalars['Int']>;
+  /** The permalink of the comment */
+  link?: Maybe<Scalars['String']>;
   /** Connection between the Comment type and the Comment type */
   parent?: Maybe<CommentToParentCommentConnectionEdge>;
   /** The database id of the parent comment node or null if it is the root comment */
@@ -1507,6 +1537,8 @@ export type Comment = DatabaseIdentifier & Node & {
   status?: Maybe<CommentStatusEnum>;
   /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
   type?: Maybe<Scalars['String']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']>;
 };
 
 
@@ -1890,8 +1922,14 @@ export type ContentNode = {
   guid?: Maybe<Scalars['String']>;
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -2104,6 +2142,8 @@ export type ContentType = Node & UniformResourceIdentifiable & {
   hierarchical?: Maybe<Scalars['Boolean']>;
   /** The globally unique identifier of the post-type object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
   /** Whether this page is set to the static front page. */
@@ -3520,6 +3560,8 @@ export type GeneralSettings = {
   dateFormat?: Maybe<Scalars['String']>;
   /** Site tagline. */
   description?: Maybe<Scalars['String']>;
+  /** This address is used for admin purposes, like new user notification. */
+  email?: Maybe<Scalars['String']>;
   /** WordPress locale code. */
   language?: Maybe<Scalars['String']>;
   /** A day number of the week that the week should start on. */
@@ -3564,8 +3606,14 @@ export type HierarchicalContentNode = {
   guid?: Maybe<Scalars['String']>;
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -3819,8 +3867,14 @@ export type HierarchicalTermNode = {
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>;
   /** Whether the node is a Term */
@@ -4050,8 +4104,14 @@ export type MediaItem = ContentNode & DatabaseIdentifier & HierarchicalContentNo
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the attachment object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -4577,8 +4637,14 @@ export type MenuItemLinkable = {
   databaseId: Scalars['Int'];
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the node is a Term */
   isTermNode: Scalars['Boolean'];
   /** The unique resource identifier path */
@@ -4734,36 +4800,108 @@ export type MenuToMenuItemConnectionWhereArgs = {
 
 /** The MimeType of the object */
 export enum MimeTypeEnum {
+  /** application/java mime type. */
+  ApplicationJava = 'APPLICATION_JAVA',
   /** application/msword mime type. */
   ApplicationMsword = 'APPLICATION_MSWORD',
+  /** application/octet-stream mime type. */
+  ApplicationOctetStream = 'APPLICATION_OCTET_STREAM',
+  /** application/onenote mime type. */
+  ApplicationOnenote = 'APPLICATION_ONENOTE',
+  /** application/oxps mime type. */
+  ApplicationOxps = 'APPLICATION_OXPS',
   /** application/pdf mime type. */
   ApplicationPdf = 'APPLICATION_PDF',
+  /** application/rar mime type. */
+  ApplicationRar = 'APPLICATION_RAR',
+  /** application/rtf mime type. */
+  ApplicationRtf = 'APPLICATION_RTF',
+  /** application/ttaf+xml mime type. */
+  ApplicationTtafXml = 'APPLICATION_TTAF_XML',
   /** application/vnd.apple.keynote mime type. */
   ApplicationVndAppleKeynote = 'APPLICATION_VND_APPLE_KEYNOTE',
+  /** application/vnd.apple.numbers mime type. */
+  ApplicationVndAppleNumbers = 'APPLICATION_VND_APPLE_NUMBERS',
+  /** application/vnd.apple.pages mime type. */
+  ApplicationVndApplePages = 'APPLICATION_VND_APPLE_PAGES',
+  /** application/vnd.ms-access mime type. */
+  ApplicationVndMsAccess = 'APPLICATION_VND_MS_ACCESS',
   /** application/vnd.ms-excel mime type. */
   ApplicationVndMsExcel = 'APPLICATION_VND_MS_EXCEL',
+  /** application/vnd.ms-excel.addin.macroEnabled.12 mime type. */
+  ApplicationVndMsExcelAddinMacroenabled_12 = 'APPLICATION_VND_MS_EXCEL_ADDIN_MACROENABLED_12',
   /** application/vnd.ms-excel.sheet.binary.macroEnabled.12 mime type. */
   ApplicationVndMsExcelSheetBinaryMacroenabled_12 = 'APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACROENABLED_12',
   /** application/vnd.ms-excel.sheet.macroEnabled.12 mime type. */
   ApplicationVndMsExcelSheetMacroenabled_12 = 'APPLICATION_VND_MS_EXCEL_SHEET_MACROENABLED_12',
+  /** application/vnd.ms-excel.template.macroEnabled.12 mime type. */
+  ApplicationVndMsExcelTemplateMacroenabled_12 = 'APPLICATION_VND_MS_EXCEL_TEMPLATE_MACROENABLED_12',
   /** application/vnd.ms-powerpoint mime type. */
   ApplicationVndMsPowerpoint = 'APPLICATION_VND_MS_POWERPOINT',
+  /** application/vnd.ms-powerpoint.addin.macroEnabled.12 mime type. */
+  ApplicationVndMsPowerpointAddinMacroenabled_12 = 'APPLICATION_VND_MS_POWERPOINT_ADDIN_MACROENABLED_12',
   /** application/vnd.ms-powerpoint.presentation.macroEnabled.12 mime type. */
   ApplicationVndMsPowerpointPresentationMacroenabled_12 = 'APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACROENABLED_12',
   /** application/vnd.ms-powerpoint.slideshow.macroEnabled.12 mime type. */
   ApplicationVndMsPowerpointSlideshowMacroenabled_12 = 'APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACROENABLED_12',
+  /** application/vnd.ms-powerpoint.slide.macroEnabled.12 mime type. */
+  ApplicationVndMsPowerpointSlideMacroenabled_12 = 'APPLICATION_VND_MS_POWERPOINT_SLIDE_MACROENABLED_12',
+  /** application/vnd.ms-powerpoint.template.macroEnabled.12 mime type. */
+  ApplicationVndMsPowerpointTemplateMacroenabled_12 = 'APPLICATION_VND_MS_POWERPOINT_TEMPLATE_MACROENABLED_12',
+  /** application/vnd.ms-project mime type. */
+  ApplicationVndMsProject = 'APPLICATION_VND_MS_PROJECT',
   /** application/vnd.ms-word.document.macroEnabled.12 mime type. */
   ApplicationVndMsWordDocumentMacroenabled_12 = 'APPLICATION_VND_MS_WORD_DOCUMENT_MACROENABLED_12',
+  /** application/vnd.ms-word.template.macroEnabled.12 mime type. */
+  ApplicationVndMsWordTemplateMacroenabled_12 = 'APPLICATION_VND_MS_WORD_TEMPLATE_MACROENABLED_12',
+  /** application/vnd.ms-write mime type. */
+  ApplicationVndMsWrite = 'APPLICATION_VND_MS_WRITE',
+  /** application/vnd.ms-xpsdocument mime type. */
+  ApplicationVndMsXpsdocument = 'APPLICATION_VND_MS_XPSDOCUMENT',
+  /** application/vnd.oasis.opendocument.chart mime type. */
+  ApplicationVndOasisOpendocumentChart = 'APPLICATION_VND_OASIS_OPENDOCUMENT_CHART',
+  /** application/vnd.oasis.opendocument.database mime type. */
+  ApplicationVndOasisOpendocumentDatabase = 'APPLICATION_VND_OASIS_OPENDOCUMENT_DATABASE',
+  /** application/vnd.oasis.opendocument.formula mime type. */
+  ApplicationVndOasisOpendocumentFormula = 'APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA',
+  /** application/vnd.oasis.opendocument.graphics mime type. */
+  ApplicationVndOasisOpendocumentGraphics = 'APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS',
+  /** application/vnd.oasis.opendocument.presentation mime type. */
+  ApplicationVndOasisOpendocumentPresentation = 'APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION',
+  /** application/vnd.oasis.opendocument.spreadsheet mime type. */
+  ApplicationVndOasisOpendocumentSpreadsheet = 'APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET',
   /** application/vnd.oasis.opendocument.text mime type. */
   ApplicationVndOasisOpendocumentText = 'APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT',
   /** application/vnd.openxmlformats-officedocument.presentationml.presentation mime type. */
   ApplicationVndOpenxmlformatsOfficedocumentPresentationmlPresentation = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION',
+  /** application/vnd.openxmlformats-officedocument.presentationml.slide mime type. */
+  ApplicationVndOpenxmlformatsOfficedocumentPresentationmlSlide = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE',
   /** application/vnd.openxmlformats-officedocument.presentationml.slideshow mime type. */
   ApplicationVndOpenxmlformatsOfficedocumentPresentationmlSlideshow = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW',
+  /** application/vnd.openxmlformats-officedocument.presentationml.template mime type. */
+  ApplicationVndOpenxmlformatsOfficedocumentPresentationmlTemplate = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TEMPLATE',
   /** application/vnd.openxmlformats-officedocument.spreadsheetml.sheet mime type. */
   ApplicationVndOpenxmlformatsOfficedocumentSpreadsheetmlSheet = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET',
+  /** application/vnd.openxmlformats-officedocument.spreadsheetml.template mime type. */
+  ApplicationVndOpenxmlformatsOfficedocumentSpreadsheetmlTemplate = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TEMPLATE',
   /** application/vnd.openxmlformats-officedocument.wordprocessingml.document mime type. */
   ApplicationVndOpenxmlformatsOfficedocumentWordprocessingmlDocument = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT',
+  /** application/vnd.openxmlformats-officedocument.wordprocessingml.template mime type. */
+  ApplicationVndOpenxmlformatsOfficedocumentWordprocessingmlTemplate = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_TEMPLATE',
+  /** application/wordperfect mime type. */
+  ApplicationWordperfect = 'APPLICATION_WORDPERFECT',
+  /** application/x-7z-compressed mime type. */
+  ApplicationX_7ZCompressed = 'APPLICATION_X_7Z_COMPRESSED',
+  /** application/x-gzip mime type. */
+  ApplicationXGzip = 'APPLICATION_X_GZIP',
+  /** application/x-tar mime type. */
+  ApplicationXTar = 'APPLICATION_X_TAR',
+  /** application/zip mime type. */
+  ApplicationZip = 'APPLICATION_ZIP',
+  /** audio/aac mime type. */
+  AudioAac = 'AUDIO_AAC',
+  /** audio/flac mime type. */
+  AudioFlac = 'AUDIO_FLAC',
   /** audio/midi mime type. */
   AudioMidi = 'AUDIO_MIDI',
   /** audio/mpeg mime type. */
@@ -4772,20 +4910,52 @@ export enum MimeTypeEnum {
   AudioOgg = 'AUDIO_OGG',
   /** audio/wav mime type. */
   AudioWav = 'AUDIO_WAV',
+  /** audio/x-matroska mime type. */
+  AudioXMatroska = 'AUDIO_X_MATROSKA',
+  /** audio/x-ms-wax mime type. */
+  AudioXMsWax = 'AUDIO_X_MS_WAX',
   /** audio/x-ms-wma mime type. */
   AudioXMsWma = 'AUDIO_X_MS_WMA',
+  /** audio/x-realaudio mime type. */
+  AudioXRealaudio = 'AUDIO_X_REALAUDIO',
+  /** image/bmp mime type. */
+  ImageBmp = 'IMAGE_BMP',
   /** image/gif mime type. */
   ImageGif = 'IMAGE_GIF',
+  /** image/heic mime type. */
+  ImageHeic = 'IMAGE_HEIC',
   /** image/jpeg mime type. */
   ImageJpeg = 'IMAGE_JPEG',
   /** image/png mime type. */
   ImagePng = 'IMAGE_PNG',
+  /** image/tiff mime type. */
+  ImageTiff = 'IMAGE_TIFF',
+  /** image/webp mime type. */
+  ImageWebp = 'IMAGE_WEBP',
+  /** image/x-icon mime type. */
+  ImageXIcon = 'IMAGE_X_ICON',
+  /** text/calendar mime type. */
+  TextCalendar = 'TEXT_CALENDAR',
+  /** text/css mime type. */
+  TextCss = 'TEXT_CSS',
+  /** text/csv mime type. */
+  TextCsv = 'TEXT_CSV',
+  /** text/plain mime type. */
+  TextPlain = 'TEXT_PLAIN',
+  /** text/richtext mime type. */
+  TextRichtext = 'TEXT_RICHTEXT',
+  /** text/tab-separated-values mime type. */
+  TextTabSeparatedValues = 'TEXT_TAB_SEPARATED_VALUES',
+  /** text/vtt mime type. */
+  TextVtt = 'TEXT_VTT',
   /** video/3gpp mime type. */
   Video_3Gpp = 'VIDEO_3GPP',
   /** video/3gpp2 mime type. */
   Video_3Gpp2 = 'VIDEO_3GPP2',
   /** video/avi mime type. */
   VideoAvi = 'VIDEO_AVI',
+  /** video/divx mime type. */
+  VideoDivx = 'VIDEO_DIVX',
   /** video/mp4 mime type. */
   VideoMp4 = 'VIDEO_MP4',
   /** video/mpeg mime type. */
@@ -4798,8 +4968,16 @@ export enum MimeTypeEnum {
   VideoWebm = 'VIDEO_WEBM',
   /** video/x-flv mime type. */
   VideoXFlv = 'VIDEO_X_FLV',
+  /** video/x-matroska mime type. */
+  VideoXMatroska = 'VIDEO_X_MATROSKA',
+  /** video/x-ms-asf mime type. */
+  VideoXMsAsf = 'VIDEO_X_MS_ASF',
+  /** video/x-ms-wm mime type. */
+  VideoXMsWm = 'VIDEO_X_MS_WM',
   /** video/x-ms-wmv mime type. */
-  VideoXMsWmv = 'VIDEO_X_MS_WMV'
+  VideoXMsWmv = 'VIDEO_X_MS_WMV',
+  /** video/x-ms-wmx mime type. */
+  VideoXMsWmx = 'VIDEO_X_MS_WMX'
 }
 
 /** The news type */
@@ -4840,8 +5018,14 @@ export type News = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the news_article object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -5523,8 +5707,14 @@ export type Organization = ContentNode & DatabaseIdentifier & MenuItemLinkable &
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the organization object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -5696,6 +5886,8 @@ export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the page object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
   /** Whether this page is set to the static front page. */
@@ -6222,8 +6414,14 @@ export type Person = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the person object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -6420,10 +6618,6 @@ export enum PluginStatusEnum {
   Inactive = 'INACTIVE',
   /** The plugin is a must-use plugin. */
   MustUse = 'MUST_USE',
-  /** The plugin is activated on the multisite network. */
-  NetworkActivated = 'NETWORK_ACTIVATED',
-  /** The plugin is installed on the multisite network, but is currently inactive. */
-  NetworkInactive = 'NETWORK_INACTIVE',
   /** The plugin is technically active but was paused while loading. */
   Paused = 'PAUSED',
   /** The plugin was active recently. */
@@ -6483,8 +6677,14 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the post object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -6705,8 +6905,14 @@ export type PostFormat = DatabaseIdentifier & Node & TermNode & UniformResourceI
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>;
   /** Whether the node is a Term */
@@ -7811,8 +8017,14 @@ export type Report = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the report object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -11150,6 +11362,8 @@ export type Settings = {
   /** Settings of the the string Settings Group */
   generalSettingsDescription?: Maybe<Scalars['String']>;
   /** Settings of the the string Settings Group */
+  generalSettingsEmail?: Maybe<Scalars['String']>;
+  /** Settings of the the string Settings Group */
   generalSettingsLanguage?: Maybe<Scalars['String']>;
   /** Settings of the the integer Settings Group */
   generalSettingsStartOfWeek?: Maybe<Scalars['Int']>;
@@ -11159,6 +11373,8 @@ export type Settings = {
   generalSettingsTimezone?: Maybe<Scalars['String']>;
   /** Settings of the the string Settings Group */
   generalSettingsTitle?: Maybe<Scalars['String']>;
+  /** Settings of the the string Settings Group */
+  generalSettingsUrl?: Maybe<Scalars['String']>;
   /** Settings of the the integer Settings Group */
   readingSettingsPageForPosts?: Maybe<Scalars['Int']>;
   /** Settings of the the integer Settings Group */
@@ -11205,8 +11421,14 @@ export type Story = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node &
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the story object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -11353,8 +11575,14 @@ export type Tag = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & Unif
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>;
   /** Whether the node is a Term */
@@ -11689,8 +11917,14 @@ export type TakeAction = ContentNode & DatabaseIdentifier & MenuItemLinkable & N
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the take_actions object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
@@ -12397,8 +12631,14 @@ export type TermNode = {
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>;
   /** Whether the node is a Term */
@@ -12633,8 +12873,14 @@ export type TimelineTemplate = ContentTemplate & {
 export type UniformResourceIdentifiable = {
   /** The globally unique ID for the object */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the node is a Term */
   isTermNode: Scalars['Boolean'];
   /** The unique resource identifier path */
@@ -13071,6 +13317,8 @@ export type UpdateSettingsInput = {
   generalSettingsDateFormat?: InputMaybe<Scalars['String']>;
   /** Site tagline. */
   generalSettingsDescription?: InputMaybe<Scalars['String']>;
+  /** This address is used for admin purposes, like new user notification. */
+  generalSettingsEmail?: InputMaybe<Scalars['String']>;
   /** WordPress locale code. */
   generalSettingsLanguage?: InputMaybe<Scalars['String']>;
   /** A day number of the week that the week should start on. */
@@ -13081,6 +13329,8 @@ export type UpdateSettingsInput = {
   generalSettingsTimezone?: InputMaybe<Scalars['String']>;
   /** Site title. */
   generalSettingsTitle?: InputMaybe<Scalars['String']>;
+  /** Site URL. */
+  generalSettingsUrl?: InputMaybe<Scalars['String']>;
   /** The ID of the page that should display the latest posts */
   readingSettingsPageForPosts?: InputMaybe<Scalars['Int']>;
   /** The ID of the page that should be displayed on the front page */
@@ -13316,8 +13566,14 @@ export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdenti
   firstName?: Maybe<Scalars['String']>;
   /** The globally unique identifier for the user object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>;
   /** Whether the node is a Term */
@@ -14252,8 +14508,14 @@ export type Volunteer_Position = ContentNode & DatabaseIdentifier & MenuItemLink
   guid?: Maybe<Scalars['String']>;
   /** The globally unique identifier of the volunteer_position object. */
   id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>;
   /** Whether the object is restricted from the current viewer */
