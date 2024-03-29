@@ -134,7 +134,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
   const volunteers = await getVolunteers()
 
-  // const purpleAirStations = await fetchPurpleAirStations()
+  const purpleAirStations = await fetchPurpleAirStations()
   const openAQStations = await fetchOpenAQStations()
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
@@ -143,9 +143,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
   const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
-  // const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
-  const stations = [...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+  const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+  // const stations = [...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const data = await getHomeLandingPageSettings()
+
+
 
   return {
     props: {
