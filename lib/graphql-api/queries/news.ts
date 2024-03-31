@@ -192,7 +192,7 @@ export async function getAgaarNegNews(): Promise<
     keywords: string[]
   }[]
 > {
-  const MAX_NUM_RESOURCES = 7
+  const MAX_NUM_RESOURCES = 8
   // override api request url, as host server is different
   const news = []
   const data = await fetchAPI(
