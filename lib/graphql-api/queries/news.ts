@@ -86,24 +86,22 @@ export async function getNewsLandingPageSettings(): Promise<any> {
     `query getNewsLandingPageSettings {
       newsPageSettings {
         newsLanding {
-          socialMediaShare {
-            description
-            descriptionMn
-            title
-            titleMn
-            image {
-              mediaItemUrl
-            }
-            imageMn {
-              mediaItemUrl
-              }
+          description
+          descriptionMn
+          title
+          titleMn
+          image {
+            mediaItemUrl
+          }
+          imageMn {
+            mediaItemUrl
             }
           }
         }
       }
     `,
   )
-  return data.newsPageSettings.newsLanding.socialMediaShare || []
+  return data.newsPageSettings.newsLanding || []
 }
 
 
