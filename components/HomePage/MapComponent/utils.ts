@@ -85,6 +85,23 @@ export const getHealthCategory = (aqi: number) => {
   }
 }
 
+// Getting air quality level
+export const getAirQualityLevel = (aqi: number) => {
+  if (aqi < 50) {
+    return 'Good'
+  } else if (aqi < 100) {
+    return 'Moderate'
+  } else if (aqi < 150) {
+    return 'Unhealthy Sensitive'
+  } else if (aqi < 200) {
+    return 'Unhealthy'
+  } else if (aqi < 300) {
+    return 'Very Unhealthy'
+  } else if (aqi > 300) {
+    return 'Hazardous'
+  }
+}
+
 // -------------------------------- Time filtering for indoor and outdoor sensors --------------------------------
 
 // only show/render stations that are updated within last week

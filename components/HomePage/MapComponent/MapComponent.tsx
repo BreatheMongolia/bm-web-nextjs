@@ -11,10 +11,9 @@ import { LocationOption, leftRadios, locationsWithSensors, rightRadios } from '.
 import { MapDropdownWrapper } from './MapDropdowns/MapDropdownWrapper'
 import { LocationDropdown, RankDropdown, StationsDropdown } from './MapDropdowns'
 // import { isStationWithinBBOX } from './utils'
-import { RankType, StationType } from 'lib/air-pollution-map/types'
+import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map/types'
 import { StationDetail } from './StationDetail'
 import StationPin from './Helpers/StationPin'
-import ReactDOM from 'react-dom'
 import { useWidth } from 'lib/utils/useWidth'
 import { CELL_PHONE_MAX_WIDTH } from 'lib/consts/widths'
 
@@ -32,12 +31,16 @@ export const MapComponent = ({
   title,
   descriptionHtml,
   stations,
+  recommendations,
   globalRanks,
+  locale,
 }: {
   title: { en: string; mn: string }
   descriptionHtml: { en: string; mn: string }
   stations: StationType[]
+  recommendations: RecommendationType[]
   globalRanks: RankType[]
+  locale: string
 }) => {
   const { t, i18n } = useTranslation('map')
   // init
@@ -236,6 +239,8 @@ export const MapComponent = ({
             mapContext.setSelectedStation(null)
           }}
           station={mapContext.selectedStation}
+          recommendations={recommendations}
+          locale={locale}
         />
       </div>
     </div>

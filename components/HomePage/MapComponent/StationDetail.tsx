@@ -1,11 +1,24 @@
-import { StationType } from 'lib/air-pollution-map/types'
+import { StationType, RecommendationType } from 'lib/air-pollution-map/types'
 import { useTranslation } from 'next-i18next'
+import { useState } from 'react'
 import { getAQIColor, getHealthCategory } from './utils'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { motion, AnimatePresence } from 'framer-motion'
+import { RecommendationCard } from '../../Cards/RecommendationCard'
 import { healthCategoryDetailsIndoor, healthCategoryDetailsOutdoor } from './consts'
+import { getTranslated } from 'lib/utils/getTranslated'
 
-export const StationDetail = ({ setHidden, station }: { setHidden: Function; station: StationType }) => {
+export const StationDetail = ({
+  setHidden,
+  station,
+  recommendations,
+  locale,
+}: {
+  setHidden: Function
+  station: StationType
+  recommendations: RecommendationType[]
+  locale: string
+}) => {
   const { t } = useTranslation('map')
 
   const getFormattedDate = () => {
@@ -19,6 +32,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
     const mins = date.getMinutes() === 0 ? '00' : date.getMinutes()
     return `${date.getHours()}:${mins} Hrs, ${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
   }
+
   // helper util to get all the different colors
   const getSectionBgColors = (aqiColor: string) => {
     switch (aqiColor) {
@@ -75,6 +89,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
     }
   }
 
+  const [recommendation, setRecommendation] = useState(null)
   const aqiColor = station ? getAQIColor(station.pollution.aqius) : ''
   const bgColors = getSectionBgColors(aqiColor)
   const healthCategory = station ? getHealthCategory(station.pollution.aqius) : ''
@@ -82,6 +97,18 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
     station && station.type === 'indoor'
       ? healthCategoryDetailsIndoor[healthCategory]
       : healthCategoryDetailsOutdoor[healthCategory]
+
+  const airQuality = getHealthCategory(station.pollution.aqius)
+  const isOutdoor = station.type == 'indoor' ? null : true
+  console.log(recommendations)
+
+  recommendations.map(x => {
+    // if (x.airQuality.includes(airQuality) && x.isOutdoor == isOutdoor) {
+    if (x.airQuality.includes(airQuality)) {
+      setRecommendation(x)
+    }
+  })
+  console.log(recommendation)
 
   // separated the content to make the return method more readable
   const ContentTopLeftArea = () => {
@@ -122,11 +149,13 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
       <div className={`col-span-2 px-1 md:px-4 py-1 flex items-center justify-center space-x-1 ${bgColors.bottomB}`}>
         <div className={`health_category_icon ${healthCategoryDetails.className}`}></div>
         <div className="font-bold text-sm" style={{ lineHeight: '18px' }}>
-          {t(`stationDetail.${station.type}Text.${healthCategory}.category_text`)}
+          {/* {t(`stationDetail.${station.type}Text.${healthCategory}.category_text`)} */}
+          {getTranslated(recommendation.description, recommendation.descriptionMn, locale)}
         </div>
       </div>
     )
   }
+
   const ContentRightArea = () => {
     return (
       <div className={`flex-grow px-1 md:px-4 py-0.5 md:py-3 ${bgColors.right}`}>
@@ -144,26 +173,38 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           <div
             className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
           >
-            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.first_advice}`}></div>
-            <div className="text-xs font-semibold">
-              {t(`stationDetail.${station.type}Text.${healthCategory}.first_advice`)}
-            </div>
+            <RecommendationCard
+              key={'first'}
+              slug={recommendation.advices[0].takeAction[0].slug}
+              icon={recommendation.advices[0].icon}
+              comment={recommendation.advices[0].comment}
+              commentMn={recommendation.advices[0].commentMn}
+              locale={locale}
+            />
           </div>
           <div
             className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
           >
-            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.second_advice}`}></div>
-            <div className="text-xs font-semibold">
-              {t(`stationDetail.${station.type}Text.${healthCategory}.second_advice`)}
-            </div>
+            <RecommendationCard
+              key={'second'}
+              slug={recommendation.advices[1].takeAction[0].slug}
+              icon={recommendation.advices[1].icon}
+              comment={recommendation.advices[1].comment}
+              commentMn={recommendation.advices[1].commentMn}
+              locale={locale}
+            />
           </div>
           <div
             className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
           >
-            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.third_advice}`}></div>
-            <div className="text-xs font-semibold">
-              {t(`stationDetail.${station.type}Text.${healthCategory}.third_advice`)}
-            </div>
+            <RecommendationCard
+              key={'third'}
+              slug={recommendation.advices[2].takeAction[0].slug}
+              icon={recommendation.advices[2].icon}
+              comment={recommendation.advices[2].comment}
+              commentMn={recommendation.advices[2].commentMn}
+              locale={locale}
+            />
           </div>
         </div>
       </div>

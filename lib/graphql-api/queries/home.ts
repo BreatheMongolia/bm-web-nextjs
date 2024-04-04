@@ -1,5 +1,6 @@
 import { fetchAPI } from 'lib/graphql-api/api'
 import { Page, PageIdType, MediaItemSizeEnum, Page_Customfields } from 'graphql/generated'
+import { RecommendationType } from 'lib/air-pollution-map/types'
 
 const HomePageGQLQuerySections = {
   banner: `
@@ -287,4 +288,35 @@ export async function getHomeLandingPageSettings(): Promise<any> {
       `,
     )
     return data.homePageSettings.customFields?.socialMediaShare || []
+  }
+
+  export async function getRecommendationSettings(): Promise<any> {
+    const data = await fetchAPI(
+      `query GetRecommendations {
+        recommendedActionsSettings {
+          mapRecommendations {
+            recommendations {
+              airQuality
+              isOutdoor
+              description
+              descriptionMn
+              advices {
+                icon {
+                  mediaItemUrl
+                }
+                comment
+                commentMn
+                takeAction {
+                  ... on TakeAction {
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      `,
+    )
+    return data.recommendedActionsSettings?.mapRecommendations || []
   }
