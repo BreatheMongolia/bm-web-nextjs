@@ -217,13 +217,13 @@ export const MapComponent = ({
             selectedStation={mapContext.selectedStation}
             open={currentDropdown === 'stations'}
           />
-          <RankDropdown
+          {/* <RankDropdown
             data={globalRanks}
             setTitleClick={(isOpen: boolean) => {
               setCurrentDropdown(isOpen ? 'rank' : 'none')
             }}
             open={currentDropdown === 'rank'}
-          />
+          /> */}
         </MapDropdownWrapper>
         <InfoPopup />
         <MapController
