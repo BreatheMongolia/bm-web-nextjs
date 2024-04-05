@@ -371,18 +371,19 @@ p {
   text-decoration: none;
 
   &.big {
-    grid-column: auto / span 2;
-    grid-row: auto / span 2;
+    grid-column:  span 2;
+    grid-row:  span 2;
     width: 100%;
     height: auto;
-    margin-right: 5px;
+    overflow: hidden;
+
 
     .take-action-img {
       height: 306px;
+   
     }
 
     .take-action-info {
-      padding: 15px 20px;
       height: 104px !important;
 
       .take-action-title {

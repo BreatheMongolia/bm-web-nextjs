@@ -8,9 +8,9 @@ export const NewsGrid = ({ children, defaultRows = 1, isPaginated = false }: Pro
 
   return (
     <div
-      className={`grid ${
-        defaultRows === 1 ? 'grid-cols-1' : 'grid-cols-2'
-      } sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 justify-between gap-4`}
+      className={`grid gap-x-2 gap-y-3 justify-center ${
+        defaultRows === 1 ? 'grid-cols-[330px]' : 'grid-cols-[330px_330px]'
+      } sm:grid-cols-[330px_330px] lg:grid-cols-[330px_330px_330px] xl:grid-cols-[330px_330px_330px] 2xl:grid-cols-[330px_330px_330px_330px] `}
     >
       {children}
 
