@@ -290,14 +290,14 @@ export async function getHomeLandingPageSettings(): Promise<any> {
     return data.homePageSettings.customFields?.socialMediaShare || []
   }
 
-  export async function getRecommendationSettings(): Promise<any> {
+  export async function getRecommendationSettings(): Promise<RecommendationType> {
     const data = await fetchAPI(
       `query GetRecommendations {
         recommendedActionsSettings {
           mapRecommendations {
             recommendations {
               airQuality
-              isOutdoor
+              sensorType
               description
               descriptionMn
               advices {
@@ -318,5 +318,5 @@ export async function getHomeLandingPageSettings(): Promise<any> {
       }
       `,
     )
-    return data.recommendedActionsSettings?.mapRecommendations || []
+    return data.recommendedActionsSettings?.mapRecommendations.recommendations || []
   }

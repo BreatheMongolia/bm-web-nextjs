@@ -32,7 +32,7 @@ import {
 } from 'components/HomePage'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 import dayjs from 'dayjs'
-// import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { getTranslated } from 'lib/utils/getTranslated'
 
 export default function Index({
@@ -134,7 +134,7 @@ export default function Index({
           />
         </div>
       </div>
-      {/* <GoogleAnalytics gaId="G-Z26ZSKR6S9" /> */}
+      <GoogleAnalytics gaId="G-Z26ZSKR6S9" />
     </div>
   )
 }
@@ -150,12 +150,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
   const isNotDev = process.env.NODE_ENV !== 'development'
-  // const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
-  // const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
+  const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
+  const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
   // const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
-  const stations = [...purpleAirStations, ...openAQStations]
-  // const stations = [...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+  // const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+  const stations = [...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const data = await getHomeLandingPageSettings()
 
   return {

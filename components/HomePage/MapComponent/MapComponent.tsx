@@ -16,6 +16,7 @@ import { StationDetail } from './StationDetail'
 import StationPin from './Helpers/StationPin'
 import { useWidth } from 'lib/utils/useWidth'
 import { CELL_PHONE_MAX_WIDTH } from 'lib/consts/widths'
+import { getHealthCategory } from './utils'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -61,6 +62,22 @@ export const MapComponent = ({
     label: t('province.ulaanbaatar'),
   })
   const [currentDropdown, setCurrentDropdown] = useState<'location' | 'stations' | 'rank' | 'none'>('location')
+  const [recommendation, setRecommendation] = useState(null)
+
+  // useEffect(() => {
+  //   console.log(recommendations)
+  //   if (recommendations) {
+  //     const indoorRecs = recommendations
+  //       .filter(item => item.sensorType === 'indoor')
+  //       // @ts-ignore
+  //       .reduce((acc, [key, value]) => {
+  //         acc[key] = value
+  //         return acc
+  //       }, {})
+
+  //     console.log('indoorRecs', indoorRecs)
+  //   }
+  // }, [recommendations])
 
   useEffect(() => {
     if (!map) {
@@ -157,6 +174,9 @@ export const MapComponent = ({
     //   setIsStationsDropdownOpen(false)
     // }
     mapContext?.setSelectedStation(station)
+    const airQuality = station ? getHealthCategory(station.pollution.aqius) : ''
+    setRecommendation(recommendations.find(x => x.airQuality === airQuality && x.sensorType === station?.type))
+
     // const mapBoundingBox = map.getBounds()
 
     // I think it's better to fly even if it is within bounds?
@@ -239,7 +259,7 @@ export const MapComponent = ({
             mapContext.setSelectedStation(null)
           }}
           station={mapContext.selectedStation}
-          recommendations={recommendations}
+          recommendation={recommendation}
           locale={locale}
         />
       </div>

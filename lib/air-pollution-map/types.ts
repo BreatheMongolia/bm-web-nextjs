@@ -59,7 +59,7 @@ export interface RankType {
 
 export interface RecommendationType {
   airQuality: string
-  isOutdoor: boolean
+  sensorType: string
   description: string
   descriptionMn: string
   advices?: {
