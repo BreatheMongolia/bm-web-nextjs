@@ -14,6 +14,11 @@ export function getTransformedDataFromOpenAQ(res: any) {
       const manufacturerName = station.manufacturers.length > 0 ? station.manufacturers[0] : 'OpenAQ Unknown'
       // item.id = 2 -> PM2.5
       const PM25 = res.results[i].parameters.find(item => item.id === 2) ?? {}
+
+      // skip if PM2.5 readings are negative
+      if (PM25.lastValue < 0) {
+        continue
+      }
       // skip if it hasnt been updated in a week
       if (!hasStationUpdatedWithinLastWeek(PM25.lastUpdated, 'openAQ')) {
         continue
