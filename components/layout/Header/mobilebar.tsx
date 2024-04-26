@@ -59,7 +59,7 @@ export const Mobilebar = () => {
       <div className="flex gap-x-2">
         <div
           id="mobile-menu"
-          className={`bg-white w-full lg:hidden fixed py-10 flex flex-col gap-7 mt-12 h-300 z-30 px-10 text-black
+          className={`bg-white w-full lg:hidden fixed py-10 flex flex-col gap-7 mt-12 h-full z-30 px-10 text-black
         uppercase text-lg font-semibold tracking-widest 
         transition-all ease-in-out duration-200
         ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
