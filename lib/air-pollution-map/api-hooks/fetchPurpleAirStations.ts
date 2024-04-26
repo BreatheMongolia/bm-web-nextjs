@@ -4,7 +4,7 @@ import { getAQIFromPM2, getAQIColor } from 'components/HomePage/MapComponent/uti
 import { StationType } from '../types'
 
 // API urls
-const PA_FIELDS = 'name,last_seen,location_type,latitude,longitude,pm2.5_cf_1'
+const PA_FIELDS = 'name,last_seen,location_type,latitude,longitude,pm2.5'
 const PA_GET_SENSORS_DATA = `https://api.purpleair.com/v1/sensors?fields=${PA_FIELDS}&nwlng=${PA_MONGOLIA_BOUNDING_BOX_COORDS.NW_LNG}&nwlat=${PA_MONGOLIA_BOUNDING_BOX_COORDS.NW_LAT}&selng=${PA_MONGOLIA_BOUNDING_BOX_COORDS.SE_LNG}&selat=${PA_MONGOLIA_BOUNDING_BOX_COORDS.SE_LAT}`
 
 export const fetchPurpleAirStations = async () => {
@@ -32,7 +32,7 @@ export const fetchPurpleAirStations = async () => {
         // turn raw_stations into stationTypes
         raw_stations.map(x => {
           // convert to aqi
-          const pm2 = parseInt(x['pm2.5_cf_1'])
+          const pm2 = parseInt(x['pm2.5'])
           const stationAQI = getAQIFromPM2(pm2)
           // push
           stations.push({
@@ -49,6 +49,6 @@ export const fetchPurpleAirStations = async () => {
     .catch(err => {
       console.error('failed to get all sensors:', err)
     })
-
+  console.log("PA Sensors", stations)
   return stations
 }
