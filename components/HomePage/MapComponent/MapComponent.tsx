@@ -64,21 +64,6 @@ export const MapComponent = ({
   const [currentDropdown, setCurrentDropdown] = useState<'location' | 'stations' | 'rank' | 'none'>('location')
   const [recommendation, setRecommendation] = useState(null)
 
-  // useEffect(() => {
-  //   console.log(recommendations)
-  //   if (recommendations) {
-  //     const indoorRecs = recommendations
-  //       .filter(item => item.sensorType === 'indoor')
-  //       // @ts-ignore
-  //       .reduce((acc, [key, value]) => {
-  //         acc[key] = value
-  //         return acc
-  //       }, {})
-
-  //     console.log('indoorRecs', indoorRecs)
-  //   }
-  // }, [recommendations])
-
   useEffect(() => {
     if (!map) {
       // Initialize map once when the MapComponent rendered at the first time
