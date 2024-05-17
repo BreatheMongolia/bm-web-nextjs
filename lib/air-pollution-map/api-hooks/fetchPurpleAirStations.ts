@@ -31,7 +31,7 @@ export const fetchPurpleAirStations = async () => {
         })
 
         // Filter out stations with pm2.5 of 0
-        const filtered_stations = raw_stations.filter(x => parseInt(x['pm2.5']) !== 0)
+        const filtered_stations = raw_stations.filter(x => parseInt(x['pm2.5']) > 0)
 
         // turn raw_stations into stationTypes
         filtered_stations.map(x => {
