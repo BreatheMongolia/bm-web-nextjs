@@ -11,12 +11,12 @@ import { LocationOption, leftRadios, locationsWithSensors, rightRadios } from '.
 import { MapDropdownWrapper } from './MapDropdowns/MapDropdownWrapper'
 import { LocationDropdown, RankDropdown, StationsDropdown } from './MapDropdowns'
 // import { isStationWithinBBOX } from './utils'
-import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map/types'
+import { RankType, StationType } from 'lib/air-pollution-map/types'
 import { StationDetail } from './StationDetail'
 import StationPin from './Helpers/StationPin'
+import ReactDOM from 'react-dom'
 import { useWidth } from 'lib/utils/useWidth'
 import { CELL_PHONE_MAX_WIDTH } from 'lib/consts/widths'
-import { getHealthCategory } from './utils'
 
 const MAP_BASE_CONFIG = {
   lng: 106.9176,
@@ -32,16 +32,12 @@ export const MapComponent = ({
   title,
   descriptionHtml,
   stations,
-  recommendations,
   globalRanks,
-  locale,
 }: {
   title: { en: string; mn: string }
   descriptionHtml: { en: string; mn: string }
   stations: StationType[]
-  recommendations: RecommendationType[]
   globalRanks: RankType[]
-  locale: string
 }) => {
   const { t, i18n } = useTranslation('map')
   // init
@@ -62,7 +58,6 @@ export const MapComponent = ({
     label: t('province.ulaanbaatar'),
   })
   const [currentDropdown, setCurrentDropdown] = useState<'location' | 'stations' | 'rank' | 'none'>('location')
-  const [recommendation, setRecommendation] = useState(null)
 
   useEffect(() => {
     if (!map) {
@@ -159,9 +154,6 @@ export const MapComponent = ({
     //   setIsStationsDropdownOpen(false)
     // }
     mapContext?.setSelectedStation(station)
-    const airQuality = station ? getHealthCategory(station.pollution.aqius) : ''
-    setRecommendation(recommendations.find(x => x.airQuality === airQuality && x.sensorType === station?.type))
-
     // const mapBoundingBox = map.getBounds()
 
     // I think it's better to fly even if it is within bounds?
@@ -244,8 +236,6 @@ export const MapComponent = ({
             mapContext.setSelectedStation(null)
           }}
           station={mapContext.selectedStation}
-          recommendation={recommendation}
-          locale={locale}
         />
       </div>
     </div>

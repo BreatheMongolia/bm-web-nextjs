@@ -19,7 +19,6 @@ import {
 } from 'lib/graphql-api/queries/news'
 import FullNewsGrid from 'components/NewsPage/FullNewsGrid'
 import { getTranslated } from 'lib/utils/getTranslated'
-import LogoBlue from 'assets/images/logoBlue.png'
 
 // FIXME: Featured News not showing up
 const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featuredNews: News[]; agaarNegNews }) => {
@@ -68,7 +67,7 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
           <H2
             title={t('latestOnBm')}
             trailingLineColor="blue"
-            iconImage={LogoBlue}
+            iconImage={'/images/logoBlue.png'}
             extraButton={{
               title: t('seemore'),
               url: '/news/breathemongolia',

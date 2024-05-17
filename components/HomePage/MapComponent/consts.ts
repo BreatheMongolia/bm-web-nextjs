@@ -163,6 +163,85 @@ export const AQI_THRESHOLDS = {
   '500.4': { iHi: 500, iLow: 401, bpHi: 500.4, bpLow: 350.5, pmLvl: 5 },
 }
 
+export const healthCategoryDetailsIndoor = {
+  good: {
+    className: 'good',
+    category_text: 'Air quality is good. Enjoy the outdoors!',
+    recommendation_icon: { first_advice: 'wetclean', second_advice: 'no-smoke', third_advice: 'chemical' },
+    recommendation_text: 'good',
+  },
+  moderate: {
+    className: 'moderate',
+    category_text: 'Moderate air quality continue monitoring the air',
+    recommendation_icon: { first_advice: 'checkair', second_advice: 'chemical', third_advice: 'no-smoke' },
+    recommendation_text: 'moderate',
+  },
+  unhealthy_sensitive: {
+    className: 'unhealthy_sensitive',
+    category_text: 'Unhealthy for vulnerable populations of all ages',
+    recommendation_icon: { first_advice: 'purifier', second_advice: 'no-smoke', third_advice: 'monitor' },
+    recommendation_text: 'unhealthy_sensitive',
+  },
+  unhealthy: {
+    className: 'unhealthy',
+    category_text: 'Unhealthy air quality. Monitor your health',
+    recommendation_icon: { first_advice: 'purifier', second_advice: 'chemical', third_advice: 'monitor' },
+    recommendation_text: 'unhealthy',
+  },
+  very_unhealthy: {
+    className: 'very_unhealthy',
+    category_text: 'Very unhealthy! Serious health effects',
+    recommendation_icon: { first_advice: 'purifier', second_advice: 'monitor', third_advice: 'indoor' },
+    recommendation_text: 'very_unhealthy',
+  },
+  hazardous: {
+    className: 'hazardous',
+    category_text: 'Caution! air quality is hazardous!',
+    recommendation_icon: { first_advice: 'indoor', second_advice: 'purifier', third_advice: 'monitor' },
+    recommendation_text: 'hazardous',
+  },
+}
+
+// Health impact details
+export const healthCategoryDetailsOutdoor = {
+  good: {
+    className: 'good',
+    category_text: 'Air quality is good. Enjoy the outdoors!',
+    recommendation_icon: { first_advice: 'walk', second_advice: 'openWindow', third_advice: 'wetclean' },
+    recommendation_text: 'good',
+  },
+  moderate: {
+    className: 'moderate',
+    category_text: 'Moderate air quality continue monitoring the air',
+    recommendation_icon: { first_advice: 'checkair', second_advice: 'chemical', third_advice: 'traffic' },
+    recommendation_text: 'moderate',
+  },
+  unhealthy_sensitive: {
+    className: 'unhealthy_sensitive',
+    category_text: 'Unhealthy for vulnerable populations of all ages',
+    recommendation_icon: { first_advice: 'purifier', second_advice: 'no-smoke', third_advice: 'monitor' },
+    recommendation_text: 'unhealthy_sensitive',
+  },
+  unhealthy: {
+    className: 'unhealthy',
+    category_text: 'Unhealthy air quality. Monitor your health',
+    recommendation_icon: { first_advice: 'purifier', second_advice: 'closeWindow', third_advice: 'mask' },
+    recommendation_text: 'unhealthy',
+  },
+  very_unhealthy: {
+    className: 'very_unhealthy',
+    category_text: 'Very unhealthy! Serious health effects',
+    recommendation_icon: { first_advice: 'purifier', second_advice: 'monitor', third_advice: 'mask' },
+    recommendation_text: 'very_unhealthy',
+  },
+  hazardous: {
+    className: 'hazardous',
+    category_text: 'Caution! air quality is hazardous!',
+    recommendation_icon: { first_advice: 'indoor', second_advice: 'purifier', third_advice: 'mask' },
+    recommendation_text: 'hazardous',
+  },
+}
+
 export const desiredPollutants = ['p2', 'p1', 'n2', 's2', 'o3', 'co']
 
 export const indoorStationLocation: any = {

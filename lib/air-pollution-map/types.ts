@@ -1,5 +1,3 @@
-import { TakeAction } from "graphql/generated"
-
 export interface MapContextInterface {
   pins: any[]
   addPin: (pin: HTMLDivElement) => void
@@ -54,20 +52,5 @@ export interface RankType {
   ranking: {
     current_aqi: number
     current_aqi_cn: number
-  }
-}
-
-export interface RecommendationType {
-  airQuality: string
-  sensorType: string
-  description: string
-  descriptionMn: string
-  advices?: {
-    icon?: {
-      mediaItemUrl: any
-    }
-    comment: string
-    commentMn: string
-    takeAction?: TakeAction[]
   }
 }
