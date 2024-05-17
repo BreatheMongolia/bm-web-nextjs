@@ -4,14 +4,9 @@ import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // types
 import { Page } from 'graphql/generated'
-import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map/types'
+import { RankType, StationType } from 'lib/air-pollution-map/types'
 // lib functions/queries
-import {
-  getHomeLandingPageSettings,
-  getHomePage,
-  getRecommendationSettings,
-  getVolunteers,
-} from 'lib/graphql-api/queries/home'
+import { getHomeLandingPageSettings, getHomePage, getVolunteers } from 'lib/graphql-api/queries/home'
 import {
   fetchPurpleAirStations,
   fetchOpenAQStations,
@@ -32,22 +27,20 @@ import {
 } from 'components/HomePage'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 import dayjs from 'dayjs'
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { getTranslated } from 'lib/utils/getTranslated'
 
 export default function Index({
   page,
   stations,
-  recommendationActions,
   volunteers,
   globalRanks,
   locale,
 }: {
   page: Page
   stations: StationType[]
-  recommendationActions: RecommendationType[]
-  volunteers: any
   globalRanks: RankType[]
+  volunteers: any
   locale: string
 }) {
   const { i18n } = useTranslation()
@@ -62,14 +55,13 @@ export default function Index({
   const pageBanner =
     i18n.language === 'en'
       ? {
-          leftText: page.customFields.bannerTextLeft,
-          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
-        }
+        leftText: page.customFields.bannerTextLeft,
+        rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
+      }
       : {
-          leftText: page.customFields.bannerTextLeftMn,
-          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
-        }
-
+        leftText: page.customFields.bannerTextLeftMn,
+        rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
+      }
   return (
     <div>
       <Head>
@@ -100,9 +92,7 @@ export default function Index({
                 mn: page.customFields.mapDescriptionMn,
               }}
               stations={stations}
-              recommendations={recommendationActions}
               globalRanks={globalRanks}
-              locale={locale}
             />
           </MapContextWrapper>
 
@@ -143,20 +133,21 @@ export default function Index({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
   const volunteers = await getVolunteers()
-  const recommendationActions = await getRecommendationSettings()
 
   const purpleAirStations = await fetchPurpleAirStations()
   const openAQStations = await fetchOpenAQStations()
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
   const isNotDev = process.env.NODE_ENV !== 'development'
-  const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
-  const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
+  // const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
+  // const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
   // const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
-  // const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
-  const stations = [...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+  const stations = [...purpleAirStations, ...openAQStations]
+  // const stations = [...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const data = await getHomeLandingPageSettings()
+
+
 
   return {
     props: {
@@ -165,7 +156,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       page,
       volunteers,
       stations,
-      recommendationActions,
       globalRanks: [],
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),

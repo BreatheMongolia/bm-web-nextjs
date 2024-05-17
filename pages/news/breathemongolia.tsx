@@ -6,7 +6,6 @@ import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import FullNewsGrid from 'components/NewsPage/FullNewsGrid'
 import { BreadCrumb } from 'components/NewsPage/DetailPage'
-import LogoBlue from 'assets/images/logoBlue.png'
 
 const BreatheMongoliaNewsPage = ({ news }: { news: News[] }) => {
   const { t } = useTranslation('news')
@@ -23,7 +22,7 @@ const BreatheMongoliaNewsPage = ({ news }: { news: News[] }) => {
     <div className="pt-10">
       <BreadCrumb breadCrumbItems={breadCrumbItems} />
       <div className="container">
-        <H2 title={t('latestOnBm')} trailingLineColor="blue" iconImage={LogoBlue} />
+        <H2 title={t('latestOnBm')} trailingLineColor="blue" iconImage={'/images/logoBlue.png'} />
         <FullNewsGrid news={bmNews} />
       </div>
     </div>

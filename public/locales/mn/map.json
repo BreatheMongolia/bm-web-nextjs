@@ -80,6 +80,82 @@
     "Arkhangai": "Архангай",
     "Umnugovi": "Өмнөговь",
     "Darkhan": "Дархан",
+    "outdoorText": {
+      "good": {
+        "first_advice": "Явган яваарай",
+        "second_advice": "Цонхоо онгойлго",
+        "third_advice": "Нойтон цэвэрлэгээ хийгээрэй",
+        "category_text": "Агаарын чанар хэвийн. Агаарт гараарай!"
+      },
+      "moderate": {
+        "first_advice": "Aгаарын чанарыг хяна",
+        "second_advice": "Эко цэвэрлэгч сонгоорой",
+        "third_advice": "Авто замаас холуур байгаарай",
+        "category_text": "Бага бохирдолтой. Агаарын чанарыг шалгаарай"
+      },
+      "unhealthy_sensitive": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Тамхи бүү тат",
+        "third_advice": "Эрүүл мэнддээ анхаар",
+        "category_text": "Хүүхдүүд, өндөр настай, архаг өвчтэй хүмүүс болгоомжил"
+      },
+      "unhealthy": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Цонхоо хаа",
+        "third_advice": "Маскаа зүүгээрэй",
+        "category_text": "Агаарын чанар эрүүл мэндэд аюултай!"
+      },
+      "very_unhealthy": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Эрүүл мэнддээ анхаар",
+        "third_advice": "Маскаа зүүгээрэй",
+        "category_text": "Анxаар! Агаарын чанар эрүүл мэндэд xортой"
+      },
+      "hazardous": {
+        "first_advice": "Гадагш бүү гар",
+        "second_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "third_advice": "Маскаа зүүгээрэй",
+        "category_text": "Анхаар! Эрүүл мэндэд маш их хортой"
+      }
+    },
+    "indoorText": {
+      "good": {
+        "first_advice": "Нойтон цэвэрлэгээ хийгээрэй",
+        "second_advice": "Тамхи бүү тат",
+        "third_advice": "Эко цэвэрлэгч сонгоорой",
+        "category_text": "Aгаарын чанар хэвийн"
+      },
+      "moderate": {
+        "first_advice": "Aгаарын чанарыг хяна",
+        "second_advice": "Эко цэвэрлэгч сонгоорой",
+        "third_advice": "Тамхи бүү тат",
+        "category_text": "Бага бохирдолтой. Агаарын чанарыг шалгаарай"
+      },
+      "unhealthy_sensitive": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Тамхи бүү тат",
+        "third_advice": "Эрүүл мэнддээ анхаар",
+        "category_text": "Xүүхдүүд, өндөр настай, aрхаг өвчтэй хүмүүс болгоомжил"
+      },
+      "unhealthy": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Эко цэвэрлэгч сонгоорой",
+        "third_advice": "Эрүүл мэнддээ анхаар",
+        "category_text": "Агаарын чанар эрүүл мэндэд аюултай!"
+      },
+      "very_unhealthy": {
+        "first_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "second_advice": "Эрүүл мэнддээ анхаар",
+        "third_advice": "Гэрийн дулаалгаа сайжруул",
+        "category_text": "Анxаар! Агаарын чанар эрүүл мэндэд xортой"
+      },
+      "hazardous": {
+        "first_advice": "Гэрийн дулаалгаа сайжруул",
+        "second_advice": "Агаар цэвэршүүлэгч асаагаарай",
+        "third_advice": "Эрүүл мэнддээ анхаар",
+        "category_text": "Aнхаар! Эрүүл мэндэд маш их хортой"
+      }
+    },
     "zone4_details": "Хатуу түлш хэрэглэхгүй",
     "zone2_details": "Цахилгаанд холбогдоно",
     "zone1_details": "Сайжруулсан түлш хэрэглэнэ",
