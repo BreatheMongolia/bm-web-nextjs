@@ -29,8 +29,12 @@ export const fetchPurpleAirStations = async () => {
           })
           raw_stations.push(object)
         })
+
+        // Filter out stations with pm2.5 of 0
+        const filtered_stations = raw_stations.filter(x => parseInt(x['pm2.5']) !== 0)
+
         // turn raw_stations into stationTypes
-        raw_stations.map(x => {
+        filtered_stations.map(x => {
           // convert to aqi
           const pm2 = parseInt(x['pm2.5'])
           const stationAQI = getAQIFromPM2(pm2)
@@ -49,6 +53,5 @@ export const fetchPurpleAirStations = async () => {
     .catch(err => {
       console.error('failed to get all sensors:', err)
     })
-  console.log("PA Sensors", stations)
   return stations
 }
