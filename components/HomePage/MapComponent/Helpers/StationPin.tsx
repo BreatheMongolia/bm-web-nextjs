@@ -26,7 +26,7 @@ const StationPin = ({ station, onClick }: { station: StationType; onClick: Funct
   return (
     <div onClick={() => onClick()} className={`${styles.wrapperClassNames} marker-${station.type}`}>
       {styles.pin}
-      <span className={styles.markerClassNames}>{station.pollution.aqius}</span>
+      <span className={styles.markerClassNames}>{station.pollution.aqius < 0 ? 0 : station.pollution.aqius}</span>
     </div>
   )
 }

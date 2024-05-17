@@ -1,139 +1,139 @@
 .aqi-map-wrapper {
+  position: relative;
+
+  .map-container {
     position: relative;
+    margin: 0 0 35px;
 
-    .map-container {
+    .location-dropdown-container {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 10px;
+
+      .location-dropdown {
+        cursor: pointer;
+        width: 290px;
+        height: 31px;
+        line-height: 31px;
+        color: #ffffff;
+        background-color: #4870d7;
+        border: 1px solid #4870d7;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
         position: relative;
-        margin: 0 0 35px;
+        z-index: 2;
 
-        .location-dropdown-container {
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 10px;
+        .Dropdown-placeholder {
+          position: relative;
 
-            .location-dropdown {
-                cursor: pointer;
-                width: 290px;
-                height: 31px;
-                line-height: 31px;
-                color: #ffffff;
-                background-color: #4870d7;
-                border: 1px solid #4870d7;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-                font-size: 14px;
-                font-weight: 700;
-                text-align: center;
-                position: relative;
-                z-index: 2;
+          &:after {
+            font-size: 16px;
+            font-family: 'Font Awesome 5 Free';
+            content: '\f078';
+            position: absolute;
+            top: 0;
+            right: 20px;
+            height: 100%;
+            width: auto;
+          }
+        }
 
-                .Dropdown-placeholder {
-                    position: relative;
+        &.is-open {
+          background-color: #ffffff;
+          color: #2b2d42;
 
-                    &:after {
-                        font-size: 16px;
-                        font-family: "Font Awesome 5 Free";
-                        content: "\f078";
-                        position: absolute;
-                        top: 0;
-                        right: 20px;
-                        height: 100%;
-                        width: auto;
-                    }
-                }
-
-                &.is-open {
-                    background-color: #ffffff;
-                    color: #2b2d42;
-
-                    .Dropdown-placeholder {
-                        &:after {
-                            content: "\f077";
-                        }
-                    }
-                }
-
-                .dropdown-menu {
-                    background-color: #fff;
-                    height: calc(32px * 4);
-                    max-height: calc(32px * 4);
-                    overflow-x: hidden;
-                    overflow-y: scroll;
-                    border-bottom-left-radius: 5px;
-                    border-bottom-right-radius: 5px;
-                    border: 1px solid #2b2d42;
-                    width: 222px;
-                    margin-left: -1px;
-
-                    &::-webkit-scrollbar {
-                        width: 12px;
-                    }
-
-                    &::-webkit-scrollbar-track {
-                        box-shadow: inset 0 0 5px grey;
-                        border-radius: 10px;
-                        display: none;
-                    }
-
-                    &::-webkit-scrollbar-thumb {
-                        border-radius: 50px;
-                        background-color: #2c2d41;
-                        border: 3px solid transparent;
-                        background-clip: content-box;
-                    }
-
-                    .Dropdown-option {
-                        background-color: #ffffff;
-                        color: #2b2d42;
-                        border-bottom: 1px solid #2b2d42;
-                        border-right: 1px solid #2b2d42;
-                        transition: all 0.3s ease;
-
-                        &:hover {
-                            color: #ffffff;
-                            background-color: #2b2d42;
-                        }
-
-                        &:last-child {
-                            border-bottom: 0;
-                        }
-                    }
-                }
+          .Dropdown-placeholder {
+            &:after {
+              content: '\f077';
             }
+          }
         }
 
-        /* Map style */
-        .map-wrapper {
-            width: 100%;
-            height: 575px;
-            max-height: 600px;
-        }
+        .dropdown-menu {
+          background-color: #fff;
+          height: calc(32px * 4);
+          max-height: calc(32px * 4);
+          overflow-x: hidden;
+          overflow-y: scroll;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          border: 1px solid #2b2d42;
+          width: 222px;
+          margin-left: -1px;
 
-        .mapboxgl-canvas {
-            outline: none;
-        }
+          &::-webkit-scrollbar {
+            width: 12px;
+          }
 
-        .mapboxgl-ctrl-bottom-left {
-            display: flex;
-            flex-direction: row;
-            height: 40px;
-            z-index: 3;
-            margin-bottom: 30px;
-        }
+          &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+            display: none;
+          }
 
-        .mapboxgl-ctrl.mapboxgl-ctrl-logo {
-            position: relative;
-            bottom: -8px;
-            left: 15px;
+          &::-webkit-scrollbar-thumb {
+            border-radius: 50px;
+            background-color: #2c2d41;
+            border: 3px solid transparent;
+            background-clip: content-box;
+          }
+
+          .Dropdown-option {
+            background-color: #ffffff;
+            color: #2b2d42;
+            border-bottom: 1px solid #2b2d42;
+            border-right: 1px solid #2b2d42;
+            transition: all 0.3s ease;
+
+            &:hover {
+              color: #ffffff;
+              background-color: #2b2d42;
+            }
+
+            &:last-child {
+              border-bottom: 0;
+            }
+          }
         }
+      }
     }
+
+    /* Map style */
+    .map-wrapper {
+      width: 100%;
+      height: 575px;
+      max-height: 600px;
+    }
+
+    .mapboxgl-canvas {
+      outline: none;
+    }
+
+    .mapboxgl-ctrl-bottom-left {
+      display: flex;
+      flex-direction: row;
+      height: 40px;
+      z-index: 3;
+      margin-bottom: 30px;
+    }
+
+    .mapboxgl-ctrl.mapboxgl-ctrl-logo {
+      position: relative;
+      bottom: -8px;
+      left: 15px;
+    }
+  }
 }
 
 .map_info_container {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    text-align: center;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
 }
 
 // .map_info {
@@ -152,2960 +152,2958 @@
 // }
 
 #select_zone {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 #zone_info_close_button {
-    float: right;
+  float: right;
 }
 
 .zone_info_icon {
-    position: absolute;
-    top: 13px;
-    left: 15px;
-    width: 44px;
-    height: 44px;
-    background-image: url(../assets/img/zone-icons/what_zone_icon.svg);
-    background-repeat: no-repeat;
+  position: absolute;
+  top: 13px;
+  left: 15px;
+  width: 44px;
+  height: 44px;
+  background-image: url(../assets/img/zone-icons/what_zone_icon.svg);
+  background-repeat: no-repeat;
 }
 
 #aqi_pin {
-    position: absolute;
-    top: 16px;
-    left: 18px;
-    font-size: 10px;
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  font-size: 10px;
 }
 
 .select_pin_title,
 .select_pin_description {
-    position: absolute;
-    text-align: left;
-    left: 67px;
+  position: absolute;
+  text-align: left;
+  left: 67px;
 }
 
 .select_pin_title {
-    top: 13px;
-    font-size: 19px;
-    line-height: 26px;
-    font-style: normal;
-    font-weight: bold;
-    letter-spacing: 0.729643px;
+  top: 13px;
+  font-size: 19px;
+  line-height: 26px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0.729643px;
 }
 
 .select_pin_description {
-    top: 35px;
-    width: 240px;
-    padding: 5px 0;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 14px;
-    letter-spacing: 0.5px;
+  top: 35px;
+  width: 240px;
+  padding: 5px 0;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 14px;
+  letter-spacing: 0.5px;
 }
 
 #select_pin_close_button {
-    float: right;
+  float: right;
 }
 
-#container>p {
-    display: none;
+#container > p {
+  display: none;
 }
 
 #map {
-    width: 100%;
-    height: 800px;
-    display: flex;
+  width: 100%;
+  height: 800px;
+  display: flex;
 }
 
 .mapboxgl-canvas {
-    outline: none;
+  outline: none;
 }
 
 .mapboxgl-ctrl-top-right {
-    right: 300px !important;
-    z-index: 3;
+  right: 300px !important;
+  z-index: 3;
 }
 
 .mapboxgl-ctrl-bottom-left {
-    display: flex;
-    flex-direction: row;
-    top: 400px;
-    /* !important; */
-    height: 40px;
-    z-index: 3;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  top: 400px;
+  /* !important; */
+  height: 40px;
+  z-index: 3;
+  margin-bottom: 30px;
 }
 
 .mapboxgl-ctrl.mapboxgl-ctrl-logo {
-    position: relative;
-    bottom: -8px;
-    left: 15px;
+  position: relative;
+  bottom: -8px;
+  left: 15px;
 }
 
 #map_dropdowns {
-    display: inline-block;
-    background: #ffffff;
-    width: 290px;
-    height: auto;
-    margin: 24px auto 13px;
-    border: 0.3px solid #3174d0;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    font-style: normal;
+  display: inline-block;
+  background: #ffffff;
+  width: 290px;
+  height: auto;
+  margin: 24px auto 13px;
+  border: 0.3px solid #3174d0;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  font-style: normal;
 
-    .current-location {
-        background: #4870d7;
-        border-bottom: 1px solid #fff;
-        padding-left: 15px;
+  .current-location {
+    background: #4870d7;
+    border-bottom: 1px solid #fff;
+    padding-left: 15px;
 
-        h2 {
-            margin: 0;
-            font-family: "Open Sans";
-            font-style: normal;
-            font-weight: 600;
-            font-size: 15px;
-            line-height: 36px;
+    h2 {
+      margin: 0;
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 36px;
 
-            color: #ffffff;
-        }
+      color: #ffffff;
     }
+  }
 }
 
 .ranking-item-aqi {
-    display: inline-block;
-    background-color: darkred;
-    padding: 5px;
+  display: inline-block;
+  background-color: darkred;
+  padding: 5px;
 }
 
 .mapboxgl-popup {
-    max-width: 400px;
-    font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  max-width: 400px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 .other-pollutants {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 17px;
-    grid-row-gap: 17px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 17px;
+  grid-row-gap: 17px;
 }
 
 #top_ub_ranking {
-    .dropdown_list {
-        .ranking_item {
-            &:hover {
-                &.hover-green {
-                    background-color: #92ba2a;
-                }
-
-                &.hover-yellow {
-                    background-color: #e2c62f;
-                }
-
-                &.hover-orange {
-                    background-color: #f9963b;
-                }
-
-                &.hover-red {
-                    background-color: #ea3224;
-                }
-
-                &.hover-purple {
-                    background-color: #b136d1;
-                }
-
-                &.hover-brown {
-                    background-color: #9a0421;
-                }
-
-                span {
-                    color: #fff;
-                }
-
-                .aqi_circle {
-                    border: 1px solid #fff;
-                    height: 11px;
-                    width: 11px;
-                }
-            }
+  .dropdown_list {
+    .ranking_item {
+      &:hover {
+        &.hover-green {
+          background-color: #92ba2a;
         }
+
+        &.hover-yellow {
+          background-color: #e2c62f;
+        }
+
+        &.hover-orange {
+          background-color: #f9963b;
+        }
+
+        &.hover-red {
+          background-color: #ea3224;
+        }
+
+        &.hover-purple {
+          background-color: #b136d1;
+        }
+
+        &.hover-brown {
+          background-color: #9a0421;
+        }
+
+        span {
+          color: #fff;
+        }
+
+        .aqi_circle {
+          border: 1px solid #fff;
+          height: 11px;
+          width: 11px;
+        }
+      }
     }
+  }
 }
 
 .dropdown_title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 2;
 }
 
 .dropdown_arrow {
-    height: 20px;
-    width: 25px;
-    background-repeat: no-repeat;
-    cursor: pointer;
+  height: 20px;
+  width: 25px;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .dropdown_arrow.khoroo {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .hide_top10_ranking {
-    background-image: url(../assets/img/down_arrow.svg);
+  background-image: url(../assets/img/down_arrow.svg);
 
-    &.white {
-        background-image: url(../assets/img/down_arrow_white.svg);
-    }
+  &.white {
+    background-image: url(../assets/img/down_arrow_white.svg);
+  }
 }
 
 .show_top10_ranking {
-    background-image: url(../assets/img/up_arrow.svg);
+  background-image: url(../assets/img/up_arrow.svg);
 
-    &.white {
-        background-image: url(../assets/img/up_arrow_white.svg);
-    }
+  &.white {
+    background-image: url(../assets/img/up_arrow_white.svg);
+  }
 }
 
 .show_top10_ranking::before {
-    content: attr(data-content);
-    vertical-align: 25%;
-    font-size: 12px;
-    margin-right: 7px;
+  content: attr(data-content);
+  vertical-align: 25%;
+  font-size: 12px;
+  margin-right: 7px;
 }
 
 .dropdown_title_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 33px;
-    background-color: #f1faff;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(49, 116, 208, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 33px;
+  background-color: #f1faff;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(49, 116, 208, 0.5);
 }
 
 .dropdown_container {
-    &:last-child {
-        .dropdown_title_container {
-            border-bottom: 0;
-        }
+  &:last-child {
+    .dropdown_title_container {
+      border-bottom: 0;
+    }
+  }
+
+  &.location-dropdown {
+    .dropdown_title_container {
+      background-color: #4870d7;
+      border-bottom: 1px solid #fff;
+
+      .dropdown_title {
+        color: #fff;
+      }
     }
 
-    &.location-dropdown {
-        .dropdown_title_container {
-            background-color: #4870d7;
-            border-bottom: 1px solid #fff;
+    .ranking_item:hover {
+      background-color: #4870d7;
 
-            .dropdown_title {
-                color: #fff;
-            }
-        }
-
-        .ranking_item:hover {
-            background-color: #4870d7;
-
-            .dropdown_list_details {
-                color: #fff;
-            }
-        }
+      .dropdown_list_details {
+        color: #fff;
+      }
     }
+  }
 }
 
 .dropdown_title_container:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #top10_ranking {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .dropdown_title {
-    font-family: "Open Sans", sans-serif;
-    display: flex;
-    font-weight: 600;
-    font-size: 12px;
-    text-align: left;
-    justify-content: space-between;
-    color: #2b2d42;
-    padding: 8.5px 15px;
-    cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  font-weight: 600;
+  font-size: 12px;
+  text-align: left;
+  justify-content: space-between;
+  color: #2b2d42;
+  padding: 8.5px 15px;
+  cursor: pointer;
 }
 
 .dropdown_title::first-letter {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .dropdown_list {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    list-style-type: none;
-    padding: 0;
-    max-height: 190px;
-    height: auto;
-    overflow-y: scroll;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+  max-height: 190px;
+  height: auto;
+  overflow-y: scroll;
+  margin: 0;
 }
 
 .dropdown_content .dropdown_list {
-    height: 100%;
+  height: 100%;
 }
 
 .khoroo_ranking-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    list-style-type: none;
-    padding: 0;
-    height: auto;
-    overflow: scroll;
-    margin: 0;
-    background-color: #ffffff;
-    opacity: 0.8;
-    z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+  height: auto;
+  overflow: scroll;
+  margin: 0;
+  background-color: #ffffff;
+  opacity: 0.8;
+  z-index: 3;
 }
 
 .ranking_item {
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.8em 1em;
-    cursor: pointer;
-    border-bottom: 0.5px solid #cacaca;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8em 1em;
+  cursor: pointer;
+  border-bottom: 0.5px solid #cacaca;
 }
 
 .dropdown_content .ranking_item {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
 .ranking_item .zone_0,
 .ranking_item .zone_1,
 .ranking_item .zone_2,
 .ranking_item .zone_4 {
-    opacity: 0.8;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .ub_highlighted {
-    color: white;
+  color: white;
 }
 
-.ub_highlighted>.aqi_circle {
-    border: 1px solid white;
-    border-radius: 50%;
-    width: 14px;
-    height: 14px;
-    margin: 0 3px;
+.ub_highlighted > .aqi_circle {
+  border: 1px solid white;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  margin: 0 3px;
 }
 
 .ranking_item.highlighted {
-    background-color: #ffdd64;
+  background-color: #ffdd64;
 }
 
 .ranking_number,
 .zone_list_number {
-    font-weight: 800;
-    font-size: 12px;
-    line-height: 16px;
-    color: #2b2d42;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  color: #2b2d42;
 }
 
 .zone_list_number {
-    text-transform: uppercase;
-    font-family: "Open Sans";
-    min-width: 50px;
-    white-space: nowrap;
+  text-transform: uppercase;
+  font-family: 'Open Sans';
+  min-width: 50px;
+  white-space: nowrap;
 }
 
 .city_name,
 .ub_station_name,
 .dropdown_list_details {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 12px;
-    color: #2b2d42;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #2b2d42;
 }
 
 .khoroo_list_details {
-    font-family: "Open Sans";
-    font-style: italic;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 36px;
-    letter-spacing: 1px;
-    color: #2b2d42;
-    opacity: 0.7;
-    margin-left: 14px;
-    text-align: left;
-    min-height: 36px;
-    margin-right: 5px;
-    word-break: break-all;
-    padding-left: 2em;
-    text-indent: -2em;
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 36px;
+  letter-spacing: 1px;
+  color: #2b2d42;
+  opacity: 0.7;
+  margin-left: 14px;
+  text-align: left;
+  min-height: 36px;
+  margin-right: 5px;
+  word-break: break-all;
+  padding-left: 2em;
+  text-indent: -2em;
 }
 
 .city_name:first-letter,
 .ub_station_name:first-letter,
 .dropdown_list_details:first-letter {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .city_aqi,
 .ub_station_aqi {
-    margin-left: auto;
-    margin-right: 4px;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 36px;
+  margin-left: auto;
+  margin-right: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 36px;
 }
 
 .aqi_circle {
-    height: 10px;
-    width: 10px;
-    border-radius: 100%;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
 }
 
 #temp {
-    height: 80px;
-    border-bottom: 1px solid rgba(43, 45, 66, 0.2);
-    background: #2b2d42;
-    display: flex;
-    padding: 5px;
-    align-items: center;
-    justify-content: space-around;
-    text-transform: uppercase;
-    text-align: left;
-    border-radius: 4px 4px 0 0;
+  height: 80px;
+  border-bottom: 1px solid rgba(43, 45, 66, 0.2);
+  background: #2b2d42;
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  justify-content: space-around;
+  text-transform: uppercase;
+  text-align: left;
+  border-radius: 4px 4px 0 0;
 }
 
 .temp_content {
-    display: flex;
-    flex-direction: row;
-    color: white;
-    font-weight: 800;
-    font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  font-weight: 800;
+  font-size: 12px;
 }
 
 #wind_icon {
-    margin-right: 19px;
+  margin-right: 19px;
 }
 
 #current_weather_icon {
-    width: 40px;
-    height: 40px;
-    margin-right: 8px;
-    margin-top: 10px;
-    background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  margin-top: 10px;
+  background-repeat: no-repeat;
 }
 
 .wi-day-sunny {
-    background-image: url(../assets/img/weather-icons/wi-day-sunny.svg);
+  background-image: url(../assets/img/weather-icons/wi-day-sunny.svg);
 }
 
 .wi-night-clear {
-    background-image: url(../assets/img/weather-icons/wi-night-clear.svg);
+  background-image: url(../assets/img/weather-icons/wi-night-clear.svg);
 }
 
 .wi-day-cloudy {
-    background-image: url(../assets/img/weather-icons/wi-day-cloudy.svg);
+  background-image: url(../assets/img/weather-icons/wi-day-cloudy.svg);
 }
 
 .wi-night-alt-cloudy {
-    background-image: url(../assets/img/weather-icons/wi-night-alt-cloudy.svg);
+  background-image: url(../assets/img/weather-icons/wi-night-alt-cloudy.svg);
 }
 
 .wi-cloudy {
-    background-image: url(../assets/img/weather-icons/wi-cloudy.svg);
+  background-image: url(../assets/img/weather-icons/wi-cloudy.svg);
 }
 
 .wi-rain {
-    background-image: url(../assets/img/weather-icons/wi-rain.svg);
+  background-image: url(../assets/img/weather-icons/wi-rain.svg);
 }
 
 .wi-day-rain {
-    background-image: url(../assets/img/weather-icons/wi-day-rain.svg);
+  background-image: url(../assets/img/weather-icons/wi-day-rain.svg);
 }
 
 .wi-night-rain {
-    background-image: url(../assets/img/weather-icons/wi-night-rain.svg);
+  background-image: url(../assets/img/weather-icons/wi-night-rain.svg);
 }
 
 .wi-thunderstorm {
-    background-image: url(../assets/img/weather-icons/wi-thunderstorm.svg);
+  background-image: url(../assets/img/weather-icons/wi-thunderstorm.svg);
 }
 
 .wi-snow {
-    background-image: url(../assets/img/weather-icons/wi-snow.svg);
+  background-image: url(../assets/img/weather-icons/wi-snow.svg);
 }
 
 .wi-windy {
-    background-image: url(../assets/img/weather-icons/wi-windy.svg);
+  background-image: url(../assets/img/weather-icons/wi-windy.svg);
 }
 
 .wi-wind {
-    background-image: url(../assets/img/weather-icons/wind.svg);
-    background-repeat: no-repeat;
-    width: 35px;
-    height: 40px;
-    margin-right: 10px;
-    margin-top: 16px;
+  background-image: url(../assets/img/weather-icons/wind.svg);
+  background-repeat: no-repeat;
+  width: 35px;
+  height: 40px;
+  margin-right: 10px;
+  margin-top: 16px;
 }
 
 #wind_text {
-    padding-top: 3px;
+  padding-top: 3px;
 }
 
 .current_temp {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .temp_values {
-    font-weight: bold;
-    font-size: 26px;
-    line-height: 27px;
-    font-style: normal;
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 27px;
+  font-style: normal;
 }
 
 #temp_unit_celsius {
-    font-size: 26px;
+  font-size: 26px;
 }
 
 #temp_unit_speed {
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: lowercase;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: lowercase;
 }
 
 .marker,
 .marker_info {
-    width: 38px;
-    height: 48px;
-    color: #ffffff;
-    font-weight: bold;
-    display: flex;
-    padding-top: 10px;
-    justify-content: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    z-index: 1;
-    background-size: cover;
-    align-items: center;
-    padding-bottom: 18px;
+  width: 38px;
+  height: 48px;
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  padding-top: 10px;
+  justify-content: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  z-index: 1;
+  background-size: cover;
+  align-items: center;
+  padding-bottom: 18px;
 
-    &.hide {
-        display: none;
-    }
+  &.hide {
+    display: none;
+  }
 }
 
 .marker.selected {
-    animation: stationEnlarge 2s 5;
+  animation: stationEnlarge 2s 5;
 }
 
 @keyframes stationEnlarge {
-    from {
-        width: 76px;
-        height: 96px;
-        background-size: 76px;
-        font-size: 22px;
-        align-items: center;
-        padding-bottom: 24px;
-    }
+  from {
+    width: 76px;
+    height: 96px;
+    background-size: 76px;
+    font-size: 22px;
+    align-items: center;
+    padding-bottom: 24px;
+  }
 
-    to {
-        width: 38px;
-        height: 48px;
-        background-size: 38px;
-        align-items: center;
-        padding-bottom: 14px;
-    }
+  to {
+    width: 38px;
+    height: 48px;
+    background-size: 38px;
+    align-items: center;
+    padding-bottom: 14px;
+  }
 }
 
 .marker.marker-green,
 .marker_info {
-    background-image: url(../assets/img/outdoor-markers/marker-green.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-green.svg);
 }
 
 .marker.marker-yellow {
-    background-image: url(../assets/img/outdoor-markers/marker-yellow.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-yellow.svg);
 }
 
 .marker.marker-orange {
-    background-image: url(../assets/img/outdoor-markers/marker-orange.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-orange.svg);
 }
 
 .marker.marker-red {
-    background-image: url(../assets/img/outdoor-markers/marker-red.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-red.svg);
 }
 
 .marker.marker-purple {
-    background-image: url(../assets/img/outdoor-markers/marker-purple.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-purple.svg);
 }
 
 .marker.marker-brown {
-    background-image: url(../assets/img/outdoor-markers/marker-brown.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-brown.svg);
 }
 
 .marker.marker-green.zoned {
-    background-image: url(../assets/img/outdoor-markers/marker-zoned-green.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-zoned-green.svg);
 }
 
 .marker.marker-yellow.zoned {
-    background-image: url(../assets/img/outdoor-markers/marker-zoned-yellow.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-zoned-yellow.svg);
 }
 
 .marker.marker-orange.zoned {
-    background-image: url(../assets/img/outdoor-markers/marker-zoned-orange.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-zoned-orange.svg);
 }
 
 .marker.marker-red.zoned {
-    background-image: url(../assets/img/outdoor-markers/marker-zoned-red.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-zoned-red.svg);
 }
 
 .marker.marker-purple.zoned {
-    background-image: url(../assets/img/outdoor-markers/marker-zoned-purple.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-zoned-purple.svg);
 }
 
 .marker.marker-brown.zoned {
-    background-image: url(../assets/img/outdoor-markers/marker-zoned-brown.svg);
+  background-image: url(../assets/img/outdoor-markers/marker-zoned-brown.svg);
 }
 
 .marker.marker-green.zoned {
-    color: #92ba2a;
+  color: #92ba2a;
 }
 
 .marker.marker-yellow.zoned {
-    color: #e2c62f;
+  color: #e2c62f;
 }
 
 .marker.marker-orange.zoned {
-    color: #f9963b;
+  color: #f9963b;
 }
 
 .marker.marker-red.zoned {
-    color: #ea3224;
+  color: #ea3224;
 }
 
 .marker.marker-purple.zoned {
-    color: #b136d1;
+  color: #b136d1;
 }
 
 .marker.marker-brown.zoned {
-    color: #9a0421;
+  color: #9a0421;
 }
 
 .house {
-    width: 44px;
-    height: 48px;
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center;
-    display: flex;
-    padding-top: 14px;
-    justify-content: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    z-index: 1;
-    background-size: cover;
-    align-items: center;
+  width: 44px;
+  height: 48px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  padding-top: 14px;
+  justify-content: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  z-index: 1;
+  background-size: cover;
+  align-items: center;
 
-    &.hide {
-        display: none;
-    }
+  &.hide {
+    display: none;
+  }
 }
 
 @keyframes indoorStationEnlarge {
-    from {
-        width: 88px;
-        height: 96px;
-        background-size: 88px;
-        font-size: 22px;
-        align-items: center;
-    }
+  from {
+    width: 88px;
+    height: 96px;
+    background-size: 88px;
+    font-size: 22px;
+    align-items: center;
+  }
 
-    to {
-        width: 44px;
-        height: 48px;
-        background-size: 44px;
-        align-items: center;
-    }
+  to {
+    width: 44px;
+    height: 48px;
+    background-size: 44px;
+    align-items: center;
+  }
 }
 
 .house.selected {
-    animation: indoorStationEnlarge 2s 5;
+  animation: indoorStationEnlarge 2s 5;
 }
 
 .house.house-green {
-    background-image: url(../assets/img/indoor-markers/house-green.svg);
+  background-image: url(../assets/img/indoor-markers/house-green.svg);
 }
 
 .house.house-yellow {
-    background-image: url(../assets/img/indoor-markers/house-yellow.svg);
+  background-image: url(../assets/img/indoor-markers/house-yellow.svg);
 }
 
 .house.house-orange {
-    background-image: url(../assets/img/indoor-markers/house-orange.svg);
+  background-image: url(../assets/img/indoor-markers/house-orange.svg);
 }
 
 .house.house-red {
-    background-image: url(../assets/img/indoor-markers/house-red.svg);
+  background-image: url(../assets/img/indoor-markers/house-red.svg);
 }
 
 .house.house-purple {
-    background-image: url(../assets/img/indoor-markers/house-purple.svg);
+  background-image: url(../assets/img/indoor-markers/house-purple.svg);
 }
 
 .house.house-brown {
-    background-image: url(../assets/img/indoor-markers/house-brown.svg);
+  background-image: url(../assets/img/indoor-markers/house-brown.svg);
 }
 
 .house.house-green.zoned {
-    background-image: url(../assets/img/indoor-markers/house-zoned-green.svg);
+  background-image: url(../assets/img/indoor-markers/house-zoned-green.svg);
 }
 
 .house.house-yellow.zoned {
-    background-image: url(../assets/img/indoor-markers/house-zoned-yellow.svg);
+  background-image: url(../assets/img/indoor-markers/house-zoned-yellow.svg);
 }
 
 .house.house-orange.zoned {
-    background-image: url(../assets/img/indoor-markers/house-zoned-orange.svg);
+  background-image: url(../assets/img/indoor-markers/house-zoned-orange.svg);
 }
 
 .house.house-red.zoned {
-    background-image: url(../assets/img/indoor-markers/house-zoned-red.svg);
+  background-image: url(../assets/img/indoor-markers/house-zoned-red.svg);
 }
 
 .house.house-purple.zoned {
-    background-image: url(../assets/img/indoor-markers/house-zoned-purple.svg);
+  background-image: url(../assets/img/indoor-markers/house-zoned-purple.svg);
 }
 
 .house.house-brown.zomed {
-    background-image: url(../assets/img/indoor-markers/house-zoned-brown.svg);
+  background-image: url(../assets/img/indoor-markers/house-zoned-brown.svg);
 }
 
 .house.house-green.zoned {
-    color: #92ba2a;
+  color: #92ba2a;
 }
 
 .house.house-yellow.zoned {
-    color: #e2c62f;
+  color: #e2c62f;
 }
 
 .house.house-orange.zoned {
-    color: #f9963b;
+  color: #f9963b;
 }
 
 .house.house-red.zoned {
-    color: #ea3224;
+  color: #ea3224;
 }
 
 .house.house-purple.zoned {
-    color: #b136d1;
+  color: #b136d1;
 }
 
 .house.house-brown.zoned {
-    color: #9a0421;
+  color: #9a0421;
 }
 
 #bottom_wrapper {
-    display: flex;
-    font-family: "Open Sans";
+  display: flex;
+  font-family: 'Open Sans';
 }
 
 .tabs_container {
-    display: block;
-    margin-left: 20px;
+  display: block;
+  margin-left: 20px;
 }
 
 .zone_0 {
-    background-color: #e13333;
+  background-color: #e13333;
 }
 
 .zone_1 {
-    background-color: #fd6915;
+  background-color: #fd6915;
 }
 
 .zone_2 {
-    background-color: #f9cf3b;
+  background-color: #f9cf3b;
 }
 
 .zone_4 {
-    background-color: #92ba2a;
+  background-color: #92ba2a;
 }
 
 .tabs {
-    position: relative;
-    top: 1.5px;
+  position: relative;
+  top: 1.5px;
 }
 
 ul.tabs {
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
 }
 
 ul.tabs li {
-    display: inline-block;
-    /* cursor: pointer; */
+  display: inline-block;
+  /* cursor: pointer; */
 }
 
 .tab_content {
-    display: none;
+  display: none;
 }
 
 .tab_content.current {
-    display: inherit;
+  display: inherit;
 }
 
 .tablinks {
-    background-color: #2c2d41;
-    color: #ffffff;
-    margin-right: 5px;
-    box-sizing: border-box;
-    border-radius: 3.38173px 3.38173px 1.690866px 1.690866px;
-    border: 0.5px solid #2b2d42;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 16px;
-    align-items: center;
-    letter-spacing: 0.845433px;
-    text-transform: capitalize;
-    display: flex;
-    flex-direction: row;
+  background-color: #2c2d41;
+  color: #ffffff;
+  margin-right: 5px;
+  box-sizing: border-box;
+  border-radius: 3.38173px 3.38173px 1.690866px 1.690866px;
+  border: 0.5px solid #2b2d42;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+  letter-spacing: 0.845433px;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: row;
 }
 
 .tablinks.current,
 .location_tablinks.current {
-    background-color: #ffffff;
-    color: #2c2d41;
-    border-bottom: 2px solid #ffffff;
+  background-color: #ffffff;
+  color: #2c2d41;
+  border-bottom: 2px solid #ffffff;
 }
 
 .tablinks .tabs_wrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 20px;
-    padding: 0 5px 0 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 20px;
+  padding: 0 5px 0 5px;
 }
 
 .tablinks .checkbox {
-    background-image: url(../assets/img/unchecked.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 12px;
-    height: 10px;
-    display: flex;
-    cursor: pointer;
-    overflow: visible;
-    padding-right: 15px;
+  background-image: url(../assets/img/unchecked.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 12px;
+  height: 10px;
+  display: flex;
+  cursor: pointer;
+  overflow: visible;
+  padding-right: 15px;
 }
 
 .tablinks .checkbox.checked {
-    background-image: url(../assets/img/checked.svg);
+  background-image: url(../assets/img/checked.svg);
 }
 
 .tab_name {
-    cursor: pointer;
-    width: 100%;
+  cursor: pointer;
+  width: 100%;
 }
 
 #location_dropdown_container {
-    max-width: 220px;
-    height: 32px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    color: #ffffff;
-    border: 1px solid #2b2d42;
-    background-color: #2b2d42;
-    border-radius: 3px;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 19px;
+  max-width: 220px;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  border: 1px solid #2b2d42;
+  background-color: #2b2d42;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19px;
 }
 
 #selected_location {
-    line-height: 19px;
-    font-weight: 700;
-    letter-spacing: 1.85px;
-    width: 100%;
-    text-align: center;
+  line-height: 19px;
+  font-weight: 700;
+  letter-spacing: 1.85px;
+  width: 100%;
+  text-align: center;
 }
 
 .loc_dropdown_arrow {
-    position: absolute;
-    left: 185px;
-    width: 35px;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    height: 13px;
-    z-index: 6;
+  position: absolute;
+  left: 185px;
+  width: 35px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  height: 13px;
+  z-index: 6;
 }
 
 .location_list {
-    width: 100%;
-    margin-left: 0;
-    position: relative;
-    padding-left: 0;
-    top: 59px;
-    z-index: 5;
-    max-height: 128px;
-    overflow-y: scroll;
+  width: 100%;
+  margin-left: 0;
+  position: relative;
+  padding-left: 0;
+  top: 59px;
+  z-index: 5;
+  max-height: 128px;
+  overflow-y: scroll;
 }
 
 .location_item {
-    height: 32px;
-    background-color: #ffffff;
-    border: 1px solid #2c2d41;
-    color: #2c2d41;
-    padding-top: 4px;
-    cursor: pointer;
-    list-style-type: none;
-    text-align: center;
-    line-height: 19px;
-    font-weight: 700;
-    letter-spacing: 1.85px;
+  height: 32px;
+  background-color: #ffffff;
+  border: 1px solid #2c2d41;
+  color: #2c2d41;
+  padding-top: 4px;
+  cursor: pointer;
+  list-style-type: none;
+  text-align: center;
+  line-height: 19px;
+  font-weight: 700;
+  letter-spacing: 1.85px;
 }
 
 .location_item.selected {
-    top: 0;
-    background-color: #2c2d41;
-    color: #ffffff;
+  top: 0;
+  background-color: #2c2d41;
+  color: #ffffff;
 }
 
 .location_item:hover {
-    background-color: #2c2d41;
-    color: #ffffff;
+  background-color: #2c2d41;
+  color: #ffffff;
 }
 
 .sponsor_logo {
-    height: 15px;
-    width: 50px;
+  height: 15px;
+  width: 50px;
 }
 
 .sponsor_logo.unicef {
-    background-image: url(../assets/img/unicef_logo.svg);
-    background-repeat: no-repeat;
+  background-image: url(../assets/img/unicef_logo.svg);
+  background-repeat: no-repeat;
 }
 
 .sponsor_logo.pml {
-    background-image: url(../assets/img/pml_logo.svg);
-    background-repeat: no-repeat;
+  background-image: url(../assets/img/pml_logo.svg);
+  background-repeat: no-repeat;
 }
 
 .sensor_brand {
-    visibility: hidden;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    text-transform: capitalize;
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    font-size: 9px;
-    width: auto;
-    padding: 1px 5px 1px 5px;
-    margin: 0 3px 2px 2px;
-    border-radius: 2px;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 9px;
+  width: auto;
+  padding: 1px 5px 1px 5px;
+  margin: 0 3px 2px 2px;
+  border-radius: 2px;
 }
 
 .sensor_brand.has_brand {
-    visibility: visible;
+  visibility: visible;
 }
 
 .sensor_brand.green {
-    color: #788459;
+  color: #788459;
 }
 
 .sensor_brand.yellow {
-    color: #90885b;
+  color: #90885b;
 }
 
 .sensor_brand.orange {
-    color: #977a5e;
+  color: #977a5e;
 }
 
 .sensor_brand.red {
-    color: #925b57;
+  color: #925b57;
 }
 
 .sensor_brand.purple {
-    color: #866983;
+  color: #866983;
 }
 
 .sensor_brand.brown {
-    color: #845b4f;
+  color: #845b4f;
 }
 
 .zone_details_container {
-    position: absolute;
-    top: -125px;
-    display: block;
-    margin-left: 20px;
-    width: 401px;
-    height: 132px;
-    z-index: 5;
-    box-shadow: 0px 3.38173px 10.1452px rgba(0, 0, 0, 0.1);
-    border-radius: 3.38173px;
-    display: block;
-    padding: 10px;
+  position: absolute;
+  top: -125px;
+  display: block;
+  margin-left: 20px;
+  width: 401px;
+  height: 132px;
+  z-index: 5;
+  box-shadow: 0px 3.38173px 10.1452px rgba(0, 0, 0, 0.1);
+  border-radius: 3.38173px;
+  display: block;
+  padding: 10px;
 }
 
 .zone_details_top_section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .zone_khoroo_title {
-    background-color: transparent;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 135%;
-    display: flex;
-    align-items: center;
-    letter-spacing: 1px;
-    color: #ffffff;
+  background-color: transparent;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 135%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  color: #ffffff;
 }
 
 .zone_details_district {
-    font-style: italic;
-    font-size: 12px;
-    margin-bottom: 5px;
+  font-style: italic;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 
 .zone_khoroo_details {
-    width: 100%;
-    height: 66px;
-    background: #ffffff;
-    display: flex;
-    flex-direction: row;
-    border-radius: 4.22693px;
+  width: 100%;
+  height: 66px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  border-radius: 4.22693px;
 }
 
 .zone_khoroo_details_left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    min-width: 80px;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  min-width: 80px;
+  height: 100%;
 }
 
 .zone_khoroo_details_right {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    letter-spacing: 1.26042px;
-    color: #2b2d42;
-    padding: 10px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1.26042px;
+  color: #2b2d42;
+  padding: 10px;
 }
 
 .zone_details_icon {
-    width: 40px;
-    height: 37px;
-    background-repeat: no-repeat;
-    background-size: contain;
+  width: 40px;
+  height: 37px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .burn-improved-coal {
-    background-image: url(../assets/img/zone-icons/burn-improved-coal.png);
+  background-image: url(../assets/img/zone-icons/burn-improved-coal.png);
 }
 
 .no-burning {
-    background-image: url(../assets/img/zone-icons/no-burning.svg);
-    /*height: 32px;*/
+  background-image: url(../assets/img/zone-icons/no-burning.svg);
+  /*height: 32px;*/
 }
 
 .zone_details_name {
-    background-color: #ffffff;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 14px;
-    line-height: 19px;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.845433px;
-    text-transform: capitalize;
+  background-color: #ffffff;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 19px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.845433px;
+  text-transform: capitalize;
 }
 
 .zone_details_name.zone_0 {
-    color: #e13333;
+  color: #e13333;
 }
 
 .zone_details_name.zone_1 {
-    color: #fd6915;
+  color: #fd6915;
 }
 
 .zone_details_name.zone_2 {
-    color: #f9cf3b;
+  color: #f9cf3b;
 }
 
 .zone_details_name.zone_4 {
-    color: #92ba2a;
+  color: #92ba2a;
 }
 
 .temporary_details {
-    position: absolute;
-    bottom: -200px;
-    display: flex;
-    flex-direction: column;
+  position: absolute;
+  bottom: -200px;
+  display: flex;
+  flex-direction: column;
 }
 
 #basemap_switch label {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    text-transform: capitalize;
-    color: #556270;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: capitalize;
+  color: #556270;
 }
 
 #sensor_switch label {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 16px;
-    align-items: center;
-    color: #2b2d42;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+  color: #2b2d42;
 
-    span {
-        font-family: "Open Sans";
-        font-style: italic;
-        font-weight: 400;
-        font-size: 10px;
-        line-height: 14px;
-        display: flex;
-        align-items: center;
-        text-transform: lowercase;
-        color: #2b2d42;
-    }
+  span {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    text-transform: lowercase;
+    color: #2b2d42;
+  }
 }
 
 .radio_wrapper label {
-    margin-left: 14px;
+  margin-left: 14px;
 }
 
 .radio_wrapper {
-    display: flex;
-    align-content: center;
-    height: 46px;
+  display: flex;
+  align-content: center;
+  height: 46px;
 }
 
 .subtitle {
-    font-family: "Open Sans";
-    font-style: italic;
-    font-weight: normal;
-    letter-spacing: 0.4px;
-    font-size: 10px;
-    line-height: 14px;
-    text-transform: lowercase;
-    color: #2b2d42;
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: normal;
+  letter-spacing: 0.4px;
+  font-size: 10px;
+  line-height: 14px;
+  text-transform: lowercase;
+  color: #2b2d42;
 }
 
-input[type="radio"] {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-    box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.25);
+input[type='radio'] {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.25);
 }
 
-input[type="radio"]:before {
-    content: "";
-    display: block;
-    width: 60%;
-    height: 60%;
-    margin: 20% auto;
-    border-radius: 20px;
+input[type='radio']:before {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 60%;
+  margin: 20% auto;
+  border-radius: 20px;
 }
 
-input[type="radio"]:checked:before {
-    background: #2b2d42;
+input[type='radio']:checked:before {
+  background: #2b2d42;
 }
 
 #station_details {
-    font-family: "Open Sans";
-    position: relative;
+  font-family: 'Open Sans';
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  z-index: 5;
+
+  .station_body {
     display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    z-index: 5;
+  }
 
-    .station_body {
-        display: flex;
-    }
-
-    .station_details {
-        position: relative;
-    }
+  .station_details {
+    position: relative;
+  }
 }
 
 #station_details_head {
-    width: 100%;
-    height: 50px;
-    border-radius: 5px 5px 0 0;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px 5px 0 0;
 }
 
 .station_name {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: capitalize;
-    color: #ffffff;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
 }
 
 .close_button {
-    width: 25px;
-    height: 25px;
-    background-image: url(../assets/img/close_button.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
+  width: 25px;
+  height: 25px;
+  background-image: url(../assets/img/close_button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
 
 #close_button {
-    position: absolute;
-    top: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 #close_button_desktop {
-    display: none;
+  display: none;
 }
 
 .station_extra_details {
-    width: 100%;
-    color: #ffffff;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 10px;
-    text-transform: lowercase;
-    display: flex;
+  width: 100%;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  text-transform: lowercase;
+  display: flex;
 }
 
 .station_reading_time {
-    margin-right: auto;
+  margin-right: auto;
 }
 
 #station_extra_details_type {
-    font-style: italic;
+  font-style: italic;
 }
 
 #station_details_aqi {
-    position: relative;
-    width: 25%;
-    height: 100px;
-    font-family: "Open Sans";
-    font-style: normal;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  position: relative;
+  width: 25%;
+  height: 100px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .aqi_standard {
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 12px;
-    text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
 }
 
 .station_aqi_val {
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    font-size: 40px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
 }
 
 .station_pm2 {
-    text-align: center;
-    font-size: 12px;
-    line-height: 12px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 12px;
 }
 
 #station_pm2_row1 {
-    font-weight: 100;
+  font-weight: 100;
 }
 
 #station_pm2_row2 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #station_details_category {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #station_details_category_text {
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 150%;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 150%;
 }
 
 #recommended_icons_container {
-    height: 100px;
-    padding: 7px 17px;
+  height: 100px;
+  padding: 7px 17px;
 }
 
 #station_details_icons {
-    width: 100%;
-    height: 120px;
+  width: 100%;
+  height: 120px;
 }
 
 .station_details_other {
-    padding-left: 10px;
-    padding-right: 16px;
+  padding-left: 10px;
+  padding-right: 16px;
 }
 
 #other_title_wrapper {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
 }
 
 #other_air_title {
-    display: none;
+  display: none;
 }
 
 .other_pollutant_dropdown_icon {
-    height: 20px;
-    width: 24px;
-    background-repeat: no-repeat;
-    cursor: pointer;
+  height: 20px;
+  width: 24px;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .other_pollutant_dropdown_icon.hide_other {
-    background-image: url(../assets/img/down_arrow.svg);
+  background-image: url(../assets/img/down_arrow.svg);
 }
 
 .other_pollutant_dropdown_icon.show_other {
-    background-image: url(../assets/img/up_arrow.svg);
+  background-image: url(../assets/img/up_arrow.svg);
 }
 
 .station_aqi_container {
-    border-bottom: 1px solid rgba(43, 45, 66, 0.2);
-    padding-left: 0 !important;
-    height: 100%;
-    display: flex;
+  border-bottom: 1px solid rgba(43, 45, 66, 0.2);
+  padding-left: 0 !important;
+  height: 100%;
+  display: flex;
 }
 
 .station_aqi {
-    height: auto;
-    max-width: 150px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 10px;
+  height: auto;
+  max-width: 150px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
 }
 
 .green {
-    background-color: #92ba2a;
+  background-color: #92ba2a;
 }
 
 .yellow {
-    background-color: #e2c62f;
+  background-color: #e2c62f;
 }
 
 .orange {
-    background-color: #f9963b;
+  background-color: #f9963b;
 }
 
 .red {
-    background-color: #ea3224;
+  background-color: #ea3224;
 }
 
 .purple {
-    background-color: #b136d1;
+  background-color: #b136d1;
 }
 
 .brown {
-    background-color: #9a0421;
+  background-color: #9a0421;
 }
 
 .green.station_details {
-    background-color: #92ba2a;
+  background-color: #92ba2a;
 }
 
 .green.station_details#station_details_head {
-    background-color: #78845a;
+  background-color: #78845a;
 }
 
 .green.station_details#station_details_category {
-    background-color: #c8dd94;
+  background-color: #c8dd94;
 }
 
 .green.station_details#station_details_icons {
-    background-color: #deeabf;
+  background-color: #deeabf;
 }
 
 .green.station_details.station_details_other {
-    background-color: #e9f0d2;
+  background-color: #e9f0d2;
 }
 
 .yellow.station_details {
-    background-color: #e2c62f;
+  background-color: #e2c62f;
 }
 
 .yellow.station_details#station_details_head {
-    background-color: #90885b;
+  background-color: #90885b;
 }
 
 .yellow.station_details#station_details_category {
-    background-color: #f0e497;
+  background-color: #f0e497;
 }
 
 .yellow.station_details#station_details_icons {
-    background-color: #f6eec1;
+  background-color: #f6eec1;
 }
 
 .yellow.station_details.station_details_other {
-    background-color: #f9f3d4;
+  background-color: #f9f3d4;
 }
 
 .orange.station_details {
-    background-color: #f9963b;
+  background-color: #f9963b;
 }
 
 .orange.station_details#station_details_head {
-    background-color: #977a5e;
+  background-color: #977a5e;
 }
 
 .orange.station_details#station_details_category {
-    background-color: #fccb9d;
+  background-color: #fccb9d;
 }
 
 .orange.station_details#station_details_icons {
-    background-color: #fce0c4;
+  background-color: #fce0c4;
 }
 
 .orange.station_details.station_details_other {
-    background-color: #fee9d6;
+  background-color: #fee9d6;
 }
 
 .red.station_details {
-    background-color: #ea3224;
+  background-color: #ea3224;
 }
 
 .red.station_details#station_details_head {
-    background-color: #9b5955;
+  background-color: #9b5955;
 }
 
 .red.station_details#station_details_category {
-    background-color: #f59891;
+  background-color: #f59891;
 }
 
 .red.station_details#station_details_icons {
-    background-color: #f9c2bd;
+  background-color: #f9c2bd;
 }
 
 .red.station_details.station_details_other {
-    background-color: #fbd4d1;
+  background-color: #fbd4d1;
 }
 
 .purple.station_details {
-    background-color: #b136d1;
+  background-color: #b136d1;
 }
 
 .purple.station_details#station_details_head {
-    background-color: #856a83;
+  background-color: #856a83;
 }
 
 .purple.station_details#station_details_category {
-    background-color: #deafdb;
+  background-color: #deafdb;
 }
 
 .purple.station_details#station_details_icons {
-    background-color: #e8c3f1;
+  background-color: #e8c3f1;
 }
 
 .purple.station_details.station_details_other {
-    background-color: #f0d5f5;
+  background-color: #f0d5f5;
 }
 
 .brown.station_details {
-    background-color: #9a0421;
+  background-color: #9a0421;
 }
 
 .brown.station_details#station_details_head {
-    background-color: #845c4f;
+  background-color: #845c4f;
 }
 
 .brown.station_details#station_details_category {
-    background-color: #dc9984;
+  background-color: #dc9984;
 }
 
 .brown.station_details#station_details_icons {
-    background-color: #d6b9be;
+  background-color: #d6b9be;
 }
 
 .brown.station_details.station_details_other {
-    background-color: #e2ced1;
+  background-color: #e2ced1;
 }
 
 .station_aqi_category {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .health_category_wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 90%;
-    border-bottom: 1px solid rgba(43, 45, 66, 0.2);
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+  border-bottom: 1px solid rgba(43, 45, 66, 0.2);
+  justify-content: space-evenly;
 }
 
-.unhealthy_sensitive {
-    background-image: url(../assets/img/aqi-health-category-icons/category_unhealthy_sensitive.svg);
-    width: 75px;
-    height: 75px;
-}
+// .unhealthy_sensitive {
+//     background-image: url(../assets/img/aqi-health-category-icons/category_unhealthy_sensitive.svg);
+//     width: 75px;
+//     height: 75px;
+// }
 
 .health_category {
-    font-weight: bold;
-    font-size: 0.8em;
-    padding-left: 5px;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding-left: 5px;
 }
 
 .health_category_icon {
-    display: none;
+  display: none;
 }
 
 .health_category_icon.good {
-    background-image: url(../assets/img/aqi-health-category-icons/category_good.svg);
+  background-image: url(../assets/img/aqi-health-category-icons/category_good.svg);
 }
 
 .health_category_icon.moderate {
-    background-image: url(../assets/img/aqi-health-category-icons/category_moderate.svg);
+  background-image: url(../assets/img/aqi-health-category-icons/category_moderate.svg);
 }
 
 .health_category_icon.unhealthy_sensitive {
-    background-image: url(../assets/img/aqi-health-category-icons/category_unhealthy_sensitive.svg);
+  background-image: url(../assets/img/aqi-health-category-icons/category_unhealthy_sensitive.svg);
 }
 
 .health_category_icon.unhealthy {
-    background-image: url(../assets/img/aqi-health-category-icons/category_unhealthy.svg);
+  background-image: url(../assets/img/aqi-health-category-icons/category_unhealthy.svg);
 }
 
 .health_category_icon.very_unhealthy {
-    background-image: url(../assets/img/aqi-health-category-icons/category_very_unhealthy.svg);
+  background-image: url(../assets/img/aqi-health-category-icons/category_very_unhealthy.svg);
 }
 
 .health_category_icon.hazardous {
-    background-image: url(../assets/img/aqi-health-category-icons/category_hazardous.svg);
+  background-image: url(../assets/img/aqi-health-category-icons/category_hazardous.svg);
 }
 
 .recommend_icons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 3px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3px 10px;
 }
 
-#recommended_advice1,
-#recommended_advice2,
-#recommended_advice3 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+// #recommended_advice1,
+// #recommended_advice2,
+// #recommended_advice3 {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
 
 .other-pollutants-dropdown {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.recommend_icon {
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 37px;
-    min-width: 37px;
-    height: 37px;
-    margin-right: 8px;
-}
+// .recommend_icon {
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   width: 37px;
+//   min-width: 37px;
+//   height: 37px;
+//   margin-right: 8px;
+// }
 
-.recommend_icon:first-child {
-    display: block;
-    background-position: center;
-}
+// .recommend_icon:first-child {
+//   display: block;
+//   background-position: center;
+// }
 
-.recommend_icon.mask {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/wear_mask.svg);
-}
+// .recommend_icon.mask {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/wear_mask.svg);
+// }
 
-.recommend_icon.monitor {
-    background-image: url(../assets/img/recommendations-icons/monitor-health.svg);
-}
+// .recommend_icon.monitor {
+//   background-image: url(../assets/img/recommendations-icons/monitor-health.svg);
+// }
 
-.recommend_icon.no_mask {
-    background-image: url(#);
-}
+// .recommend_icon.no_mask {
+//   background-image: url(#);
+// }
 
-.recommend_icon.purifier {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/run_airpurifier.svg);
-}
+// .recommend_icon.purifier {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/run_airpurifier.svg);
+// }
 
-.recommend_icon.closeWindow {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/close-window.svg);
-}
+// .recommend_icon.closeWindow {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/close-window.svg);
+// }
 
-.recommend_icon.openWindow {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/open-window.svg);
-}
+// .recommend_icon.openWindow {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/open-window.svg);
+// }
 
-.recommend_icon.walk {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/walk.svg);
-}
+// .recommend_icon.walk {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/walk.svg);
+// }
 
-.recommend_icon.wetclean {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/wet-clearning.svg);
-}
+// .recommend_icon.wetclean {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/wet-clearning.svg);
+// }
 
-.recommend_icon.no-smoke {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/no-smoke.svg);
-}
+// .recommend_icon.no-smoke {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/no-smoke.svg);
+// }
 
-.recommend_icon.keep-kid {
-    background-image: url(../assets/img/recommendations-icons/keep-kid.svg);
-}
+// .recommend_icon.keep-kid {
+//   background-image: url(../assets/img/recommendations-icons/keep-kid.svg);
+// }
 
-.recommend_icon.checkair {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/checkair.svg);
-}
+// .recommend_icon.checkair {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/checkair.svg);
+// }
 
-.recommend_icon.traffic {
-    width: 55px;
-    height: 55px;
-    background-image: url(../assets/img/recommendations-icons/traffic.svg);
-}
+// .recommend_icon.traffic {
+//   width: 55px;
+//   height: 55px;
+//   background-image: url(../assets/img/recommendations-icons/traffic.svg);
+// }
 
-.recommend_icon.indoor {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/indoor.svg);
-}
+// .recommend_icon.indoor {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/indoor.svg);
+// }
 
-.recommend_icon.chemical {
-    width: 37px;
-    height: 37px;
-    background-image: url(../assets/img/recommendations-icons/chemicals.svg);
-}
+// .recommend_icon.chemical {
+//   width: 37px;
+//   height: 37px;
+//   background-image: url(../assets/img/recommendations-icons/chemicals.svg);
+// }
 
-.recommend_texts {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
+// .recommend_texts {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-around;
+// }
 
-.recommend_text {
-    font-size: 10px;
-    font-weight: bold;
-    line-height: 12px;
-    text-align: center;
-}
+// .recommend_text {
+//   font-size: 10px;
+//   font-weight: bold;
+//   line-height: 12px;
+//   text-align: center;
+// }
 
 .other_pollutants {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 5px;
-    border-bottom: 1px solid rgba(43, 45, 66, 0.2);
-    border-left: 1px solid rgba(43, 45, 66, 0.2);
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 5px;
+  border-bottom: 1px solid rgba(43, 45, 66, 0.2);
+  border-left: 1px solid rgba(43, 45, 66, 0.2);
+  height: 100%;
 }
 
 .other_pollutants_column {
-    position: absolute;
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    max-width: 435px;
-    padding: 0 0 10px 0;
-    border-radius: 0 0 5px 5px;
+  position: absolute;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  max-width: 435px;
+  padding: 0 0 10px 0;
+  border-radius: 0 0 5px 5px;
 }
 
-.other_pollutants_column>div:nth-child(even) {
-    margin: 0 -15% 0 15%;
+.other_pollutants_column > div:nth-child(even) {
+  margin: 0 -15% 0 15%;
 }
 
 .other_pollutant-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-    &:first-child:last-child {
-        grid-column: span 3;
-    }
+  &:first-child:last-child {
+    grid-column: span 3;
+  }
 
-    .aqi_circle {
-        margin: 0 5px;
-    }
+  .aqi_circle {
+    margin: 0 5px;
+  }
 }
 
 .other_pollutant_name {
-    font-weight: 600;
-    font-size: 12px;
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .other_pollutant_value {
-    font-weight: 600;
-    font-size: 12px;
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .pollutant_index {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-in {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .mapboxgl-ctrl-icon.mapboxgl-ctrl-compass {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .mapboxgl-ctrl.mapboxgl-ctrl-scale {
-    border-color: #6c6b6b;
+  border-color: #6c6b6b;
 }
 
 .mapboxgl-ctrl a.mapboxgl-ctrl-logo.mapboxgl-compact {
-    margin: 8px 0 -3px 10px;
+  margin: 8px 0 -3px 10px;
 }
 
 .minimizer {
-    background-image: none;
-    background-repeat: no-repeat;
-    height: 24px;
-    width: 24px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 9;
-    background-size: contain;
+  background-image: none;
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 9;
+  background-size: contain;
 }
 
 .minimizer.collapsed {
-    background-image: url(../assets/img/minimizer_down.svg);
-    cursor: pointer;
+  background-image: url(../assets/img/minimizer_down.svg);
+  cursor: pointer;
 
-    &+#map_dropdowns {
-        border: none;
-    }
+  & + #map_dropdowns {
+    border: none;
+  }
 }
 
 .minimizer.expanded {
-    background-image: url(../assets/img/minimizer_up.svg);
-    cursor: pointer;
+  background-image: url(../assets/img/minimizer_up.svg);
+  cursor: pointer;
 }
 
 #map_dropdowns {
-    position: absolute;
-    right: 10px;
-    top: -37px;
-    margin: 0;
-    z-index: 4;
-    border-radius: 4px;
-    overflow: hidden;
+  position: absolute;
+  right: 10px;
+  top: -37px;
+  margin: 0;
+  z-index: 4;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 /* mobile  */
 @media only screen and (max-width: 768px) {
-    #container {
-        height: 662px;
-    }
+  #container {
+    height: 662px;
+  }
 
-    #container.mobile_open {
-        height: 985px;
-    }
+  #container.mobile_open {
+    height: 985px;
+  }
 
-    #container.mobile_open_zone_details {
-        height: 772px;
-    }
+  #container.mobile_open_zone_details {
+    height: 772px;
+  }
 
-    #map.mobile_open {
-        height: 985px;
-    }
+  #map.mobile_open {
+    height: 985px;
+  }
 
-    #map.mobile_open_zone_details {
-        height: 772px;
-    }
+  #map.mobile_open_zone_details {
+    height: 772px;
+  }
 
-    .mapboxgl-ctrl-bottom-left.bottom_left_open {
-        top: 455px;
-    }
+  .mapboxgl-ctrl-bottom-left.bottom_left_open {
+    top: 455px;
+  }
 
-    .mapboxgl-ctrl-bottom-left.mobile_open_zone_details {
-        top: 550px;
-    }
+  .mapboxgl-ctrl-bottom-left.mobile_open_zone_details {
+    top: 550px;
+  }
 
-    .mapboxgl-ctrl-top-right {
-        top: 340px !important;
-        right: 5px !important;
-    }
+  .mapboxgl-ctrl-top-right {
+    top: 340px !important;
+    right: 5px !important;
+  }
 
-    .mapboxgl-ctrl-bottom-right.mobile_open {
-        top: 400px !important;
-    }
+  .mapboxgl-ctrl-bottom-right.mobile_open {
+    top: 400px !important;
+  }
 
-    #bottom_wrapper.mobile_open {
-        position: absolute;
-        top: 500px;
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
+  #bottom_wrapper.mobile_open {
+    position: absolute;
+    top: 500px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
 
-    #bottom_wrapper.mobile_open_zone_details {
-        position: absolute;
-        bottom: 30%;
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
+  #bottom_wrapper.mobile_open_zone_details {
+    position: absolute;
+    bottom: 30%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
 
-    .tabs_container {
-        position: relative;
-        align-items: center;
-        margin: 0 auto;
-        bottom: 110px;
-        height: 100%;
-        z-index: 3;
-    }
+  .tabs_container {
+    position: relative;
+    align-items: center;
+    margin: 0 auto;
+    bottom: 110px;
+    height: 100%;
+    z-index: 3;
+  }
 
-    .tabs {
-        z-index: 5;
-    }
+  .tabs {
+    z-index: 5;
+  }
 
-    .tabs_container.mobile_open {
-        top: 330px;
-        align-items: center;
-        margin: 0 auto;
-        margin-left: calc(50% - 170px);
-    }
+  .tabs_container.mobile_open {
+    top: 330px;
+    align-items: center;
+    margin: 0 auto;
+    margin-left: calc(50% - 170px);
+  }
 
-    .tabs_container.mobile_open_zone_details {
-        top: 0px;
-        align-items: center;
-        margin: 0 auto;
-        margin-left: calc(50% - 170px);
-    }
+  .tabs_container.mobile_open_zone_details {
+    top: 0px;
+    align-items: center;
+    margin: 0 auto;
+    margin-left: calc(50% - 170px);
+  }
 
-    .controller_container {
-        opacity: 1;
-        margin-top: 0;
-    }
+  .controller_container {
+    opacity: 1;
+    margin-top: 0;
+  }
 
-    .controller_container.mobile_open {
-        top: 430px;
-    }
+  .controller_container.mobile_open {
+    top: 430px;
+  }
 
-    .controller_container.mobile_open_zone_details {
-        top: 248px;
-    }
+  .controller_container.mobile_open_zone_details {
+    top: 248px;
+  }
 
-    .station_aqi {
-        width: 100%;
-        max-width: 100%;
-        height: 4em;
-        padding-left: 8vw !important;
-        padding-right: 0;
-    }
+  .station_aqi {
+    width: 100%;
+    max-width: 100%;
+    height: 4em;
+    padding-left: 8vw !important;
+    padding-right: 0;
+  }
 
-    .station_pm2 {
-        padding: 0 0.5em 0 1em;
-        bottom: 0;
-    }
+  .station_pm2 {
+    padding: 0 0.5em 0 1em;
+    bottom: 0;
+  }
 
-    .station_recommendations {
-        height: auto;
-        border-left: none;
-    }
+  .station_recommendations {
+    height: auto;
+    border-left: none;
+  }
 
-    .other_pollutants {
-        height: auto;
-        border-left: none;
-    }
+  .other_pollutants {
+    height: auto;
+    border-left: none;
+  }
 
-    .station_aqi_container {
-        height: auto;
-    }
+  .station_aqi_container {
+    height: auto;
+  }
 
-    .zone_details_container {
-        position: absolute;
-        top: 105px;
-        align-items: center;
-        margin-left: calc(50% - 172.5px);
-        width: 345px;
-        box-shadow: 0px 2.85887px 8.57661px rgba(0, 0, 0, 0.1);
-        border-radius: 2.85887px;
-    }
+  .zone_details_container {
+    position: absolute;
+    top: 105px;
+    align-items: center;
+    margin-left: calc(50% - 172.5px);
+    width: 345px;
+    box-shadow: 0px 2.85887px 8.57661px rgba(0, 0, 0, 0.1);
+    border-radius: 2.85887px;
+  }
 
-    .zone_khoroo_title {
-        font-size: 17px;
-        letter-spacing: 0.845387px;
-    }
+  .zone_khoroo_title {
+    font-size: 17px;
+    letter-spacing: 0.845387px;
+  }
 
-    .zone_khoroo_details_right {
-        font-size: 14px;
-    }
+  .zone_khoroo_details_right {
+    font-size: 14px;
+  }
 
-    .zone_details_name {
-        font-size: 11.8354px;
-        line-height: 16px;
-        letter-spacing: 0.714718px;
-        top: 39px;
-    }
+  .zone_details_name {
+    font-size: 11.8354px;
+    line-height: 16px;
+    letter-spacing: 0.714718px;
+    top: 39px;
+  }
 
-    .temporary_details.mobile_open_zone_details {
-        bottom: -400px;
-    }
+  .temporary_details.mobile_open_zone_details {
+    bottom: -400px;
+  }
 }
 
 /* tablets and mobile landspace */
 @media only screen and (min-width: 769px) {
-    #map {
-        height: 730px;
-    }
+  #map {
+    height: 730px;
+  }
 
-    #map.mobile_open {
-        height: 985px;
-    }
+  #map.mobile_open {
+    height: 985px;
+  }
 
-    #map.mobile_open_zone_details {
-        height: 850px;
-    }
+  #map.mobile_open_zone_details {
+    height: 850px;
+  }
 
-    #container.mobile_open_zone_details {
-        height: 850px;
-    }
+  #container.mobile_open_zone_details {
+    height: 850px;
+  }
 
-    #container.mobile_open {
-        height: 985px;
-    }
+  #container.mobile_open {
+    height: 985px;
+  }
 
-    .mapboxgl-ctrl-bottom-left.bottom_left_open {
-        bottom: 160px !important;
-    }
+  .mapboxgl-ctrl-bottom-left.bottom_left_open {
+    bottom: 160px !important;
+  }
 
-    .mapboxgl-ctrl-bottom-left {
-        top: unset !important;
-        bottom: 88px !important;
-        left: 6px !important;
-    }
+  .mapboxgl-ctrl-bottom-left {
+    top: unset !important;
+    bottom: 88px !important;
+    left: 6px !important;
+  }
 
-    .dropdown_collapsed {
-        .mapboxgl-ctrl-top-right {
-            right: 30px !important;
-        }
+  .dropdown_collapsed {
+    .mapboxgl-ctrl-top-right {
+      right: 30px !important;
     }
+  }
 
-    .dropdown_title {
-        text-align: left;
-        width: 240px;
-        line-height: 14px;
-    }
+  .dropdown_title {
+    text-align: left;
+    width: 240px;
+    line-height: 14px;
+  }
 
-    #bottom_wrapper {
-        position: absolute;
-        bottom: 8px;
-        left: 5px;
-    }
+  #bottom_wrapper {
+    position: absolute;
+    bottom: 8px;
+    left: 5px;
+  }
 
-    #bottom_wrapper.mobile_open {
-        bottom: 300px;
-    }
+  #bottom_wrapper.mobile_open {
+    bottom: 300px;
+  }
 
-    #bottom_wrapper.mobile_open_zone_details {
-        bottom: 135px;
-    }
+  #bottom_wrapper.mobile_open_zone_details {
+    bottom: 135px;
+  }
 
-    .controller_container {
-        position: relative;
-        width: 370px;
-    }
+  .controller_container {
+    position: relative;
+    width: 370px;
+  }
 
-    .tabs {
-        z-index: 5;
-    }
+  .tabs {
+    z-index: 5;
+  }
 
-    .station_aqi_container {
-        height: auto;
-    }
+  .station_aqi_container {
+    height: auto;
+  }
 
-    #select_pin {
-        position: absolute;
-        top: 13px;
-        left: 20px;
-        margin: 0;
-        z-index: 4;
-    }
+  #select_pin {
+    position: absolute;
+    top: 13px;
+    left: 20px;
+    margin: 0;
+    z-index: 4;
+  }
 
-    .map_info.zone {
-        position: absolute;
-        top: 460px;
-        left: 20px;
-        margin: 0;
-        z-index: 4;
-    }
+  .map_info.zone {
+    position: absolute;
+    top: 460px;
+    left: 20px;
+    margin: 0;
+    z-index: 4;
+  }
 
-    .map_info.zone.mobile_open {
-        top: 275px;
-        animation: slideInScale 0.3s;
-    }
+  .map_info.zone.mobile_open {
+    top: 275px;
+    animation: slideInScale 0.3s;
+  }
 
-    .tabs_container {
-        z-index: 3;
-    }
+  .tabs_container {
+    z-index: 3;
+  }
 
-    .zone_details_container {
-        position: absolute;
-        width: 345px;
-        box-shadow: 0px 2.85887px 8.57661px rgba(0, 0, 0, 0.1);
-        border-radius: 2.85887px;
-        top: -125px;
-    }
+  .zone_details_container {
+    position: absolute;
+    width: 345px;
+    box-shadow: 0px 2.85887px 8.57661px rgba(0, 0, 0, 0.1);
+    border-radius: 2.85887px;
+    top: -125px;
+  }
 
-    .zone_khoroo_title {
-        font-size: 17px;
-        letter-spacing: 0.845387px;
-    }
+  .zone_khoroo_title {
+    font-size: 17px;
+    letter-spacing: 0.845387px;
+  }
 
-    .zone_khoroo_details_right {
-        font-size: 14px;
-    }
+  .zone_khoroo_details_right {
+    font-size: 14px;
+  }
 
-    .zone_details_name {
-        font-size: 11.8354px;
-        line-height: 16px;
-        letter-spacing: 0.714718px;
-    }
+  .zone_details_name {
+    font-size: 11.8354px;
+    line-height: 16px;
+    letter-spacing: 0.714718px;
+  }
 
-    .temporary_details.mobile_open_zone_details {
-        bottom: -400px;
-    }
+  .temporary_details.mobile_open_zone_details {
+    bottom: -400px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
-    #map {
-        height: 730px;
+  #map {
+    height: 730px;
+  }
+
+  #map.mobile_open {
+    height: 730px;
+  }
+
+  #map.mobile_open_zone_details {
+    height: 730px;
+  }
+
+  #bottom_wrapper.mobile_open {
+    bottom: 10px;
+  }
+
+  #bottom_wrapper.mobile_open_zone_details {
+    bottom: 10px;
+  }
+
+  #container.mobile_open_zone_details {
+    height: 730px;
+  }
+
+  #container.mobile_open {
+    height: 730px;
+  }
+
+  .mapboxgl-ctrl-bottom-left.bottom_left_open {
+    bottom: 270px !important;
+    animation: slideInScale 0.3s;
+  }
+
+  .dropdown_collapsed {
+    .mapboxgl-ctrl-top-right {
+      right: 30px !important;
+    }
+  }
+
+  @keyframes slideInScale {
+    from {
+      bottom: 100px;
     }
 
-    #map.mobile_open {
-        height: 730px;
+    to {
+      bottom: 270px;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      height: 0;
     }
 
-    #map.mobile_open_zone_details {
-        height: 730px;
+    to {
+      height: 160px;
+    }
+  }
+
+  .zone_details_container {
+    animation: slideIn 0.3s;
+  }
+
+  .map_info.zone.mobile_open {
+    animation: slideIn 0.3s;
+  }
+
+  @keyframes slideIn {
+    from {
+      margin-top: 150px;
     }
 
-    #bottom_wrapper.mobile_open {
-        bottom: 10px;
+    to {
+      margin-top: 0;
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      height: 160px;
     }
 
-    #bottom_wrapper.mobile_open_zone_details {
-        bottom: 10px;
+    to {
+      height: 0;
+      bottom: 0;
     }
+  }
 
-    #container.mobile_open_zone_details {
-        height: 730px;
-    }
+  #station_details_head {
+    position: relative;
+    height: 67px;
+    border-radius: 0;
+    padding-top: 10px;
+    padding-left: 17px;
+    padding-right: 12px;
+  }
 
-    #container.mobile_open {
-        height: 730px;
-    }
+  .station_name {
+    font-size: 16px;
+    line-height: 27px;
+    font-weight: 700;
+  }
 
-    .mapboxgl-ctrl-bottom-left.bottom_left_open {
-        bottom: 270px !important;
-        animation: slideInScale 0.3s;
-    }
+  #station_details_aqi {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    color: #ffffff;
+  }
 
-    .dropdown_collapsed {
-        .mapboxgl-ctrl-top-right {
-            right: 30px !important;
-        }
-    }
+  .station_pm2 {
+    top: 105px;
+    font-size: 12px;
+    line-height: 15px;
+  }
 
-    @keyframes slideInScale {
-        from {
-            bottom: 100px;
-        }
+  #station_pm2_row1 {
+    font-weight: 100;
+  }
 
-        to {
-            bottom: 270px;
-        }
-    }
+  #station_pm2_row2 {
+    font-weight: bold;
+  }
 
-    @keyframes slideIn {
-        from {
-            height: 0;
-        }
+  #station_details_category {
+    align-items: center;
+    width: 243px;
+    padding: 15px;
+  }
 
-        to {
-            height: 160px;
-        }
-    }
+  .health_category_icon {
+    display: block;
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-    .zone_details_container {
-        animation: slideIn 0.3s;
-    }
+  #station_details_head_category {
+    display: flex;
+    flex-wrap: wrap;
+    width: 32%;
+  }
 
-    .map_info.zone.mobile_open {
-        animation: slideIn 0.3s;
-    }
+  #station_details_category_text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+  }
 
-    @keyframes slideIn {
-        from {
-            margin-top: 150px;
-        }
+  #station_details_icons {
+    display: flex;
+    flex-direction: column;
+    width: 412px;
+    height: 176px;
+  }
 
-        to {
-            margin-top: 0;
-        }
-    }
+  .station_details_other {
+    display: flex;
+    order: -1;
+    justify-content: flex-start;
+    padding-left: 0;
+  }
 
-    @keyframes slideOut {
-        from {
-            height: 160px;
-        }
+  .other_pollutants_column {
+    display: none;
+  }
 
-        to {
-            height: 0;
-            bottom: 0;
-        }
-    }
+  .other_pollutants_column.show_other {
+    position: absolute;
+    display: flex;
+    width: 160px;
+    top: 40px;
+    font-weight: 600;
+    margin-left: 0;
+    padding-left: 10px;
+    box-shadow: 0 2px 4px -2px gray;
+  }
 
-    #station_details_head {
-        position: relative;
-        height: 67px;
-        border-radius: 0;
-        padding-top: 10px;
-        padding-left: 17px;
-        padding-right: 12px;
-    }
+  #other_title_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 160px;
+    margin-right: 30px;
+    font-size: 12px;
+  }
 
-    .station_name {
-        font-size: 16px;
-        line-height: 27px;
-        font-weight: 700;
-    }
+  #other_title_wrapper.show_other {
+    box-shadow: 0 2px 4px -2px gray;
+    margin-left: 0;
+  }
 
-    #station_details_aqi {
-        position: relative;
-        width: 110px;
-        height: 110px;
-        font-family: "Open Sans";
-        font-style: normal;
-        color: #ffffff;
-    }
+  .other_pollutants_column > div:nth-child(even) {
+    margin: unset;
+  }
 
-    .station_pm2 {
-        top: 105px;
-        font-size: 12px;
-        line-height: 15px;
-    }
+  #other_air_text {
+    margin-right: 10px;
+  }
 
-    #station_pm2_row1 {
-        font-weight: 100;
-    }
+  .green.station_details.station_details_other,
+  .green.station_details#station_details_icons {
+    background-color: #deeabf;
+  }
 
-    #station_pm2_row2 {
-        font-weight: bold;
-    }
+  .yellow.station_details.station_details_other,
+  .yellow.station_details#station_details_icons {
+    background-color: #f6eec1;
+  }
 
-    #station_details_category {
-        align-items: center;
-        width: 243px;
-        padding: 15px;
-    }
+  .orange.station_details.station_details_other,
+  .orange.station_details#station_details_icons {
+    background-color: #fce0c4;
+  }
 
-    .health_category_icon {
-        display: block;
-        width: 48px;
-        min-width: 48px;
-        height: 48px;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+  .red.station_details.station_details_other,
+  .red.station_details#station_details_icons {
+    background-color: #f9c2bd;
+  }
 
-    #station_details_head_category {
-        display: flex;
-        flex-wrap: wrap;
-        width: 32%;
-    }
+  .purple.station_details.station_details_other,
+  .purple.station_details#station_details_icons {
+    background-color: #e8c3f1;
+  }
 
-    #station_details_category_text {
-        font-family: "Open Sans", sans-serif;
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 18px;
-    }
+  .brown.station_details.station_details_other,
+  .brown.station_details#station_details_icons {
+    background-color: #d6b9be;
+  }
 
-    #station_details_icons {
-        display: flex;
-        flex-direction: column;
-        width: 412px;
-        height: 176px;
-    }
+  // #recommended_advice1,
+  // #recommended_advice2,
+  // #recommended_advice3 {
+  //   display: flex;
+  //   flex-direction: row;
+  //   width: 184px;
+  //   height: 63px;
+  //   border-radius: 5px;
+  //   background-color: rgba(255, 255, 255, 0.3);
+  //   justify-content: center;
+  //   padding: 15px 10px;
+  //   padding-right: 5px;
+  // }
 
-    .station_details_other {
-        display: flex;
-        order: -1;
-        justify-content: flex-start;
-        padding-left: 0;
-    }
+  // #recommended_advice4 {
+  //   height: 37px;
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   width: 184px;
+  //   border-radius: 5px;
+  //   justify-content: center;
+  //   padding: 9px 10px;
+  //   cursor: pointer;
+  //   background-color: rgba(255, 255, 255, 0.3);
 
-    .other_pollutants_column {
-        display: none;
-    }
+  //   &.show_other {
+  //     height: auto;
+  //     border: 1px solid #fff;
 
-    .other_pollutants_column.show_other {
-        position: absolute;
-        display: flex;
-        width: 160px;
-        top: 40px;
-        font-weight: 600;
-        margin-left: 0;
-        padding-left: 10px;
-        box-shadow: 0 2px 4px -2px gray;
-    }
+  //     .other-pollutants-dropdown {
+  //       margin-bottom: 15px;
+  //     }
 
-    #other_title_wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        width: 160px;
-        margin-right: 30px;
-        font-size: 12px;
-    }
+  //     &.green {
+  //       background-color: #e7f1d2;
+  //     }
 
-    #other_title_wrapper.show_other {
-        box-shadow: 0 2px 4px -2px gray;
-        margin-left: 0;
-    }
+  //     &.yellow {
+  //       background-color: #f9f3d4;
+  //     }
 
-    .other_pollutants_column>div:nth-child(even) {
-        margin: unset;
-    }
+  //     &.orange {
+  //       background-color: #fde9d6;
+  //     }
 
-    #other_air_text {
-        margin-right: 10px;
-    }
+  //     &.red {
+  //       background-color: #fbd4d1;
+  //     }
 
-    .green.station_details.station_details_other,
-    .green.station_details#station_details_icons {
-        background-color: #deeabf;
-    }
+  //     &.purple {
+  //       background-color: #eed5f5;
+  //     }
 
-    .yellow.station_details.station_details_other,
-    .yellow.station_details#station_details_icons {
-        background-color: #f6eec1;
-    }
+  //     &.brown {
+  //       background-color: #e2ced1;
+  //     }
+  //   }
 
-    .orange.station_details.station_details_other,
-    .orange.station_details#station_details_icons {
-        background-color: #fce0c4;
-    }
+  //   span {
+  //     font-family: 'Open Sans', sans-serif;
+  //     font-style: normal;
+  //     font-weight: 600;
+  //     font-size: 12px;
+  //     line-height: 16px;
+  //   }
 
-    .red.station_details.station_details_other,
-    .red.station_details#station_details_icons {
-        background-color: #f9c2bd;
-    }
+  //   // margin-right: 10px;
+  // }
 
-    .purple.station_details.station_details_other,
-    .purple.station_details#station_details_icons {
-        background-color: #e8c3f1;
-    }
+  // .recommend_text {
+  //   font-weight: 600;
+  //   font-size: 12px;
+  //   line-height: 150%;
+  //   letter-spacing: 0;
+  //   text-align: unset;
+  // }
 
-    .brown.station_details.station_details_other,
-    .brown.station_details#station_details_icons {
-        background-color: #d6b9be;
-    }
+  #other_air_title {
+    display: flex;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
+    margin: 0 auto;
+    align-self: center;
+  }
 
-    #recommended_advice1,
-    #recommended_advice2,
-    #recommended_advice3 {
-        display: flex;
-        flex-direction: row;
-        width: 184px;
-        height: 63px;
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.3);
-        justify-content: center;
-        padding: 15px 10px;
-        padding-right: 5px;
-    }
+  #close_button_desktop {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url(../assets/img/close_button_black.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 2px;
+    right: 0;
+    cursor: pointer;
+  }
 
-    #recommended_advice4 {
-        height: 37px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 184px;
-        border-radius: 5px;
-        justify-content: center;
-        padding: 9px 10px;
-        cursor: pointer;
-        background-color: rgba(255, 255, 255, 0.3);
-
-        &.show_other {
-            height: auto;
-            border: 1px solid #fff;
-
-            .other-pollutants-dropdown {
-                margin-bottom: 15px;
-            }
-
-            &.green {
-                background-color: #e7f1d2;
-            }
-
-            &.yellow {
-                background-color: #f9f3d4;
-            }
-
-            &.orange {
-                background-color: #fde9d6;
-            }
-
-            &.red {
-                background-color: #fbd4d1;
-            }
-
-            &.purple {
-                background-color: #eed5f5;
-            }
-
-            &.brown {
-                background-color: #e2ced1;
-            }
-        }
-
-        span {
-            font-family: "Open Sans", sans-serif;
-            font-style: normal;
-            font-weight: 600;
-            font-size: 12px;
-            line-height: 16px;
-        }
-
-        // margin-right: 10px;
-    }
-
-    .recommend_text {
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 150%;
-        letter-spacing: 0;
-        text-align: unset;
-    }
-
-    #other_air_title {
-        display: flex;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 30px;
-        margin: 0 auto;
-        align-self: center;
-    }
-
-    #close_button_desktop {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        background-image: url(../assets/img/close_button_black.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-        position: absolute;
-        top: 2px;
-        right: 0;
-        cursor: pointer;
-    }
-
-    #close_button {
-        display: none;
-    }
+  #close_button {
+    display: none;
+  }
 }
 
 .map_carousel {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 9;
-    background-color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  background-color: #fff;
+
+  .dropdown_aqi {
+    display: none;
+  }
+
+  .is-open {
+    .hide_top10_ranking {
+      background-image: url(../assets/img/up_arrow.svg);
+    }
+
+    .zone_list_0 {
+      background-color: #e13333;
+    }
+
+    .zone_list_1 {
+      background-color: #fd6915;
+    }
+
+    .zone_list_2 {
+      background-color: #f9cf3b;
+    }
+
+    .zone_list_4 {
+      background-color: #92ba2a;
+    }
 
     .dropdown_aqi {
-        display: none;
+      display: block;
     }
-
-    .is-open {
-        .hide_top10_ranking {
-            background-image: url(../assets/img/up_arrow.svg);
-        }
-
-        .zone_list_0 {
-            background-color: #e13333;
-        }
-
-        .zone_list_1 {
-            background-color: #fd6915;
-        }
-
-        .zone_list_2 {
-            background-color: #f9cf3b;
-        }
-
-        .zone_list_4 {
-            background-color: #92ba2a;
-        }
-
-        .dropdown_aqi {
-            display: block;
-        }
-    }
+  }
 }
 
 .mapboxgl-ctrl-bottom-right {
-    display: none;
+  display: none;
 }
 
 @media only screen and (max-width: 768px) {
-    .aqi-map-wrapper {
-        .map-container {
-            .map-wrapper {
-                height: 750px;
+  .aqi-map-wrapper {
+    .map-container {
+      .map-wrapper {
+        height: 750px;
 
-                .controller_container {
-                    bottom: 100%;
-                }
-            }
-
-            .info_popup {
-                bottom: 135px;
-                left: 20px;
-                right: auto;
-                top: auto;
-            }
-
-            .mapboxgl-ctrl-top-right {
-                bottom: 135px;
-                right: 20px !important;
-                left: auto;
-                top: auto !important;
-
-                .mapboxgl-ctrl {
-                    margin: 0 !important;
-                }
-            }
-
-            .aqi_scale_container {
-                left: 20px;
-                bottom: 35px;
-                width: calc(100% - 40px);
-                max-width: 380px;
-            }
-
-            #map_dropdowns {
-                width: calc(100% - 40px);
-                left: 20px;
-                right: auto;
-            }
-
-            #station_details {
-                position: absolute;
-                width: calc(100% - 40px);
-                left: 20px;
-                bottom: 135px;
-                right: auto;
-
-                &>div {
-                    width: 100%;
-
-                    #station_details_category {
-                        width: 100%;
-                    }
-                }
-
-                #station_details_category {
-                    &.green {
-                        background-color: #c8db94;
-                    }
-
-                    &.yellow {
-                        background-color: #f0e197;
-                    }
-
-                    &.orange {
-                        background-color: #fde9d6;
-                    }
-
-                    &.red {
-                        background-color: #fbd4d1;
-                    }
-
-                    &.purple {
-                        background-color: #eed5f5;
-                    }
-
-                    &.brown {
-                        background-color: #e2ced1;
-                    }
-                }
-
-                #recommended_advice4 {
-                    &.green {
-                        background-color: #e7f0d2;
-                    }
-
-                    &.yellow {
-                        background-color: #f9f3d4;
-                    }
-
-                    &.orange {
-                        background-color: #fde9d6;
-                    }
-
-                    &.red {
-                        background-color: #fbd4d1;
-                    }
-
-                    &.purple {
-                        background-color: #eed5f5;
-                    }
-
-                    &.brown {
-                        background-color: #e2ced1;
-                    }
-
-                    .other-pollutants {
-                        grid-template-columns: 1fr 1fr 1fr;
-                        justify-items: center;
-
-                        .other_pollutant-container {
-                            padding: 10px 0;
-                        }
-                    }
-                }
-
-                #station_details_head {
-                    padding-top: 11px;
-                    padding-left: 12px;
-                }
-
-                #station_details_icons {
-                    height: auto;
-                }
-
-                #recommended_icons_container {
-                    padding: 0;
-                    padding-top: 10px;
-                    height: auto;
-                }
-
-                .station_aqi_val {
-                    font-size: 32px;
-                    line-height: 40px;
-                }
-
-                #station_details_head {
-                    height: 80px;
-                    display: flex;
-                    flex-wrap: wrap;
-                    align-items: flex-start;
-
-                    .sensor_brand,
-                    .sponsor_logo {
-                        display: inline-block;
-                    }
-                }
-
-                .station_extra_details {
-                    .station_reading_time {
-                        margin: 0;
-
-                        &::after {
-                            content: ", ";
-                        }
-                    }
-
-                    .sensor_brand,
-                    .sponsor_logo {
-                        display: none !important;
-                    }
-                }
-
-                .recommend_icons {
-                    grid-template-columns: 1fr 1fr 1fr;
-                    align-items: center;
-
-                    .recommend_icon {
-
-                        &.checkair,
-                        &.chemical {
-                            margin-bottom: 10px;
-                        }
-                    }
-
-                    .recommend_text {
-                        font-weight: 600;
-                        font-size: 12px;
-                        line-height: 14px;
-                    }
-
-                    #recommended_advice4 {
-                        margin-top: 10px;
-                        grid-column: span 3;
-
-                        .other-pollutants-dropdown {
-                            height: 51px;
-                            padding: 0 10px;
-
-                            span {
-                                display: block;
-                                width: 100%;
-                                font-family: "Open Sans";
-                                font-style: normal;
-                                font-weight: 600;
-                                font-size: 14px;
-                                line-height: 30px;
-                                letter-spacing: 1.19209e-7px;
-                                text-transform: capitalize;
-                                color: #2b2d42;
-                            }
-                        }
-                    }
-                }
-            }
+        .controller_container {
+          bottom: 100%;
         }
-    }
+      }
 
-    .controller_container {
-        width: calc(100% - 40px) !important;
-        max-width: 380px;
+      .info_popup {
+        bottom: 135px;
         left: 20px;
-        top: calc(100% - 30px) !important;
-    }
+        right: auto;
+        top: auto;
+      }
 
-    .aqi-map-wrapper {
-        margin-bottom: 70px;
+      .mapboxgl-ctrl-top-right {
+        bottom: 135px;
+        right: 20px !important;
+        left: auto;
+        top: auto !important;
+
+        .mapboxgl-ctrl {
+          margin: 0 !important;
+        }
+      }
+
+      .aqi_scale_container {
+        left: 20px;
+        bottom: 35px;
+        width: calc(100% - 40px);
+        max-width: 380px;
+      }
+
+      #map_dropdowns {
+        width: calc(100% - 40px);
+        left: 20px;
+        right: auto;
+      }
+
+      #station_details {
+        position: absolute;
+        width: calc(100% - 40px);
+        left: 20px;
+        bottom: 135px;
+        right: auto;
+
+        & > div {
+          width: 100%;
+
+          #station_details_category {
+            width: 100%;
+          }
+        }
+
+        #station_details_category {
+          &.green {
+            background-color: #c8db94;
+          }
+
+          &.yellow {
+            background-color: #f0e197;
+          }
+
+          &.orange {
+            background-color: #fde9d6;
+          }
+
+          &.red {
+            background-color: #fbd4d1;
+          }
+
+          &.purple {
+            background-color: #eed5f5;
+          }
+
+          &.brown {
+            background-color: #e2ced1;
+          }
+        }
+
+        #recommended_advice4 {
+          &.green {
+            background-color: #e7f0d2;
+          }
+
+          &.yellow {
+            background-color: #f9f3d4;
+          }
+
+          &.orange {
+            background-color: #fde9d6;
+          }
+
+          &.red {
+            background-color: #fbd4d1;
+          }
+
+          &.purple {
+            background-color: #eed5f5;
+          }
+
+          &.brown {
+            background-color: #e2ced1;
+          }
+
+          .other-pollutants {
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-items: center;
+
+            .other_pollutant-container {
+              padding: 10px 0;
+            }
+          }
+        }
+
+        #station_details_head {
+          padding-top: 11px;
+          padding-left: 12px;
+        }
+
+        #station_details_icons {
+          height: auto;
+        }
+
+        #recommended_icons_container {
+          padding: 0;
+          padding-top: 10px;
+          height: auto;
+        }
+
+        .station_aqi_val {
+          font-size: 32px;
+          line-height: 40px;
+        }
+
+        #station_details_head {
+          height: 80px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-start;
+
+          .sensor_brand,
+          .sponsor_logo {
+            display: inline-block;
+          }
+        }
+
+        .station_extra_details {
+          .station_reading_time {
+            margin: 0;
+
+            &::after {
+              content: ', ';
+            }
+          }
+
+          .sensor_brand,
+          .sponsor_logo {
+            display: none !important;
+          }
+        }
+
+        .recommend_icons {
+          grid-template-columns: 1fr 1fr 1fr;
+          align-items: center;
+
+          .recommend_icon {
+            &.checkair,
+            &.chemical {
+              margin-bottom: 10px;
+            }
+          }
+
+          .recommend_text {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 14px;
+          }
+
+          #recommended_advice4 {
+            margin-top: 10px;
+            grid-column: span 3;
+
+            .other-pollutants-dropdown {
+              height: 51px;
+              padding: 0 10px;
+
+              span {
+                display: block;
+                width: 100%;
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 30px;
+                letter-spacing: 1.19209e-7px;
+                text-transform: capitalize;
+                color: #2b2d42;
+              }
+            }
+          }
+        }
+      }
     }
+  }
+
+  .controller_container {
+    width: calc(100% - 40px) !important;
+    max-width: 380px;
+    left: 20px;
+    top: calc(100% - 30px) !important;
+  }
+
+  .aqi-map-wrapper {
+    margin-bottom: 70px;
+  }
 }
 
 /* tablets and mobile landspace */
 @media only screen and (min-width: 769px) and (max-width: 1023px) {
-    #bottom_wrapper {
-        position: absolute;
-        left: 5px;
-        bottom: 8px;
+  #bottom_wrapper {
+    position: absolute;
+    left: 5px;
+    bottom: 8px;
+  }
+
+  #station_details {
+    width: calc(100% - 300px);
+    margin: 0;
+
+    & > div {
+      width: 100%;
+
+      #station_details_category {
+        width: 100%;
+      }
     }
 
-    #station_details {
-        width: calc(100% - 300px);
+    #station_details_category {
+      &.green {
+        background-color: #c8db94;
+      }
+
+      &.yellow {
+        background-color: #f0e197;
+      }
+
+      &.orange {
+        background-color: #fde9d6;
+      }
+
+      &.red {
+        background-color: #fbd4d1;
+      }
+
+      &.purple {
+        background-color: #eed5f5;
+      }
+
+      &.brown {
+        background-color: #e2ced1;
+      }
+    }
+
+    #recommended_advice4 {
+      &.green {
+        background-color: #e7f0d2;
+      }
+
+      &.yellow {
+        background-color: #f9f3d4;
+      }
+
+      &.orange {
+        background-color: #fde9d6;
+      }
+
+      &.red {
+        background-color: #fbd4d1;
+      }
+
+      &.purple {
+        background-color: #eed5f5;
+      }
+
+      &.brown {
+        background-color: #e2ced1;
+      }
+
+      .other-pollutants {
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-items: center;
+
+        .other_pollutant-container {
+          padding: 10px 0;
+        }
+      }
+    }
+
+    #station_details_category {
+      &.green {
+        background-color: #c8db94;
+      }
+
+      &.yellow {
+        background-color: #f0e197;
+      }
+
+      &.orange {
+        background-color: #fde9d6;
+      }
+
+      &.red {
+        background-color: #fbd4d1;
+      }
+
+      &.purple {
+        background-color: #eed5f5;
+      }
+
+      &.brown {
+        background-color: #e2ced1;
+      }
+    }
+
+    #recommended_advice4 {
+      &.green {
+        background-color: #e7f0d2;
+      }
+
+      &.yellow {
+        background-color: #f9f3d4;
+      }
+
+      &.orange {
+        background-color: #fde9d6;
+      }
+
+      &.red {
+        background-color: #fbd4d1;
+      }
+
+      &.purple {
+        background-color: #eed5f5;
+      }
+
+      &.brown {
+        background-color: #e2ced1;
+      }
+
+      .other-pollutants {
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-items: center;
+
+        .other_pollutant-container {
+          padding: 10px 0;
+        }
+      }
+    }
+
+    #station_details_head {
+      padding-top: 11px;
+      padding-left: 12px;
+    }
+
+    #station_details_icons {
+      height: auto;
+    }
+
+    #recommended_icons_container {
+      padding: 0;
+      padding-top: 10px;
+      height: auto;
+    }
+
+    .station_aqi_val {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    #station_details_head {
+      height: 60px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+
+      .sensor_brand,
+      .sponsor_logo {
+        display: inline-block;
+      }
+    }
+
+    .station_extra_details {
+      .station_reading_time {
         margin: 0;
 
-        &>div {
-            width: 100%;
-
-            #station_details_category {
-                width: 100%;
-            }
+        &::after {
+          content: ', ';
         }
+      }
 
-        #station_details_category {
-            &.green {
-                background-color: #c8db94;
-            }
-
-            &.yellow {
-                background-color: #f0e197;
-            }
-
-            &.orange {
-                background-color: #fde9d6;
-            }
-
-            &.red {
-                background-color: #fbd4d1;
-            }
-
-            &.purple {
-                background-color: #eed5f5;
-            }
-
-            &.brown {
-                background-color: #e2ced1;
-            }
-        }
-
-        #recommended_advice4 {
-            &.green {
-                background-color: #e7f0d2;
-            }
-
-            &.yellow {
-                background-color: #f9f3d4;
-            }
-
-            &.orange {
-                background-color: #fde9d6;
-            }
-
-            &.red {
-                background-color: #fbd4d1;
-            }
-
-            &.purple {
-                background-color: #eed5f5;
-            }
-
-            &.brown {
-                background-color: #e2ced1;
-            }
-
-            .other-pollutants {
-                grid-template-columns: 1fr 1fr 1fr;
-                justify-items: center;
-
-                .other_pollutant-container {
-                    padding: 10px 0;
-                }
-            }
-        }
-
-        #station_details_category {
-            &.green {
-                background-color: #c8db94;
-            }
-
-            &.yellow {
-                background-color: #f0e197;
-            }
-
-            &.orange {
-                background-color: #fde9d6;
-            }
-
-            &.red {
-                background-color: #fbd4d1;
-            }
-
-            &.purple {
-                background-color: #eed5f5;
-            }
-
-            &.brown {
-                background-color: #e2ced1;
-            }
-        }
-
-        #recommended_advice4 {
-            &.green {
-                background-color: #e7f0d2;
-            }
-
-            &.yellow {
-                background-color: #f9f3d4;
-            }
-
-            &.orange {
-                background-color: #fde9d6;
-            }
-
-            &.red {
-                background-color: #fbd4d1;
-            }
-
-            &.purple {
-                background-color: #eed5f5;
-            }
-
-            &.brown {
-                background-color: #e2ced1;
-            }
-
-            .other-pollutants {
-                grid-template-columns: 1fr 1fr 1fr;
-                justify-items: center;
-
-                .other_pollutant-container {
-                    padding: 10px 0;
-                }
-            }
-        }
-
-        #station_details_head {
-            padding-top: 11px;
-            padding-left: 12px;
-        }
-
-        #station_details_icons {
-            height: auto;
-        }
-
-        #recommended_icons_container {
-            padding: 0;
-            padding-top: 10px;
-            height: auto;
-        }
-
-        .station_aqi_val {
-            font-size: 32px;
-            line-height: 40px;
-        }
-
-        #station_details_head {
-            height: 60px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
-
-            .sensor_brand,
-            .sponsor_logo {
-                display: inline-block;
-            }
-        }
-
-        .station_extra_details {
-            .station_reading_time {
-                margin: 0;
-
-                &::after {
-                    content: ", ";
-                }
-            }
-
-            .sensor_brand,
-            .sponsor_logo {
-                display: none !important;
-            }
-        }
-
-        .recommend_icons {
-            grid-template-columns: 1fr 1fr 1fr;
-            align-items: center;
-
-            .recommend_icon {
-
-                &.checkair,
-                &.chemical {
-                    margin-bottom: 10px;
-                }
-            }
-
-            .recommend_text {
-                font-weight: 600;
-                font-size: 12px;
-                line-height: 14px;
-            }
-
-            #recommended_advice4 {
-                margin-top: 10px;
-                grid-column: span 3;
-
-                .other-pollutants-dropdown {
-                    height: 51px;
-                    padding: 0 10px;
-
-                    span {
-                        display: block;
-                        width: 100%;
-                        font-family: "Open Sans";
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 14px;
-                        line-height: 30px;
-                        letter-spacing: 1.19209e-7px;
-                        text-transform: capitalize;
-                        color: #2b2d42;
-                    }
-                }
-            }
-        }
+      .sensor_brand,
+      .sponsor_logo {
+        display: none !important;
+      }
     }
+
+    .recommend_icons {
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+
+      .recommend_icon {
+        &.checkair,
+        &.chemical {
+          margin-bottom: 10px;
+        }
+      }
+
+      .recommend_text {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      #recommended_advice4 {
+        margin-top: 10px;
+        grid-column: span 3;
+
+        .other-pollutants-dropdown {
+          height: 51px;
+          padding: 0 10px;
+
+          span {
+            display: block;
+            width: 100%;
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 30px;
+            letter-spacing: 1.19209e-7px;
+            text-transform: capitalize;
+            color: #2b2d42;
+          }
+        }
+      }
+    }
+  }
 }
 
 .mapboxgl-ctrl-bottom-right {
-    display: none;
+  display: none;
 }
 
 .mapboxgl-ctrl-bottom-left {
-    display: none !important;
+  display: none !important;
 }
 
 @media only screen and (max-width: 425px) {
-    .aqi-map-wrapper .map-container .info_popup {
-        left: 15px !important;
+  .aqi-map-wrapper .map-container .info_popup {
+    left: 15px !important;
+  }
+
+  .controller_container,
+  .aqi-map-wrapper .map-container #station_details {
+    left: 15px !important;
+    width: calc(100% - 30px) !important;
+  }
+
+  .mapboxgl-ctrl-top-right {
+    top: auto;
+  }
+
+  .aqi_scale_container {
+    left: 15px !important;
+    width: calc(100% - 30px) !important;
+
+    .aqi-item .aqi_scale_text,
+    .aqi_scale_box {
+      width: 45px !important;
+    }
+  }
+
+  .aqi-map-wrapper .map-container #station_details {
+    .station_aqi_val {
+      font-size: 24px;
+      line-height: 32px;
     }
 
-    .controller_container,
-    .aqi-map-wrapper .map-container #station_details {
-        left: 15px !important;
-        width: calc(100% - 30px) !important;
+    .station_pm2,
+    .aqi_standard {
+      font-size: 10px;
     }
-
-    .mapboxgl-ctrl-top-right {
-        top: auto;
-    }
-
-    .aqi_scale_container {
-        left: 15px !important;
-        width: calc(100% - 30px) !important;
-
-        .aqi-item .aqi_scale_text,
-        .aqi_scale_box {
-            width: 45px !important;
-        }
-    }
-
-    .aqi-map-wrapper .map-container #station_details {
-        .station_aqi_val {
-            font-size: 24px;
-            line-height: 32px;
-        }
-
-        .station_pm2,
-        .aqi_standard {
-            font-size: 10px;
-        }
-    }
+  }
 }
