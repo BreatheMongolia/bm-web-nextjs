@@ -48,7 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="keywords" content="air pollution, clean air, public health, mongolia"></meta>
 
           <title>{title}</title>
-          <meta property="og:description" content="&nbsp;" />
+          <meta property="og:description" content="&hellip;" />
           <meta property="og:title" content={title} />
           <meta property="og:image" content={image} />
           <meta name="description" content={description} />

@@ -20,23 +20,27 @@ import {
 import FullNewsGrid from 'components/NewsPage/FullNewsGrid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import LogoBlue from 'assets/images/logoBlue.png'
+import { useMediaQuery } from 'react-responsive'
 
 // FIXME: Featured News not showing up
 const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featuredNews: News[]; agaarNegNews }) => {
   const { t } = useTranslation('news')
+  const isMobile = useMediaQuery({ minWidth: 1024, maxWidth: 1280 })
+  const maxNews = isMobile ? 6 : 8
+
   const filteredNews = [...news]
   // filter to categories for BM related news, slice recent 8
   const bmNews = filteredNews
     .filter(x => {
       return x.categories.nodes.some(c => c.slug === 'about-us' || c.slug === 'press-release')
     })
-    .slice(0, 8)
+    .slice(0, maxNews)
   return (
     <div>
       <Head>
         <title> News - Breathe Mongolia - Clean Air Coalition </title>
       </Head>
-      <div className="lg:container px-4 w-full mx-auto flex flex-col gap-16 pt-14">
+      <div className="lg:container px-4 w-full mx-auto flex flex-col gap-16 pt-5 md:pt-10 ">
         <div>
           <H2 title={t('featuredNews')} trailingLineColor="blue" />
           <FeaturedNews news={featuredNews} />
@@ -46,22 +50,18 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
           <FullNewsGrid news={filteredNews} />
         </div>
         <div>
-          <H2 iconImage={'/images/agaar-neg/agaar-neg-icon.png'} title={t('agaarNegPlatform')} />
+          <H2
+            iconImage={'/images/agaar-neg/agaar-neg-icon.png'}
+            title={t('agaarNegPlatform')}
+            agaarnegButton={{
+              title: t('seemoreon'),
+              url: 'https://agaarneg.mn/news_stories',
+            }}
+          />
           <NewsGrid defaultRows={1}>
             {agaarNegNews.map((x, idx) => {
               return <AgaarNegCard className={idx > 3 ? 'hidden md:block' : ''} news={x} key={idx} />
             })}
-            <div className="col-span-2 sm:col-span-1 flex justify-center items-center">
-              <Link href="https://agaarneg.mn/news_stories" target="_blank">
-                <div className="bg-[#00aeef] text-white flex px-6 py-4 items-center justify-center gap-2 font-semibold rounded-full shadow-lg group hover:shadow-xl hover:bg-sky-600 transition-all w-full">
-                  <span className="text-xs">{t('seemoreon')} </span>
-                  <h1>AgaarNeg.mn</h1>
-                  <span>
-                    <ArrowRightCircleIcon className="h-5 w-5 group-hover:-mr-1 transition-all" />
-                  </span>
-                </div>
-              </Link>
-            </div>
           </NewsGrid>
         </div>
         <div className="mb-20">

@@ -1516,10 +1516,7 @@
 @media (min-width: 768px) and (max-width: 1063px) {
   .actions-grid {
     display: grid;
-    max-width: 768px;
-    margin-left: auto;
-    margin-right: auto;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 236px 236px 236px;
   }
   .parent-pagination {
     max-width: 768px;
