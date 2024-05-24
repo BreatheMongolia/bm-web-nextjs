@@ -1,4 +1,4 @@
-import { MapContextInterface, StationType } from 'lib/air-pollution-map/types'
+import { MapContextInterface, RecommendationType, StationType } from 'lib/air-pollution-map/types'
 import { MapContext } from 'pages/_app'
 import { useRef, useState } from 'react'
 export const MapContextWrapper = ({ children }) => {
