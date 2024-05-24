@@ -62,13 +62,13 @@ export default function Index({
   const pageBanner =
     i18n.language === 'en'
       ? {
-          leftText: page.customFields.bannerTextLeft,
-          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
-        }
+        leftText: page.customFields.bannerTextLeft,
+        rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
+      }
       : {
-          leftText: page.customFields.bannerTextLeftMn,
-          rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
-        }
+        leftText: page.customFields.bannerTextLeftMn,
+        rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
+      }
 
   return (
     <div>
@@ -154,8 +154,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
   // const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
-  // const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
-  const stations = [...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+  const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const data = await getHomeLandingPageSettings()
 
   return {
