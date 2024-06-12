@@ -13,11 +13,9 @@ export const FeaturedNews = ({ news }: { news: News[] }) => {
   const otherNews = news.slice(1)
 
   return (
-    <div className="grid gap-5 md:grid-cols-2 h-[660px] md:h-[460px]">
-      <div>
-        <div className="bg-gray-200 h-full">
-          <NewsCard news={bigNews} cardHeight="fill" idx={0} />
-        </div>
+    <div className="grid grid-col-2 lg:grid-cols-2 h-[660px] lg:h-[460px] gap-5 featuredNewsMargin">
+      <div className="bg-gray-200 h-full">
+        <NewsCard news={bigNews} cardHeight="fill" idx={0} />
       </div>
       <div className="flex overflow-hidden h-full relative">
         <div className="overflow-y-auto pr-4 pb-4 absolute top-0 bottom-0 right-0 left-0 gap-3 flex flex-col">

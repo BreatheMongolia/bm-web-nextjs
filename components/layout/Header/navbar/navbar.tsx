@@ -29,6 +29,7 @@ export const Navbar = () => {
         <div className="items-center gap-10 hidden lg:flex">
           <MenuItem title={t('home')} href="/" isActive={path == '/'} />
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
+          <MenuItem title={t('journalism')} href="https://www.ejfp.mn/" target={'_blank'} isActive={false} />
           <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
           <MenuItem title={t('agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
           <MenuItem title={t('aboutUs')} href="/about/info" isActive={path.includes('about')} />
@@ -57,11 +58,12 @@ export const Navbar = () => {
         id="mobile-menu"
         className={`bg-white w-full lg:hidden fixed py-10 flex flex-col gap-7 h-full z-30 px-10 
         uppercase text-lg font-semibold tracking-widest
-        transition-all ease-in-out duration-200
+        transition-all ease-in-out duration-200 overflow-x-hidden
         ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <MenuItem title={t('home')} href="/" isActive={path == '/'} />
         <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('take-action')} />
+        <MenuItem title={t('journalism')} href="https://www.ejfp.mn/" target={'_blank'} isActive={false} />
         <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
         <MenuItem title={t('agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
         <MenuItem title={t('aboutUs')} href="/about" isActive={path.includes('about')} />

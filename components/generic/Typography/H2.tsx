@@ -3,18 +3,25 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { StaticImageData } from 'next/image'
+import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
+import { useMediaQuery } from 'react-responsive'
 
 export const H2 = ({
   title,
   iconImage,
   trailingLineColor,
   extraButton,
+  agaarnegButton,
   descriptionHtml,
   className,
 }: {
   title: string
   iconImage?: StaticImageData | string
   trailingLineColor?: 'blue' | 'yellow'
+  agaarnegButton?: {
+    title: string
+    url: string
+  }
   extraButton?: {
     title: string
     url: string
@@ -22,6 +29,8 @@ export const H2 = ({
   descriptionHtml?: string
   className?: string
 }) => {
+  const isMobile = useMediaQuery({ maxWidth: 752 })
+
   const TrailingLine = () => {
     // Setting state and useEffect removes the hydration error from static generation
     const [borderColor, setBorderColor] = useState('border-amber-400')
@@ -35,20 +44,36 @@ export const H2 = ({
       </div>
     )
   }
+  const AgaarNegButton = () => {
+    return (
+      <div className={`col-span-2 sm:col-span-1 flex  ${isMobile ? 'justify-end' : 'justify-center items-center'}`}>
+        <Link href={agaarnegButton.url} target="_blank">
+          <div className="bg-[#00aeef] text-white flex px-3 py-1 items-center justify-center gap-2 font-semibold rounded-full shadow-lg group hover:shadow-xl hover:bg-sky-600 transition-all w-full">
+            <span className="text-xs">{agaarnegButton.title} </span>
+            <h1>AgaarNeg.mn</h1>
+            <span>
+              <ArrowRightCircleIcon className="h-5 w-5 group-hover:-mr-1 transition-all" />
+            </span>
+          </div>
+        </Link>
+      </div>
+    )
+  }
   const IconImage = () => {
     return <Image src={iconImage} alt={title} className="h-10 w-10" width={40} height={40} />
   }
   return (
     <div className={`mt-2 mb-5 ${className}`}>
-      <div className="flex items-center gap-x-3">
+      <div className="flex gap-x-3 items-center">
         {iconImage && <IconImage />}
         <h2 className={`${!trailingLineColor && 'grow'} font-bold text-lg sm:text-3xl text-zinc-800`}>{title}</h2>
         {/* Trailing line */}
         {trailingLineColor && <TrailingLine />}
         {/* Button */}
         {extraButton && <ExtraButton />}
+        {agaarnegButton && !isMobile && <AgaarNegButton />}
       </div>
-
+      {agaarnegButton && isMobile && <AgaarNegButton />}
       {descriptionHtml && (
         <div className="mt-2 pt-4 mb-5 text-zinc-600" dangerouslySetInnerHTML={{ __html: descriptionHtml }}></div>
       )}

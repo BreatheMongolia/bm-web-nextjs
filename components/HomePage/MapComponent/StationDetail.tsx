@@ -1,11 +1,22 @@
-import { StationType } from 'lib/air-pollution-map/types'
+import { StationType, RecommendationType } from 'lib/air-pollution-map/types'
 import { useTranslation } from 'next-i18next'
-import { getAQIColor, getHealthCategory } from './utils'
+import { getAQIColor } from './utils'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { motion, AnimatePresence } from 'framer-motion'
-import { healthCategoryDetailsIndoor, healthCategoryDetailsOutdoor } from './consts'
+import { RecommendationCard } from '../../Cards/RecommendationCard'
+import { getTranslated } from 'lib/utils/getTranslated'
 
-export const StationDetail = ({ setHidden, station }: { setHidden: Function; station: StationType }) => {
+export const StationDetail = ({
+  setHidden,
+  station,
+  recommendation,
+  locale,
+}: {
+  setHidden: Function
+  station: StationType
+  recommendation: RecommendationType
+  locale: string
+}) => {
   const { t } = useTranslation('map')
 
   const getFormattedDate = () => {
@@ -19,6 +30,7 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
     const mins = date.getMinutes() === 0 ? '00' : date.getMinutes()
     return `${date.getHours()}:${mins} Hrs, ${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
   }
+
   // helper util to get all the different colors
   const getSectionBgColors = (aqiColor: string) => {
     switch (aqiColor) {
@@ -77,11 +89,14 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
 
   const aqiColor = station ? getAQIColor(station.pollution.aqius) : ''
   const bgColors = getSectionBgColors(aqiColor)
-  const healthCategory = station ? getHealthCategory(station.pollution.aqius) : ''
-  const healthCategoryDetails =
-    station && station.type === 'indoor'
-      ? healthCategoryDetailsIndoor[healthCategory]
-      : healthCategoryDetailsOutdoor[healthCategory]
+
+  // converts current recommendation's advices to an array
+  const getAdvices = () => {
+    const currentAdvices = Object.keys(recommendation.advices).map(function (key) {
+      return recommendation.advices[key]
+    })
+    return currentAdvices
+  }
 
   // separated the content to make the return method more readable
   const ContentTopLeftArea = () => {
@@ -107,7 +122,10 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
     return (
       <div className={`text-white px-2 py-1 flex flex-col items-center justify-center ${bgColors.bottomA}`}>
         <div className="text-xs font-semibold uppercase"> {t('stationDetail.usaqi')}</div>
-        <div className="font-bold text-3xl md:text-5xl"> {station.pollution.aqius} </div>
+        <div className="font-bold text-3xl md:text-5xl">
+          {' '}
+          {station.pollution.aqius < 0 ? 0 : station.pollution.aqius}{' '}
+        </div>
         {p2 && (
           <div className="text-xs text-center">
             <div className="font-regular"> PM2.5 </div>
@@ -120,16 +138,17 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
   const ContentBottomAreaB = () => {
     return (
       <div className={`col-span-2 px-1 md:px-4 py-1 flex items-center justify-center space-x-1 ${bgColors.bottomB}`}>
-        <div className={`health_category_icon ${healthCategoryDetails.className}`}></div>
+        <div className={`health_category_icon ${recommendation.airQuality}`}></div>
         <div className="font-bold text-sm" style={{ lineHeight: '18px' }}>
-          {t(`stationDetail.${station.type}Text.${healthCategory}.category_text`)}
+          {getTranslated(recommendation?.description, recommendation?.descriptionMn, locale)}
         </div>
       </div>
     )
   }
+
   const ContentRightArea = () => {
     return (
-      <div className={`flex-grow px-1 md:px-4 py-0.5 md:py-3 ${bgColors.right}`}>
+      <div className={`flex-grow px-1 md:px-2 py-0.5 md:py-2 ${bgColors.right}`}>
         <div className="flex items-center">
           <span className="grow font-bold hidden md:inline-block">{t('stationDetail.Recommendations')}</span>
           <div
@@ -140,35 +159,23 @@ export const StationDetail = ({ setHidden, station }: { setHidden: Function; sta
           </div>
         </div>
         {/* Recommended Area */}
-        <div className="grid grid-cols-3 md:grid-cols-1 xl:grid-cols-2 gap-1">
-          <div
-            className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
-          >
-            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.first_advice}`}></div>
-            <div className="text-xs font-semibold">
-              {t(`stationDetail.${station.type}Text.${healthCategory}.first_advice`)}
+        <div className="grid grid-cols-3 gap-1 md:grid-cols-1 xl:grid-cols-2">
+          {getAdvices().map((advice, idx) => (
+            <div key={'recommendationCard' + idx} className={`${bgColors.otherBox} rounded-md`}>
+              <RecommendationCard
+                slug={advice.takeAction.slug}
+                icon={advice.icon}
+                comment={advice.comment}
+                commentMn={advice.commentMn}
+                locale={locale}
+              />
             </div>
-          </div>
-          <div
-            className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
-          >
-            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.second_advice}`}></div>
-            <div className="text-xs font-semibold">
-              {t(`stationDetail.${station.type}Text.${healthCategory}.second_advice`)}
-            </div>
-          </div>
-          <div
-            className={`${bgColors.otherBox} rounded p-1 md:p-3 flex flex-col md:flex-row text-center md:text-left gap-2 items-center justify-center`}
-          >
-            <div className={`recommend_icon ${healthCategoryDetails.recommendation_icon.third_advice}`}></div>
-            <div className="text-xs font-semibold">
-              {t(`stationDetail.${station.type}Text.${healthCategory}.third_advice`)}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     )
   }
+
   return (
     <AnimatePresence>
       {station && (
