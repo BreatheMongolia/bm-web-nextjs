@@ -29,7 +29,7 @@ export const Navbar = () => {
         <div className="items-center gap-10 hidden lg:flex">
           <MenuItem title={t('home')} href="/" isActive={path == '/'} />
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
-          <MenuItem title={t('projects')} href="/" target={'_blank'} isActive={false}> 
+          <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
             <div>
               <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
                 <Link href="https://www.ejfp.mn/" target={'_blank'}>{t('journalism')}</Link>
@@ -71,9 +71,17 @@ export const Navbar = () => {
       >
         <MenuItem title={t('home')} href="/" isActive={path == '/'} />
         <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('take-action')} />
-        <MenuItem title={t('journalism')} href="https://www.ejfp.mn/" target={'_blank'} isActive={false} />
+        <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
+          <div>
+            <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
+              <Link href="https://www.ejfp.mn/" target={'_blank'}>{t('journalism')}</Link>
+            </div>
+            <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
+              <Link href="https://www.agaarneg.mn/" target={'_blank'}>{t('agaarNeg')}</Link>
+            </div>
+          </div>
+        </MenuItem>
         <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
-        <MenuItem title={t('agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
         <MenuItem title={t('aboutUs')} href="/about" isActive={path.includes('about')} />
 
         <hr className="border-slate-400" />
