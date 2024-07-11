@@ -9,6 +9,7 @@ import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map
 import {
   getHomeLandingPageSettings,
   getHomePage,
+  getProjectUrls,
   getRecommendationSettings,
   getVolunteers,
 } from 'lib/graphql-api/queries/home'
@@ -156,6 +157,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const data = await getHomeLandingPageSettings()
+  
+  const projects: Array<any> = await getProjectUrls()
+  console.log("projects", projects)
 
   return {
     props: {
@@ -166,6 +170,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       stations,
       recommendationActions,
       globalRanks: [],
+      projects,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
       image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),

@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // FIXME: Givebutter doesn't seem to be working
   return (
     <AnimatePresence mode="wait" initial={true}>
-      <Layout>
+      <Layout projects={pageProps.projects} >
         <Head>
           <Script src="https://js.givebutter.com/elements/latest.js" />
           <Script id="give-butter-config">

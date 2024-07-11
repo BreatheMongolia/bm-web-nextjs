@@ -12,6 +12,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import { MenuItem } from './navbar/menuItem'
 import Image from 'next/image'
 import logoWhite from 'assets/images/logoWhiteText.png'
+import { getTranslated } from 'lib/utils/getTranslated'
 
 type Option = {
   value: string
@@ -27,7 +28,7 @@ const availableOptions: Options = {
   mn: { value: 'mn', label: 'MNG' },
 }
 
-export const Mobilebar = () => {
+export const Mobilebar = ({ projects }) => {
   const { locale } = useRouter()
   const [isMenuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
@@ -69,12 +70,11 @@ export const Mobilebar = () => {
           <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
           <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
             <div>
-              <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
-                <Link href="https://www.ejfp.mn/" target={'_blank'}>{t('journalism')}</Link>
-              </div>
-              <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
-                <Link href="https://www.agaarneg.mn/" target={'_blank'}>{t('agaarNeg')}</Link>
-              </div>
+              {projects.map((project, index) => (
+                <div key={index} className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
+                  <Link href={project.url} target={'_blank'}>{getTranslated(project.title, project.titleMn)}</Link>
+                </div>
+              ))}
             </div>
           </MenuItem>
           <MenuItem title={t('aboutUs')} href="/about" isActive={path.includes('about')} />

@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useAtom } from 'jotai'
 import { giveButterDialogAtom } from 'lib/consts/atoms'
+import { getTranslated } from 'lib/utils/getTranslated'
 
-export const Navbar = () => {
+export const Navbar = ({ projects }) => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
   const path = router.pathname.toLowerCase()
@@ -31,12 +32,11 @@ export const Navbar = () => {
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
           <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
             <div>
-              <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
-                <Link href="https://www.ejfp.mn/" target={'_blank'}>{t('journalism')}</Link>
-              </div>
-              <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
-                <Link href="https://www.agaarneg.mn/" target={'_blank'}>{t('agaarNeg')}</Link>
-              </div>
+              {projects.map((project, index) => (
+                <div key={index} className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
+                  <Link href={project.url} target={'_blank'}>{getTranslated(project.title, project.titleMn)}</Link>
+                </div>
+              ))}
             </div>
           </MenuItem>
           <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
@@ -73,12 +73,11 @@ export const Navbar = () => {
         <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('take-action')} />
         <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
           <div>
-            <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
-              <Link href="https://www.ejfp.mn/" target={'_blank'}>{t('journalism')}</Link>
-            </div>
-            <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
-              <Link href="https://www.agaarneg.mn/" target={'_blank'}>{t('agaarNeg')}</Link>
-            </div>
+            {projects.map((project, index) => (
+              <div key={index} className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
+                <Link href={project.url} target={'_blank'}>{getTranslated(project.title, project.titleMn)}</Link>
+              </div>
+            ))}
           </div>
         </MenuItem>
         <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
