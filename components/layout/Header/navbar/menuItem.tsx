@@ -46,12 +46,12 @@ export const MenuItem = (props: MenuItemProps) => {
         )}
       </div>
       {props.children && isDropdownOpen && !isMobile && (
-        <div className="absolute left-0 mt-2 mb-2 w-60 py-2 bg-white shadow-lg rounded-xl z-10">
+        <div className="absolute left-1 top-8 mt-2 mb-2 w-60 py-2 bg-white shadow-lg rounded-xl z-10">
           {props.children}
         </div>
       )}
       {props.children && isDropdownOpen && isMobile && (
-        <div className="mt-2 mb-2 w-60 py-2 bg-white shadow-lg rounded-xl">
+        <div className="mt-2 mb-2 py-2 bg-white">
           {props.children}
         </div>
       )}
