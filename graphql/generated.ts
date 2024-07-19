@@ -3978,7 +3978,7 @@ export enum MimeTypeEnum {
   /** MimeType audio/x-ms-wma */
   AudioXMsWma = 'AUDIO_X_MS_WMA',
   /** MimeType audio/x-realaudio */
-  AudioXRealaudio = 'A
+  AudioXRealaudio = 'AUDIO_X_REALAUDIO',
   /** MimeType image/avif */
   ImageAvif = 'IMAGE_AVIF',
   /** MimeType image/bmp */
