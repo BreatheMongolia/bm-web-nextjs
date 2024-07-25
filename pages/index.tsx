@@ -159,7 +159,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const data = await getHomeLandingPageSettings()
   
   const projects: Array<any> = await getProjectUrls()
-  console.log("projects", projects)
 
   return {
     props: {
