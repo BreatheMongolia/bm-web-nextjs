@@ -26,11 +26,12 @@ export const Navbar = () => {
         <Link href="/">
           <img className="aspect-auto max-h-14 sm:max-h-16 mb-2" src="/images/logo.png" alt="Breathe Mongolia" />
         </Link>
-        <div className="items-center gap-10 hidden lg:flex">
+        <div className="ml-8 items-center gap-10 hidden lg:flex">
           <MenuItem title={t('home')} href="/" isActive={path == '/'} />
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
           <MenuItem title={t('journalism')} href="https://www.ejfp.mn/" target={'_blank'} isActive={false} />
           <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
+          <MenuItem title={t('journalism')} href="https://www.ejfp.mn/" target={'_blank'} isActive={false} />
           <MenuItem title={t('agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
           <MenuItem title={t('aboutUs')} href="/about/info" isActive={path.includes('about')} />
 
@@ -65,6 +66,7 @@ export const Navbar = () => {
         <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('take-action')} />
         <MenuItem title={t('journalism')} href="https://www.ejfp.mn/" target={'_blank'} isActive={false} />
         <MenuItem title={t('news')} href="/news" isActive={path.includes('news')} />
+        <MenuItem title={t('journalism')} href="https://www.ejfp.mn/" target={'_blank'} isActive={false} />
         <MenuItem title={t('agaarNeg')} href="http://www.agaarneg.mn" target={'_blank'} isActive={false} />
         <MenuItem title={t('aboutUs')} href="/about" isActive={path.includes('about')} />
 
