@@ -51,7 +51,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta property="og:description" content="&hellip;" />
           <meta property="og:title" content={title} />
           <meta property="og:image" content={image} />
-          <meta name="description" content={description} />
         </Head>
         <NextNProgress height={7} color="rgba(0,0,0,0.5)" showOnShallow={true} options={{ showSpinner: false }} />
         <Component {...pageProps} key={router.asPath} />
