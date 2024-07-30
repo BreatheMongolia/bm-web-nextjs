@@ -20,7 +20,11 @@ import { getProjectUrls } from 'lib/graphql-api/queries/home'
 
 export const MapContext = createContext<MapContextInterface | null>(null)
 
-function MyApp({ Component, pageProps, projects }: AppProps) {
+interface MyAppProps extends AppProps {
+  projects: any; // Adjust the type of `projects` as needed
+}
+
+function MyApp({ Component, pageProps, projects }: MyAppProps) {
   const router = useRouter()
   const { locale } = useRouter()
 
