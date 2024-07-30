@@ -15,10 +15,12 @@ import { MapContextInterface } from 'lib/air-pollution-map/types'
 import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar'
+import { GetStaticProps, NextPageContext } from 'next'
+import { getProjectUrls } from 'lib/graphql-api/queries/home'
 
 export const MapContext = createContext<MapContextInterface | null>(null)
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, projects }: AppProps) {
   const router = useRouter()
   const { locale } = useRouter()
 
@@ -33,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // FIXME: Givebutter doesn't seem to be working
   return (
     <AnimatePresence mode="wait" initial={true}>
-      <Layout projects={pageProps.projects} >
+      <Layout projects={projects} >
         <Head>
           <Script src="https://js.givebutter.com/elements/latest.js" />
           <Script id="give-butter-config">
@@ -57,6 +59,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Layout>
     </AnimatePresence>
   )
+}
+
+MyApp.getInitialProps = async (ctx: NextPageContext) => {
+  const projects: Array<any> = await getProjectUrls()
+
+  return { projects }
 }
 
 export default appWithTranslation(MyApp)

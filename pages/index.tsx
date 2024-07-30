@@ -158,8 +158,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const data = await getHomeLandingPageSettings()
   
-  const projects: Array<any> = await getProjectUrls()
-
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'common'])),
@@ -169,7 +167,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       stations,
       recommendationActions,
       globalRanks: [],
-      projects,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
       image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),

@@ -20,6 +20,15 @@ export const Navbar = ({ projects }) => {
       setMenuOpen(false)
     }
   }, [router.asPath])
+  // <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
+  //           <div>
+  //             {projects.map((project, index) => (
+  //               <div key={index} className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
+  //                 <Link href={project.url} target={'_blank'}>{getTranslated(project.title, project.titleMn)}</Link>
+  //               </div>
+  //             ))}
+  //           </div>
+  //         </MenuItem>
 
   return (
     <div className="">
