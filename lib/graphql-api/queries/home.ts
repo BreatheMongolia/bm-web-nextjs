@@ -266,57 +266,75 @@ export async function getVolunteers(): Promise<Page> {
 }
 
 export async function getHomeLandingPageSettings(): Promise<any> {
-    const data = await fetchAPI(
-      `query getHomeLandingPageSettings {
-        homePageSettings {
-            customFields {
-              socialMediaShare {
-                description
-                descriptionMn
-                title
-                titleMn
-                image {
-                  mediaItemUrl
-                }
-                imageMn {
-                  mediaItemUrl
-                }
+  const data = await fetchAPI(
+    `query getHomeLandingPageSettings {
+      homePageSettings {
+          customFields {
+            socialMediaShare {
+              description
+              descriptionMn
+              title
+              titleMn
+              image {
+                mediaItemUrl
+              }
+              imageMn {
+                mediaItemUrl
               }
             }
           }
         }
-      `,
-    )
-    return data.homePageSettings.customFields?.socialMediaShare || []
-  }
+      }
+    `,
+  )
+  return data.homePageSettings.customFields?.socialMediaShare || []
+}
 
-  export async function getRecommendationSettings(): Promise<RecommendationType> {
-    const data = await fetchAPI(
-      `query GetRecommendations {
-        recommendedActionsSettings {
-          mapRecommendations {
-            recommendations {
-              airQuality
-              sensorType
-              description
-              descriptionMn
-              advices {
-                icon {
-                  mediaItemUrl
-                }
-                comment
-                commentMn
-                takeAction {
-                  ... on TakeAction {
-                    slug
-                  }
+export async function getRecommendationSettings(): Promise<RecommendationType> {
+  const data = await fetchAPI(
+    `query GetRecommendations {
+      recommendedActionsSettings {
+        mapRecommendations {
+          recommendations {
+            airQuality
+            sensorType
+            description
+            descriptionMn
+            advices {
+              icon {
+                mediaItemUrl
+              }
+              comment
+              commentMn
+              takeAction {
+                ... on TakeAction {
+                  slug
                 }
               }
             }
           }
         }
       }
-      `,
-    )
-    return data.recommendedActionsSettings?.mapRecommendations.recommendations || []
-  }
+    }
+    `,
+  )
+  return data.recommendedActionsSettings?.mapRecommendations.recommendations || []
+}
+
+export async function getProjectUrls(): Promise<any> {
+  const data = await fetchAPI(
+    `query getProjectUrls {
+      homePageSettings {
+        customFields {
+          projects {
+            title
+            titleMn
+            url
+            }
+          }
+        }
+      }
+    `,
+  )
+  return data.homePageSettings.customFields?.projects || []
+}

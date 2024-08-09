@@ -1,11 +1,11 @@
 import { Navbar } from './navbar'
 import { Topbar } from './topbar'
 
-export const Header = () => {
+export const Header = ({ projects }) => {
   return (
     <div className="w-full sticky top-0 z-50">
       <Topbar />
-      <Navbar />
+      <Navbar projects={projects}/>
     </div>
   )
 }
