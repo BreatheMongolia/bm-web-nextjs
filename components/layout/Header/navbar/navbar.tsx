@@ -20,7 +20,7 @@ export const Navbar = ({ projects }) => {
       setMenuOpen(false)
     }
   }, [router.asPath])
-  // <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
+  // <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}>
   //           <div>
   //             {projects.map((project, index) => (
   //               <div key={index} className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
@@ -34,17 +34,19 @@ export const Navbar = ({ projects }) => {
     <div className="">
       <div className="w-full flex justify-between px-2 sm:px-5 py-1 uppercase text-xsm tracking-[1px] font-medium bg-white text-black">
         <Link href="/">
-          <img className="aspect-auto max-h-14 sm:max-h-16 mb-2" src="/images/logo.png" alt="Breathe Mongolia" />
+          <img className="mb-2 aspect-auto max-h-14 sm:max-h-16" src="/images/logo.png" alt="Breathe Mongolia" />
         </Link>
-        <div className="ml-8 items-center gap-10 hidden lg:flex">
+        <div className="items-center hidden gap-10 ml-8 lg:flex">
           <MenuItem title={t('home')} href="/" isActive={path == '/'} />
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
-          <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
+          <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}>
             <div>
               {projects.map((project, index) => (
-                <div key={index} className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
-                  <Link href={project.url} target={'_blank'}>{getTranslated(project.title, project.titleMn)}</Link>
-                </div>
+                <Link key={index} href={project.url} target={'_blank'}>
+                  <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
+                    {getTranslated(project.title, project.titleMn)}
+                  </div>
+                </Link>
               ))}
             </div>
           </MenuItem>
@@ -63,7 +65,7 @@ export const Navbar = ({ projects }) => {
         </div>
         {/* Added the pl-1 to make the div more clickable */}
         <div
-          className="lg:hidden flex items-center justify-center pl-1"
+          className="flex items-center justify-center pl-1 lg:hidden"
           onClick={() => {
             setMenuOpen(!isMenuOpen)
           }}
@@ -80,12 +82,14 @@ export const Navbar = ({ projects }) => {
       >
         <MenuItem title={t('home')} href="/" isActive={path == '/'} />
         <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('take-action')} />
-        <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}> 
+        <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}>
           <div>
             {projects.map((project, index) => (
-              <div key={index} className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
-                <Link href={project.url} target={'_blank'}>{getTranslated(project.title, project.titleMn)}</Link>
-              </div>
+              <Link key={index} href={project.url} target={'_blank'}>
+                <div className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%] font-semibold">
+                  {getTranslated(project.title, project.titleMn)}
+                </div>
+              </Link>
             ))}
           </div>
         </MenuItem>
