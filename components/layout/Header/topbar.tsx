@@ -44,34 +44,36 @@ export const Topbar = () => {
     <div className="w-full bg-bm-blue text-white px-5 py-1">
       <div className="flex justify-end gap-x-2">
         <SearchBar />
+        <div className="hidden md:block">
+          {/* Social URLS */}
+          {socialUrls.map((x, idx) => {
+            return (
+              <SocialIcon
+                url={x}
+                target="_blank"
+                key={idx}
+                bgColor="transparent"
+                fgColor="#ffffff"
+                className={`hover:bg-black/10 rounded`}
+                style={{ height: 40, width: 40 }}
+              />
+            )
+          })}
+          {socialUrlsDesktop.map((x, idx) => {
+            return (
+              <SocialIcon
+                url={x}
+                target="_blank"
+                key={idx}
+                bgColor="transparent"
+                fgColor="#ffffff"
+                className={`hover:bg-black/10 rounded hidden md:block`}
+                style={{ height: 40, width: 40 }}
+              />
+            )
+          })}
+        </div>
 
-        {/* Social URLS */}
-        {socialUrls.map((x, idx) => {
-          return (
-            <SocialIcon
-              url={x}
-              target="_blank"
-              key={idx}
-              bgColor="transparent"
-              fgColor="#ffffff"
-              className={`hover:bg-black/10 rounded`}
-              style={{ height: 40, width: 40 }}
-            />
-          )
-        })}
-        {socialUrlsDesktop.map((x, idx) => {
-          return (
-            <SocialIcon
-              url={x}
-              target="_blank"
-              key={idx}
-              bgColor="transparent"
-              fgColor="#ffffff"
-              className={`hover:bg-black/10 rounded hidden md:block`}
-              style={{ height: 40, width: 40 }}
-            />
-          )
-        })}
         {/* Language Selector */}
         <Menu as="div" className="relative inline-flex items-center justify-center">
           <Menu.Button className="flex w-full items-center justify-center rounded-md text-xs font-semibold text-white hover:bg-opacity-30">
