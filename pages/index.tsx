@@ -9,6 +9,7 @@ import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map
 import {
   getHomeLandingPageSettings,
   getHomePage,
+  getProjectUrls,
   getRecommendationSettings,
   getVolunteers,
 } from 'lib/graphql-api/queries/home'
