@@ -3170,6 +3170,7 @@ export type HomePageSettings_Customfields = {
   partnersLogos?: Maybe<Array<Maybe<HomePageSettings_Customfields_PartnersLogos>>>;
   partnersLogosTitle?: Maybe<Scalars['String']>;
   partnersLogosTitleMn?: Maybe<Scalars['String']>;
+  projects?: Maybe<Array<Maybe<HomePageSettings_Customfields_Projects>>>;
   socialMediaShare?: Maybe<HomePageSettings_Customfields_SocialMediaShare>;
   takeActionsBanner?: Maybe<MediaItem>;
   takeActionsBannerMn?: Maybe<MediaItem>;
@@ -3247,6 +3248,15 @@ export type HomePageSettings_Customfields_PartnersLogos = {
   fieldGroupName?: Maybe<Scalars['String']>;
   partnersLogosImage?: Maybe<MediaItem>;
   partnersLogosUrls?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type HomePageSettings_Customfields_Projects = {
+  __typename?: 'HomePageSettings_Customfields_projects';
+  fieldGroupName?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
 };
 
 /** File details for a Media Item */
@@ -5145,6 +5155,7 @@ export type Page_Customfields = {
   partnersLogos?: Maybe<Array<Maybe<Page_Customfields_PartnersLogos>>>;
   partnersLogosTitle?: Maybe<Scalars['String']>;
   partnersLogosTitleMn?: Maybe<Scalars['String']>;
+  projects?: Maybe<Array<Maybe<Page_Customfields_Projects>>>;
   socialMediaShare?: Maybe<Page_Customfields_SocialMediaShare>;
   takeActionsBanner?: Maybe<MediaItem>;
   takeActionsBannerMn?: Maybe<MediaItem>;
@@ -5222,6 +5233,15 @@ export type Page_Customfields_PartnersLogos = {
   fieldGroupName?: Maybe<Scalars['String']>;
   partnersLogosImage?: Maybe<MediaItem>;
   partnersLogosUrls?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type Page_Customfields_Projects = {
+  __typename?: 'Page_Customfields_projects';
+  fieldGroupName?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
 };
 
 /** Field Group */
