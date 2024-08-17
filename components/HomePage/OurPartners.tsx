@@ -39,6 +39,7 @@ export const OurPartners = ({
           slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 2,
+          infinite: true,
         },
       },
       {
@@ -46,6 +47,7 @@ export const OurPartners = ({
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
+          infinite: true,
         },
       },
     ],
