@@ -11,6 +11,10 @@ export async function getHealthPage() {
             bodyMn
             title
             titleMn
+            diagramTextBottom
+            diagramTextBottomMn
+            diagramTextTop
+            diagramTextTopMn
             healthSocialMediaShare {
               description
               descriptionMn

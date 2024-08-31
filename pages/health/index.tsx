@@ -19,21 +19,27 @@ const HealthPage = ({ featuredNews, featuredTakeActions, page, locale }) => {
       {getTranslated(page?.body, page?.bodyMn, locale)}
       </p>
       <p className='text-zinc-500 mt-5 mb-5 '>
-      Interact below to see causal health effects of air pollution.
+      {getTranslated(page?.diagramTextTop, page?.diagramTextTopMn, locale)}
       </p>
-      <iframe 
-        className="info-graphik-iframe" 
-        frameBorder="0" 
-        height="1400" 
-        scrolling="no" 
-        id="serviceFrameSend" 
-        src={`https://health-effects.swisstph.ch/index.html?a_lang=${locale}`}
-        width="1100">
-      </iframe>
+
+      <div className='w-full'>
+        <iframe
+          className="info-graphik-iframe"
+          frameBorder="0"
+          id="serviceFrameSend"
+          src={`https://health-effects.swisstph.ch/index.html?a_lang=${locale}`}
+          style={{
+            width: '100%',
+            height: '100vh', // Height set relative to the viewport height
+            minWidth: '300px', // Minimum width to prevent it from getting too small
+            maxWidth: '1100px', // Maximum width for larger screens
+          }}
+        />
+      </div>      
       
       <div className='flex flex-col gap-20'>
-        <p className='font-semibold text-base text-zinc-800 mt-5'>
-        {getTranslated(page?.body, page?.bodyMn, locale)}
+        <p className='font-semibold text-base text-zinc-800 mt-5 hidden lg:block'>
+        {getTranslated(page?.diagramTextBottom, page?.diagramTextBottomMn, locale)}
         </p>
         <TakeActionCarousel takeActionPosts={featuredTakeActions} locale={locale} />
         <NewsCarousel featuredNews={featuredNews} />
@@ -50,8 +56,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const homePage = await getHomePage("/")
   const featuredNews = await getHealthNews()
   const featuredTakeActions = homePage.customFields.featuredTakeActions
-  console.log(page)
-  console.log(locale)
 
   return {
     props: {
