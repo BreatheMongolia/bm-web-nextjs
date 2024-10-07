@@ -39,6 +39,7 @@ export const Navbar = ({ projects }) => {
         <div className="items-center hidden gap-10 ml-8 lg:flex">
           <MenuItem title={t('home')} href="/" isActive={path == '/'} />
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
+          <MenuItem title={t('health')} href="/health" isActive={path.includes('health')} />
           <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}>
             <div>
               {projects.map((project, index) => (
@@ -82,6 +83,7 @@ export const Navbar = ({ projects }) => {
       >
         <MenuItem title={t('home')} href="/" isActive={path == '/'} />
         <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('take-action')} />
+        <MenuItem title={t('health')} href="/health" isActive={path.includes('health')} />
         <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}>
           <div>
             {projects.map((project, index) => (
