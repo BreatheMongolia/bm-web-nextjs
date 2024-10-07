@@ -22,7 +22,7 @@ const HealthPage = ({ featuredNews, featuredTakeActions, page, locale }) => {
       {getTranslated(page?.diagramTextTop, page?.diagramTextTopMn, locale)}
       </p>
 
-      <iframe className="info-graphik-iframe" frameBorder="0" height="1375" id="serviceFrameSend" src="https://health-effects.swisstph.ch/index.html?a_lang=mn"></iframe>
+      <iframe name="info-graphik-iframe" className='w-full h-[1000px] lg:h-[1375px]' id="serviceFrameSend" src={`https://health-effects.swisstph.ch/index.html?a_lang=` + locale}></iframe>
 
       
       <div className='flex flex-col gap-20'>
