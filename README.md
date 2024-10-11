@@ -1,5 +1,15 @@
 # Breathe Mongolia NextJS Website
 
+This is the front-end project for the BreatheMongolia Website that is written in React/NextJS.
+
+## Deployment Steps
+
+TODO: Outline steps for deployment processes here.
+
+## Setup Guide for Local Development
+
+The below steps are the necessary steps for local development for this project.
+
 ### Step 1. Set up environment variables
 
 Setup a local `.env.local` file (which will be ignored by Git):
