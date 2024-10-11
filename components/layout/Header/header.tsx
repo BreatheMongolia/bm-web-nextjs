@@ -1,6 +1,5 @@
 import { Navbar } from './navbar'
 import { Topbar } from './topbar'
-import { Mobilebar } from './mobilebar'
 
 export const Header = ({ projects }) => {
   return (
