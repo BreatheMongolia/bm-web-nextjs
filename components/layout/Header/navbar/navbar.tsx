@@ -20,7 +20,7 @@ export const Navbar = ({ projects }) => {
       setMenuOpen(false)
     }
   }, [router.asPath])
-
+  
   return (
     <div className="">
       <div className="w-full flex justify-between px-2 sm:px-5 py-1 uppercase text-xsm tracking-[1px] font-medium bg-white text-black">
