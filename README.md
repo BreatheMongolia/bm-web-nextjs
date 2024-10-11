@@ -8,7 +8,7 @@ TODO: Outline steps for deployment processes here.
 
 ## Setup Guide for Local Development
 
-The below steps are the necessary steps for local development for this project
+The below steps are the necessary steps for local development for this project.
 
 ### Step 1. Set up environment variables
 
