@@ -20,7 +20,7 @@ export const Navbar = ({ projects }) => {
       setMenuOpen(false)
     }
   }, [router.asPath])
-  
+
   return (
     <div className="">
       <div className="w-full flex justify-between px-2 sm:px-5 py-1 uppercase text-xsm tracking-[1px] font-medium bg-white text-black">
@@ -31,7 +31,7 @@ export const Navbar = ({ projects }) => {
           <MenuItem title={t('home')} href="/" isActive={path == '/'} />
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
           <MenuItem title={t('health')} href="/health" isActive={path.includes('health')} />
-          <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}>
+          <MenuItem title={t('projects')} isActive={false}>
             <div>
               {projects.map((project, index) => (
                 <Link key={index} href={project.url} target={'_blank'}>
