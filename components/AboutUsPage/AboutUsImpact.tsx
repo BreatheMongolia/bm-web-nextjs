@@ -25,15 +25,29 @@ const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
   accomplishments.sort((a, b) => new Date(b.sortBy) - new Date(a.sortBy))
   const onPageClick = pageNum => {
     if (pageNum < 0) setCurrentPage(0)
-    const maxPages = Math.ceil(filteredNews.length / ITEMS_PER_PAGE)
+    const maxPages = Math.ceil(accomplishments.length / ITEMS_PER_PAGE)
     if (pageNum >= maxPages) {
       setCurrentPage(maxPages - 1)
     }
     setCurrentPage(pageNum)
   }
   const pages = []
-  const MAX_PAGES = Math.ceil(filteredNews.length / ITEMS_PER_PAGE)
-
+  const MAX_PAGES = Math.ceil(accomplishments.length / ITEMS_PER_PAGE)
+  for (let i = 0; i < MAX_PAGES; i++) {
+    if (i === 0 || i === MAX_PAGES - 1 || (i < currentPage + 2 && i > currentPage - 2)) {
+      pages.push(
+        <div
+          key={i}
+          onClick={() => setCurrentPage(i)}
+          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#2C2D41]/80 hover:text-white ${
+            currentPage === i && 'bg-[#2C2D41] text-white'
+          }`}
+        >
+          {i + 1}
+        </div>,
+      )
+    }
+  }
   return (
     <>
       <div className="impact-container sm:mb-100">
@@ -100,17 +114,15 @@ const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
               </Arrow>
             }
           >
-            {reports
-              .slice(ITEMS_PER_PAGE * currentPage, ITEMS_PER_PAGE * currentPage + ITEMS_PER_PAGE)
-              .map((data: any, index: number) => (
-                <Report
-                  key={'report-mobile' + index}
-                  id={data.id}
-                  title={data.title}
-                  urlMn={data.urlMn}
-                  urlEng={data.urlEng}
-                />
-              ))}
+            {reports.map((data: any, index: number) => (
+              <Report
+                key={'report-mobile' + index}
+                id={data.id}
+                title={data.title}
+                urlMn={data.urlMn}
+                urlEng={data.urlEng}
+              />
+            ))}
           </Slider>
         </div>
         {/* Mobile */}
