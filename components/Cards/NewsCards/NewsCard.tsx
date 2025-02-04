@@ -43,6 +43,11 @@ export const NewsCard = ({
     if (transformedNews.newsContentType) {
       switch (transformedNews.newsContentType.toLowerCase()) {
         case 'external':
+          if (i18n.language !== transformedNews.sourceLanguage) {
+            router.push(`/news/${transformedNews.desiredSlug || transformedNews.slug || transformedNews.id}`)
+            return
+          }
+
           window.open(transformedNews.sourceLink, '_blank')
           return
         case 'video':
