@@ -22,8 +22,8 @@ export const Footer = () => {
       {
         title: t('titleExplore'),
         urls: [
-          { title: t('nav.policy'), url: '/policy' },
-          { title: t('nav.health'), url: '/health' },
+          { title: t('nav.home'), url: '/' },
+          { title: t('nav.news'), url: '/news' },
           { title: t('nav.agaarNeg'), url: EXTERNAL_URLS.AGAAR_NEG, target: '_blank' },
         ],
       },

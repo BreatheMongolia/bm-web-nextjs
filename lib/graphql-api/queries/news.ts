@@ -104,6 +104,7 @@ export async function getNewsLandingPageSettings(): Promise<any> {
   return data.newsPageSettings.newsLanding || []
 }
 
+
 export async function getNewsPosts(): Promise<News[]> {
   const data = await fetchAPI(
     `
@@ -182,8 +183,6 @@ export async function getNewsPosts(): Promise<News[]> {
   }
   return []
 }
-
-
 export async function getAgaarNegNews(): Promise<
   {
     id: string
