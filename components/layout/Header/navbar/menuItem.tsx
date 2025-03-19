@@ -33,9 +33,9 @@ export const MenuItem = (props: MenuItemProps) => {
     <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="flex items-center justify-between" >
         <Link
-        className={`hover:text-bm-blue font-semibold ${props.isActive && ' text-bm-blue'}`}
-        href={props.href}
-        target={props.target}
+          className={`hover:text-bm-blue font-medium ${props.isActive && ' text-bm-blue'}`}
+          href={props.href}
+          target={props.target}
         >
           {props.title}
         </Link>
