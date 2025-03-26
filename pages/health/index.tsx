@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       featuredTakeActions,
       page: page,
       title: getTranslated(page.healthSocialMediaShare.title, page.healthSocialMediaShare.titleMn, locale),
-      image: getTranslated(page.healthSocialMediaShare.image.mediaItemUrl, page.healthSocialMediaShare.imageMn.mediaItemUrl, locale),
+      image: getTranslated(page.healthSocialMediaShare.image?.mediaItemUrl, page.healthSocialMediaShare.imageMn?.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,

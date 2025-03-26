@@ -4032,6 +4032,12 @@ export enum MimeTypeEnum {
   ImageGif = 'IMAGE_GIF',
   /** MimeType image/heic */
   ImageHeic = 'IMAGE_HEIC',
+  /** MimeType image/heic-sequence */
+  ImageHeicSequence = 'IMAGE_HEIC_SEQUENCE',
+  /** MimeType image/heif */
+  ImageHeif = 'IMAGE_HEIF',
+  /** MimeType image/heif-sequence */
+  ImageHeifSequence = 'IMAGE_HEIF_SEQUENCE',
   /** MimeType image/jpeg */
   ImageJpeg = 'IMAGE_JPEG',
   /** MimeType image/png */
