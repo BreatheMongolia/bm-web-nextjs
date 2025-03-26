@@ -2966,6 +2966,41 @@ export type GeneralSettings = {
   url?: Maybe<Scalars['String']>;
 };
 
+/** Health Page Settings options */
+export type HealthPageSettings = {
+  __typename?: 'HealthPageSettings';
+  healthPage?: Maybe<HealthPageSettings_Healthpage>;
+  pageSlug?: Maybe<Scalars['String']>;
+  pageTitle?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type HealthPageSettings_Healthpage = {
+  __typename?: 'HealthPageSettings_Healthpage';
+  body?: Maybe<Scalars['String']>;
+  bodyMn?: Maybe<Scalars['String']>;
+  diagramTextBottom?: Maybe<Scalars['String']>;
+  diagramTextBottomMn?: Maybe<Scalars['String']>;
+  diagramTextTop?: Maybe<Scalars['String']>;
+  diagramTextTopMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  healthSocialMediaShare?: Maybe<HealthPageSettings_Healthpage_HealthSocialMediaShare>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
+/** Field Group */
+export type HealthPageSettings_Healthpage_HealthSocialMediaShare = {
+  __typename?: 'HealthPageSettings_Healthpage_HealthSocialMediaShare';
+  description?: Maybe<Scalars['String']>;
+  descriptionMn?: Maybe<Scalars['String']>;
+  fieldGroupName?: Maybe<Scalars['String']>;
+  image?: Maybe<MediaItem>;
+  imageMn?: Maybe<MediaItem>;
+  title?: Maybe<Scalars['String']>;
+  titleMn?: Maybe<Scalars['String']>;
+};
+
 /** Content node with hierarchical (parent/child) relationships */
 export type HierarchicalContentNode = {
   /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
@@ -7330,6 +7365,8 @@ export type RootQuery = {
   discussionSettings?: Maybe<DiscussionSettings>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
+  /** Health Page Settings options */
+  healthPageSettings?: Maybe<HealthPageSettings>;
   /** Home Page Settings options */
   homePageSettings?: Maybe<HomePageSettings>;
   /** An object of the mediaItem Type.  */
