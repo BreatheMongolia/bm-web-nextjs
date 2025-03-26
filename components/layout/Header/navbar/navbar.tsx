@@ -78,7 +78,7 @@ export const Navbar = ({ projects }) => {
           <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('take-action')} />
           <MenuItem title={t('policy')} href="/policy" isActive={path.includes('policy')} />
           <MenuItem title={t('health')} href="/health" isActive={path.includes('health')} />
-          <MenuItem title={t('projects')} href="#" target={'_blank'} isActive={false}>
+          <MenuItem title={t('projects')} isActive={false}>
             <div>
               {projects.map((project, index) => (
                 <Link key={index} href={project.url} target={'_blank'}>
