@@ -248,7 +248,7 @@ const TakeActionGQLQuerySections = {
         mediaItemUrl
       }
     }
-    customFields {
+    takeActionCustomFields {
       additionalResources {
         title
         titleMn
@@ -264,14 +264,20 @@ const TakeActionGQLQuerySections = {
       titleMn
       title
       typeOfAction {
-        customFields {
-          name
-          nameMn
+        nodes {
+          ... on ActionType {
+            actionTypeCustomFields {
+              name
+              nameMn
+            }
+          }
         }
       }
       listOfPhotos {
-        mediaItemUrl
-        caption
+        nodes {
+          mediaItemUrl
+          caption
+        }
       }
       listOfVideos {
         videoLink

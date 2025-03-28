@@ -240,7 +240,7 @@ export async function getBannerText(): Promise<Page_Customfields> {
   const data = await fetchAPI(
     `query homeBanner {
         page(id: "/", idType: URI) {
-          customFields {
+          homePage {
             bannerTextLeft
             bannerTextLeftMn
             bannerTextRight {
@@ -252,7 +252,7 @@ export async function getBannerText(): Promise<Page_Customfields> {
       }`,
   )
 
-  return data.page.customFields
+  return data.page.homePage
 }
 
 export async function getVolunteers(): Promise<Page> {

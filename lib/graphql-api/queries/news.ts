@@ -273,7 +273,7 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
         desiredSlug
         slug
         dateGmt
-        customFields {
+        newsCustomFields {
           authors {
             authorLink
             authorName
@@ -287,18 +287,22 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
           excerptMn
           featuredImage {
             image {
-              mediaDetails {
-                sizes(include: [MEDIUM, MEDIUM_LARGE, LARGE]) {
-                  name
-                  sourceUrl
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM, MEDIUM_LARGE, LARGE]) {
+                    name
+                    sourceUrl
+                  }
                 }
               }
             }
             imageMn {
-              mediaDetails {
-                sizes(include: [MEDIUM,MEDIUM_LARGE, LARGE]) {
-                  name
-                  sourceUrl
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM,MEDIUM_LARGE, LARGE]) {
+                    name
+                    sourceUrl
+                  }
                 }
               }
             }
@@ -361,14 +365,14 @@ export async function getLastThree(): Promise<News[]> {
   const data = await fetchAPI(
     `
     query getLatestNews {
-      newses(where: { orderby: { order: DESC, field: DATE } }, first: 3) {
+      newses(where: {orderby: {order: DESC, field: DATE}}, first: 3) {
         edges {
           node {
             databaseId
             slug
             date
             dateGmt
-            customFields {
+            newsCustomFields {
               titleMn
               title
               sourceLink
@@ -378,20 +382,24 @@ export async function getLastThree(): Promise<News[]> {
               newsContentType
               featuredImage {
                 image {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                      name
-                      sourceUrl
+                  node {
+                    mediaItemUrl
+                    mediaDetails {
+                      sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                        name
+                        sourceUrl
+                      }
                     }
                   }
                 }
                 imageMn {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                      name
-                      sourceUrl
+                  node {
+                    mediaItemUrl
+                    mediaDetails {
+                      sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                        name
+                        sourceUrl
+                      }
                     }
                   }
                 }
@@ -451,33 +459,37 @@ export async function getNewsPostSlugs(): Promise<News[]> {
 export async function getNewsBannerImages(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {
   const data = await fetchAPI(
     `query getFeaturedNews($id: ID!, $idType: PageIdType!) {
-          page(id: $id, idType: $idType) {
-            news_general_fields {
-              banner {
-                bannerImage {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: _1536X1536) {
-                      height
-                      width
-                      sourceUrl
-                    }
+      page(id: $id, idType: $idType) {
+        newsGeneralFields {
+          banner {
+            bannerImage {
+              node {
+                mediaItemUrl
+                mediaDetails {
+                  sizes(include: _1536X1536) {
+                    height
+                    width
+                    sourceUrl
                   }
                 }
-                bannerImageMn {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: _1536X1536) {
-                      height
-                      width
-                      sourceUrl
-                    }
+              }
+            }
+            bannerImageMn {
+              node {
+                mediaItemUrl
+                mediaDetails {
+                  sizes(include: _1536X1536) {
+                    height
+                    width
+                    sourceUrl
                   }
                 }
               }
             }
           }
         }
+      }
+    }
     `,
     {
       variables: { id, idType },

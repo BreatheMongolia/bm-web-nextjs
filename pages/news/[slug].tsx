@@ -15,7 +15,6 @@ import {
   getNewsFull,
   getNewsPostSlugs,
   getLastThree,
-  getNewsSlugByPostID,
 } from 'lib/graphql-api/queries/news'
 import { BreadCrumb, ShareButton, LatestNews, Banner } from 'components/NewsPage/DetailPage'
 import LoadingPage from 'components/generic/LoadingPage'
@@ -190,13 +189,13 @@ const getTransformedData = (banner: any, locale: string) => {
   return {
     mediaItemUrl:
       getTranslated(
-        banner?.news_general_fields.banner?.bannerImage?.mediaItemUrl,
-        banner?.news_general_fields.banner?.bannerImageMn?.mediaItemUrl,
+        banner?.newsGeneralFields.banner?.bannerImage?.node?.mediaItemUrl,
+        banner?.newsGeneralFields.banner?.bannerImageMn?.node?.mediaItemUrl,
         locale,
       ) !== null
         ? getTranslated(
-          banner?.news_general_fields.banner?.bannerImage?.mediaItemUrl,
-          banner?.news_general_fields.banner?.bannerImageMn?.mediaItemUrl,
+          banner?.newsGeneralFields.banner?.bannerImage?.node?.mediaItemUrl,
+          banner?.newsGeneralFields.banner?.bannerImageMn?.node?.mediaItemUrl,
           locale,
         )
         : '',
@@ -226,8 +225,8 @@ const getNews = (news: News, locale: string): any => {
         ? getTranslated(news.newsCustomFields.excerpt, news.newsCustomFields.titleMn, locale)
         : '',
     authors:
-      news?.customFields.authors !== null
-        ? news?.customFields.authors?.map((author: any) => {
+      news?.newsCustomFields.authors !== null
+        ? news?.newsCustomFields.authors?.map((author: any) => {
           return {
             name:
               getTranslated(author.authorName, author.authorNameMn, locale) !== null
