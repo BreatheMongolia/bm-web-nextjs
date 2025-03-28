@@ -43,10 +43,8 @@ export async function getTakeActionsLatest() {
   const data = await fetchAPI(
     `query getLatestTakeActions {
       takeActions(where: { orderby: { order: DESC, field: DATE } }, first: 100) {
-        edges {
-          node {
-            ${TakeActionGQLQuerySections.takeAction}
-            }
+        nodes {
+          ${TakeActionGQLQuerySections.takeAction}
           }
         }
       }
@@ -59,7 +57,7 @@ export async function getTakeActionText() {
   const data = await fetchAPI(
     `query getTakeActionTexts {
       takeActionSettings {
-        TakeActionTexts {
+        takeActionTexts {
           waysToGive {
             title
             url
@@ -84,7 +82,7 @@ export async function getTakeActionText() {
     `,
   )
 
-  return data.takeActionSettings?.TakeActionTexts || []
+  return data.takeActionSettings?.takeActionTexts || []
 }
 
 export async function getFeaturedTakeActions(
@@ -94,7 +92,7 @@ export async function getFeaturedTakeActions(
   const data = await fetchAPI(
     `query page($id: ID!, $idType: PageIdType!) {
           page(id: $id, idType: $idType) {
-              customFields {
+              homePage {
                   ${TakeActionGQLQuerySections.featuredTakeAction}
               }
           }
@@ -104,32 +102,36 @@ export async function getFeaturedTakeActions(
       variables: { id, idType },
     },
   )
-  return data.page?.customFields || []
+  return data.page?.homePage || []
 }
 
 export async function getTakeActionLandingPageSettings(): Promise<any> {
   const data = await fetchAPI(
     `query getTakeActionLandingPageSettings {
       takeActionSettings {
-        TakeActionTexts {
+        takeActionTexts {
           landingPage {
             description
             descriptionMn
             title
             titleMn
             landingPageImage {
-              mediaItemUrl
+              node {
+                mediaItemUrl
+              }
             }
             landingPageImageMn {
-              mediaItemUrl
+              node {
+                mediaItemUrl
               }
             }
           }
         }
       }
+    }
     `,
   )
-  return data.takeActionSettings.TakeActionTexts?.landingPage || []
+  return data.takeActionSettings.takeActionTexts?.landingPage || []
 }
 
 export async function getTakeActionSlugs(): Promise<TakeAction[]> {
@@ -153,54 +155,68 @@ export async function getTakeActionSlugs(): Promise<TakeAction[]> {
 const TakeActionGQLQuerySections = {
   featuredTakeAction: `
     featuredTakeActionsLanding {
-      ... on TakeAction {
-        databaseId
-        slug
-        dateGmt
-        customFields {
-          titleMn
-          title
-          excerpt
-          excerptMn
-          typeOfAction {
-            customFields {
-              name
-              nameMn
+        nodes {
+          ... on TakeAction {
+            databaseId
+            slug
+            dateGmt
+            takeActionCustomFields {
+              titleMn
+              title
+              excerpt
+              excerptMn
+              typeOfAction {
+                nodes {
+                  ... on ActionType {
+                    actionTypeCustomFields {
+                      name
+                      nameMn
+                    }
+                  }
+                }
+              }
+            }
+            featuredImage {
+              node {
+                mediaItemUrl
+              }
             }
           }
         }
-        featuredImage {
-          node {
-            mediaItemUrl
-          }
+      }
+      bannerTextLeft
+      bannerTextLeftMn
+      bannerTextRight {
+        categoryText
+        categoryTextMn
+      }
+      takeActionsBanner {
+        node {
+          mediaItemUrl
         }
       }
-    }
-    bannerTextLeft
-    bannerTextLeftMn
-    bannerTextRight {
-      categoryText
-      categoryTextMn
-    }
-    takeActionsBanner {
-      mediaItemUrl
-    }
-    takeActionsBannerMn {
-      mediaItemUrl
-    }
+      takeActionsBannerMn {
+        node {
+          mediaItemUrl
+        }
+      }
   `,
   takeAction: `
       databaseId
       slug
       date
       dateGmt
-      customFields {
+      takeActionCustomFields {
         titleMn
         title
         typeOfAction {
-          customFields {
-            name
-            nameMn
+          nodes {
+            ... on ActionType {
+              actionTypeCustomFields {
+                name
+                nameMn
+              }
+            }
           }
         }
       }

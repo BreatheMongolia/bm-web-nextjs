@@ -19,10 +19,10 @@ export default function OurTeamPage({ page, people, locale }) {
       <div className="container mx-auto flex flex-col gap-20">
         <OurPartners
           title={{
-            en: page?.customFields.partnersLogosTitle,
-            mn: page?.customFields.partnersLogosTitleMn,
+            en: page?.homePage.partnersLogosTitle,
+            mn: page?.homePage.partnersLogosTitleMn,
           }}
-          partnerLogos={page?.customFields.partnersLogos}
+          partnerLogos={page?.homePage.partnersLogos}
           locale={locale}
         />
       </div>
@@ -34,22 +34,22 @@ const getTransformedPeople = (PplData: string | any[], locale: string) => {
   const people = []
   for (let i = 0; i < PplData.length; i++) {
     people.push({
-      name: getTranslated(PplData[i].node.title, PplData[i].node.customFields.nameMn, locale),
+      name: getTranslated(PplData[i].node.title, PplData[i].node.personCustomFields.nameMn, locale),
       imgSrc: PplData[i].node.featuredImage.node.mediaItemUrl,
-      role: getTranslated(PplData[i].node.customFields.role, PplData[i].node.customFields.roleMn, locale),
+      role: getTranslated(PplData[i].node.personCustomFields.role, PplData[i].node.personCustomFields.roleMn, locale),
       description: getTranslated(
-        PplData[i].node.customFields.description,
-        PplData[i].node.customFields.descriptionMn,
+        PplData[i].node.personCustomFields.description,
+        PplData[i].node.personCustomFields.descriptionMn,
         locale,
       ),
       memberSince: getTranslated(
-        PplData[i].node.customFields.memberSince,
-        PplData[i].node.customFields.memberSinceMn,
+        PplData[i].node.personCustomFields.memberSince,
+        PplData[i].node.personCustomFields.memberSinceMn,
         locale,
       ),
-      featured: PplData[i].node.customFields.featured,
-      linkedin: PplData[i].node.customFields.linkedin,
-      sortBy: PplData[i].node.customFields.memberSince,
+      featured: PplData[i].node.personCustomFields.featured,
+      linkedin: PplData[i].node.personCustomFields.linkedin,
+      sortBy: PplData[i].node.personCustomFields.memberSince,
     })
   }
 
@@ -69,7 +69,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       page,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
+      image: getTranslated(data.image.node.mediaItemUrl, data.imageMn.node.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,

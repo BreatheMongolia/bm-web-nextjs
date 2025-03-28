@@ -8,18 +8,18 @@ export function getTransformedNews(news: News, language: 'en' | 'mn') {
     id: news.databaseId,
     desiredSlug: news.desiredSlug,
     slug: news.slug,
-    sourceLink: news.customFields?.sourceLink,
+    sourceLink: news.newsCustomFields?.sourceLink,
     dateGmt: news.dateGmt,
     title:
-      getTranslated(news.customFields?.title, news.customFields?.titleMn, language) !== null
-        ? getTranslated(news.customFields?.title, news.customFields?.titleMn, language)
+      getTranslated(news.newsCustomFields?.title, news.newsCustomFields?.titleMn, language) !== null
+        ? getTranslated(news.newsCustomFields?.title, news.newsCustomFields?.titleMn, language)
         : '',
     sourceName:
-      getTranslated(news.customFields?.sourceName, news.customFields?.sourceNameMn, language) !== null
-        ? getTranslated(news.customFields?.sourceName, news.customFields?.sourceNameMn, language)
+      getTranslated(news.newsCustomFields?.sourceName, news.newsCustomFields?.sourceNameMn, language) !== null
+        ? getTranslated(news.newsCustomFields?.sourceName, news.newsCustomFields?.sourceNameMn, language)
         : '',
-    sourceLanguage: news.customFields?.sourceLanguage,
-    homePageFeatured: news.customFields?.homePageFeatured,
+    sourceLanguage: news.newsCustomFields?.sourceLanguage,
+    homePageFeatured: news.newsCustomFields?.homePageFeatured,
     categories: news?.categories?.nodes?.map((cat: any) => {
       return {
         name:
@@ -28,17 +28,17 @@ export function getTransformedNews(news: News, language: 'en' | 'mn') {
             : '',
       }
     }),
-    newsContentType: news.customFields?.newsContentType,
+    newsContentType: news.newsCustomFields?.newsContentType,
     featuredImageSmall: getImage(
-      news.customFields?.featuredImage.image?.mediaDetails,
-      news.customFields?.featuredImage.imageMn?.mediaDetails,
+      news.newsCustomFields?.featuredImage.image?.node?.mediaDetails,
+      news.newsCustomFields?.featuredImage.imageMn?.node?.mediaDetails,
       news.featuredImage?.node?.mediaDetails,
       'medium',
     ),
     featuredImageBig:
       getImage(
-        news.customFields?.featuredImage.image?.mediaDetails,
-        news.customFields?.featuredImage.imageMn?.mediaDetails,
+        news.newsCustomFields?.featuredImage.image?.node?.mediaDetails,
+        news.newsCustomFields?.featuredImage.imageMn?.node?.mediaDetails,
         news.featuredImage?.node?.mediaDetails,
         'medium_large',
       ) ?? news.featuredImage?.node?.mediaItemUrl,

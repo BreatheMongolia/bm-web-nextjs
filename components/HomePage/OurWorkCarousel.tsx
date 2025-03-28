@@ -94,7 +94,7 @@ export const OurWorkCarousel = ({
             url={campaign.campaignCatgeoryUrl}
             description={getTranslated(campaign.campaignDescription, campaign.campaignDescriptionMn, locale)}
             category={getTranslated(campaign.campaignCategoryText, campaign.campaignCategoryTextMn, locale)}
-            campaignImage={campaign.volunteerImage?.mediaItemUrl !== null ? campaign?.volunteerImage?.mediaItemUrl : ''}
+            campaignImage={campaign.volunteerImage?.node.mediaItemUrl !== null ? campaign?.volunteerImage?.node.mediaItemUrl : ''}
           />
         ))}
       </Slider>

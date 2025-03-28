@@ -61,7 +61,7 @@ export const OurPartners = ({
           {partnerLogos.map((x, idx) => (
             <div key={idx}>
               <a href={x.partnersLogosUrls} target="_blank">
-                <img src={x.partnersLogosImage.mediaItemUrl} alt="ourPartnerLogos" loading="lazy" />
+                <img src={x.partnersLogosImage.node.mediaItemUrl} alt="ourPartnerLogos" loading="lazy" />
               </a>
             </div>
           ))}

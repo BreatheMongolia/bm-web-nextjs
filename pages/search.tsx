@@ -24,12 +24,12 @@ const SearchPage = ({ data, locale, banner }) => {
   const pageBanner =
     i18n.language === 'en'
       ? {
-        imageUrl: banner.bannerImage.mediaItemUrl,
+        imageUrl: banner.bannerimage.node.mediaItemUrl,
         leftText: banner.bannerTextLeft,
         rightText: getBannerTextRight(banner.bannerTextRight, 'categoryText'),
       }
       : {
-        imageUrl: banner.bannerImageMn.mediaItemUrl,
+        imageUrl: banner.bannerimageMn.node.mediaItemUrl,
         leftText: banner.bannerTextLeftMn,
         rightText: getBannerTextRight(banner.bannerTextRight, 'categoryTextMn'),
       }

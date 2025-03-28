@@ -75,8 +75,8 @@ export const JoinBMSection = ({
         <div className="hidden lg:block lg:w-[50%] join-bm-slider">
           <Slider {...settings}>
             {slider.map(x => (
-              <div key={x.sliderImage.databaseId}>
-                <img className="slider-image" src={x.sliderImage.mediaItemUrl} />
+              <div key={x.sliderImage?.node.databaseId}>
+                <img className="slider-image" src={x.sliderImage?.node.mediaItemUrl} />
               </div>
             ))}
           </Slider>

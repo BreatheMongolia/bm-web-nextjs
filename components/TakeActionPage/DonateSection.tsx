@@ -23,7 +23,7 @@ export type DonationMethod = {
   url: string
 }
 
-export const DonateSection = ({ text }: {text: DonationsText} ) => {
+export const DonateSection = ({ text }: { text: DonationsText }) => {
   const { t } = useTranslation('takeAction')
   const [isNavVisible, setNavVisible] = useState(false)
 
@@ -31,7 +31,7 @@ export const DonateSection = ({ text }: {text: DonationsText} ) => {
     return (
       <ul className="list-disc">
         {
-          text.waysToGive.map( (pair, idx) => {
+          text.waysToGive.map((pair, idx) => {
             return (
               <li key={idx}>
                 <Link href={getTranslated(pair.url, text.waysToGiveMn[idx].url)} target={'_blank'} className="text-black hover:text-bm-blue my-2">

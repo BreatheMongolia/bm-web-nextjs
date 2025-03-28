@@ -3,7 +3,7 @@ import { fetchAPI } from "../api"
 export async function getPolicies(): Promise<any[]> {
   const data = await fetchAPI(
     `query getAllPolicies {
-      newses(first: 1000) {
+      policies(first: 1000) {
         edges {
           node {
             databaseId
@@ -27,22 +27,129 @@ export async function getPolicies(): Promise<any[]> {
 export async function getPolicyLandingPageSettings(): Promise<any> {
     const data = await fetchAPI(
       `query getPolicyLandingPageSettings {
-        newsPageSettings {
-          newsLanding {
+        policyTrackingPageSettings {
+          policyPage {
             description
             descriptionMn
             title
             titleMn
-            image {
-              mediaItemUrl
+            featuredNews {
+              nodes {
+                ... on News {
+                  databaseId
+                  dateGmt
+                  slug
+                  desiredSlug
+                  newsCustomFields {
+                    titleMn
+                    title
+                    sourceLink
+                    sourceName
+                    sourceNameMn
+                    sourceLanguage
+                    newsLandingPageFeatured
+                    newsContentType
+                    featuredImage {
+                      image {
+                        node {
+                          mediaDetails {
+                            sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                              name
+                              sourceUrl
+                            }
+                          }
+                        }
+                      }
+                      imageMn {
+                        node {
+                          mediaDetails {
+                            sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                              name
+                              sourceUrl
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  featuredImage {
+                    node {
+                      id
+                      mediaDetails {
+                        sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                          name
+                          sourceUrl
+                        }
+                      }
+                    }
+                  }
+                  categories {
+                    nodes {
+                      slug
+                      categoryCustomFields {
+                        name
+                        nameMn
+                      }
+                    }
+                  }
+                }
+              }
             }
-            imageMn {
-              mediaItemUrl
+            featuredTakeActions {
+              nodes {
+                ... on TakeAction {
+                  databaseId
+                  slug
+                  dateGmt
+                  featuredImage {
+                    node {
+                      mediaItemUrl
+                      mediaDetails {
+                        sizes(include: MEDIUM) {
+                          height
+                          width
+                          sourceUrl
+                        }
+                      }
+                    }
+                  }
+                  takeActionCustomFields {
+                    typeOfAction {
+                      nodes {
+                        ... on ActionType {
+                          actionTypeCustomFields {
+                            name
+                            nameMn
+                          }
+                        }
+                      }
+                    }
+                    title
+                    titleMn
+                  }
+                }
+              }
+            }
+            policySocialMediaShare {
+              description
+              descriptionMn
+              image {
+                node {
+                  mediaItemUrl
+                }
+              }
+              title
+              titleMn
+              imageMn {
+                node {
+                  mediaItemUrl
+                }
               }
             }
           }
         }
-      `,
+      }
+    `,
     )
-    return data.newsPageSettings.newsLanding || []
+    return data.policyTrackingPageSettings.policyPage || []
   }

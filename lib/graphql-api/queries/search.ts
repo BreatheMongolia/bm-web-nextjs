@@ -130,7 +130,6 @@ export async function getSearchData() {
                 categoryCustomFields {
                 name
                 nameMn
-                fieldGroupName
                 }
             }
             }

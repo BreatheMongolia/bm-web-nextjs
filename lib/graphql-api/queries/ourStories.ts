@@ -7,7 +7,7 @@ export async function getStories() {
                 edges {
                     node {
                         id
-                        customFields {
+                        storyCustomFields {
                             title
                             titleMn
                             description

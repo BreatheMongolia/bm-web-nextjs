@@ -86,8 +86,8 @@ export const TakeActionCarousel = ({
             id={takeAction.databaseId}
             slug={takeAction.slug}
             title={
-              getTranslated(takeAction.customFields?.title, takeAction.customFields?.titleMn, locale) !== null
-                ? getTranslated(takeAction.customFields?.title, takeAction.customFields?.titleMn, locale)
+              getTranslated(takeAction.takeActionCustomFields?.title, takeAction.takeActionCustomFields?.titleMn, locale) !== null
+                ? getTranslated(takeAction.takeActionCustomFields?.title, takeAction.takeActionCustomFields?.titleMn, locale)
                 : ''
             }
             featuredImage={

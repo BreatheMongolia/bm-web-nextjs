@@ -6,11 +6,9 @@ import Slider from 'react-slick'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 import Arrow from 'components/generic/Arrow'
-import { init } from 'next/dist/compiled/webpack/webpack'
 
 export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields_FeaturedNews[] }) => {
   const { t } = useTranslation('home')
-
   const news = featuredNews
   const settings = {
     dots: false,

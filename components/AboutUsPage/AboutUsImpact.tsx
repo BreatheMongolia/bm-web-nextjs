@@ -18,7 +18,6 @@ const ITEMS_PER_PAGE = 5
 const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
   const { t } = useTranslation('about')
   const [currentPage, setCurrentPage] = useState(0)
-  const [filteredNews, setFilteredNews] = useState([])
 
   // Sort accomplishments by newest to oldest
   //   @ts-ignore
@@ -39,15 +38,15 @@ const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
         <div
           key={i}
           onClick={() => setCurrentPage(i)}
-          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#2C2D41]/80 hover:text-white ${
-            currentPage === i && 'bg-[#2C2D41] text-white'
-          }`}
+          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#2C2D41]/80 hover:text-white ${currentPage === i && 'bg-[#2C2D41] text-white'
+            }`}
         >
           {i + 1}
         </div>,
       )
     }
   }
+
   return (
     <>
       <div className="impact-container sm:mb-100">
@@ -73,9 +72,8 @@ const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
           <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
             <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
               <div
-                className={`transition-all hover:bg-[#2C2D41] hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${
-                  currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
-                }`}
+                className={`transition-all hover:bg-[#2C2D41] hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
+                  }`}
                 onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
               >
                 <span className="block p-3">
@@ -84,9 +82,8 @@ const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
               </div>
               {pages}
               <div
-                className={`transition-all hover:bg-[#2C2D41] hover:text-white border-black border hover:border-[#f09c4f]/80 rounded-full ${
-                  currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
-                }`}
+                className={`transition-all hover:bg-[#2C2D41] hover:text-white border-black border hover:border-[#f09c4f]/80 rounded-full ${currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
+                  }`}
                 onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
               >
                 <span className="block p-3">
