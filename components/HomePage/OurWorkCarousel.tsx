@@ -6,13 +6,13 @@ import Arrow from 'components/generic/Arrow'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import CampaignCard from 'components/Cards/CampaignCard'
-import { Page_Customfields_CampaignAndOurWorkSlider } from 'graphql/generated'
+import { HomePageCampaignAndOurWorkSlider } from 'graphql/generated'
 
 export const OurWorkCarousel = ({
   campaigns,
   locale,
 }: {
-  campaigns: Page_Customfields_CampaignAndOurWorkSlider[]
+  campaigns: HomePageCampaignAndOurWorkSlider[]
   locale: string
 }) => {
   const { t } = useTranslation('home')

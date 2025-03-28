@@ -83,7 +83,7 @@ export async function getFeaturedNews(): Promise<News[]> {
 
   if (data?.page) {
     const page = data.page as Page
-    return page.newsGeneralFields?.featuredNews.nodes || []
+    return (page.newsGeneralFields?.featuredNews.nodes as News[]) || []
   }
 
   return []

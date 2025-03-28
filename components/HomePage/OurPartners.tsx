@@ -1,6 +1,6 @@
 import React from 'react'
 import { H2 } from 'components/generic/Typography'
-import { Page_Customfields_PartnersLogos } from 'graphql/generated'
+import { HomePagePartnersLogos } from 'graphql/generated'
 import Slider from 'react-slick'
 import { getTranslated } from 'lib/utils/getTranslated'
 
@@ -10,7 +10,7 @@ export const OurPartners = ({
   locale,
 }: {
   title: { en: string; mn: string }
-  partnerLogos: Page_Customfields_PartnersLogos[]
+  partnerLogos: HomePagePartnersLogos[]
   locale: string
 }) => {
   // Styling the settings for partner-logo images within Slider

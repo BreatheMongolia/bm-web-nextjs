@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // types
-import { Page } from 'graphql/generated'
+import { News, Page, TakeAction } from 'graphql/generated'
 import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map/types'
 // lib functions/queries
 import {
@@ -105,8 +105,8 @@ export default function Index({
           </MapContextWrapper>
 
           {/* Add other page level components here */}
-          <NewsCarousel featuredNews={page.homePage.featuredNews.nodes} />
-          <TakeActionCarousel takeActionPosts={page.homePage.featuredTakeActions.nodes} locale={locale} />
+          <NewsCarousel featuredNews={page.homePage.featuredNews.nodes as News[]} />
+          <TakeActionCarousel takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]} locale={locale} />
           <OurWorkCarousel campaigns={sortedCampaigns} locale={locale} />
           <JoinBMSection
             title={{

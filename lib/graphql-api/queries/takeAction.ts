@@ -50,7 +50,7 @@ export async function getTakeActionsLatest() {
       }
     `,
   )
-  return data.takeActions?.edges || []
+  return data.takeActions?.nodes || []
 }
 
 export async function getTakeActionText() {

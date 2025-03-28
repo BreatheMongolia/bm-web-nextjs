@@ -4,7 +4,7 @@ import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
-import { TakeAction } from 'graphql/generated'
+import { ActionType, TakeAction } from 'graphql/generated'
 
 export type TakeActionAll = {
   id: number
@@ -34,7 +34,7 @@ const getTransformedData = (featured: TakeAction[], locale: string) => {
         getTranslated(takeAction.takeActionCustomFields.excerpt, takeAction.takeActionCustomFields.excerptMn, locale) !== null
           ? getTranslated(takeAction.takeActionCustomFields.excerpt, takeAction.takeActionCustomFields.excerptMn, locale)
           : '',
-      typeOfAction: takeAction.takeActionCustomFields.typeOfAction?.node?.map(
+      typeOfAction: takeAction.takeActionCustomFields.typeOfAction?.nodes?.map(
         (type: { actionTypeCustomFields: { name: string; nameMn: string } }) =>
           getTranslated(type.actionTypeCustomFields.name, type.actionTypeCustomFields.nameMn, locale),
       ),
@@ -51,21 +51,21 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
   const takeActions: TakeActionAll[] = []
   latest.map((takeAction: any) => {
     takeActions.push({
-      id: takeAction?.node.databaseId,
-      slug: takeAction?.node.slug,
-      date: takeAction?.node.dateGmt,
+      id: takeAction?.databaseId,
+      slug: takeAction?.slug,
+      date: takeAction?.dateGmt,
       title:
-        getTranslated(takeAction?.node.takeActionCustomFields?.title, takeAction?.node.takeActionCustomFields?.titleMn, locale) !== null
-          ? getTranslated(takeAction?.node.takeActionCustomFields?.title, takeAction?.node.takeActionCustomFields?.titleMn, locale)
+        getTranslated(takeAction?.takeActionCustomFields?.title, takeAction?.takeActionCustomFields?.titleMn, locale) !== null
+          ? getTranslated(takeAction?.takeActionCustomFields?.title, takeAction?.takeActionCustomFields?.titleMn, locale)
           : '',
       excerpt: '',
-      typeOfAction: takeAction?.node.takeActionCustomFields.typeOfAction?.map(
+      typeOfAction: takeAction?.takeActionCustomFields.typeOfAction?.nodes?.map(
         (type: { actionTypeCustomFields: { name: string; nameMn: string } }) =>
           getTranslated(type.actionTypeCustomFields.name, type.actionTypeCustomFields.nameMn, locale),
       ),
       featuredImage:
-        takeAction?.node?.featuredImage?.node?.mediaDetails.sizes !== null
-          ? takeAction?.node?.featuredImage?.node?.mediaDetails?.sizes[0].sourceUrl
+        takeAction?.featuredImage?.node?.mediaDetails.sizes !== null
+          ? takeAction?.featuredImage?.node?.mediaDetails?.sizes[0].sourceUrl
           : '',
     })
   })
@@ -74,6 +74,7 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
 
 const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
+  console.log('latest', latest)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
   const { whatYouCanDo, whatYouCanDoMn, whatYouCanDoText, whatYouCanDoTextMn, ...donationsText } = takeActionText;
@@ -86,7 +87,7 @@ const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   const getActionCategories = () => {
     let newActionCategories: any = []
     takeActions.map(ta => {
-      ta.typeOfAction?.nodes?.map((action: string) => {
+      ta.typeOfAction?.map((action: string) => {
         if (!newActionCategories.includes(action)) newActionCategories.push(action)
       })
     })

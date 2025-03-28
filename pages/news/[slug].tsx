@@ -246,8 +246,8 @@ const getNews = (news: News, locale: string): any => {
     }),
     newsContentType: '',
     featuredImageBig: getImage(
-      news.newsCustomFields.featuredImage.image?.mediaDetails,
-      news.newsCustomFields.featuredImage.imageMn?.mediaDetails,
+      news.newsCustomFields.featuredImage.image?.node?.mediaDetails,
+      news.newsCustomFields.featuredImage.imageMn?.node?.mediaDetails,
       news.featuredImage?.node?.mediaDetails,
       'large',
     ),

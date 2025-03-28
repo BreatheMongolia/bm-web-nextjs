@@ -19,7 +19,6 @@ export function getTransformedNews(news: News, language: 'en' | 'mn') {
         ? getTranslated(news.newsCustomFields?.sourceName, news.newsCustomFields?.sourceNameMn, language)
         : '',
     sourceLanguage: news.newsCustomFields?.sourceLanguage,
-    homePageFeatured: news.newsCustomFields?.homePageFeatured,
     categories: news?.categories?.nodes?.map((cat: any) => {
       return {
         name:

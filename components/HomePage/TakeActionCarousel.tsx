@@ -1,6 +1,6 @@
 import React from 'react'
 import { H2 } from 'components/generic/Typography'
-import { Page_Customfields_FeaturedTakeActions } from 'graphql/generated'
+import { TakeAction } from 'graphql/generated'
 import Slider from 'react-slick'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
@@ -12,7 +12,7 @@ export const TakeActionCarousel = ({
   takeActionPosts,
   locale,
 }: {
-  takeActionPosts: Page_Customfields_FeaturedTakeActions[]
+  takeActionPosts: TakeAction[]
   locale: string
 }) => {
   const { t } = useTranslation('home')

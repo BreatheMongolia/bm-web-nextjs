@@ -1,5 +1,5 @@
 import { fetchAPI } from 'lib/graphql-api/api'
-import { Page, PageIdType, MediaItemSizeEnum, Page_Customfields } from 'graphql/generated'
+import { Page, PageIdType, MediaItemSizeEnum } from 'graphql/generated'
 import { RecommendationType } from 'lib/air-pollution-map/types'
 
 const HomePageGQLQuerySections = {
@@ -236,7 +236,7 @@ export async function getHomePage(id: string, idType: PageIdType = PageIdType.Ur
   return data.page
 }
 
-export async function getBannerText(): Promise<Page_Customfields> {
+export async function getBannerText(): Promise<Page> {
   const data = await fetchAPI(
     `query homeBanner {
         page(id: "/", idType: URI) {

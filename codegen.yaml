@@ -1,4 +1,4 @@
-schema: https://breathemon2.wpengine.com/graphql
+schema: https://breathemon2dev.wpengine.com/graphql
 generates:
   ./graphql/generated.ts:
     plugins:
