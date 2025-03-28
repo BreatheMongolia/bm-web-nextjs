@@ -18,10 +18,10 @@ export default function ImpactPage({ page, reports, accomplishments, locale }) {
       <div className="container mx-auto flex flex-col gap-20">
         <OurPartners
           title={{
-            en: page?.customFields.partnersLogosTitle,
-            mn: page?.customFields.partnersLogosTitleMn,
+            en: page?.homePage.partnersLogosTitle,
+            mn: page?.homePage.partnersLogosTitleMn,
           }}
-          partnerLogos={page?.customFields.partnersLogos}
+          partnerLogos={page?.homePage.partnersLogos}
           locale={locale}
         />
       </div>
@@ -34,19 +34,19 @@ const getTransformedAccomplishment = (accData: string | any[], locale: string) =
 
   for (let i = 0; i < accData.length; i++) {
     accomplishments.push({
-      title: getTranslated(accData[i].node.customFields.title, accData[i].node.customFields.titleMn, locale),
-      category: getTranslated(accData[i].node.customFields.category, accData[i].node.customFields.categoryMn, locale),
+      title: getTranslated(accData[i].node.accomplishmentCustomFields.title, accData[i].node.accomplishmentCustomFields.titleMn, locale),
+      category: getTranslated(accData[i].node.accomplishmentCustomFields.category, accData[i].node.accomplishmentCustomFields.categoryMn, locale),
       description: getTranslated(
-        accData[i].node.customFields.description,
-        accData[i].node.customFields.descriptionMn,
+        accData[i].node.accomplishmentCustomFields.description,
+        accData[i].node.accomplishmentCustomFields.descriptionMn,
         locale,
       ),
-      date: accData[i].node.customFields.date,
+      date: accData[i].node.accomplishmentCustomFields.date,
       image:
-        accData[i].node.customFields.image?.mediaDetails?.sizes !== null
-          ? accData[i].node.customFields.image?.mediaDetails?.sizes[0]?.sourceUrl
+        accData[i].node.accomplishmentCustomFields.image?.node.mediaDetails?.sizes !== null
+          ? accData[i].node.accomplishmentCustomFields.image?.node.mediaDetails?.sizes[0]?.sourceUrl
           : '',
-      sortBy: accData[i].node.customFields.date,
+      sortBy: accData[i].node.accomplishmentCustomFields.date,
     })
   }
 
@@ -60,11 +60,11 @@ const getTransformedReport = (data: any[], locale: string) => {
     reports.push({
       id: report.node.databaseId,
       title:
-        getTranslated(report.node.customFields.title, report.node.customFields.titleMn, locale) !== null
-          ? getTranslated(report.node.customFields.title, report.node.customFields.titleMn, locale)
+        getTranslated(report.node.reportCustomFields.title, report.node.reportCustomFields.titleMn, locale) !== null
+          ? getTranslated(report.node.reportCustomFields.title, report.node.reportCustomFields.titleMn, locale)
           : '',
-      urlMn: report.node.customFields?.pdfFileMn ? report.node.customFields?.pdfFileMn?.mediaItemUrl : null,
-      urlEng: report.node.customFields?.pdfFile ? report.node.customFields?.pdfFile?.mediaItemUrl : null,
+      urlMn: report.node.reportCustomFields?.pdfFileMn ? report.node.reportCustomFields?.pdfFileMn?.node.mediaItemUrl : null,
+      urlEng: report.node.reportCustomFields?.pdfFile ? report.node.reportCustomFields?.pdfFile?.node.mediaItemUrl : null,
     })
   })
 
@@ -86,7 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       page,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
+      image: getTranslated(data.image.node.mediaItemUrl, data.imageMn.node.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,

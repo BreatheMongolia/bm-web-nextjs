@@ -3,20 +3,18 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // types
-import { Page } from 'graphql/generated'
+import { News, Page, TakeAction } from 'graphql/generated'
 import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map/types'
 // lib functions/queries
 import {
   getHomeLandingPageSettings,
   getHomePage,
-  getProjectUrls,
   getRecommendationSettings,
   getVolunteers,
 } from 'lib/graphql-api/queries/home'
 import {
   fetchPurpleAirStations,
   fetchOpenAQStations,
-  fetchAirVisualGlobalStations,
   fetchAirVisualIndoorStations,
   fetchAirVisualOutdoorStations,
 } from 'lib/air-pollution-map/api-hooks'
@@ -52,9 +50,8 @@ export default function Index({
   locale: string
 }) {
   const { i18n } = useTranslation()
-
   // OurWorkCarousel
-  const campaigns = [...page?.customFields?.campaignAndOurWorkSlider]
+  const campaigns = [...page?.homePage?.campaignAndOurWorkSlider]
   const sortedCampaigns = campaigns.sort((a: any, b: any) =>
     dayjs(a?.campaignDate).isBefore(dayjs(b?.campaignDate)) ? 1 : -1,
   )
@@ -63,12 +60,12 @@ export default function Index({
   const pageBanner =
     i18n.language === 'en'
       ? {
-        leftText: page.customFields.bannerTextLeft,
-        rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryText'),
+        leftText: page.homePage.bannerTextLeft,
+        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
       }
       : {
-        leftText: page.customFields.bannerTextLeftMn,
-        rightText: getBannerTextRight(page.customFields.bannerTextRight, 'categoryTextMn'),
+        leftText: page.homePage.bannerTextLeftMn,
+        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
       }
 
   return (
@@ -78,9 +75,9 @@ export default function Index({
       </Head>
       <div>
         <PageImageBanner
-          imageUrls={page.customFields.banners.map(x => {
+          imageUrls={page.homePage.banners.map(x => {
             return {
-              mediaItemUrl: x.bannerImage.mediaItemUrl,
+              mediaItemUrl: x.bannerImage.node.mediaItemUrl,
               url: x.bannerImageUrl,
             }
           })}
@@ -93,12 +90,12 @@ export default function Index({
           <MapContextWrapper>
             <MapComponent
               title={{
-                en: page.customFields.mapTitle,
-                mn: page.customFields.mapTitleMn,
+                en: page.homePage.mapTitle,
+                mn: page.homePage.mapTitleMn,
               }}
               descriptionHtml={{
-                en: page.customFields.mapDescription,
-                mn: page.customFields.mapDescriptionMn,
+                en: page.homePage.mapDescription,
+                mn: page.homePage.mapDescriptionMn,
               }}
               stations={stations}
               recommendations={recommendationActions}
@@ -108,29 +105,29 @@ export default function Index({
           </MapContextWrapper>
 
           {/* Add other page level components here */}
-          <NewsCarousel featuredNews={page.customFields.featuredNews} />
-          <TakeActionCarousel takeActionPosts={page.customFields.featuredTakeActions} locale={locale} />
+          <NewsCarousel featuredNews={page.homePage.featuredNews.nodes as News[]} />
+          <TakeActionCarousel takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]} locale={locale} />
           <OurWorkCarousel campaigns={sortedCampaigns} locale={locale} />
           <JoinBMSection
             title={{
-              en: page.customFields.joinBreatheMongoliaTitle,
-              mn: page.customFields.joinBreatheMongoliaTitleMn,
+              en: page.homePage.joinBreatheMongoliaTitle,
+              mn: page.homePage.joinBreatheMongoliaTitleMn,
             }}
             locale={locale}
             descriptionHtml={{
-              en: page.customFields.joinBreatheMongoliaDescription,
-              mn: page.customFields.joinBreatheMongoliaDescriptionMn,
+              en: page.homePage.joinBreatheMongoliaDescription,
+              mn: page.homePage.joinBreatheMongoliaDescriptionMn,
             }}
-            slider={page.customFields.joinBreatheMongoliaImageSlider}
-            countriesInfoText={page.customFields.countriesInfoText}
+            slider={page.homePage.joinBreatheMongoliaImageSlider}
+            countriesInfoText={page.homePage.countriesInfoText}
             volunteers={volunteers}
           />
           <OurPartners
             title={{
-              en: page.customFields.partnersLogosTitle,
-              mn: page.customFields.partnersLogosTitleMn,
+              en: page.homePage.partnersLogosTitle,
+              mn: page.homePage.partnersLogosTitleMn,
             }}
-            partnerLogos={page.customFields.partnersLogos}
+            partnerLogos={page.homePage.partnersLogos}
             locale={locale}
           />
         </div>
@@ -157,7 +154,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const data = await getHomeLandingPageSettings()
-  
+
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'common'])),
@@ -169,7 +166,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       globalRanks: [],
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
+      image: getTranslated(data.image?.node.mediaItemUrl, data.imageMn?.node.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,

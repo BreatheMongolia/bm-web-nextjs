@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHealthPage()
   const homePage = await getHomePage("/")
   const featuredNews = await getHealthNews()
-  const featuredTakeActions = homePage.customFields.featuredTakeActions
+  const featuredTakeActions = homePage.homePage.featuredTakeActions.nodes || []
 
   return {
     props: {
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       featuredTakeActions,
       page: page,
       title: getTranslated(page.healthSocialMediaShare.title, page.healthSocialMediaShare.titleMn, locale),
-      image: getTranslated(page.healthSocialMediaShare.image?.mediaItemUrl, page.healthSocialMediaShare.imageMn?.mediaItemUrl, locale),
+      image: getTranslated(page.healthSocialMediaShare.image?.node?.mediaItemUrl, page.healthSocialMediaShare.imageMn?.node?.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,

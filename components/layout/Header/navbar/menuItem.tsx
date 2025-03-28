@@ -14,7 +14,7 @@ type MenuItemProps = {
 export const MenuItem = (props: MenuItemProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [delayHandler, setDelayHandler] = useState(null)
-  const isMobile = useMediaQuery({ maxWidth: 680 || 767 })
+  const isMobile = useMediaQuery({ maxWidth: 767 })
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen)

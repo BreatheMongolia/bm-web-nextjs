@@ -4,16 +4,16 @@ const MAX_NUM = 100
 export async function getPeople() {
   const data = await fetchAPI(
     `query getPeople {
-        people(first: ${MAX_NUM}) {
+        persons(first: ${MAX_NUM}) {
         edges {
             node {
-            title
-            featuredImage {
+                title
+                featuredImage {
                 node {
-                mediaItemUrl
+                    mediaItemUrl
                 }
-            }
-            customFields {
+                }
+                personCustomFields {
                 nameMn
                 role
                 roleMn
@@ -23,14 +23,14 @@ export async function getPeople() {
                 memberSinceMn
                 featured
                 linkedin
+                }
             }
             }
-        }
     }
 }
 `,
     {},
   )
 
-  return data?.people?.edges || []
+  return data?.persons?.edges || []
 }

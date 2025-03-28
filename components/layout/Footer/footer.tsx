@@ -22,8 +22,8 @@ export const Footer = () => {
       {
         title: t('titleExplore'),
         urls: [
-          { title: t('nav.home'), url: '/' },
-          { title: t('nav.news'), url: '/news' },
+          { title: t('nav.policy'), url: '/policy' },
+          { title: t('nav.health'), url: '/health' },
           { title: t('nav.agaarNeg'), url: EXTERNAL_URLS.AGAAR_NEG, target: '_blank' },
         ],
       },
@@ -49,7 +49,7 @@ export const Footer = () => {
       },
     ]
     return (
-      <div className="container flex flex-col uppercase tracking-widest text-slate-700">
+      <div className="container flex flex-col uppercase tracking-widest text-slate-700 font-[Rubik]">
         {/* Desktop */}
         <div className="hidden sm:grid md:grid-row-2 lg:grid-cols-2 lg:gap-5 xl:gap-20">
           <div className="flex flex-row justify-between">

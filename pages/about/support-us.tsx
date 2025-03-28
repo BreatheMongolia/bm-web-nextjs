@@ -14,22 +14,22 @@ export default function SupportUsPage({ page, volunteers, locale }) {
       {/* Content */}
       <AboutUsSupportUs
         descriptionHtml={getTranslated(
-          page.customFields.joinBreatheMongoliaDescription,
-          page.customFields.joinBreatheMongoliaDescriptionMn,
+          page.homePage.joinBreatheMongoliaDescription,
+          page.homePage.joinBreatheMongoliaDescriptionMn,
           locale,
         )}
         volunteers={volunteers}
-        countriesInfoText={page.customFields.countriesInfoText}
+        countriesInfoText={page.homePage.countriesInfoText}
         locale={locale}
       />
 
       <div className="container mx-auto flex flex-col gap-20">
         <OurPartners
           title={{
-            en: page?.customFields.partnersLogosTitle,
-            mn: page?.customFields.partnersLogosTitleMn,
+            en: page?.homePage.partnersLogosTitle,
+            mn: page?.homePage.partnersLogosTitleMn,
           }}
-          partnerLogos={page?.customFields.partnersLogos}
+          partnerLogos={page?.homePage.partnersLogos}
           locale={locale}
         />
       </div>
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       page,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
+      image: getTranslated(data.image.node.mediaItemUrl, data.imageMn.node.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,

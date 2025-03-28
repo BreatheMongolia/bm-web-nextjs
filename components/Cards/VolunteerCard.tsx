@@ -40,7 +40,7 @@ export const VolunteerCard = ({
         <div className="grid grid-cols-3 gap-5 my-5">
           {countriesInfoText.map((info, idx) => (
             <div className="inline-block" key={'support' + idx}>
-              <img className="w-5 h-5 mb-2 ml-8" src={info.infoIcon.mediaItemUrl} alt="Join Us" />
+              <img className="w-5 h-5 mb-2 ml-8" src={info.infoIcon.node.mediaItemUrl} alt="Join Us" />
               {info.customTextMn && (
                 <div className="place-items-center text-data-custom">
                   {parse(getTranslated(info.customText, info.customTextMn, locale))}
@@ -54,15 +54,15 @@ export const VolunteerCard = ({
           <p className="font-bold text-lg text-slate-700">{t('joinBm.opportunities')}</p>
           <ul className="list-disc pl-5 text-black">
             {volunteers?.map((volunteerPos: any) => (
-              <li className="" key={volunteerPos?.node?.databaseId}>
+              <li className="" key={volunteerPos?.databaseId}>
                 <Link
                   className="hover:text-[#3174d0]"
-                  href={volunteerPos?.node?.customFields?.link?.url}
+                  href={volunteerPos?.volunteerCustomFields?.link?.url}
                   target="_blank"
                 >
                   {getTranslated(
-                    volunteerPos?.node?.customFields?.position,
-                    volunteerPos?.node?.customFields?.positionMn,
+                    volunteerPos?.volunteerCustomFields?.position,
+                    volunteerPos?.volunteerCustomFields?.positionMn,
                     locale,
                   )}
                 </Link>

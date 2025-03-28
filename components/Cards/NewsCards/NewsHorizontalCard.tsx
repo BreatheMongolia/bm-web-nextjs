@@ -16,7 +16,7 @@ export const NewsHorizontalCard = ({ news, className }: { news: News; className?
   const [_, setVideoDialogUrl] = useAtom(videoNewsDialogAtom)
 
   useEffect(() => {
-    fetch('https://noembed.com/embed?url=' + news.customFields.sourceLink)
+    fetch('https://noembed.com/embed?url=' + news.newsCustomFields.sourceLink)
       .then(res => {
         return res.json()
       })

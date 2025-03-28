@@ -10,17 +10,19 @@ export async function getAccomplishments(): Promise<any> {
           edges {
             node {
               id 
-              customFields {
+              accomplishmentCustomFields {
                 date
                 image {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: MEDIUM) {
-                        height
-                        width
-                        sourceUrl
+                  node {
+                    mediaItemUrl
+                    mediaDetails {
+                      sizes(include: MEDIUM) {
+                          height
+                          width
+                          sourceUrl
+                      }
                     }
-                    }
+                  }
                 }
                 category
                 categoryMn
@@ -28,7 +30,6 @@ export async function getAccomplishments(): Promise<any> {
                 titleMn
                 description
                 descriptionMn
-                fieldGroupName
               }
             }
           }
@@ -36,7 +37,7 @@ export async function getAccomplishments(): Promise<any> {
       }
     `,
     {},
-  )
+  ) 
 
   return data?.accomplishments?.edges || []
 }
@@ -47,12 +48,16 @@ export async function getReports(): Promise<any> {
         reports {
           edges {
             node {
-              customFields {
+              reportCustomFields {
                 pdfFile {
-                  mediaItemUrl
+                  node {
+                    mediaItemUrl
+                  } 
                 }
                 pdfFileMn {
-                  mediaItemUrl
+                  node {
+                    mediaItemUrl
+                  }
                 }
                 title
                 titleMn
@@ -80,15 +85,19 @@ export async function getInfoSettings(): Promise<any> {
             title
             titleMn
             image {
-              mediaItemUrl
+              node {
+                mediaItemUrl
+              }
             }
             imageMn {
-              mediaItemUrl
+              node {
+                mediaItemUrl
               }
             }
           }
         }
       }
+    }
     `,
     {},
   )
@@ -107,16 +116,20 @@ export async function getImpactSettings(): Promise<any> {
             title
             titleMn
             image {
-              mediaItemUrl
+              node {
+                mediaItemUrl
+              }
             }
             imageMn {
-              mediaItemUrl
+              node {
+                mediaItemUrl
               }
             }
           }
         }
       }
-    `,
+    }
+  `,
     {},
   )
   return data?.aboutUsPageSettings.aboutUs?.ourWork || []
@@ -134,15 +147,19 @@ export async function getOurStorySettings(): Promise<any> {
             title
             titleMn
             image {
-              mediaItemUrl
+              node {
+                mediaItemUrl
+              }
             }
             imageMn {
-              mediaItemUrl
+              node {
+                mediaItemUrl
               }
             }
           }
         }
       }
+    }
     `,
     {},
   )
@@ -161,16 +178,20 @@ export async function getOurTeamSettings(): Promise<any> {
             title
             titleMn
             image {
-              mediaItemUrl
+              node {
+                mediaItemUrl
+              }
             }
             imageMn {
-              mediaItemUrl
+              node {
+                mediaItemUrl
               }
             }
           }
         }
       }
-    `,
+    }
+  `,
     {},
   )
   return data?.aboutUsPageSettings.aboutUs?.ourTeam || []
@@ -188,15 +209,19 @@ export async function getSupportUsSettings(): Promise<any> {
             title
             titleMn
             image {
-              mediaItemUrl
+              node {
+                mediaItemUrl
+              }
             }
             imageMn {
-              mediaItemUrl
+              node {
+                mediaItemUrl
               }
             }
           }
         }
       }
+    }
     `,
     {},
   )

@@ -27,7 +27,7 @@ export const NewsCard = ({
   const [_, setVideoDialogUrl] = useAtom(videoNewsDialogAtom)
 
   useEffect(() => {
-    fetch('https://noembed.com/embed?url=' + news.customFields.sourceLink)
+    fetch('https://noembed.com/embed?url=' + news.newsCustomFields.sourceLink)
       .then(res => {
         return res.json()
       })
@@ -67,9 +67,8 @@ export const NewsCard = ({
   }
   return (
     <div
-      className={`relative bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow  ${
-        cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
-      }
+      className={`relative bg-slate-300 rounded-md overflow-hidden cursor-pointer bg-cover bg-center group shadow  ${cardHeight === 'normal' ? 'h-[250px]' : 'h-full'
+        }
       ${idx === 0 ? 'w-full' : 'w-[330px]'} ${className}`}
       style={{ backgroundImage: `url(${backgroundImageUrl()})` }}
       onClick={onCardClick}
@@ -94,19 +93,19 @@ export const NewsCard = ({
             <div className="flex border-b-[0.5px] border-white w-fit text-[12px] font-bold my-2">
               {transformedNews.categories?.length > 2
                 ? transformedNews.categories?.slice(0, 2).map((cat, idx) => (
-                    <div key={idx}>
-                      <div className="flex">
-                        <TbPointFilled className="w-2 h-2 text-white mr-1 self-center " />
-                        <span className=" text-white mr-1">{cat.name}</span>
-                      </div>
-                    </div>
-                  ))
-                : transformedNews.categories?.map((cat, idx) => (
-                    <div key={idx} className="flex">
+                  <div key={idx}>
+                    <div className="flex">
                       <TbPointFilled className="w-2 h-2 text-white mr-1 self-center " />
                       <span className=" text-white mr-1">{cat.name}</span>
                     </div>
-                  ))}
+                  </div>
+                ))
+                : transformedNews.categories?.map((cat, idx) => (
+                  <div key={idx} className="flex">
+                    <TbPointFilled className="w-2 h-2 text-white mr-1 self-center " />
+                    <span className=" text-white mr-1">{cat.name}</span>
+                  </div>
+                ))}
             </div>
           )}
           <p className="w-full text-white line-clamp-2 text-[16px] leading-[130%]"> {transformedNews.title}</p>

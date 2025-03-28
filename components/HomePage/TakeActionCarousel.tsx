@@ -1,6 +1,6 @@
 import React from 'react'
 import { H2 } from 'components/generic/Typography'
-import { Page_Customfields_FeaturedTakeActions } from 'graphql/generated'
+import { TakeAction } from 'graphql/generated'
 import Slider from 'react-slick'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'components/generic/Arrow'
@@ -12,7 +12,7 @@ export const TakeActionCarousel = ({
   takeActionPosts,
   locale,
 }: {
-  takeActionPosts: Page_Customfields_FeaturedTakeActions[]
+  takeActionPosts: TakeAction[]
   locale: string
 }) => {
   const { t } = useTranslation('home')
@@ -86,8 +86,8 @@ export const TakeActionCarousel = ({
             id={takeAction.databaseId}
             slug={takeAction.slug}
             title={
-              getTranslated(takeAction.customFields?.title, takeAction.customFields?.titleMn, locale) !== null
-                ? getTranslated(takeAction.customFields?.title, takeAction.customFields?.titleMn, locale)
+              getTranslated(takeAction.takeActionCustomFields?.title, takeAction.takeActionCustomFields?.titleMn, locale) !== null
+                ? getTranslated(takeAction.takeActionCustomFields?.title, takeAction.takeActionCustomFields?.titleMn, locale)
                 : ''
             }
             featuredImage={

@@ -15,7 +15,6 @@ import {
   getNewsFull,
   getNewsPostSlugs,
   getLastThree,
-  getNewsSlugByPostID,
 } from 'lib/graphql-api/queries/news'
 import { BreadCrumb, ShareButton, LatestNews, Banner } from 'components/NewsPage/DetailPage'
 import LoadingPage from 'components/generic/LoadingPage'
@@ -190,15 +189,15 @@ const getTransformedData = (banner: any, locale: string) => {
   return {
     mediaItemUrl:
       getTranslated(
-        banner?.news_general_fields.banner?.bannerImage?.mediaItemUrl,
-        banner?.news_general_fields.banner?.bannerImageMn?.mediaItemUrl,
+        banner?.newsGeneralFields.banner?.bannerImage?.node?.mediaItemUrl,
+        banner?.newsGeneralFields.banner?.bannerImageMn?.node?.mediaItemUrl,
         locale,
       ) !== null
         ? getTranslated(
-            banner?.news_general_fields.banner?.bannerImage?.mediaItemUrl,
-            banner?.news_general_fields.banner?.bannerImageMn?.mediaItemUrl,
-            locale,
-          )
+          banner?.newsGeneralFields.banner?.bannerImage?.node?.mediaItemUrl,
+          banner?.newsGeneralFields.banner?.bannerImageMn?.node?.mediaItemUrl,
+          locale,
+        )
         : '',
   }
 }
@@ -212,30 +211,30 @@ const getNews = (news: News, locale: string): any => {
     date: news.dateGmt,
     slug: news.slug,
     desiredSlug: news.desiredSlug,
-    body: getTranslated(news.customFields.body, news.customFields.bodyMn, locale),
+    body: getTranslated(news.newsCustomFields.body, news.newsCustomFields.bodyMn, locale),
     sourceLink: '',
     title:
-      getTranslated(news.customFields.title, news.customFields.titleMn, locale) !== null
-        ? getTranslated(news.customFields.title, news.customFields.titleMn, locale)
+      getTranslated(news.newsCustomFields.title, news.newsCustomFields.titleMn, locale) !== null
+        ? getTranslated(news.newsCustomFields.title, news.newsCustomFields.titleMn, locale)
         : '',
     sourceName: '',
     sourceLanguage: '',
     newsLandingPageFeatured: '',
     excerpt:
-      getTranslated(news.customFields.excerpt, news.customFields.excerptMn, locale) !== null
-        ? getTranslated(news.customFields.excerpt, news.customFields.titleMn, locale)
+      getTranslated(news.newsCustomFields.excerpt, news.newsCustomFields.excerptMn, locale) !== null
+        ? getTranslated(news.newsCustomFields.excerpt, news.newsCustomFields.titleMn, locale)
         : '',
     authors:
-      news?.customFields.authors !== null
-        ? news?.customFields.authors?.map((author: any) => {
-            return {
-              name:
-                getTranslated(author.authorName, author.authorNameMn, locale) !== null
-                  ? getTranslated(author.authorName, author.authorNameMn, locale)
-                  : '',
-              authorLink: author.authorLink,
-            }
-          })
+      news?.newsCustomFields.authors !== null
+        ? news?.newsCustomFields.authors?.map((author: any) => {
+          return {
+            name:
+              getTranslated(author.authorName, author.authorNameMn, locale) !== null
+                ? getTranslated(author.authorName, author.authorNameMn, locale)
+                : '',
+            authorLink: author.authorLink,
+          }
+        })
         : null,
     categories: news?.categories?.nodes.map((cat: any) => {
       return {
@@ -247,12 +246,12 @@ const getNews = (news: News, locale: string): any => {
     }),
     newsContentType: '',
     featuredImageBig: getImage(
-      news.customFields.featuredImage.image?.mediaDetails,
-      news.customFields.featuredImage.imageMn?.mediaDetails,
+      news.newsCustomFields.featuredImage.image?.node?.mediaDetails,
+      news.newsCustomFields.featuredImage.imageMn?.node?.mediaDetails,
       news.featuredImage?.node?.mediaDetails,
       'large',
     ),
-    caption: getTranslated(news.customFields.featuredImage.caption, news.customFields.featuredImage.captionMn, locale),
+    caption: getTranslated(news.newsCustomFields.featuredImage.caption, news.newsCustomFields.featuredImage.captionMn, locale),
   }
 }
 
@@ -266,18 +265,18 @@ function getLatestNews(data: any[], locale: string) {
     breathMongoliaNews.push({
       id: news.databaseId,
       slug: news.slug,
-      sourceLink: news.customFields.sourceLink,
+      sourceLink: news.newsCustomFields.sourceLink,
       title:
-        getTranslated(news.customFields.title, news.customFields.titleMn, locale) !== null
-          ? getTranslated(news.customFields.title, news.customFields.titleMn, locale)
+        getTranslated(news.newsCustomFields.title, news.newsCustomFields.titleMn, locale) !== null
+          ? getTranslated(news.newsCustomFields.title, news.newsCustomFields.titleMn, locale)
           : '',
       sourceName:
-        getTranslated(news.customFields.sourceName, news.customFields.sourceNameMn, locale) !== null
-          ? getTranslated(news.customFields.sourceName, news.customFields.sourceNameMn, locale)
+        getTranslated(news.newsCustomFields.sourceName, news.newsCustomFields.sourceNameMn, locale) !== null
+          ? getTranslated(news.newsCustomFields.sourceName, news.newsCustomFields.sourceNameMn, locale)
           : '',
-      sourceLanguage: news.customFields.sourceLanguage,
+      sourceLanguage: news.newsCustomFields.sourceLanguage,
       newsLandingPageFeatured: '',
-      // newsLandingPageFeatured: news.customFields.newsLandingPageFeatured || '',
+      // newsLandingPageFeatured: news.newsCustomFields.newsLandingPageFeatured || '',
       categories: news?.categories?.nodes.map((cat: any) => {
         return {
           name:
@@ -286,18 +285,18 @@ function getLatestNews(data: any[], locale: string) {
               : '',
         }
       }),
-      newsContentType: news.customFields.newsContentType,
+      newsContentType: news.newsCustomFields.newsContentType,
       featuredImageSmall:
         getImage(
-          news.customFields.featuredImage.image?.mediaDetails,
-          news.customFields.featuredImage.imageMn?.mediaDetails,
+          news.newsCustomFields.featuredImage.image?.mediaDetails,
+          news.newsCustomFields.featuredImage.imageMn?.mediaDetails,
           news.featuredImage?.node?.mediaDetails,
           'medium',
         ) || '',
       featuredImageBig:
         getImage(
-          news.customFields.featuredImage.image?.mediaDetails,
-          news.customFields.featuredImage.imageMn?.mediaDetails,
+          news.newsCustomFields.featuredImage.image?.mediaDetails,
+          news.newsCustomFields.featuredImage.imageMn?.mediaDetails,
           news.featuredImage?.node?.mediaDetails,
           'large',
         ) || '',

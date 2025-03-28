@@ -1,5 +1,5 @@
 import { fetchAPI } from 'lib/graphql-api/api'
-import { Page, PageIdType, MediaItemSizeEnum, Page_Customfields } from 'graphql/generated'
+import { Page, PageIdType, MediaItemSizeEnum } from 'graphql/generated'
 import { RecommendationType } from 'lib/air-pollution-map/types'
 
 const HomePageGQLQuerySections = {
@@ -14,16 +14,18 @@ const HomePageGQLQuerySections = {
         banners {
             bannerImageUrl
             bannerImage {
-                id
-                mediaItemUrl
-                dateGmt
-                mediaDetails {
-                    sizes(include: ${MediaItemSizeEnum['1536X1536']}) {
-                        height
-                        width
-                        sourceUrl
-                    }
-                }
+              node {
+                  id
+                  mediaItemUrl
+                  dateGmt
+                  mediaDetails {
+                      sizes(include: ${MediaItemSizeEnum['1536X1536']}) {
+                          height
+                          width
+                          sourceUrl
+                      }
+                  }
+              }
             }
         }
     `,
@@ -34,149 +36,168 @@ const HomePageGQLQuerySections = {
         partnersLogos {
             partnersLogosUrls
             partnersLogosImage {
-                databaseId
-                mediaItemUrl
-                dateGmt
+              node {
+                  databaseId
+                  mediaItemUrl
+                  dateGmt
+              } 
             }
         }
     `,
   featuredNews: `
     # featured news
     featuredNews {
-        ... on News {
+        nodes {
+          ... on News {
             databaseId
             desiredSlug
             slug
             dateGmt
-            customFields {
-                titleMn
-                title
-                sourceLink
-                sourceName
-                sourceNameMn
-                sourceLanguage
-                newsLandingPageFeatured
-                newsContentType
-                featuredImage {
-                    image {
-                        mediaDetails {
-                            sizes(include: MEDIUM_LARGE) {
-                            name
-                            sourceUrl
-                            }
-                        }
+            newsCustomFields {
+              titleMn
+              title
+              sourceLink
+              sourceName
+              sourceNameMn
+              sourceLanguage
+              newsLandingPageFeatured
+              newsContentType
+              featuredImage {
+                image {
+                  node {
+                    mediaDetails {
+                      sizes(include: MEDIUM_LARGE) {
+                        name
+                        sourceUrl
+                      }
                     }
-                    imageMn {
-                        mediaDetails {
-                            sizes(include: MEDIUM_LARGE) {
-                                sourceUrl
-                                name
-                            }
-                        }
-                    }
+                  }
                 }
+                imageMn {
+                  node {
+                    mediaDetails {
+                      sizes(include: MEDIUM_LARGE) {
+                        sourceUrl
+                        name
+                      }
+                    }
+                  }
+                }
+              }
             }
             featuredImage {
-                node {
-                    id
-                    mediaDetails {
-                        sizes(include: MEDIUM_LARGE) {
-                            sourceUrl
-                            name
-                        }
-                    }
+              node {
+                id
+                mediaDetails {
+                  sizes(include: MEDIUM_LARGE) {
+                    sourceUrl
+                    name
+                  }
                 }
+              }
             }
             categories {
-                nodes {
-                    categoryCustomFields {
-                        name
-                        nameMn
-                        fieldGroupName
-                    }
+              nodes {
+                categoryCustomFields {
+                  name
+                  nameMn
                 }
+              }
             }
+          }
         }
-    }
+      }
     `,
   featuredTakeActions: `
     # featured take actions
     featuredTakeActions {
-        ... on TakeAction {
+        nodes {
+          ... on TakeAction {
             databaseId
             slug
             dateGmt
             featuredImage {
-                node {
-                    mediaItemUrl
-                    mediaDetails {
-                        sizes(include: MEDIUM) {
-                            height
-                            width
-                            sourceUrl
-                        }
-                    }
+              node {
+                mediaItemUrl
+                mediaDetails {
+                  sizes(include: MEDIUM) {
+                    height
+                    width
+                    sourceUrl
+                  }
                 }
+              }
             }
-            customFields {
-                typeOfAction {
-                    customFields {
-                        name
-                        nameMn
+            takeActionCustomFields {
+              typeOfAction {
+                nodes {
+                  ... on ActionType {
+                    actionTypeCustomFields {
+                      name
+                      nameMn
                     }
+                  }
                 }
-            title
-            titleMn
+              }
+              title
+              titleMn
             }
+          }
         }
-    }
+      }
     `,
   joinBm: `
     # join bm
     joinBreatheMongoliaTitle
-    joinBreatheMongoliaTitleMn
-    joinBreatheMongoliaDescription
-    joinBreatheMongoliaDescriptionMn
-    joinBreatheMongoliaImageSlider {
+      joinBreatheMongoliaTitleMn
+      joinBreatheMongoliaDescription
+      joinBreatheMongoliaDescriptionMn
+      joinBreatheMongoliaImageSlider {
         sliderImageLink
         sliderImage {
+          node {
             databaseId
             mediaItemUrl
+          }
         }
-    }
-    countriesInfoText {
+      }
+      countriesInfoText {
         customTextMn
         customText
         infoIcon {
+          node {
             databaseId
             mediaItemUrl
+          }
         }
-    }
+      }
     `,
   ourWork: `
     # campaign
     campaignAndOurWorkTitle
     campaignAndOurWorkTitleMn
     campaignAndOurWorkSlider {
-        campaignCategoryText
-        campaignCategoryTextMn
-        campaignCatgeoryUrl
-        campaignTitle
-        campaignTitleMn
-        campaignDescription
-        campaignDescriptionMn
-        campaignDate
-        volunteerImage {
-            id
-            mediaItemUrl
-            mediaDetails {
-                sizes(include: MEDIUM_LARGE) {
-                    height
-                    width
-                    sourceUrl
-                }
+      campaignCategoryText
+      campaignCategoryTextMn
+      campaignCatgeoryUrl
+      campaignTitle
+      campaignTitleMn
+      campaignDescription
+      campaignDescriptionMn
+      campaignDate
+      volunteerImage {
+        node {
+          id
+          mediaItemUrl
+          mediaDetails {
+            sizes(include: MEDIUM_LARGE) {
+              height
+              width
+              sourceUrl
             }
+          }
         }
+      }
     }
     `,
   map: `
@@ -195,7 +216,7 @@ export async function getHomePage(id: string, idType: PageIdType = PageIdType.Ur
             page(id: $id, idType: $idType) {
                 title
                 dateGmt
-                customFields {
+                homePage {
                     ${HomePageGQLQuerySections.banner}
                     ${HomePageGQLQuerySections.ourPartners}
                     ${HomePageGQLQuerySections.featuredNews}
@@ -215,11 +236,11 @@ export async function getHomePage(id: string, idType: PageIdType = PageIdType.Ur
   return data.page
 }
 
-export async function getBannerText(): Promise<Page_Customfields> {
+export async function getBannerText(): Promise<Page> {
   const data = await fetchAPI(
     `query homeBanner {
         page(id: "/", idType: URI) {
-          customFields {
+          homePage {
             bannerTextLeft
             bannerTextLeftMn
             bannerTextRight {
@@ -231,29 +252,27 @@ export async function getBannerText(): Promise<Page_Customfields> {
       }`,
   )
 
-  return data.page.customFields
+  return data.page.homePage
 }
 
 export async function getVolunteers(): Promise<Page> {
   const data = await fetchAPI(
     `query volunteerPositions {
         volunteerPositions(first: 5) {
-          edges {
-            node {
-              content
-              customFields {
-                link {
-                  title
-                  url
-                  target
-                }
-                position
-                positionMn
+          nodes {
+            content
+            volunteerCustomFields {
+              link {
+                title
+                url
+                target
               }
-              databaseId
-              date
-              title
+              position
+              positionMn
             }
+            databaseId
+            date
+            title
           }
         }
       }
@@ -262,32 +281,36 @@ export async function getVolunteers(): Promise<Page> {
   )
   
 
-  return data.volunteerPositions.edges
+  return data.volunteerPositions.nodes
 }
 
 export async function getHomeLandingPageSettings(): Promise<any> {
   const data = await fetchAPI(
     `query getHomeLandingPageSettings {
       homePageSettings {
-          customFields {
-            socialMediaShare {
-              description
-              descriptionMn
-              title
-              titleMn
-              image {
+        homePage {
+          socialMediaShare {
+            description
+            descriptionMn
+            title
+            titleMn
+            image {
+              node {
                 mediaItemUrl
               }
-              imageMn {
+            }
+            imageMn {
+              node {
                 mediaItemUrl
               }
             }
           }
         }
       }
+    }
     `,
   )
-  return data.homePageSettings.customFields?.socialMediaShare || []
+  return data.homePageSettings.homePage?.socialMediaShare || []
 }
 
 export async function getRecommendationSettings(): Promise<RecommendationType> {
@@ -302,13 +325,17 @@ export async function getRecommendationSettings(): Promise<RecommendationType> {
             descriptionMn
             advices {
               icon {
-                mediaItemUrl
+                node {
+                  mediaItemUrl
+                }
               }
               comment
               commentMn
               takeAction {
-                ... on TakeAction {
-                  slug
+                nodes {
+                  ... on TakeAction {
+                    slug
+                  }
                 }
               }
             }
@@ -325,7 +352,7 @@ export async function getProjectUrls(): Promise<any> {
   const data = await fetchAPI(
     `query getProjectUrls {
       homePageSettings {
-        customFields {
+        homePage {
           projects {
             title
             titleMn
@@ -336,5 +363,5 @@ export async function getProjectUrls(): Promise<any> {
       }
     `,
   )
-  return data.homePageSettings.customFields?.projects || []
+  return data.homePageSettings.homePage?.projects || []
 }

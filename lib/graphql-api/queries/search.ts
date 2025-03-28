@@ -18,7 +18,7 @@ export async function getSearchData() {
             databaseId
             slug
             dateGmt
-            customFields {
+            takeActionCustomFields {
                 additionalResources {
                 title
                 titleMn
@@ -34,14 +34,20 @@ export async function getSearchData() {
                 excerpt
                 excerptMn
                 typeOfAction {
-                customFields {
-                    name
-                    nameMn
-                }
+                  nodes {
+                        ... on ActionType {
+                          actionTypeCustomFields {
+                            name
+                            nameMn
+                          }
+                        }
+                      }
                 }
                 listOfPhotos {
-                mediaItemUrl
-                caption
+                  nodes {
+                    mediaItemUrl
+                    caption
+                  } 
                 }
                 listOfVideos {
                 videoLink
@@ -61,7 +67,7 @@ export async function getSearchData() {
             }
         }
     }
-    people(first: ${MAX_NUM}) {
+    persons(first: ${MAX_NUM}) {
         edges {
           node {
             title
@@ -70,7 +76,7 @@ export async function getSearchData() {
                 mediaItemUrl
               }
             }
-            customFields {
+            personCustomFields {
               nameMn
               role
               roleMn
@@ -87,7 +93,7 @@ export async function getSearchData() {
             databaseId
             slug
             dateGmt
-            customFields {
+            newsCustomFields {
             titleMn
             title
             body
@@ -100,18 +106,22 @@ export async function getSearchData() {
             newsContentType
             featuredImage {
               image {
-                mediaDetails {
-                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                    sourceUrl
-                    name
+                node {
+                  mediaDetails {
+                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                      sourceUrl
+                      name
+                    }
                   }
                 }
               }
               imageMn {
-                mediaDetails {
-                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                    sourceUrl
-                    name
+                node {
+                  mediaDetails {
+                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                      sourceUrl
+                      name
+                    }
                   }
                 }
               }
@@ -120,17 +130,16 @@ export async function getSearchData() {
             }
             }
             featuredImage {
-            node {
-                id
-                mediaItemUrl
-            }
+              node {
+                  id
+                  mediaItemUrl
+              }
             }
             categories {
             nodes {
                 categoryCustomFields {
                 name
                 nameMn
-                fieldGroupName
                 }
             }
             }

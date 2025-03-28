@@ -4,7 +4,7 @@ import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
-import { TakeAction } from 'graphql/generated'
+import { ActionType, TakeAction } from 'graphql/generated'
 
 export type TakeActionAll = {
   id: number
@@ -27,16 +27,16 @@ const getTransformedData = (featured: TakeAction[], locale: string) => {
       slug: takeAction?.slug,
       date: takeAction.dateGmt,
       title:
-        getTranslated(takeAction.customFields.title, takeAction.customFields.titleMn, locale) !== null
-          ? getTranslated(takeAction.customFields.title, takeAction.customFields.titleMn, locale)
+        getTranslated(takeAction.takeActionCustomFields.title, takeAction.takeActionCustomFields.titleMn, locale) !== null
+          ? getTranslated(takeAction.takeActionCustomFields.title, takeAction.takeActionCustomFields.titleMn, locale)
           : '',
       excerpt:
-        getTranslated(takeAction.customFields.excerpt, takeAction.customFields.excerptMn, locale) !== null
-          ? getTranslated(takeAction.customFields.excerpt, takeAction.customFields.excerptMn, locale)
+        getTranslated(takeAction.takeActionCustomFields.excerpt, takeAction.takeActionCustomFields.excerptMn, locale) !== null
+          ? getTranslated(takeAction.takeActionCustomFields.excerpt, takeAction.takeActionCustomFields.excerptMn, locale)
           : '',
-      typeOfAction: takeAction.customFields.typeOfAction?.map(
-        (type: { customFields: { name: string; nameMn: string } }) =>
-          getTranslated(type.customFields.name, type.customFields.nameMn, locale),
+      typeOfAction: takeAction.takeActionCustomFields.typeOfAction?.nodes?.map(
+        (type: { actionTypeCustomFields: { name: string; nameMn: string } }) =>
+          getTranslated(type.actionTypeCustomFields.name, type.actionTypeCustomFields.nameMn, locale),
       ),
       featuredImage: takeAction.featuredImage?.node.mediaItemUrl,
     }),
@@ -51,21 +51,21 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
   const takeActions: TakeActionAll[] = []
   latest.map((takeAction: any) => {
     takeActions.push({
-      id: takeAction?.node.databaseId,
-      slug: takeAction?.node.slug,
-      date: takeAction?.node.dateGmt,
+      id: takeAction?.databaseId,
+      slug: takeAction?.slug,
+      date: takeAction?.dateGmt,
       title:
-        getTranslated(takeAction?.node.customFields?.title, takeAction?.node.customFields?.titleMn, locale) !== null
-          ? getTranslated(takeAction?.node.customFields?.title, takeAction?.node.customFields?.titleMn, locale)
+        getTranslated(takeAction?.takeActionCustomFields?.title, takeAction?.takeActionCustomFields?.titleMn, locale) !== null
+          ? getTranslated(takeAction?.takeActionCustomFields?.title, takeAction?.takeActionCustomFields?.titleMn, locale)
           : '',
       excerpt: '',
-      typeOfAction: takeAction?.node.customFields.typeOfAction?.map(
-        (type: { customFields: { name: string; nameMn: string } }) =>
-          getTranslated(type.customFields.name, type.customFields.nameMn, locale),
+      typeOfAction: takeAction?.takeActionCustomFields.typeOfAction?.nodes?.map(
+        (type: { actionTypeCustomFields: { name: string; nameMn: string } }) =>
+          getTranslated(type.actionTypeCustomFields.name, type.actionTypeCustomFields.nameMn, locale),
       ),
       featuredImage:
-        takeAction?.node?.featuredImage?.node?.mediaDetails.sizes !== null
-          ? takeAction?.node?.featuredImage?.node?.mediaDetails?.sizes[0].sourceUrl
+        takeAction?.featuredImage?.node?.mediaDetails.sizes !== null
+          ? takeAction?.featuredImage?.node?.mediaDetails?.sizes[0].sourceUrl
           : '',
     })
   })
@@ -74,6 +74,7 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
 
 const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
+  console.log('latest', latest)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
   const { whatYouCanDo, whatYouCanDoMn, whatYouCanDoText, whatYouCanDoTextMn, ...donationsText } = takeActionText;
@@ -86,7 +87,7 @@ const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   const getActionCategories = () => {
     let newActionCategories: any = []
     takeActions.map(ta => {
-      ta.typeOfAction.map((action: string) => {
+      ta.typeOfAction?.map((action: string) => {
         if (!newActionCategories.includes(action)) newActionCategories.push(action)
       })
     })
@@ -98,9 +99,9 @@ const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   return (
     <div>
       <div className="container mx-auto flex flex-col px-[1rem] lg:px-[6rem] xl:px-[9rem] 2xl:px-[16rem]">
-        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} text={actionText}/>
+        <TakeActionsGrid takeAction={takeActions} categories={actionCategories} text={actionText} />
 
-        <DonateSection text={donationsText}/>
+        <DonateSection text={donationsText} />
       </div>
     </div>
   )
@@ -117,13 +118,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'takeAction', 'common'])),
-      featured: featured.featuredTakeActionsLanding,
+      featured: featured.featuredTakeActionsLanding.nodes || [],
       latest,
       locale,
       takeActionText,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.landingPageImage.mediaItemUrl, data.landingPageImageMn.mediaItemUrl, locale)
+      image: getTranslated(data.landingPageImage?.node.mediaItemUrl, data.landingPageImageMn?.node.mediaItemUrl, locale)
     },
     revalidate: 60,
   }

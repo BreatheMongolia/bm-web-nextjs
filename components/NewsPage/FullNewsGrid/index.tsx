@@ -115,9 +115,8 @@ const FullNewsGrid = ({ news }: Props) => {
         <div
           key={i}
           onClick={() => setCurrentPage(i)}
-          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#f09c4f]/80 hover:text-white ${
-            currentPage === i && 'bg-[#f09c4f] text-white'
-          }`}
+          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#f09c4f]/80 hover:text-white ${currentPage === i && 'bg-[#f09c4f] text-white'
+            }`}
         >
           {i + 1}
         </div>,
@@ -170,9 +169,8 @@ const FullNewsGrid = ({ news }: Props) => {
                       const isActive = activeCategories.some(c => c.id === x.id)
                       return (
                         <div
-                          className={`px-5 py-1 cursor-pointer border-b border-white hover:bg-[#f09c4f]/20 ${
-                            isActive ? 'text-[#f09c4f] bg-[#f09c4f]/20 font-semibold' : 'text-zinc-500'
-                          }`}
+                          className={`px-5 py-1 cursor-pointer border-b border-white hover:bg-[#f09c4f]/20 ${isActive ? 'text-[#f09c4f] bg-[#f09c4f]/20 font-semibold' : 'text-zinc-500'
+                            }`}
                           onClick={() => {
                             setActiveCategory(x)
                           }}
@@ -196,9 +194,8 @@ const FullNewsGrid = ({ news }: Props) => {
             return (
               <div
                 key={idx}
-                className={`h-[250px]  sm:h-60 ${idx === 0 ? 'md:col-span-2' : 'w-[330px]'} ${
-                  idx > 3 && 'hidden md:block'
-                }`}
+                className={`h-[250px]  sm:h-60 ${idx === 0 ? 'md:col-span-2' : 'w-[330px]'} ${idx > 3 && 'hidden md:block'
+                  }`}
               >
                 <NewsCard idx={idx} news={x} cardHeight="fill" />
               </div>
@@ -210,9 +207,8 @@ const FullNewsGrid = ({ news }: Props) => {
       <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
         <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
           <div
-            className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${
-              currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
-            }`}
+            className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
+              }`}
             onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
           >
             <span className="block p-3">
@@ -221,9 +217,8 @@ const FullNewsGrid = ({ news }: Props) => {
           </div>
           {pages}
           <div
-            className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white border-black border hover:border-[#f09c4f]/80 rounded-full ${
-              currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
-            }`}
+            className={`transition-all hover:bg-[#f09c4f]/80 hover:text-white border-black border hover:border-[#f09c4f]/80 rounded-full ${currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
+              }`}
             onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
           >
             <span className="block p-3">
