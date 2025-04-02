@@ -8,6 +8,7 @@ import { getTranslated } from 'lib/utils/getTranslated'
 import { getAccomplishments, getImpactSettings, getReports } from 'lib/graphql-api/queries/aboutUs'
 
 export default function ImpactPage({ page, reports, accomplishments, locale }) {
+
   return (
     <div className="flex flex-col bg-[#FAFAFF]">
       <AboutUsHeader />
@@ -44,8 +45,8 @@ const getTransformedAccomplishment = (accData: string | any[], locale: string) =
       date: accData[i].node.accomplishmentCustomFields.date,
       image:
         accData[i].node.accomplishmentCustomFields.image?.node.mediaDetails?.sizes !== null
-          ? accData[i].node.accomplishmentCustomFields.image?.node.mediaDetails?.sizes[0]?.sourceUrl
-          : '',
+          ? accData[i].node.accomplishmentCustomFields.image?.node?.mediaDetails?.sizes[0]?.sourceUrl
+          : accData[i].node.accomplishmentCustomFields.image?.node?.mediaItemUrl,
       sortBy: accData[i].node.accomplishmentCustomFields.date,
     })
   }
