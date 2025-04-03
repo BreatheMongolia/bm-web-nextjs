@@ -1,0 +1,45 @@
+name: Playwright Tests
+on:
+  push:
+    branches:
+      - staging
+
+  pull_request:
+    branches:
+      - develop
+jobs:
+  e2e-tests:
+    name: End-to-end Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # TODO: Update to V22
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm install -g yarn && yarn
+
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+
+      - name: Fetch Vercel Deployment URL
+        id: fetch-vercel-url
+        run: |
+          curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+          "https://api.vercel.com/v6/deployments?teamId=${{ secrets.VERCEL_TEAM_ID }}" \
+          | jq -r '.deployments[] | select(.meta.githubCommitRef == env.GITHUB_HEAD_REF) | .url' > vercel_url.txt
+          echo "VERCEL_URL=$(cat vercel_url.txt)" >> $GITHUB_ENV
+        env:
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+
+      - name: Run Playwright tests
+        run: yarn e2e
+        env:
+          APP_URL: https://${{ env.VERCEL_URL }}
