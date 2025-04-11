@@ -24,6 +24,8 @@ export const OurPartners = ({
     autoplay: true,
     autoplaySpeed: 5000,
     adaptiveHeight: true,
+    centerMode: false,
+    variableWidth: true,
     responsive: [
       {
         breakpoint: 1024,
