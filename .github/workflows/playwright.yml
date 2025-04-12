@@ -22,7 +22,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           check_interval: 10
-          max_timeout: 600
+          max_timeout: 1000
 
       - run: echo ${{steps.waitFor200.outputs.url}}
 
