@@ -21,7 +21,6 @@ jobs:
         id: waitFor200
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          allow_inactive: true
           check_interval: 10
           max_timeout: 600
 
