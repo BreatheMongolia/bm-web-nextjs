@@ -21,8 +21,8 @@ jobs:
         id: waitFor200
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          check_interval: 10
-          max_timeout: 1000
+          check_interval: 15
+          max_timeout: 1200
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
