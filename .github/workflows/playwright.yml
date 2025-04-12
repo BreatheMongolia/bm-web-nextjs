@@ -16,6 +16,15 @@ jobs:
       - name: Checkout codebase
         uses: actions/checkout@v4
 
+      - name: Waiting for 200 from the Vercel Preview
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
+        id: waitFor200
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 60
+
+      - run: echo ${{steps.waitFor200.outputs.url}}
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -30,4 +39,4 @@ jobs:
       - name: Run Playwright tests
         run: yarn e2e
         env:
-          APP_URL: ${{ secrets.APP_URL }}
+          APP_URL: ${{ steps.waitFor200.outputs.url }}
