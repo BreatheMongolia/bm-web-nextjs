@@ -20,8 +20,10 @@ jobs:
         uses: patrickedqvist/wait-for-vercel-preview@v1.3.2
         id: waitFor200
         with:
+          allow_inactive: true
+          check_interval: 10
+          max_timeout: 600
           token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 360
 
       - run: echo ${{steps.waitFor200.outputs.url}}
 
