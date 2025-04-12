@@ -6,7 +6,7 @@ on:
 
   pull_request:
     branches:
-      - develop
+      - '**'
 jobs:
   e2e-tests:
     name: End-to-end Tests
@@ -21,7 +21,7 @@ jobs:
         id: waitFor200
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 60
+          max_timeout: 360
 
       - run: echo ${{steps.waitFor200.outputs.url}}
 
