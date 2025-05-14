@@ -19,11 +19,23 @@ export default function PolicyPostPage({ policy, locale }: PolicyPostPageProps) 
 
   console.log('policy in component', policy)
 
+  function splitLocalizedValue(value: string, locale: string): string {
+    const [en, mn] = value.split(' / ')
+    return locale === 'mn' ? (mn || en) : en
+  }
+  
+  function translateList(items: string[], locale: string): string[] {
+    return items.map(item => splitLocalizedValue(item, locale))
+  }
+
   const title = getTranslated(policy.title.en, policy.title.mn, locale)
   const description = getTranslated(policy.description.en, policy.description.mn, locale)
   const summary = getTranslated(policy.summary.en, policy.summary.mn, locale)
   const updates = getTranslated(policy.updates.en, policy.updates.mn, locale)
   const furtherReading = getTranslated(policy.furtherReading.en, policy.furtherReading.mn, locale)
+  const topics = translateList(policy.topics || [], locale)
+  const documentTypes = translateList(policy.documentTypes || [], locale)
+  const status = translateList(policy.status || [], locale)
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -37,28 +49,26 @@ export default function PolicyPostPage({ policy, locale }: PolicyPostPageProps) 
       <h1 className="text-2xl font-semibold mb-4">{title}</h1>
 
       {/* Metadata Table */}
-      <div className="overflow-x-auto bg-blue-50 rounded-md">
-        <table className="w-full table-fixed text-left text-sm">
-          <thead className="bg-blue-100 text-blue-900 font-semibold">
-            <tr>
-              <th className="px-4 py-2">НЭР</th>
-              <th className="px-4 py-2">ТӨРӨЛ</th>
-              <th className="px-4 py-2">СЭДЭВ</th>
-              <th className="px-4 py-2">ТӨЛӨВ</th>
-              <th className="px-4 py-2">БАТЛАГДСАН</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="px-4 py-2">{description}</td>
-              <td className="px-4 py-2">{policy.documentTypes?.join(', ')}</td>
-              <td className="px-4 py-2">{policy.topics?.join(', ')}</td>
-              <td className="px-4 py-2">{policy.status?.join(', ')}</td>
-              <td className="px-4 py-2">{policy.dateApproved}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="mb-8">
+        {/* Header Row */}
+        <div className="bg-blue-600 text-white text-center font-bold text-transform: uppercase grid grid-cols-[repeat(5,minmax(0,1fr))] rounded-lg">
+          <div className="py-3 px-4">Нэр</div>
+          <div className="py-3 px-4">Төрөл</div>
+          <div className="py-3 px-4">Сэдэв</div>
+          <div className="py-3 px-4">Төлөв</div>
+          <div className="py-3 px-4">Батлагдсан</div>
+        </div>
+
+        {/* Data Row */}
+        <div className="grid grid-cols-[repeat(5,minmax(0,1fr))] py-6 border-b text-center text-sm">
+          <div className="px-4">{description}</div>
+          <div className="px-4">{documentTypes.join(', ') || '—'}</div>
+          <div className="px-4">{topics.join(', ') || '—'}</div>
+          <div className="px-4">{status.join(', ') || '—'}</div>
+          <div className="px-4">{policy.dateApproved || '—'}</div>
+        </div>
       </div>
+
 
       {/* Action Buttons */}
       <div className="flex flex-wrap gap-3 my-6">
