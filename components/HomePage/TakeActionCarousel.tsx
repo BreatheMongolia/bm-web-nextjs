@@ -17,12 +17,14 @@ export const TakeActionCarousel = ({
 }) => {
   const { t } = useTranslation('home')
 
+  console.log('takeActionPosts', takeActionPosts)
+
   // Styling the settings for take-action-carousel within Slider
   const settings = {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 2,
     arrows: true,
     autoplaySpeed: 5000,

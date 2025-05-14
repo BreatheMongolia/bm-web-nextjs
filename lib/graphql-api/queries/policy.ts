@@ -45,6 +45,47 @@ export async function getPolicyDetails(id: string, idType: PolicyIdType = Policy
           titleMn
           updates
           updatesMn
+          recommendedAction(first: 10) {
+            edges {
+              node {
+                slug
+                ... on TakeAction {
+                  databaseId
+                  slug
+                  dateGmt
+                  takeActionCustomFields {
+                    titleMn
+                    title
+                    excerpt
+                    excerptMn
+                    typeOfAction {
+                      nodes {
+                        ... on ActionType {
+                          actionTypeCustomFields {
+                            name
+                            nameMn
+                          }
+                        }
+                      }
+                    }
+                  }
+                  featuredImage {
+                    node {
+                      mediaItemUrl
+                      mediaDetails {
+                        sizes(include: MEDIUM) {
+                          height
+                          width
+                          sourceUrl
+                        }
+                      }
+                    }
+                  }
+                  
+                }
+              }
+            }
+          }
         }
         policyStatus(first: 10) {
           edges {
