@@ -45,6 +45,8 @@ export default PolicyPage
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
     // fetch the data
     const policies = await getPolicies()
+
+    console.log(policies)
     const data = await getPolicyLandingPageSettings()
 
     return {
