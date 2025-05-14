@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowDownIcon } from '@heroicons/react/24/solid'
+import { ArrowLeftIcon, ArrowDownIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import { getPolicies, getPolicyDetails } from 'lib/graphql-api/queries/policy'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -60,7 +60,7 @@ export default function PolicyPostPage({ policy, locale }: PolicyPostPageProps) 
         </div>
 
         {/* Data Row */}
-        <div className="grid grid-cols-[repeat(5,minmax(0,1fr))] py-6 border-b text-center text-sm">
+        <div className="grid grid-cols-[repeat(5,minmax(0,1fr))] py-6 text-center text-sm">
           <div className="px-4">{description}</div>
           <div className="px-4">{documentTypes.join(', ') || '—'}</div>
           <div className="px-4">{topics.join(', ') || '—'}</div>
@@ -71,35 +71,36 @@ export default function PolicyPostPage({ policy, locale }: PolicyPostPageProps) 
 
 
       {/* Action Buttons */}
-      <div className="flex flex-wrap gap-3 my-6">
+      <div className="flex flex-wrap justify-center gap-3 my-6">
         {policy.sourceUrl && (
           <a
             href={policy.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
           >
-            Эх сурвалж ↗
+            Эх сурвалж
+            <ArrowTopRightOnSquareIcon className="w-5 h-5" />
           </a>
         )}
         {policy.fileMn && (
           <a
             href={policy.fileMn}
             download
-            className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
           >
-            <ArrowDownIcon className="w-4 h-4" />
             Download (MNG)
+            <ArrowDownIcon className="w-5 h-5" />
           </a>
         )}
         {policy.fileEn && (
           <a
             href={policy.fileEn}
             download
-            className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
           >
-            <ArrowDownIcon className="w-4 h-4" />
             Download (EN)
+            <ArrowDownIcon className="w-5 h-5" />
           </a>
         )}
       </div>
