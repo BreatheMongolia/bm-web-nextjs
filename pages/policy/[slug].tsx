@@ -1,4 +1,6 @@
+import { H2 } from '@/components/generic/Typography'
 import { TakeActionCarousel } from '@/components/HomePage'
+import { ShareButton } from '@/components/NewsPage/DetailPage/ShareButton'
 import { ArrowLeftIcon, ArrowDownIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import { TakeAction } from 'graphql/generated'
 import { getPolicies, getPolicyDetails } from 'lib/graphql-api/queries/policy'
@@ -8,14 +10,17 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React from 'react'
+import { useTranslation } from 'next-i18next'
 
 interface PolicyPostPageProps {
   policy: any,
-  locale: string
+  locale: string,
+  slug: string
 }
 
-export default function PolicyPostPage({ policy, locale }: PolicyPostPageProps) {
+export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageProps) {
   const router = useRouter()
+  const { t } = useTranslation('policy')
 
   if (router.isFallback) return <p>Loading...</p>
 
@@ -48,7 +53,26 @@ export default function PolicyPostPage({ policy, locale }: PolicyPostPageProps) 
       </Link>
   
       {/* Title */}
-      <h1 className="text-2xl font-semibold mb-4">{title}</h1>
+      <div className="flex justify-between items-center mb-8">
+        <H2 title={title} />
+        <div className="subSection">
+          <ShareButton
+              url={`https://breathemongolia.org/policy/${slug}`}
+              title={title}
+              bottom={false}
+            />
+        </div>
+      </div>
+      {/* <div className="bg-red-100">
+        <ShareButton
+          url={`https://breathemongolia.org/policy/${slug}`}
+          title={title}
+          bottom={false}
+        />
+      </div> */}
+
+      
+      
   
       {/* Metadata Table */}
       <div className="mb-8">
@@ -107,30 +131,21 @@ export default function PolicyPostPage({ policy, locale }: PolicyPostPageProps) 
       </div>
   
       {/* Summary */}
-      <div className="flex items-center gap-4 mt-10 mb-4">
-        <h2 className="text-2xl font-semibold whitespace-nowrap">Summary</h2>
-        <div className="flex-grow h-0.5 rounded-lg bg-bm-blue" />
-      </div>
+      <H2 title={"Summary"} trailingLineColor="blue" />
       <div
         className="text-gray-700 leading-relaxed prose max-w-none"
         dangerouslySetInnerHTML={{ __html: summary }}
       />
   
       {/* Updates */}
-      <div className="flex items-center gap-4 mt-10 mb-4">
-        <h2 className="text-2xl font-semibold whitespace-nowrap">Updates</h2>
-        <div className="flex-grow h-0.5 rounded-lg bg-bm-blue" />
-      </div>
+      <H2 title={"Updates"} trailingLineColor="blue" />
       <div
         className="text-gray-700 leading-relaxed prose max-w-none"
         dangerouslySetInnerHTML={{ __html: updates }}
       />
   
       {/* Further Reading */}
-      <div className="flex items-center gap-4 mt-10 mb-4">
-        <h2 className="text-2xl font-semibold whitespace-nowrap">Further Reading</h2>
-        <div className="flex-grow h-0.5 rounded-lg bg-bm-blue" />
-      </div>
+      <H2 title={"Further Reading"} trailingLineColor="blue" />
       <div
         className="text-bm-blue leading-relaxed prose max-w-none"
         dangerouslySetInnerHTML={{ __html: furtherReading }}
@@ -140,121 +155,6 @@ export default function PolicyPostPage({ policy, locale }: PolicyPostPageProps) 
     </div>
   )  
 }
-
-// recommendedActions: [
-//   {
-//     slug: 'ger-insulation',
-//     databaseId: 3374,
-//     dateGmt: '2022-10-03T07:47:29',
-//     takeActionCustomFields: [Object],
-//     featuredImage: [Object]
-//   },
-//   {
-//     slug: 'how-to-minimize-vehicle-emissions',
-//     databaseId: 2200,
-//     dateGmt: '2021-05-21T00:33:05',
-//     takeActionCustomFields: [Object],
-//     featuredImage: [Object]
-//   },
-//   {
-//     slug: 'test',
-//     databaseId: 2127,
-//     dateGmt: '2021-04-20T17:08:35',
-//     takeActionCustomFields: [Object],
-//     featuredImage: [Object]
-//   }
-// ]
-
-// takeActionPosts [
-//   {
-//     databaseId: 2309,
-//     slug: 'use-air-purifier',
-//     dateGmt: '2021-12-13T01:55:40',
-//     featuredImage: { node: [Object] },
-//     takeActionCustomFields: {
-//       typeOfAction: [Object],
-//       title: 'Use Air Purifier ',
-//       titleMn: 'Агаар цэвэршүүлэгч хэрэглэж хэвшицгээе'
-//     }
-//   },
-//   {
-//     databaseId: 3477,
-//     slug: 'house-insulation',
-//     dateGmt: '2022-10-12T13:00:59',
-//     featuredImage: { node: [Object] },
-//     takeActionCustomFields: {
-//       typeOfAction: [Object],
-//       title: "Let's insulate our house!",
-//       titleMn: 'Байшингаа дулаалцгаая!'
-//     }
-//   },
-//   {
-//     databaseId: 2200,
-//     slug: 'how-to-minimize-vehicle-emissions',
-//     dateGmt: '2021-05-21T00:33:05',
-//     featuredImage: { node: [Object] },
-//     takeActionCustomFields: {
-//       typeOfAction: [Object],
-//       title: 'How to minimize vehicle emissions',
-//       titleMn: 'Хэрхэн автомашиныхаа утааг багасгах вэ?'
-//     }
-//   },
-//   {
-//     databaseId: 2127,
-//     slug: 'test',
-//     dateGmt: '2021-04-20T17:08:35',
-//     featuredImage: { node: [Object] },
-//     takeActionCustomFields: {
-//       typeOfAction: [Object],
-//       title: 'Protect myself and others from cigarette smoke ',
-//       titleMn: 'Би гэр бүлийнхнийгээ тамхины хороос хамгаалахыг амлаж байна. '
-//     }
-//   },
-//   {
-//     databaseId: 2172,
-//     slug: 'test-shijir',
-//     dateGmt: '2021-04-28T00:41:08',
-//     featuredImage: { node: [Object] },
-//     takeActionCustomFields: {
-//       typeOfAction: [Object],
-//       title: 'Ride a Bicycle',
-//       titleMn: 'Дугуй унацгаая'
-//     }
-//   },
-//   {
-//     databaseId: 2163,
-//     slug: 'wear-a-mask',
-//     dateGmt: '2021-04-26T12:44:42',
-//     featuredImage: { node: [Object] },
-//     takeActionCustomFields: {
-//       typeOfAction: [Object],
-//       title: "Let's wear a mask",
-//       titleMn: 'Маскаа зүүцгээе'
-//     }
-//   },
-//   {
-//     databaseId: 2300,
-//     slug: 'prevent-co-poisoning',
-//     dateGmt: '2021-12-13T01:47:22',
-//     featuredImage: { node: [Object] },
-//     takeActionCustomFields: {
-//       typeOfAction: [Object],
-//       title: 'Prevent CO poisoning ',
-//       titleMn: 'Угаарын хийн хордлогоос сэргийлье'
-//     }
-//   },
-//   {
-//     databaseId: 3374,
-//     slug: 'ger-insulation',
-//     dateGmt: '2022-10-03T07:47:29',
-//     featuredImage: { node: [Object] },
-//     takeActionCustomFields: {
-//       typeOfAction: [Object],
-//       title: "Let's insulate our gers",
-//       titleMn: 'Гэрээ дулаалцгаая'
-//     }
-//   }
-// ]
 
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
@@ -279,11 +179,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug as string
   const policy = await getPolicyDetails(slug)
 
-  console.log('raw policy', policy)
-
   const transformedPolicy = transformPolicy(policy);
-
-  console.log('transformed policy', transformedPolicy)
 
   if (!policy) return { notFound: true }
 
@@ -291,7 +187,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     props: {
       ...(await serverSideTranslations(locale!, ['common', 'policy', 'nav', 'footer', 'home'])),
       policy: transformedPolicy,
-      locale
+      locale,
+      slug
     },
     revalidate: 60,
   }
@@ -299,9 +196,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
 export function transformPolicy(raw: any) {
   const f = raw.policy.policyPageCustomFields;
-  console.log("f", f)
-
-  console.log("raw recomennded action", f.recommendedAction)
 
   return {
     title: {

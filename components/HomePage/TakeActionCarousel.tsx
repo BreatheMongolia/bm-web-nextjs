@@ -17,8 +17,6 @@ export const TakeActionCarousel = ({
 }) => {
   const { t } = useTranslation('home')
 
-  console.log('takeActionPosts', takeActionPosts)
-
   // Styling the settings for take-action-carousel within Slider
   const settings = {
     dots: false,
