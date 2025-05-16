@@ -8630,6 +8630,8 @@ export type PolicyPageCustomFields = AcfFieldGroup & AcfFieldGroupFields & Polic
   nameMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   recommendedAction?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  relatedPolicies?: Maybe<AcfContentNodeConnection>;
   /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   sourceUrl?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
@@ -8649,6 +8651,15 @@ export type PolicyPageCustomFields = AcfFieldGroup & AcfFieldGroupFields & Polic
 
 /** The &quot;PolicyPageCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PolicyPageCustomFieldsRecommendedActionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The &quot;PolicyPageCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PolicyPageCustomFieldsRelatedPoliciesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -8678,6 +8689,8 @@ export type PolicyPageCustomFields_Fields = {
   nameMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   recommendedAction?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  relatedPolicies?: Maybe<AcfContentNodeConnection>;
   /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   sourceUrl?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
@@ -8697,6 +8710,15 @@ export type PolicyPageCustomFields_Fields = {
 
 /** Interface representing fields of the ACF &quot;PolicyPageCustomFields&quot; Field Group */
 export type PolicyPageCustomFields_FieldsRecommendedActionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** Interface representing fields of the ACF &quot;PolicyPageCustomFields&quot; Field Group */
+export type PolicyPageCustomFields_FieldsRelatedPoliciesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;

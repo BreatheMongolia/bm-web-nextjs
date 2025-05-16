@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React from 'react'
 import { useTranslation } from 'next-i18next'
+import { BackBtn } from '@/components/TakeActionPage'
 
 interface PolicyPostPageProps {
   policy: any,
@@ -43,16 +44,18 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
   const topics = translateList(policy.topics || [], locale)
   const documentTypes = translateList(policy.documentTypes || [], locale)
   const status = translateList(policy.status || [], locale)
+  const relatedPolicies = policy.relatedPolicies
 
+  console.log('relatedPolicies', relatedPolicies)
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Link */}
       <Link href="/policy" className="flex items-center text-bm-blue hover:underline mb-4">
-        <ArrowLeftIcon className="w-5 h-5 mr-1" />
+        <BackBtn title='Back to Policy Page'/>
         Back to Policy Page
       </Link>
   
-      {/* Title */}
+      {/* Title and Share buttons */}
       <div className="flex justify-between items-center mb-8">
         <H2 title={title} />
         <div className="subSection">
@@ -63,17 +66,7 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
             />
         </div>
       </div>
-      {/* <div className="bg-red-100">
-        <ShareButton
-          url={`https://breathemongolia.org/policy/${slug}`}
-          title={title}
-          bottom={false}
-        />
-      </div> */}
 
-      
-      
-  
       {/* Metadata Table */}
       <div className="mb-8">
         {/* Header Row */}
@@ -151,9 +144,32 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
         dangerouslySetInnerHTML={{ __html: furtherReading }}
       />
 
+      {/* Related Policies */}
+      <H2 title={"Related Policies"} trailingLineColor="blue" />
+      { relatedPolicies && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {relatedPolicies.map((policy: any) => (
+            <PolicyCard key={policy.databaseId} policy={policy} locale={locale} />
+        ))}
+        </div>
+      )}
+
       <TakeActionCarousel takeActionPosts={policy.recommendedActions as TakeAction[]} locale={locale} />
     </div>
   )  
+}
+
+const PolicyCard = ({ policy, locale }: any) => {
+  const { summary, summaryMn } = policy.policyPageCustomFields
+  return (
+    <div>
+      <div
+        className="text-gray-700 leading-relaxed prose max-w-none"
+        dangerouslySetInnerHTML={{ __html: getTranslated(summary, summaryMn, locale) }}
+      />
+    </div>
+    
+  )
 }
 
 
@@ -226,6 +242,7 @@ export function transformPolicy(raw: any) {
     documentTypes: (raw.policy.documentTypes?.edges || []).map((e: any) => e.node.name),
     status: (raw.policy.policyStatus?.edges || []).map((e: any) => e.node.name),
     recommendedActions: (f.recommendedAction?.edges || []).map((e: any) => e.node),
+    relatedPolicies: (f.relatedPolicies?.edges || []).map((e: any) => e.node),
   }
 }
 
