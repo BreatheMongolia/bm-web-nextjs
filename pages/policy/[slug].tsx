@@ -12,6 +12,7 @@ import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React from 'react'
 import { useTranslation } from 'next-i18next'
 import { BackBtn } from '@/components/TakeActionPage'
+import { tr } from 'date-fns/locale'
 
 interface PolicyPostPageProps {
   policy: any,
@@ -26,15 +27,6 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
   if (router.isFallback) return <p>Loading...</p>
 
   console.log('policy in component', policy)
-
-  function splitLocalizedValue(value: string, locale: string): string {
-    const [en, mn] = value.split(' / ')
-    return locale === 'mn' ? (mn || en) : en
-  }
-  
-  function translateList(items: string[], locale: string): string[] {
-    return items.map(item => splitLocalizedValue(item, locale))
-  }
 
   const title = getTranslated(policy.title.en, policy.title.mn, locale)
   const description = getTranslated(policy.description.en, policy.description.mn, locale)
@@ -51,8 +43,7 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Link */}
       <Link href="/policy" className="flex items-center text-bm-blue hover:underline mb-4">
-        <BackBtn title='Back to Policy Page'/>
-        Back to Policy Page
+        <BackBtn title='Back to Policy Page' />
       </Link>
   
       {/* Title and Share buttons */}
@@ -147,7 +138,7 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
       {/* Related Policies */}
       <H2 title={"Related Policies"} trailingLineColor="blue" />
       { relatedPolicies && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="">
           {relatedPolicies.map((policy: any) => (
             <PolicyCard key={policy.databaseId} policy={policy} locale={locale} />
         ))}
@@ -160,13 +151,26 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
 }
 
 const PolicyCard = ({ policy, locale }: any) => {
-  const { summary, summaryMn } = policy.policyPageCustomFields
+  const { title, titleMn } = policy.policyPageCustomFields
+  const { topics, dateGmt } = policy
+  const dateApproved = formatDate(dateGmt)
+  const transformedTopics = translateList((topics?.edges || []).map((e: any) => e.node.name), locale)
+
+  console.log(transformedTopics)
   return (
     <div>
       <div
-        className="text-gray-700 leading-relaxed prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: getTranslated(summary, summaryMn, locale) }}
+        className="text-bm-blue leading-relaxed prose max-w-none mb-3"
+        dangerouslySetInnerHTML={{ __html: getTranslated(title, titleMn, locale) }}
       />
+      <div className='flex justify-between'>
+        <div className='bg-gray-200 rounded-lg text-xs px-4 py-2'>Батлагдсан: {dateApproved}</div>
+        <div>
+          {transformedTopics.map((topic: any) => (
+            <span className="bg-blue-500 text-white text-sm px-4 py-1 rounded-lg mr-2">{topic}</span>
+          ))}
+        </div>
+      </div>
     </div>
     
   )
@@ -250,6 +254,15 @@ function formatDate(iso: string) {
   if (!iso) return ''
   const d = new Date(iso)
   return d.toLocaleDateString('en-CA') // e.g. "2016-04-09"
+}
+
+function splitLocalizedValue(value: string, locale: string): string {
+  const [en, mn] = value.split(' / ')
+  return locale === 'mn' ? (mn || en) : en
+}
+
+function translateList(items: string[], locale: string): string[] {
+  return items.map(item => splitLocalizedValue(item, locale))
 }
 
 

@@ -54,8 +54,8 @@ export async function getPolicyDetails(id: string, idType: PolicyIdType = Policy
                 ... on Policy {
                   id
                   policyPageCustomFields {
-                    summary
-                    summaryMn
+                    title
+                    titleMn
                   }
                   topics(first: 10) {
                     edges {
