@@ -43,18 +43,18 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Link */}
       <Link href="/policy" className="flex items-center text-bm-blue hover:underline mb-4">
-        <BackBtn title='Back to Policy Page' />
+        <BackBtn title={t('backToPolicy')} />
       </Link>
-  
+
       {/* Title and Share buttons */}
       <div className="flex justify-between items-center mb-8">
         <H2 title={title} />
         <div className="subSection">
           <ShareButton
-              url={`https://breathemongolia.org/policy/${slug}`}
-              title={title}
-              bottom={false}
-            />
+            url={`https://breathemongolia.org/policy/${slug}`}
+            title={title}
+            bottom={false}
+          />
         </div>
       </div>
 
@@ -62,13 +62,13 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
       <div className="mb-8">
         {/* Header Row */}
         <div className="bg-bm-blue text-white text-center font-bold uppercase grid grid-cols-[repeat(5,minmax(0,1fr))] rounded-lg">
-          <div className="py-3 px-4">Нэр</div>
-          <div className="py-3 px-4">Төрөл</div>
-          <div className="py-3 px-4">Сэдэв</div>
-          <div className="py-3 px-4">Төлөв</div>
-          <div className="py-3 px-4">Батлагдсан</div>
+          <div className="py-3 px-4">{t('tableHeaders.name')}</div>
+          <div className="py-3 px-4">{t('tableHeaders.type')}</div>
+          <div className="py-3 px-4">{t('tableHeaders.topic')}</div>
+          <div className="py-3 px-4">{t('tableHeaders.status')}</div>
+          <div className="py-3 px-4">{t('tableHeaders.dateApproved')}</div>
         </div>
-  
+
         {/* Data Row */}
         <div className="grid grid-cols-[repeat(5,minmax(0,1fr))] py-6 text-center text-sm">
           <div className="px-4">{description}</div>
@@ -78,7 +78,7 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
           <div className="px-4">{policy.dateApproved || '—'}</div>
         </div>
       </div>
-  
+
       {/* Action Buttons */}
       <div className="flex flex-wrap justify-center gap-3 my-6">
         {policy.sourceUrl && (
@@ -88,7 +88,7 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
             rel="noopener noreferrer"
             className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
           >
-            Эх сурвалж
+            {t('source')}
             <ArrowTopRightOnSquareIcon className="w-5 h-5" />
           </a>
         )}
@@ -98,7 +98,7 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
             download
             className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
           >
-            Download (MNG)
+            {t('downloadMn')}
             <ArrowDownIcon className="w-5 h-5" />
           </a>
         )}
@@ -108,46 +108,46 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
             download
             className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
           >
-            Download (EN)
+            {t('downloadEn')}
             <ArrowDownIcon className="w-5 h-5" />
           </a>
         )}
       </div>
-  
+
       {/* Summary */}
-      <H2 title={"Summary"} trailingLineColor="blue" />
+      <H2 title={t('summaryTitle')} trailingLineColor="blue" />
       <div
         className="text-gray-700 leading-relaxed prose max-w-none"
         dangerouslySetInnerHTML={{ __html: summary }}
       />
-  
+
       {/* Updates */}
-      <H2 title={"Updates"} trailingLineColor="blue" />
+      <H2 title={t('updatesTitle')} trailingLineColor="blue" />
       <div
         className="text-gray-700 leading-relaxed prose max-w-none"
         dangerouslySetInnerHTML={{ __html: updates }}
       />
-  
+
       {/* Further Reading */}
-      <H2 title={"Further Reading"} trailingLineColor="blue" />
+      <H2 title={t('furtherReadingTitle')} trailingLineColor="blue" />
       <div
         className="text-bm-blue leading-relaxed prose max-w-none"
         dangerouslySetInnerHTML={{ __html: furtherReading }}
       />
 
       {/* Related Policies */}
-      <H2 title={"Related Policies"} trailingLineColor="blue" />
-      { relatedPolicies && (
+      <H2 title={t('relatedPoliciesTitle')} trailingLineColor="blue" />
+      {relatedPolicies && (
         <div className="">
           {relatedPolicies.map((policy: any) => (
             <PolicyCard key={policy.databaseId} policy={policy} locale={locale} />
-        ))}
+          ))}
         </div>
       )}
 
       <TakeActionCarousel takeActionPosts={policy.recommendedActions as TakeAction[]} locale={locale} />
     </div>
-  )  
+  )
 }
 
 const PolicyCard = ({ policy, locale }: any) => {
@@ -158,12 +158,12 @@ const PolicyCard = ({ policy, locale }: any) => {
 
   console.log(transformedTopics)
   return (
-    <div>
+    <div className="mb-4">
       <div
         className="text-bm-blue leading-relaxed prose max-w-none mb-3"
         dangerouslySetInnerHTML={{ __html: getTranslated(title, titleMn, locale) }}
       />
-      <div className='flex justify-between'>
+      <div className='flex justify-between items-center'>
         <div className='bg-gray-200 rounded-lg text-xs px-4 py-2'>Батлагдсан: {dateApproved}</div>
         <div>
           {transformedTopics.map((topic: any) => (

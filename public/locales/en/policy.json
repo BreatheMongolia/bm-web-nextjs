@@ -1,0 +1,18 @@
+{
+  "backToPolicy": "Back to Policy Page",
+  "tableHeaders": {
+    "name": "Name",
+    "type": "Type",
+    "topic": "Topic",
+    "status": "Status",
+    "dateApproved": "Approved"
+  },
+  "source": "Source",
+  "downloadMn": "Download (MNG)",
+  "downloadEn": "Download (EN)",
+  "summaryTitle": "Summary",
+  "updatesTitle": "Updates",
+  "furtherReadingTitle": "Further Reading",
+  "relatedPoliciesTitle": "Related Policies",
+  "approvedOn": "Approved"
+}
