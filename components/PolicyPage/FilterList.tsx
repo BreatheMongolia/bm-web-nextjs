@@ -37,9 +37,8 @@ export const FilterList = (props: FilterButtonProps) => {
       <div className="flex items-center justify-between">
         <button
           onClick={toggleDropdown}
-          className={`w-28 border border-[#ADC4CC] font-semibold text-black py-1 rounded-2xl flex gap-3 justify-center items-center  ${
-            props.isActive && 'bg-bm-blue text-white hover:bg-bm-blue-hover'
-          }`}
+          className={`w-28 border border-[#ADC4CC] font-semibold text-black py-1 rounded-2xl flex gap-3 justify-center items-center  ${props.isActive && 'bg-bm-blue text-white hover:bg-bm-blue-hover'
+            }`}
         >
           {props.name}
           {props.children &&

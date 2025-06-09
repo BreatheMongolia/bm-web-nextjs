@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getTranslated } from 'lib/utils/getTranslated'
 import {
@@ -17,7 +16,7 @@ import { useMediaQuery } from 'react-responsive'
 
 const PolicyPage = ({
   policies,
-  documentTypes,
+  documentTypeOptions,
   policyStatuses,
   policyTopics,
   title,
@@ -43,7 +42,7 @@ const PolicyPage = ({
           <h3 className="mb-5 font-semibold text-base sm:text-xl text-zinc-800 mx-3 sm:mx-0">{description}</h3>
           <PolicySection
             policies={policies}
-            documentTypes={documentTypes}
+            documentTypeOptions={documentTypeOptions}
             policyStatuses={policyStatuses}
             policyTopics={policyTopics}
           />
@@ -65,11 +64,16 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const topics = await getPolicyTopics()
   const data = await getPolicyLandingPageSettings()
 
+  const documentTypeOptions = documentTypes.map((doc) => ({
+    label: getTranslated(doc.documentTypeCustomFields.name, doc.documentTypeCustomFields.nameMn, locale),
+    value: doc.slug,
+  }))
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common', 'policy'])),
       policies: policies,
-      documentTypes: documentTypes,
+      documentTypeOptions: documentTypeOptions,
       policyStatuses: policyStatuses,
       policyTopics: topics,
       locale,
