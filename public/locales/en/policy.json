@@ -1,0 +1,22 @@
+{
+    "tableHeader": {
+        "documentName": "Document Title",
+        "documentType": "Type",
+        "documentStatus": "Status",
+        "documentSummary": "Summary"
+    },
+    "filterButtons": {
+        "all": "All",
+        "types": "Type",
+        "topics": "Topics",
+        "status": "Status",
+        "year": "Year"
+    },
+    "noPoliciesFound": {
+        "all": "No Policy Found",
+        "type": "Type: No Policy Found",
+        "topic": "Topic: No Policy Found",
+        "status": "Status: No Policy Found",
+        "year": "Year: No Policy Found"
+    }
+}

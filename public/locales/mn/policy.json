@@ -1,0 +1,22 @@
+{
+    "tableHeader": {
+        "documentName": "БАРИМТЫН НЭР",
+        "documentType": "ТӨРӨЛ",
+        "documentStatus": "ТӨЛӨВ",
+        "documentSummary": "ХУРААНГУЙ"
+    },
+    "filterButtons": {
+        "all": "Бүгд",
+        "types": "Төрөл",
+        "topics": "Сэдэв",
+        "status": "Төлөв",
+        "year": "Он"
+    },
+    "noPoliciesFound": {
+        "all": "Бодлого олдсонгүй",
+        "type": "Төрөл: Бодлого олдсонгүй",
+        "topic": "Сэдэв: Бодлого олдсонгүй",
+        "status": "Төлөв: Бодлого олдсонгүй",
+        "year": "Он: Бодлого олдсонгүй"
+    }
+}

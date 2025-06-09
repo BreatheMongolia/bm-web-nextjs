@@ -2547,14 +2547,14 @@ export enum ContentTypesOfCategoryEnum {
   Post = 'POST'
 }
 
-/** Allowed Content Types of the DocumentTopic taxonomy. */
-export enum ContentTypesOfDocumentTopicEnum {
+/** Allowed Content Types of the DocumentType taxonomy. */
+export enum ContentTypesOfDocumentTypeEnum {
   /** The Type of Content object */
   Policy = 'POLICY'
 }
 
-/** Allowed Content Types of the DocumentType taxonomy. */
-export enum ContentTypesOfDocumentTypeEnum {
+/** Allowed Content Types of the PolicyStatus taxonomy. */
+export enum ContentTypesOfPolicyStatusEnum {
   /** The Type of Content object */
   Policy = 'POLICY'
 }
@@ -2575,6 +2575,12 @@ export enum ContentTypesOfResourceTypeEnum {
 export enum ContentTypesOfTagEnum {
   /** The Type of Content object */
   Post = 'POST'
+}
+
+/** Allowed Content Types of the Topic taxonomy. */
+export enum ContentTypesOfTopicEnum {
+  /** The Type of Content object */
+  Policy = 'POLICY'
 }
 
 /** Input for the createAccomplishment mutation. */
@@ -2691,29 +2697,6 @@ export type CreateCommentPayload = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
-/** Input for the createDocumentTopic mutation. */
-export type CreateDocumentTopicInput = {
-  /** The slug that the document-topic will be an alias of */
-  aliasOf?: InputMaybe<Scalars['String']>;
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']>;
-  /** The description of the document-topic object */
-  description?: InputMaybe<Scalars['String']>;
-  /** The name of the document-topic object to mutate */
-  name: Scalars['String'];
-  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
-  slug?: InputMaybe<Scalars['String']>;
-};
-
-/** The payload for the createDocumentTopic mutation. */
-export type CreateDocumentTopicPayload = {
-  __typename?: 'CreateDocumentTopicPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The created document-topic */
-  documentTopic?: Maybe<DocumentTopic>;
-};
-
 /** Input for the createDocumentType mutation. */
 export type CreateDocumentTypeInput = {
   /** The slug that the document-type will be an alias of */
@@ -2724,6 +2707,10 @@ export type CreateDocumentTypeInput = {
   description?: InputMaybe<Scalars['String']>;
   /** The name of the document-type object to mutate */
   name: Scalars['String'];
+  /** The database ID of the document-type that should be set as the parent. This field cannot be used in conjunction with parentId */
+  parentDatabaseId?: InputMaybe<Scalars['Int']>;
+  /** The ID of the document-type that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
+  parentId?: InputMaybe<Scalars['ID']>;
   /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
   slug?: InputMaybe<Scalars['String']>;
 };
@@ -2883,20 +2870,22 @@ export type CreatePolicyInput = {
   content?: InputMaybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']>;
-  /** Set connections between the policy and documentTopics */
-  documentTopics?: InputMaybe<PolicyDocumentTopicsInput>;
   /** Set connections between the policy and documentTypes */
   documentTypes?: InputMaybe<PolicyDocumentTypesInput>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']>;
   /** The password used to protect the content of the object */
   password?: InputMaybe<Scalars['String']>;
+  /** Set connections between the policy and policyStatuses */
+  policyStatuses?: InputMaybe<PolicyPolicyStatusesInput>;
   /** The slug of the object */
   slug?: InputMaybe<Scalars['String']>;
   /** The status of the object */
   status?: InputMaybe<PostStatusEnum>;
   /** The title of the object */
   title?: InputMaybe<Scalars['String']>;
+  /** Set connections between the policy and topics */
+  topics?: InputMaybe<PolicyTopicsInput>;
 };
 
 /** The payload for the createPolicy mutation. */
@@ -2906,6 +2895,33 @@ export type CreatePolicyPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** The Post object mutation type. */
   policy?: Maybe<Policy>;
+};
+
+/** Input for the createPolicyStatus mutation. */
+export type CreatePolicyStatusInput = {
+  /** The slug that the policy-status will be an alias of */
+  aliasOf?: InputMaybe<Scalars['String']>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The description of the policy-status object */
+  description?: InputMaybe<Scalars['String']>;
+  /** The name of the policy-status object to mutate */
+  name: Scalars['String'];
+  /** The database ID of the policy-status that should be set as the parent. This field cannot be used in conjunction with parentId */
+  parentDatabaseId?: InputMaybe<Scalars['Int']>;
+  /** The ID of the policy-status that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
+  parentId?: InputMaybe<Scalars['ID']>;
+  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+/** The payload for the createPolicyStatus mutation. */
+export type CreatePolicyStatusPayload = {
+  __typename?: 'CreatePolicyStatusPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The created policy-status */
+  policyStatus?: Maybe<PolicyStatus>;
 };
 
 /** Input for the createPostFormat mutation. */
@@ -3194,6 +3210,33 @@ export type CreateTimelinePayload = {
   timeline?: Maybe<Timeline>;
 };
 
+/** Input for the createTopic mutation. */
+export type CreateTopicInput = {
+  /** The slug that the topic will be an alias of */
+  aliasOf?: InputMaybe<Scalars['String']>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The description of the topic object */
+  description?: InputMaybe<Scalars['String']>;
+  /** The name of the topic object to mutate */
+  name: Scalars['String'];
+  /** The database ID of the topic that should be set as the parent. This field cannot be used in conjunction with parentId */
+  parentDatabaseId?: InputMaybe<Scalars['Int']>;
+  /** The ID of the topic that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
+  parentId?: InputMaybe<Scalars['ID']>;
+  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+/** The payload for the createTopic mutation. */
+export type CreateTopicPayload = {
+  __typename?: 'CreateTopicPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The created topic */
+  topic?: Maybe<Topic>;
+};
+
 /** Input for the createUser mutation. */
 export type CreateUserInput = {
   /** User's AOL IM account. */
@@ -3457,25 +3500,6 @@ export type DeleteCommentPayload = {
   deletedId?: Maybe<Scalars['ID']>;
 };
 
-/** Input for the deleteDocumentTopic mutation. */
-export type DeleteDocumentTopicInput = {
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']>;
-  /** The ID of the documentTopic to delete */
-  id: Scalars['ID'];
-};
-
-/** The payload for the deleteDocumentTopic mutation. */
-export type DeleteDocumentTopicPayload = {
-  __typename?: 'DeleteDocumentTopicPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The ID of the deleted object */
-  deletedId?: Maybe<Scalars['ID']>;
-  /** The deleted term object */
-  documentTopic?: Maybe<DocumentTopic>;
-};
-
 /** Input for the deleteDocumentType mutation. */
 export type DeleteDocumentTypeInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -3606,6 +3630,25 @@ export type DeletePolicyPayload = {
   deletedId?: Maybe<Scalars['ID']>;
   /** The object before it was deleted */
   policy?: Maybe<Policy>;
+};
+
+/** Input for the deletePolicyStatus mutation. */
+export type DeletePolicyStatusInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The ID of the policyStatus to delete */
+  id: Scalars['ID'];
+};
+
+/** The payload for the deletePolicyStatus mutation. */
+export type DeletePolicyStatusPayload = {
+  __typename?: 'DeletePolicyStatusPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']>;
+  /** The deleted term object */
+  policyStatus?: Maybe<PolicyStatus>;
 };
 
 /** Input for the deletePostFormat mutation. */
@@ -3822,6 +3865,25 @@ export type DeleteTimelinePayload = {
   timeline?: Maybe<Timeline>;
 };
 
+/** Input for the deleteTopic mutation. */
+export type DeleteTopicInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The ID of the topic to delete */
+  id: Scalars['ID'];
+};
+
+/** The payload for the deleteTopic mutation. */
+export type DeleteTopicPayload = {
+  __typename?: 'DeleteTopicPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']>;
+  /** The deleted term object */
+  topic?: Maybe<Topic>;
+};
+
 /** Input for the deleteUser mutation. */
 export type DeleteUserInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -3875,329 +3937,13 @@ export type DiscussionSettings = {
   defaultPingStatus?: Maybe<Scalars['String']>;
 };
 
-/** The documentTopic type */
-export type DocumentTopic = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & WithAcfDocumentTopicCustomFields & WithAcfPolicyPageCustomFields & {
-  __typename?: 'DocumentTopic';
-  /** Connection between the DocumentTopic type and the ContentNode type */
-  contentNodes?: Maybe<DocumentTopicToContentNodeConnection>;
-  /** The number of objects connected to the object */
-  count?: Maybe<Scalars['Int']>;
-  /** The unique identifier stored in the database */
-  databaseId: Scalars['Int'];
-  /** The description of the object */
-  description?: Maybe<Scalars['String']>;
-  /** Fields of the DocumentTopicCustomFields ACF Field Group */
-  documentTopicCustomFields?: Maybe<DocumentTopicCustomFields>;
-  /**
-   * The id field matches the WP_Post-&gt;ID field.
-   * @deprecated Deprecated in favor of databaseId
-   */
-  documentTopicId?: Maybe<Scalars['Int']>;
-  /** Connection between the TermNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
-  /** Connection between the TermNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The globally unique ID for the object */
-  id: Scalars['ID'];
-  /** Whether the node is a Comment */
-  isComment: Scalars['Boolean'];
-  /** Whether the node is a Content Node */
-  isContentNode: Scalars['Boolean'];
-  /** Whether the node represents the front page. */
-  isFrontPage: Scalars['Boolean'];
-  /** Whether  the node represents the blog page. */
-  isPostsPage: Scalars['Boolean'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']>;
-  /** Whether the node is a Term */
-  isTermNode: Scalars['Boolean'];
-  /** The link to the term */
-  link?: Maybe<Scalars['String']>;
-  /** The human friendly name of the object. */
-  name?: Maybe<Scalars['String']>;
-  /** Connection between the DocumentTopic type and the policy type */
-  policies?: Maybe<DocumentTopicToPolicyConnection>;
-  /** Fields of the PolicyPageCustomFields ACF Field Group */
-  policyPageCustomFields?: Maybe<PolicyPageCustomFields>;
-  /** An alphanumeric identifier for the object unique to its type. */
-  slug?: Maybe<Scalars['String']>;
-  /** Connection between the DocumentTopic type and the Taxonomy type */
-  taxonomy?: Maybe<DocumentTopicToTaxonomyConnectionEdge>;
-  /** The name of the taxonomy that the object is associated with */
-  taxonomyName?: Maybe<Scalars['String']>;
-  /** The ID of the term group that this term object belongs to */
-  termGroupId?: Maybe<Scalars['Int']>;
-  /** The taxonomy ID that the object is associated with */
-  termTaxonomyId?: Maybe<Scalars['Int']>;
-  /** The unique resource identifier path */
-  uri?: Maybe<Scalars['String']>;
-};
-
-
-/** The documentTopic type */
-export type DocumentTopicContentNodesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<DocumentTopicToContentNodeConnectionWhereArgs>;
-};
-
-
-/** The documentTopic type */
-export type DocumentTopicEnqueuedScriptsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-};
-
-
-/** The documentTopic type */
-export type DocumentTopicEnqueuedStylesheetsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-};
-
-
-/** The documentTopic type */
-export type DocumentTopicPoliciesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<DocumentTopicToPolicyConnectionWhereArgs>;
-};
-
-/** Connection to documentTopic Nodes */
-export type DocumentTopicConnection = {
-  /** A list of edges (relational context) between RootQuery and connected documentTopic Nodes */
-  edges: Array<DocumentTopicConnectionEdge>;
-  /** A list of connected documentTopic Nodes */
-  nodes: Array<DocumentTopic>;
-  /** Information about pagination in a connection. */
-  pageInfo: DocumentTopicConnectionPageInfo;
-};
-
-/** Edge between a Node and a connected documentTopic */
-export type DocumentTopicConnectionEdge = {
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']>;
-  /** The connected documentTopic Node */
-  node: DocumentTopic;
-};
-
-/** Page Info on the connected DocumentTopicConnectionEdge */
-export type DocumentTopicConnectionPageInfo = {
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']>;
-};
-
-/** The &quot;DocumentTopicCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type DocumentTopicCustomFields = AcfFieldGroup & AcfFieldGroupFields & DocumentTopicCustomFields_Fields & {
-  __typename?: 'DocumentTopicCustomFields';
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DocumentTopicCustomFields&quot; Field Group */
-  name?: Maybe<Scalars['String']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DocumentTopicCustomFields&quot; Field Group */
-  nameMn?: Maybe<Scalars['String']>;
-};
-
-/** Interface representing fields of the ACF &quot;DocumentTopicCustomFields&quot; Field Group */
-export type DocumentTopicCustomFields_Fields = {
-  /**
-   * The name of the field group
-   * @deprecated Use __typename instead
-   */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DocumentTopicCustomFields&quot; Field Group */
-  name?: Maybe<Scalars['String']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DocumentTopicCustomFields&quot; Field Group */
-  nameMn?: Maybe<Scalars['String']>;
-};
-
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
-export enum DocumentTopicIdType {
-  /** The Database ID for the node */
-  DatabaseId = 'DATABASE_ID',
-  /** The hashed Global ID */
-  Id = 'ID',
-  /** The name of the node */
-  Name = 'NAME',
-  /** Url friendly name of the node */
-  Slug = 'SLUG',
-  /** The URI for the node */
-  Uri = 'URI'
-}
-
-/** Connection between the DocumentTopic type and the ContentNode type */
-export type DocumentTopicToContentNodeConnection = Connection & ContentNodeConnection & {
-  __typename?: 'DocumentTopicToContentNodeConnection';
-  /** Edges for the DocumentTopicToContentNodeConnection connection */
-  edges: Array<DocumentTopicToContentNodeConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<ContentNode>;
-  /** Information about pagination in a connection. */
-  pageInfo: DocumentTopicToContentNodeConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type DocumentTopicToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
-  __typename?: 'DocumentTopicToContentNodeConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']>;
-  /** The item at the end of the edge */
-  node: ContentNode;
-};
-
-/** Page Info on the &quot;DocumentTopicToContentNodeConnection&quot; */
-export type DocumentTopicToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'DocumentTopicToContentNodeConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']>;
-};
-
-/** Arguments for filtering the DocumentTopicToContentNodeConnection connection */
-export type DocumentTopicToContentNodeConnectionWhereArgs = {
-  /** The Types of content to filter */
-  contentTypes?: InputMaybe<Array<InputMaybe<ContentTypesOfDocumentTopicEnum>>>;
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>;
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']>;
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']>;
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>;
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']>;
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** What parameter to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']>;
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']>;
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']>;
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>;
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']>;
-};
-
-/** Connection between the DocumentTopic type and the policy type */
-export type DocumentTopicToPolicyConnection = Connection & PolicyConnection & {
-  __typename?: 'DocumentTopicToPolicyConnection';
-  /** Edges for the DocumentTopicToPolicyConnection connection */
-  edges: Array<DocumentTopicToPolicyConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<Policy>;
-  /** Information about pagination in a connection. */
-  pageInfo: DocumentTopicToPolicyConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type DocumentTopicToPolicyConnectionEdge = Edge & PolicyConnectionEdge & {
-  __typename?: 'DocumentTopicToPolicyConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']>;
-  /** The item at the end of the edge */
-  node: Policy;
-};
-
-/** Page Info on the &quot;DocumentTopicToPolicyConnection&quot; */
-export type DocumentTopicToPolicyConnectionPageInfo = PageInfo & PolicyConnectionPageInfo & WpPageInfo & {
-  __typename?: 'DocumentTopicToPolicyConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']>;
-};
-
-/** Arguments for filtering the DocumentTopicToPolicyConnection connection */
-export type DocumentTopicToPolicyConnectionWhereArgs = {
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>;
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']>;
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']>;
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>;
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']>;
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** What parameter to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']>;
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']>;
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']>;
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>;
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']>;
-};
-
-/** Connection between the DocumentTopic type and the Taxonomy type */
-export type DocumentTopicToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
-  __typename?: 'DocumentTopicToTaxonomyConnectionEdge';
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']>;
-  /** The node of the connection, without the edges */
-  node: Taxonomy;
-};
-
 /** The documentType type */
-export type DocumentType = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & WithAcfDocumentTypeCustomFields & WithAcfPolicyPageCustomFields & {
+export type DocumentType = DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & WithAcfDocumentTypeCustomFields & {
   __typename?: 'DocumentType';
+  /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+  ancestors?: Maybe<DocumentTypeToAncestorsDocumentTypeConnection>;
+  /** Connection between the documentType type and its children documentTypes. */
+  children?: Maybe<DocumentTypeToDocumentTypeConnection>;
   /** Connection between the DocumentType type and the ContentNode type */
   contentNodes?: Maybe<DocumentTypeToContentNodeConnection>;
   /** The number of objects connected to the object */
@@ -4235,10 +3981,14 @@ export type DocumentType = DatabaseIdentifier & MenuItemLinkable & Node & TermNo
   link?: Maybe<Scalars['String']>;
   /** The human friendly name of the object. */
   name?: Maybe<Scalars['String']>;
+  /** Connection between the documentType type and its parent documentType. */
+  parent?: Maybe<DocumentTypeToParentDocumentTypeConnectionEdge>;
+  /** Database id of the parent node */
+  parentDatabaseId?: Maybe<Scalars['Int']>;
+  /** The globally unique identifier of the parent node. */
+  parentId?: Maybe<Scalars['ID']>;
   /** Connection between the DocumentType type and the policy type */
   policies?: Maybe<DocumentTypeToPolicyConnection>;
-  /** Fields of the PolicyPageCustomFields ACF Field Group */
-  policyPageCustomFields?: Maybe<PolicyPageCustomFields>;
   /** An alphanumeric identifier for the object unique to its type. */
   slug?: Maybe<Scalars['String']>;
   /** Connection between the DocumentType type and the Taxonomy type */
@@ -4251,6 +4001,25 @@ export type DocumentType = DatabaseIdentifier & MenuItemLinkable & Node & TermNo
   termTaxonomyId?: Maybe<Scalars['Int']>;
   /** The unique resource identifier path */
   uri?: Maybe<Scalars['String']>;
+};
+
+
+/** The documentType type */
+export type DocumentTypeAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The documentType type */
+export type DocumentTypeChildrenArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DocumentTypeToDocumentTypeConnectionWhereArgs>;
 };
 
 
@@ -4331,6 +4100,8 @@ export type DocumentTypeCustomFields = AcfFieldGroup & AcfFieldGroupFields & Doc
   fieldGroupName?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DocumentTypeCustomFields&quot; Field Group */
   name?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DocumentTypeCustomFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
 };
 
 /** Interface representing fields of the ACF &quot;DocumentTypeCustomFields&quot; Field Group */
@@ -4342,6 +4113,8 @@ export type DocumentTypeCustomFields_Fields = {
   fieldGroupName?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DocumentTypeCustomFields&quot; Field Group */
   name?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DocumentTypeCustomFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -4357,6 +4130,39 @@ export enum DocumentTypeIdType {
   /** The URI for the node */
   Uri = 'URI'
 }
+
+/** Connection between the DocumentType type and the documentType type */
+export type DocumentTypeToAncestorsDocumentTypeConnection = Connection & DocumentTypeConnection & {
+  __typename?: 'DocumentTypeToAncestorsDocumentTypeConnection';
+  /** Edges for the DocumentTypeToAncestorsDocumentTypeConnection connection */
+  edges: Array<DocumentTypeToAncestorsDocumentTypeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<DocumentType>;
+  /** Information about pagination in a connection. */
+  pageInfo: DocumentTypeToAncestorsDocumentTypeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type DocumentTypeToAncestorsDocumentTypeConnectionEdge = DocumentTypeConnectionEdge & Edge & {
+  __typename?: 'DocumentTypeToAncestorsDocumentTypeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: DocumentType;
+};
+
+/** Page Info on the &quot;DocumentTypeToAncestorsDocumentTypeConnection&quot; */
+export type DocumentTypeToAncestorsDocumentTypeConnectionPageInfo = DocumentTypeConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'DocumentTypeToAncestorsDocumentTypeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
 
 /** Connection between the DocumentType type and the ContentNode type */
 export type DocumentTypeToContentNodeConnection = Connection & ContentNodeConnection & {
@@ -4429,6 +4235,92 @@ export type DocumentTypeToContentNodeConnectionWhereArgs = {
   status?: InputMaybe<PostStatusEnum>;
   /** Title of the object */
   title?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection between the DocumentType type and the documentType type */
+export type DocumentTypeToDocumentTypeConnection = Connection & DocumentTypeConnection & {
+  __typename?: 'DocumentTypeToDocumentTypeConnection';
+  /** Edges for the DocumentTypeToDocumentTypeConnection connection */
+  edges: Array<DocumentTypeToDocumentTypeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<DocumentType>;
+  /** Information about pagination in a connection. */
+  pageInfo: DocumentTypeToDocumentTypeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type DocumentTypeToDocumentTypeConnectionEdge = DocumentTypeConnectionEdge & Edge & {
+  __typename?: 'DocumentTypeToDocumentTypeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: DocumentType;
+};
+
+/** Page Info on the &quot;DocumentTypeToDocumentTypeConnection&quot; */
+export type DocumentTypeToDocumentTypeConnectionPageInfo = DocumentTypeConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'DocumentTypeToDocumentTypeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the DocumentTypeToDocumentTypeConnection connection */
+export type DocumentTypeToDocumentTypeConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Connection between the DocumentType type and the documentType type */
+export type DocumentTypeToParentDocumentTypeConnectionEdge = DocumentTypeConnectionEdge & Edge & OneToOneConnection & {
+  __typename?: 'DocumentTypeToParentDocumentTypeConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /** The node of the connection, without the edges */
+  node: DocumentType;
 };
 
 /** Connection between the DocumentType type and the policy type */
@@ -6402,7 +6294,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Accomplishment | ActionType | Category | DocumentTopic | DocumentType | News | Page | Person | Policy | Post | PurposeTag | Report | Resource | ResourceType | Story | Tag | TakeAction | Timeline | VolunteerPosition;
+export type MenuItemObjectUnion = Accomplishment | ActionType | Category | DocumentType | News | Page | Person | Policy | PolicyStatus | Post | PurposeTag | Report | Resource | ResourceType | Story | Tag | TakeAction | Timeline | Topic | VolunteerPosition;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -8449,8 +8341,6 @@ export type Policy = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
   dateGmt?: Maybe<Scalars['String']>;
   /** The desired slug of the post */
   desiredSlug?: Maybe<Scalars['String']>;
-  /** Connection between the Policy type and the documentTopic type */
-  documentTopics?: Maybe<PolicyToDocumentTopicConnection>;
   /** Connection between the Policy type and the documentType type */
   documentTypes?: Maybe<PolicyToDocumentTypeConnection>;
   /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
@@ -8509,6 +8399,8 @@ export type Policy = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
   policyId: Scalars['Int'];
   /** Fields of the PolicyPageCustomFields ACF Field Group */
   policyPageCustomFields?: Maybe<PolicyPageCustomFields>;
+  /** Connection between the Policy type and the policyStatus type */
+  policyStatuses?: Maybe<PolicyToPolicyStatusConnection>;
   /** Connection between the Policy type and the policy type */
   preview?: Maybe<PolicyToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -8525,6 +8417,8 @@ export type Policy = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
   terms?: Maybe<PolicyToTermNodeConnection>;
   /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
   title?: Maybe<Scalars['String']>;
+  /** Connection between the Policy type and the topic type */
+  topics?: Maybe<PolicyToTopicConnection>;
   /** The unique resource identifier path */
   uri?: Maybe<Scalars['String']>;
 };
@@ -8542,16 +8436,6 @@ export type PolicyAncestorsArgs = {
 /** The policy type */
 export type PolicyContentArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
-};
-
-
-/** The policy type */
-export type PolicyDocumentTopicsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PolicyToDocumentTopicConnectionWhereArgs>;
 };
 
 
@@ -8584,6 +8468,16 @@ export type PolicyEnqueuedStylesheetsArgs = {
 
 
 /** The policy type */
+export type PolicyPolicyStatusesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PolicyToPolicyStatusConnectionWhereArgs>;
+};
+
+
+/** The policy type */
 export type PolicyTermsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -8596,6 +8490,16 @@ export type PolicyTermsArgs = {
 /** The policy type */
 export type PolicyTitleArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The policy type */
+export type PolicyTopicsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PolicyToTopicConnectionWhereArgs>;
 };
 
 /** Connection to policy Nodes */
@@ -8626,26 +8530,6 @@ export type PolicyConnectionPageInfo = {
   hasPreviousPage: Scalars['Boolean'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']>;
-};
-
-/** Set relationships between the policy to documentTopics */
-export type PolicyDocumentTopicsInput = {
-  /** If true, this will append the documentTopic to existing related documentTopics. If false, this will replace existing relationships. Default true. */
-  append?: InputMaybe<Scalars['Boolean']>;
-  /** The input list of items to set. */
-  nodes?: InputMaybe<Array<InputMaybe<PolicyDocumentTopicsNodeInput>>>;
-};
-
-/** List of documentTopics to connect the policy to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
-export type PolicyDocumentTopicsNodeInput = {
-  /** The description of the documentTopic. This field is used to set a description of the documentTopic if a new one is created during the mutation. */
-  description?: InputMaybe<Scalars['String']>;
-  /** The ID of the documentTopic. If present, this will be used to connect to the policy. If no existing documentTopic exists with this ID, no connection will be made. */
-  id?: InputMaybe<Scalars['ID']>;
-  /** The name of the documentTopic. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
-  name?: InputMaybe<Scalars['String']>;
-  /** The slug of the documentTopic. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
-  slug?: InputMaybe<Scalars['String']>;
 };
 
 /** Set relationships between the policy to documentTypes */
@@ -8725,8 +8609,6 @@ export type PolicyPageFeaturedTakeActionsArgs = {
 /** The &quot;PolicyPageCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PolicyPageCustomFields = AcfFieldGroup & AcfFieldGroupFields & PolicyPageCustomFields_Fields & {
   __typename?: 'PolicyPageCustomFields';
-  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
-  documentTypes?: Maybe<AcfContentNodeConnection>;
   /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   downloadUrl?: Maybe<Scalars['String']>;
   /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
@@ -8738,18 +8620,20 @@ export type PolicyPageCustomFields = AcfFieldGroup & AcfFieldGroupFields & Polic
   fieldGroupName?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   furtherReading?: Maybe<Scalars['String']>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  furtherReadingMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;date_picker&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group (ACF Fields of the date_picker type return a date string according to the RFC3339 spec: https://datatracker.ietf.org/doc/html/rfc3339.) */
   initiatedDate?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   name?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   recommendedAction?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  relatedPolicies?: Maybe<AcfContentNodeConnection>;
   /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   sourceUrl?: Maybe<Scalars['String']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
-  status?: Maybe<Scalars['String']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
-  statusMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   summary?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
@@ -8760,15 +8644,8 @@ export type PolicyPageCustomFields = AcfFieldGroup & AcfFieldGroupFields & Polic
   titleMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   updates?: Maybe<Scalars['String']>;
-};
-
-
-/** The &quot;PolicyPageCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type PolicyPageCustomFieldsDocumentTypesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  updatesMn?: Maybe<Scalars['String']>;
 };
 
 
@@ -8780,10 +8657,17 @@ export type PolicyPageCustomFieldsRecommendedActionArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+
+/** The &quot;PolicyPageCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PolicyPageCustomFieldsRelatedPoliciesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
 /** Interface representing fields of the ACF &quot;PolicyPageCustomFields&quot; Field Group */
 export type PolicyPageCustomFields_Fields = {
-  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
-  documentTypes?: Maybe<AcfContentNodeConnection>;
   /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   downloadUrl?: Maybe<Scalars['String']>;
   /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
@@ -8795,18 +8679,20 @@ export type PolicyPageCustomFields_Fields = {
   fieldGroupName?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   furtherReading?: Maybe<Scalars['String']>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  furtherReadingMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;date_picker&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group (ACF Fields of the date_picker type return a date string according to the RFC3339 spec: https://datatracker.ietf.org/doc/html/rfc3339.) */
   initiatedDate?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   name?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   recommendedAction?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;post_object&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  relatedPolicies?: Maybe<AcfContentNodeConnection>;
   /** Field of the &quot;url&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   sourceUrl?: Maybe<Scalars['String']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
-  status?: Maybe<Scalars['String']>;
-  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
-  statusMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   summary?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
@@ -8817,11 +8703,13 @@ export type PolicyPageCustomFields_Fields = {
   titleMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
   updates?: Maybe<Scalars['String']>;
+  /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;PolicyPageCustomFields&quot; Field Group */
+  updatesMn?: Maybe<Scalars['String']>;
 };
 
 
 /** Interface representing fields of the ACF &quot;PolicyPageCustomFields&quot; Field Group */
-export type PolicyPageCustomFields_FieldsDocumentTypesArgs = {
+export type PolicyPageCustomFields_FieldsRecommendedActionArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -8830,7 +8718,7 @@ export type PolicyPageCustomFields_FieldsDocumentTypesArgs = {
 
 
 /** Interface representing fields of the ACF &quot;PolicyPageCustomFields&quot; Field Group */
-export type PolicyPageCustomFields_FieldsRecommendedActionArgs = {
+export type PolicyPageCustomFields_FieldsRelatedPoliciesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -8921,29 +8809,169 @@ export type PolicyPage_FieldsFeaturedTakeActionsArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
-/** Connection between the Policy type and the documentTopic type */
-export type PolicyToDocumentTopicConnection = Connection & DocumentTopicConnection & {
-  __typename?: 'PolicyToDocumentTopicConnection';
-  /** Edges for the PolicyToDocumentTopicConnection connection */
-  edges: Array<PolicyToDocumentTopicConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<DocumentTopic>;
+/** Set relationships between the policy to policyStatuses */
+export type PolicyPolicyStatusesInput = {
+  /** If true, this will append the policyStatus to existing related policyStatuses. If false, this will replace existing relationships. Default true. */
+  append?: InputMaybe<Scalars['Boolean']>;
+  /** The input list of items to set. */
+  nodes?: InputMaybe<Array<InputMaybe<PolicyPolicyStatusesNodeInput>>>;
+};
+
+/** List of policyStatuses to connect the policy to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
+export type PolicyPolicyStatusesNodeInput = {
+  /** The description of the policyStatus. This field is used to set a description of the policyStatus if a new one is created during the mutation. */
+  description?: InputMaybe<Scalars['String']>;
+  /** The ID of the policyStatus. If present, this will be used to connect to the policy. If no existing policyStatus exists with this ID, no connection will be made. */
+  id?: InputMaybe<Scalars['ID']>;
+  /** The name of the policyStatus. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
+  name?: InputMaybe<Scalars['String']>;
+  /** The slug of the policyStatus. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+/** The policyStatus type */
+export type PolicyStatus = DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & WithAcfPolicyStatusCustomFields & {
+  __typename?: 'PolicyStatus';
+  /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+  ancestors?: Maybe<PolicyStatusToAncestorsPolicyStatusConnection>;
+  /** Connection between the policyStatus type and its children policyStatuses. */
+  children?: Maybe<PolicyStatusToPolicyStatusConnection>;
+  /** Connection between the PolicyStatus type and the ContentNode type */
+  contentNodes?: Maybe<PolicyStatusToContentNodeConnection>;
+  /** The number of objects connected to the object */
+  count?: Maybe<Scalars['Int']>;
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int'];
+  /** The description of the object */
+  description?: Maybe<Scalars['String']>;
+  /** Connection between the TermNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
+  /** Connection between the TermNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
+  /** The globally unique ID for the object */
+  id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean'];
+  /** The link to the term */
+  link?: Maybe<Scalars['String']>;
+  /** The human friendly name of the object. */
+  name?: Maybe<Scalars['String']>;
+  /** Connection between the policyStatus type and its parent policyStatus. */
+  parent?: Maybe<PolicyStatusToParentPolicyStatusConnectionEdge>;
+  /** Database id of the parent node */
+  parentDatabaseId?: Maybe<Scalars['Int']>;
+  /** The globally unique identifier of the parent node. */
+  parentId?: Maybe<Scalars['ID']>;
+  /** Connection between the PolicyStatus type and the policy type */
+  policies?: Maybe<PolicyStatusToPolicyConnection>;
+  /** Fields of the PolicyStatusCustomFields ACF Field Group */
+  policyStatusCustomFields?: Maybe<PolicyStatusCustomFields>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of databaseId
+   */
+  policyStatusId?: Maybe<Scalars['Int']>;
+  /** An alphanumeric identifier for the object unique to its type. */
+  slug?: Maybe<Scalars['String']>;
+  /** Connection between the PolicyStatus type and the Taxonomy type */
+  taxonomy?: Maybe<PolicyStatusToTaxonomyConnectionEdge>;
+  /** The name of the taxonomy that the object is associated with */
+  taxonomyName?: Maybe<Scalars['String']>;
+  /** The ID of the term group that this term object belongs to */
+  termGroupId?: Maybe<Scalars['Int']>;
+  /** The taxonomy ID that the object is associated with */
+  termTaxonomyId?: Maybe<Scalars['Int']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']>;
+};
+
+
+/** The policyStatus type */
+export type PolicyStatusAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The policyStatus type */
+export type PolicyStatusChildrenArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PolicyStatusToPolicyStatusConnectionWhereArgs>;
+};
+
+
+/** The policyStatus type */
+export type PolicyStatusContentNodesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PolicyStatusToContentNodeConnectionWhereArgs>;
+};
+
+
+/** The policyStatus type */
+export type PolicyStatusEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The policyStatus type */
+export type PolicyStatusEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The policyStatus type */
+export type PolicyStatusPoliciesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PolicyStatusToPolicyConnectionWhereArgs>;
+};
+
+/** Connection to policyStatus Nodes */
+export type PolicyStatusConnection = {
+  /** A list of edges (relational context) between RootQuery and connected policyStatus Nodes */
+  edges: Array<PolicyStatusConnectionEdge>;
+  /** A list of connected policyStatus Nodes */
+  nodes: Array<PolicyStatus>;
   /** Information about pagination in a connection. */
-  pageInfo: PolicyToDocumentTopicConnectionPageInfo;
+  pageInfo: PolicyStatusConnectionPageInfo;
 };
 
-/** An edge in a connection */
-export type PolicyToDocumentTopicConnectionEdge = DocumentTopicConnectionEdge & Edge & {
-  __typename?: 'PolicyToDocumentTopicConnectionEdge';
-  /** A cursor for use in pagination */
+/** Edge between a Node and a connected policyStatus */
+export type PolicyStatusConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
   cursor?: Maybe<Scalars['String']>;
-  /** The item at the end of the edge */
-  node: DocumentTopic;
+  /** The connected policyStatus Node */
+  node: PolicyStatus;
 };
 
-/** Page Info on the &quot;PolicyToDocumentTopicConnection&quot; */
-export type PolicyToDocumentTopicConnectionPageInfo = DocumentTopicConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'PolicyToDocumentTopicConnectionPageInfo';
+/** Page Info on the connected PolicyStatusConnectionEdge */
+export type PolicyStatusConnectionPageInfo = {
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['String']>;
   /** When paginating forwards, are there more items? */
@@ -8954,8 +8982,268 @@ export type PolicyToDocumentTopicConnectionPageInfo = DocumentTopicConnectionPag
   startCursor?: Maybe<Scalars['String']>;
 };
 
-/** Arguments for filtering the PolicyToDocumentTopicConnection connection */
-export type PolicyToDocumentTopicConnectionWhereArgs = {
+/** The &quot;PolicyStatusCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type PolicyStatusCustomFields = AcfFieldGroup & AcfFieldGroupFields & PolicyStatusCustomFields_Fields & {
+  __typename?: 'PolicyStatusCustomFields';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyStatusCustomFields&quot; Field Group */
+  name?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyStatusCustomFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
+};
+
+/** Interface representing fields of the ACF &quot;PolicyStatusCustomFields&quot; Field Group */
+export type PolicyStatusCustomFields_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyStatusCustomFields&quot; Field Group */
+  name?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyStatusCustomFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
+};
+
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+export enum PolicyStatusIdType {
+  /** The Database ID for the node */
+  DatabaseId = 'DATABASE_ID',
+  /** The hashed Global ID */
+  Id = 'ID',
+  /** The name of the node */
+  Name = 'NAME',
+  /** Url friendly name of the node */
+  Slug = 'SLUG',
+  /** The URI for the node */
+  Uri = 'URI'
+}
+
+/** Connection between the PolicyStatus type and the policyStatus type */
+export type PolicyStatusToAncestorsPolicyStatusConnection = Connection & PolicyStatusConnection & {
+  __typename?: 'PolicyStatusToAncestorsPolicyStatusConnection';
+  /** Edges for the PolicyStatusToAncestorsPolicyStatusConnection connection */
+  edges: Array<PolicyStatusToAncestorsPolicyStatusConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<PolicyStatus>;
+  /** Information about pagination in a connection. */
+  pageInfo: PolicyStatusToAncestorsPolicyStatusConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type PolicyStatusToAncestorsPolicyStatusConnectionEdge = Edge & PolicyStatusConnectionEdge & {
+  __typename?: 'PolicyStatusToAncestorsPolicyStatusConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: PolicyStatus;
+};
+
+/** Page Info on the &quot;PolicyStatusToAncestorsPolicyStatusConnection&quot; */
+export type PolicyStatusToAncestorsPolicyStatusConnectionPageInfo = PageInfo & PolicyStatusConnectionPageInfo & WpPageInfo & {
+  __typename?: 'PolicyStatusToAncestorsPolicyStatusConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Connection between the PolicyStatus type and the ContentNode type */
+export type PolicyStatusToContentNodeConnection = Connection & ContentNodeConnection & {
+  __typename?: 'PolicyStatusToContentNodeConnection';
+  /** Edges for the PolicyStatusToContentNodeConnection connection */
+  edges: Array<PolicyStatusToContentNodeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<ContentNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: PolicyStatusToContentNodeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type PolicyStatusToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
+  __typename?: 'PolicyStatusToContentNodeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: ContentNode;
+};
+
+/** Page Info on the &quot;PolicyStatusToContentNodeConnection&quot; */
+export type PolicyStatusToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'PolicyStatusToContentNodeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the PolicyStatusToContentNodeConnection connection */
+export type PolicyStatusToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: InputMaybe<Array<InputMaybe<ContentTypesOfPolicyStatusEnum>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection between the PolicyStatus type and the policyStatus type */
+export type PolicyStatusToParentPolicyStatusConnectionEdge = Edge & OneToOneConnection & PolicyStatusConnectionEdge & {
+  __typename?: 'PolicyStatusToParentPolicyStatusConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /** The node of the connection, without the edges */
+  node: PolicyStatus;
+};
+
+/** Connection between the PolicyStatus type and the policy type */
+export type PolicyStatusToPolicyConnection = Connection & PolicyConnection & {
+  __typename?: 'PolicyStatusToPolicyConnection';
+  /** Edges for the PolicyStatusToPolicyConnection connection */
+  edges: Array<PolicyStatusToPolicyConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Policy>;
+  /** Information about pagination in a connection. */
+  pageInfo: PolicyStatusToPolicyConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type PolicyStatusToPolicyConnectionEdge = Edge & PolicyConnectionEdge & {
+  __typename?: 'PolicyStatusToPolicyConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: Policy;
+};
+
+/** Page Info on the &quot;PolicyStatusToPolicyConnection&quot; */
+export type PolicyStatusToPolicyConnectionPageInfo = PageInfo & PolicyConnectionPageInfo & WpPageInfo & {
+  __typename?: 'PolicyStatusToPolicyConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the PolicyStatusToPolicyConnection connection */
+export type PolicyStatusToPolicyConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection between the PolicyStatus type and the policyStatus type */
+export type PolicyStatusToPolicyStatusConnection = Connection & PolicyStatusConnection & {
+  __typename?: 'PolicyStatusToPolicyStatusConnection';
+  /** Edges for the PolicyStatusToPolicyStatusConnection connection */
+  edges: Array<PolicyStatusToPolicyStatusConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<PolicyStatus>;
+  /** Information about pagination in a connection. */
+  pageInfo: PolicyStatusToPolicyStatusConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type PolicyStatusToPolicyStatusConnectionEdge = Edge & PolicyStatusConnectionEdge & {
+  __typename?: 'PolicyStatusToPolicyStatusConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: PolicyStatus;
+};
+
+/** Page Info on the &quot;PolicyStatusToPolicyStatusConnection&quot; */
+export type PolicyStatusToPolicyStatusConnectionPageInfo = PageInfo & PolicyStatusConnectionPageInfo & WpPageInfo & {
+  __typename?: 'PolicyStatusToPolicyStatusConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the PolicyStatusToPolicyStatusConnection connection */
+export type PolicyStatusToPolicyStatusConnectionWhereArgs = {
   /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
   cacheDomain?: InputMaybe<Scalars['String']>;
   /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
@@ -8996,6 +9284,15 @@ export type PolicyToDocumentTopicConnectionWhereArgs = {
   termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Whether to prime meta caches for matched terms. Default true. */
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Connection between the PolicyStatus type and the Taxonomy type */
+export type PolicyStatusToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
+  __typename?: 'PolicyStatusToTaxonomyConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /** The node of the connection, without the edges */
+  node: Taxonomy;
 };
 
 /** Connection between the Policy type and the documentType type */
@@ -9126,6 +9423,83 @@ export type PolicyToPolicyConnectionPageInfo = PageInfo & PolicyConnectionPageIn
   startCursor?: Maybe<Scalars['String']>;
 };
 
+/** Connection between the Policy type and the policyStatus type */
+export type PolicyToPolicyStatusConnection = Connection & PolicyStatusConnection & {
+  __typename?: 'PolicyToPolicyStatusConnection';
+  /** Edges for the PolicyToPolicyStatusConnection connection */
+  edges: Array<PolicyToPolicyStatusConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<PolicyStatus>;
+  /** Information about pagination in a connection. */
+  pageInfo: PolicyToPolicyStatusConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type PolicyToPolicyStatusConnectionEdge = Edge & PolicyStatusConnectionEdge & {
+  __typename?: 'PolicyToPolicyStatusConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: PolicyStatus;
+};
+
+/** Page Info on the &quot;PolicyToPolicyStatusConnection&quot; */
+export type PolicyToPolicyStatusConnectionPageInfo = PageInfo & PolicyStatusConnectionPageInfo & WpPageInfo & {
+  __typename?: 'PolicyToPolicyStatusConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the PolicyToPolicyStatusConnection connection */
+export type PolicyToPolicyStatusConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Connection between the Policy type and the policy type */
 export type PolicyToPreviewConnectionEdge = Edge & OneToOneConnection & PolicyConnectionEdge & {
   __typename?: 'PolicyToPreviewConnectionEdge';
@@ -9212,6 +9586,103 @@ export type PolicyToTermNodeConnectionWhereArgs = {
   termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Whether to prime meta caches for matched terms. Default true. */
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Connection between the Policy type and the topic type */
+export type PolicyToTopicConnection = Connection & TopicConnection & {
+  __typename?: 'PolicyToTopicConnection';
+  /** Edges for the PolicyToTopicConnection connection */
+  edges: Array<PolicyToTopicConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Topic>;
+  /** Information about pagination in a connection. */
+  pageInfo: PolicyToTopicConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type PolicyToTopicConnectionEdge = Edge & TopicConnectionEdge & {
+  __typename?: 'PolicyToTopicConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: Topic;
+};
+
+/** Page Info on the &quot;PolicyToTopicConnection&quot; */
+export type PolicyToTopicConnectionPageInfo = PageInfo & TopicConnectionPageInfo & WpPageInfo & {
+  __typename?: 'PolicyToTopicConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the PolicyToTopicConnection connection */
+export type PolicyToTopicConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Set relationships between the policy to topics */
+export type PolicyTopicsInput = {
+  /** If true, this will append the topic to existing related topics. If false, this will replace existing relationships. Default true. */
+  append?: InputMaybe<Scalars['Boolean']>;
+  /** The input list of items to set. */
+  nodes?: InputMaybe<Array<InputMaybe<PolicyTopicsNodeInput>>>;
+};
+
+/** List of topics to connect the policy to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
+export type PolicyTopicsNodeInput = {
+  /** The description of the topic. This field is used to set a description of the topic if a new one is created during the mutation. */
+  description?: InputMaybe<Scalars['String']>;
+  /** The ID of the topic. If present, this will be used to connect to the policy. If no existing topic exists with this ID, no connection will be made. */
+  id?: InputMaybe<Scalars['ID']>;
+  /** The name of the topic. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
+  name?: InputMaybe<Scalars['String']>;
+  /** The slug of the topic. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
+  slug?: InputMaybe<Scalars['String']>;
 };
 
 export type PolicyTrackingPageSettings = AcfOptionsPage & Node & WithAcfPolicyPage & {
@@ -11926,8 +12397,6 @@ export type RootMutation = {
   createCategory?: Maybe<CreateCategoryPayload>;
   /** The createComment mutation */
   createComment?: Maybe<CreateCommentPayload>;
-  /** The createDocumentTopic mutation */
-  createDocumentTopic?: Maybe<CreateDocumentTopicPayload>;
   /** The createDocumentType mutation */
   createDocumentType?: Maybe<CreateDocumentTypePayload>;
   /** The createMediaItem mutation */
@@ -11940,6 +12409,8 @@ export type RootMutation = {
   createPerson?: Maybe<CreatePersonPayload>;
   /** The createPolicy mutation */
   createPolicy?: Maybe<CreatePolicyPayload>;
+  /** The createPolicyStatus mutation */
+  createPolicyStatus?: Maybe<CreatePolicyStatusPayload>;
   /** The createPost mutation */
   createPost?: Maybe<CreatePostPayload>;
   /** The createPostFormat mutation */
@@ -11960,6 +12431,8 @@ export type RootMutation = {
   createTakeAction?: Maybe<CreateTakeActionPayload>;
   /** The createTimeline mutation */
   createTimeline?: Maybe<CreateTimelinePayload>;
+  /** The createTopic mutation */
+  createTopic?: Maybe<CreateTopicPayload>;
   /** The createUser mutation */
   createUser?: Maybe<CreateUserPayload>;
   /** The createVolunteerPosition mutation */
@@ -11972,8 +12445,6 @@ export type RootMutation = {
   deleteCategory?: Maybe<DeleteCategoryPayload>;
   /** The deleteComment mutation */
   deleteComment?: Maybe<DeleteCommentPayload>;
-  /** The deleteDocumentTopic mutation */
-  deleteDocumentTopic?: Maybe<DeleteDocumentTopicPayload>;
   /** The deleteDocumentType mutation */
   deleteDocumentType?: Maybe<DeleteDocumentTypePayload>;
   /** The deleteMediaItem mutation */
@@ -11986,6 +12457,8 @@ export type RootMutation = {
   deletePerson?: Maybe<DeletePersonPayload>;
   /** The deletePolicy mutation */
   deletePolicy?: Maybe<DeletePolicyPayload>;
+  /** The deletePolicyStatus mutation */
+  deletePolicyStatus?: Maybe<DeletePolicyStatusPayload>;
   /** The deletePost mutation */
   deletePost?: Maybe<DeletePostPayload>;
   /** The deletePostFormat mutation */
@@ -12006,6 +12479,8 @@ export type RootMutation = {
   deleteTakeAction?: Maybe<DeleteTakeActionPayload>;
   /** The deleteTimeline mutation */
   deleteTimeline?: Maybe<DeleteTimelinePayload>;
+  /** The deleteTopic mutation */
+  deleteTopic?: Maybe<DeleteTopicPayload>;
   /** The deleteUser mutation */
   deleteUser?: Maybe<DeleteUserPayload>;
   /** The deleteVolunteerPosition mutation */
@@ -12028,8 +12503,6 @@ export type RootMutation = {
   updateCategory?: Maybe<UpdateCategoryPayload>;
   /** The updateComment mutation */
   updateComment?: Maybe<UpdateCommentPayload>;
-  /** The updateDocumentTopic mutation */
-  updateDocumentTopic?: Maybe<UpdateDocumentTopicPayload>;
   /** The updateDocumentType mutation */
   updateDocumentType?: Maybe<UpdateDocumentTypePayload>;
   /** The updateMediaItem mutation */
@@ -12042,6 +12515,8 @@ export type RootMutation = {
   updatePerson?: Maybe<UpdatePersonPayload>;
   /** The updatePolicy mutation */
   updatePolicy?: Maybe<UpdatePolicyPayload>;
+  /** The updatePolicyStatus mutation */
+  updatePolicyStatus?: Maybe<UpdatePolicyStatusPayload>;
   /** The updatePost mutation */
   updatePost?: Maybe<UpdatePostPayload>;
   /** The updatePostFormat mutation */
@@ -12064,6 +12539,8 @@ export type RootMutation = {
   updateTakeAction?: Maybe<UpdateTakeActionPayload>;
   /** The updateTimeline mutation */
   updateTimeline?: Maybe<UpdateTimelinePayload>;
+  /** The updateTopic mutation */
+  updateTopic?: Maybe<UpdateTopicPayload>;
   /** The updateUser mutation */
   updateUser?: Maybe<UpdateUserPayload>;
   /** The updateVolunteerPosition mutation */
@@ -12108,12 +12585,6 @@ export type RootMutationCreateCommentArgs = {
 
 
 /** The root mutation */
-export type RootMutationCreateDocumentTopicArgs = {
-  input: CreateDocumentTopicInput;
-};
-
-
-/** The root mutation */
 export type RootMutationCreateDocumentTypeArgs = {
   input: CreateDocumentTypeInput;
 };
@@ -12146,6 +12617,12 @@ export type RootMutationCreatePersonArgs = {
 /** The root mutation */
 export type RootMutationCreatePolicyArgs = {
   input: CreatePolicyInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreatePolicyStatusArgs = {
+  input: CreatePolicyStatusInput;
 };
 
 
@@ -12210,6 +12687,12 @@ export type RootMutationCreateTimelineArgs = {
 
 
 /** The root mutation */
+export type RootMutationCreateTopicArgs = {
+  input: CreateTopicInput;
+};
+
+
+/** The root mutation */
 export type RootMutationCreateUserArgs = {
   input: CreateUserInput;
 };
@@ -12246,12 +12729,6 @@ export type RootMutationDeleteCommentArgs = {
 
 
 /** The root mutation */
-export type RootMutationDeleteDocumentTopicArgs = {
-  input: DeleteDocumentTopicInput;
-};
-
-
-/** The root mutation */
 export type RootMutationDeleteDocumentTypeArgs = {
   input: DeleteDocumentTypeInput;
 };
@@ -12284,6 +12761,12 @@ export type RootMutationDeletePersonArgs = {
 /** The root mutation */
 export type RootMutationDeletePolicyArgs = {
   input: DeletePolicyInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeletePolicyStatusArgs = {
+  input: DeletePolicyStatusInput;
 };
 
 
@@ -12344,6 +12827,12 @@ export type RootMutationDeleteTakeActionArgs = {
 /** The root mutation */
 export type RootMutationDeleteTimelineArgs = {
   input: DeleteTimelineInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteTopicArgs = {
+  input: DeleteTopicInput;
 };
 
 
@@ -12414,12 +12903,6 @@ export type RootMutationUpdateCommentArgs = {
 
 
 /** The root mutation */
-export type RootMutationUpdateDocumentTopicArgs = {
-  input: UpdateDocumentTopicInput;
-};
-
-
-/** The root mutation */
 export type RootMutationUpdateDocumentTypeArgs = {
   input: UpdateDocumentTypeInput;
 };
@@ -12452,6 +12935,12 @@ export type RootMutationUpdatePersonArgs = {
 /** The root mutation */
 export type RootMutationUpdatePolicyArgs = {
   input: UpdatePolicyInput;
+};
+
+
+/** The root mutation */
+export type RootMutationUpdatePolicyStatusArgs = {
+  input: UpdatePolicyStatusInput;
 };
 
 
@@ -12522,6 +13011,12 @@ export type RootMutationUpdateTimelineArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdateTopicArgs = {
+  input: UpdateTopicInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdateUserArgs = {
   input: UpdateUserInput;
 };
@@ -12571,10 +13066,6 @@ export type RootQuery = WithAcfOptionsPageAboutUsPageSettings & WithAcfOptionsPa
   contentTypes?: Maybe<RootQueryToContentTypeConnection>;
   /** Fields of the &#039;DiscussionSettings&#039; settings group */
   discussionSettings?: Maybe<DiscussionSettings>;
-  /** A 0bject */
-  documentTopic?: Maybe<DocumentTopic>;
-  /** Connection between the RootQuery type and the documentTopic type */
-  documentTopics?: Maybe<RootQueryToDocumentTopicConnection>;
   /** A 0bject */
   documentType?: Maybe<DocumentType>;
   /** Connection between the RootQuery type and the documentType type */
@@ -12645,6 +13136,10 @@ export type RootQuery = WithAcfOptionsPageAboutUsPageSettings & WithAcfOptionsPa
    * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
    */
   policyBy?: Maybe<Policy>;
+  /** A 0bject */
+  policyStatus?: Maybe<PolicyStatus>;
+  /** Connection between the RootQuery type and the policyStatus type */
+  policyStatuses?: Maybe<RootQueryToPolicyStatusConnection>;
   policyTrackingPageSettings?: Maybe<PolicyTrackingPageSettings>;
   /** An object of the post Type.  */
   post?: Maybe<Post>;
@@ -12736,6 +13231,10 @@ export type RootQuery = WithAcfOptionsPageAboutUsPageSettings & WithAcfOptionsPa
   timelineBy?: Maybe<Timeline>;
   /** Connection between the RootQuery type and the timeline type */
   timelines?: Maybe<RootQueryToTimelineConnection>;
+  /** A 0bject */
+  topic?: Maybe<Topic>;
+  /** Connection between the RootQuery type and the topic type */
+  topics?: Maybe<RootQueryToTopicConnection>;
   /** Returns a user */
   user?: Maybe<User>;
   /** Returns a user role */
@@ -12880,23 +13379,6 @@ export type RootQueryContentTypesArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryDocumentTopicArgs = {
-  id: Scalars['ID'];
-  idType?: InputMaybe<DocumentTopicIdType>;
-};
-
-
-/** The root entry point into the Graph */
-export type RootQueryDocumentTopicsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<RootQueryToDocumentTopicConnectionWhereArgs>;
 };
 
 
@@ -13110,6 +13592,23 @@ export type RootQueryPolicyByArgs = {
   policyId?: InputMaybe<Scalars['Int']>;
   slug?: InputMaybe<Scalars['String']>;
   uri?: InputMaybe<Scalars['String']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryPolicyStatusArgs = {
+  id: Scalars['ID'];
+  idType?: InputMaybe<PolicyStatusIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryPolicyStatusesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<RootQueryToPolicyStatusConnectionWhereArgs>;
 };
 
 
@@ -13407,6 +13906,23 @@ export type RootQueryTimelinesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<RootQueryToTimelineConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryTopicArgs = {
+  id: Scalars['ID'];
+  idType?: InputMaybe<TopicIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryTopicsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<RootQueryToTopicConnectionWhereArgs>;
 };
 
 
@@ -13892,83 +14408,6 @@ export type RootQueryToContentTypeConnectionPageInfo = ContentTypeConnectionPage
   hasPreviousPage: Scalars['Boolean'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']>;
-};
-
-/** Connection between the RootQuery type and the documentTopic type */
-export type RootQueryToDocumentTopicConnection = Connection & DocumentTopicConnection & {
-  __typename?: 'RootQueryToDocumentTopicConnection';
-  /** Edges for the RootQueryToDocumentTopicConnection connection */
-  edges: Array<RootQueryToDocumentTopicConnectionEdge>;
-  /** The nodes of the connection, without the edges */
-  nodes: Array<DocumentTopic>;
-  /** Information about pagination in a connection. */
-  pageInfo: RootQueryToDocumentTopicConnectionPageInfo;
-};
-
-/** An edge in a connection */
-export type RootQueryToDocumentTopicConnectionEdge = DocumentTopicConnectionEdge & Edge & {
-  __typename?: 'RootQueryToDocumentTopicConnectionEdge';
-  /** A cursor for use in pagination */
-  cursor?: Maybe<Scalars['String']>;
-  /** The item at the end of the edge */
-  node: DocumentTopic;
-};
-
-/** Page Info on the &quot;RootQueryToDocumentTopicConnection&quot; */
-export type RootQueryToDocumentTopicConnectionPageInfo = DocumentTopicConnectionPageInfo & PageInfo & WpPageInfo & {
-  __typename?: 'RootQueryToDocumentTopicConnectionPageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']>;
-};
-
-/** Arguments for filtering the RootQueryToDocumentTopicConnection connection */
-export type RootQueryToDocumentTopicConnectionWhereArgs = {
-  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
-  cacheDomain?: InputMaybe<Scalars['String']>;
-  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
-  childOf?: InputMaybe<Scalars['Int']>;
-  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
-  childless?: InputMaybe<Scalars['Boolean']>;
-  /** Retrieve terms where the description is LIKE the input value. Default empty. */
-  descriptionLike?: InputMaybe<Scalars['String']>;
-  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
-  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
-  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
-  hideEmpty?: InputMaybe<Scalars['Boolean']>;
-  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
-  hierarchical?: InputMaybe<Scalars['Boolean']>;
-  /** Array of term ids to include. Default empty array. */
-  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Array of names to return term(s) for. Default empty. */
-  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** Retrieve terms where the name is LIKE the input value. Default empty. */
-  nameLike?: InputMaybe<Scalars['String']>;
-  /** Array of object IDs. Results will be limited to terms associated with these objects. */
-  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Direction the connection should be ordered in */
-  order?: InputMaybe<OrderEnum>;
-  /** Field(s) to order terms by. Defaults to 'name'. */
-  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
-  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
-  padCounts?: InputMaybe<Scalars['Boolean']>;
-  /** Parent term ID to retrieve direct-child terms of. Default empty. */
-  parent?: InputMaybe<Scalars['Int']>;
-  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
-  search?: InputMaybe<Scalars['String']>;
-  /** Array of slugs to return term(s) for. Default empty. */
-  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  /** Array of term taxonomy IDs, to match when querying terms. */
-  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  /** Whether to prime meta caches for matched terms. Default true. */
-  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Connection between the RootQuery type and the documentType type */
@@ -14622,6 +15061,83 @@ export type RootQueryToPolicyConnectionWhereArgs = {
   status?: InputMaybe<PostStatusEnum>;
   /** Title of the object */
   title?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection between the RootQuery type and the policyStatus type */
+export type RootQueryToPolicyStatusConnection = Connection & PolicyStatusConnection & {
+  __typename?: 'RootQueryToPolicyStatusConnection';
+  /** Edges for the RootQueryToPolicyStatusConnection connection */
+  edges: Array<RootQueryToPolicyStatusConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<PolicyStatus>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToPolicyStatusConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToPolicyStatusConnectionEdge = Edge & PolicyStatusConnectionEdge & {
+  __typename?: 'RootQueryToPolicyStatusConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: PolicyStatus;
+};
+
+/** Page Info on the &quot;RootQueryToPolicyStatusConnection&quot; */
+export type RootQueryToPolicyStatusConnectionPageInfo = PageInfo & PolicyStatusConnectionPageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToPolicyStatusConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the RootQueryToPolicyStatusConnection connection */
+export type RootQueryToPolicyStatusConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Connection between the RootQuery type and the post type */
@@ -15602,6 +16118,83 @@ export type RootQueryToTimelineConnectionWhereArgs = {
   status?: InputMaybe<PostStatusEnum>;
   /** Title of the object */
   title?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection between the RootQuery type and the topic type */
+export type RootQueryToTopicConnection = Connection & TopicConnection & {
+  __typename?: 'RootQueryToTopicConnection';
+  /** Edges for the RootQueryToTopicConnection connection */
+  edges: Array<RootQueryToTopicConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Topic>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToTopicConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToTopicConnectionEdge = Edge & TopicConnectionEdge & {
+  __typename?: 'RootQueryToTopicConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: Topic;
+};
+
+/** Page Info on the &quot;RootQueryToTopicConnection&quot; */
+export type RootQueryToTopicConnectionPageInfo = PageInfo & TopicConnectionPageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToTopicConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the RootQueryToTopicConnection connection */
+export type RootQueryToTopicConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Connection between the RootQuery type and the User type */
@@ -17194,10 +17787,10 @@ export enum TaxonomyEnum {
   Actiontype = 'ACTIONTYPE',
   /** Taxonomy enum category */
   Category = 'CATEGORY',
-  /** Taxonomy enum document-topic */
-  Documenttopic = 'DOCUMENTTOPIC',
   /** Taxonomy enum document-type */
   Documenttype = 'DOCUMENTTYPE',
+  /** Taxonomy enum policy-status */
+  Policystatus = 'POLICYSTATUS',
   /** Taxonomy enum post_format */
   Postformat = 'POSTFORMAT',
   /** Taxonomy enum purpose-tag */
@@ -17205,7 +17798,9 @@ export enum TaxonomyEnum {
   /** Taxonomy enum resource_type */
   Resourcetype = 'RESOURCETYPE',
   /** Taxonomy enum post_tag */
-  Tag = 'TAG'
+  Tag = 'TAG',
+  /** Taxonomy enum topic */
+  Topic = 'TOPIC'
 }
 
 /** The Type of Identifier used to fetch a single Taxonomy node. To be used along with the "id" field. Default is "ID". */
@@ -17764,6 +18359,472 @@ export type TimelineToTimelineConnectionPageInfo = PageInfo & TimelineConnection
   startCursor?: Maybe<Scalars['String']>;
 };
 
+/** The topic type */
+export type Topic = DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & WithAcfTopicCustomFields & {
+  __typename?: 'Topic';
+  /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+  ancestors?: Maybe<TopicToAncestorsTopicConnection>;
+  /** Connection between the topic type and its children topics. */
+  children?: Maybe<TopicToTopicConnection>;
+  /** Connection between the Topic type and the ContentNode type */
+  contentNodes?: Maybe<TopicToContentNodeConnection>;
+  /** The number of objects connected to the object */
+  count?: Maybe<Scalars['Int']>;
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int'];
+  /** The description of the object */
+  description?: Maybe<Scalars['String']>;
+  /** Connection between the TermNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
+  /** Connection between the TermNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
+  /** The globally unique ID for the object */
+  id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean'];
+  /** The link to the term */
+  link?: Maybe<Scalars['String']>;
+  /** The human friendly name of the object. */
+  name?: Maybe<Scalars['String']>;
+  /** Connection between the topic type and its parent topic. */
+  parent?: Maybe<TopicToParentTopicConnectionEdge>;
+  /** Database id of the parent node */
+  parentDatabaseId?: Maybe<Scalars['Int']>;
+  /** The globally unique identifier of the parent node. */
+  parentId?: Maybe<Scalars['ID']>;
+  /** Connection between the Topic type and the policy type */
+  policies?: Maybe<TopicToPolicyConnection>;
+  /** An alphanumeric identifier for the object unique to its type. */
+  slug?: Maybe<Scalars['String']>;
+  /** Connection between the Topic type and the Taxonomy type */
+  taxonomy?: Maybe<TopicToTaxonomyConnectionEdge>;
+  /** The name of the taxonomy that the object is associated with */
+  taxonomyName?: Maybe<Scalars['String']>;
+  /** The ID of the term group that this term object belongs to */
+  termGroupId?: Maybe<Scalars['Int']>;
+  /** The taxonomy ID that the object is associated with */
+  termTaxonomyId?: Maybe<Scalars['Int']>;
+  /** Fields of the TopicCustomFields ACF Field Group */
+  topicCustomFields?: Maybe<TopicCustomFields>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of databaseId
+   */
+  topicId?: Maybe<Scalars['Int']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']>;
+};
+
+
+/** The topic type */
+export type TopicAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The topic type */
+export type TopicChildrenArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TopicToTopicConnectionWhereArgs>;
+};
+
+
+/** The topic type */
+export type TopicContentNodesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TopicToContentNodeConnectionWhereArgs>;
+};
+
+
+/** The topic type */
+export type TopicEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The topic type */
+export type TopicEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The topic type */
+export type TopicPoliciesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TopicToPolicyConnectionWhereArgs>;
+};
+
+/** Connection to topic Nodes */
+export type TopicConnection = {
+  /** A list of edges (relational context) between RootQuery and connected topic Nodes */
+  edges: Array<TopicConnectionEdge>;
+  /** A list of connected topic Nodes */
+  nodes: Array<Topic>;
+  /** Information about pagination in a connection. */
+  pageInfo: TopicConnectionPageInfo;
+};
+
+/** Edge between a Node and a connected topic */
+export type TopicConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /** The connected topic Node */
+  node: Topic;
+};
+
+/** Page Info on the connected TopicConnectionEdge */
+export type TopicConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** The &quot;TopicCustomFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type TopicCustomFields = AcfFieldGroup & AcfFieldGroupFields & TopicCustomFields_Fields & {
+  __typename?: 'TopicCustomFields';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;TopicCustomFields&quot; Field Group */
+  name?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;TopicCustomFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
+};
+
+/** Interface representing fields of the ACF &quot;TopicCustomFields&quot; Field Group */
+export type TopicCustomFields_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;TopicCustomFields&quot; Field Group */
+  name?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;TopicCustomFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
+};
+
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+export enum TopicIdType {
+  /** The Database ID for the node */
+  DatabaseId = 'DATABASE_ID',
+  /** The hashed Global ID */
+  Id = 'ID',
+  /** The name of the node */
+  Name = 'NAME',
+  /** Url friendly name of the node */
+  Slug = 'SLUG',
+  /** The URI for the node */
+  Uri = 'URI'
+}
+
+/** Connection between the Topic type and the topic type */
+export type TopicToAncestorsTopicConnection = Connection & TopicConnection & {
+  __typename?: 'TopicToAncestorsTopicConnection';
+  /** Edges for the TopicToAncestorsTopicConnection connection */
+  edges: Array<TopicToAncestorsTopicConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Topic>;
+  /** Information about pagination in a connection. */
+  pageInfo: TopicToAncestorsTopicConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type TopicToAncestorsTopicConnectionEdge = Edge & TopicConnectionEdge & {
+  __typename?: 'TopicToAncestorsTopicConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: Topic;
+};
+
+/** Page Info on the &quot;TopicToAncestorsTopicConnection&quot; */
+export type TopicToAncestorsTopicConnectionPageInfo = PageInfo & TopicConnectionPageInfo & WpPageInfo & {
+  __typename?: 'TopicToAncestorsTopicConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Connection between the Topic type and the ContentNode type */
+export type TopicToContentNodeConnection = Connection & ContentNodeConnection & {
+  __typename?: 'TopicToContentNodeConnection';
+  /** Edges for the TopicToContentNodeConnection connection */
+  edges: Array<TopicToContentNodeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<ContentNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: TopicToContentNodeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type TopicToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
+  __typename?: 'TopicToContentNodeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: ContentNode;
+};
+
+/** Page Info on the &quot;TopicToContentNodeConnection&quot; */
+export type TopicToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'TopicToContentNodeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the TopicToContentNodeConnection connection */
+export type TopicToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: InputMaybe<Array<InputMaybe<ContentTypesOfTopicEnum>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection between the Topic type and the topic type */
+export type TopicToParentTopicConnectionEdge = Edge & OneToOneConnection & TopicConnectionEdge & {
+  __typename?: 'TopicToParentTopicConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /** The node of the connection, without the edges */
+  node: Topic;
+};
+
+/** Connection between the Topic type and the policy type */
+export type TopicToPolicyConnection = Connection & PolicyConnection & {
+  __typename?: 'TopicToPolicyConnection';
+  /** Edges for the TopicToPolicyConnection connection */
+  edges: Array<TopicToPolicyConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Policy>;
+  /** Information about pagination in a connection. */
+  pageInfo: TopicToPolicyConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type TopicToPolicyConnectionEdge = Edge & PolicyConnectionEdge & {
+  __typename?: 'TopicToPolicyConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: Policy;
+};
+
+/** Page Info on the &quot;TopicToPolicyConnection&quot; */
+export type TopicToPolicyConnectionPageInfo = PageInfo & PolicyConnectionPageInfo & WpPageInfo & {
+  __typename?: 'TopicToPolicyConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the TopicToPolicyConnection connection */
+export type TopicToPolicyConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection between the Topic type and the Taxonomy type */
+export type TopicToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
+  __typename?: 'TopicToTaxonomyConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /** The node of the connection, without the edges */
+  node: Taxonomy;
+};
+
+/** Connection between the Topic type and the topic type */
+export type TopicToTopicConnection = Connection & TopicConnection & {
+  __typename?: 'TopicToTopicConnection';
+  /** Edges for the TopicToTopicConnection connection */
+  edges: Array<TopicToTopicConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Topic>;
+  /** Information about pagination in a connection. */
+  pageInfo: TopicToTopicConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type TopicToTopicConnectionEdge = Edge & TopicConnectionEdge & {
+  __typename?: 'TopicToTopicConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: Topic;
+};
+
+/** Page Info on the &quot;TopicToTopicConnection&quot; */
+export type TopicToTopicConnectionPageInfo = PageInfo & TopicConnectionPageInfo & WpPageInfo & {
+  __typename?: 'TopicToTopicConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the TopicToTopicConnection connection */
+export type TopicToTopicConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Any node that has a URI */
 export type UniformResourceIdentifiable = {
   /** The globally unique ID for the object */
@@ -17906,31 +18967,6 @@ export type UpdateCommentPayload = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
-/** Input for the updateDocumentTopic mutation. */
-export type UpdateDocumentTopicInput = {
-  /** The slug that the document-topic will be an alias of */
-  aliasOf?: InputMaybe<Scalars['String']>;
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']>;
-  /** The description of the document-topic object */
-  description?: InputMaybe<Scalars['String']>;
-  /** The ID of the documentTopic object to update */
-  id: Scalars['ID'];
-  /** The name of the document-topic object to mutate */
-  name?: InputMaybe<Scalars['String']>;
-  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
-  slug?: InputMaybe<Scalars['String']>;
-};
-
-/** The payload for the updateDocumentTopic mutation. */
-export type UpdateDocumentTopicPayload = {
-  __typename?: 'UpdateDocumentTopicPayload';
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The created document-topic */
-  documentTopic?: Maybe<DocumentTopic>;
-};
-
 /** Input for the updateDocumentType mutation. */
 export type UpdateDocumentTypeInput = {
   /** The slug that the document-type will be an alias of */
@@ -17943,6 +18979,10 @@ export type UpdateDocumentTypeInput = {
   id: Scalars['ID'];
   /** The name of the document-type object to mutate */
   name?: InputMaybe<Scalars['String']>;
+  /** The database ID of the document-type that should be set as the parent. This field cannot be used in conjunction with parentId */
+  parentDatabaseId?: InputMaybe<Scalars['Int']>;
+  /** The ID of the document-type that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
+  parentId?: InputMaybe<Scalars['ID']>;
   /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
   slug?: InputMaybe<Scalars['String']>;
 };
@@ -18116,8 +19156,6 @@ export type UpdatePolicyInput = {
   content?: InputMaybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']>;
-  /** Set connections between the policy and documentTopics */
-  documentTopics?: InputMaybe<PolicyDocumentTopicsInput>;
   /** Set connections between the policy and documentTypes */
   documentTypes?: InputMaybe<PolicyDocumentTypesInput>;
   /** The ID of the policy object */
@@ -18128,12 +19166,16 @@ export type UpdatePolicyInput = {
   menuOrder?: InputMaybe<Scalars['Int']>;
   /** The password used to protect the content of the object */
   password?: InputMaybe<Scalars['String']>;
+  /** Set connections between the policy and policyStatuses */
+  policyStatuses?: InputMaybe<PolicyPolicyStatusesInput>;
   /** The slug of the object */
   slug?: InputMaybe<Scalars['String']>;
   /** The status of the object */
   status?: InputMaybe<PostStatusEnum>;
   /** The title of the object */
   title?: InputMaybe<Scalars['String']>;
+  /** Set connections between the policy and topics */
+  topics?: InputMaybe<PolicyTopicsInput>;
 };
 
 /** The payload for the updatePolicy mutation. */
@@ -18143,6 +19185,35 @@ export type UpdatePolicyPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** The Post object mutation type. */
   policy?: Maybe<Policy>;
+};
+
+/** Input for the updatePolicyStatus mutation. */
+export type UpdatePolicyStatusInput = {
+  /** The slug that the policy-status will be an alias of */
+  aliasOf?: InputMaybe<Scalars['String']>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The description of the policy-status object */
+  description?: InputMaybe<Scalars['String']>;
+  /** The ID of the policyStatus object to update */
+  id: Scalars['ID'];
+  /** The name of the policy-status object to mutate */
+  name?: InputMaybe<Scalars['String']>;
+  /** The database ID of the policy-status that should be set as the parent. This field cannot be used in conjunction with parentId */
+  parentDatabaseId?: InputMaybe<Scalars['Int']>;
+  /** The ID of the policy-status that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
+  parentId?: InputMaybe<Scalars['ID']>;
+  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+/** The payload for the updatePolicyStatus mutation. */
+export type UpdatePolicyStatusPayload = {
+  __typename?: 'UpdatePolicyStatusPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The created policy-status */
+  policyStatus?: Maybe<PolicyStatus>;
 };
 
 /** Input for the updatePostFormat mutation. */
@@ -18516,6 +19587,35 @@ export type UpdateTimelinePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** The Post object mutation type. */
   timeline?: Maybe<Timeline>;
+};
+
+/** Input for the updateTopic mutation. */
+export type UpdateTopicInput = {
+  /** The slug that the topic will be an alias of */
+  aliasOf?: InputMaybe<Scalars['String']>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The description of the topic object */
+  description?: InputMaybe<Scalars['String']>;
+  /** The ID of the topic object to update */
+  id: Scalars['ID'];
+  /** The name of the topic object to mutate */
+  name?: InputMaybe<Scalars['String']>;
+  /** The database ID of the topic that should be set as the parent. This field cannot be used in conjunction with parentId */
+  parentDatabaseId?: InputMaybe<Scalars['Int']>;
+  /** The ID of the topic that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
+  parentId?: InputMaybe<Scalars['ID']>;
+  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+/** The payload for the updateTopic mutation. */
+export type UpdateTopicPayload = {
+  __typename?: 'UpdateTopicPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The created topic */
+  topic?: Maybe<Topic>;
 };
 
 /** Input for the updateUser mutation. */
@@ -19760,12 +20860,6 @@ export type WithAcfCustomFields = {
   customFields?: Maybe<CustomFields>;
 };
 
-/** Provides access to fields of the &quot;DocumentTopicCustomFields&quot; ACF Field Group via the &quot;documentTopicCustomFields&quot; field */
-export type WithAcfDocumentTopicCustomFields = {
-  /** Fields of the DocumentTopicCustomFields ACF Field Group */
-  documentTopicCustomFields?: Maybe<DocumentTopicCustomFields>;
-};
-
 /** Provides access to fields of the &quot;DocumentTypeCustomFields&quot; ACF Field Group via the &quot;documentTypeCustomFields&quot; field */
 export type WithAcfDocumentTypeCustomFields = {
   /** Fields of the DocumentTypeCustomFields ACF Field Group */
@@ -19873,6 +20967,12 @@ export type WithAcfPolicyPageCustomFields = {
   policyPageCustomFields?: Maybe<PolicyPageCustomFields>;
 };
 
+/** Provides access to fields of the &quot;PolicyStatusCustomFields&quot; ACF Field Group via the &quot;policyStatusCustomFields&quot; field */
+export type WithAcfPolicyStatusCustomFields = {
+  /** Fields of the PolicyStatusCustomFields ACF Field Group */
+  policyStatusCustomFields?: Maybe<PolicyStatusCustomFields>;
+};
+
 /** Provides access to fields of the &quot;ProjectCustomField&quot; ACF Field Group via the &quot;projectCustomField&quot; field */
 export type WithAcfProjectCustomField = {
   /** Fields of the ProjectCustomField ACF Field Group */
@@ -19901,6 +21001,12 @@ export type WithAcfTakeActionCustomFields = {
 export type WithAcfTakeActionTexts = {
   /** Fields of the TakeActionTexts ACF Field Group */
   takeActionTexts?: Maybe<TakeActionTexts>;
+};
+
+/** Provides access to fields of the &quot;TopicCustomFields&quot; ACF Field Group via the &quot;topicCustomFields&quot; field */
+export type WithAcfTopicCustomFields = {
+  /** Fields of the TopicCustomFields ACF Field Group */
+  topicCustomFields?: Maybe<TopicCustomFields>;
 };
 
 /** Provides access to fields of the &quot;VolunteerCustomFields&quot; ACF Field Group via the &quot;volunteerCustomFields&quot; field */
