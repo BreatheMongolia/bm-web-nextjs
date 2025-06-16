@@ -12,6 +12,13 @@
         "status": "Status",
         "year": "Year"
     },
+    "sortButton": "Sort By",
+    "sortBy": {
+        "dateAsc": "Initiated Date (newest to oldest)",
+        "dateDesc": "Initiated Date (oldest to newest)",
+        "nameAsc": "Policy Title (A to Z)",
+        "nameDesc": "Policy Title (Z to A)"
+    },
     "noPoliciesFound": {
         "all": "No Policy Found",
         "type": "Type: No Policy Found",

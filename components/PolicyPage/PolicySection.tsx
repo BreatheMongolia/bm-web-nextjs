@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from '@heroicons/react/24/solid'
-import { PolicyStatus, Topic } from 'graphql/generated'
+import { Menu } from '@headlessui/react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
-import { FilterList } from './FilterList'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Dropdown } from './Dropdown'
 
 type OptionProps = {
-  id?: string;
-  label: string;
-  value: string;
+  id?: string
+  label: string
+  value: string
 }
 
 type Policy = {
@@ -67,60 +63,64 @@ const POLICIES_PER_PAGE = 5
 export const PolicySection = ({
   policies,
   documentTypeOptions,
-  policyStatuses,
-  policyTopics,
+  policyStatusOptions,
+  documentTopicOptions,
 }: {
   policies: Policy[]
   documentTypeOptions: OptionProps[]
-  policyStatuses: PolicyStatus[]
-  policyTopics: Topic[]
+  policyStatusOptions: OptionProps[]
+  documentTopicOptions: OptionProps[]
 }) => {
   const { t, i18n } = useTranslation('policy')
-  const [activeButtons, setActiveButtons] = useState([])
   const [filteredPolicies, setFilteredPolicies] = useState<Policy[]>(policies)
   const [currentPage, setCurrentPage] = useState(0)
-
-  // Dropdown options states
-  const [policyTopicOptions, setPolicyTopicOptions] = useState<OptionProps[]>([])
   const [yearOptions, setYearOptions] = useState<OptionProps[]>([])
   // Filter states
   const [selectedDocumentType, setSelectedDocumentType] = useState<string | undefined>()
   const [selectedDocumentTopic, setSelectedDocumentTopic] = useState<string | undefined>()
+  const [selectedPolicyStatus, setSelectedPolicyStatus] = useState<string | undefined>()
   const [selectedYear, setSelectedYear] = useState<string | undefined>()
 
+  const sortArray = [
+    { id: 1, label: t('sortBy.dateAsc'), value: 'dateAsc' },
+    { id: 2, label: t('sortBy.dateDesc'), value: 'dateDesc' },
+    { id: 3, label: t('sortBy.nameAsc'), value: 'nameAsc' },
+    { id: 4, label: t('sortBy.nameDesc'), value: 'nameDesc' },
+  ]
 
   useEffect(() => {
-    const uniqueYearOptions: OptionProps[] = [];
-    const years = policies.map(policy => dayjs(policy.policyPageCustomFields.initiatedDate).year().toString());
-    const uniqueYears = Array.from(new Set(years)).sort((a, b) => parseInt(b) - parseInt(a));
+    const uniqueYearOptions: OptionProps[] = []
+    const years = policies.map(policy => dayjs(policy.policyPageCustomFields.initiatedDate).year().toString())
+    const uniqueYears = Array.from(new Set(years)).sort((a, b) => parseInt(b) - parseInt(a))
 
     uniqueYears.forEach(year => {
       uniqueYearOptions.push({
         label: year,
         value: year,
-      });
-    });
+      })
+    })
 
-    setYearOptions(uniqueYearOptions);
-  }
-    , [policies])
-
-  useEffect(() => {
-    const options = policyTopics.map(topic => ({
-      label: getTranslated(topic.topicCustomFields.name, topic.topicCustomFields.nameMn, i18n.language),
-      value: topic.slug,
-    }))
-    setPolicyTopicOptions(options)
-  }, [policyTopics, i18n.language])
+    setYearOptions(uniqueYearOptions)
+  }, [policies])
 
   useEffect(() => {
-    const filtered = policies.filter(policy =>
-      policy.documentTypes.edges.some(type => selectedDocumentType !== undefined ? type.node.slug === selectedDocumentType : true) &&
-      policy.topics.edges.some(topic => selectedDocumentTopic !== undefined ? topic.node.slug === selectedDocumentTopic : true) &&
-      (selectedYear !== undefined ? dayjs(policy.policyPageCustomFields.initiatedDate).year().toString() === selectedYear : true)
+    const filtered = policies.filter(
+      policy =>
+        policy.documentTypes.edges.some(type =>
+          selectedDocumentType !== undefined ? type.node.slug === selectedDocumentType : true,
+        ) &&
+        policy.topics.edges.some(topic =>
+          selectedDocumentTopic !== undefined ? topic.node.slug === selectedDocumentTopic : true,
+        ) &&
+        policy.policyStatuses.edges.some(status =>
+          selectedPolicyStatus !== undefined ? status.node.slug === selectedPolicyStatus : true,
+        ) &&
+        (selectedYear !== undefined
+          ? dayjs(policy.policyPageCustomFields.initiatedDate).year().toString() === selectedYear
+          : true),
     )
     setFilteredPolicies(filtered)
-  }, [selectedDocumentTopic, selectedDocumentType, policies, selectedYear])
+  }, [selectedDocumentTopic, selectedDocumentType, selectedPolicyStatus, policies, selectedYear])
 
   const truncate = (input1: string, input2: string) => {
     const s = parse(getTranslated(input1, input2, i18n.language))[0]?.props?.children || ''
@@ -138,6 +138,62 @@ export const PolicySection = ({
     }
   }
 
+  const clickSortButton = (id: number) => {
+    switch (id) {
+      case 1:
+        {
+          // dateAsc
+          filteredPolicies.sort(
+            (a, b) =>
+              dayjs(b.policyPageCustomFields.initiatedDate).year() -
+              dayjs(a.policyPageCustomFields.initiatedDate).year(),
+          )
+        }
+        break
+      case 2:
+        {
+          // dateDesc
+          filteredPolicies.sort(
+            (a, b) =>
+              dayjs(a.policyPageCustomFields.initiatedDate).year() -
+              dayjs(b.policyPageCustomFields.initiatedDate).year(),
+          )
+        }
+        break
+      case 3:
+        {
+          // nameAsc
+          if (i18n.language === 'mn') {
+            filteredPolicies.sort((a, b) =>
+              a.policyPageCustomFields.titleMn.localeCompare(b.policyPageCustomFields.titleMn),
+            )
+          } else {
+            filteredPolicies.sort((a, b) =>
+              a.policyPageCustomFields.title.localeCompare(b.policyPageCustomFields.title),
+            )
+          }
+        }
+        break
+      case 4:
+        {
+          //nameDesc
+          if (i18n.language === 'mn') {
+            filteredPolicies.sort((a, b) =>
+              b.policyPageCustomFields.titleMn.localeCompare(a.policyPageCustomFields.titleMn),
+            )
+          } else {
+            filteredPolicies.sort((a, b) =>
+              b.policyPageCustomFields.title.localeCompare(a.policyPageCustomFields.title),
+            )
+          }
+        }
+        break
+      default:
+        break
+    }
+    setFilteredPolicies([...filteredPolicies])
+  }
+
   const onPageClick = (pageNum: number) => {
     if (pageNum < 0) setCurrentPage(0)
     const maxPages = Math.ceil(filteredPolicies.length / POLICIES_PER_PAGE)
@@ -152,7 +208,6 @@ export const PolicySection = ({
     return dayjs(value).format('DD/MM/YYYY')
   }
 
-
   // pagination
   const pages = []
   let MAX_PAGES = 1
@@ -166,8 +221,9 @@ export const PolicySection = ({
         <div
           key={'page' + i}
           onClick={() => setCurrentPage(i)}
-          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-bm-blue/80 hover:text-white ${currentPage === i && 'bg-bm-blue text-white'
-            }`}
+          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-bm-blue/80 hover:text-white ${
+            currentPage === i && 'bg-bm-blue text-white'
+          }`}
         >
           {i + 1}
         </div>,
@@ -183,42 +239,79 @@ export const PolicySection = ({
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-wrap w-full gap-2 grow items-center my-5">
-        <div className="relative flex place-content-start gap-2">
-          <button
-            onClick={() => {
-              setSelectedDocumentType(undefined)
-              setSelectedDocumentTopic(undefined)
-              setSelectedYear(undefined)
-            }}
-            className={`w-28 border border-[#ADC4CC] font-semibold text-black py-1 rounded-2xl flex gap-3 justify-center items-center bg-bm-blue text-white hover:bg-bm-blue-hover`}
-          >
-            {t('filterButtons.all')}
-          </button>
+      <div className="flex flex-wrap w-full justify-between my-5">
+        <div className="flex justify-start gap-2 grow items-center ">
+          <div className="relative flex place-content-start gap-2">
+            <button
+              onClick={() => {
+                setSelectedDocumentType(undefined)
+                setSelectedDocumentTopic(undefined)
+                setSelectedPolicyStatus(undefined)
+                setSelectedYear(undefined)
+              }}
+              className={`w-28 border border-[#ADC4CC] font-semibold py-1 rounded-xl flex gap-3 justify-center items-center ${
+                selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
+                  ? 'text-black bg-white hover:bg-bm-blue-hover'
+                  : 'bg-bm-blue text-white'
+              }`}
+            >
+              {t('filterButtons.all')}
+            </button>
 
-          <Dropdown id="types" options={documentTypeOptions} label={t('filterButtons.types')} onClick={(selected) => setSelectedDocumentType(selected)} selectedOption={selectedDocumentType} />
-          <Dropdown id="topics" options={policyTopicOptions} label={t('filterButtons.topics')} onClick={(selected) => setSelectedDocumentTopic(selected)} selectedOption={selectedDocumentTopic} />
-
-          <FilterList id={3} name={t('filterButtons.status')} isActive={activeButtons.some(button => button == 3)}>
-            <div>
-              {policyStatuses.map((status, idx) => (
-                <div
-                  key={idx}
-                  className="block px-2 py-2 hover:bg-gray-100 hover:rounded-xl hover:text-bm-blue mx-auto w-[95%] l-[90%]"
-                  onClick={() => {
-                    // clickFilterButton(3, status.slug)
-                  }}
-                >
-                  {getTranslated(
-                    status.policyStatusCustomFields.name,
-                    status.policyStatusCustomFields.nameMn,
-                    i18n.language,
-                  )}
-                </div>
-              ))}
-            </div>
-          </FilterList>
-          <Dropdown id="year" options={yearOptions} label={t('filterButtons.year')} onClick={(selected) => setSelectedYear(selected)} selectedOption={selectedYear} />
+            <Dropdown
+              id="types"
+              options={documentTypeOptions}
+              label={t('filterButtons.types')}
+              onClick={selected => setSelectedDocumentType(selected)}
+              selectedOption={selectedDocumentType}
+            />
+            <Dropdown
+              id="topics"
+              options={documentTopicOptions}
+              label={t('filterButtons.topics')}
+              onClick={selected => setSelectedDocumentTopic(selected)}
+              selectedOption={selectedDocumentTopic}
+            />
+            <Dropdown
+              id="statuses"
+              options={policyStatusOptions}
+              label={t('filterButtons.topics')}
+              onClick={selected => setSelectedPolicyStatus(selected)}
+              selectedOption={selectedPolicyStatus}
+            />
+            <Dropdown
+              id="year"
+              options={yearOptions}
+              label={t('filterButtons.year')}
+              onClick={selected => setSelectedYear(selected)}
+              selectedOption={selectedYear}
+            />
+          </div>
+        </div>
+        <div className="relative flex place-content-end whitespace-nowrap">
+          <Menu>
+            <Menu.Button className="bg-[#f09c4f] text-white font-semibold py-1 px-4 rounded-xl hover:opacity-80 active:opacity-80 flex gap-3 justify-center items-center">
+              {t('sortButton')}
+            </Menu.Button>
+            <Menu.Items className="absolute top-10 right-0 bg-white z-50 rounded border border-[#f09c4f] w-60">
+              {sortArray.map((x, idx) => {
+                return (
+                  <Menu.Item key={idx}>
+                    {() => {
+                      return (
+                        <div
+                          className="px-5 py-1 cursor-pointer border-b border-white hover:bg-[#f09c4f]/20 text-xs"
+                          onClick={() => clickSortButton(x.id)}
+                        >
+                          {x.label}
+                        </div>
+                      )
+                    }}
+                  </Menu.Item>
+                )
+              })}
+            </Menu.Items>
+          </Menu>
         </div>
       </div>
 
@@ -232,7 +325,7 @@ export const PolicySection = ({
 
       {/* Policies */}
       <div className="">
-        {filteredPolicies !== null ? (
+        {filteredPolicies !== undefined ? (
           filteredPolicies.map((policy, index) => (
             <div key={'policyList' + index} className="grid grid-cols-7 border-b border-zinc-200 pb-5">
               <div className="col-span-2 mr-5">
@@ -253,11 +346,15 @@ export const PolicySection = ({
                 </div>
               </div>
               <p className="mr-5">
-                {policy.documentTypes.edges.map((type, i) => getTranslated(
-                  type.node.documentTypeCustomFields.name,
-                  type.node.documentTypeCustomFields.nameMn,
-                  i18n.language,
-                )).join(', ')}
+                {policy.documentTypes.edges
+                  .map((type, i) =>
+                    getTranslated(
+                      type.node.documentTypeCustomFields.name,
+                      type.node.documentTypeCustomFields.nameMn,
+                      i18n.language,
+                    ),
+                  )
+                  .join(', ')}
               </p>
               <p>
                 {getTranslated(
@@ -289,7 +386,7 @@ export const PolicySection = ({
             </div>
           ))
         ) : (
-          <div className="text-center text-gray-500">{t('noPoliciesFound.all')}</div>
+          <div className="flex flex wrap text-center text-gray-500">{t('noPoliciesFound.all')}</div>
         )}
       </div>
 
@@ -297,8 +394,9 @@ export const PolicySection = ({
       <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
         <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
           <div
-            className={`transition-all hover:bg-bm-blue/80 hover:text-white rounded-full border-black border hover:border-bm-blue/80 ${currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
-              }`}
+            className={`transition-all hover:bg-bm-blue/80 hover:text-white rounded-full border-black border hover:border-bm-blue/80 ${
+              currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
+            }`}
             onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
           >
             <span className="block p-3">
@@ -307,8 +405,9 @@ export const PolicySection = ({
           </div>
           {pages}
           <div
-            className={`transition-all hover:bg-bm-blue/80 hover:text-white border-black border hover:border-bm-blue/80 rounded-full ${currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
-              }`}
+            className={`transition-all hover:bg-bm-blue/80 hover:text-white border-black border hover:border-bm-blue/80 rounded-full ${
+              currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
+            }`}
             onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
           >
             <span className="block p-3">

@@ -17,8 +17,8 @@ import { useMediaQuery } from 'react-responsive'
 const PolicyPage = ({
   policies,
   documentTypeOptions,
-  policyStatuses,
-  policyTopics,
+  policyStatusOptions,
+  documentTopicOptions,
   title,
   description,
   socialShare,
@@ -43,8 +43,8 @@ const PolicyPage = ({
           <PolicySection
             policies={policies}
             documentTypeOptions={documentTypeOptions}
-            policyStatuses={policyStatuses}
-            policyTopics={policyTopics}
+            policyStatusOptions={policyStatusOptions}
+            documentTopicOptions={documentTopicOptions}
           />
         </div>
         <NewsCarousel featuredNews={featuredNews} />
@@ -64,9 +64,19 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const topics = await getPolicyTopics()
   const data = await getPolicyLandingPageSettings()
 
-  const documentTypeOptions = documentTypes.map((doc) => ({
-    label: getTranslated(doc.documentTypeCustomFields.name, doc.documentTypeCustomFields.nameMn, locale),
-    value: doc.slug,
+  const documentTypeOptions = documentTypes.map(type => ({
+    label: getTranslated(type.documentTypeCustomFields.name, type.documentTypeCustomFields.nameMn, locale),
+    value: type.slug,
+  }))
+
+  const documentTopicOptions = topics.map(topic => ({
+    label: getTranslated(topic.topicCustomFields.name, topic.topicCustomFields.nameMn, locale),
+    value: topic.slug,
+  }))
+
+  const policyStatusOptions = policyStatuses.map(status => ({
+    label: getTranslated(status.policyStatusCustomFields.name, status.policyStatusCustomFields.nameMn, locale),
+    value: status.slug,
   }))
 
   return {
@@ -74,8 +84,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common', 'policy'])),
       policies: policies,
       documentTypeOptions: documentTypeOptions,
-      policyStatuses: policyStatuses,
-      policyTopics: topics,
+      policyStatusOptions: policyStatusOptions,
+      documentTopicOptions: documentTopicOptions,
       locale,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
