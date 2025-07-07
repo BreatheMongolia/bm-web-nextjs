@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { Menu } from '@headlessui/react'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+import { ChevronLeftIcon, ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
@@ -121,22 +121,6 @@ export const PolicySection = ({
     )
     setFilteredPolicies(filtered)
   }, [selectedDocumentTopic, selectedDocumentType, selectedPolicyStatus, policies, selectedYear])
-
-  const truncate = (input1: string, input2: string) => {
-    const s = parse(getTranslated(input1, input2, i18n.language))[0]?.props?.children || ''
-    if (typeof s !== 'string') {
-      return ''
-    }
-    if (s.length > 225) {
-      if (i18n.language === 'mn') {
-        return s.substring(0, 200) + '...'
-      } else {
-        s.substring(0, 225) + '...'
-      }
-    } else {
-      return s
-    }
-  }
 
   const clickSortButton = (id: number) => {
     switch (id) {
@@ -288,7 +272,7 @@ export const PolicySection = ({
             />
           </div>
         </div>
-        <div className="relative flex place-content-end whitespace-nowrap">
+        <div className="relative flex place-content-end whitespace-nowrap gap-2">
           <Menu>
             <Menu.Button className="bg-[#f09c4f] text-white font-semibold py-1 px-4 rounded-xl hover:opacity-80 active:opacity-80 flex gap-3 justify-center items-center">
               {t('sortButton')}
@@ -364,8 +348,14 @@ export const PolicySection = ({
                 )}
               </p>
               <div className="col-span-3">
-                <p className="h-24">
-                  {truncate(policy.policyPageCustomFields.summary, policy.policyPageCustomFields.summaryMn)}
+                <p className="policy-summary-limit">
+                  {parse(
+                    getTranslated(
+                      policy.policyPageCustomFields.summary,
+                      policy.policyPageCustomFields.summaryMn,
+                      i18n.language,
+                    ),
+                  )}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {policy.topics.edges.map((topic, i) => (

@@ -12,6 +12,7 @@
         "status": "Төлөв",
         "year": "Он"
     },
+    "searchButton": "Хайлт хийх",
     "sortButton": "Эрэмбэлэх",
     "sortBy": {
         "dateAsc": "Батлагдсан огноо (шинэ - хуучин)",

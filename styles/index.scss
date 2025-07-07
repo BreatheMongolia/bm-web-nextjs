@@ -1118,3 +1118,11 @@ p {
     }
   }
 }
+
+.policy-summary-limit {
+  display: -webkit-box;
+  width: 100%;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

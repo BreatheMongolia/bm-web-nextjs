@@ -12,6 +12,7 @@
         "status": "Status",
         "year": "Year"
     },
+    "searchButton": "Search By",
     "sortButton": "Sort By",
     "sortBy": {
         "dateAsc": "Initiated Date (newest to oldest)",
