@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { Menu } from '@headlessui/react'
-import { ChevronLeftIcon, ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
@@ -221,6 +221,30 @@ export const PolicySection = ({
     }
   }
 
+  const showPolicyDetails = (index: number) => {
+    const policy = filteredPolicies[index]
+    return (
+      <div className="grid grid-cols-2">
+        <div>
+          <div>t('filterButtons.types')</div>
+          <div>
+            {policy.documentTypes.edges
+              .map(type =>
+                getTranslated(
+                  type.node.documentTypeCustomFields.name,
+                  type.node.documentTypeCustomFields.nameMn,
+                  i18n.language,
+                ),
+              )
+              .join(', ')}
+          </div>
+        </div>
+        <div>t('filterButtons.topic')</div>
+        <div>t('filterButtons.status')</div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-wrap w-full justify-between my-5">
@@ -259,7 +283,7 @@ export const PolicySection = ({
             <Dropdown
               id="statuses"
               options={policyStatusOptions}
-              label={t('filterButtons.topics')}
+              label={t('filterButtons.status')}
               onClick={selected => setSelectedPolicyStatus(selected)}
               selectedOption={selectedPolicyStatus}
             />
@@ -300,7 +324,7 @@ export const PolicySection = ({
       </div>
 
       {/* Table Header */}
-      <div className="grid grid-cols-7 bg-bm-blue text-lg font-semibold text-white my-5 rounded-l-md rounded-r-md">
+      <div className="hidden md:grid grid-cols-7 bg-bm-blue text-lg font-semibold text-white my-5 rounded-l-md rounded-r-md">
         <div className="col-span-2 pl-2">{t('tableHeader.documentName')}</div>
         <div className="">{t('tableHeader.documentType')}</div>
         <div className="">{t('tableHeader.documentStatus')}</div>
@@ -308,12 +332,13 @@ export const PolicySection = ({
       </div>
 
       {/* Policies */}
-      <div className="">
-        {filteredPolicies !== undefined ? (
-          filteredPolicies.map((policy, index) => (
-            <div key={'policyList' + index} className="grid grid-cols-7 border-b border-zinc-200 pb-5">
+      {filteredPolicies.length !== 0 ? (
+        filteredPolicies.map((policy, index) => (
+          <div key={'policyList' + index}>
+            {/* Desktop */}
+            <div className="hidden md:grid grid-cols-7 border-b border-zinc-200 pb-5">
               <div className="col-span-2 mr-5">
-                <Link href={`/policy/${policy.slug}`} className="">
+                <Link href={`/policy/${policy.slug}`}>
                   <h3>
                     {getTranslated(
                       policy.policyPageCustomFields.title,
@@ -323,7 +348,7 @@ export const PolicySection = ({
                   </h3>
                 </Link>
                 <div className="flex justify-start mt-5">
-                  <p className="bg-[#E9EAEB] rounded-l-md rounded-r-md px-2">
+                  <p className="bg-[#E9EAEB] rounded-l-md rounded-r-md px-2 text-sm">
                     {(i18n.language === 'mn' ? 'Батлагдсан: ' : 'Date Passed: ') +
                       formatMyDate(policy.policyPageCustomFields.initiatedDate)}
                   </p>
@@ -357,7 +382,7 @@ export const PolicySection = ({
                     ),
                   )}
                 </p>
-                <div className="flex flex-wrap gap-2 mt-2">
+                <div className="flex flex-wrap gap-2 mt-2 text-sm">
                   {policy.topics.edges.map((topic, i) => (
                     <div key={'topic' + i} className="flex items-center">
                       {i < 5 && (
@@ -374,11 +399,32 @@ export const PolicySection = ({
                 </div>
               </div>
             </div>
-          ))
-        ) : (
-          <div className="flex flex wrap text-center text-gray-500">{t('noPoliciesFound.all')}</div>
-        )}
-      </div>
+            {/* Mobile */}
+            <div className="md:hidden grid border-b border-zinc-500 pb-5">
+              <Link href={`/policy/${policy.slug}`}>
+                <h3>
+                  {getTranslated(
+                    policy.policyPageCustomFields.title,
+                    policy.policyPageCustomFields.titleMn,
+                    i18n.language,
+                  )}
+                </h3>
+              </Link>
+              <div className="grid grid-cols-2">
+                <p className="mt-5 bg-[#E9EAEB] rounded-l-md rounded-r-md px-2 text-sm">
+                  {(i18n.language === 'mn' ? 'Батлагдсан: ' : 'Date Passed: ') +
+                    formatMyDate(policy.policyPageCustomFields.initiatedDate)}
+                </p>
+                <div className="flex justify-end">
+                  <ChevronDownIcon className="h-5 w-5 mt-5 cursor-pointer" onClick={() => showPolicyDetails(index)} />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="grid justify-items-center text-gray-500">{t('noPoliciesFound.all')}</div>
+      )}
 
       {/* Pagination */}
       <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
