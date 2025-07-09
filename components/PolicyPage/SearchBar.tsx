@@ -6,8 +6,16 @@ type Props = {
 }
 
 const SearchBar: FC<Props> = ({ onSubmit }) => {
-    const [searchValue, setSearchValue] = useState();
     const inputRef = useRef(null)
+
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            if (onSubmit) {
+                onSubmit(e)
+            }
+        }
+    }
 
     return (
         <div className="flex align-center shadow-md border-[#E5E5E5] rounded-[10px] overflow-hidden h-[44px] bg-white px-[16px] py-[10px] mr-[10px]">
@@ -20,8 +28,7 @@ const SearchBar: FC<Props> = ({ onSubmit }) => {
                 type="text"
                 placeholder="Хайлт хийх"
                 ref={inputRef}
-                onKeyDown={e => onSubmit(e)}
-                defaultValue={searchValue}
+                onKeyDown={onKeyDown}
             />
         </div>
     )

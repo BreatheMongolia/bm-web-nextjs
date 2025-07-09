@@ -76,7 +76,7 @@ export const PolicySection = ({
   const [filteredPolicies, setFilteredPolicies] = useState<Policy[]>(policies)
   const [currentPage, setCurrentPage] = useState(0)
   const [yearOptions, setYearOptions] = useState<OptionProps[]>([])
-  const [searchValue, setSearchValue] = useState<string | undefined>()
+  const [searchValue, setSearchValue] = useState<string | undefined>('')
   // Filter states
   const [selectedDocumentType, setSelectedDocumentType] = useState<string | undefined>()
   const [selectedDocumentTopic, setSelectedDocumentTopic] = useState<string | undefined>()
@@ -122,15 +122,14 @@ export const PolicySection = ({
           : true),
     )
 
-    console.log(searchValue)
     filtered = searchValue === ''
       ? filtered
       : filtered.filter(
         policy =>
           policy.policyPageCustomFields?.title?.toLocaleLowerCase().includes(searchValue?.toLocaleLowerCase()) ||
-          policy.policyPageCustomFields?.titleMn?.toLocaleLowerCase().includes(searchValue?.toLocaleLowerCase())
-        // policy.pledgeContent?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-        // policy.excerpt?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
+          policy.policyPageCustomFields?.titleMn?.toLocaleLowerCase().includes(searchValue?.toLocaleLowerCase()) ||
+          policy.policyPageCustomFields?.summary?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          policy.policyPageCustomFields?.summaryMn?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
       )
 
     setFilteredPolicies(filtered)
@@ -363,7 +362,7 @@ export const PolicySection = ({
                 )}
               </p>
               <div className="col-span-3">
-                <p className="policy-summary-limit">
+                <div className="policy-summary-limit">
                   {parse(
                     getTranslated(
                       policy.policyPageCustomFields.summary,
@@ -371,7 +370,7 @@ export const PolicySection = ({
                       i18n.language,
                     ),
                   )}
-                </p>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {policy.topics.edges.map((topic, i) => (
                     <div key={'topic' + i} className="flex items-center">
