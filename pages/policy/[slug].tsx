@@ -75,7 +75,6 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
     )
   }
 
-  console.log('policy in component', policy)
 
   const title = getTranslated(policy.title.en, policy.title.mn, locale)
   const description = getTranslated(policy.description.en, policy.description.mn, locale)
@@ -87,8 +86,6 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
   const status = translateList(policy.status || [], locale)
   const relatedPolicies = policy.relatedPolicies
 
-  console.log('relatedPolicies', relatedPolicies)
-  console.log('furtherReading HTML:', furtherReading)
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Link */}
@@ -97,71 +94,162 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
       </Link>
 
       {/* Title and Share buttons */}
-      <div className="flex justify-between items-center mb-8">
-        <H2 title={title} />
-        <div className="subSection">
-          <ShareButton
-            url={`https://breathemongolia.org/policy/${slug}`}
-            title={title}
-            bottom={false}
-          />
+      <div className="mb-8">
+        {/* Desktop Layout */}
+        <div className="hidden md:flex justify-between items-center">
+          <H2 title={title} />
+          <div className="subSection">
+            <ShareButton
+              url={`https://breathemongolia.org/policy/${slug}`}
+              title={title}
+              bottom={false}
+            />
+          </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="md:hidden space-y-1">
+          <H2 title={title} />
+          <div className="flex justify-end">
+            <div className="subSection !pb-2 !pt-0">
+              <ShareButton
+                url={`https://breathemongolia.org/policy/${slug}`}
+                title={title}
+                bottom={false}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Metadata Table */}
+      {/* Metadata Section */}
       <div className="mb-8">
-        {/* Header Row */}
-        <div className="bg-bm-blue text-white text-center font-bold uppercase grid grid-cols-[repeat(5,minmax(0,1fr))] rounded-lg">
-          <div className="py-3 px-4">{t('tableHeaders.name')}</div>
-          <div className="py-3 px-4">{t('tableHeaders.type')}</div>
-          <div className="py-3 px-4">{t('tableHeaders.topic')}</div>
-          <div className="py-3 px-4">{t('tableHeaders.status')}</div>
-          <div className="py-3 px-4">{t('tableHeaders.dateApproved')}</div>
+        {/* Desktop Table View */}
+        <div className="hidden md:block">
+          {/* Header Row */}
+          <div className="bg-bm-blue text-white text-center font-bold uppercase grid grid-cols-[repeat(5,minmax(0,1fr))] rounded-lg">
+            <div className="py-3 px-4">{t('tableHeaders.name')}</div>
+            <div className="py-3 px-4">{t('tableHeaders.type')}</div>
+            <div className="py-3 px-4">{t('tableHeaders.topic')}</div>
+            <div className="py-3 px-4">{t('tableHeaders.status')}</div>
+            <div className="py-3 px-4">{t('tableHeaders.dateApproved')}</div>
+          </div>
+
+          {/* Data Row */}
+          <div className="grid grid-cols-[repeat(5,minmax(0,1fr))] py-6 text-center text-sm">
+            <div className="px-4">{description}</div>
+            <div className="px-4">{documentTypes.join(', ') || '—'}</div>
+            <div className="px-4">{topics.join(', ') || '—'}</div>
+            <div className="px-4">{status.join(', ') || '—'}</div>
+            <div className="px-4">{policy.dateApproved || '—'}</div>
+          </div>
         </div>
 
-        {/* Data Row */}
-        <div className="grid grid-cols-[repeat(5,minmax(0,1fr))] py-6 text-center text-sm">
-          <div className="px-4">{description}</div>
-          <div className="px-4">{documentTypes.join(', ') || '—'}</div>
-          <div className="px-4">{topics.join(', ') || '—'}</div>
-          <div className="px-4">{status.join(', ') || '—'}</div>
-          <div className="px-4">{policy.dateApproved || '—'}</div>
+        {/* Mobile List View */}
+        <div className="md:hidden bg-gray-50 rounded-lg p-4 space-y-4 uppercase">
+          {/* Approved Date */}
+          <div className='bg-gray-200 rounded-lg text-xs px-4 py-2 w-fit -ml-1'>
+            {t('approvedOn')}: {policy.dateApproved || '—'}
+          </div>
+          
+          {/* Metadata Items */}
+          <div className="space-y-3">
+            <div>
+              <span className="font-semibold text-gray-700">{t('tableHeaders.type')}: </span>
+              <span className="text-gray-600">{documentTypes.join(', ') || '—'}</span>
+            </div>
+            
+            <div>
+              <span className="font-semibold text-gray-700">{t('tableHeaders.topic')}: </span>
+              <span className="text-gray-600">{topics.join(', ') || '—'}</span>
+            </div>
+            
+            <div>
+              <span className="font-semibold text-gray-700">{t('tableHeaders.status')}: </span>
+              <span className="text-gray-600">{status.join(', ') || '—'}</span>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-wrap justify-center gap-3 my-6">
-        {policy.sourceUrl && (
-          <a
-            href={policy.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
-          >
-            {t('source')}
-            <ArrowTopRightOnSquareIcon className="w-5 h-5" />
-          </a>
-        )}
-        {policy.fileMn && (
-          <a
-            href={policy.fileMn}
-            download
-            className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
-          >
-            {t('downloadMn')}
-            <ArrowDownIcon className="w-5 h-5" />
-          </a>
-        )}
-        {policy.fileEn && (
-          <a
-            href={policy.fileEn}
-            download
-            className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
-          >
-            {t('downloadEn')}
-            <ArrowDownIcon className="w-5 h-5" />
-          </a>
-        )}
+      <div className="my-6">
+        {/* Desktop Layout */}
+        <div className="hidden md:flex flex-wrap justify-center gap-3">
+          {policy.sourceUrl && (
+            <a
+              href={policy.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
+            >
+              {t('source')}
+              <ArrowTopRightOnSquareIcon className="w-5 h-5" />
+            </a>
+          )}
+          {policy.fileMn && (
+            <a
+              href={policy.fileMn}
+              download
+              className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
+            >
+              {t('downloadMn')}
+              <ArrowDownIcon className="w-5 h-5" />
+            </a>
+          )}
+          {policy.fileEn && (
+            <a
+              href={policy.fileEn}
+              download
+              className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
+            >
+              {t('downloadEn')}
+              <ArrowDownIcon className="w-5 h-5" />
+            </a>
+          )}
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="md:hidden space-y-3">
+          {/* First Row - Source Button */}
+          {policy.sourceUrl && (
+            <a
+              href={policy.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-bm-blue text-white px-4 py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-bm-blue/90"
+            >
+              {t('source')}
+              <ArrowTopRightOnSquareIcon className="w-5 h-5" />
+            </a>
+          )}
+          
+          {/* Second Row - Download Buttons */}
+          {(policy.fileMn || policy.fileEn) && (
+            <div className="grid grid-cols-2 gap-3">
+              {policy.fileMn && (
+                <a
+                  href={policy.fileMn}
+                  download
+                  className="bg-bm-blue text-white px-4 py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-bm-blue/90"
+                >
+                  {t('downloadMn')}
+                  <ArrowDownIcon className="w-5 h-5" />
+                </a>
+              )}
+              {policy.fileEn && (
+                <a
+                  href={policy.fileEn}
+                  download
+                  className="bg-bm-blue text-white px-4 py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-bm-blue/90"
+                >
+                  {t('downloadEn')}
+                  <ArrowDownIcon className="w-5 h-5" />
+                </a>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Summary */}
