@@ -14,5 +14,8 @@
   "updatesTitle": "Updates",
   "furtherReadingTitle": "Further Reading",
   "relatedPoliciesTitle": "Related Policies",
-  "approvedOn": "Approved"
+  "approvedOn": "Approved",
+  "expand": "Expand",
+  "seeMore": "See more",
+  "collapse": "Collapse"
 }

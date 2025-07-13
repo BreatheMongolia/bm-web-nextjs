@@ -6,6 +6,7 @@ import { getTranslated } from 'lib/utils/getTranslated'
 import { getPolicies, getPolicyLandingPageSettings } from 'lib/graphql-api/queries/policy'
 import { H2 } from '@/components/generic/Typography'
 import { NewsCarousel, TakeActionCarousel } from '@/components/HomePage'
+import Link from 'next/link'
 
 
 const PolicyPage = ({ policies, title, description, socialShare, featuredNews, featuredTakeActions, locale }) => {
@@ -25,12 +26,20 @@ const PolicyPage = ({ policies, title, description, socialShare, featuredNews, f
                         {description}
                     </h3>
 
-                    {/* TODO : Policies  */}
-                    {policies.map((policy, index) => (
-                        <div key={index} className="flex flex-col gap-4">
-                            {policy.title}
-                        </div>
-                    ))}
+                    {/* Policy Links */}
+                    <div className="grid gap-4">
+                        {policies.map((policy, index) => (
+                            <Link 
+                                key={index} 
+                                href={`/policy/${policy.slug}`}
+                                className="block p-6 border border-gray-200 rounded-lg hover:border-bm-blue hover:shadow-md transition-all duration-200"
+                            >
+                                <h3 className="text-lg font-semibold text-bm-blue mb-2">
+                                    {policy.title}
+                                </h3>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
 
                 <NewsCarousel featuredNews={featuredNews} />

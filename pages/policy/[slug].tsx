@@ -12,19 +12,68 @@ import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React from 'react'
 import { useTranslation } from 'next-i18next'
 import { BackBtn } from '@/components/TakeActionPage'
-import { tr } from 'date-fns/locale'
+import { RelatedPoliciesList, PolicyLoading, PolicyError } from '@/components/PolicyPage'
+import { transformPolicy, translateList } from 'lib/utils/policy'
 
-interface PolicyPostPageProps {
-  policy: any,
-  locale: string,
-  slug: string
+interface LocalizedContent {
+  en: string
+  mn: string
 }
 
-export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageProps) {
+interface Policy {
+  title: LocalizedContent
+  description: LocalizedContent
+  summary: LocalizedContent
+  updates: LocalizedContent
+  furtherReading: LocalizedContent
+  dateApproved: string
+  fileMn?: string
+  fileEn?: string
+  sourceUrl?: string
+  topics: string[]
+  documentTypes: string[]
+  status: string[]
+  recommendedActions: TakeAction[]
+  relatedPolicies: RelatedPolicy[]
+}
+
+interface RelatedPolicy {
+  databaseId: string
+  dateGmt: string
+  policyPageCustomFields: {
+    title: string
+    titleMn: string
+  }
+  topics?: {
+    edges: Array<{ node: { name: string } }>
+  }
+}
+
+interface PolicyPostPageProps {
+  policy: Policy | null
+  locale: string
+  slug: string
+  error?: string
+}
+
+export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPostPageProps) {
   const router = useRouter()
   const { t } = useTranslation('policy')
 
-  if (router.isFallback) return <p>Loading...</p>
+  // Loading state
+  if (router.isFallback) {
+    return <PolicyLoading />
+  }
+
+  // Error state
+  if (error || !policy) {
+    return (
+      <PolicyError 
+        error={error} 
+        onRetry={() => router.reload()}
+      />
+    )
+  }
 
   console.log('policy in component', policy)
 
@@ -39,11 +88,12 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
   const relatedPolicies = policy.relatedPolicies
 
   console.log('relatedPolicies', relatedPolicies)
+  console.log('furtherReading HTML:', furtherReading)
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Link */}
       <Link href="/policy" className="flex items-center text-bm-blue hover:underline mb-4">
-        <BackBtn title={t('backToPolicy')} />
+        <BackBtn title={t('backToPolicy')} href='/policy' />
       </Link>
 
       {/* Title and Share buttons */}
@@ -131,18 +181,16 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
       {/* Further Reading */}
       <H2 title={t('furtherReadingTitle')} trailingLineColor="blue" />
       <div
-        className="text-bm-blue leading-relaxed prose max-w-none"
+        className="text-bm-blue leading-relaxed policy-list-content"
         dangerouslySetInnerHTML={{ __html: furtherReading }}
       />
 
       {/* Related Policies */}
-      <H2 title={t('relatedPoliciesTitle')} trailingLineColor="blue" />
-      {relatedPolicies && (
-        <div className="">
-          {relatedPolicies.map((policy: any) => (
-            <PolicyCard key={policy.databaseId} policy={policy} locale={locale} />
-          ))}
-        </div>
+      {relatedPolicies && relatedPolicies.length > 0 && (
+        <>
+          <H2 title={t('relatedPoliciesTitle')} trailingLineColor="blue" />
+          <RelatedPoliciesList policies={relatedPolicies} locale={locale} />
+        </>
       )}
 
       <TakeActionCarousel takeActionPosts={policy.recommendedActions as TakeAction[]} locale={locale} />
@@ -150,31 +198,6 @@ export default function PolicyPostPage({ policy, locale, slug }: PolicyPostPageP
   )
 }
 
-const PolicyCard = ({ policy, locale }: any) => {
-  const { title, titleMn } = policy.policyPageCustomFields
-  const { topics, dateGmt } = policy
-  const dateApproved = formatDate(dateGmt)
-  const transformedTopics = translateList((topics?.edges || []).map((e: any) => e.node.name), locale)
-
-  console.log(transformedTopics)
-  return (
-    <div className="mb-4">
-      <div
-        className="text-bm-blue leading-relaxed prose max-w-none mb-3"
-        dangerouslySetInnerHTML={{ __html: getTranslated(title, titleMn, locale) }}
-      />
-      <div className='flex justify-between items-center'>
-        <div className='bg-gray-200 rounded-lg text-xs px-4 py-2'>Батлагдсан: {dateApproved}</div>
-        <div>
-          {transformedTopics.map((topic: any) => (
-            <span className="bg-blue-500 text-white text-sm px-4 py-1 rounded-lg mr-2">{topic}</span>
-          ))}
-        </div>
-      </div>
-    </div>
-    
-  )
-}
 
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
@@ -197,73 +220,41 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug as string
-  const policy = await getPolicyDetails(slug)
+  
+  try {
+    const policy = await getPolicyDetails(slug)
 
-  const transformedPolicy = transformPolicy(policy);
+    if (!policy) {
+      return { notFound: true }
+    }
 
-  if (!policy) return { notFound: true }
+    const transformedPolicy = transformPolicy(policy);
 
-  return {
-    props: {
-      ...(await serverSideTranslations(locale!, ['common', 'policy', 'nav', 'footer', 'home'])),
-      policy: transformedPolicy,
-      locale,
-      slug
-    },
-    revalidate: 60,
+    return {
+      props: {
+        ...(await serverSideTranslations(locale!, ['common', 'policy', 'nav', 'footer', 'home'])),
+        policy: transformedPolicy,
+        locale,
+        slug
+      },
+      revalidate: 60,
+    }
+  } catch (error) {
+    console.error('Error fetching policy:', error)
+    
+    return {
+      props: {
+        ...(await serverSideTranslations(locale!, ['common', 'policy', 'nav', 'footer', 'home'])),
+        policy: null,
+        locale,
+        slug,
+        error: 'Failed to load policy data. Please try again later.'
+      },
+      revalidate: 60,
+    }
   }
 }
 
-export function transformPolicy(raw: any) {
-  const f = raw.policy.policyPageCustomFields;
-
-  return {
-    title: {
-      en: f.title,
-      mn: f.titleMn,
-    },
-    description: {
-      en: f.name,
-      mn: f.nameMn,
-    },
-    summary: {
-      en: f.summary,
-      mn: f.summaryMn,
-    },
-    updates: {
-      en: f.updates,
-      mn: f.updatesMn,
-    },
-    furtherReading: {
-      en: f.furtherReading,
-      mn: f.furtherReadingMn,
-    },
-    dateApproved: formatDate(f.initiatedDate),
-    fileMn: f.downloadUrlMn,
-    fileEn: f.downloadUrl,
-    sourceUrl: f.sourceUrl,
-    topics: (raw.policy.topics?.edges || []).map((e: any) => e.node.name),
-    documentTypes: (raw.policy.documentTypes?.edges || []).map((e: any) => e.node.name),
-    status: (raw.policy.policyStatus?.edges || []).map((e: any) => e.node.name),
-    recommendedActions: (f.recommendedAction?.edges || []).map((e: any) => e.node),
-    relatedPolicies: (f.relatedPolicies?.edges || []).map((e: any) => e.node),
-  }
-}
-
-function formatDate(iso: string) {
-  if (!iso) return ''
-  const d = new Date(iso)
-  return d.toLocaleDateString('en-CA') // e.g. "2016-04-09"
-}
-
-function splitLocalizedValue(value: string, locale: string): string {
-  const [en, mn] = value.split(' / ')
-  return locale === 'mn' ? (mn || en) : en
-}
-
-function translateList(items: string[], locale: string): string[] {
-  return items.map(item => splitLocalizedValue(item, locale))
-}
 
 
 

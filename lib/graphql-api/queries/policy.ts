@@ -110,7 +110,7 @@ export async function getPolicyDetails(id: string, idType: PolicyIdType = Policy
             }
           }
         }
-        policyStatus(first: 10) {
+        policyStatuses(first: 10) {
           edges {
             node {
               name

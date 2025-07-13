@@ -14,5 +14,8 @@
   "updatesTitle": "Шинэчлэлт",
   "furtherReadingTitle": "Нэмэлт мэдээлэл",
   "relatedPoliciesTitle": "Холбоотой бодлогууд",
-  "approvedOn": "Батлагдсан"
+  "approvedOn": "Батлагдсан",
+  "expand": "Дэлгэх",
+  "seeMore": "бусад харах",
+  "collapse": "Хаах"
 }
