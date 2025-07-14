@@ -354,13 +354,15 @@ export const PolicySection = ({
                   )
                   .join(', ')}
               </p>
-              <p>
-                {getTranslated(
-                  policy.policyStatuses.edges[0].node.policyStatusCustomFields.name,
-                  policy.policyStatuses.edges[0].node.policyStatusCustomFields.nameMn,
-                  i18n.language,
-                )}
-              </p>
+              {policy.policyStatuses?.edges.length > 0 && (
+                <p>
+                  {getTranslated(
+                    policy.policyStatuses?.edges[0].node.policyStatusCustomFields.name,
+                    policy.policyStatuses?.edges[0].node.policyStatusCustomFields.nameMn,
+                    i18n.language,
+                  )}
+                </p>
+              )}
               <div className="col-span-3">
                 <div className="policy-summary-limit">
                   {parse(

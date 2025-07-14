@@ -18,11 +18,10 @@ const SearchBar: FC<Props> = ({ onSubmit }) => {
     }
 
     return (
-        <div className="flex align-center shadow-md border-[#E5E5E5] rounded-[10px] overflow-hidden h-[44px] bg-white px-[16px] py-[10px] mr-[10px]">
-            <MagnifyingGlassIcon className="w-6 h-6" color="#BBBBBB" />
-            <div className="bg-[#BBBBBB] w-[2px] mx-[16px]"></div>
+        <div className="flex align-center shadow-md border-[#E5E5E5] rounded-[10px] overflow-hidden h-[44px] bg-white px-[16px] py-[10px] mr-[10px] relative">
+            <MagnifyingGlassIcon className="w-6 h-6 absolute left-[16px] top-[calc(50% - 12px)]" color="#BBBBBB" />
             <input
-                className="outline-none"
+                className="outline-none pl-[34px]"
                 id="policy-search-input"
                 name="policy-search-input"
                 type="text"
