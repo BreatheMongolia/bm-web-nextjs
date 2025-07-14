@@ -1,10 +1,15 @@
 import React from 'react'
-import { getFeaturedTakeActions, getTakeActionLandingPageSettings, getTakeActionsLatest, getTakeActionText } from 'lib/graphql-api/queries/takeAction'
+import {
+  getFeaturedTakeActions,
+  getTakeActionLandingPageSettings,
+  getTakeActionsLatest,
+  getTakeActionText,
+} from 'lib/graphql-api/queries/takeAction'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { DonateSection, TakeActionsGrid } from 'components/TakeActionPage'
-import { ActionType, TakeAction } from 'graphql/generated'
+import { TakeAction } from 'graphql/generated'
 
 export type TakeActionAll = {
   id: number
@@ -27,12 +32,21 @@ const getTransformedData = (featured: TakeAction[], locale: string) => {
       slug: takeAction?.slug,
       date: takeAction.dateGmt,
       title:
-        getTranslated(takeAction.takeActionCustomFields.title, takeAction.takeActionCustomFields.titleMn, locale) !== null
+        getTranslated(takeAction.takeActionCustomFields.title, takeAction.takeActionCustomFields.titleMn, locale) !==
+        null
           ? getTranslated(takeAction.takeActionCustomFields.title, takeAction.takeActionCustomFields.titleMn, locale)
           : '',
       excerpt:
-        getTranslated(takeAction.takeActionCustomFields.excerpt, takeAction.takeActionCustomFields.excerptMn, locale) !== null
-          ? getTranslated(takeAction.takeActionCustomFields.excerpt, takeAction.takeActionCustomFields.excerptMn, locale)
+        getTranslated(
+          takeAction.takeActionCustomFields.excerpt,
+          takeAction.takeActionCustomFields.excerptMn,
+          locale,
+        ) !== null
+          ? getTranslated(
+              takeAction.takeActionCustomFields.excerpt,
+              takeAction.takeActionCustomFields.excerptMn,
+              locale,
+            )
           : '',
       typeOfAction: takeAction.takeActionCustomFields.typeOfAction?.nodes?.map(
         (type: { actionTypeCustomFields: { name: string; nameMn: string } }) =>
@@ -55,8 +69,16 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
       slug: takeAction?.slug,
       date: takeAction?.dateGmt,
       title:
-        getTranslated(takeAction?.takeActionCustomFields?.title, takeAction?.takeActionCustomFields?.titleMn, locale) !== null
-          ? getTranslated(takeAction?.takeActionCustomFields?.title, takeAction?.takeActionCustomFields?.titleMn, locale)
+        getTranslated(
+          takeAction?.takeActionCustomFields?.title,
+          takeAction?.takeActionCustomFields?.titleMn,
+          locale,
+        ) !== null
+          ? getTranslated(
+              takeAction?.takeActionCustomFields?.title,
+              takeAction?.takeActionCustomFields?.titleMn,
+              locale,
+            )
           : '',
       excerpt: '',
       typeOfAction: takeAction?.takeActionCustomFields.typeOfAction?.nodes?.map(
@@ -74,11 +96,20 @@ const getLatestTakeActions = (latest: TakeAction[], locale: string) => {
 
 const TakeActionsPage = ({ latest, featured, locale, takeActionText }) => {
   const featuredTakeActions = getTransformedData(featured, locale)
-  console.log('latest', latest)
   const latestTakeActions = getLatestTakeActions(latest, locale)
   var takeActions = [...featuredTakeActions, ...latestTakeActions]
-  const { whatYouCanDo, whatYouCanDoMn, whatYouCanDoText, whatYouCanDoTextMn, ...donationsText } = takeActionText;
-  const { donationText, donationTextMn, donationTitle, donationTitleMn, disclaimerText, disclaimerTextMn, waysToGive, waysToGiveMn, ...actionText } = takeActionText;
+  const { whatYouCanDo, whatYouCanDoMn, whatYouCanDoText, whatYouCanDoTextMn, ...donationsText } = takeActionText
+  const {
+    donationText,
+    donationTextMn,
+    donationTitle,
+    donationTitleMn,
+    disclaimerText,
+    disclaimerTextMn,
+    waysToGive,
+    waysToGiveMn,
+    ...actionText
+  } = takeActionText
 
   takeActions = takeActions.filter(
     (value, index, self) => self.map(takeAction => takeAction.id).indexOf(value.id) == index,
@@ -124,7 +155,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       takeActionText,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.landingPageImage?.node.mediaItemUrl, data.landingPageImageMn?.node.mediaItemUrl, locale)
+      image: getTranslated(
+        data.landingPageImage?.node.mediaItemUrl,
+        data.landingPageImageMn?.node.mediaItemUrl,
+        locale,
+      ),
     },
     revalidate: 60,
   }

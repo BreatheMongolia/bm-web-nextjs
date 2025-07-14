@@ -1,0 +1,30 @@
+{
+    "tableHeader": {
+        "documentName": "Document Title",
+        "documentType": "Type",
+        "documentStatus": "Status",
+        "documentSummary": "Summary"
+    },
+    "filterButtons": {
+        "all": "All",
+        "types": "Type",
+        "topics": "Topics",
+        "status": "Status",
+        "year": "Year"
+    },
+    "searchButton": "Search By",
+    "sortButton": "Sort By",
+    "sortBy": {
+        "dateAsc": "Initiated Date (newest to oldest)",
+        "dateDesc": "Initiated Date (oldest to newest)",
+        "nameAsc": "Policy Title (A to Z)",
+        "nameDesc": "Policy Title (Z to A)"
+    },
+    "noPoliciesFound": {
+        "all": "No Policy Found",
+        "type": "Type: No Policy Found",
+        "topic": "Topic: No Policy Found",
+        "status": "Status: No Policy Found",
+        "year": "Year: No Policy Found"
+    }
+}

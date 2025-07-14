@@ -24,9 +24,15 @@ export const Navbar = ({ projects }) => {
   return (
     <div className="">
       <div className="w-full uppercase text-xsm tracking-[1px] font-medium bg-white text-black">
-        <div className='container flex justify-between items-center py-1 h-[80px] font-[Rubik]'>
-          <Link href="/" className='flex items-center'>
-            <img className="aspect-auto max-h-14 sm:max-h-16" src="/images/logo.png" width={255} height={55} alt="Breathe Mongolia" />
+        <div className="container flex justify-between items-center py-1 h-[80px] font-[Rubik]">
+          <Link href="/" className="flex items-center">
+            <img
+              className="aspect-auto max-h-14 sm:max-h-16"
+              src="/images/logo.png"
+              width={255}
+              height={55}
+              alt="Breathe Mongolia"
+            />
           </Link>
           <div className="items-center hidden gap-10 ml-8 lg:flex">
             <MenuItem title={t('home')} href="/" isActive={path == '/'} />

@@ -1,0 +1,30 @@
+{
+    "tableHeader": {
+        "documentName": "БАРИМТЫН НЭР",
+        "documentType": "ТӨРӨЛ",
+        "documentStatus": "ТӨЛӨВ",
+        "documentSummary": "ХУРААНГУЙ"
+    },
+    "filterButtons": {
+        "all": "Бүгд",
+        "types": "Төрөл",
+        "topics": "Сэдэв",
+        "status": "Төлөв",
+        "year": "Он"
+    },
+    "searchButton": "Хайлт хийх",
+    "sortButton": "Эрэмбэлэх",
+    "sortBy": {
+        "dateAsc": "Батлагдсан огноо (шинэ - хуучин)",
+        "dateDesc": "Батлагдсан огноо (хуучин - шинэ)",
+        "nameAsc": "Баримтын нэр (A-Я)",
+        "nameDesc": "Баримтын нэр (Я-A)"
+    },
+    "noPoliciesFound": {
+        "all": "Бодлого олдсонгүй",
+        "type": "Төрөл: Бодлого олдсонгүй",
+        "topic": "Сэдэв: Бодлого олдсонгүй",
+        "status": "Төлөв: Бодлого олдсонгүй",
+        "year": "Он: Бодлого олдсонгүй"
+    }
+}
