@@ -39,10 +39,10 @@ export const Dropdown = ({ id, label, onClick, selectedOption, options = [] }: D
 
   return (
     <div className="relative flex place-content-start gap-2" onClick={toggleDropdown} id={id} ref={ref}>
-      <div className="flex items-center justify-between">
+      <div className="flex-1 items-center justify-between">
         <button
           onClick={() => setIsDropdownOpen(false)}
-          className={`w-28 border border-[#ADC4CC] font-semibold text-black py-1 rounded-xl flex gap-3 justify-center items-center  ${
+          className={`px-3 border border-[#ADC4CC] font-semibold text-black py-1 rounded-xl flex gap-3 justify-center items-center  ${
             selectedOption && 'bg-bm-blue text-white hover:bg-bm-blue-hover'
           }`}
         >

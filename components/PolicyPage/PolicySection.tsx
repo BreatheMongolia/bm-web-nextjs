@@ -2,11 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { Menu } from '@headlessui/react'
-import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronDownIcon,
+  ArrowUpRightIcon,
+  CalendarIcon,
+} from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Dropdown } from './Dropdown'
+import Image from 'next/image'
+import LinkSign from 'assets/img/vectorlink-sign.png'
 
 type OptionProps = {
   id?: string
@@ -23,7 +31,7 @@ type Policy = {
     summaryMn: string
     initiatedDate: string
   }
-  documentTypes: {
+  documentTypes?: {
     edges: {
       node: {
         slug: string
@@ -34,7 +42,7 @@ type Policy = {
       }
     }[]
   }
-  topics: {
+  topics?: {
     edges: {
       node: {
         slug: string
@@ -45,7 +53,7 @@ type Policy = {
       }
     }[]
   }
-  policyStatuses: {
+  policyStatuses?: {
     edges: {
       node: {
         slug: string
@@ -74,6 +82,7 @@ export const PolicySection = ({
   const { t, i18n } = useTranslation('policy')
   const [filteredPolicies, setFilteredPolicies] = useState<Policy[]>(policies)
   const [currentPage, setCurrentPage] = useState(0)
+  const [policyDetails, setPolicyDetails] = useState([])
   const [yearOptions, setYearOptions] = useState<OptionProps[]>([])
   // Filter states
   const [selectedDocumentType, setSelectedDocumentType] = useState<string | undefined>()
@@ -224,10 +233,10 @@ export const PolicySection = ({
   const showPolicyDetails = (index: number) => {
     const policy = filteredPolicies[index]
     return (
-      <div className="grid grid-cols-2">
-        <div>
-          <div>t('filterButtons.types')</div>
-          <div>
+      <div>
+        <div className="flex flex-row grid grid-cols-4 mt-5 gap-2">
+          <div className="ml-3 font-semibold">{t('filterButtons.types') + ':'}</div>
+          <p className="col-span-3 text-[#7F7F7F]">
             {policy.documentTypes.edges
               .map(type =>
                 getTranslated(
@@ -237,10 +246,33 @@ export const PolicySection = ({
                 ),
               )
               .join(', ')}
-          </div>
+          </p>
+          <div className="ml-3 font-semibold">{t('filterButtons.topics') + ':'}</div>
+          <p className="col-span-3 text-[#7F7F7F]">
+            {policy.topics.edges
+              .map(topic =>
+                getTranslated(topic.node.topicCustomFields.name, topic.node.topicCustomFields.nameMn, i18n.language),
+              )
+              .join(', ')}
+          </p>
+          <div className="ml-3 font-semibold">{t('filterButtons.status') + ':'}</div>
+          <p className="col-span-3 text-[#7F7F7F]">
+            {policy.policyStatuses.edges
+              .map(status =>
+                getTranslated(
+                  status.node.policyStatusCustomFields.name,
+                  status.node.policyStatusCustomFields.nameMn,
+                  i18n.language,
+                ),
+              )
+              .join(', ')}
+          </p>
         </div>
-        <div>t('filterButtons.topic')</div>
-        <div>t('filterButtons.status')</div>
+        <div className="flex justify-end">
+          <Link className="font-semibold text-xs text-bm-blue" href={`/policy/${policy.slug}`}>
+            {t('showMore')} <ArrowUpRightIcon className="inline-block w-3 h-3 font-semibold text-bm-blue" />
+          </Link>
+        </div>
       </div>
     )
   }
@@ -248,7 +280,8 @@ export const PolicySection = ({
   return (
     <div className="flex flex-col">
       <div className="flex flex-wrap w-full justify-between my-5">
-        <div className="flex justify-start gap-2 grow items-center ">
+        {/* Desktop */}
+        <div className="hidden md:flex justify-start gap-2 grow items-center ">
           <div className="relative flex place-content-start gap-2">
             <button
               onClick={() => {
@@ -256,6 +289,7 @@ export const PolicySection = ({
                 setSelectedDocumentTopic(undefined)
                 setSelectedPolicyStatus(undefined)
                 setSelectedYear(undefined)
+                setPolicyDetails([])
               }}
               className={`w-28 border border-[#ADC4CC] font-semibold py-1 rounded-xl flex gap-3 justify-center items-center ${
                 selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
@@ -320,6 +354,56 @@ export const PolicySection = ({
               })}
             </Menu.Items>
           </Menu>
+        </div>
+      </div>
+      {/* Mobile */}
+      <div className="md:hidden grid justify-items-start">
+        <div className="relative flex flex-wrap gap-2">
+          <button
+            onClick={() => {
+              setSelectedDocumentType(undefined)
+              setSelectedDocumentTopic(undefined)
+              setSelectedPolicyStatus(undefined)
+              setSelectedYear(undefined)
+              setPolicyDetails([])
+            }}
+            className={`place-content-stretch px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
+              selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
+                ? 'text-black bg-white hover:bg-bm-blue-hover'
+                : 'bg-bm-blue text-white'
+            }`}
+          >
+            {t('filterButtons.all')}
+          </button>
+
+          <Dropdown
+            id="types"
+            options={documentTypeOptions}
+            label={t('filterButtons.types')}
+            onClick={selected => setSelectedDocumentType(selected)}
+            selectedOption={selectedDocumentType}
+          />
+          <Dropdown
+            id="topics"
+            options={documentTopicOptions}
+            label={t('filterButtons.topics')}
+            onClick={selected => setSelectedDocumentTopic(selected)}
+            selectedOption={selectedDocumentTopic}
+          />
+          <Dropdown
+            id="statuses"
+            options={policyStatusOptions}
+            label={t('filterButtons.status')}
+            onClick={selected => setSelectedPolicyStatus(selected)}
+            selectedOption={selectedPolicyStatus}
+          />
+          <Dropdown
+            id="year"
+            options={yearOptions}
+            label={t('filterButtons.year')}
+            onClick={selected => setSelectedYear(selected)}
+            selectedOption={selectedYear}
+          />
         </div>
       </div>
 
@@ -400,9 +484,9 @@ export const PolicySection = ({
               </div>
             </div>
             {/* Mobile */}
-            <div className="md:hidden grid border-b border-zinc-500 pb-5">
+            <div className="md:hidden grid border-b border-zinc-500 py-2">
               <Link href={`/policy/${policy.slug}`}>
-                <h3>
+                <h3 className="mb-3">
                   {getTranslated(
                     policy.policyPageCustomFields.title,
                     policy.policyPageCustomFields.titleMn,
@@ -410,15 +494,18 @@ export const PolicySection = ({
                   )}
                 </h3>
               </Link>
-              <div className="grid grid-cols-2">
-                <p className="mt-5 bg-[#E9EAEB] rounded-l-md rounded-r-md px-2 text-sm">
-                  {(i18n.language === 'mn' ? 'Батлагдсан: ' : 'Date Passed: ') +
-                    formatMyDate(policy.policyPageCustomFields.initiatedDate)}
-                </p>
-                <div className="flex justify-end">
-                  <ChevronDownIcon className="h-5 w-5 mt-5 cursor-pointer" onClick={() => showPolicyDetails(index)} />
+              <div className="flex flex-row">
+                <div className="flex flex-row items-center h-8 bg-[#E9EAEB] rounded-l-md rounded-r-md px-3 text-sm">
+                  <CalendarIcon className="h-5 w-5 mr-2" /> {formatMyDate(policy.policyPageCustomFields.initiatedDate)}
+                </div>
+                <div className="flex flex-1 justify-end">
+                  <ChevronDownIcon
+                    className="mt-3 h-4 w-4 cursor-pointer"
+                    onClick={() => setPolicyDetails([...policyDetails, index])}
+                  />
                 </div>
               </div>
+              {policyDetails.some(i => i == index) && showPolicyDetails(index)}
             </div>
           </div>
         ))
