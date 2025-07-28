@@ -357,8 +357,8 @@ export const PolicySection = ({
         </div>
       </div>
       {/* Mobile */}
-      <div className="md:hidden grid justify-items-start">
-        <div className="relative flex flex-wrap gap-2">
+      <div className="md:hidden border-b border-zinc-500 pb-5">
+        <div className="relative flex flex-wrap grow gap-2">
           <button
             onClick={() => {
               setSelectedDocumentType(undefined)
@@ -367,7 +367,7 @@ export const PolicySection = ({
               setSelectedYear(undefined)
               setPolicyDetails([])
             }}
-            className={`place-content-stretch px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
+            className={`px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
               selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
                 ? 'text-black bg-white hover:bg-bm-blue-hover'
                 : 'bg-bm-blue text-white'
@@ -375,7 +375,6 @@ export const PolicySection = ({
           >
             {t('filterButtons.all')}
           </button>
-
           <Dropdown
             id="types"
             options={documentTypeOptions}
