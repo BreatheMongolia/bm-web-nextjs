@@ -36,10 +36,17 @@ const PolicyPage = ({
         <meta property="og:title" content={socialShare.title} />
         <meta property="og:image" content={socialShare.image} />
       </Head>
+<<<<<<< HEAD
       <div className="lg:container px-4 w-full mx-auto flex flex-col gap-16 pt-5">
         <div className="flex flex-col">
           <H2 title={title} />
           <h3 className="mb-5 font-semibold text-base sm:text-xl text-zinc-800">{description}</h3>
+=======
+      <div className="lg:container px-4 w-full mx-auto flex flex-col gap-16 pt-5 md:pt-10 ">
+        <div className="flex flex-col">
+          <H2 title={title} className="ta-mobile-header" />
+          <h3 className="mb-5 font-semibold text-base sm:text-xl text-zinc-800 mx-3 sm:mx-0">{description}</h3>
+>>>>>>> develop
           <PolicySection
             policies={policies}
             documentTypeOptions={documentTypeOptions}

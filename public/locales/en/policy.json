@@ -26,6 +26,10 @@
         "topic": "Topic: No Policy Found",
         "status": "Status: No Policy Found",
         "year": "Year: No Policy Found"
+<<<<<<< HEAD
     },
     "showMore": "Show More"
+=======
+    }
+>>>>>>> develop
 }
