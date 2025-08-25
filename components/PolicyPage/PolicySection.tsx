@@ -115,13 +115,13 @@ export const PolicySection = ({
   useEffect(() => {
     const filtered = policies.filter(
       policy =>
-        policy.documentTypes.edges.some(type =>
+        policy.documentTypes?.edges.some(type =>
           selectedDocumentType !== undefined ? type.node.slug === selectedDocumentType : true,
         ) &&
-        policy.topics.edges.some(topic =>
+        policy.topics?.edges.some(topic =>
           selectedDocumentTopic !== undefined ? topic.node.slug === selectedDocumentTopic : true,
         ) &&
-        policy.policyStatuses.edges.some(status =>
+        policy.policyStatuses?.edges.some(status =>
           selectedPolicyStatus !== undefined ? status.node.slug === selectedPolicyStatus : true,
         ) &&
         (selectedYear !== undefined
@@ -234,10 +234,10 @@ export const PolicySection = ({
     const policy = filteredPolicies[index]
     return (
       <div>
-        <div className="flex flex-row grid grid-cols-4 mt-5 gap-2">
-          <div className="ml-3 font-semibold">{t('filterButtons.types') + ':'}</div>
-          <p className="col-span-3 text-[#7F7F7F]">
-            {policy.documentTypes.edges
+        <div className="flex flex-row grid grid-cols-4 mt-5 gap-2 font-medium">
+          <div className="ml-3 text-[#524D42]">{t('filterButtons.types') + ':'}</div>
+          <div className="col-span-3">
+            {policy.documentTypes?.edges
               .map(type =>
                 getTranslated(
                   type.node.documentTypeCustomFields.name,
@@ -246,18 +246,18 @@ export const PolicySection = ({
                 ),
               )
               .join(', ')}
-          </p>
-          <div className="ml-3 font-semibold">{t('filterButtons.topics') + ':'}</div>
-          <p className="col-span-3 text-[#7F7F7F]">
-            {policy.topics.edges
+          </div>
+          <div className="ml-3 text-[#524D42]">{t('filterButtons.topics') + ':'}</div>
+          <div className="col-span-3">
+            {policy.topics?.edges
               .map(topic =>
                 getTranslated(topic.node.topicCustomFields.name, topic.node.topicCustomFields.nameMn, i18n.language),
               )
               .join(', ')}
-          </p>
-          <div className="ml-3 font-semibold">{t('filterButtons.status') + ':'}</div>
-          <p className="col-span-3 text-[#7F7F7F]">
-            {policy.policyStatuses.edges
+          </div>
+          <div className="ml-3 text-[#524D42]">{t('filterButtons.status') + ':'}</div>
+          <div className="col-span-3">
+            {policy.policyStatuses?.edges
               .map(status =>
                 getTranslated(
                   status.node.policyStatusCustomFields.name,
@@ -266,7 +266,7 @@ export const PolicySection = ({
                 ),
               )
               .join(', ')}
-          </p>
+          </div>
         </div>
         <div className="flex justify-end">
           <Link className="font-semibold text-xs text-bm-blue" href={`/policy/${policy.slug}`}>
@@ -281,8 +281,8 @@ export const PolicySection = ({
     <div className="flex flex-col">
       <div className="flex flex-wrap w-full justify-between my-5">
         {/* Desktop */}
-        <div className="hidden md:flex justify-start gap-2 grow items-center ">
-          <div className="relative flex place-content-start gap-2">
+        <div className="flex justify-start">
+          <div className="relative hidden md:flex flex-wrap gap-2">
             <button
               onClick={() => {
                 setSelectedDocumentType(undefined)
@@ -291,7 +291,7 @@ export const PolicySection = ({
                 setSelectedYear(undefined)
                 setPolicyDetails([])
               }}
-              className={`w-28 border border-[#ADC4CC] font-semibold py-1 rounded-xl flex gap-3 justify-center items-center ${
+              className={`w-28 w-full px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl justify-center items-center ${
                 selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
                   ? 'text-black bg-white hover:bg-bm-blue-hover'
                   : 'bg-bm-blue text-white'
@@ -356,9 +356,10 @@ export const PolicySection = ({
           </Menu>
         </div>
       </div>
+
       {/* Mobile */}
       <div className="md:hidden border-b border-zinc-500 pb-5">
-        <div className="relative flex flex-wrap grow gap-2">
+        <div className="relative grid grid-cols-6 gap-2">
           <button
             onClick={() => {
               setSelectedDocumentType(undefined)
@@ -367,7 +368,7 @@ export const PolicySection = ({
               setSelectedYear(undefined)
               setPolicyDetails([])
             }}
-            className={`px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
+            className={`col-span-2 px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
               selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
                 ? 'text-black bg-white hover:bg-bm-blue-hover'
                 : 'bg-bm-blue text-white'
@@ -431,14 +432,14 @@ export const PolicySection = ({
                   </h3>
                 </Link>
                 <div className="flex justify-start mt-5">
-                  <p className="bg-[#E9EAEB] rounded-l-md rounded-r-md px-2 text-sm">
+                  <div className="bg-[#E9EAEB] rounded-l-md rounded-r-md px-2 text-sm">
                     {(i18n.language === 'mn' ? 'Батлагдсан: ' : 'Date Passed: ') +
                       formatMyDate(policy.policyPageCustomFields.initiatedDate)}
-                  </p>
+                  </div>
                 </div>
               </div>
-              <p className="mr-5">
-                {policy.documentTypes.edges
+              <div className="mr-5">
+                {policy.documentTypes?.edges
                   .map((type, i) =>
                     getTranslated(
                       type.node.documentTypeCustomFields.name,
@@ -447,16 +448,20 @@ export const PolicySection = ({
                     ),
                   )
                   .join(', ')}
-              </p>
-              <p>
-                {getTranslated(
-                  policy.policyStatuses.edges[0].node.policyStatusCustomFields.name,
-                  policy.policyStatuses.edges[0].node.policyStatusCustomFields.nameMn,
-                  i18n.language,
-                )}
-              </p>
+              </div>
+              <div>
+                {policy.policyStatuses?.edges
+                  .map(status =>
+                    getTranslated(
+                      status.node.policyStatusCustomFields.name,
+                      status.node.policyStatusCustomFields.nameMn,
+                      i18n.language,
+                    ),
+                  )
+                  .join(', ')}
+              </div>
               <div className="col-span-3">
-                <p className="policy-summary-limit">
+                <div className="policy-summary-limit">
                   {parse(
                     getTranslated(
                       policy.policyPageCustomFields.summary,
@@ -464,18 +469,18 @@ export const PolicySection = ({
                       i18n.language,
                     ),
                   )}
-                </p>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-2 text-sm">
-                  {policy.topics.edges.map((topic, i) => (
+                  {policy.topics?.edges.map((topic, i) => (
                     <div key={'topic' + i} className="flex items-center">
                       {i < 5 && (
-                        <p className="bg-[#E3F8FF] rounded-l-md rounded-r-md px-2 text-bm-blue">
+                        <div className="bg-[#E3F8FF] rounded-l-md rounded-r-md px-2 text-bm-blue">
                           {getTranslated(
                             topic.node.topicCustomFields.name,
                             topic.node.topicCustomFields.nameMn,
                             i18n.language,
                           )}
-                        </p>
+                        </div>
                       )}
                     </div>
                   ))}
@@ -509,7 +514,7 @@ export const PolicySection = ({
           </div>
         ))
       ) : (
-        <div className="grid justify-items-center text-gray-500">{t('noPoliciesFound.all')}</div>
+        <div className="grid justify-center items-center text-gray-500">{t('noPoliciesFound.all')}</div>
       )}
 
       {/* Pagination */}
