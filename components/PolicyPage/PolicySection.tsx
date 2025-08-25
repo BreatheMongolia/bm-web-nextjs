@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { Menu } from '@headlessui/react'
-<<<<<<< HEAD
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -10,18 +9,13 @@ import {
   ArrowUpRightIcon,
   CalendarIcon,
 } from '@heroicons/react/24/solid'
-=======
-import { ChevronLeftIcon, ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
->>>>>>> develop
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Dropdown } from './Dropdown'
-<<<<<<< HEAD
 import Image from 'next/image'
 import LinkSign from 'assets/img/vectorlink-sign.png'
-=======
->>>>>>> develop
 
 type OptionProps = {
   id?: string
@@ -38,11 +32,7 @@ type Policy = {
     summaryMn: string
     initiatedDate: string
   }
-<<<<<<< HEAD
   documentTypes?: {
-=======
-  documentTypes: {
->>>>>>> develop
     edges: {
       node: {
         slug: string
@@ -53,11 +43,7 @@ type Policy = {
       }
     }[]
   }
-<<<<<<< HEAD
   topics?: {
-=======
-  topics: {
->>>>>>> develop
     edges: {
       node: {
         slug: string
@@ -68,11 +54,7 @@ type Policy = {
       }
     }[]
   }
-<<<<<<< HEAD
   policyStatuses?: {
-=======
-  policyStatuses: {
->>>>>>> develop
     edges: {
       node: {
         slug: string
@@ -101,10 +83,7 @@ export const PolicySection = ({
   const { t, i18n } = useTranslation('policy')
   const [filteredPolicies, setFilteredPolicies] = useState<Policy[]>(policies)
   const [currentPage, setCurrentPage] = useState(0)
-<<<<<<< HEAD
   const [policyDetails, setPolicyDetails] = useState([])
-=======
->>>>>>> develop
   const [yearOptions, setYearOptions] = useState<OptionProps[]>([])
   // Filter states
   const [selectedDocumentType, setSelectedDocumentType] = useState<string | undefined>()
@@ -137,7 +116,6 @@ export const PolicySection = ({
   useEffect(() => {
     const filtered = policies.filter(
       policy =>
-<<<<<<< HEAD
         policy.documentTypes?.edges.some(type =>
           selectedDocumentType !== undefined ? type.node.slug === selectedDocumentType : true,
         ) &&
@@ -145,15 +123,6 @@ export const PolicySection = ({
           selectedDocumentTopic !== undefined ? topic.node.slug === selectedDocumentTopic : true,
         ) &&
         policy.policyStatuses?.edges.some(status =>
-=======
-        policy.documentTypes.edges.some(type =>
-          selectedDocumentType !== undefined ? type.node.slug === selectedDocumentType : true,
-        ) &&
-        policy.topics.edges.some(topic =>
-          selectedDocumentTopic !== undefined ? topic.node.slug === selectedDocumentTopic : true,
-        ) &&
-        policy.policyStatuses.edges.some(status =>
->>>>>>> develop
           selectedPolicyStatus !== undefined ? status.node.slug === selectedPolicyStatus : true,
         ) &&
         (selectedYear !== undefined
@@ -262,7 +231,6 @@ export const PolicySection = ({
     }
   }
 
-<<<<<<< HEAD
   const showPolicyDetails = (index: number) => {
     const policy = filteredPolicies[index]
     return (
@@ -316,27 +284,15 @@ export const PolicySection = ({
         {/* Desktop */}
         <div className="flex justify-start">
           <div className="relative hidden md:flex flex-wrap gap-2">
-=======
-  return (
-    <div className="flex flex-col">
-      <div className="flex flex-wrap w-full justify-between my-5">
-        <div className="flex justify-start gap-2 grow items-center ">
-          <div className="relative flex place-content-start gap-2">
->>>>>>> develop
             <button
               onClick={() => {
                 setSelectedDocumentType(undefined)
                 setSelectedDocumentTopic(undefined)
                 setSelectedPolicyStatus(undefined)
                 setSelectedYear(undefined)
-<<<<<<< HEAD
                 setPolicyDetails([])
               }}
               className={`w-28 w-full px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl justify-center items-center ${
-=======
-              }}
-              className={`w-28 border border-[#ADC4CC] font-semibold py-1 rounded-xl flex gap-3 justify-center items-center ${
->>>>>>> develop
                 selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
                   ? 'text-black bg-white hover:bg-bm-blue-hover'
                   : 'bg-bm-blue text-white'
@@ -362,11 +318,7 @@ export const PolicySection = ({
             <Dropdown
               id="statuses"
               options={policyStatusOptions}
-<<<<<<< HEAD
               label={t('filterButtons.status')}
-=======
-              label={t('filterButtons.topics')}
->>>>>>> develop
               onClick={selected => setSelectedPolicyStatus(selected)}
               selectedOption={selectedPolicyStatus}
             />
@@ -406,7 +358,6 @@ export const PolicySection = ({
         </div>
       </div>
 
-<<<<<<< HEAD
       {/* Mobile */}
       <div className="md:hidden border-b border-zinc-500 pb-5">
         <div className="relative grid grid-cols-6 gap-2">
@@ -459,10 +410,6 @@ export const PolicySection = ({
 
       {/* Table Header */}
       <div className="hidden md:grid grid-cols-7 bg-bm-blue text-lg font-semibold text-white my-5 rounded-l-md rounded-r-md">
-=======
-      {/* Table Header */}
-      <div className="grid grid-cols-7 bg-bm-blue text-lg font-semibold text-white my-5 rounded-l-md rounded-r-md">
->>>>>>> develop
         <div className="col-span-2 pl-2">{t('tableHeader.documentName')}</div>
         <div className="">{t('tableHeader.documentType')}</div>
         <div className="">{t('tableHeader.documentStatus')}</div>
@@ -470,7 +417,6 @@ export const PolicySection = ({
       </div>
 
       {/* Policies */}
-<<<<<<< HEAD
       {filteredPolicies.length !== 0 ? (
         filteredPolicies.map((policy, index) => (
           <div key={'policyList' + index}>
@@ -478,14 +424,6 @@ export const PolicySection = ({
             <div className="hidden md:grid grid-cols-7 border-b border-zinc-200 pb-5">
               <div className="col-span-2 mr-5">
                 <Link href={`/policy/${policy.slug}`}>
-=======
-      <div className="">
-        {filteredPolicies !== undefined ? (
-          filteredPolicies.map((policy, index) => (
-            <div key={'policyList' + index} className="grid grid-cols-7 border-b border-zinc-200 pb-5">
-              <div className="col-span-2 mr-5">
-                <Link href={`/policy/${policy.slug}`} className="">
->>>>>>> develop
                   <h3>
                     {getTranslated(
                       policy.policyPageCustomFields.title,
@@ -495,7 +433,6 @@ export const PolicySection = ({
                   </h3>
                 </Link>
                 <div className="flex justify-start mt-5">
-<<<<<<< HEAD
                   <div className="bg-[#E9EAEB] rounded-l-md rounded-r-md px-2 text-sm">
                     {(i18n.language === 'mn' ? 'Батлагдсан: ' : 'Date Passed: ') +
                       formatMyDate(policy.policyPageCustomFields.initiatedDate)}
@@ -504,16 +441,6 @@ export const PolicySection = ({
               </div>
               <div className="mr-5">
                 {policy.documentTypes?.edges
-=======
-                  <p className="bg-[#E9EAEB] rounded-l-md rounded-r-md px-2">
-                    {(i18n.language === 'mn' ? 'Батлагдсан: ' : 'Date Passed: ') +
-                      formatMyDate(policy.policyPageCustomFields.initiatedDate)}
-                  </p>
-                </div>
-              </div>
-              <p className="mr-5">
-                {policy.documentTypes.edges
->>>>>>> develop
                   .map((type, i) =>
                     getTranslated(
                       type.node.documentTypeCustomFields.name,
@@ -522,7 +449,6 @@ export const PolicySection = ({
                     ),
                   )
                   .join(', ')}
-<<<<<<< HEAD
               </div>
               <div>
                 {policy.policyStatuses?.edges
@@ -537,18 +463,6 @@ export const PolicySection = ({
               </div>
               <div className="col-span-3">
                 <div className="policy-summary-limit">
-=======
-              </p>
-              <p>
-                {getTranslated(
-                  policy.policyStatuses.edges[0].node.policyStatusCustomFields.name,
-                  policy.policyStatuses.edges[0].node.policyStatusCustomFields.nameMn,
-                  i18n.language,
-                )}
-              </p>
-              <div className="col-span-3">
-                <p className="policy-summary-limit">
->>>>>>> develop
                   {parse(
                     getTranslated(
                       policy.policyPageCustomFields.summary,
@@ -556,38 +470,24 @@ export const PolicySection = ({
                       i18n.language,
                     ),
                   )}
-<<<<<<< HEAD
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2 text-sm">
                   {policy.topics?.edges.map((topic, i) => (
                     <div key={'topic' + i} className="flex items-center">
                       {i < 5 && (
                         <div className="bg-[#E3F8FF] rounded-l-md rounded-r-md px-2 text-bm-blue">
-=======
-                </p>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {policy.topics.edges.map((topic, i) => (
-                    <div key={'topic' + i} className="flex items-center">
-                      {i < 5 && (
-                        <p className="bg-[#E3F8FF] rounded-l-md rounded-r-md px-2 text-bm-blue">
->>>>>>> develop
                           {getTranslated(
                             topic.node.topicCustomFields.name,
                             topic.node.topicCustomFields.nameMn,
                             i18n.language,
                           )}
-<<<<<<< HEAD
                         </div>
-=======
-                        </p>
->>>>>>> develop
                       )}
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
             {/* Mobile */}
             <div className="md:hidden grid border-b border-zinc-500 py-2">
               <Link href={`/policy/${policy.slug}`}>
@@ -617,13 +517,6 @@ export const PolicySection = ({
       ) : (
         <div className="grid justify-center items-center text-gray-500">{t('noPoliciesFound.all')}</div>
       )}
-=======
-          ))
-        ) : (
-          <div className="flex flex wrap text-center text-gray-500">{t('noPoliciesFound.all')}</div>
-        )}
-      </div>
->>>>>>> develop
 
       {/* Pagination */}
       <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
