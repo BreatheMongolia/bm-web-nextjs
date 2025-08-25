@@ -4060,7 +4060,15 @@ export type DocumentTypePoliciesArgs = {
   where?: InputMaybe<DocumentTypeToPolicyConnectionWhereArgs>;
 };
 
+<<<<<<< Updated upstream
 /** Connection to documentType Nodes */
+=======
+<<<<<<< HEAD
+/** A paginated collection of documentType Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of documentType Nodes */
+=======
+/** Connection to documentType Nodes */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type DocumentTypeConnection = {
   /** A list of edges (relational context) between RootQuery and connected documentType Nodes */
   edges: Array<DocumentTypeConnectionEdge>;
@@ -4070,7 +4078,15 @@ export type DocumentTypeConnection = {
   pageInfo: DocumentTypeConnectionPageInfo;
 };
 
+<<<<<<< Updated upstream
 /** Edge between a Node and a connected documentType */
+=======
+<<<<<<< HEAD
+/** Represents a connection to a documentType. Contains both the documentType Node and metadata about the relationship. */
+=======
+/** Edge between a Node and a connected documentType */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type DocumentTypeConnectionEdge = {
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
   cursor?: Maybe<Scalars['String']>;
@@ -4078,7 +4094,15 @@ export type DocumentTypeConnectionEdge = {
   node: DocumentType;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the connected DocumentTypeConnectionEdge */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;DocumentTypeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;DocumentTypeConnectionEdge&quot; Nodes. */
+=======
+/** Page Info on the connected DocumentTypeConnectionEdge */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type DocumentTypeConnectionPageInfo = {
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['String']>;
@@ -4117,7 +4141,15 @@ export type DocumentTypeCustomFields_Fields = {
   nameMn?: Maybe<Scalars['String']>;
 };
 
+<<<<<<< Updated upstream
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
+=======
+<<<<<<< HEAD
+/** Identifier types for retrieving a specific DocumentType. Determines which unique property (global ID, database ID, slug, etc.) is used to locate the DocumentType. */
+=======
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export enum DocumentTypeIdType {
   /** The Database ID for the node */
   DatabaseId = 'DATABASE_ID',
@@ -4151,7 +4183,15 @@ export type DocumentTypeToAncestorsDocumentTypeConnectionEdge = DocumentTypeConn
   node: DocumentType;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;DocumentTypeToAncestorsDocumentTypeConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;DocumentTypeToAncestorsDocumentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of DocumentTypeToAncestorsDocumentTypeConnection Nodes. */
+=======
+/** Page Info on the &quot;DocumentTypeToAncestorsDocumentTypeConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type DocumentTypeToAncestorsDocumentTypeConnectionPageInfo = DocumentTypeConnectionPageInfo & PageInfo & WpPageInfo & {
   __typename?: 'DocumentTypeToAncestorsDocumentTypeConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -4184,7 +4224,15 @@ export type DocumentTypeToContentNodeConnectionEdge = ContentNodeConnectionEdge 
   node: ContentNode;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;DocumentTypeToContentNodeConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;DocumentTypeToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of DocumentTypeToContentNodeConnection Nodes. */
+=======
+/** Page Info on the &quot;DocumentTypeToContentNodeConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type DocumentTypeToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
   __typename?: 'DocumentTypeToContentNodeConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -4257,7 +4305,15 @@ export type DocumentTypeToDocumentTypeConnectionEdge = DocumentTypeConnectionEdg
   node: DocumentType;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;DocumentTypeToDocumentTypeConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;DocumentTypeToDocumentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of DocumentTypeToDocumentTypeConnection Nodes. */
+=======
+/** Page Info on the &quot;DocumentTypeToDocumentTypeConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type DocumentTypeToDocumentTypeConnectionPageInfo = DocumentTypeConnectionPageInfo & PageInfo & WpPageInfo & {
   __typename?: 'DocumentTypeToDocumentTypeConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -4343,7 +4399,15 @@ export type DocumentTypeToPolicyConnectionEdge = Edge & PolicyConnectionEdge & {
   node: Policy;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;DocumentTypeToPolicyConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;DocumentTypeToPolicyConnection&quot; collections. Provides cursors and flags for navigating through sets of DocumentTypeToPolicyConnection Nodes. */
+=======
+/** Page Info on the &quot;DocumentTypeToPolicyConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type DocumentTypeToPolicyConnectionPageInfo = PageInfo & PolicyConnectionPageInfo & WpPageInfo & {
   __typename?: 'DocumentTypeToPolicyConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -4403,7 +4467,15 @@ export type DocumentTypeToTaxonomyConnectionEdge = Edge & OneToOneConnection & T
   node: Taxonomy;
 };
 
+<<<<<<< Updated upstream
 /** Relational context between connected nodes */
+=======
+<<<<<<< HEAD
+/** Represents a connection between two objects. Contains both the related object (node) and metadata about the relationship (cursor). */
+=======
+/** Relational context between connected nodes */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type Edge = {
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
   cursor?: Maybe<Scalars['String']>;
@@ -8502,7 +8574,15 @@ export type PolicyTopicsArgs = {
   where?: InputMaybe<PolicyToTopicConnectionWhereArgs>;
 };
 
+<<<<<<< Updated upstream
 /** Connection to policy Nodes */
+=======
+<<<<<<< HEAD
+/** A paginated collection of policy Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of policy Nodes */
+=======
+/** Connection to policy Nodes */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyConnection = {
   /** A list of edges (relational context) between RootQuery and connected policy Nodes */
   edges: Array<PolicyConnectionEdge>;
@@ -8552,7 +8632,15 @@ export type PolicyDocumentTypesNodeInput = {
   slug?: InputMaybe<Scalars['String']>;
 };
 
+<<<<<<< Updated upstream
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
+=======
+<<<<<<< HEAD
+/** Identifier types for retrieving a specific Policy. Specifies which unique attribute is used to find an exact Policy. */
+=======
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export enum PolicyIdType {
   /** Identify a resource by the Database ID. */
   DatabaseId = 'DATABASE_ID',
@@ -8952,7 +9040,15 @@ export type PolicyStatusPoliciesArgs = {
   where?: InputMaybe<PolicyStatusToPolicyConnectionWhereArgs>;
 };
 
+<<<<<<< Updated upstream
 /** Connection to policyStatus Nodes */
+=======
+<<<<<<< HEAD
+/** A paginated collection of policyStatus Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of policyStatus Nodes */
+=======
+/** Connection to policyStatus Nodes */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyStatusConnection = {
   /** A list of edges (relational context) between RootQuery and connected policyStatus Nodes */
   edges: Array<PolicyStatusConnectionEdge>;
@@ -8962,7 +9058,15 @@ export type PolicyStatusConnection = {
   pageInfo: PolicyStatusConnectionPageInfo;
 };
 
+<<<<<<< Updated upstream
 /** Edge between a Node and a connected policyStatus */
+=======
+<<<<<<< HEAD
+/** Represents a connection to a policyStatus. Contains both the policyStatus Node and metadata about the relationship. */
+=======
+/** Edge between a Node and a connected policyStatus */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyStatusConnectionEdge = {
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
   cursor?: Maybe<Scalars['String']>;
@@ -8970,7 +9074,15 @@ export type PolicyStatusConnectionEdge = {
   node: PolicyStatus;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the connected PolicyStatusConnectionEdge */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyStatusConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PolicyStatusConnectionEdge&quot; Nodes. */
+=======
+/** Page Info on the connected PolicyStatusConnectionEdge */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyStatusConnectionPageInfo = {
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['String']>;
@@ -9009,7 +9121,15 @@ export type PolicyStatusCustomFields_Fields = {
   nameMn?: Maybe<Scalars['String']>;
 };
 
+<<<<<<< Updated upstream
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
+=======
+<<<<<<< HEAD
+/** Identifier types for retrieving a specific PolicyStatus. Determines which unique property (global ID, database ID, slug, etc.) is used to locate the PolicyStatus. */
+=======
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export enum PolicyStatusIdType {
   /** The Database ID for the node */
   DatabaseId = 'DATABASE_ID',
@@ -9043,7 +9163,15 @@ export type PolicyStatusToAncestorsPolicyStatusConnectionEdge = Edge & PolicySta
   node: PolicyStatus;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;PolicyStatusToAncestorsPolicyStatusConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyStatusToAncestorsPolicyStatusConnection&quot; collections. Provides cursors and flags for navigating through sets of PolicyStatusToAncestorsPolicyStatusConnection Nodes. */
+=======
+/** Page Info on the &quot;PolicyStatusToAncestorsPolicyStatusConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyStatusToAncestorsPolicyStatusConnectionPageInfo = PageInfo & PolicyStatusConnectionPageInfo & WpPageInfo & {
   __typename?: 'PolicyStatusToAncestorsPolicyStatusConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -9076,7 +9204,15 @@ export type PolicyStatusToContentNodeConnectionEdge = ContentNodeConnectionEdge 
   node: ContentNode;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;PolicyStatusToContentNodeConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyStatusToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PolicyStatusToContentNodeConnection Nodes. */
+=======
+/** Page Info on the &quot;PolicyStatusToContentNodeConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyStatusToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
   __typename?: 'PolicyStatusToContentNodeConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -9158,7 +9294,15 @@ export type PolicyStatusToPolicyConnectionEdge = Edge & PolicyConnectionEdge & {
   node: Policy;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;PolicyStatusToPolicyConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyStatusToPolicyConnection&quot; collections. Provides cursors and flags for navigating through sets of PolicyStatusToPolicyConnection Nodes. */
+=======
+/** Page Info on the &quot;PolicyStatusToPolicyConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyStatusToPolicyConnectionPageInfo = PageInfo & PolicyConnectionPageInfo & WpPageInfo & {
   __typename?: 'PolicyStatusToPolicyConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -9229,7 +9373,15 @@ export type PolicyStatusToPolicyStatusConnectionEdge = Edge & PolicyStatusConnec
   node: PolicyStatus;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;PolicyStatusToPolicyStatusConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyStatusToPolicyStatusConnection&quot; collections. Provides cursors and flags for navigating through sets of PolicyStatusToPolicyStatusConnection Nodes. */
+=======
+/** Page Info on the &quot;PolicyStatusToPolicyStatusConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyStatusToPolicyStatusConnectionPageInfo = PageInfo & PolicyStatusConnectionPageInfo & WpPageInfo & {
   __typename?: 'PolicyStatusToPolicyStatusConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -9315,7 +9467,15 @@ export type PolicyToDocumentTypeConnectionEdge = DocumentTypeConnectionEdge & Ed
   node: DocumentType;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;PolicyToDocumentTypeConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyToDocumentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of PolicyToDocumentTypeConnection Nodes. */
+=======
+/** Page Info on the &quot;PolicyToDocumentTypeConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyToDocumentTypeConnectionPageInfo = DocumentTypeConnectionPageInfo & PageInfo & WpPageInfo & {
   __typename?: 'PolicyToDocumentTypeConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -9443,7 +9603,15 @@ export type PolicyToPolicyStatusConnectionEdge = Edge & PolicyStatusConnectionEd
   node: PolicyStatus;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;PolicyToPolicyStatusConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyToPolicyStatusConnection&quot; collections. Provides cursors and flags for navigating through sets of PolicyToPolicyStatusConnection Nodes. */
+=======
+/** Page Info on the &quot;PolicyToPolicyStatusConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyToPolicyStatusConnectionPageInfo = PageInfo & PolicyStatusConnectionPageInfo & WpPageInfo & {
   __typename?: 'PolicyToPolicyStatusConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -9529,7 +9697,15 @@ export type PolicyToTermNodeConnectionEdge = Edge & TermNodeConnectionEdge & {
   node: TermNode;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;PolicyToTermNodeConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PolicyToTermNodeConnection Nodes. */
+=======
+/** Page Info on the &quot;PolicyToTermNodeConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyToTermNodeConnectionPageInfo = PageInfo & TermNodeConnectionPageInfo & WpPageInfo & {
   __typename?: 'PolicyToTermNodeConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -9608,7 +9784,15 @@ export type PolicyToTopicConnectionEdge = Edge & TopicConnectionEdge & {
   node: Topic;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;PolicyToTopicConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;PolicyToTopicConnection&quot; collections. Provides cursors and flags for navigating through sets of PolicyToTopicConnection Nodes. */
+=======
+/** Page Info on the &quot;PolicyToTopicConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type PolicyToTopicConnectionPageInfo = PageInfo & TopicConnectionPageInfo & WpPageInfo & {
   __typename?: 'PolicyToTopicConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -14430,7 +14614,15 @@ export type RootQueryToDocumentTypeConnectionEdge = DocumentTypeConnectionEdge &
   node: DocumentType;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;RootQueryToDocumentTypeConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;RootQueryToDocumentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToDocumentTypeConnection Nodes. */
+=======
+/** Page Info on the &quot;RootQueryToDocumentTypeConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type RootQueryToDocumentTypeConnectionPageInfo = DocumentTypeConnectionPageInfo & PageInfo & WpPageInfo & {
   __typename?: 'RootQueryToDocumentTypeConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -15083,7 +15275,15 @@ export type RootQueryToPolicyStatusConnectionEdge = Edge & PolicyStatusConnectio
   node: PolicyStatus;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;RootQueryToPolicyStatusConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;RootQueryToPolicyStatusConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPolicyStatusConnection Nodes. */
+=======
+/** Page Info on the &quot;RootQueryToPolicyStatusConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type RootQueryToPolicyStatusConnectionPageInfo = PageInfo & PolicyStatusConnectionPageInfo & WpPageInfo & {
   __typename?: 'RootQueryToPolicyStatusConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -16140,7 +16340,15 @@ export type RootQueryToTopicConnectionEdge = Edge & TopicConnectionEdge & {
   node: Topic;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;RootQueryToTopicConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;RootQueryToTopicConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTopicConnection Nodes. */
+=======
+/** Page Info on the &quot;RootQueryToTopicConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type RootQueryToTopicConnectionPageInfo = PageInfo & TopicConnectionPageInfo & WpPageInfo & {
   __typename?: 'RootQueryToTopicConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -18482,7 +18690,15 @@ export type TopicPoliciesArgs = {
   where?: InputMaybe<TopicToPolicyConnectionWhereArgs>;
 };
 
+<<<<<<< Updated upstream
 /** Connection to topic Nodes */
+=======
+<<<<<<< HEAD
+/** A paginated collection of topic Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of topic Nodes */
+=======
+/** Connection to topic Nodes */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type TopicConnection = {
   /** A list of edges (relational context) between RootQuery and connected topic Nodes */
   edges: Array<TopicConnectionEdge>;
@@ -18492,7 +18708,15 @@ export type TopicConnection = {
   pageInfo: TopicConnectionPageInfo;
 };
 
+<<<<<<< Updated upstream
 /** Edge between a Node and a connected topic */
+=======
+<<<<<<< HEAD
+/** Represents a connection to a topic. Contains both the topic Node and metadata about the relationship. */
+=======
+/** Edge between a Node and a connected topic */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type TopicConnectionEdge = {
   /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
   cursor?: Maybe<Scalars['String']>;
@@ -18500,7 +18724,15 @@ export type TopicConnectionEdge = {
   node: Topic;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the connected TopicConnectionEdge */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;TopicConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TopicConnectionEdge&quot; Nodes. */
+=======
+/** Page Info on the connected TopicConnectionEdge */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type TopicConnectionPageInfo = {
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['String']>;
@@ -18539,7 +18771,15 @@ export type TopicCustomFields_Fields = {
   nameMn?: Maybe<Scalars['String']>;
 };
 
+<<<<<<< Updated upstream
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
+=======
+<<<<<<< HEAD
+/** Identifier types for retrieving a specific Topic. Determines which unique property (global ID, database ID, slug, etc.) is used to locate the Topic. */
+=======
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export enum TopicIdType {
   /** The Database ID for the node */
   DatabaseId = 'DATABASE_ID',
@@ -18573,7 +18813,15 @@ export type TopicToAncestorsTopicConnectionEdge = Edge & TopicConnectionEdge & {
   node: Topic;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;TopicToAncestorsTopicConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;TopicToAncestorsTopicConnection&quot; collections. Provides cursors and flags for navigating through sets of TopicToAncestorsTopicConnection Nodes. */
+=======
+/** Page Info on the &quot;TopicToAncestorsTopicConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type TopicToAncestorsTopicConnectionPageInfo = PageInfo & TopicConnectionPageInfo & WpPageInfo & {
   __typename?: 'TopicToAncestorsTopicConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -18606,7 +18854,15 @@ export type TopicToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge 
   node: ContentNode;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;TopicToContentNodeConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;TopicToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TopicToContentNodeConnection Nodes. */
+=======
+/** Page Info on the &quot;TopicToContentNodeConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type TopicToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
   __typename?: 'TopicToContentNodeConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -18688,7 +18944,15 @@ export type TopicToPolicyConnectionEdge = Edge & PolicyConnectionEdge & {
   node: Policy;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;TopicToPolicyConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;TopicToPolicyConnection&quot; collections. Provides cursors and flags for navigating through sets of TopicToPolicyConnection Nodes. */
+=======
+/** Page Info on the &quot;TopicToPolicyConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type TopicToPolicyConnectionPageInfo = PageInfo & PolicyConnectionPageInfo & WpPageInfo & {
   __typename?: 'TopicToPolicyConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -18768,7 +19032,15 @@ export type TopicToTopicConnectionEdge = Edge & TopicConnectionEdge & {
   node: Topic;
 };
 
+<<<<<<< Updated upstream
 /** Page Info on the &quot;TopicToTopicConnection&quot; */
+=======
+<<<<<<< HEAD
+/** Pagination metadata specific to &quot;TopicToTopicConnection&quot; collections. Provides cursors and flags for navigating through sets of TopicToTopicConnection Nodes. */
+=======
+/** Page Info on the &quot;TopicToTopicConnection&quot; */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type TopicToTopicConnectionPageInfo = PageInfo & TopicConnectionPageInfo & WpPageInfo & {
   __typename?: 'TopicToTopicConnectionPageInfo';
   /** When paginating forwards, the cursor to continue. */
@@ -18825,7 +19097,15 @@ export type TopicToTopicConnectionWhereArgs = {
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
 };
 
+<<<<<<< Updated upstream
 /** Any node that has a URI */
+=======
+<<<<<<< HEAD
+/** An interface for content that can be accessed via a unique URI/URL path. Implemented by content types that have their own permalinks. */
+=======
+/** Any node that has a URI */
+>>>>>>> develop
+>>>>>>> Stashed changes
 export type UniformResourceIdentifiable = {
   /** The globally unique ID for the object */
   id: Scalars['ID'];
