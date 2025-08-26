@@ -8,6 +8,7 @@ import {
   ChevronDownIcon,
   ArrowUpRightIcon,
   CalendarIcon,
+  MagnifyingGlassIcon,
 } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
@@ -15,6 +16,7 @@ import parse from 'html-react-parser'
 import { Dropdown } from './Dropdown'
 import Image from 'next/image'
 import LinkSign from 'assets/img/vectorlink-sign.png'
+import SearchBar from './SearchBar'
 
 type OptionProps = {
   id?: string
@@ -84,6 +86,7 @@ export const PolicySection = ({
   const [currentPage, setCurrentPage] = useState(0)
   const [policyDetails, setPolicyDetails] = useState([])
   const [yearOptions, setYearOptions] = useState<OptionProps[]>([])
+  const [searchValue, setSearchValue] = useState<string | undefined>('')
   // Filter states
   const [selectedDocumentType, setSelectedDocumentType] = useState<string | undefined>()
   const [selectedDocumentTopic, setSelectedDocumentTopic] = useState<string | undefined>()
@@ -113,23 +116,35 @@ export const PolicySection = ({
   }, [policies])
 
   useEffect(() => {
-    const filtered = policies.filter(
+    let filtered = policies.filter(
       policy =>
-        policy.documentTypes?.edges.some(type =>
+        policy.documentTypes.edges.some(type =>
           selectedDocumentType !== undefined ? type.node.slug === selectedDocumentType : true,
         ) &&
-        policy.topics?.edges.some(topic =>
+        policy.topics.edges.some(topic =>
           selectedDocumentTopic !== undefined ? topic.node.slug === selectedDocumentTopic : true,
         ) &&
-        policy.policyStatuses?.edges.some(status =>
+        policy.policyStatuses.edges.some(status =>
           selectedPolicyStatus !== undefined ? status.node.slug === selectedPolicyStatus : true,
         ) &&
         (selectedYear !== undefined
           ? dayjs(policy.policyPageCustomFields.initiatedDate).year().toString() === selectedYear
           : true),
     )
+
+    filtered =
+      searchValue === ''
+        ? filtered
+        : filtered.filter(
+            policy =>
+              policy.policyPageCustomFields?.title?.toLocaleLowerCase().includes(searchValue?.toLocaleLowerCase()) ||
+              policy.policyPageCustomFields?.titleMn?.toLocaleLowerCase().includes(searchValue?.toLocaleLowerCase()) ||
+              policy.policyPageCustomFields?.summary?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+              policy.policyPageCustomFields?.summaryMn?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
+          )
+
     setFilteredPolicies(filtered)
-  }, [selectedDocumentTopic, selectedDocumentType, selectedPolicyStatus, policies, selectedYear])
+  }, [selectedDocumentTopic, selectedDocumentType, selectedPolicyStatus, policies, selectedYear, searchValue])
 
   const clickSortButton = (id: number) => {
     switch (id) {
@@ -330,6 +345,9 @@ export const PolicySection = ({
             />
           </div>
         </div>
+        <div>
+          <SearchBar onSubmit={(e: React.FormEvent<HTMLInputElement>) => setSearchValue(e?.currentTarget?.value)} />
+        </div>
         <div className="relative flex place-content-end whitespace-nowrap gap-2">
           <Menu>
             <Menu.Button className="bg-[#f09c4f] text-white font-semibold py-1 px-4 rounded-xl hover:opacity-80 active:opacity-80 flex gap-3 justify-center items-center">
@@ -416,13 +434,12 @@ export const PolicySection = ({
       </div>
 
       {/* Policies */}
-      {filteredPolicies.length !== 0 ? (
-        filteredPolicies.map((policy, index) => (
-          <div key={'policyList' + index}>
-            {/* Desktop */}
-            <div className="hidden md:grid grid-cols-7 border-b border-zinc-200 pb-5">
+      <div className="">
+        {filteredPolicies !== undefined ? (
+          filteredPolicies.map((policy, index) => (
+            <div key={'policyList' + index} className="hidden md:grid grid-cols-7 border-b border-zinc-200 pb-5">
               <div className="col-span-2 mr-5">
-                <Link href={`/policy/${policy.slug}`}>
+                <Link href={`/policy/${policy.slug}`} className="">
                   <h3>
                     {getTranslated(
                       policy.policyPageCustomFields.title,
@@ -432,14 +449,14 @@ export const PolicySection = ({
                   </h3>
                 </Link>
                 <div className="flex justify-start mt-5">
-                  <div className="bg-[#E9EAEB] rounded-l-md rounded-r-md px-2 text-sm">
+                  <p className="bg-[#E9EAEB] rounded-l-md rounded-r-md px-2">
                     {(i18n.language === 'mn' ? 'Батлагдсан: ' : 'Date Passed: ') +
                       formatMyDate(policy.policyPageCustomFields.initiatedDate)}
-                  </div>
+                  </p>
                 </div>
               </div>
-              <div className="mr-5">
-                {policy.documentTypes?.edges
+              <p className="mr-5">
+                {policy.documentTypes.edges
                   .map((type, i) =>
                     getTranslated(
                       type.node.documentTypeCustomFields.name,
@@ -448,18 +465,16 @@ export const PolicySection = ({
                     ),
                   )
                   .join(', ')}
-              </div>
-              <div>
-                {policy.policyStatuses?.edges
-                  .map(status =>
-                    getTranslated(
-                      status.node.policyStatusCustomFields.name,
-                      status.node.policyStatusCustomFields.nameMn,
-                      i18n.language,
-                    ),
-                  )
-                  .join(', ')}
-              </div>
+              </p>
+              {policy.policyStatuses?.edges.length > 0 && (
+                <p>
+                  {getTranslated(
+                    policy.policyStatuses?.edges[0].node.policyStatusCustomFields.name,
+                    policy.policyStatuses?.edges[0].node.policyStatusCustomFields.nameMn,
+                    i18n.language,
+                  )}
+                </p>
+              )}
               <div className="col-span-3">
                 <div className="policy-summary-limit">
                   {parse(
@@ -470,76 +485,77 @@ export const PolicySection = ({
                     ),
                   )}
                 </div>
-                <div className="flex flex-wrap gap-2 mt-2 text-sm">
-                  {policy.topics?.edges.map((topic, i) => (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {policy.topics.edges.map((topic, i) => (
                     <div key={'topic' + i} className="flex items-center">
                       {i < 5 && (
-                        <div className="bg-[#E3F8FF] rounded-l-md rounded-r-md px-2 text-bm-blue">
+                        <p className="bg-[#E3F8FF] rounded-l-md rounded-r-md px-2 text-bm-blue">
                           {getTranslated(
                             topic.node.topicCustomFields.name,
                             topic.node.topicCustomFields.nameMn,
                             i18n.language,
                           )}
-                        </div>
+                        </p>
                       )}
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
-            {/* Mobile */}
-            <div className="md:hidden grid border-b border-zinc-500 py-2">
-              <Link href={`/policy/${policy.slug}`}>
-                <h3 className="mb-3">
-                  {getTranslated(
-                    policy.policyPageCustomFields.title,
-                    policy.policyPageCustomFields.titleMn,
-                    i18n.language,
-                  )}
-                </h3>
-              </Link>
-              <div className="flex flex-row">
-                <div className="flex flex-row items-center h-8 bg-[#E9EAEB] rounded-l-md rounded-r-md px-3 text-sm">
-                  <CalendarIcon className="h-5 w-5 mr-2" /> {formatMyDate(policy.policyPageCustomFields.initiatedDate)}
+              {/* Mobile */}
+              <div className="md:hidden grid border-b border-zinc-500 py-2">
+                <Link href={`/policy/${policy.slug}`}>
+                  <h3 className="mb-3">
+                    {getTranslated(
+                      policy.policyPageCustomFields.title,
+                      policy.policyPageCustomFields.titleMn,
+                      i18n.language,
+                    )}
+                  </h3>
+                </Link>
+                <div className="flex flex-row">
+                  <div className="flex flex-row items-center h-8 bg-[#E9EAEB] rounded-l-md rounded-r-md px-3 text-sm">
+                    <CalendarIcon className="h-5 w-5 mr-2" />{' '}
+                    {formatMyDate(policy.policyPageCustomFields.initiatedDate)}
+                  </div>
+                  <div className="flex flex-1 justify-end">
+                    <ChevronDownIcon
+                      className="mt-3 h-4 w-4 cursor-pointer"
+                      onClick={() => setPolicyDetails([...policyDetails, index])}
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-1 justify-end">
-                  <ChevronDownIcon
-                    className="mt-3 h-4 w-4 cursor-pointer"
-                    onClick={() => setPolicyDetails([...policyDetails, index])}
-                  />
-                </div>
+                {policyDetails.some(i => i == index) && showPolicyDetails(index)}
               </div>
-              {policyDetails.some(i => i == index) && showPolicyDetails(index)}
             </div>
-          </div>
-        ))
-      ) : (
-        <div className="grid justify-center items-center text-gray-500">{t('noPoliciesFound.all')}</div>
-      )}
+          ))
+        ) : (
+          <div className="grid justify-center items-center text-gray-500">{t('noPoliciesFound.all')}</div>
+        )}
 
-      {/* Pagination */}
-      <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
-        <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
-          <div
-            className={`transition-all hover:bg-bm-blue/80 hover:text-white rounded-full border-black border hover:border-bm-blue/80 ${
-              currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
-            }`}
-            onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
-          >
-            <span className="block p-3">
-              <ChevronLeftIcon className="w-5 h-5" />
-            </span>
-          </div>
-          {pages}
-          <div
-            className={`transition-all hover:bg-bm-blue/80 hover:text-white border-black border hover:border-bm-blue/80 rounded-full ${
-              currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
-            }`}
-            onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
-          >
-            <span className="block p-3">
-              <ChevronRightIcon className="w-5 h-5" />
-            </span>
+        {/* Pagination */}
+        <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
+          <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
+            <div
+              className={`transition-all hover:bg-bm-blue/80 hover:text-white rounded-full border-black border hover:border-bm-blue/80 ${
+                currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
+              }`}
+              onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
+            >
+              <span className="block p-3">
+                <ChevronLeftIcon className="w-5 h-5" />
+              </span>
+            </div>
+            {pages}
+            <div
+              className={`transition-all hover:bg-bm-blue/80 hover:text-white border-black border hover:border-bm-blue/80 rounded-full ${
+                currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
+              }`}
+              onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
+            >
+              <span className="block p-3">
+                <ChevronRightIcon className="w-5 h-5" />
+              </span>
+            </div>
           </div>
         </div>
       </div>
