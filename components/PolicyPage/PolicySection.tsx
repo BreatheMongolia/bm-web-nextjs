@@ -7,6 +7,7 @@ import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Dropdown } from './Dropdown'
+import SearchBar from './SearchBar'
 
 type OptionProps = {
   id?: string
@@ -75,6 +76,7 @@ export const PolicySection = ({
   const [filteredPolicies, setFilteredPolicies] = useState<Policy[]>(policies)
   const [currentPage, setCurrentPage] = useState(0)
   const [yearOptions, setYearOptions] = useState<OptionProps[]>([])
+  const [searchValue, setSearchValue] = useState<string | undefined>('')
   // Filter states
   const [selectedDocumentType, setSelectedDocumentType] = useState<string | undefined>()
   const [selectedDocumentTopic, setSelectedDocumentTopic] = useState<string | undefined>()
@@ -104,7 +106,7 @@ export const PolicySection = ({
   }, [policies])
 
   useEffect(() => {
-    const filtered = policies.filter(
+    let filtered = policies.filter(
       policy =>
         policy.documentTypes.edges.some(type =>
           selectedDocumentType !== undefined ? type.node.slug === selectedDocumentType : true,
@@ -119,8 +121,19 @@ export const PolicySection = ({
           ? dayjs(policy.policyPageCustomFields.initiatedDate).year().toString() === selectedYear
           : true),
     )
+
+    filtered = searchValue === ''
+      ? filtered
+      : filtered.filter(
+        policy =>
+          policy.policyPageCustomFields?.title?.toLocaleLowerCase().includes(searchValue?.toLocaleLowerCase()) ||
+          policy.policyPageCustomFields?.titleMn?.toLocaleLowerCase().includes(searchValue?.toLocaleLowerCase()) ||
+          policy.policyPageCustomFields?.summary?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+          policy.policyPageCustomFields?.summaryMn?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+      )
+
     setFilteredPolicies(filtered)
-  }, [selectedDocumentTopic, selectedDocumentType, selectedPolicyStatus, policies, selectedYear])
+  }, [selectedDocumentTopic, selectedDocumentType, selectedPolicyStatus, policies, selectedYear, searchValue])
 
   const clickSortButton = (id: number) => {
     switch (id) {
@@ -205,9 +218,8 @@ export const PolicySection = ({
         <div
           key={'page' + i}
           onClick={() => setCurrentPage(i)}
-          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-bm-blue/80 hover:text-white ${
-            currentPage === i && 'bg-bm-blue text-white'
-          }`}
+          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-bm-blue/80 hover:text-white ${currentPage === i && 'bg-bm-blue text-white'
+            }`}
         >
           {i + 1}
         </div>,
@@ -233,11 +245,10 @@ export const PolicySection = ({
                 setSelectedPolicyStatus(undefined)
                 setSelectedYear(undefined)
               }}
-              className={`w-28 border border-[#ADC4CC] font-semibold py-1 rounded-xl flex gap-3 justify-center items-center ${
-                selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
-                  ? 'text-black bg-white hover:bg-bm-blue-hover'
-                  : 'bg-bm-blue text-white'
-              }`}
+              className={`w-28 border border-[#ADC4CC] font-semibold py-1 rounded-xl flex gap-3 justify-center items-center ${selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
+                ? 'text-black bg-white hover:bg-bm-blue-hover'
+                : 'bg-bm-blue text-white'
+                }`}
             >
               {t('filterButtons.all')}
             </button>
@@ -271,6 +282,9 @@ export const PolicySection = ({
               selectedOption={selectedYear}
             />
           </div>
+        </div>
+        <div>
+          <SearchBar onSubmit={(e: React.FormEvent<HTMLInputElement>) => setSearchValue(e?.currentTarget?.value)} />
         </div>
         <div className="relative flex place-content-end whitespace-nowrap gap-2">
           <Menu>
@@ -340,15 +354,17 @@ export const PolicySection = ({
                   )
                   .join(', ')}
               </p>
-              <p>
-                {getTranslated(
-                  policy.policyStatuses.edges[0].node.policyStatusCustomFields.name,
-                  policy.policyStatuses.edges[0].node.policyStatusCustomFields.nameMn,
-                  i18n.language,
-                )}
-              </p>
+              {policy.policyStatuses?.edges.length > 0 && (
+                <p>
+                  {getTranslated(
+                    policy.policyStatuses?.edges[0].node.policyStatusCustomFields.name,
+                    policy.policyStatuses?.edges[0].node.policyStatusCustomFields.nameMn,
+                    i18n.language,
+                  )}
+                </p>
+              )}
               <div className="col-span-3">
-                <p className="policy-summary-limit">
+                <div className="policy-summary-limit">
                   {parse(
                     getTranslated(
                       policy.policyPageCustomFields.summary,
@@ -356,7 +372,7 @@ export const PolicySection = ({
                       i18n.language,
                     ),
                   )}
-                </p>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {policy.topics.edges.map((topic, i) => (
                     <div key={'topic' + i} className="flex items-center">
@@ -384,9 +400,8 @@ export const PolicySection = ({
       <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
         <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
           <div
-            className={`transition-all hover:bg-bm-blue/80 hover:text-white rounded-full border-black border hover:border-bm-blue/80 ${
-              currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
-            }`}
+            className={`transition-all hover:bg-bm-blue/80 hover:text-white rounded-full border-black border hover:border-bm-blue/80 ${currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
+              }`}
             onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
           >
             <span className="block p-3">
@@ -395,9 +410,8 @@ export const PolicySection = ({
           </div>
           {pages}
           <div
-            className={`transition-all hover:bg-bm-blue/80 hover:text-white border-black border hover:border-bm-blue/80 rounded-full ${
-              currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
-            }`}
+            className={`transition-all hover:bg-bm-blue/80 hover:text-white border-black border hover:border-bm-blue/80 rounded-full ${currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
+              }`}
             onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
           >
             <span className="block p-3">
