@@ -9,7 +9,6 @@ import {
   ArrowUpRightIcon,
   CalendarIcon,
 } from '@heroicons/react/24/solid'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
