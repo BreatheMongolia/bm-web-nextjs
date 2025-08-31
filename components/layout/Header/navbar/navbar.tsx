@@ -24,8 +24,8 @@ export const Navbar = ({ projects }) => {
   return (
     <div className="">
       <div className="w-full uppercase text-xsm tracking-[1px] font-medium bg-white text-black">
-        <div className="container flex justify-between items-center py-1 h-[80px] font-[Rubik]">
-          <Link href="/" className="flex items-center">
+        <div className="flex justify-between items-center py-1 h-[80px] font-[Rubik] mx-[20px]">
+          <Link href="/" className="flex items-center min-w-[225px]">
             <img
               className="aspect-auto max-h-14 sm:max-h-16"
               src="/images/logo.png"
@@ -34,7 +34,7 @@ export const Navbar = ({ projects }) => {
               alt="Breathe Mongolia"
             />
           </Link>
-          <div className="items-center hidden gap-10 ml-8 lg:flex">
+          <div className="items-center hidden gap-1 lg:gap-6 ml-8 lg:flex">
             <MenuItem title={t('home')} href="/" isActive={path == '/'} />
             <MenuItem title={t('takeAction')} href="/take-action" isActive={path.includes('action')} />
             <MenuItem title={t('policy')} href="/policy" isActive={path.includes('policy')} />

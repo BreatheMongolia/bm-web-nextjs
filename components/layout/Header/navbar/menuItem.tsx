@@ -34,7 +34,7 @@ export const MenuItem = (props: MenuItemProps) => {
       <div className="flex items-center justify-between">
         {props.href ? (
           <Link
-            className={`hover:text-bm-blue font-semibold ${props.isActive && ' text-bm-blue'}`}
+            className={`hover:text-bm-blue font-semibold w-full ${props.isActive && ' text-bm-blue'}`}
             href={props.href}
             target={props.target}
           >
