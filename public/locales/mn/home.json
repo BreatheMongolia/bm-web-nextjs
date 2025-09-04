@@ -8,8 +8,12 @@
     "applyNow": "АНКEТ БӨГЛӨХ"
   },
   "takeAction": {
+    "gridTitle": "Шийдэл",
     "title": "Таны оролцоо",
     "seeMore": "Бүгд"
+  },
+  "health": {
+    "title": "Эрүүл мэнд"
   },
   "news": {
     "title": "Мэдээ"

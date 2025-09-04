@@ -28,11 +28,13 @@ import {
   JoinBMSection,
   NewsCarousel,
   OurWorkCarousel,
+  TakeActionGrid,
 } from 'components/HomePage'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 import dayjs from 'dayjs'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { getTranslated } from 'lib/utils/getTranslated'
+import { HealthSection } from '@/components/HomePage/HealthSection'
 
 export default function Index({
   page,
@@ -60,13 +62,13 @@ export default function Index({
   const pageBanner =
     i18n.language === 'en'
       ? {
-        leftText: page.homePage.bannerTextLeft,
-        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
-      }
+          leftText: page.homePage.bannerTextLeft,
+          rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
+        }
       : {
-        leftText: page.homePage.bannerTextLeftMn,
-        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
-      }
+          leftText: page.homePage.bannerTextLeftMn,
+          rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
+        }
 
   return (
     <div>
@@ -105,8 +107,22 @@ export default function Index({
           </MapContextWrapper>
 
           {/* Add other page level components here */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div className="hidden lg:block">
+              <TakeActionGrid
+                takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]}
+                locale={locale}
+              />
+            </div>
+            <HealthSection />
+          </div>
           <NewsCarousel featuredNews={page.homePage.featuredNews.nodes as News[]} />
-          <TakeActionCarousel takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]} locale={locale} />
+          <div className="lg:hidden">
+            <TakeActionCarousel
+              takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]}
+              locale={locale}
+            />
+          </div>
           <OurWorkCarousel campaigns={sortedCampaigns} locale={locale} />
           <JoinBMSection
             title={{
@@ -142,12 +158,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
   const volunteers = await getVolunteers()
   const recommendationActions = await getRecommendationSettings()
+  const isNotDev = process.env.NODE_ENV !== 'development'
 
-  const purpleAirStations = await fetchPurpleAirStations()
-  const openAQStations = await fetchOpenAQStations()
+  const purpleAirStations = isNotDev ? await fetchPurpleAirStations() : []
+  const openAQStations = isNotDev ? await fetchOpenAQStations() : []
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
-  const isNotDev = process.env.NODE_ENV !== 'development'
   const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
   const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
   // const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
@@ -155,6 +171,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
   const data = await getHomeLandingPageSettings()
 
+  console.log(page)
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'common'])),

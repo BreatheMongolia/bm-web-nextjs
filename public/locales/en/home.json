@@ -8,8 +8,12 @@
     "applyNow": "Apply Now"
   },
   "takeAction": {
+    "gridTitle": "Solutions",
     "title": "Take Action",
     "seeMore": "See more"
+  },
+  "health": {
+    "title": "Health"
   },
   "news": {
     "title": "News"
