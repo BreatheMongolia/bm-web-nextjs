@@ -36,18 +36,21 @@ export const Dropdown = ({ id, label, onClick, selectedOption, options = [] }: D
   }, [])
 
   return (
-    <div className="relative md:w-28 col-span-2" onClick={toggleDropdown} id={id} ref={ref}>
-      <div className={`${(id === 'year' || id === 'statuses') && 'md:w-28 col-span-3'}`}>
-        <button
-          onClick={() => setIsDropdownOpen(false)}
-          className={`flex w-full px-3 border border-[#ADC4CC] font-semibold text-black py-1 rounded-xl gap-3 items-center ${
-            selectedOption && 'bg-bm-blue text-white hover:bg-bm-blue-hover'
-          }`}
-        >
-          {label}
-          {isDropdownOpen ? <ChevronUpIcon className="h-5 w-5" /> : <ChevronDownIcon className="h-5 w-5" />}
-        </button>
-      </div>
+    <div
+      className={`relative w-28 ${(id === 'year' || id === 'statuses') && 'md:w-28 w-44'}`}
+      onClick={toggleDropdown}
+      id={id}
+      ref={ref}
+    >
+      <button
+        onClick={() => setIsDropdownOpen(false)}
+        className={`flex w-full px-3 border border-[#ADC4CC] font-semibold text-black py-1 rounded-xl gap-3 items-center ${
+          selectedOption && 'bg-bm-blue text-white hover:bg-bm-blue-hover'
+        }`}
+      >
+        {label}
+        {isDropdownOpen ? <ChevronUpIcon className="h-5 w-5" /> : <ChevronDownIcon className="h-5 w-5" />}
+      </button>
 
       {isDropdownOpen && (
         <div
@@ -68,7 +71,6 @@ export const Dropdown = ({ id, label, onClick, selectedOption, options = [] }: D
                 type="checkbox"
                 className="mr-2"
                 checked={option.value === selectedOption}
-                readOnly
               />
               {option.label}
             </div>

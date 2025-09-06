@@ -222,6 +222,14 @@ export type AboutUsSupportUs = AboutUsSupportUs_Fields & AcfFieldGroup & AcfFiel
   description?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
   descriptionMn?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
+  donorDescription?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
+  donorDescriptionMn?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
+  donorTitle?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
+  donorTitleMn?: Maybe<Scalars['String']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -243,6 +251,14 @@ export type AboutUsSupportUs_Fields = {
   description?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
   descriptionMn?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
+  donorDescription?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
+  donorDescriptionMn?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
+  donorTitle?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutUsSupportUs&quot; Field Group */
+  donorTitleMn?: Maybe<Scalars['String']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -2402,6 +2418,8 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Attachment = 'ATTACHMENT',
   /** The Type of Content object */
+  Donor = 'DONOR',
+  /** The Type of Content object */
   NewsArticle = 'NEWS_ARTICLE',
   /** The Type of Content object */
   Page = 'PAGE',
@@ -2722,6 +2740,33 @@ export type CreateDocumentTypePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** The created document-type */
   documentType?: Maybe<DocumentType>;
+};
+
+/** Input for the createDonor mutation. */
+export type CreateDonorInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+/** The payload for the createDonor mutation. */
+export type CreateDonorPayload = {
+  __typename?: 'CreateDonorPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The Post object mutation type. */
+  donor?: Maybe<Donor>;
 };
 
 /** Input for the createMediaItem mutation. */
@@ -3517,6 +3562,29 @@ export type DeleteDocumentTypePayload = {
   deletedId?: Maybe<Scalars['ID']>;
   /** The deleted term object */
   documentType?: Maybe<DocumentType>;
+};
+
+/** Input for the deleteDonor mutation. */
+export type DeleteDonorInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']>;
+  /** The ID of the donor to delete */
+  id: Scalars['ID'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** The payload for the deleteDonor mutation. */
+export type DeleteDonorPayload = {
+  __typename?: 'DeleteDonorPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']>;
+  /** The object before it was deleted */
+  donor?: Maybe<Donor>;
 };
 
 /** Input for the deleteMediaItem mutation. */
@@ -4401,6 +4469,264 @@ export type DocumentTypeToTaxonomyConnectionEdge = Edge & OneToOneConnection & T
   cursor?: Maybe<Scalars['String']>;
   /** The node of the connection, without the edges */
   node: Taxonomy;
+};
+
+/** The donor type */
+export type Donor = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfDonorFields & {
+  __typename?: 'Donor';
+  /**
+   * The ancestors of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  ancestors?: Maybe<DonorToDonorConnection>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']>;
+  /** Fields of the DonorFields ACF Field Group */
+  donorFields?: Maybe<DonorFields>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  donorId: Scalars['Int'];
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']>;
+  /** Whether the donor object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']>;
+  /** The globally unique identifier of the donor object. */
+  id: Scalars['ID'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']>;
+  /**
+   * The parent of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  parent?: Maybe<DonorToParentConnectionEdge>;
+  /** The password for the donor object. */
+  password?: Maybe<Scalars['String']>;
+  /** Connection between the Donor type and the donor type */
+  preview?: Maybe<DonorToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']>;
+};
+
+
+/** The donor type */
+export type DonorAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The donor type */
+export type DonorEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The donor type */
+export type DonorEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The donor type */
+export type DonorTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** A paginated collection of donor Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of donor Nodes */
+export type DonorConnection = {
+  /** A list of edges (relational context) between RootQuery and connected donor Nodes */
+  edges: Array<DonorConnectionEdge>;
+  /** A list of connected donor Nodes */
+  nodes: Array<Donor>;
+  /** Information about pagination in a connection. */
+  pageInfo: DonorConnectionPageInfo;
+};
+
+/** Represents a connection to a donor. Contains both the donor Node and metadata about the relationship. */
+export type DonorConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /** The connected donor Node */
+  node: Donor;
+};
+
+/** Pagination metadata specific to &quot;DonorConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;DonorConnectionEdge&quot; Nodes. */
+export type DonorConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** The &quot;DonorFields&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type DonorFields = AcfFieldGroup & AcfFieldGroupFields & DonorFields_Fields & {
+  __typename?: 'DonorFields';
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;DonorFields&quot; Field Group */
+  description?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;DonorFields&quot; Field Group */
+  descriptionMn?: Maybe<Scalars['String']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;DonorFields&quot; Field Group */
+  image?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DonorFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
+};
+
+/** Interface representing fields of the ACF &quot;DonorFields&quot; Field Group */
+export type DonorFields_Fields = {
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;DonorFields&quot; Field Group */
+  description?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;DonorFields&quot; Field Group */
+  descriptionMn?: Maybe<Scalars['String']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;DonorFields&quot; Field Group */
+  image?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;DonorFields&quot; Field Group */
+  nameMn?: Maybe<Scalars['String']>;
+};
+
+/** Identifier types for retrieving a specific Donor. Specifies which unique attribute is used to find an exact Donor. */
+export enum DonorIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the Donor type and the donor type */
+export type DonorToDonorConnection = Connection & DonorConnection & {
+  __typename?: 'DonorToDonorConnection';
+  /** Edges for the DonorToDonorConnection connection */
+  edges: Array<DonorToDonorConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Donor>;
+  /** Information about pagination in a connection. */
+  pageInfo: DonorToDonorConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type DonorToDonorConnectionEdge = DonorConnectionEdge & Edge & {
+  __typename?: 'DonorToDonorConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  node: Donor;
+};
+
+/** Pagination metadata specific to &quot;DonorToDonorConnection&quot; collections. Provides cursors and flags for navigating through sets of DonorToDonorConnection Nodes. */
+export type DonorToDonorConnectionPageInfo = DonorConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'DonorToDonorConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Connection between the Donor type and the donor type */
+export type DonorToParentConnectionEdge = DonorConnectionEdge & Edge & OneToOneConnection & {
+  __typename?: 'DonorToParentConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The node of the connection, without the edges
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  node: Donor;
+};
+
+/** Connection between the Donor type and the donor type */
+export type DonorToPreviewConnectionEdge = DonorConnectionEdge & Edge & OneToOneConnection & {
+  __typename?: 'DonorToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']>;
+  /** The node of the connection, without the edges */
+  node: Donor;
 };
 
 /** Represents a connection between two objects. Contains both the related object (node) and metadata about the relationship (cursor). */
@@ -6394,7 +6720,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Accomplishment | ActionType | Category | DocumentType | News | Page | Person | Policy | PolicyStatus | Post | PurposeTag | Report | Resource | ResourceType | Story | Tag | TakeAction | Timeline | Topic | VolunteerPosition;
+export type MenuItemObjectUnion = Accomplishment | ActionType | Category | DocumentType | Donor | News | Page | Person | Policy | PolicyStatus | Post | PurposeTag | Report | Resource | ResourceType | Story | Tag | TakeAction | Timeline | Topic | VolunteerPosition;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -12499,6 +12825,8 @@ export type RootMutation = {
   createComment?: Maybe<CreateCommentPayload>;
   /** The createDocumentType mutation */
   createDocumentType?: Maybe<CreateDocumentTypePayload>;
+  /** The createDonor mutation */
+  createDonor?: Maybe<CreateDonorPayload>;
   /** The createMediaItem mutation */
   createMediaItem?: Maybe<CreateMediaItemPayload>;
   /** The createNews mutation */
@@ -12547,6 +12875,8 @@ export type RootMutation = {
   deleteComment?: Maybe<DeleteCommentPayload>;
   /** The deleteDocumentType mutation */
   deleteDocumentType?: Maybe<DeleteDocumentTypePayload>;
+  /** The deleteDonor mutation */
+  deleteDonor?: Maybe<DeleteDonorPayload>;
   /** The deleteMediaItem mutation */
   deleteMediaItem?: Maybe<DeleteMediaItemPayload>;
   /** The deleteNews mutation */
@@ -12605,6 +12935,8 @@ export type RootMutation = {
   updateComment?: Maybe<UpdateCommentPayload>;
   /** The updateDocumentType mutation */
   updateDocumentType?: Maybe<UpdateDocumentTypePayload>;
+  /** The updateDonor mutation */
+  updateDonor?: Maybe<UpdateDonorPayload>;
   /** The updateMediaItem mutation */
   updateMediaItem?: Maybe<UpdateMediaItemPayload>;
   /** The updateNews mutation */
@@ -12687,6 +13019,12 @@ export type RootMutationCreateCommentArgs = {
 /** The root mutation */
 export type RootMutationCreateDocumentTypeArgs = {
   input: CreateDocumentTypeInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreateDonorArgs = {
+  input: CreateDonorInput;
 };
 
 
@@ -12831,6 +13169,12 @@ export type RootMutationDeleteCommentArgs = {
 /** The root mutation */
 export type RootMutationDeleteDocumentTypeArgs = {
   input: DeleteDocumentTypeInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteDonorArgs = {
+  input: DeleteDonorInput;
 };
 
 
@@ -13009,6 +13353,12 @@ export type RootMutationUpdateDocumentTypeArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdateDonorArgs = {
+  input: UpdateDonorInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdateMediaItemArgs = {
   input: UpdateMediaItemInput;
 };
@@ -13170,6 +13520,15 @@ export type RootQuery = WithAcfOptionsPageAboutUsPageSettings & WithAcfOptionsPa
   documentType?: Maybe<DocumentType>;
   /** Connection between the RootQuery type and the documentType type */
   documentTypes?: Maybe<RootQueryToDocumentTypeConnection>;
+  /** An object of the donor Type.  */
+  donor?: Maybe<Donor>;
+  /**
+   * A donor object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  donorBy?: Maybe<Donor>;
+  /** Connection between the RootQuery type and the donor type */
+  donors?: Maybe<RootQueryToDonorConnection>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
   healthPageSettings?: Maybe<HealthPageSettings>;
@@ -13496,6 +13855,33 @@ export type RootQueryDocumentTypesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<RootQueryToDocumentTypeConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryDonorArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  idType?: InputMaybe<DonorIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryDonorByArgs = {
+  donorId?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryDonorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<RootQueryToDonorConnectionWhereArgs>;
 };
 
 
@@ -14585,6 +14971,77 @@ export type RootQueryToDocumentTypeConnectionWhereArgs = {
   termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Whether to prime meta caches for matched terms. Default true. */
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Connection between the RootQuery type and the donor type */
+export type RootQueryToDonorConnection = Connection & DonorConnection & {
+  __typename?: 'RootQueryToDonorConnection';
+  /** Edges for the RootQueryToDonorConnection connection */
+  edges: Array<RootQueryToDonorConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Donor>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToDonorConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToDonorConnectionEdge = DonorConnectionEdge & Edge & {
+  __typename?: 'RootQueryToDonorConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node: Donor;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToDonorConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToDonorConnection Nodes. */
+export type RootQueryToDonorConnectionPageInfo = DonorConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToDonorConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Arguments for filtering the RootQueryToDonorConnection connection */
+export type RootQueryToDonorConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']>;
 };
 
 /** Connection between the RootQuery type and the EnqueuedScript type */
@@ -19096,6 +19553,37 @@ export type UpdateDocumentTypePayload = {
   documentType?: Maybe<DocumentType>;
 };
 
+/** Input for the updateDonor mutation. */
+export type UpdateDonorInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']>;
+  /** The ID of the donor object */
+  id: Scalars['ID'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+/** The payload for the updateDonor mutation. */
+export type UpdateDonorPayload = {
+  __typename?: 'UpdateDonorPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The Post object mutation type. */
+  donor?: Maybe<Donor>;
+};
+
 /** Input for the updateMediaItem mutation. */
 export type UpdateMediaItemInput = {
   /** Alternative text to display when mediaItem is not displayed */
@@ -20964,6 +21452,12 @@ export type WithAcfCustomFields = {
 export type WithAcfDocumentTypeCustomFields = {
   /** Fields of the DocumentTypeCustomFields ACF Field Group */
   documentTypeCustomFields?: Maybe<DocumentTypeCustomFields>;
+};
+
+/** Provides access to fields of the &quot;DonorFields&quot; ACF Field Group via the &quot;donorFields&quot; field */
+export type WithAcfDonorFields = {
+  /** Fields of the DonorFields ACF Field Group */
+  donorFields?: Maybe<DonorFields>;
 };
 
 /** Provides access to fields of the &quot;HealthPage&quot; ACF Field Group via the &quot;healthPage&quot; field */
