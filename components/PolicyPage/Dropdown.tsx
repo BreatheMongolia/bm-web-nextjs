@@ -37,14 +37,14 @@ export const Dropdown = ({ id, label, onClick, selectedOption, options = [] }: D
 
   return (
     <div
-      className={`relative w-28 ${(id === 'year' || id === 'statuses') && 'md:w-28 w-44'}`}
+      className={`relative w-28 ${(id === 'year' || id === 'statuses') && 'md:w-28 w-[172px]'}`}
       onClick={toggleDropdown}
       id={id}
       ref={ref}
     >
       <button
         onClick={() => setIsDropdownOpen(false)}
-        className={`flex w-full px-3 border border-[#ADC4CC] font-semibold text-black py-1 rounded-xl gap-3 items-center ${
+        className={`flex w-full justify-center px-3 border border-[#ADC4CC] font-semibold text-black py-1 rounded-xl gap-3 ${
           selectedOption && 'bg-bm-blue text-white hover:bg-bm-blue-hover'
         }`}
       >

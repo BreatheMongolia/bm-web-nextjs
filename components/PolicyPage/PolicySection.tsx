@@ -373,8 +373,8 @@ export const PolicySection = ({
         </div>
 
         {/* Mobile */}
-        <div className="md:hidden flex w-full border-b border-zinc-500 py-5">
-          <div className="relative flex flex-wrap gap-2">
+        <div className="md:hidden flex border-b border-zinc-500 py-5">
+          <div className="relative flex flex-wrap w-full justify-items-center gap-2">
             <button
               onClick={() => {
                 setSelectedDocumentType(undefined)
@@ -383,7 +383,7 @@ export const PolicySection = ({
                 setSelectedYear(undefined)
                 setPolicyDetails([])
               }}
-              className={`w-28 filter-button px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
+              className={`w-28 px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
                 selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
                   ? 'text-black bg-white hover:bg-bm-blue-hover'
                   : 'bg-bm-blue text-white'
