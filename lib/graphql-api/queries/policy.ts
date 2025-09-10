@@ -10,16 +10,137 @@ export async function getPolicies(): Promise<any[]> {
             databaseId
             slug
             title
+            policyPageCustomFields {
+              title
+              titleMn
+              name
+              nameMn
+              initiatedDate
+              sourceUrl
+              summary
+              summaryMn
+            }
+            policyStatuses {
+              edges {
+                node {
+                  slug
+                  policyStatusCustomFields {
+                    name
+                    nameMn
+                  }
+                }
+              }
+            }
+            documentTypes {
+              edges {
+                node {
+                  slug
+                  documentTypeCustomFields {
+                    name
+                    nameMn
+                  }
+                }
+              }
+            }
+            topics {
+              edges {
+                node {
+                  slug
+                  topicCustomFields {
+                    name
+                    nameMn
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
-  }
     `,
   )
-  // parse the data into news objects
+  // parse the data into policy objects
   if (data && data.policies && data.policies.edges) {
     if (data.policies.edges.length > 0) {
       return data.policies.edges.map(x => x.node as any)
+    }
+  }
+  return []
+}
+
+export async function getDocumentTypes(): Promise<any[]> {
+  const data = await fetchAPI(
+    `query getAllDocumentTypes {
+      documentTypes {
+        edges {
+          node {
+            slug
+            documentTypeCustomFields {
+              name
+              nameMn
+            }
+          }
+        }
+      }
+    }
+    `,
+  )
+  // parse the data into types objects
+  if (data && data.documentTypes && data.documentTypes.edges) {
+    if (data.documentTypes.edges.length > 0) {
+      return data.documentTypes.edges.map(x => x.node as any)
+    }
+  }
+  return []
+}
+
+export async function getPolicyStatus(): Promise<any[]> {
+  const data = await fetchAPI(
+    `query getAllPolicyStatus {
+      policyStatuses {
+        edges {
+          node {
+            slug
+            policyStatusCustomFields {
+              name
+              nameMn
+            }
+          }
+        }
+      }
+    }
+    `,
+  )
+  // parse the data into status objects
+  if (data && data.policyStatuses && data.policyStatuses.edges) {
+    if (data.policyStatuses.edges.length > 0) {
+      return data.policyStatuses.edges.map(x => x.node as any)
+    }
+  }
+  return []
+}
+
+export async function getPolicyTopics(): Promise<any[]> {
+  const data = await fetchAPI(
+    `query getAllPolicyTopics {
+      topics {
+        edges {
+          node {
+            slug
+            topicCustomFields {
+              name
+              nameMn
+            }
+          }
+        }
+      }
+    }
+    `,
+  )
+  // parse the data into topics objects
+  if (data && data.topics && data.topics.edges) {
+    if (data.topics.edges.length > 0) {
+      return data.topics.edges.map(x => x.node as any)
     }
   }
   return []
@@ -104,7 +225,6 @@ export async function getPolicyDetails(id: string, idType: PolicyIdType = Policy
                       }
                     }
                   }
-                  
                 }
               }
             }
@@ -113,21 +233,33 @@ export async function getPolicyDetails(id: string, idType: PolicyIdType = Policy
         policyStatuses(first: 10) {
           edges {
             node {
-              name
+              slug
+              policyStatusCustomFields {
+                name
+                nameMn
+              }
             }
           }
         }
         documentTypes(first: 10) {
           edges {
             node {
-              name
+              slug
+              documentTypeCustomFields {
+                name
+                nameMn
+              }
             }
           }
         }
         topics(first: 10) {
           edges {
             node {
-              name
+              slug
+              topicCustomFields {
+                name
+                nameMn
+              }
             }
           }
         }
