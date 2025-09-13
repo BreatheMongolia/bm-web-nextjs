@@ -66,7 +66,7 @@ export const H2 = ({
     <div className={`mt-2 mb-5 ${className}`}>
       <div className="flex gap-x-3 items-center">
         {iconImage && <IconImage />}
-        <h2 className={`${!trailingLineColor && 'grow'} font-bold text-lg sm:text-3xl text-zinc-800`}>{title}</h2>
+        <h2 className={`${!trailingLineColor && 'grow'} font-bold text-lg sm:text-3xl text-zinc-800 ${className}`}>{title}</h2>
         {/* Trailing line */}
         {trailingLineColor && <TrailingLine />}
         {/* Button */}

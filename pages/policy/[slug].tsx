@@ -253,30 +253,30 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
       </div>
 
       {/* Summary */}
-      <H2 title={t('summaryTitle')} trailingLineColor="blue" />
+      <H2 title={t('summaryTitle')} trailingLineColor="blue" className="!text-lg" />
       <div
-        className="text-gray-700 leading-relaxed prose max-w-none"
+        className="text-gray-700 leading-relaxed prose max-w-none mb-8"
         dangerouslySetInnerHTML={{ __html: summary }}
       />
 
       {/* Updates */}
-      <H2 title={t('updatesTitle')} trailingLineColor="blue" />
+      <H2 title={t('updatesTitle')} trailingLineColor="blue" className="!text-lg" />
       <div
-        className="text-gray-700 leading-relaxed prose max-w-none"
+        className="text-gray-700 leading-relaxed prose max-w-none mb-8"
         dangerouslySetInnerHTML={{ __html: updates }}
       />
 
       {/* Further Reading */}
-      <H2 title={t('furtherReadingTitle')} trailingLineColor="blue" />
+      <H2 title={t('furtherReadingTitle')} trailingLineColor="blue" className="!text-lg" />
       <div
-        className="text-bm-blue leading-relaxed policy-list-content"
+        className="text-bm-blue leading-relaxed policy-list-content mb-8"
         dangerouslySetInnerHTML={{ __html: furtherReading }}
       />
 
       {/* Related Policies */}
       {relatedPolicies && relatedPolicies.length > 0 && (
         <>
-          <H2 title={t('relatedPoliciesTitle')} trailingLineColor="blue" />
+          <H2 title={t('relatedPoliciesTitle')} trailingLineColor="blue" className="!text-lg" />
           <RelatedPoliciesList policies={relatedPolicies} locale={locale} />
         </>
       )}
@@ -315,6 +315,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     if (!policy) {
       return { notFound: true }
     }
+
+    console.log('policy', policy)
+    console.log("policcStatus", policy.policyStatuses?.edges)
+    console.log("documentTypes", policy.documentTypes?.edges)
+    console.log("topics", policy.topics?.edges)
 
     const transformedPolicy = transformPolicy(policy);
 

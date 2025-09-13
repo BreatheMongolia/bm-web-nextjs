@@ -46,7 +46,7 @@ export const RelatedPoliciesList = ({ policies, locale }: RelatedPoliciesListPro
             >
               <EllipsisHorizontalIcon className="w-12 h-12" />
               <span className="text-sm font-semibold">
-                {t('expand')} ({t('seeMore')} {remainingCount})
+                {t('expand')} (+{remainingCount})
               </span>
             </button>
           ) : (

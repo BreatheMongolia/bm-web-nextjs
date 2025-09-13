@@ -233,33 +233,21 @@ export async function getPolicyDetails(id: string, idType: PolicyIdType = Policy
         policyStatuses(first: 10) {
           edges {
             node {
-              slug
-              policyStatusCustomFields {
-                name
-                nameMn
-              }
+              name
             }
           }
         }
         documentTypes(first: 10) {
           edges {
             node {
-              slug
-              documentTypeCustomFields {
-                name
-                nameMn
-              }
+              name
             }
           }
         }
         topics(first: 10) {
           edges {
             node {
-              slug
-              topicCustomFields {
-                name
-                nameMn
-              }
+              name
             }
           }
         }
