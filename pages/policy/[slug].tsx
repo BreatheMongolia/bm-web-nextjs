@@ -127,7 +127,7 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
         {/* Desktop Table View */}
         <div className="hidden md:block">
           {/* Header Row */}
-          <div className="bg-bm-blue text-white text-center font-bold uppercase grid grid-cols-[repeat(5,minmax(0,1fr))] rounded-lg">
+          <div className="bg-bm-blue text-white font-bold uppercase grid grid-cols-[repeat(5,minmax(0,1fr))] rounded-lg">
             <div className="py-3 px-4">{t('tableHeaders.name')}</div>
             <div className="py-3 px-4">{t('tableHeaders.type')}</div>
             <div className="py-3 px-4">{t('tableHeaders.topic')}</div>
@@ -136,7 +136,7 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
           </div>
 
           {/* Data Row */}
-          <div className="grid grid-cols-[repeat(5,minmax(0,1fr))] py-6 text-center text-sm">
+          <div className="grid grid-cols-[repeat(5,minmax(0,1fr))] py-6 text-sm">
             <div className="px-4">{description}</div>
             <div className="px-4">{documentTypes.join(', ') || '—'}</div>
             <div className="px-4">{topics.join(', ') || '—'}</div>
@@ -146,31 +146,25 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
         </div>
 
         {/* Mobile List View */}
-        <div className="md:hidden bg-gray-50 rounded-lg p-4 space-y-4 uppercase">
-          {/* Approved Date */}
-          <div className='bg-gray-200 rounded-lg text-xs px-4 py-2 w-fit -ml-1'>
-            {t('approvedOn')}: {policy.dateApproved || '—'}
-          </div>
-          
+        <div className="md:hidden bg-gray-50 rounded-lg p-4 space-y-4">
           {/* Metadata Items */}
-          <div className="space-y-3">
-            <div>
-              <span className="font-semibold text-gray-700">{t('tableHeaders.type')}: </span>
-              <span className="text-gray-600">{documentTypes.join(', ') || '—'}</span>
-            </div>
+          <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-3">
+            <span className="font-semibold text-gray-700">{t('tableHeaders.type')}:</span>
+            <span className="text-gray-600">{documentTypes.join(', ') || '—'}</span>
             
-            <div>
-              <span className="font-semibold text-gray-700">{t('tableHeaders.topic')}: </span>
-              <span className="text-gray-600">{topics.join(', ') || '—'}</span>
-            </div>
+            <span className="font-semibold text-gray-700">{t('tableHeaders.topic')}:</span>
+            <span className="text-gray-600">{topics.join(', ') || '—'}</span>
             
-            <div>
-              <span className="font-semibold text-gray-700">{t('tableHeaders.status')}: </span>
-              <span className="text-gray-600">{status.join(', ') || '—'}</span>
-            </div>
+            <span className="font-semibold text-gray-700">{t('tableHeaders.status')}:</span>
+            <span className="text-gray-600">{status.join(', ') || '—'}</span>
+            
+            <span className="font-semibold text-gray-700">{t('tableHeaders.dateApproved')}:</span>
+            <span className="text-gray-600">{policy.dateApproved || '—'}</span>
           </div>
         </div>
       </div>
+
+      <div className="md:hidden border-b border-gray-500 my-3"></div>
 
       {/* Action Buttons */}
       <div className="my-6">
@@ -315,11 +309,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     if (!policy) {
       return { notFound: true }
     }
-
-    console.log('policy', policy)
-    console.log("policcStatus", policy.policyStatuses?.edges)
-    console.log("documentTypes", policy.documentTypes?.edges)
-    console.log("topics", policy.topics?.edges)
 
     const transformedPolicy = transformPolicy(policy);
 
