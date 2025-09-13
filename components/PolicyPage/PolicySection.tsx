@@ -87,10 +87,10 @@ export const PolicySection = ({
   const [yearOptions, setYearOptions] = useState<OptionProps[]>([])
   const [searchValue, setSearchValue] = useState<string | undefined>('')
   // Filter states
-  const [selectedDocumentType, setSelectedDocumentType] = useState<string | undefined>()
-  const [selectedDocumentTopic, setSelectedDocumentTopic] = useState<string | undefined>()
-  const [selectedPolicyStatus, setSelectedPolicyStatus] = useState<string | undefined>()
-  const [selectedYear, setSelectedYear] = useState<string | undefined>()
+  const [selectedDocumentType, setSelectedDocumentType] = useState([])
+  const [selectedDocumentTopic, setSelectedDocumentTopic] = useState([])
+  const [selectedPolicyStatus, setSelectedPolicyStatus] = useState([])
+  const [selectedYear, setSelectedYear] = useState([])
 
   const sortArray = [
     { id: 1, label: t('sortBy.dateAsc'), value: 'dateAsc' },
@@ -118,16 +118,16 @@ export const PolicySection = ({
     let filtered = policies.filter(
       policy =>
         policy.documentTypes.edges.some(type =>
-          selectedDocumentType !== undefined ? type.node.slug === selectedDocumentType : true,
+          selectedDocumentType.length !== 0 ? selectedDocumentType.some(t1 => t1 === type.node.slug) : true,
         ) &&
         policy.topics.edges.some(topic =>
-          selectedDocumentTopic !== undefined ? topic.node.slug === selectedDocumentTopic : true,
+          selectedDocumentTopic.length !== 0 ? selectedDocumentTopic.some(t2 => t2 === topic.node.slug) : true,
         ) &&
         policy.policyStatuses.edges.some(status =>
-          selectedPolicyStatus !== undefined ? status.node.slug === selectedPolicyStatus : true,
+          selectedPolicyStatus.length !== 0 ? selectedPolicyStatus.some(s => s === status.node.slug) : true,
         ) &&
-        (selectedYear !== undefined
-          ? dayjs(policy.policyPageCustomFields.initiatedDate).year().toString() === selectedYear
+        (selectedYear.length !== 0
+          ? selectedYear.some(y => y === dayjs(policy.policyPageCustomFields.initiatedDate).year().toString())
           : true),
     )
 
@@ -292,6 +292,30 @@ export const PolicySection = ({
     )
   }
 
+  const checkSelectedDocumentType = typeToCheck => {
+    selectedDocumentType.some(type => type === typeToCheck)
+      ? setSelectedDocumentType(prevItems => prevItems.filter(item => item !== typeToCheck))
+      : setSelectedDocumentType([...selectedDocumentType, typeToCheck])
+  }
+
+  const checkSelectedDocumentTopic = topicToCheck => {
+    selectedDocumentTopic.some(topic => topic === topicToCheck)
+      ? setSelectedDocumentTopic(prevItems => prevItems.filter(item => item !== topicToCheck))
+      : setSelectedDocumentTopic([...selectedDocumentTopic, topicToCheck])
+  }
+
+  const checkSelectedPolicyStatus = statusToCheck => {
+    selectedPolicyStatus.some(status => status === statusToCheck)
+      ? setSelectedPolicyStatus(prevItems => prevItems.filter(item => item !== statusToCheck))
+      : setSelectedPolicyStatus([...selectedPolicyStatus, statusToCheck])
+  }
+
+  const checkSelectedYear = yearToCheck => {
+    selectedYear.some(year => year === yearToCheck)
+      ? setSelectedYear(prevItems => prevItems.filter(item => item !== yearToCheck))
+      : setSelectedYear([...selectedYear, yearToCheck])
+  }
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-wrap w-full md:justify-between gap-2 my-5">
@@ -300,14 +324,17 @@ export const PolicySection = ({
           <div className="relative hidden md:flex flex-wrap gap-2">
             <button
               onClick={() => {
-                setSelectedDocumentType(undefined)
-                setSelectedDocumentTopic(undefined)
-                setSelectedPolicyStatus(undefined)
-                setSelectedYear(undefined)
+                setSelectedDocumentType([])
+                setSelectedDocumentTopic([])
+                setSelectedPolicyStatus([])
+                setSelectedYear([])
                 setPolicyDetails([])
               }}
               className={`w-28 px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl justify-center items-center ${
-                selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
+                selectedDocumentType.length !== 0 ||
+                selectedDocumentTopic.length !== 0 ||
+                selectedPolicyStatus.length !== 0 ||
+                selectedYear.length !== 0
                   ? 'text-black bg-white hover:bg-bm-blue-hover'
                   : 'bg-bm-blue text-white'
               }`}
@@ -319,28 +346,28 @@ export const PolicySection = ({
               id="types"
               options={documentTypeOptions}
               label={t('filterButtons.types')}
-              onClick={selected => setSelectedDocumentType(selected)}
+              onClick={selected => checkSelectedDocumentType(selected)}
               selectedOption={selectedDocumentType}
             />
             <Dropdown
               id="topics"
               options={documentTopicOptions}
               label={t('filterButtons.topics')}
-              onClick={selected => setSelectedDocumentTopic(selected)}
+              onClick={selected => checkSelectedDocumentTopic(selected)}
               selectedOption={selectedDocumentTopic}
             />
             <Dropdown
               id="statuses"
               options={policyStatusOptions}
               label={t('filterButtons.status')}
-              onClick={selected => setSelectedPolicyStatus(selected)}
+              onClick={selected => checkSelectedPolicyStatus(selected)}
               selectedOption={selectedPolicyStatus}
             />
             <Dropdown
               id="year"
               options={yearOptions}
               label={t('filterButtons.year')}
-              onClick={selected => setSelectedYear(selected)}
+              onClick={selected => checkSelectedYear(selected)}
               selectedOption={selectedYear}
             />
           </div>
@@ -377,14 +404,17 @@ export const PolicySection = ({
           <div className="relative flex flex-wrap w-full justify-items-center gap-2">
             <button
               onClick={() => {
-                setSelectedDocumentType(undefined)
-                setSelectedDocumentTopic(undefined)
-                setSelectedPolicyStatus(undefined)
-                setSelectedYear(undefined)
+                setSelectedDocumentType([])
+                setSelectedDocumentTopic([])
+                setSelectedPolicyStatus([])
+                setSelectedYear([])
                 setPolicyDetails([])
               }}
               className={`w-28 px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
-                selectedDocumentType || selectedDocumentTopic || selectedPolicyStatus || selectedYear
+                selectedDocumentType.length !== 0 ||
+                selectedDocumentTopic.length !== 0 ||
+                selectedPolicyStatus.length !== 0 ||
+                selectedYear.length !== 0
                   ? 'text-black bg-white hover:bg-bm-blue-hover'
                   : 'bg-bm-blue text-white'
               }`}
@@ -395,28 +425,28 @@ export const PolicySection = ({
               id="types"
               options={documentTypeOptions}
               label={t('filterButtons.types')}
-              onClick={selected => setSelectedDocumentType(selected)}
+              onClick={selected => checkSelectedDocumentType(selected)}
               selectedOption={selectedDocumentType}
             />
             <Dropdown
               id="topics"
               options={documentTopicOptions}
               label={t('filterButtons.topics')}
-              onClick={selected => setSelectedDocumentTopic(selected)}
+              onClick={selected => checkSelectedDocumentTopic(selected)}
               selectedOption={selectedDocumentTopic}
             />
             <Dropdown
               id="statuses"
               options={policyStatusOptions}
               label={t('filterButtons.status')}
-              onClick={selected => setSelectedPolicyStatus(selected)}
+              onClick={selected => checkSelectedPolicyStatus(selected)}
               selectedOption={selectedPolicyStatus}
             />
             <Dropdown
               id="year"
               options={yearOptions}
               label={t('filterButtons.year')}
-              onClick={selected => setSelectedYear(selected)}
+              onClick={selected => checkSelectedYear(selected)}
               selectedOption={selectedYear}
             />
           </div>
@@ -432,7 +462,7 @@ export const PolicySection = ({
 
         {/* Policies */}
         <div className="">
-          {filteredPolicies !== undefined ? (
+          {filteredPolicies.length !== 0 ? (
             filteredPolicies.map((policy, index) => (
               <div key={'policyList' + index}>
                 {/* Desktop */}

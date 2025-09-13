@@ -10,7 +10,7 @@ export type OptionProps = {
 type DropdownProps = {
   id: string
   label: string
-  selectedOption?: string
+  selectedOption: string[]
   onClick?: (e: string) => void
   options: OptionProps[]
 }
@@ -45,7 +45,7 @@ export const Dropdown = ({ id, label, onClick, selectedOption, options = [] }: D
       <button
         onClick={() => setIsDropdownOpen(false)}
         className={`flex w-full justify-center px-3 border border-[#ADC4CC] font-semibold text-black py-1 rounded-xl gap-3 ${
-          selectedOption && 'bg-bm-blue text-white hover:bg-bm-blue-hover'
+          selectedOption.length !== 0 && 'bg-bm-blue text-white hover:bg-bm-blue-hover'
         }`}
       >
         {label}
@@ -67,10 +67,10 @@ export const Dropdown = ({ id, label, onClick, selectedOption, options = [] }: D
               }}
             >
               <input
-                id={selectedOption + idx}
+                key={idx}
                 type="checkbox"
                 className="mr-2"
-                checked={option.value === selectedOption}
+                checked={selectedOption.some(s => s === option.value)}
               />
               {option.label}
             </div>
