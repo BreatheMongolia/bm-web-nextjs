@@ -37,7 +37,7 @@ export const Dropdown = ({ id, label, onClick, selectedOption, options = [] }: D
 
   return (
     <div
-      className={`relative w-28 ${(id === 'year' || id === 'statuses') && 'md:w-28 w-[172px]'}`}
+      className={`relative md:w-28 w-[30%] ${(id === 'year' || id === 'statuses') && 'md:w-28 w-[46%]'}`}
       onClick={toggleDropdown}
       id={id}
       ref={ref}

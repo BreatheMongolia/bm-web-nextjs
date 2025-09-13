@@ -410,7 +410,7 @@ export const PolicySection = ({
                 setSelectedYear([])
                 setPolicyDetails([])
               }}
-              className={`w-28 px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
+              className={`w-[30%] px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
                 selectedDocumentType.length !== 0 ||
                 selectedDocumentTopic.length !== 0 ||
                 selectedPolicyStatus.length !== 0 ||
@@ -461,7 +461,7 @@ export const PolicySection = ({
         </div>
 
         {/* Policies */}
-        <div className="">
+        <div className="flex flex-col gap-2 w-full">
           {filteredPolicies.length !== 0 ? (
             filteredPolicies.map((policy, index) => (
               <div key={'policyList' + index}>
@@ -559,7 +559,7 @@ export const PolicySection = ({
               </div>
             ))
           ) : (
-            <div className="grid justify-center items-center text-gray-500">{t('noPoliciesFound.all')}</div>
+            <div className="flex justify-center items-center text-gray-500">{t('noPoliciesFound.all')}</div>
           )}
         </div>
 
