@@ -45,5 +45,9 @@
     "approvedOn": "Approved",
     "expand": "Expand",
     "seeMore": "See more",
-    "collapse": "Collapse"
+    "collapse": "Collapse",
+    "error": {
+        "description": "Sorry, we couldn't find the policy you're looking for. It may have been moved or no longer exists.",
+        "tryAgain": "Try Again"
+    }
 }
