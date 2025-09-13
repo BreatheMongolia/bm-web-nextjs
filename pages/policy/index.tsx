@@ -14,6 +14,7 @@ import { NewsCarousel, TakeActionCarousel } from '@/components/HomePage'
 import { PolicySection } from '@/components/PolicyPage/PolicySection'
 import { useMediaQuery } from 'react-responsive'
 
+
 const PolicyPage = ({
   policies,
   documentTypeOptions,

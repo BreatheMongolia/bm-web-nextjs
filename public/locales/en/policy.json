@@ -26,5 +26,28 @@
         "topic": "Topic: No Policy Found",
         "status": "Status: No Policy Found",
         "year": "Year: No Policy Found"
+    },
+    "backToPolicy": "Back to Policy Page",
+    "tableHeaders": {
+        "name": "Name",
+        "type": "Type",
+        "topic": "Topic",
+        "status": "Status",
+        "dateApproved": "Approved"
+    },
+    "source": "Source",
+    "downloadMn": "Download (MNG)",
+    "downloadEn": "Download (EN)",
+    "summaryTitle": "Summary",
+    "updatesTitle": "Updates",
+    "furtherReadingTitle": "Further Reading",
+    "relatedPoliciesTitle": "Related Policies",
+    "approvedOn": "Approved",
+    "expand": "Expand",
+    "seeMore": "See more",
+    "collapse": "Collapse",
+    "error": {
+        "description": "Sorry, we couldn't find the policy you're looking for. It may have been moved or no longer exists.",
+        "tryAgain": "Try Again"
     }
 }

@@ -26,5 +26,28 @@
         "topic": "Сэдэв: Бодлого олдсонгүй",
         "status": "Төлөв: Бодлого олдсонгүй",
         "year": "Он: Бодлого олдсонгүй"
+    },
+    "backToPolicy": "Бодлогын жагсаалт руу буцах",
+    "tableHeaders": {
+        "name": "Нэр",
+        "type": "Төрөл",
+        "topic": "Сэдэв",
+        "status": "Төлөв",
+        "dateApproved": "Батлагдсан"
+    },
+    "source": "Эх сурвалж",
+    "downloadMn": "Татах (MNG)",
+    "downloadEn": "Татах (EN)",
+    "summaryTitle": "Хураангуй",
+    "updatesTitle": "Шинэчлэлт",
+    "furtherReadingTitle": "Нэмэлт мэдээлэл",
+    "relatedPoliciesTitle": "Холбоотой бодлогууд",
+    "approvedOn": "Батлагдсан",
+    "expand": "Дэлгэх",
+    "seeMore": "бусад харах",
+    "collapse": "Хаах",
+    "error": {
+        "description": "Уучлаарай, таны хайж буй бодлогыг олж чадсангүй. Энэ бодлого устгагдсан эсвэл нүүж байж магадгүй.",
+        "tryAgain": "Дахин оролдох"
     }
 }

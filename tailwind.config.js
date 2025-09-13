@@ -16,6 +16,8 @@ module.exports = {
       colors: {
         'bm-blue': '#3173D0',
         'action-red': '#EE6161',
+        'policy-tag-bg': '#E3F8FF',
+        'policy-tag-text': '#3575B6',
       },
       fontSize: {
         xsm: '13px',
