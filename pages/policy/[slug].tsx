@@ -39,6 +39,7 @@ interface Policy {
 
 interface RelatedPolicy {
   databaseId: string
+  slug: string
   dateGmt: string
   policyPageCustomFields: {
     title: string
@@ -86,6 +87,8 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
   const status = translateList(policy.status || [], locale)
   const relatedPolicies = policy.relatedPolicies
 
+
+  console.log("furtherReading:", furtherReading);
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Link */}
@@ -263,7 +266,7 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
       {/* Further Reading */}
       <H2 title={t('furtherReadingTitle')} trailingLineColor="blue" className="!text-lg" />
       <div
-        className="text-bm-blue leading-relaxed policy-list-content mb-8"
+        className="text-gray-700 leading-relaxed policy-list-content mb-8"
         dangerouslySetInnerHTML={{ __html: furtherReading }}
       />
 

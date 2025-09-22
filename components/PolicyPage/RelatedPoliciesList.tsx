@@ -6,6 +6,7 @@ import { PolicyEntry } from './PolicyCard'
 interface RelatedPoliciesListProps {
   policies: Array<{
     databaseId: string
+    slug: string
     dateGmt: string
     policyPageCustomFields: {
       title: string
