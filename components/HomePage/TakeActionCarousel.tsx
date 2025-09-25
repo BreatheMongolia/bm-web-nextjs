@@ -22,7 +22,7 @@ export const TakeActionCarousel = ({
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 2,
     arrows: true,
     autoplaySpeed: 5000,

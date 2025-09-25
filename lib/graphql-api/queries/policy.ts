@@ -1,3 +1,4 @@
+import { Policy, PolicyIdType } from "graphql/generated"
 import { fetchAPI } from "../api"
 
 export async function getPolicies(): Promise<any[]> {
@@ -143,6 +144,121 @@ export async function getPolicyTopics(): Promise<any[]> {
     }
   }
   return []
+}
+
+// TODO
+export async function getPolicyDetails(id: string, idType: PolicyIdType = PolicyIdType.Slug): Promise<Policy> {
+  const data = await fetchAPI(
+    `query getPolicyDetails($id: ID!, $idType: PolicyIdType!) {
+      policy(id: $id, idType: $idType) {
+        policyPageCustomFields {
+          name
+          nameMn
+          downloadUrl
+          downloadUrlMn
+          furtherReading
+          furtherReadingMn
+          initiatedDate
+          sourceUrl
+          summary
+          summaryMn
+          title
+          titleMn
+          updates
+          updatesMn
+          relatedPolicies(first: 10) {
+            edges {
+              node {
+                slug
+                databaseId
+                dateGmt
+                ... on Policy {
+                  id
+                  policyPageCustomFields {
+                    title
+                    titleMn
+                  }
+                  topics(first: 10) {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          recommendedAction(first: 10) {
+            edges {
+              node {
+                slug
+                ... on TakeAction {
+                  databaseId
+                  slug
+                  dateGmt
+                  takeActionCustomFields {
+                    titleMn
+                    title
+                    excerpt
+                    excerptMn
+                    typeOfAction {
+                      nodes {
+                        ... on ActionType {
+                          actionTypeCustomFields {
+                            name
+                            nameMn
+                          }
+                        }
+                      }
+                    }
+                  }
+                  featuredImage {
+                    node {
+                      mediaItemUrl
+                      mediaDetails {
+                        sizes(include: MEDIUM) {
+                          height
+                          width
+                          sourceUrl
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        policyStatuses(first: 10) {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        documentTypes(first: 10) {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        topics(first: 10) {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+    `,
+    {
+      variables: { id, idType },
+    },
+  ).catch(err => console.error('Failed to fetch policy', err))
+  return data
 }
 
 export async function getPolicyLandingPageSettings(): Promise<any> {

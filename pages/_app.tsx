@@ -8,6 +8,7 @@ import 'styles/our-mission.scss'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import 'styles/take-action.scss'
 import 'styles/news-styles.scss'
+import 'styles/donors-styles.scss'
 import Script from 'next/script'
 import { AnimatePresence } from 'framer-motion'
 import { createContext, useEffect } from 'react'
@@ -21,7 +22,7 @@ import { getProjectUrls } from 'lib/graphql-api/queries/home'
 export const MapContext = createContext<MapContextInterface | null>(null)
 
 interface MyAppProps extends AppProps {
-  projects: any; // Adjust the type of `projects` as needed
+  projects: any // Adjust the type of `projects` as needed
 }
 
 function MyApp({ Component, pageProps, projects }: MyAppProps) {
@@ -39,7 +40,7 @@ function MyApp({ Component, pageProps, projects }: MyAppProps) {
   // FIXME: Givebutter doesn't seem to be working
   return (
     <AnimatePresence mode="wait" initial={true}>
-      <Layout projects={projects} >
+      <Layout projects={projects}>
         <Head>
           <Script src="https://js.givebutter.com/elements/latest.js" />
           <Script id="give-butter-config">
