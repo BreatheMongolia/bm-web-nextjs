@@ -14,7 +14,6 @@ import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Dropdown } from './Dropdown'
-import Image from 'next/image'
 import SearchBar from './SearchBar'
 
 type OptionProps = {
