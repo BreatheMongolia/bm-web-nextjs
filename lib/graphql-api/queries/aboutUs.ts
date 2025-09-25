@@ -37,7 +37,7 @@ export async function getAccomplishments(): Promise<any> {
       }
     `,
     {},
-  ) 
+  )
 
   return data?.accomplishments?.edges || []
 }
@@ -102,7 +102,6 @@ export async function getInfoSettings(): Promise<any> {
     {},
   )
   return data?.aboutUsPageSettings.aboutUs?.info || []
-
 }
 
 export async function getImpactSettings(): Promise<any> {
@@ -133,7 +132,6 @@ export async function getImpactSettings(): Promise<any> {
     {},
   )
   return data?.aboutUsPageSettings.aboutUs?.ourWork || []
-
 }
 
 export async function getOurStorySettings(): Promise<any> {
@@ -164,7 +162,6 @@ export async function getOurStorySettings(): Promise<any> {
     {},
   )
   return data?.aboutUsPageSettings.aboutUs?.ourStory || []
-
 }
 
 export async function getOurTeamSettings(): Promise<any> {
@@ -195,7 +192,6 @@ export async function getOurTeamSettings(): Promise<any> {
     {},
   )
   return data?.aboutUsPageSettings.aboutUs?.ourTeam || []
-
 }
 
 export async function getSupportUsSettings(): Promise<any> {
@@ -218,6 +214,10 @@ export async function getSupportUsSettings(): Promise<any> {
                 mediaItemUrl
               }
             }
+            donorTitleMn
+            donorTitle
+            donorDescriptionMn
+            donorDescription
           }
         }
       }
@@ -226,5 +226,4 @@ export async function getSupportUsSettings(): Promise<any> {
     {},
   )
   return data?.aboutUsPageSettings.aboutUs?.supportUs || []
-
 }

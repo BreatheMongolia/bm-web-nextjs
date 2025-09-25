@@ -60,7 +60,7 @@ export const PageImageBanner = ({ imageUrls, bottomText }: BannerProps) => {
         ))}
       </Slider>
       <div className="banner_bottom_text_bar ">
-        <div className="flex container mx-auto justify-center banner_bottom_text_content">
+        <div className="flex container banner_bottom_text_content gap-8">
           <p>{bottomText.left}</p>
           <p>{bottomText.right}</p>
         </div>

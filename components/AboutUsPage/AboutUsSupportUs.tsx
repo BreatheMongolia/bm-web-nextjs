@@ -5,6 +5,7 @@ import VolunteerPosition from './SupportUs/VolunteerPosition'
 import DonateThroughEmployerCard from './SupportUs/DonateThroughEmployerCard'
 import { useTranslation } from 'next-i18next'
 import { H2 } from 'components/generic/Typography'
+import DonorsMain from './DonorsMain'
 
 export type openPositions = {
   position: string
@@ -18,11 +19,17 @@ export const AboutUsSupportUs = ({
   volunteers,
   countriesInfoText,
   locale,
+  donors,
+  donorsTitle,
+  donorDescription,
 }: {
   descriptionHtml: string
   volunteers: any[]
   countriesInfoText: any[]
   locale: string
+  donors: any[]
+  donorsTitle: string
+  donorDescription: string
 }) => {
   const { t } = useTranslation('about')
 
@@ -41,6 +48,7 @@ export const AboutUsSupportUs = ({
         <script src="https://givebutter.com/js/widget.js"></script>
       </div>
 
+      <DonorsMain donors={donors} donorsTitle={donorsTitle} donorDescription={donorDescription} />
       <DonateThroughEmployerCard />
       <VolunteerPosition
         joinDescription={descriptionHtml}
