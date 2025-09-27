@@ -87,8 +87,6 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
   const status = translateList(policy.status || [], locale)
   const relatedPolicies = policy.relatedPolicies
 
-
-  console.log("furtherReading:", furtherReading);
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Link */}
