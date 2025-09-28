@@ -88,7 +88,7 @@ export default function Index({
             right: pageBanner.rightText,
           }}
         />
-        <div className="container mx-auto flex flex-col gap-20">
+        <div className="container flex flex-col gap-20 mx-auto">
           <MapContextWrapper>
             <MapComponent
               title={{
@@ -107,9 +107,15 @@ export default function Index({
           </MapContextWrapper>
 
           {/* Add other page level components here */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
             <div className="hidden lg:block">
               <TakeActionGrid
+                takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]}
+                locale={locale}
+              />
+            </div>
+            <div className="lg:hidden">
+              <TakeActionCarousel
                 takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]}
                 locale={locale}
               />
@@ -117,12 +123,6 @@ export default function Index({
             <HealthSection />
           </div>
           <NewsCarousel featuredNews={page.homePage.featuredNews.nodes as News[]} />
-          <div className="lg:hidden">
-            <TakeActionCarousel
-              takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]}
-              locale={locale}
-            />
-          </div>
           <OurWorkCarousel campaigns={sortedCampaigns} locale={locale} />
           <JoinBMSection
             title={{
