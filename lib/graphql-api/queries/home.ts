@@ -146,6 +146,116 @@ const HomePageGQLQuerySections = {
         }
       }
     `,
+  featuredPolicies: `
+    # featured policies
+    policySection {
+        policyDescriptionEn
+        policyDescriptionMn
+        featuredPolicies {
+          nodes {
+            ... on Policy {
+              databaseId
+              slug
+              dateGmt
+              policyPageCustomFields {
+                name
+                nameMn
+                summary
+                summaryMn
+                title
+                titleMn
+              }
+              topics {
+                nodes {
+                  slug
+                  topicCustomFields {
+                    name
+                    nameMn
+                  }
+                }
+              }
+              documentTypes {
+                nodes {
+                  slug
+                  documentTypeCustomFields {
+                    name
+                    nameMn
+                  }
+                }
+              }
+              policyStatuses {
+                nodes {
+                  slug
+                  policyStatusCustomFields {
+                    name
+                    nameMn
+                  }
+                }
+              }
+            }
+          }
+        }
+        policyImageEn {
+          cursor
+          node {
+            mediaItemUrl
+            mediaDetails {
+              sizes(include: MEDIUM) {
+                height
+                width
+                sourceUrl
+              }
+            }
+          }
+        }
+        policyImageMn {
+          cursor
+          node {
+            mediaItemUrl
+            mediaDetails {
+              sizes(include: MEDIUM) {
+                height
+                width
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
+    `,
+  healthSection: `
+    # health section
+    healthSection{
+        healthDescriptionEn
+        healthDescriptionMn
+        healthImageEn {
+          cursor
+          node {
+            mediaItemUrl
+            mediaDetails {
+              sizes(include: MEDIUM) {
+                height
+                width
+                sourceUrl
+              }
+            }
+          }
+        }
+        healthImageMn {
+          cursor
+          node {
+            mediaItemUrl
+            mediaDetails {
+              sizes(include: MEDIUM) {
+                height
+                width
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
+  `,
   joinBm: `
     # join bm
     joinBreatheMongoliaTitle
@@ -224,6 +334,8 @@ export async function getHomePage(id: string, idType: PageIdType = PageIdType.Ur
                     ${HomePageGQLQuerySections.ourWork}
                     ${HomePageGQLQuerySections.featuredTakeActions}
                     ${HomePageGQLQuerySections.map}
+                    ${HomePageGQLQuerySections.featuredPolicies}
+                    ${HomePageGQLQuerySections.healthSection}
                 }
             }
         }
@@ -279,7 +391,6 @@ export async function getVolunteers(): Promise<Page> {
         `,
     {},
   )
-  
 
   return data.volunteerPositions.nodes
 }
