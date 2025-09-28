@@ -13,7 +13,10 @@
     "seeMore": "See more"
   },
   "health": {
-    "title": "Health"
+    "title": "Health",
+    "textTitle": "Air Pollution and Your Health",
+    "textDescription": "Air pollution affects every stage of human life and every organ system.",
+    "learnMore": "Learn More"
   },
   "news": {
     "title": "News"
