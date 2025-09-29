@@ -785,6 +785,50 @@ p {
   }
 }
 
+// Policy Page Filter Buttons
+.policy-filter-buttons-grid {
+  display: grid;
+  grid-gap: 5px;
+  width: 100% !important;
+  overflow-x: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-rows: 2;
+  // repeat(auto-fit, minmax(130px, 1fr));
+  // margin-left: auto;
+  // margin-right: auto;
+
+  // .filter-buttons {
+  //   width: 100%;
+  // background: #ffffff;
+  // border: 1px solid #d9d9d9;
+  // box-sizing: border-box;
+  // border-radius: 4px;
+  // padding: 10px 20px;
+  // font-family: 'Open Sans';
+  // font-style: normal;
+  // font-weight: 600;
+  // font-size: 14px;
+  // color: #2c2d41;
+  // cursor: pointer;
+  // margin-right: 10px;
+  // margin-bottom: 10px;
+
+  // &.active,
+  // &:hover {
+  //   background: #3a62c8;
+  //   border: none;
+  //   color: #ffffff;
+  // }
+  // }
+}
+
+// @media (max-width: 767px) {
+//   .policy-filter-buttons-grid {
+//     padding-top: 30px;
+//     overflow-x: hidden;
+//   }
+// }
+
 // Team Card Component
 .team-card {
   background: #ffffff;
