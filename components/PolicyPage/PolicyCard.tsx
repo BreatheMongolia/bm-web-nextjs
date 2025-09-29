@@ -3,10 +3,12 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import { useTranslation } from 'next-i18next'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { formatDate, translateList } from 'lib/utils/policy'
+import Link from 'next/link'
 
 interface PolicyCardProps {
   policy: {
     databaseId: string
+    slug: string
     dateGmt: string
     policyPageCustomFields: {
       title: string
@@ -23,16 +25,18 @@ export const PolicyEntry = ({ policy, locale }: PolicyCardProps) => {
   const [isTagsExpanded, setIsTagsExpanded] = useState(false)
   const { t } = useTranslation('policy')
   const { title, titleMn } = policy.policyPageCustomFields
-  const { topics, dateGmt } = policy
+  const { topics, dateGmt, slug } = policy
   const dateApproved = formatDate(dateGmt)
   const transformedTopics = translateList((topics?.edges || []).map((e: any) => e.node.name), locale)
 
   return (
     <div className="pb-2 mb-4 border-b-2 border-gray-200 last:border-b-0">
-      <div
-        className="text-bm-blue leading-relaxed prose max-w-none mb-3"
-        dangerouslySetInnerHTML={{ __html: getTranslated(title, titleMn, locale) }}
-      />
+      <Link href={`/policy/${slug}`} className="block">
+        <div
+          className="text-bm-blue hover:text-blue-600 transition-colors leading-relaxed prose max-w-none mb-3 cursor-pointer"
+          dangerouslySetInnerHTML={{ __html: getTranslated(title, titleMn, locale) }}
+        />
+      </Link>
       <div className='flex justify-between items-center'>
         <div className='bg-gray-200 rounded-lg text-xs px-4 py-2'>{t('approvedOn')}: {dateApproved}</div>
         

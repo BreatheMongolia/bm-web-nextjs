@@ -39,10 +39,17 @@ figure {
     margin-left: 0.5rem;
     padding-left: 1rem;
   }
-  
+
   li {
     display: list-item;
     margin-bottom: 0.5rem;
+  }
+
+  a {
+    @apply text-blue-600 underline;
+    &:hover {
+      @apply text-blue-400;
+    }
   }
 }
 

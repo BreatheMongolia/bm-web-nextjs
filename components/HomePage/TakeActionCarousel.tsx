@@ -17,14 +17,17 @@ export const TakeActionCarousel = ({
 }) => {
   const { t } = useTranslation('home')
 
+  // Check if we have fewer than 4 cards
+  const hasFewerThanFourCards = takeActionPosts.length < 4
+
   // Styling the settings for take-action-carousel within Slider
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: !hasFewerThanFourCards,
     speed: 600,
-    slidesToShow: 4,
-    slidesToScroll: 2,
-    arrows: true,
+    slidesToShow: hasFewerThanFourCards ? takeActionPosts.length : 4,
+    slidesToScroll: hasFewerThanFourCards ? 1 : 2,
+    arrows: !hasFewerThanFourCards,
     autoplaySpeed: 5000,
     cssEase: 'ease-in-out',
     adaptiveHeight: true,
@@ -34,17 +37,17 @@ export const TakeActionCarousel = ({
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 5,
-          slidesToScroll: 2,
-          infinite: true,
+          slidesToShow: hasFewerThanFourCards ? takeActionPosts.length : 5,
+          slidesToScroll: hasFewerThanFourCards ? 1 : 2,
+          infinite: !hasFewerThanFourCards,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: hasFewerThanFourCards ? takeActionPosts.length : 3,
           slidesToScroll: 1,
-          initialSlide: 2,
+          initialSlide: hasFewerThanFourCards ? 0 : 2,
         },
       },
       {
@@ -70,14 +73,18 @@ export const TakeActionCarousel = ({
       <Slider
         {...settings}
         prevArrow={
-          <Arrow check={0} classes="prev-gray-arrow">
-            <ChevronLeftIcon className="w-8 h-8 text-white" />
-          </Arrow>
+          hasFewerThanFourCards ? <></> : (
+            <Arrow check={0} classes="prev-gray-arrow">
+              <ChevronLeftIcon className="w-8 h-8 text-white" />
+            </Arrow>
+          )
         }
         nextArrow={
-          <Arrow check={takeActionPosts?.length - 4} classes="next-gray-arrow">
-            <ChevronRightIcon className="w-8 h-8 text-white" />
-          </Arrow>
+          hasFewerThanFourCards ? <></> : (
+            <Arrow check={takeActionPosts?.length - 4} classes="next-gray-arrow">
+              <ChevronRightIcon className="w-8 h-8 text-white" />
+            </Arrow>
+          )
         }
       >
         {takeActionPosts.map((takeAction, idx) => (
