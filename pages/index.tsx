@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // types
-import { News, Page, TakeAction } from 'graphql/generated'
+import { HomePageHealthSection, News, Page, TakeAction } from 'graphql/generated'
 import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map/types'
 // lib functions/queries
 import {
@@ -125,7 +125,7 @@ export default function Index({
                 locale={locale}
               />
             </div>
-            <HealthSection />
+            <HealthSection healthSection={page.homePage.healthSection as HomePageHealthSection} />
           </div>
           <NewsCarousel featuredNews={page.homePage.featuredNews.nodes as News[]} />
           <OurWorkCarousel campaigns={sortedCampaigns} locale={locale} />

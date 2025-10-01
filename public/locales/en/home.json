@@ -20,5 +20,10 @@
   },
   "news": {
     "title": "News"
+  },
+  "policy": {
+    "title": "Policy",
+    "seeMore": "See more",
+    "learnMore": "Learn More"
   }
 }
