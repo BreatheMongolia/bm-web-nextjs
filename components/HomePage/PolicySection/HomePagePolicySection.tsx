@@ -1,8 +1,8 @@
 import { H2 } from 'components/generic/Typography'
-import { HomePagePolicySection_Fields } from 'graphql/generated'
+import { HomePagePolicySection_Fields, Policy } from 'graphql/generated'
 import { useTranslation } from 'next-i18next'
-import Image from 'next/image'
 import Link from 'next/link'
+import BorderlessPolicyTable from './BorderlessPolicyTable'
 
 type Props = {
   policySection: HomePagePolicySection_Fields
@@ -17,10 +17,17 @@ const HomePagePolicySection = ({ policySection }: Props) => {
 
   return (
     <div>
-      <H2 title={t('policy.title')} trailingLineColor="blue" />
+      <H2
+        title={t('policy.title')}
+        trailingLineColor="blue"
+        extraButton={{
+          title: t('policy.seeMore'),
+          url: '/policy#policy',
+        }}
+      />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <div
-          className="hidden md:block justify-center items-center relative overflow-hidden rounded-md"
+          className="justify-center items-center relative overflow-hidden rounded-md"
           style={{
             backgroundImage: `url(${imageSourceUrl})`,
             backgroundSize: 'cover',
@@ -38,7 +45,9 @@ const HomePagePolicySection = ({ policySection }: Props) => {
             </Link>
           </div>
         </div>
-        <div className="py-5 bg-red-50">Right side</div>
+        <div className="py-5 ">
+          <BorderlessPolicyTable policies={policySection.featuredPolicies.nodes as Policy[]} />
+        </div>
       </div>
     </div>
   )

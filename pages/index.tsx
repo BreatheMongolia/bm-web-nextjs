@@ -30,15 +30,12 @@ import {
   OurWorkCarousel,
   TakeActionGrid,
   HomePagePolicySection,
-} from 'components/HomePage'
+} from '@/components/HomePage'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 import dayjs from 'dayjs'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { HealthSection } from '@/components/HomePage/HealthSection'
-
-// TODO: Health Section map to server side information
-// TODO: Policy Section on home page
 
 export default function Index({
   page,

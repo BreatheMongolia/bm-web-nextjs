@@ -24,6 +24,8 @@
   "policy": {
     "title": "Policy",
     "seeMore": "See more",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "documentName": "Document Title",
+    "documentType": "Type"
   }
 }
