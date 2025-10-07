@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getTransformedDataFromOpenAQ } from 'components/HomePage/MapComponent/utils'
 import { StationType } from '../types'
 // country id = 103 -> Mongolia
-const OPEN_AQ_URL = 'https://api.openaq.org/v2/locations?country_id=104&limit=500&parameter_id=2'
+const OPEN_AQ_URL = 'https://api.openaq.org/v3/locations?country_id=104&limit=500&parameter_id=2'
 
 export const fetchOpenAQStations = async () => {
   const stations: StationType[] = []
