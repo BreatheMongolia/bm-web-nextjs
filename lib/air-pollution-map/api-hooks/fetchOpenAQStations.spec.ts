@@ -52,7 +52,7 @@ describe('fetchOpenAQStations', () => {
                 units: 'µg/m³',
                 displayName: 'PM2.5',
               },
-            }
+            },
           ],
           coordinates: {
             latitude: 47.929732,
@@ -141,9 +141,9 @@ describe('fetchOpenAQStations', () => {
   describe('successful cases', () => {
     describe('single station', () => {
       it('should fetch and transform single station data successfully', async () => {
-        const { execute, expectedUrl, expectedCallParams } = createSUT({ mockResponse: mockApiResponse });
+        const { execute, expectedUrl, expectedCallParams } = createSUT({ mockResponse: mockApiResponse })
 
-        (getTransformedDataFromOpenAQ as jest.Mock).mockReturnValueOnce(mockTransformedData)
+        ;(getTransformedDataFromOpenAQ as jest.Mock).mockReturnValueOnce(mockTransformedData)
 
         const result = await execute()
 
@@ -162,26 +162,26 @@ describe('fetchOpenAQStations', () => {
               mockApiResponse.data.results[0],
               {
                 ...mockApiResponse.data.results[0],
-                name: 'MNB2'
-              }
-            ]
-          }
+                name: 'MNB2',
+              },
+            ],
+          },
         }
 
         const multipleStationsData = {
           'Station 1': {
             ...mockTransformedData['Station Name Example'],
-            name: 'Station 1'
+            name: 'Station 1',
           },
           'Station 2': {
             ...mockTransformedData['Station Name Example'],
-            name: 'Station 2'
-          }
+            name: 'Station 2',
+          },
         }
 
-        const { execute, expectedUrl, expectedCallParams } = createSUT({ mockResponse: multipleStationsResponse });
-        
-        (getTransformedDataFromOpenAQ as jest.Mock).mockReturnValueOnce(multipleStationsData)
+        const { execute, expectedUrl, expectedCallParams } = createSUT({ mockResponse: multipleStationsResponse })
+
+        ;(getTransformedDataFromOpenAQ as jest.Mock).mockReturnValueOnce(multipleStationsData)
 
         const result = await execute()
 
