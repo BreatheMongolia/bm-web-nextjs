@@ -8,7 +8,7 @@
     "e2e:debug": "playwright test --headed --debug",
     "start": "next start -p 9001",
     "lint": "next lint",
-    "test": "npx jest --coverage ./lib",
+    "test": "npx jest --coverage --testPathIgnorePatterns='tests/'",
     "test:watch": "jest --watch",
     "generate": "graphql-codegen"
   },
