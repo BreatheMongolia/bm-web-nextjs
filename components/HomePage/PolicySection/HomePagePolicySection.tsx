@@ -13,7 +13,6 @@ const HomePagePolicySection = ({ policySection }: Props) => {
   const description = i18n.language === 'mn' ? policySection?.policyDescriptionMn : policySection?.policyDescriptionEn
   const image = i18n.language === 'mn' ? policySection?.policyImageMn : policySection?.policyImageEn
   const imageSourceUrl = image?.node?.mediaDetails.sizes !== null ? image?.node?.mediaDetails?.sizes[0].sourceUrl : ''
-  console.log(policySection)
 
   return (
     <div>
