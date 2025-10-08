@@ -8,13 +8,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { getTranslated } from 'lib/utils/getTranslated'
 import TakeActionTile from '../Cards/TakeActionTile'
 
-export const TakeActionCarousel = ({
-  takeActionPosts,
-  locale,
-}: {
-  takeActionPosts: TakeAction[]
-  locale: string
-}) => {
+export const TakeActionCarousel = ({ takeActionPosts, locale }: { takeActionPosts: TakeAction[]; locale: string }) => {
   const { t } = useTranslation('home')
 
   // Check if we have fewer than 4 cards
@@ -63,7 +57,7 @@ export const TakeActionCarousel = ({
   return (
     <div className="flex flex-col">
       <H2
-        title={t('takeAction.title')}
+        title={t('takeAction.gridTitle')}
         trailingLineColor="yellow"
         extraButton={{
           title: t('takeAction.seeMore'),
@@ -93,8 +87,16 @@ export const TakeActionCarousel = ({
             id={takeAction.databaseId}
             slug={takeAction.slug}
             title={
-              getTranslated(takeAction.takeActionCustomFields?.title, takeAction.takeActionCustomFields?.titleMn, locale) !== null
-                ? getTranslated(takeAction.takeActionCustomFields?.title, takeAction.takeActionCustomFields?.titleMn, locale)
+              getTranslated(
+                takeAction.takeActionCustomFields?.title,
+                takeAction.takeActionCustomFields?.titleMn,
+                locale,
+              ) !== null
+                ? getTranslated(
+                    takeAction.takeActionCustomFields?.title,
+                    takeAction.takeActionCustomFields?.titleMn,
+                    locale,
+                  )
                 : ''
             }
             featuredImage={

@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // types
-import { News, Page, TakeAction } from 'graphql/generated'
+import { HomePageHealthSection, News, Page, TakeAction } from 'graphql/generated'
 import { RankType, StationType, RecommendationType } from 'lib/air-pollution-map/types'
 // lib functions/queries
 import {
@@ -28,11 +28,14 @@ import {
   JoinBMSection,
   NewsCarousel,
   OurWorkCarousel,
-} from 'components/HomePage'
+  TakeActionGrid,
+  HomePagePolicySection,
+} from '@/components/HomePage'
 import { getBannerTextRight } from 'lib/utils/getBannerTextRight'
 import dayjs from 'dayjs'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { getTranslated } from 'lib/utils/getTranslated'
+import { HealthSection } from '@/components/HomePage/HealthSection'
 
 export default function Index({
   page,
@@ -60,13 +63,13 @@ export default function Index({
   const pageBanner =
     i18n.language === 'en'
       ? {
-        leftText: page.homePage.bannerTextLeft,
-        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
-      }
+          leftText: page.homePage.bannerTextLeft,
+          rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
+        }
       : {
-        leftText: page.homePage.bannerTextLeftMn,
-        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
-      }
+          leftText: page.homePage.bannerTextLeftMn,
+          rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
+        }
 
   return (
     <div>
@@ -86,7 +89,7 @@ export default function Index({
             right: pageBanner.rightText,
           }}
         />
-        <div className="container mx-auto flex flex-col gap-20">
+        <div className="container flex flex-col gap-20 mx-auto">
           <MapContextWrapper>
             <MapComponent
               title={{
@@ -105,8 +108,23 @@ export default function Index({
           </MapContextWrapper>
 
           {/* Add other page level components here */}
+          <HomePagePolicySection policySection={page.homePage.policySection} />
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            <div className="hidden lg:block">
+              <TakeActionGrid
+                takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]}
+                locale={locale}
+              />
+            </div>
+            <div className="lg:hidden">
+              <TakeActionCarousel
+                takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]}
+                locale={locale}
+              />
+            </div>
+            <HealthSection healthSection={page.homePage.healthSection as HomePageHealthSection} />
+          </div>
           <NewsCarousel featuredNews={page.homePage.featuredNews.nodes as News[]} />
-          <TakeActionCarousel takeActionPosts={page.homePage.featuredTakeActions.nodes as TakeAction[]} locale={locale} />
           <OurWorkCarousel campaigns={sortedCampaigns} locale={locale} />
           <JoinBMSection
             title={{
@@ -142,12 +160,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const page = await getHomePage('/')
   const volunteers = await getVolunteers()
   const recommendationActions = await getRecommendationSettings()
+  const isNotDev = process.env.NODE_ENV !== 'development'
 
-  const purpleAirStations = await fetchPurpleAirStations()
-  const openAQStations = await fetchOpenAQStations()
+  const purpleAirStations = isNotDev ? await fetchPurpleAirStations() : []
+  const openAQStations = isNotDev ? await fetchOpenAQStations() : []
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
-  const isNotDev = process.env.NODE_ENV !== 'development'
   const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
   const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
   // const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []

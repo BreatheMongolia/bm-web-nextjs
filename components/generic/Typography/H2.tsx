@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { StaticImageData } from 'next/image'
 import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 import { useMediaQuery } from 'react-responsive'
+import { useRouter } from 'next/router'
 
 export const H2 = ({
   title,
@@ -38,9 +39,21 @@ export const H2 = ({
     return <div className={`border-b-2 mt-2 grow ${borderColor}`}></div>
   }
   const ExtraButton = () => {
+    const router = useRouter()
+    const handleClick = e => {
+      e.preventDefault()
+      router.push(extraButton.url).then(() => {
+        const mainElement = document.getElementById('main-content')
+        if (mainElement) {
+          mainElement.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+      })
+    }
     return (
       <div className="font-bold text-sm">
-        <Link href={extraButton.url}>{extraButton.title}</Link>
+        <a href={extraButton.url} onClick={handleClick}>
+          {extraButton.title}
+        </a>
       </div>
     )
   }

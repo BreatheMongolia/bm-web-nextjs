@@ -1,0 +1,46 @@
+import { DocumentType, Policy } from 'graphql/generated'
+import { useTranslation } from 'next-i18next'
+
+type Props = {
+  policies: Policy[]
+}
+
+const MAX_POLICIES = 5
+
+const BorderlessPolicyTable = ({ policies }: Props) => {
+  const { t, i18n } = useTranslation('home')
+
+  return (
+    <div className="h-full flex flex-col w-full justify-center">
+      <div className="grid grid-cols-4 bg-bm-blue text-white font-bold uppercase px-2 rounded-md py-0 gap-2">
+        <div className="col-span-3">{t('policy.documentName')}</div>
+        <div>{t('policy.documentType')}</div>
+      </div>
+      <div className="flex flex-col gap-5 py-5">
+        {policies.slice(0, MAX_POLICIES).map(policy => {
+          return <PolicyRow key={policy.id} policy={policy} isMn={i18n.language === 'mn'} />
+        })}
+      </div>
+    </div>
+  )
+}
+
+const PolicyRow = ({ policy, isMn }: { policy: Policy; isMn: boolean }) => {
+  const getDocumentTypes = (nodes: DocumentType[]) => {
+    const str = nodes
+      .map(node => (isMn ? node.documentTypeCustomFields.nameMn : node.documentTypeCustomFields.name))
+      .join(', ')
+
+    return str
+  }
+  const name = isMn ? policy.policyPageCustomFields.nameMn : policy.policyPageCustomFields.name
+  const type = getDocumentTypes(policy.documentTypes.nodes)
+  return (
+    <div className="grid grid-cols-4 gap-2 text-bm-blue">
+      <div className="col-span-3 font-bold">{name}</div>
+      <div>{type}</div>
+    </div>
+  )
+}
+
+export default BorderlessPolicyTable
