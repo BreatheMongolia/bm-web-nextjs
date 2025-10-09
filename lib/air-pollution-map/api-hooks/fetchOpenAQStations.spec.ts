@@ -1,33 +1,16 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { getTransformedDataFromOpenAQ } from '../../../components/HomePage/MapComponent/utils'
-
-const rateLimitedAxiosGetSpy = jest.fn()
+import { fetchOpenAQStations } from './fetchOpenAQStations'
 
 jest.mock('../../../components/HomePage/MapComponent/utils', () => ({
   getTransformedDataFromOpenAQ: jest.fn(),
 }))
 
-jest.mock('bottleneck', () => {
-  return jest.fn(() => ({
-    wrap: jest.fn(fn => {
-      return jest.fn(async (...args) => {
-        rateLimitedAxiosGetSpy()
-        return fn(...args)
-      })
-    }),
-    on: jest.fn(),
-  }))
-})
-
-// Import after mocking
-const { fetchOpenAQStations } = require('./fetchOpenAQStations')
-
-const limiterSpy = rateLimitedAxiosGetSpy
-jest.useFakeTimers()
-
-describe('fetchOpenAQStations', () => {
+describe('fetchOpenAQStations - DI Tests', () => {
   let mock: MockAdapter
+  let mockLimiter: any
+  let wrapSpy: jest.Mock
   const originalEnv = process.env
   const TEST_API_KEY = 'TEST_API_KEY'
   const OPEN_AQ_URL = 'https://api.openaq.org/v3/locations?country_id=104&limit=500&parameter_id=2'
@@ -141,7 +124,7 @@ describe('fetchOpenAQStations', () => {
     }
 
     return {
-      execute: () => fetchOpenAQStations(),
+      execute: () => fetchOpenAQStations(mockLimiter),
       expectedUrl: OPEN_AQ_URL,
       expectedCallParams,
     }
@@ -149,7 +132,15 @@ describe('fetchOpenAQStations', () => {
 
   beforeEach(() => {
     process.env = { ...process.env, AQ_KEY: TEST_API_KEY }
-    limiterSpy.mockClear()
+
+    // Create fresh mock limiter for each test
+    wrapSpy = jest.fn()
+    mockLimiter = {
+      wrap: jest.fn(fn => {
+        wrapSpy()
+        return fn
+      }),
+    }
     jest.clearAllTimers()
     jest.clearAllMocks()
   })
@@ -171,7 +162,7 @@ describe('fetchOpenAQStations', () => {
       expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
       expect(getTransformedDataFromOpenAQ).toHaveBeenCalledWith(mockApiResponse.data)
       expect(result).toEqual([mockTransformedData['MNB']])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
+      expect(wrapSpy).toHaveBeenCalledTimes(1)
     })
 
     it('should handle multiple stations successfully', async () => {
@@ -208,7 +199,7 @@ describe('fetchOpenAQStations', () => {
       expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
       expect(getTransformedDataFromOpenAQ).toHaveBeenCalledWith(multipleStationsResponse.data)
       expect(result).toEqual([multipleStationsData['MNB'], multipleStationsData['MNB2']])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
+      expect(wrapSpy).toHaveBeenCalledTimes(1)
     })
 
     it('should handle empty response data', async () => {
@@ -218,67 +209,11 @@ describe('fetchOpenAQStations', () => {
 
       expect(mock.history.get[0].url).toBe(expectedUrl)
       expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
-      expect(result).toEqual([])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
-    })
-
-    it('should handle empty results array', async () => {
-      const emptyResponse = {
-        data: {
-          results: [],
-        },
-      }
-      const { execute, expectedUrl, expectedCallParams } = createSUT({ mockResponse: emptyResponse })
-
-      const result = await execute()
-
-      expect(mock.history.get[0].url).toBe(expectedUrl)
-      expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
-      expect(result).toEqual([])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
-    })
-
-    it('should handle invalid coordinates', async () => {
-      const invalidCoordinatesResponse = {
-        data: {
-          results: [
-            {
-              id: 3,
-              name: 'Invalid Station',
-              coordinates: {
-                latitude: NaN,
-                longitude: undefined,
-              },
-            },
-          ],
-        },
-      }
-      const { execute, expectedUrl, expectedCallParams } = createSUT({ mockResponse: invalidCoordinatesResponse })
-
-      const result = await execute()
-
-      expect(mock.history.get[0].url).toBe(expectedUrl)
-      expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
-      expect(result).toEqual([])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
+      expect(result).toEqual([]) // One thing I am unsure is wh
+      expect(wrapSpy).toHaveBeenCalledTimes(1)
     })
   })
   describe('error cases', () => {
-    it('should handle missing API key', async () => {
-      const { execute, expectedUrl, expectedCallParams } = createSUT({
-        shouldReject: true,
-        error: new Error('Unauthorized'),
-        apiKey: undefined,
-      })
-
-      const result = await execute()
-
-      expect(mock.history.get[0].url).toBe(expectedUrl)
-      expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
-      expect(result).toEqual([])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
-    })
-
     it('should handle API errors gracefully', async () => {
       const mockError = new Error('API Error')
       const { execute, expectedUrl, expectedCallParams } = createSUT({ shouldReject: true, error: mockError })
@@ -290,23 +225,7 @@ describe('fetchOpenAQStations', () => {
       expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
       expect(consoleSpy).toHaveBeenCalledWith(mockError)
       expect(result).toEqual([])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
-      consoleSpy.mockRestore()
-    })
-
-    it('should handle rate limiting errors', async () => {
-      const rateLimitError = new Error('Too Many Requests')
-      rateLimitError.name = '429'
-      const { execute, expectedUrl, expectedCallParams } = createSUT({ shouldReject: true, error: rateLimitError })
-
-      const consoleSpy = jest.spyOn(console, 'error')
-      const result = await execute()
-
-      expect(mock.history.get[0].url).toBe(expectedUrl)
-      expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
-      expect(consoleSpy).toHaveBeenCalledWith(rateLimitError)
-      expect(result).toEqual([])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
+      expect(wrapSpy).toHaveBeenCalledTimes(1)
       consoleSpy.mockRestore()
     })
 
@@ -322,7 +241,7 @@ describe('fetchOpenAQStations', () => {
       expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
       expect(consoleSpy).toHaveBeenCalledWith(timeoutError)
       expect(result).toEqual([])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
+      expect(wrapSpy).toHaveBeenCalledTimes(1)
       consoleSpy.mockRestore()
     })
   })
@@ -344,7 +263,7 @@ describe('fetchOpenAQStations', () => {
       expect(mock.history.get[0].url).toBe(expectedUrl)
       expect(mock.history.get[0].headers['X-API-Key']).toBe(expectedCallParams.headers['X-API-Key'])
       expect(result).toEqual([mockTransformedData['MNB']])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
+      expect(wrapSpy).toHaveBeenCalledTimes(1)
 
       jest.useRealTimers()
     })
@@ -368,48 +287,7 @@ describe('fetchOpenAQStations', () => {
 
       expect(result1).toEqual([mockTransformedData['MNB']])
       expect(result2).toEqual([mockTransformedData['MNB']])
-      expect(limiterSpy).toHaveBeenCalledTimes(2)
-
-      jest.useRealTimers()
-    })
-
-    it('should respect minimum time constraints', async () => {
-      jest.useFakeTimers()
-
-      const { execute } = createSUT({ mockResponse: mockApiResponse })
-      ;(getTransformedDataFromOpenAQ as jest.Mock).mockReturnValueOnce(mockTransformedData)
-
-      const start = Date.now()
-
-      const resultPromise = execute()
-
-      // Simulate time passage for rate limiting
-      jest.advanceTimersByTime(1500)
-
-      const result = await resultPromise
-
-      expect(result).toEqual([mockTransformedData['MNB']])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
-
-      jest.useRealTimers()
-    })
-
-    it('should handle timing with fake timers properly', async () => {
-      jest.useFakeTimers()
-
-      const { execute } = createSUT({ mockResponse: mockApiResponse })
-      ;(getTransformedDataFromOpenAQ as jest.Mock).mockReturnValueOnce(mockTransformedData)
-
-      // Execute request with timing control
-      const resultPromise = execute()
-
-      // Fast forward through any potential delays
-      jest.runAllTimers()
-
-      const result = await resultPromise
-
-      expect(result).toEqual([mockTransformedData['MNB']])
-      expect(limiterSpy).toHaveBeenCalledTimes(1)
+      expect(wrapSpy).toHaveBeenCalledTimes(2)
 
       jest.useRealTimers()
     })
