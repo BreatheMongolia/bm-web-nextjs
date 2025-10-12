@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getTransformedDataFromOpenAQ, hasStationUpdatedWithinLastWeek } from 'components/HomePage/MapComponent/utils'
+import { getTransformedDataFromOpenAQ } from 'components/HomePage/MapComponent/utils'
 import { StationType } from '../types'
 // country id = 103 -> Mongolia
 const OPEN_AQ_URL = 'https://api.openaq.org/v2/locations?country_id=104&limit=500&parameter_id=2'
