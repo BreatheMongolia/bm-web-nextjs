@@ -17,6 +17,7 @@ import {
   fetchOpenAQStations,
   fetchAirVisualIndoorStations,
   fetchAirVisualOutdoorStations,
+  fetchClarityStations,
 } from 'lib/air-pollution-map/api-hooks'
 // components
 import { PageImageBanner } from 'components/generic/PageImageBanner'
@@ -168,9 +169,16 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // adding a isNotDev check to disable api calls locally as it consumes api credits
   const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
   const airVisualIndoorStations = isNotDev ? await fetchAirVisualIndoorStations() : []
+  const clarityStations = isNotDev ? await fetchClarityStations() : []
   // const airVisualGlobalRanks = isNotDev ? await fetchAirVisualGlobalStations() : []
 
-  const stations = [...purpleAirStations, ...openAQStations, ...airVisualIndoorStations, ...airVisualOutdoorStations]
+  const stations = [
+    ...purpleAirStations,
+    ...openAQStations,
+    ...airVisualIndoorStations,
+    ...airVisualOutdoorStations,
+    ...clarityStations,
+  ]
   const data = await getHomeLandingPageSettings()
 
   return {

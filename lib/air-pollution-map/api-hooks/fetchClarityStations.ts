@@ -9,7 +9,6 @@ export const fetchClarityStations = async () => {
 
   const requestBody = {
     allDatasources: true,
-    metricSelect: 'only pm2_5* + pm10*',
     org: 'nationO3LY',
     outputFrequency: 'minute',
     qcAssessment: true,
