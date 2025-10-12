@@ -55,7 +55,7 @@ const getTransformedDataFromClarity = (data: Object): StationType[] => {
         p2,
         ts: Date.parse(pm25['time']),
       },
-      location: { coordinates: [location['longitude'], location['latitude']] },
+      location: { coordinates: [location['lon'], location['lat']] },
       type: 'outdoor',
       color: getAQIColor(getAQIFromPM2(p2)),
     }
