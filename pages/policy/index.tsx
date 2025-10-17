@@ -12,7 +12,10 @@ import {
 import { H2 } from '@/components/generic/Typography'
 import { NewsCarousel, TakeActionCarousel } from '@/components/HomePage'
 import { PolicySection } from '@/components/PolicyPage/PolicySection'
+<<<<<<< Updated upstream
 import { useMediaQuery } from 'react-responsive'
+=======
+>>>>>>> Stashed changes
 
 const PolicyPage = ({
   policies,
@@ -26,8 +29,6 @@ const PolicyPage = ({
   featuredTakeActions,
   locale,
 }) => {
-  const isMobile = useMediaQuery({ minWidth: 1024, maxWidth: 1280 })
-
   return (
     <div id="policy">
       <Head>
