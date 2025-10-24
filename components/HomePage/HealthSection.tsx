@@ -16,16 +16,16 @@ const HealthSection = ({ healthSection }: Props) => {
   return (
     <div>
       <H2 title={t('health.title')} trailingLineColor="yellow" />
-      <div className="w-full bg-[#FFEFE5] flex items-center justify-center px-10 py-2 rounded-lg">
+      <div className="w-full bg-[#FFEFE5] flex items-center justify-center md:px-10 py-2 rounded-lg overflow-hidden">
         {/* Image */}
-        <Image src={imageSourceUrl} alt="health section image" width={350} height={210} />
+        <img src={imageSourceUrl} alt="health section image" className="ml-5 md:ml-0 max-h-72" />
         {/* Right side */}
         <div className="flex flex-col gap-3 px-5 py-5 xl:gap-5">
-          <h4 className="text-2xl font-bold"> {t('health.textTitle')} </h4>
-          <p className="text-base">{description}</p>
+          <h4 className="text-lg font-bold md:text-2xl"> {t('health.textTitle')} </h4>
+          <p className="text-sm md:text-base">{description}</p>
           <div className="mt-5">
             <Link href="/health">
-              <button className="bg-[#f4ac3d] rounded-lg text-base py-3 px-5 font-bold uppercase text-white hover:bg-[#f4ac3d]/80">
+              <button className="bg-[#f4ac3d] rounded-lg text-sm md:text-base py-3 px-5 font-bold uppercase text-white hover:bg-[#f4ac3d]/80">
                 {t('health.learnMore')}
               </button>
             </Link>

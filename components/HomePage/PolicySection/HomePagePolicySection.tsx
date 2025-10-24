@@ -26,7 +26,7 @@ const HomePagePolicySection = ({ policySection }: Props) => {
       />
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <div
-          className="relative items-center justify-center overflow-hidden rounded-md"
+          className="relative items-center justify-center -mx-5 overflow-hidden md:mx-auto md:rounded-md"
           style={{
             backgroundImage: `url(${imageSourceUrl})`,
             backgroundSize: 'cover',
@@ -34,9 +34,8 @@ const HomePagePolicySection = ({ policySection }: Props) => {
             backgroundRepeat: 'no-repeat',
           }}
         >
-          <div className="flex flex-col gap-10 p-8 py-16 m-10 my-16 rounded-md bg-white/70">
-            <span className="text-lg font-bold text-bm-blue">{description}</span>
-
+          <div className="flex flex-col gap-10 p-4 py-8 md:rounded-md md:my-16 md:m-10 md:py-16 md:p-8 bg-white/70">
+            <span className="text-sm font-bold md:text-lg text-bm-blue">{description}</span>
             <Link href="/policy" className="self-end">
               <button className="px-5 py-3 text-base font-bold text-white uppercase rounded-lg bg-bm-blue hover:bg-bm-blue/80">
                 {t('policy.learnMore')}
@@ -44,7 +43,7 @@ const HomePagePolicySection = ({ policySection }: Props) => {
             </Link>
           </div>
         </div>
-        <div className="px-5">
+        <div className="hidden px-5 md:block">
           <BorderlessPolicyTable policies={policySection.featuredPolicies.nodes as Policy[]} />
         </div>
       </div>
