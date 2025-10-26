@@ -32,16 +32,12 @@ interface ClarityApiResponse {
   }>
 }
 
-interface SUTParams {
-  shouldReject?: boolean
-  error?: Error
-}
-
 describe('fetchClarityStations', () => {
   let mock: MockAdapter
   const originalEnv = process.env
   const TEST_API_KEY = 'TEST_API_KEY'
   const CLARITY_API_URL = 'https://clarity-data-api.clarity.io/v2/recent-datasource-measurements-query'
+
   const createMockResponse = (): ClarityApiResponse => {
     return {
       request: {
@@ -884,25 +880,23 @@ describe('fetchClarityStations', () => {
     }
   }
 
-  const createSUT = ({ shouldReject = false, error = new Error('API Error') }: SUTParams = {}) => {
-    process.env = { ...originalEnv, CLARITY_API_KEY: TEST_API_KEY }
-
+  const createSUT = ({ shouldReject = false, error = new Error('API Error') } = {}) => {
     const mockResponse = createMockResponse()
+    mock = new MockAdapter(axios)
+    if (shouldReject) {
+      mock.onPost(CLARITY_API_URL).replyOnce(() => Promise.reject(error))
+    } else {
+      mock.onPost(CLARITY_API_URL).replyOnce(200, mockResponse)
+    }
+
+    process.env = { ...originalEnv, CLARITY_API_KEY: TEST_API_KEY }
 
     const requestBody = {
       allDatasources: true,
       org: 'nationO3LY',
       outputFrequency: 'minute',
       qcAssessment: true,
-      replyWithContinuationToken: true,
-    }
-
-    mock = new MockAdapter(axios)
-
-    if (shouldReject) {
-      mock.onPost(CLARITY_API_URL).replyOnce(() => Promise.reject(error))
-    } else {
-      mock.onPost(CLARITY_API_URL).replyOnce(200, mockResponse)
+      replyWithContinuationToken: false,
     }
 
     const expectedCallParams = {

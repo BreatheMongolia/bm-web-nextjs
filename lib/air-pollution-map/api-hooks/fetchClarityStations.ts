@@ -12,7 +12,7 @@ export const fetchClarityStations = async () => {
     org: 'nationO3LY',
     outputFrequency: 'minute',
     qcAssessment: true,
-    replyWithContinuationToken: true,
+    replyWithContinuationToken: false,
   }
 
   await axios
