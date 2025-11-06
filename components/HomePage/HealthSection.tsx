@@ -18,9 +18,9 @@ const HealthSection = ({ healthSection }: Props) => {
       <H2 title={t('health.title')} trailingLineColor="yellow" />
       <div className="w-full bg-[#FFEFE5] flex items-center justify-center md:px-10 py-2 rounded-lg overflow-hidden">
         {/* Image */}
-        <img src={imageSourceUrl} alt="health section image" className="ml-5 md:ml-0 max-h-72" />
+        <img src={imageSourceUrl} alt="health section image" className="ml-3 md:ml-5 md:ml-0 max-h-72" />
         {/* Right side */}
-        <div className="flex flex-col gap-3 px-5 py-5 xl:gap-5">
+        <div className="flex flex-col gap-3 px-3 md:px-5 py-5 xl:gap-5">
           <h4 className="text-lg font-bold md:text-2xl"> {t('health.textTitle')} </h4>
           <p className="text-sm md:text-base">{description}</p>
           <div className="mt-5">
