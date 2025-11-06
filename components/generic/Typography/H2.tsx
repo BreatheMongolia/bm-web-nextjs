@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { StaticImageData } from 'next/image'
 import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 import { useMediaQuery } from 'react-responsive'
+import { useRouter } from 'next/router'
 
 export const H2 = ({
   title,
@@ -38,9 +39,21 @@ export const H2 = ({
     return <div className={`border-b-2 mt-2 grow ${borderColor}`}></div>
   }
   const ExtraButton = () => {
+    const router = useRouter()
+    const handleClick = e => {
+      e.preventDefault()
+      router.push(extraButton.url).then(() => {
+        const mainElement = document.getElementById('main-content')
+        if (mainElement) {
+          mainElement.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+      })
+    }
     return (
       <div className="font-bold text-sm">
-        <Link href={extraButton.url}>{extraButton.title}</Link>
+        <a href={extraButton.url} onClick={handleClick}>
+          {extraButton.title}
+        </a>
       </div>
     )
   }
@@ -66,7 +79,7 @@ export const H2 = ({
     <div className={`mt-2 mb-5 ${className}`}>
       <div className="flex gap-x-3 items-center">
         {iconImage && <IconImage />}
-        <h2 className={`${!trailingLineColor && 'grow'} font-bold text-lg sm:text-3xl text-zinc-800`}>{title}</h2>
+        <h2 className={`${!trailingLineColor && 'grow'} font-bold text-lg sm:text-3xl text-zinc-800 ${className}`}>{title}</h2>
         {/* Trailing line */}
         {trailingLineColor && <TrailingLine />}
         {/* Button */}

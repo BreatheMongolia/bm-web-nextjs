@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @tailwind base;
 
 /* Write your own custom base styles here */
@@ -30,6 +31,27 @@ figure {
 /* Stop purging. */
 
 /* Your own custom utilities */
+
+/* Policy page list styles - restore default list styling removed by Tailwind reset */
+.policy-list-content {
+  ul {
+    list-style-type: disc;
+    margin-left: 0.5rem;
+    padding-left: 1rem;
+  }
+
+  li {
+    display: list-item;
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    @apply text-blue-600 underline;
+    &:hover {
+      @apply text-blue-400;
+    }
+  }
+}
 
 .has-text-align-left {
   @apply text-left;
@@ -160,6 +182,7 @@ p {
   margin-bottom: 50px;
   min-height: 210px;
   position: relative;
+  background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
 
   .slick-slide {
     height: auto !important;
@@ -172,13 +195,8 @@ p {
   }
 
   .banner_bottom_text_bar {
-    position: absolute;
     width: 100%;
     height: 36px;
-    left: 0;
-    z-index: 9;
-    bottom: 0;
-    background: linear-gradient(90deg, #3a62c8 -3.32%, #61b1ee 82.05%);
     justify-content: center;
     justify-items: center;
   }
@@ -197,6 +215,8 @@ p {
       text-transform: uppercase;
       color: #ffffff;
       align-self: center;
+      max-width: 100%;
+      white-space: nowrap;
 
       &:first-of-type {
         text-align: left;
@@ -371,16 +391,14 @@ p {
   text-decoration: none;
 
   &.big {
-    grid-column:  span 2;
-    grid-row:  span 2;
+    grid-column: span 2;
+    grid-row: span 2;
     width: 100%;
     height: auto;
     overflow: hidden;
 
-
     .take-action-img {
       height: 306px;
-   
     }
 
     .take-action-info {
@@ -774,6 +792,50 @@ p {
   }
 }
 
+// Policy Page Filter Buttons
+.policy-filter-buttons-grid {
+  display: grid;
+  grid-gap: 5px;
+  width: 100% !important;
+  overflow-x: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-rows: 2;
+  // repeat(auto-fit, minmax(130px, 1fr));
+  // margin-left: auto;
+  // margin-right: auto;
+
+  // .filter-buttons {
+  //   width: 100%;
+  // background: #ffffff;
+  // border: 1px solid #d9d9d9;
+  // box-sizing: border-box;
+  // border-radius: 4px;
+  // padding: 10px 20px;
+  // font-family: 'Open Sans';
+  // font-style: normal;
+  // font-weight: 600;
+  // font-size: 14px;
+  // color: #2c2d41;
+  // cursor: pointer;
+  // margin-right: 10px;
+  // margin-bottom: 10px;
+
+  // &.active,
+  // &:hover {
+  //   background: #3a62c8;
+  //   border: none;
+  //   color: #ffffff;
+  // }
+  // }
+}
+
+// @media (max-width: 767px) {
+//   .policy-filter-buttons-grid {
+//     padding-top: 30px;
+//     overflow-x: hidden;
+//   }
+// }
+
 // Team Card Component
 .team-card {
   background: #ffffff;
@@ -1118,4 +1180,12 @@ p {
       gap: 10px;
     }
   }
+}
+
+.policy-summary-limit {
+  display: -webkit-box;
+  width: 100%;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

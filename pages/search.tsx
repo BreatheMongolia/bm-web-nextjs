@@ -24,12 +24,12 @@ const SearchPage = ({ data, locale, banner }) => {
   const pageBanner =
     i18n.language === 'en'
       ? {
-        imageUrl: banner.bannerImage.mediaItemUrl,
+        imageUrl: banner.bannerimage?.node.mediaItemUrl,
         leftText: banner.bannerTextLeft,
         rightText: getBannerTextRight(banner.bannerTextRight, 'categoryText'),
       }
       : {
-        imageUrl: banner.bannerImageMn.mediaItemUrl,
+        imageUrl: banner.bannerimageMn?.node.mediaItemUrl,
         leftText: banner.bannerTextLeftMn,
         rightText: getBannerTextRight(banner.bannerTextRight, 'categoryTextMn'),
       }
@@ -66,18 +66,18 @@ const SearchPage = ({ data, locale, banner }) => {
       newsData.push({
         id: news.node.databaseId,
         slug: news.node.slug,
-        sourceLink: news.node.customFields.sourceLink,
+        sourceLink: news.node.newsCustomFields.sourceLink,
         title:
-          getTranslated(news.node.customFields.title, news.node.customFields.titleMn) !== null
-            ? getTranslated(news.node.customFields.title, news.node.customFields.titleMn)
+          getTranslated(news.node.newsCustomFields.title, news.node.newsCustomFields.titleMn) !== null
+            ? getTranslated(news.node.newsCustomFields.title, news.node.newsCustomFields.titleMn)
             : '',
         sourceName:
-          getTranslated(news.node.customFields.sourceName, news.node.customFields.sourceNameMn) !== null
-            ? getTranslated(news.node.customFields.sourceName, news.node.customFields.sourceNameMn)
+          getTranslated(news.node.newsCustomFields.sourceName, news.node.newsCustomFields.sourceNameMn) !== null
+            ? getTranslated(news.node.newsCustomFields.sourceName, news.node.newsCustomFields.sourceNameMn)
             : '',
-        body: getTranslated(news.node.customFields.body, news.node.customFields.bodyMn),
-        sourceLanguage: news.node.customFields.sourceLanguage,
-        newsLandingPageFeatured: news.node.customFields.newsLandingPageFeatured,
+        body: getTranslated(news.node.newsCustomFields.body, news.node.newsCustomFields.bodyMn),
+        sourceLanguage: news.node.newsCustomFields.sourceLanguage,
+        newsLandingPageFeatured: news.node.newsCustomFields.newsLandingPageFeatured,
         categories: news?.node?.categories?.nodes.map((cat: any) => {
           return {
             name:
@@ -86,16 +86,16 @@ const SearchPage = ({ data, locale, banner }) => {
                 : '',
           }
         }),
-        newsContentType: news.node.customFields.newsContentType,
+        newsContentType: news.node.newsCustomFields.newsContentType,
         featuredImageSmall: getImage(
-          news.node.customFields.featuredImage.image?.mediaDetails,
-          news.node.customFields.featuredImage.imageMn?.mediaDetails,
+          news.node.newsCustomFields.featuredImage.image?.mediaDetails,
+          news.node.newsCustomFields.featuredImage.imageMn?.mediaDetails,
           news.node.featuredImage?.node?.mediaDetails,
           'medium',
         ),
         featuredImageBig: getImage(
-          news.node.customFields.featuredImage.image?.mediaDetails,
-          news.node.customFields.featuredImage.imageMn?.mediaDetails,
+          news.node.newsCustomFields.featuredImage.image?.mediaDetails,
+          news.node.newsCustomFields.featuredImage.imageMn?.mediaDetails,
           news.node.featuredImage?.node?.mediaDetails,
           'medium_large',
         ),
@@ -117,16 +117,16 @@ const SearchPage = ({ data, locale, banner }) => {
         slug: takeAction.node.slug,
         date: takeAction.node.dateGmt,
         title:
-          getTranslated(takeAction.node.customFields.title, takeAction.node.customFields.titleMn) !== null
-            ? getTranslated(takeAction.node.customFields.title, takeAction.node.customFields.titleMn, locale)
+          getTranslated(takeAction.node.takeActionCustomFields.title, takeAction.node.takeActionCustomFields.titleMn) !== null
+            ? getTranslated(takeAction.node.takeActionCustomFields.title, takeAction.node.takeActionCustomFields.titleMn, locale)
             : '',
         excerpt:
-          getTranslated(takeAction.node.customFields.excerpt, takeAction.node.customFields.excerptMn) !== null
-            ? getTranslated(takeAction.node.customFields.excerpt, takeAction.node.customFields.excerptMn, locale)
+          getTranslated(takeAction.node.takeActionCustomFields.excerpt, takeAction.node.takeActionCustomFields.excerptMn) !== null
+            ? getTranslated(takeAction.node.takeActionCustomFields.excerpt, takeAction.node.takeActionCustomFields.excerptMn, locale)
             : '',
         additionalResources:
-          takeAction.node.customFields.additionalResources != null
-            ? takeAction.node.customFields.additionalResources.map(
+          takeAction.node.takeActionCustomFields.additionalResources != null
+            ? takeAction.node.takeActionCustomFields.additionalResources.map(
               (resource: { title: string; titleMn: string; url: string; urlMn: string }) => {
                 return {
                   title: getTranslated(resource.title, resource.titleMn),
@@ -136,21 +136,21 @@ const SearchPage = ({ data, locale, banner }) => {
             )
             : [],
         pledgeContent: getTranslated(
-          takeAction.node.customFields.pledgeContent,
-          takeAction.node.customFields.pledgeContentMn,
+          takeAction.node.takeActionCustomFields.pledgeContent,
+          takeAction.node.takeActionCustomFields.pledgeContentMn,
           locale,
         ),
         introductionText: getTranslated(
-          takeAction.node.customFields.introductionText,
-          takeAction.node.customFields.introductionTextMn,
+          takeAction.node.takeActionCustomFields.introductionText,
+          takeAction.node.takeActionCustomFields.introductionTextMn,
           locale,
         ),
-        listOfPhotos: takeAction.node.customFields.listOfPhotos,
-        listOfSubSections: takeAction.node.customFields.listOfSubSections,
-        listOfVideos: takeAction.node.customFields.listOfVideos,
-        typeOfAction: takeAction.node.customFields.typeOfAction?.map(
-          (type: { customFields: { name: string; nameMn: string } }) =>
-            getTranslated(type.customFields.name, type.customFields.nameMn, locale),
+        listOfPhotos: takeAction.node.takeActionCustomFields.listOfPhotos,
+        listOfSubSections: takeAction.node.takeActionCustomFields.listOfSubSections,
+        listOfVideos: takeAction.node.takeActionCustomFields.listOfVideos,
+        typeOfAction: takeAction.node.takeActionCustomFields.typeOfAction?.nodes?.map(
+          (type: { actionTypeCustomFields: { name: string; nameMn: string } }) =>
+            getTranslated(type.actionTypeCustomFields.name, type.actionTypeCustomFields.nameMn, locale),
         ),
         featuredImage: takeAction.node.featuredImage?.node.mediaItemUrl,
       }),
@@ -163,15 +163,15 @@ const SearchPage = ({ data, locale, banner }) => {
 
     for (let i = 0; i < PplData.length; i++) {
       people.push({
-        name: getTranslated(PplData[i].node.title, PplData[i].node.customFields.nameMn, locale),
+        name: getTranslated(PplData[i].node.title, PplData[i].node.personCustomFields.nameMn, locale),
         imgSrc: PplData[i].node.featuredImage.node.mediaItemUrl,
-        role: getTranslated(PplData[i].node.customFields.role, PplData[i].node.customFields.roleMn, locale),
+        role: getTranslated(PplData[i].node.personCustomFields.role, PplData[i].node.personCustomFields.roleMn, locale),
         description: getTranslated(
-          PplData[i].node.customFields.description,
-          PplData[i].node.customFields.descriptionMn,
+          PplData[i].node.personCustomFields.description,
+          PplData[i].node.personCustomFields.descriptionMn,
           locale,
         ),
-        linkedin: PplData[i].node.customFields.linkedin,
+        linkedin: PplData[i].node.personCustomFields.linkedin,
       })
     }
     return people
@@ -179,7 +179,7 @@ const SearchPage = ({ data, locale, banner }) => {
 
   const newses: any[] = data ? getLatestNews(data.newses.edges) : []
   const takeActions: any[] = data ? getTransformedTakeActions(data.takeActions.edges) : []
-  const people: any[] = data ? getTransformedPeople(data.people.edges) : []
+  const people: any[] = data ? getTransformedPeople(data.persons.edges) : []
 
   const filteredNews =
     searchValue === ''
@@ -249,7 +249,7 @@ export const getStaticProps: GetServerSideProps = async ({ locale }) => {
       locale,
       data,
       banner: {
-        ...bannerImageData.news_general_fields.banner,
+        ...bannerImageData.newsGeneralFields.banner,
         ...bannerTextData,
       },
     },

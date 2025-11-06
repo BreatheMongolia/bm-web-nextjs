@@ -19,10 +19,14 @@ export async function getHealthPage() {
               description
               descriptionMn
               image {
-                mediaItemUrl
+                node {
+                  mediaItemUrl
+                }
               }
               imageMn {
-                mediaItemUrl
+                node {
+                  mediaItemUrl
+                }
               }
               title
               titleMn
@@ -47,7 +51,7 @@ export async function getHealthNews(): Promise<News[]> {
             dateGmt
             desiredSlug
             slug
-            customFields {
+            newsCustomFields {
               titleMn
               title
               sourceLink
@@ -58,18 +62,22 @@ export async function getHealthNews(): Promise<News[]> {
               newsContentType
               featuredImage {
                 image {
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                      sourceUrl
-                      name
+                  node {
+                    mediaDetails {
+                      sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                        sourceUrl
+                        name
+                      }
                     }
-                  }
+                  } 
                 }
                 imageMn {
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                      sourceUrl
-                      name
+                  node {
+                    mediaDetails {
+                      sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                        sourceUrl
+                        name
+                      }
                     }
                   }
                 }
@@ -82,7 +90,6 @@ export async function getHealthNews(): Promise<News[]> {
                 categoryCustomFields {
                   name
                   nameMn
-                  fieldGroupName
                 }
                 categoryId
                 id

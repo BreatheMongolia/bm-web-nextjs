@@ -7,11 +7,11 @@ import GiveButterFloatingButton from 'components/generic/GiveButter/GiveButterFl
 import { Suspense } from 'react'
 import LoadingPage from 'components/generic/LoadingPage'
 
-export const Layout = ({ children, projects}) => {
+export const Layout = ({ children, projects }) => {
   return (
     <Suspense fallback={<LoadingPage />}>
-      <div className="flex flex-col h-full bg-[#FAFAFF] overflow-x-hidden">
-        <Header projects={projects}/>
+      <div id="main-content" className="flex flex-col h-full bg-[#FAFAFF] overflow-x-hidden">
+        <Header projects={projects} />
         <motion.div initial={{ opacity: 0, y: '-10px' }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
           <main className="grow bg-inherit pb-10"> {children} </main>
           <VideoDialog />

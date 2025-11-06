@@ -4,8 +4,8 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 import {
-  Page_Customfields_CountriesInfoText,
-  Page_Customfields_JoinBreatheMongoliaImageSlider,
+  HomePageCountriesInfoText,
+  HomePageJoinBreatheMongoliaImageSlider,
 } from 'graphql/generated'
 import { getTranslated } from 'lib/utils/getTranslated'
 import { useTranslation } from 'next-i18next'
@@ -22,8 +22,8 @@ export const JoinBMSection = ({
   locale: string
   title: { en: string; mn: string }
   descriptionHtml: { en: string; mn: string }
-  slider: Page_Customfields_JoinBreatheMongoliaImageSlider[]
-  countriesInfoText: Page_Customfields_CountriesInfoText[]
+  slider: HomePageJoinBreatheMongoliaImageSlider[]
+  countriesInfoText: HomePageCountriesInfoText[]
   volunteers: any
 }) => {
   const { t } = useTranslation('home')
@@ -75,8 +75,8 @@ export const JoinBMSection = ({
         <div className="hidden lg:block lg:w-[50%] join-bm-slider">
           <Slider {...settings}>
             {slider.map(x => (
-              <div key={x.sliderImage.databaseId}>
-                <img className="slider-image" src={x.sliderImage.mediaItemUrl} />
+              <div key={x.sliderImage?.node.databaseId}>
+                <img className="slider-image" src={x.sliderImage?.node.mediaItemUrl} />
               </div>
             ))}
           </Slider>

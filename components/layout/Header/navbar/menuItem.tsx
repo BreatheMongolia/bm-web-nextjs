@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 
 type MenuItemProps = {
   title: string | JSX.Element
-  href: string
+  href?: string
   isActive: boolean
   target?: string
   children?: JSX.Element
@@ -14,11 +14,11 @@ type MenuItemProps = {
 export const MenuItem = (props: MenuItemProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [delayHandler, setDelayHandler] = useState(null)
-  const isMobile = useMediaQuery({ maxWidth: 680 || 767 })
+  const isMobile = useMediaQuery({ maxWidth: 767 })
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+    setIsDropdownOpen(!isDropdownOpen)
+  }
 
   const handleMouseEnter = event => {
     setIsDropdownOpen(true)
@@ -31,14 +31,22 @@ export const MenuItem = (props: MenuItemProps) => {
 
   return (
     <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="flex items-center justify-between" >
-        <Link
-        className={`hover:text-bm-blue font-semibold ${props.isActive && ' text-bm-blue'}`}
-        href={props.href}
-        target={props.target}
-        >
-          {props.title}
-        </Link>
+      <div className="flex items-center justify-between">
+        {props.href ? (
+          <Link
+            className={`hover:text-bm-blue font-semibold w-full ${props.isActive && ' text-bm-blue'}`}
+            href={props.href}
+            target={props.target}
+          >
+            {props.title}
+          </Link>
+        ) : (
+          <button
+            className={`uppercase hover:text-bm-blue font-semibold  ${props.isActive && ' text-bm-blue'}`}
+          >
+            {props.title}
+          </button>
+        )}
         {props.children && (
           <button onClick={toggleDropdown} className="ml-2 focus:outline-none">
             <ChevronDownIcon className={`h-5 w-5`} />
@@ -50,11 +58,7 @@ export const MenuItem = (props: MenuItemProps) => {
           {props.children}
         </div>
       )}
-      {props.children && isDropdownOpen && isMobile && (
-        <div className="mt-2 mb-2 py-2 bg-white">
-          {props.children}
-        </div>
-      )}
+      {props.children && isDropdownOpen && isMobile && <div className="mt-2 mb-2 py-2 bg-white">{props.children}</div>}
     </div>
   )
 }
