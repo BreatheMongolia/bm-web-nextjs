@@ -29,7 +29,7 @@ const DonorGridPage = ({ donors }: { donors: Donor[] }) => {
 
   return (
     <div
-      className="grid grid-cols-[244px_244px_244px_244px] gap-[15px]"
+      className="grid grid-cols-[330px_330px_330px_330px] gap-[15px]"
       style={{ gridTemplateRows: `repeat(${Math.ceil(donors.length / 6)}, 188px 255px)`, gridAutoFlow: 'dense' }}
     >
       {donors.map((donor, i) => (
@@ -69,7 +69,7 @@ const DonorsMain = ({
     infinite: false,
   }
   return (
-    <div>
+    <div className="donor-slider-wrapper">
       <H2 title={donorsTitle} descriptionHtml={donorDescription} />
       <Slider
         {...settings}
@@ -87,15 +87,15 @@ const DonorsMain = ({
       >
         {isMobile
           ? donors?.map((donor, i) => (
-              <div key={i}>
-                <DonorCard donor={donor} />
-              </div>
-            ))
+            <div key={i}>
+              <DonorCard donor={donor} />
+            </div>
+          ))
           : pages.map((page, i) => (
-              <div key={i}>
-                <DonorGridPage donors={page} />
-              </div>
-            ))}
+            <div key={i}>
+              <DonorGridPage donors={page} />
+            </div>
+          ))}
       </Slider>
     </div>
   )

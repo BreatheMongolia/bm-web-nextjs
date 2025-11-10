@@ -14,11 +14,11 @@ const HealthSection = ({ healthSection }: Props) => {
   const image = i18n.language === 'mn' ? healthSection?.healthImageMn : healthSection?.healthImageEn
   const imageSourceUrl = image?.node?.mediaDetails.sizes !== null ? image?.node?.mediaDetails?.sizes[0].sourceUrl : ''
   return (
-    <div>
+    <div className="flex flex-col">
       <H2 title={t('health.title')} trailingLineColor="yellow" />
-      <div className="w-full bg-[#FFEFE5] flex items-center justify-center md:px-10 py-2 rounded-lg overflow-hidden">
+      <div className="w-full h-full bg-[#FFEFE5] flex items-center justify-center md:px-10 py-2 rounded-lg overflow-hidden">
         {/* Image */}
-        <img src={imageSourceUrl} alt="health section image" className="ml-3 md:ml-5 md:ml-0 max-h-72" />
+        <img src={imageSourceUrl} alt="health section image" className="ml-3 md:ml-0 max-h-72" />
         {/* Right side */}
         <div className="flex flex-col gap-3 px-3 md:px-5 py-5 xl:gap-5">
           <h4 className="text-lg font-bold md:text-2xl"> {t('health.textTitle')} </h4>
