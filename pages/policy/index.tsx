@@ -87,11 +87,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       policyStatusOptions: policyStatusOptions,
       documentTopicOptions: documentTopicOptions,
       locale,
-      title: getTranslated(data.title, data.titleMn, locale),
-      description: getTranslated(data.description, data.descriptionMn, locale),
+      title: getTranslated(data.policyTitle, data.policyTitleMn, locale),
+      description: getTranslated(data.policyDescription, data.policyDescriptionMn, locale),
       socialShare: data.policySocialMediaShare,
-      featuredNews: data?.featuredNews?.nodes || [],
-      featuredTakeActions: data?.featuredTakeActions?.nodes || [],
+      featuredNews: data?.policyFeaturedNews?.nodes || [],
+      featuredTakeActions: data?.policyFeaturedTakeActions?.nodes || [],
     },
     revalidate: 60 * 5, // every 5 minutes
   }

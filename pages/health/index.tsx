@@ -10,8 +10,8 @@ import React from 'react'
 const HealthPage = ({ featuredNews, featuredTakeActions, page, locale }) => {
   return (
     <div className="container mx-auto flex flex-col pt-14">
-      <H2 title={getTranslated(page?.title, page?.titleMn, locale)} />
-      <p className="text-base text-zinc-800">{getTranslated(page?.body, page?.bodyMn, locale)}</p>
+      <H2 title={getTranslated(page?.healthTitle, page?.healthTitleMn, locale)} />
+      <p className="text-base text-zinc-800">{getTranslated(page?.healthBody, page?.healthBodyMn, locale)}</p>
       <p className="text-zinc-500 mt-5 mb-5 ">{getTranslated(page?.diagramTextTop, page?.diagramTextTopMn, locale)}</p>
 
       <iframe
