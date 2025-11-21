@@ -4938,10 +4938,6 @@ export type GeneralSettings = {
 export type HealthPage = AcfFieldGroup & AcfFieldGroupFields & HealthPage_Fields & {
   __typename?: 'HealthPage';
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
-  body?: Maybe<Scalars['String']>;
-  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
-  bodyMn?: Maybe<Scalars['String']>;
-  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
   diagramTextBottom?: Maybe<Scalars['String']>;
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
   diagramTextBottomMn?: Maybe<Scalars['String']>;
@@ -4954,12 +4950,16 @@ export type HealthPage = AcfFieldGroup & AcfFieldGroupFields & HealthPage_Fields
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
+  healthBody?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
+  healthBodyMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
   healthSocialMediaShare?: Maybe<HealthPageHealthSocialMediaShare>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
-  title?: Maybe<Scalars['String']>;
+  healthTitle?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
-  titleMn?: Maybe<Scalars['String']>;
+  healthTitleMn?: Maybe<Scalars['String']>;
 };
 
 /** The &quot;HealthPageHealthSocialMediaShare&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -5019,10 +5019,6 @@ export type HealthPageSettings = AcfOptionsPage & Node & WithAcfHealthPage & {
 /** Interface representing fields of the ACF &quot;HealthPage&quot; Field Group */
 export type HealthPage_Fields = {
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
-  body?: Maybe<Scalars['String']>;
-  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
-  bodyMn?: Maybe<Scalars['String']>;
-  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
   diagramTextBottom?: Maybe<Scalars['String']>;
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
   diagramTextBottomMn?: Maybe<Scalars['String']>;
@@ -5035,12 +5031,16 @@ export type HealthPage_Fields = {
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
+  healthBody?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
+  healthBodyMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
   healthSocialMediaShare?: Maybe<HealthPageHealthSocialMediaShare>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
-  title?: Maybe<Scalars['String']>;
+  healthTitle?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HealthPage&quot; Field Group */
-  titleMn?: Maybe<Scalars['String']>;
+  healthTitleMn?: Maybe<Scalars['String']>;
 };
 
 /** Content that can be organized in a parent-child structure. Provides fields for navigating up and down the hierarchy and maintaining structured relationships. */
@@ -8993,30 +8993,30 @@ export enum PolicyIdType {
 /** The &quot;PolicyPage&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type PolicyPage = AcfFieldGroup & AcfFieldGroupFields & PolicyPage_Fields & {
   __typename?: 'PolicyPage';
-  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  description?: Maybe<Scalars['String']>;
-  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  descriptionMn?: Maybe<Scalars['String']>;
-  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  featuredNews?: Maybe<AcfContentNodeConnection>;
-  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  featuredTakeActions?: Maybe<AcfContentNodeConnection>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
+  policyDescription?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
+  policyDescriptionMn?: Maybe<Scalars['String']>;
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
+  policyFeaturedNews?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
+  policyFeaturedTakeActions?: Maybe<AcfContentNodeConnection>;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
   policySocialMediaShare?: Maybe<PolicyPagePolicySocialMediaShare>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  title?: Maybe<Scalars['String']>;
+  policyTitle?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  titleMn?: Maybe<Scalars['String']>;
+  policyTitleMn?: Maybe<Scalars['String']>;
 };
 
 
 /** The &quot;PolicyPage&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type PolicyPageFeaturedNewsArgs = {
+export type PolicyPagePolicyFeaturedNewsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -9025,7 +9025,7 @@ export type PolicyPageFeaturedNewsArgs = {
 
 
 /** The &quot;PolicyPage&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
-export type PolicyPageFeaturedTakeActionsArgs = {
+export type PolicyPagePolicyFeaturedTakeActionsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -9196,30 +9196,30 @@ export type PolicyPagePolicySocialMediaShare_Fields = {
 
 /** Interface representing fields of the ACF &quot;PolicyPage&quot; Field Group */
 export type PolicyPage_Fields = {
-  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  description?: Maybe<Scalars['String']>;
-  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  descriptionMn?: Maybe<Scalars['String']>;
-  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  featuredNews?: Maybe<AcfContentNodeConnection>;
-  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  featuredTakeActions?: Maybe<AcfContentNodeConnection>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
+  policyDescription?: Maybe<Scalars['String']>;
+  /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
+  policyDescriptionMn?: Maybe<Scalars['String']>;
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
+  policyFeaturedNews?: Maybe<AcfContentNodeConnection>;
+  /** Field of the &quot;relationship&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
+  policyFeaturedTakeActions?: Maybe<AcfContentNodeConnection>;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
   policySocialMediaShare?: Maybe<PolicyPagePolicySocialMediaShare>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  title?: Maybe<Scalars['String']>;
+  policyTitle?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PolicyPage&quot; Field Group */
-  titleMn?: Maybe<Scalars['String']>;
+  policyTitleMn?: Maybe<Scalars['String']>;
 };
 
 
 /** Interface representing fields of the ACF &quot;PolicyPage&quot; Field Group */
-export type PolicyPage_FieldsFeaturedNewsArgs = {
+export type PolicyPage_FieldsPolicyFeaturedNewsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -9228,7 +9228,7 @@ export type PolicyPage_FieldsFeaturedNewsArgs = {
 
 
 /** Interface representing fields of the ACF &quot;PolicyPage&quot; Field Group */
-export type PolicyPage_FieldsFeaturedTakeActionsArgs = {
+export type PolicyPage_FieldsPolicyFeaturedTakeActionsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
