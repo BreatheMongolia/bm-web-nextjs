@@ -44,7 +44,7 @@ const HomePagePolicySection = ({ policySection }: Props) => {
           </div>
         </div>
         <div className="hidden px-5 md:block">
-          <BorderlessPolicyTable policies={policySection.featuredPolicies.nodes as Policy[]} />
+          <BorderlessPolicyTable policies={policySection?.featuredPolicies?.nodes as Policy[]} />
         </div>
       </div>
     </div>

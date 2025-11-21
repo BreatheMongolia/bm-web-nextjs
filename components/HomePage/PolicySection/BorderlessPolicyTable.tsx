@@ -17,7 +17,7 @@ const BorderlessPolicyTable = ({ policies }: Props) => {
         <div>{t('policy.documentType')}</div>
       </div>
       <div className="flex flex-col gap-5 py-5">
-        {policies.slice(0, MAX_POLICIES).map(policy => {
+        {policies?.slice(0, MAX_POLICIES).map(policy => {
           return <PolicyRow key={policy.databaseId} policy={policy} isMn={i18n.language === 'mn'} />
         })}
       </div>

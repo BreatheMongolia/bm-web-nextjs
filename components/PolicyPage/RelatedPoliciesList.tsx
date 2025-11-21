@@ -23,9 +23,9 @@ export const RelatedPoliciesList = ({ policies, locale }: RelatedPoliciesListPro
   const [isExpanded, setIsExpanded] = useState(false)
   const { t } = useTranslation('policy')
   const maxInitialItems = 4
-  
+
   const shouldShowExpandButton = policies.length > maxInitialItems
-  const visiblePolicies = isExpanded ? policies : policies.slice(0, maxInitialItems)
+  const visiblePolicies = isExpanded ? policies : policies?.slice(0, maxInitialItems)
   const remainingCount = policies.length - maxInitialItems
 
   const handleToggleExpand = () => {
@@ -37,7 +37,7 @@ export const RelatedPoliciesList = ({ policies, locale }: RelatedPoliciesListPro
       {visiblePolicies.map((policy) => (
         <PolicyEntry key={policy.databaseId} policy={policy} locale={locale} />
       ))}
-      
+
       {shouldShowExpandButton && (
         <div className="mt-4 text-center">
           {!isExpanded ? (
