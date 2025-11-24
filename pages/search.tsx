@@ -243,7 +243,7 @@ const SearchPage = ({ data, locale, banner }) => {
     searchValue === ''
       ? policies
       : policies.filter(policy =>
-          Object.values(policy.searchableText).some(text =>
+          Object.values(policy.searchableText).some((text: string) =>
             text?.toLowerCase().includes(searchValue.toLowerCase()),
           ),
         )
