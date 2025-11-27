@@ -5,20 +5,20 @@ type Props = {
   policies: Policy[]
 }
 
-const MAX_POLICIES = 5
+const MAX_POLICIES = 6
 
 const BorderlessPolicyTable = ({ policies }: Props) => {
   const { t, i18n } = useTranslation('home')
 
   return (
-    <div className="h-full flex flex-col w-full justify-center">
-      <div className="grid grid-cols-4 bg-bm-blue text-white font-bold uppercase px-2 rounded-md py-0 gap-2">
+    <div className="flex flex-col w-full h-full">
+      <div className="grid grid-cols-4 gap-2 px-2 py-0 font-bold text-white uppercase rounded-md bg-bm-blue">
         <div className="col-span-3">{t('policy.documentName')}</div>
         <div>{t('policy.documentType')}</div>
       </div>
       <div className="flex flex-col gap-5 py-5">
-        {policies.slice(0, MAX_POLICIES).map(policy => {
-          return <PolicyRow key={policy.id} policy={policy} isMn={i18n.language === 'mn'} />
+        {policies?.slice(0, MAX_POLICIES).map(policy => {
+          return <PolicyRow key={policy.databaseId} policy={policy} isMn={i18n.language === 'mn'} />
         })}
       </div>
     </div>

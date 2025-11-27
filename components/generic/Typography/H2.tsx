@@ -14,7 +14,7 @@ export const H2 = ({
   extraButton,
   agaarnegButton,
   descriptionHtml,
-  className,
+  className = '',
 }: {
   title: string
   iconImage?: StaticImageData | string

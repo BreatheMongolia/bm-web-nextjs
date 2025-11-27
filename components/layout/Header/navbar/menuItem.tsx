@@ -42,7 +42,7 @@ export const MenuItem = (props: MenuItemProps) => {
           </Link>
         ) : (
           <button
-            className={`text-xsm uppercase hover:text-bm-blue font-semibold  ${props.isActive && ' text-bm-blue'}`}
+            className={`uppercase hover:text-bm-blue font-semibold  ${props.isActive && ' text-bm-blue'}`}
           >
             {props.title}
           </button>

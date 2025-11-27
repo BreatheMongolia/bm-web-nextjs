@@ -63,13 +63,13 @@ export default function Index({
   const pageBanner =
     i18n.language === 'en'
       ? {
-          leftText: page.homePage.bannerTextLeft,
-          rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
-        }
+        leftText: page.homePage.bannerTextLeft,
+        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
+      }
       : {
-          leftText: page.homePage.bannerTextLeftMn,
-          rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
-        }
+        leftText: page.homePage.bannerTextLeftMn,
+        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
+      }
 
   return (
     <div>
