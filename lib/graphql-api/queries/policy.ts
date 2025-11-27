@@ -266,11 +266,11 @@ export async function getPolicyLandingPageSettings(): Promise<any> {
       `query getPolicyLandingPageSettings {
         policyTrackingPageSettings {
           policyPage {
-            description
-            descriptionMn
-            title
-            titleMn
-            featuredNews {
+            policyTitle
+            policyTitleMn
+            policyDescription
+            policyDescriptionMn
+            policyFeaturedNews {
               nodes {
                 ... on News {
                   databaseId
@@ -332,7 +332,7 @@ export async function getPolicyLandingPageSettings(): Promise<any> {
                 }
               }
             }
-            featuredTakeActions {
+            policyFeaturedTakeActions {
               nodes {
                 ... on TakeAction {
                   databaseId
