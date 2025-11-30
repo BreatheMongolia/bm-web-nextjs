@@ -6,6 +6,7 @@ import SearchBar from 'components/SearchPage/SearchBar'
 import News from 'components/SearchPage/News'
 import TakeActions from 'components/SearchPage/TakeActions'
 import Teams from 'components/SearchPage/Teams'
+import Policies from 'components/SearchPage/Policies'
 import { GetServerSideProps } from 'next'
 import { getSearchData } from 'lib/graphql-api/queries/search'
 import { useRouter } from 'next/router'
@@ -177,9 +178,38 @@ const SearchPage = ({ data, locale, banner }) => {
     return people
   }
 
+  function getTransformedPolicies(policyData: any[]) {
+    if (policyData.length === 0) return []
+
+    return policyData.map((policy: any) => ({
+      databaseId: policy.node.databaseId,
+      slug: policy.node.slug,
+      dateGmt: policy.node.policyPageCustomFields.initiatedDate,
+      policyPageCustomFields: {
+        title: policy.node.policyPageCustomFields.title,
+        titleMn: policy.node.policyPageCustomFields.titleMn,
+      },
+      topics: policy.node.topics,
+      // Store all searchable text for filtering
+      searchableText: {
+        title: policy.node.policyPageCustomFields.title || '',
+        titleMn: policy.node.policyPageCustomFields.titleMn || '',
+        name: policy.node.policyPageCustomFields.name || '',
+        nameMn: policy.node.policyPageCustomFields.nameMn || '',
+        summary: policy.node.policyPageCustomFields.summary || '',
+        summaryMn: policy.node.policyPageCustomFields.summaryMn || '',
+        updates: policy.node.policyPageCustomFields.updates || '',
+        updatesMn: policy.node.policyPageCustomFields.updatesMn || '',
+        furtherReading: policy.node.policyPageCustomFields.furtherReading || '',
+        furtherReadingMn: policy.node.policyPageCustomFields.furtherReadingMn || '',
+      },
+    }))
+  }
+
   const newses: any[] = data ? getLatestNews(data.newses.edges) : []
   const takeActions: any[] = data ? getTransformedTakeActions(data.takeActions.edges) : []
   const people: any[] = data ? getTransformedPeople(data.persons.edges) : []
+  const policies: any[] = data ? getTransformedPolicies(data.policies.edges) : []
 
   const filteredNews =
     searchValue === ''
@@ -209,7 +239,16 @@ const SearchPage = ({ data, locale, banner }) => {
           item.description?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
       )
 
-  const count = filteredNews.length + filteredPeople.length + newFilteredTakeActions.length
+  const filteredPolicies =
+    searchValue === ''
+      ? policies
+      : policies.filter(policy =>
+          Object.values(policy.searchableText).some((text: string) =>
+            text?.toLowerCase().includes(searchValue.toLowerCase()),
+          ),
+        )
+
+  const count = filteredPolicies.length + filteredNews.length + filteredPeople.length + newFilteredTakeActions.length
 
   return (
     <div>
@@ -227,6 +266,7 @@ const SearchPage = ({ data, locale, banner }) => {
         <div className="search-page-container">
           <SearchBar value={searchValue} count={count} />
 
+          <Policies data={filteredPolicies} />
           <News data={filteredNews} />
           <TakeActions takeActions={newFilteredTakeActions} />
           <Teams people={filteredPeople} />
@@ -245,7 +285,7 @@ export const getStaticProps: GetServerSideProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'search', 'common'])),
+      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'search', 'common', 'policy'])),
       locale,
       data,
       banner: {

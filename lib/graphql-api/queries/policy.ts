@@ -266,10 +266,10 @@ export async function getPolicyLandingPageSettings(): Promise<any> {
       `query getPolicyLandingPageSettings {
         policyTrackingPageSettings {
           policyPage {
-            policyDescription
-            policyDescriptionMn
             policyTitle
             policyTitleMn
+            policyDescription
+            policyDescriptionMn
             policyFeaturedNews {
               nodes {
                 ... on News {
