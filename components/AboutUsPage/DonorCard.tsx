@@ -14,7 +14,6 @@ const DonorCard: FC<Props> = ({ donor, className, index }) => {
     'flex-shrink-0',
     'rounded-[20px]',
     'bg-white',
-    'shadow-[0_4px_20px_rgba(138,138,138,0.15)]',
     isHorizontal ? 'flex flex-row gap-4 px-4 py-2' : 'flex flex-col',
     className ? `${className} w-full` : 'w-[244px] h-[255px]',
   ].join(' ')
@@ -24,7 +23,7 @@ const DonorCard: FC<Props> = ({ donor, className, index }) => {
       <img
         src={donor.imgSrc}
         alt="donor profile image"
-        className={`rounded-full ${isHorizontal ? 'w-[122px] h-[146px] my-auto' : 'w-[75px] h-[75px] mx-auto mt-5'}`}
+        className={`rounded-full ${isHorizontal ? 'w-[122px] h-[122px] my-auto' : 'w-[75px] h-[75px] mx-auto mt-5'}`}
       />
       <div className={` ${isHorizontal ? 'pt-4' : 'align-center text-center pt-2 px-2'} `}>
         <h4 className="m-auto text-[18px] font-semibold">{donor.name}</h4>

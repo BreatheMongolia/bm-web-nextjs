@@ -69,8 +69,8 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
   // Error state
   if (error || !policy) {
     return (
-      <PolicyError 
-        error={error} 
+      <PolicyError
+        error={error}
         onRetry={() => router.reload()}
       />
     )
@@ -152,13 +152,13 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
           <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-3">
             <span className="font-semibold text-gray-700">{t('tableHeaders.type')}:</span>
             <span className="text-gray-600">{documentTypes.join(', ') || '—'}</span>
-            
+
             <span className="font-semibold text-gray-700">{t('tableHeaders.topic')}:</span>
             <span className="text-gray-600">{topics.join(', ') || '—'}</span>
-            
+
             <span className="font-semibold text-gray-700">{t('tableHeaders.status')}:</span>
             <span className="text-gray-600">{status.join(', ') || '—'}</span>
-            
+
             <span className="font-semibold text-gray-700">{t('tableHeaders.dateApproved')}:</span>
             <span className="text-gray-600">{policy.dateApproved || '—'}</span>
           </div>
@@ -179,7 +179,7 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
               className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
             >
               {t('source')}
-              <ArrowTopRightOnSquareIcon className="w-5 h-5" />
+              <ArrowTopRightOnSquareIcon className="w-5 h-5 flex-shrink-0" />
             </a>
           )}
           {policy.fileMn && (
@@ -189,7 +189,7 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
               className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
             >
               {t('downloadMn')}
-              <ArrowDownIcon className="w-5 h-5" />
+              <ArrowDownIcon className="w-5 h-5 flex-shrink-0" />
             </a>
           )}
           {policy.fileEn && (
@@ -199,7 +199,7 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
               className="bg-bm-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-bm-blue/90"
             >
               {t('downloadEn')}
-              <ArrowDownIcon className="w-5 h-5" />
+              <ArrowDownIcon className="w-5 h-5 flex-shrink-0" />
             </a>
           )}
         </div>
@@ -215,10 +215,10 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
               className="w-full bg-bm-blue text-white px-4 py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-bm-blue/90"
             >
               {t('source')}
-              <ArrowTopRightOnSquareIcon className="w-5 h-5" />
+              <ArrowTopRightOnSquareIcon className="w-5 h-5 flex-shrink-0" />
             </a>
           )}
-          
+
           {/* Second Row - Download Buttons */}
           {(policy.fileMn || policy.fileEn) && (
             <div className="grid grid-cols-2 gap-3">
@@ -229,7 +229,7 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
                   className="bg-bm-blue text-white px-4 py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-bm-blue/90"
                 >
                   {t('downloadMn')}
-                  <ArrowDownIcon className="w-5 h-5" />
+                  <ArrowDownIcon className="w-5 h-5 flex-shrink-0" />
                 </a>
               )}
               {policy.fileEn && (
@@ -239,7 +239,7 @@ export default function PolicyPostPage({ policy, locale, slug, error }: PolicyPo
                   className="bg-bm-blue text-white px-4 py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-bm-blue/90"
                 >
                   {t('downloadEn')}
-                  <ArrowDownIcon className="w-5 h-5" />
+                  <ArrowDownIcon className="w-5 h-5 flex-shrink-0" />
                 </a>
               )}
             </div>
@@ -303,7 +303,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug as string
-  
+
   try {
     const policy = await getPolicyDetails(slug)
 
@@ -324,7 +324,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   } catch (error) {
     console.error('Error fetching policy:', error)
-    
+
     return {
       props: {
         ...(await serverSideTranslations(locale!, ['common', 'policy', 'nav', 'footer', 'home'])),
