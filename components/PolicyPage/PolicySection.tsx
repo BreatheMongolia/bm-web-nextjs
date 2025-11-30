@@ -14,6 +14,7 @@ import { getTranslated } from 'lib/utils/getTranslated'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Dropdown } from './Dropdown'
+import PolicyPagination from './PolicyPagination'
 import SearchBar from './SearchBar'
 
 type OptionProps = {
@@ -81,7 +82,7 @@ export const PolicySection = ({
 }) => {
   const { t, i18n } = useTranslation('policy')
   const [filteredPolicies, setFilteredPolicies] = useState<Policy[]>(policies)
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
   const [policyDetails, setPolicyDetails] = useState([])
   const [yearOptions, setYearOptions] = useState<OptionProps[]>([])
   const [searchValue, setSearchValue] = useState<string | undefined>('')
@@ -144,6 +145,14 @@ export const PolicySection = ({
     setFilteredPolicies(filtered)
   }, [selectedDocumentTopic, selectedDocumentType, selectedPolicyStatus, policies, selectedYear, searchValue])
 
+  // Get current policies for pagination
+  const getCurrentPolicies = () => {
+    const indexOfLastPolicyList = currentPage * POLICIES_PER_PAGE
+    const indexOfFirstPolicyList = indexOfLastPolicyList - POLICIES_PER_PAGE
+    const currentPolicies = filteredPolicies.slice(indexOfFirstPolicyList, indexOfLastPolicyList)
+    return currentPolicies
+  }
+
   // Sort function
   const clickSortButton = (id: number) => {
     switch (id) {
@@ -201,47 +210,9 @@ export const PolicySection = ({
     setFilteredPolicies([...filteredPolicies])
   }
 
-  const onPageClick = (pageNum: number) => {
-    if (pageNum < 0) setCurrentPage(0)
-    const maxPages = Math.ceil(filteredPolicies.length / POLICIES_PER_PAGE)
-    if (pageNum >= maxPages) {
-      setCurrentPage(maxPages - 1)
-    }
-    setCurrentPage(pageNum)
-  }
-
   function formatMyDate(value: string) {
     if (!value) return <></>
     return dayjs(value).format('DD/MM/YYYY')
-  }
-
-  // pagination
-  const pages = []
-  let MAX_PAGES = 1
-  if (filteredPolicies !== null && filteredPolicies.length !== 0) {
-    MAX_PAGES = Math.ceil(filteredPolicies.length / POLICIES_PER_PAGE)
-  }
-  let repeated = false
-  for (let i = 0; i < MAX_PAGES; i++) {
-    if (i === 0 || i === MAX_PAGES - 1 || (i < currentPage + 2 && i > currentPage - 2)) {
-      pages.push(
-        <div
-          key={'page' + i}
-          onClick={() => setCurrentPage(i)}
-          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-bm-blue/80 hover:text-white ${
-            currentPage === i && 'bg-bm-blue text-white'
-          }`}
-        >
-          {i + 1}
-        </div>,
-      )
-      repeated = false
-    } else {
-      if (!repeated) {
-        pages.push(<div>...</div>)
-        repeated = true
-      }
-    }
   }
 
   const showPolicyDetails = (index: number) => {
@@ -328,6 +299,7 @@ export const PolicySection = ({
                 setSelectedPolicyStatus([])
                 setSelectedYear([])
                 setPolicyDetails([])
+                setCurrentPage(1)
               }}
               className={`w-28 px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl justify-center items-center ${
                 selectedDocumentType.length !== 0 ||
@@ -408,6 +380,7 @@ export const PolicySection = ({
                 setSelectedPolicyStatus([])
                 setSelectedYear([])
                 setPolicyDetails([])
+                setCurrentPage(1)
               }}
               className={`w-[30%] px-3 border border-[#ADC4CC] font-semibold py-1 rounded-xl ${
                 selectedDocumentType.length !== 0 ||
@@ -462,7 +435,7 @@ export const PolicySection = ({
         {/* Policies */}
         <div className="flex flex-col gap-2 w-full">
           {filteredPolicies.length !== 0 ? (
-            filteredPolicies.map((policy, index) => (
+            getCurrentPolicies().map((policy, index) => (
               <div key={'policyList' + index}>
                 {/* Desktop */}
                 <div className="hidden md:grid grid-cols-7 border-b border-zinc-200 pb-5 gap-2">
@@ -563,31 +536,16 @@ export const PolicySection = ({
         </div>
 
         {/* Pagination */}
-        <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
-          <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
-            <div
-              className={`transition-all hover:bg-bm-blue/80 hover:text-white rounded-full border-black border hover:border-bm-blue/80 ${
-                currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
-              }`}
-              onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
-            >
-              <span className="block p-3">
-                <ChevronLeftIcon className="w-5 h-5" />
-              </span>
-            </div>
-            {pages}
-            <div
-              className={`transition-all hover:bg-bm-blue/80 hover:text-white border-black border hover:border-bm-blue/80 rounded-full ${
-                currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
-              }`}
-              onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
-            >
-              <span className="block p-3">
-                <ChevronRightIcon className="w-5 h-5" />
-              </span>
-            </div>
+        {filteredPolicies.length > POLICIES_PER_PAGE && (
+          <div className="flex w-full justify-center mt-5">
+            <PolicyPagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              pageNumberLimit={POLICIES_PER_PAGE}
+              totalPolicies={filteredPolicies.length}
+            />
           </div>
-        </div>
+        )}
       </div>
     </div>
   )

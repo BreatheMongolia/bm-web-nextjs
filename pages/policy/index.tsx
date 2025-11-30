@@ -26,8 +26,6 @@ const PolicyPage = ({
   featuredTakeActions,
   locale,
 }) => {
-  const isMobile = useMediaQuery({ minWidth: 1024, maxWidth: 1280 })
-
   return (
     <div id="policy">
       <Head>
