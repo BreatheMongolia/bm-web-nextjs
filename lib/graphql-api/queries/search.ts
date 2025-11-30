@@ -146,6 +146,34 @@ export async function getSearchData() {
         }
         }
     }
+    policies(first: ${MAX_NUM}) {
+        edges {
+          node {
+            databaseId
+            slug
+            policyPageCustomFields {
+              title
+              titleMn
+              name
+              nameMn
+              summary
+              summaryMn
+              updates
+              updatesMn
+              furtherReading
+              furtherReadingMn
+              initiatedDate
+            }
+            topics {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
   }`,
     {},
   )
