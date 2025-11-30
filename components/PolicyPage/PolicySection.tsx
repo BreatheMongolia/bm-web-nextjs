@@ -67,7 +67,7 @@ type Policy = {
   }
 }
 
-const POLICIES_PER_PAGE = 5
+const POLICIES_PER_PAGE = 10
 
 export const PolicySection = ({
   policies,
