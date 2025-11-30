@@ -7,10 +7,10 @@ export async function getHealthPage() {
       query GetHealthPageSettings {
         healthPageSettings {
           healthPage {
-            body
-            bodyMn
-            title
-            titleMn
+            healthTitle
+            healthTitleMn
+            healthBody
+            healthBodyMn
             diagramTextBottom
             diagramTextBottomMn
             diagramTextTop
