@@ -2818,8 +2818,6 @@ export type CreateNewsInput = {
   categories?: InputMaybe<NewsCategoriesInput>;
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']>;
-  /** The content of the object */
-  content?: InputMaybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
@@ -6720,7 +6718,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Accomplishment | ActionType | Category | DocumentType | Donor | News | Page | Person | Policy | PolicyStatus | Post | PurposeTag | Report | Resource | ResourceType | Story | Tag | TakeAction | Timeline | Topic | VolunteerPosition;
+export type MenuItemObjectUnion = Accomplishment | ActionType | Category | DocumentType | Donor | Page | Person | Policy | PolicyStatus | Post | PurposeTag | Report | Resource | ResourceType | Story | Tag | TakeAction | Timeline | Topic | VolunteerPosition;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -6923,7 +6921,7 @@ export enum MimeTypeEnum {
 }
 
 /** The news type */
-export type News = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfNewsCustomFields & {
+export type News = ContentNode & DatabaseIdentifier & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfNewsCustomFields & {
   __typename?: 'News';
   /**
    * The ancestors of the content node.
@@ -6932,8 +6930,6 @@ export type News = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   ancestors?: Maybe<NewsToNewsConnection>;
   /** Connection between the News type and the category type */
   categories?: Maybe<NewsToCategoryConnection>;
-  /** The content of the post. */
-  content?: Maybe<Scalars['String']>;
   /** Connection between the ContentNode type and the ContentType type */
   contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
   /** The name of the Content Type the node belongs to */
@@ -6954,12 +6950,6 @@ export type News = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
   /** Connection between the ContentNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
-  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
-  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
-  /** The database identifier for the featured image node assigned to the content node */
-  featuredImageDatabaseId?: Maybe<Scalars['Int']>;
-  /** Globally unique ID of the featured image assigned to the node */
-  featuredImageId?: Maybe<Scalars['ID']>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']>;
   /** Whether the news_article object is password protected. */
@@ -7039,12 +7029,6 @@ export type NewsCategoriesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<NewsToCategoryConnectionWhereArgs>;
-};
-
-
-/** The news type */
-export type NewsContentArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
 
 
@@ -19635,8 +19619,6 @@ export type UpdateNewsInput = {
   categories?: InputMaybe<NewsCategoriesInput>;
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']>;
-  /** The content of the object */
-  content?: InputMaybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']>;
   /** The ID of the news object */

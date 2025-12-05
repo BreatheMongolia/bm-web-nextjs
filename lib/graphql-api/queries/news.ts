@@ -172,17 +172,6 @@ export async function getNewsPosts(): Promise<News[]> {
             slug
           }
         }
-        featuredImage {
-          node {
-            mediaItemUrl
-            mediaDetails {
-              sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                name
-                sourceUrl
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -321,16 +310,6 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
             slug
           }
         }
-        featuredImage {
-          node {
-            mediaDetails {
-              sizes(include: [MEDIUM, MEDIUM_LARGE, LARGE]) {
-                name
-                sourceUrl
-              }
-            }
-          }
-        }
       }
     } 
     `,
@@ -405,18 +384,6 @@ export async function getLastThree(): Promise<News[]> {
                 }
                 caption
                 captionMn
-              }
-            }
-            featuredImage {
-              node {
-                id
-                mediaItemUrl
-                mediaDetails {
-                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                    name
-                    sourceUrl
-                  }
-                }
               }
             }
             categories {

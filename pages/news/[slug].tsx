@@ -37,6 +37,8 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
     return <ErrorPage statusCode={404} />
   }
 
+  console.log(post)
+
   const { t } = useTranslation('news')
 
   const breadCrumbItems = [

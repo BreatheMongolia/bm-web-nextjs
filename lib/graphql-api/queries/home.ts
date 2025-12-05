@@ -85,17 +85,6 @@ const HomePageGQLQuerySections = {
                 }
               }
             }
-            featuredImage {
-              node {
-                id
-                mediaDetails {
-                  sizes(include: MEDIUM_LARGE) {
-                    sourceUrl
-                    name
-                  }
-                }
-              }
-            }
             categories {
               nodes {
                 categoryCustomFields {
