@@ -37,6 +37,8 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
     return <ErrorPage statusCode={404} />
   }
 
+  console.log(post)
+
   const { t } = useTranslation('news')
 
   const breadCrumbItems = [
@@ -248,7 +250,7 @@ const getNews = (news: News, locale: string): any => {
     featuredImageBig: getImage(
       news.newsCustomFields.featuredImage.image?.node?.mediaDetails,
       news.newsCustomFields.featuredImage.imageMn?.node?.mediaDetails,
-      news.featuredImage?.node?.mediaDetails,
+      null,
       'large',
     ),
     caption: getTranslated(news.newsCustomFields.featuredImage.caption, news.newsCustomFields.featuredImage.captionMn, locale),
@@ -290,14 +292,14 @@ function getLatestNews(data: any[], locale: string) {
         getImage(
           news.newsCustomFields.featuredImage.image?.mediaDetails,
           news.newsCustomFields.featuredImage.imageMn?.mediaDetails,
-          news.featuredImage?.node?.mediaDetails,
+          null,
           'medium',
         ) || '',
       featuredImageBig:
         getImage(
           news.newsCustomFields.featuredImage.image?.mediaDetails,
           news.newsCustomFields.featuredImage.imageMn?.mediaDetails,
-          news.featuredImage?.node?.mediaDetails,
+          null,
           'large',
         ) || '',
     })

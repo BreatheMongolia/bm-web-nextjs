@@ -55,42 +55,50 @@ const PolicyPage = ({
 export default PolicyPage
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  // fetch the data
-  const policies = await getPolicies()
-  const documentTypes = await getDocumentTypes()
-  const policyStatuses = await getPolicyStatus()
-  const topics = await getPolicyTopics()
-  const data = await getPolicyLandingPageSettings()
+  try {
+    // fetch the data
+    const policies = await getPolicies()
+    const documentTypes = await getDocumentTypes()
+    const policyStatuses = await getPolicyStatus()
+    const topics = await getPolicyTopics()
+    const data = await getPolicyLandingPageSettings()
 
-  const documentTypeOptions = documentTypes.map(type => ({
-    label: getTranslated(type.documentTypeCustomFields.name, type.documentTypeCustomFields.nameMn, locale),
-    value: type.slug,
-  }))
+    const documentTypeOptions = documentTypes.map(type => ({
+      label: getTranslated(type.documentTypeCustomFields.name, type.documentTypeCustomFields.nameMn, locale),
+      value: type.slug,
+    }))
 
-  const documentTopicOptions = topics.map(topic => ({
-    label: getTranslated(topic.topicCustomFields.name, topic.topicCustomFields.nameMn, locale),
-    value: topic.slug,
-  }))
+    const documentTopicOptions = topics.map(topic => ({
+      label: getTranslated(topic.topicCustomFields.name, topic.topicCustomFields.nameMn, locale),
+      value: topic.slug,
+    }))
 
-  const policyStatusOptions = policyStatuses.map(status => ({
-    label: getTranslated(status.policyStatusCustomFields.name, status.policyStatusCustomFields.nameMn, locale),
-    value: status.slug,
-  }))
+    const policyStatusOptions = policyStatuses.map(status => ({
+      label: getTranslated(status.policyStatusCustomFields.name, status.policyStatusCustomFields.nameMn, locale),
+      value: status.slug,
+    }))
 
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common', 'policy'])),
-      policies: policies,
-      documentTypeOptions: documentTypeOptions,
-      policyStatusOptions: policyStatusOptions,
-      documentTopicOptions: documentTopicOptions,
-      locale,
-      title: getTranslated(data.policyTitle, data.policyTitleMn, locale),
-      description: getTranslated(data.policyDescription, data.policyDescriptionMn, locale),
-      socialShare: data.policySocialMediaShare,
-      featuredNews: data?.policyFeaturedNews?.nodes || [],
-      featuredTakeActions: data?.policyFeaturedTakeActions?.nodes || [],
-    },
-    revalidate: 60 * 5, // every 5 minutes
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['home', 'nav', 'footer', 'map', 'news', 'common', 'policy'])),
+        policies: policies,
+        documentTypeOptions: documentTypeOptions,
+        policyStatusOptions: policyStatusOptions,
+        documentTopicOptions: documentTopicOptions,
+        locale,
+        title: getTranslated(data.policyTitle, data.policyTitleMn, locale),
+        description: getTranslated(data.policyDescription, data.policyDescriptionMn, locale),
+        socialShare: data.policySocialMediaShare,
+        featuredNews: data?.policyFeaturedNews?.nodes || [],
+        featuredTakeActions: data?.policyFeaturedTakeActions?.nodes || [],
+      },
+      revalidate: 60 * 5, // every 5 minutes
+    }
+  } catch (error) {
+    console.error('Error generating policy page:', error)
+    return {
+      notFound: true,
+      revalidate: 60,
+    }
   }
 }

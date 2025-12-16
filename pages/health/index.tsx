@@ -34,26 +34,34 @@ const HealthPage = ({ featuredNews, featuredTakeActions, page, locale }) => {
 export default HealthPage
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const page = await getHealthPage()
-  const homePage = await getHomePage('/')
-  const featuredNews = await getHealthNews()
-  const featuredTakeActions = homePage.homePage.featuredTakeActions.nodes || []
+  try {
+    const page = await getHealthPage()
+    const homePage = await getHomePage('/')
+    const featuredNews = await getHealthNews()
+    const featuredTakeActions = homePage.homePage.featuredTakeActions.nodes || []
 
-  return {
-    props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'common'])),
-      locale,
-      featuredNews,
-      featuredTakeActions,
-      page: page,
-      title: getTranslated(page.healthSocialMediaShare.title, page.healthSocialMediaShare.titleMn, locale),
-      image: getTranslated(
-        page.healthSocialMediaShare.image?.node?.mediaItemUrl,
-        page.healthSocialMediaShare.imageMn?.node?.mediaItemUrl,
+    return {
+      props: {
+        ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'map', 'common'])),
         locale,
-      ),
-    },
-    // This tells the page how often to refetch from the API (in seconds) (1 hour)
-    revalidate: 60 * 60,
+        featuredNews,
+        featuredTakeActions,
+        page: page,
+        title: getTranslated(page.healthSocialMediaShare.title, page.healthSocialMediaShare.titleMn, locale),
+        image: getTranslated(
+          page.healthSocialMediaShare.image?.node?.mediaItemUrl,
+          page.healthSocialMediaShare.imageMn?.node?.mediaItemUrl,
+          locale,
+        ),
+      },
+      // This tells the page how often to refetch from the API (in seconds) (1 hour)
+      revalidate: 60 * 60,
+    }
+  } catch (error) {
+    console.error('Error generating health page:', error)
+    return {
+      notFound: true,
+      revalidate: 60,
+    }
   }
 }
