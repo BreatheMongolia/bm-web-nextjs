@@ -243,10 +243,10 @@ const SearchPage = ({ data, locale, banner }) => {
     searchValue === ''
       ? policies
       : policies.filter(policy =>
-          Object.values(policy.searchableText).some((text: string) =>
-            text?.toLowerCase().includes(searchValue.toLowerCase()),
-          ),
-        )
+        Object.values(policy.searchableText).some((text: string) =>
+          text?.toLowerCase().includes(searchValue.toLowerCase()),
+        ),
+      )
 
   const count = filteredPolicies.length + filteredNews.length + filteredPeople.length + newFilteredTakeActions.length
 
@@ -279,19 +279,28 @@ const SearchPage = ({ data, locale, banner }) => {
 export default SearchPage
 
 export const getStaticProps: GetServerSideProps = async ({ locale }) => {
-  const data: any = await getSearchData()
-  const bannerImageData = await getNewsBannerImages('/news')
-  const bannerTextData = await getBannerText()
+  try {
+    const data: any = await getSearchData()
+    const bannerImageData = await getNewsBannerImages('/news')
+    const bannerTextData = await getBannerText()
 
-  return {
-    props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'search', 'common', 'policy'])),
-      locale,
-      data,
-      banner: {
-        ...bannerImageData.newsGeneralFields.banner,
-        ...bannerTextData,
+    return {
+      props: {
+        ...(await serverSideTranslations(locale ?? 'en', ['nav', 'footer', 'search', 'common', 'policy'])),
+        locale,
+        data,
+        banner: {
+          ...bannerImageData.newsGeneralFields.banner,
+          ...bannerTextData,
+        },
       },
-    },
+      revalidate: 60 * 5, // every 5 minutes
+    }
+  } catch (error) {
+    console.error('Error generating search page:', error)
+    return {
+      notFound: true,
+      revalidate: 60,
+    }
   }
 }

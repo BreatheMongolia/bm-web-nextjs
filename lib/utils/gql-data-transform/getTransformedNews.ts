@@ -31,15 +31,15 @@ export function getTransformedNews(news: News, language: 'en' | 'mn') {
     featuredImageSmall: getImage(
       news.newsCustomFields?.featuredImage.image?.node?.mediaDetails,
       news.newsCustomFields?.featuredImage.imageMn?.node?.mediaDetails,
-      news.featuredImage?.node?.mediaDetails,
+      null,
       'medium',
     ),
     featuredImageBig:
       getImage(
         news.newsCustomFields?.featuredImage.image?.node?.mediaDetails,
         news.newsCustomFields?.featuredImage.imageMn?.node?.mediaDetails,
-        news.featuredImage?.node?.mediaDetails,
+        null,
         'medium_large',
-      ) ?? news.featuredImage?.node?.mediaItemUrl,
+      )
   }
 }
