@@ -58,25 +58,33 @@ const getTransformedDonors = (donorsData: string | any[], locale: string) => {
   return people
 }
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const page = await getHomePage('/')
-  const volunteers = await getVolunteers()
-  const data = await getSupportUsSettings()
-  const donors = await getDonors()
+  try {
+    const page = await getHomePage('/')
+    const volunteers = await getVolunteers()
+    const data = await getSupportUsSettings()
+    const donors = await getDonors()
 
-  return {
-    props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
-      volunteers,
-      locale,
-      page,
-      title: getTranslated(data.title, data.titleMn, locale),
-      description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.image.node.mediaItemUrl, data.imageMn.node.mediaItemUrl, locale),
-      donorTitle: getTranslated(data?.donorTitle, data?.donorTitleMn, locale),
-      donorDescription: getTranslated(data.donorDescription, data.donorDescriptionMn, locale),
-      donors: getTransformedDonors(donors, locale),
-    },
-    // This tells the page how often to refetch from the API (in seconds) (1 hour)
-    revalidate: 60 * 60,
+    return {
+      props: {
+        ...(await serverSideTranslations(locale ?? 'en', ['home', 'nav', 'footer', 'about'])),
+        volunteers,
+        locale,
+        page,
+        title: getTranslated(data.title, data.titleMn, locale),
+        description: getTranslated(data.description, data.descriptionMn, locale),
+        image: getTranslated(data.image.node.mediaItemUrl, data.imageMn.node.mediaItemUrl, locale),
+        donorTitle: getTranslated(data?.donorTitle, data?.donorTitleMn, locale),
+        donorDescription: getTranslated(data.donorDescription, data.donorDescriptionMn, locale),
+        donors: getTransformedDonors(donors, locale),
+      },
+      // This tells the page how often to refetch from the API (in seconds) (1 hour)
+      revalidate: 60 * 60,
+    }
+  } catch (error) {
+    console.error('Error generating support-us page:', error)
+    return {
+      notFound: true,
+      revalidate: 60,
+    }
   }
 }
