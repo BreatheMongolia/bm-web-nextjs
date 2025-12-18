@@ -309,17 +309,6 @@ export async function getPolicyLandingPageSettings(): Promise<any> {
                       }
                     }
                   }
-                  featuredImage {
-                    node {
-                      id
-                      mediaDetails {
-                        sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                          name
-                          sourceUrl
-                        }
-                      }
-                    }
-                  }
                   categories {
                     nodes {
                       slug

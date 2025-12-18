@@ -96,17 +96,6 @@ export async function getHealthNews(): Promise<News[]> {
                 slug
               }
             }
-            featuredImage {
-              node {
-                mediaItemUrl
-                mediaDetails {
-                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                    name
-                    sourceUrl
-                  }
-                }
-              }
-            }
           }
         }
       }
