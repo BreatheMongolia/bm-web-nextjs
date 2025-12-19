@@ -1,9 +1,7 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 // generic components
 import { H2 } from 'components/generic/Typography'
 import { NewsCard, AgaarNegCard } from 'components/Cards'
@@ -22,7 +20,6 @@ import { getTranslated } from 'lib/utils/getTranslated'
 import LogoBlue from 'assets/images/logoBlue.png'
 import { useMediaQuery } from 'react-responsive'
 
-// FIXME: Featured News not showing up
 const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featuredNews: News[]; agaarNegNews }) => {
   const { t } = useTranslation('news')
   const isMobile = useMediaQuery({ minWidth: 1024, maxWidth: 1280 })
@@ -35,6 +32,7 @@ const NewsPage = ({ news, featuredNews, agaarNegNews }: { news: News[]; featured
       return x.categories.nodes.some(c => c.slug === 'about-us' || c.slug === 'press-release')
     })
     .slice(0, maxNews)
+
   return (
     <div>
       <Head>
@@ -103,7 +101,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       agaarNegNews,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
+      image: getTranslated(data.image.node.mediaItemUrl, data.imageMn.node.mediaItemUrl, locale),
     },
     revalidate: 60 * 5, // every 5 minutes
   }

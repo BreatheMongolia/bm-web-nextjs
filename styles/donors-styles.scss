@@ -1,0 +1,28 @@
+.slick-slider.donors-slider {
+  height: 480px;
+
+  .slick-list {
+    height: 480px;
+
+    .slick-slide {
+      height: 480px;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .slick-slider.donors-slider {
+    height: 275px;
+
+    .slick-list {
+      height: 275px;
+
+      .slick-slide,
+      .slick-slide > div {
+        width: 255px !important;
+        margin-right: 10px;
+        height: 275px;
+      }
+    }
+  }
+}

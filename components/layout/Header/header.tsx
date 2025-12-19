@@ -5,7 +5,7 @@ export const Header = ({ projects }) => {
   return (
     <div className="w-full sticky top-0 z-50">
       <Topbar />
-      <Navbar projects={projects}/>
+      <Navbar projects={projects} />
     </div>
   )
 }

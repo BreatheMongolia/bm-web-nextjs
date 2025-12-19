@@ -8,10 +8,24 @@
     "applyNow": "Apply Now"
   },
   "takeAction": {
+    "gridTitle": "Solutions",
     "title": "Take Action",
     "seeMore": "See more"
   },
+  "health": {
+    "title": "Health",
+    "textTitle": "Air Pollution and Your Health",
+    "textDescription": "Air pollution affects every stage of human life and every organ system.",
+    "learnMore": "Learn More"
+  },
   "news": {
     "title": "News"
+  },
+  "policy": {
+    "title": "Policy",
+    "seeMore": "See more",
+    "learnMore": "Learn More",
+    "documentName": "Document Title",
+    "documentType": "Type"
   }
 }

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import Report from './Report'
 import Slider from 'react-slick'
@@ -13,12 +13,39 @@ interface Impact {
   locale: string
 }
 
+const ITEMS_PER_PAGE = 5
+
 const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
   const { t } = useTranslation('about')
+  const [currentPage, setCurrentPage] = useState(0)
 
   // Sort accomplishments by newest to oldest
   //   @ts-ignore
   accomplishments.sort((a, b) => new Date(b.sortBy) - new Date(a.sortBy))
+  const onPageClick = pageNum => {
+    if (pageNum < 0) setCurrentPage(0)
+    const maxPages = Math.ceil(accomplishments.length / ITEMS_PER_PAGE)
+    if (pageNum >= maxPages) {
+      setCurrentPage(maxPages - 1)
+    }
+    setCurrentPage(pageNum)
+  }
+  const pages = []
+  const MAX_PAGES = Math.ceil(accomplishments.length / ITEMS_PER_PAGE)
+  for (let i = 0; i < MAX_PAGES; i++) {
+    if (i === 0 || i === MAX_PAGES - 1 || (i < currentPage + 2 && i > currentPage - 2)) {
+      pages.push(
+        <div
+          key={i}
+          onClick={() => setCurrentPage(i)}
+          className={`cursor-pointer rounded-full w-12 h-12 flex items-center justify-center transition-all hover:bg-[#2C2D41]/80 hover:text-white ${currentPage === i && 'bg-[#2C2D41] text-white'
+            }`}
+        >
+          {i + 1}
+        </div>,
+      )
+    }
+  }
 
   return (
     <>
@@ -26,19 +53,45 @@ const Impact: FC<Impact> = ({ accomplishments, reports, locale }) => {
         <h1 className="our_accomplishment_title">{t('impact.ourAccomplishments')}</h1>
 
         <div className="timeline">
-          {accomplishments.map((acc, id) => {
-            return (
-              <CampaignCard
-                key={'accomplishment' + id}
-                id={id}
-                title={acc.title}
-                campaignDate={acc.date}
-                description={acc.description}
-                category={acc.category}
-                campaignImage={acc.image}
-              />
-            )
-          })}
+          {accomplishments
+            .slice(ITEMS_PER_PAGE * currentPage, ITEMS_PER_PAGE * currentPage + ITEMS_PER_PAGE)
+            .map((acc, id) => {
+              return (
+                <CampaignCard
+                  key={'accomplishment' + id}
+                  id={id}
+                  title={acc.title}
+                  campaignDate={acc.date}
+                  description={acc.description}
+                  category={acc.category}
+                  campaignImage={acc.image}
+                />
+              )
+            })}
+          {/* Pagination */}
+          <div className="pt-8 pb-3 mx-auto text-lg font-bold sm:text-xl">
+            <div className="flex gap-0.5 sm:gap-5 justify-center items-center">
+              <div
+                className={`transition-all hover:bg-[#2C2D41] hover:text-white rounded-full border-black border hover:border-[#f09c4f]/80 ${currentPage === 0 ? 'opacity-0' : 'cursor-pointer'
+                  }`}
+                onClick={() => currentPage !== 0 && onPageClick(currentPage - 1)}
+              >
+                <span className="block p-3">
+                  <ChevronLeftIcon className="w-5 h-5" />
+                </span>
+              </div>
+              {pages}
+              <div
+                className={`transition-all hover:bg-[#2C2D41] hover:text-white border-black border hover:border-[#f09c4f]/80 rounded-full ${currentPage === MAX_PAGES - 1 ? 'opacity-0' : 'cursor-pointer'
+                  }`}
+                onClick={() => currentPage !== MAX_PAGES - 1 && onPageClick(currentPage + 1)}
+              >
+                <span className="block p-3">
+                  <ChevronRightIcon className="w-5 h-5" />
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="container mx-auto flex flex-col mb-20">

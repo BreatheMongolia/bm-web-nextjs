@@ -1,8 +1,13 @@
-import React, { FC, FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 
-export const BackBtn: FunctionComponent = () => {
+interface BackBtnProps {
+  title?: string
+  href?: string
+}
+
+export const BackBtn: FC<BackBtnProps> = ({ title, href = '/take-action' }) => {
   const router = useRouter()
   const { t } = useTranslation('common')
 
@@ -26,8 +31,8 @@ export const BackBtn: FunctionComponent = () => {
         />
       </svg>
 
-      <span onClick={() => router.push('/take-action')} className="backBtnText">
-        {t('backBtnText')}
+      <span onClick={() => router.push(href)} className="backBtnText">
+        {title || t('backBtnText')}
       </span>
     </div>
   )

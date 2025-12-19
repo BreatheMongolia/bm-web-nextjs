@@ -8,10 +8,12 @@
   },
   "nav": {
     "home": "home",
-    "action": "take action",
+    "action": "Solutions",
     "news": "news",
     "agaarNeg": "AGAAR NEG",
     "about": "about us",
+    "policy": "Policy",
+    "health": "Health",
     "waysToDonate": "Ways to Donate",
     "ourStory": "Our Story",
     "impact": "Impact",

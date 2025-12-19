@@ -1,6 +1,6 @@
 import { NewsCard } from 'components/Cards'
 import { H2 } from 'components/generic/Typography'
-import { News, Page_Customfields_FeaturedNews } from 'graphql/generated'
+import { News } from 'graphql/generated'
 import { useTranslation } from 'next-i18next'
 import Slider from 'react-slick'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
@@ -8,9 +8,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import Arrow from 'components/generic/Arrow'
 import { init } from 'next/dist/compiled/webpack/webpack'
 
-export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields_FeaturedNews[] }) => {
+export const NewsCarousel = ({ featuredNews }: { featuredNews: News[] }) => {
   const { t } = useTranslation('home')
-
   const news = featuredNews
   const settings = {
     dots: false,
@@ -72,7 +71,7 @@ export const NewsCarousel = ({ featuredNews }: { featuredNews: Page_Customfields
         }
       >
         {news.map((data: News, idx) => (
-          <div key={idx} className="">
+          <div key={idx}>
             <NewsCard key={idx} news={data} />
           </div>
         ))}

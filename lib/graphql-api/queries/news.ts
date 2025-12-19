@@ -11,30 +11,49 @@ export async function getFeaturedNews(): Promise<News[]> {
         uri
         date
         dateGmt
-          customFields {
+        newsGeneralFields {
           featuredNews {
-            ... on News {
-              databaseId
-              dateGmt
-              customFields {
-                titleMn
-                title
-                sourceLink
-                sourceName
-                sourceNameMn
-                sourceLanguage
-                newsLandingPageFeatured
-                newsContentType
+            nodes {
+              ... on News {
+                databaseId
+                dateGmt
+                slug
+                desiredSlug
+                newsCustomFields {
+                  titleMn
+                  title
+                  sourceLink
+                  sourceName
+                  sourceNameMn
+                  sourceLanguage
+                  newsLandingPageFeatured
+                  newsContentType
+                  featuredImage {
+                    image {
+                      node {
+                        mediaDetails {
+                          sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                            name
+                            sourceUrl
+                          }
+                        }
+                      }
+                    }
+                    imageMn {
+                      node {
+                        mediaDetails {
+                          sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                            name
+                            sourceUrl
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
                 featuredImage {
-                  image {
-                    mediaDetails {
-                      sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                        name
-                        sourceUrl
-                      }
-                    }
-                  }
-                  imageMn {
+                  node {
+                    id
                     mediaDetails {
                       sizes(include: [MEDIUM, MEDIUM_LARGE]) {
                         name
@@ -43,24 +62,13 @@ export async function getFeaturedNews(): Promise<News[]> {
                     }
                   }
                 }
-              }
-              featuredImage {
-                node {
-                  id
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                categories {
+                  nodes {
+                    slug
+                    categoryCustomFields {
                       name
-                      sourceUrl
+                      nameMn
                     }
-                  }
-                }
-              }
-              categories {
-                nodes {
-                  categoryCustomFields {
-                    name
-                    nameMn
-                    fieldGroupName
                   }
                 }
               }
@@ -75,7 +83,7 @@ export async function getFeaturedNews(): Promise<News[]> {
 
   if (data?.page) {
     const page = data.page as Page
-    return page.customFields?.featuredNews || []
+    return (page.newsGeneralFields?.featuredNews.nodes as News[]) || []
   }
 
   return []
@@ -91,88 +99,83 @@ export async function getNewsLandingPageSettings(): Promise<any> {
           title
           titleMn
           image {
-            mediaItemUrl
+            node {
+              mediaItemUrl
+            }
           }
           imageMn {
-            mediaItemUrl
-            }
-          }
-        }
-      }
-    `,
-  )
-  return data.newsPageSettings.newsLanding || []
-}
-
-
-export async function getNewsPosts(): Promise<News[]> {
-  const data = await fetchAPI(
-    `
-    query getAllNews {
-      newses(first: 1000) {
-        edges {
-          node {
-            databaseId
-            dateGmt
-            desiredSlug
-            slug
-            customFields {
-              titleMn
-              title
-              sourceLink
-              sourceName
-              sourceNameMn
-              sourceLanguage
-              newsLandingPageFeatured
-              newsContentType
-              featuredImage {
-                image {
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                      sourceUrl
-                      name
-                    }
-                  }
-                }
-                imageMn {
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                      sourceUrl
-                      name
-                    }
-                  }
-                }
-                caption
-                captionMn
-              }
-            }
-            categories {
-              nodes {
-                categoryCustomFields {
-                  name
-                  nameMn
-                  fieldGroupName
-                }
-                categoryId
-                id
-                slug
-              }
-            }
-            featuredImage {
-              node {
-                mediaItemUrl
-                mediaDetails {
-                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                    name
-                    sourceUrl
-                  }
-                }
-              }
+            node {
+              mediaItemUrl
             }
           }
         }
       }
     }
+    `,
+  )
+  return data.newsPageSettings.newsLanding || []
+}
+
+export async function getNewsPosts(): Promise<News[]> {
+  const data = await fetchAPI(
+    `
+    query getAllNews {
+  newses(first: 1000) {
+    edges {
+      node {
+        databaseId
+        dateGmt
+        desiredSlug
+        slug
+        newsCustomFields {
+          titleMn
+          title
+          sourceLink
+          sourceName
+          sourceNameMn
+          sourceLanguage
+          newsLandingPageFeatured
+          newsContentType
+          featuredImage {
+            image {
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                    sourceUrl
+                    name
+                  }
+                }
+              }
+            }
+            imageMn {
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                    sourceUrl
+                    name
+                  }
+                }
+              }
+            }
+            caption
+            captionMn
+          }
+        }
+        categories {
+          nodes {
+            categoryCustomFields {
+              name
+              nameMn
+            }
+            categoryId
+            id
+            slug
+          }
+        }
+      }
+    }
+  }
+}
     `,
   )
   // parse the data into news objects
@@ -183,6 +186,8 @@ export async function getNewsPosts(): Promise<News[]> {
   }
   return []
 }
+
+
 export async function getAgaarNegNews(): Promise<
   {
     id: string
@@ -257,7 +262,7 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
         desiredSlug
         slug
         dateGmt
-        customFields {
+        newsCustomFields {
           authors {
             authorLink
             authorName
@@ -271,18 +276,22 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
           excerptMn
           featuredImage {
             image {
-              mediaDetails {
-                sizes(include: [MEDIUM, MEDIUM_LARGE, LARGE]) {
-                  name
-                  sourceUrl
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM, MEDIUM_LARGE, LARGE]) {
+                    name
+                    sourceUrl
+                  }
                 }
               }
             }
             imageMn {
-              mediaDetails {
-                sizes(include: [MEDIUM,MEDIUM_LARGE, LARGE]) {
-                  name
-                  sourceUrl
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM,MEDIUM_LARGE, LARGE]) {
+                    name
+                    sourceUrl
+                  }
                 }
               }
             }
@@ -295,21 +304,10 @@ export async function getNewsFull(id, idType: NewsIdType = NewsIdType.Slug): Pro
             categoryCustomFields {
               name
               nameMn
-              fieldGroupName
             }
             categoryId
             id
             slug
-          }
-        }
-        featuredImage {
-          node {
-            mediaDetails {
-              sizes(include: [MEDIUM, MEDIUM_LARGE, LARGE]) {
-                name
-                sourceUrl
-              }
-            }
           }
         }
       }
@@ -346,14 +344,14 @@ export async function getLastThree(): Promise<News[]> {
   const data = await fetchAPI(
     `
     query getLatestNews {
-      newses(where: { orderby: { order: DESC, field: DATE } }, first: 3) {
+      newses(where: {orderby: {order: DESC, field: DATE}}, first: 3) {
         edges {
           node {
             databaseId
             slug
             date
             dateGmt
-            customFields {
+            newsCustomFields {
               titleMn
               title
               sourceLink
@@ -363,20 +361,24 @@ export async function getLastThree(): Promise<News[]> {
               newsContentType
               featuredImage {
                 image {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                      name
-                      sourceUrl
+                  node {
+                    mediaItemUrl
+                    mediaDetails {
+                      sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                        name
+                        sourceUrl
+                      }
                     }
                   }
                 }
                 imageMn {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                      name
-                      sourceUrl
+                  node {
+                    mediaItemUrl
+                    mediaDetails {
+                      sizes(include: [MEDIUM, MEDIUM_LARGE]) {
+                        name
+                        sourceUrl
+                      }
                     }
                   }
                 }
@@ -384,24 +386,11 @@ export async function getLastThree(): Promise<News[]> {
                 captionMn
               }
             }
-            featuredImage {
-              node {
-                id
-                mediaItemUrl
-                mediaDetails {
-                  sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                    name
-                    sourceUrl
-                  }
-                }
-              }
-            }
             categories {
               nodes {
                 categoryCustomFields {
                   name
                   nameMn
-                  fieldGroupName
                 }
               }
             }
@@ -437,34 +426,37 @@ export async function getNewsPostSlugs(): Promise<News[]> {
 export async function getNewsBannerImages(id: string, idType: PageIdType = PageIdType.Uri): Promise<Page> {
   const data = await fetchAPI(
     `query getFeaturedNews($id: ID!, $idType: PageIdType!) {
-          page(id: $id, idType: $idType) {
-            news_general_fields {
-              banner {
-                fieldGroupName
-                bannerImage {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: _1536X1536) {
-                      height
-                      width
-                      sourceUrl
-                    }
+      page(id: $id, idType: $idType) {
+        newsGeneralFields {
+          banner {
+            bannerImage {
+              node {
+                mediaItemUrl
+                mediaDetails {
+                  sizes(include: _1536X1536) {
+                    height
+                    width
+                    sourceUrl
                   }
                 }
-                bannerImageMn {
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes(include: _1536X1536) {
-                      height
-                      width
-                      sourceUrl
-                    }
+              }
+            }
+            bannerImageMn {
+              node {
+                mediaItemUrl
+                mediaDetails {
+                  sizes(include: _1536X1536) {
+                    height
+                    width
+                    sourceUrl
                   }
                 }
               }
             }
           }
         }
+      }
+    }
     `,
     {
       variables: { id, idType },

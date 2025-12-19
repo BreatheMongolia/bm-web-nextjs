@@ -18,10 +18,10 @@ export default function OurStoryPage({ page, stories, locale }) {
       <div className="container mx-auto flex flex-col gap-20">
         <OurPartners
           title={{
-            en: page?.customFields.partnersLogosTitle,
-            mn: page?.customFields.partnersLogosTitleMn,
+            en: page?.homePage.partnersLogosTitle,
+            mn: page?.homePage.partnersLogosTitleMn,
           }}
-          partnerLogos={page?.customFields.partnersLogos}
+          partnerLogos={page?.homePage.partnersLogos}
           locale={locale}
         />
       </div>
@@ -33,10 +33,10 @@ const getAllStories = (StoriesData: string | any[], locale: string) => {
   const stories = []
   for (let i = 0; i < StoriesData.length; i++) {
     stories.push({
-      title: getTranslated(StoriesData[i].node.customFields.title, StoriesData[i].node.customFields.titleMn, locale),
+      title: getTranslated(StoriesData[i].node.storyCustomFields.title, StoriesData[i].node.storyCustomFields.titleMn, locale),
       description: getTranslated(
-        StoriesData[i].node.customFields.description,
-        StoriesData[i].node.customFields.descriptionMn,
+        StoriesData[i].node.storyCustomFields.description,
+        StoriesData[i].node.storyCustomFields.descriptionMn,
         locale,
       ),
     })
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       page,
       title: getTranslated(data.title, data.titleMn, locale),
       description: getTranslated(data.description, data.descriptionMn, locale),
-      image: getTranslated(data.image.mediaItemUrl, data.imageMn.mediaItemUrl, locale),
+      image: getTranslated(data.image.node.mediaItemUrl, data.imageMn.node.mediaItemUrl, locale),
     },
     // This tells the page how often to refetch from the API (in seconds) (1 hour)
     revalidate: 60 * 60,
