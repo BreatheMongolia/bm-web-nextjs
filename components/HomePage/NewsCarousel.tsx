@@ -6,7 +6,6 @@ import Slider from 'react-slick'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 import Arrow from 'components/generic/Arrow'
-import { init } from 'next/dist/compiled/webpack/webpack'
 
 export const NewsCarousel = ({ featuredNews }: { featuredNews: News[] }) => {
   const { t } = useTranslation('home')

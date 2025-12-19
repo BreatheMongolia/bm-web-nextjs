@@ -10,7 +10,7 @@
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "generate": "graphql-codegen"
+    "generate": "npx graphql-codegen"
   },
   "dependencies": {
     "@apollo/client": "^3.7.11",
