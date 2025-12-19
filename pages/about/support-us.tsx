@@ -46,7 +46,7 @@ const getTransformedDonors = (donorsData: string | any[], locale: string) => {
   for (let i = 0; i < donorsData.length; i++) {
     people.push({
       name: getTranslated(donorsData[i].node.title, donorsData[i].node.donorFields.nameMn, locale),
-      imgSrc: donorsData[i].node.donorFields.image.node.mediaItemUrl,
+      imgSrc: donorsData[i]?.node?.donorFields?.image?.node?.mediaItemUrl ?? '',
       description: getTranslated(
         donorsData[i].node.donorFields.description,
         donorsData[i].node.donorFields.descriptionMn,

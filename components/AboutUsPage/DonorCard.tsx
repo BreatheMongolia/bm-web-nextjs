@@ -20,11 +20,13 @@ const DonorCard: FC<Props> = ({ donor, className, index }) => {
 
   return (
     <div className={cardClasses}>
-      <img
-        src={donor.imgSrc}
-        alt="donor profile image"
-        className={`rounded-full ${isHorizontal ? 'w-[122px] h-[122px] my-auto' : 'w-[75px] h-[75px] mx-auto mt-5'}`}
-      />
+      {donor.imgSrc &&
+        <img
+          src={donor.imgSrc}
+          alt="donor profile image"
+          className={`rounded-full ${isHorizontal ? 'w-[122px] h-[122px] my-auto' : 'w-[75px] h-[75px] mx-auto mt-5'}`}
+        />
+      }
       <div className={` ${isHorizontal ? 'pt-4' : 'align-center text-center pt-2 px-2'} `}>
         <h4 className="m-auto text-[18px] font-semibold">{donor.name}</h4>
         <p className="text-sm overflow-hidden">{truncate(donor.description)}</p>
