@@ -1,4 +1,4 @@
-import { TakeAction } from "graphql/generated"
+import { TakeAction } from 'graphql/generated'
 
 export interface MapContextInterface {
   pins: any[]
@@ -58,16 +58,18 @@ export interface RankType {
 }
 
 export interface RecommendationType {
-  airQuality: string
-  sensorType: string
+  airQuality: string[]
+  sensorType: string[]
   description: string
   descriptionMn: string
-  advices?: {
-    icon?: {
-      mediaItemUrl: any
-    }
-    comment: string
-    commentMn: string
-    takeAction?: TakeAction[]
-  }
+  advices?: [
+    {
+      icon?: {
+        mediaItemUrl: any
+      }
+      comment: string
+      commentMn: string
+      takeAction?: TakeAction[]
+    },
+  ]
 }

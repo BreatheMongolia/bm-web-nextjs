@@ -160,8 +160,9 @@ export const MapComponent = ({
     // }
     mapContext?.setSelectedStation(station)
     const airQuality = station ? getHealthCategory(station.pollution.aqius) : ''
-    setRecommendation(recommendations.find(x => x.airQuality === airQuality && x.sensorType === station?.type))
-
+    setRecommendation(
+      recommendations.find(x => x.airQuality.includes(airQuality) && x.sensorType.includes(station?.type)),
+    )
     // const mapBoundingBox = map.getBounds()
 
     // I think it's better to fly even if it is within bounds?
@@ -194,7 +195,6 @@ export const MapComponent = ({
     })
     setLoadedPins(true)
   }
-
   return (
     <div className="aqi-map-wrapper">
       <H2

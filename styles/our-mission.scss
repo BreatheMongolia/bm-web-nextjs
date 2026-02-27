@@ -4,12 +4,10 @@
   width: 100%;
 }
 .mission_vision_wrapper {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
-  top: 18%;
-  left: 25%;
-  right: 25%;
+  padding: 60px 25% 40px;
   text-align: center;
 }
 .our_mission_title {
@@ -30,9 +28,18 @@
   letter-spacing: 0px;
 }
 
+.particle_background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .our_mission_background {
   position: relative;
-  height: 350px;
+  min-height: 350px;
 }
 
 .what_we_do_container {
@@ -112,15 +119,13 @@
 
   .our_mission_background {
     width: 100%;
-    height: 250px;
+    min-height: 250px;
   }
 
   .mission_vision_wrapper {
-    position: absolute;
+    position: relative;
     display: block;
-    top: 5%;
-    left: 12%;
-    right: 12%;
+    padding: 20px 12% 30px;
     text-align: center;
   }
   .our_mission_title {

@@ -14,7 +14,7 @@ export const StationDetail = ({
 }: {
   setHidden: Function
   station: StationType
-  recommendation: RecommendationType
+  recommendation: RecommendationType | null
   locale: string
 }) => {
   const { t } = useTranslation('map')
@@ -92,10 +92,7 @@ export const StationDetail = ({
 
   // converts current recommendation's advices to an array
   const getAdvices = () => {
-    const currentAdvices = Object.keys(recommendation.advices).map(function (key) {
-      return recommendation.advices[key]
-    })
-    return currentAdvices
+    return recommendation?.advices ?? []
   }
 
   // separated the content to make the return method more readable
@@ -110,7 +107,7 @@ export const StationDetail = ({
               <span className={`sensor_brand ${aqiColor} ${station.sponsoredBy && 'has_brand'}`}>
                 {station.sponsoredBy}
               </span>
-              <span className="lowercase italic">{t('stationDetail.' + station.type.toLowerCase())}</span>
+              <span className="italic lowercase">{t('stationDetail.' + station.type.toLowerCase())}</span>
             </div>
           )}
         </div>
@@ -122,7 +119,7 @@ export const StationDetail = ({
     return (
       <div className={`text-white px-2 py-1 flex flex-col items-center justify-center ${bgColors.bottomA}`}>
         <div className="text-xs font-semibold uppercase"> {t('stationDetail.usaqi')}</div>
-        <div className="font-bold text-3xl md:text-5xl">
+        <div className="text-3xl font-bold md:text-5xl">
           {' '}
           {station.pollution.aqius < 0 ? 0 : station.pollution.aqius}{' '}
         </div>
@@ -138,8 +135,8 @@ export const StationDetail = ({
   const ContentBottomAreaB = () => {
     return (
       <div className={`col-span-2 px-1 md:px-4 py-1 flex items-center justify-center space-x-1 ${bgColors.bottomB}`}>
-        <div className={`health_category_icon ${recommendation.airQuality}`}></div>
-        <div className="font-bold text-sm" style={{ lineHeight: '18px' }}>
+        <div className={`health_category_icon ${recommendation?.airQuality}`}></div>
+        <div className="text-sm font-bold" style={{ lineHeight: '18px' }}>
           {getTranslated(recommendation?.description, recommendation?.descriptionMn, locale)}
         </div>
       </div>
@@ -150,12 +147,12 @@ export const StationDetail = ({
     return (
       <div className={`flex-grow px-1 md:px-2 py-0.5 md:py-2 ${bgColors.right}`}>
         <div className="flex items-center">
-          <span className="grow font-bold hidden md:inline-block">{t('stationDetail.Recommendations')}</span>
+          <span className="hidden font-bold grow md:inline-block">{t('stationDetail.Recommendations')}</span>
           <div
             onClick={() => setHidden(true)}
-            className="cursor-pointer hover:text-black/30 absolute right-1 top-1 text-white md:relative md:right-auto md:top-auto md:text-inherit"
+            className="absolute text-white cursor-pointer hover:text-black/30 right-1 top-1 md:relative md:right-auto md:top-auto md:text-inherit"
           >
-            <XMarkIcon className="h-5 w-5" />
+            <XMarkIcon className="w-5 h-5" />
           </div>
         </div>
         {/* Recommended Area */}
@@ -163,8 +160,8 @@ export const StationDetail = ({
           {getAdvices().map((advice, idx) => (
             <div key={'recommendationCard' + idx} className={`${bgColors.otherBox} rounded-md`}>
               <RecommendationCard
-                slug={advice.takeAction.slug}
-                icon={advice.icon}
+                slug={advice.takeAction.nodes?.[0]?.slug}
+                icon={advice.icon.node}
                 comment={advice.comment}
                 commentMn={advice.commentMn}
                 locale={locale}
