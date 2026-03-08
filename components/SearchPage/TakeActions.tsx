@@ -28,9 +28,9 @@ type Props = {
 
 const TakeActions: FC<Props> = ({ takeActions }) => {
   const { t } = useTranslation('search')
+  const [currentPage, setCurrentPage] = useState(1)
   if (takeActions?.length === 0) return null
   const cardsPerPage = 8
-  const [currentPage, setCurrentPage] = useState(1)
   const indexOfLastOrg = currentPage * cardsPerPage
   const indexOfFirstOrg = indexOfLastOrg - cardsPerPage
 

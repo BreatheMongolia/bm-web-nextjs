@@ -68,11 +68,11 @@ const settings = {
 }
 
 const Teams: FC<Props> = ({ people }) => {
-  const [t, i18n] = useTranslation('search')
+  const { t } = useTranslation('search')
+  const [currentPage, setCurrentPage] = useState(1)
   if (people.length === 0) return null
 
   const cardsPerPage = 3
-  const [currentPage, setCurrentPage] = useState(1)
   const indexOfLastOrg = currentPage * cardsPerPage
   const indexOfFirstOrg = indexOfLastOrg - cardsPerPage
 
