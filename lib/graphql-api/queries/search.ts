@@ -107,6 +107,7 @@ export async function getSearchData() {
             featuredImage {
               image {
                 node {
+                  mediaItemUrl
                   mediaDetails {
                     sizes(include: [MEDIUM, MEDIUM_LARGE]) {
                       sourceUrl
@@ -117,6 +118,7 @@ export async function getSearchData() {
               }
               imageMn {
                 node {
+                  mediaItemUrl
                   mediaDetails {
                     sizes(include: [MEDIUM, MEDIUM_LARGE]) {
                       sourceUrl
