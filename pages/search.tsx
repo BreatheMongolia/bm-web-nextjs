@@ -25,15 +25,15 @@ const SearchPage = ({ data, locale, banner }) => {
   const pageBanner =
     i18n.language === 'en'
       ? {
-        imageUrl: banner.bannerimage?.node.mediaItemUrl,
-        leftText: banner.bannerTextLeft,
-        rightText: getBannerTextRight(banner.bannerTextRight, 'categoryText'),
-      }
+          imageUrl: banner.bannerimage?.node.mediaItemUrl,
+          leftText: banner.bannerTextLeft,
+          rightText: getBannerTextRight(banner.bannerTextRight, 'categoryText'),
+        }
       : {
-        imageUrl: banner.bannerimageMn?.node.mediaItemUrl,
-        leftText: banner.bannerTextLeftMn,
-        rightText: getBannerTextRight(banner.bannerTextRight, 'categoryTextMn'),
-      }
+          imageUrl: banner.bannerimageMn?.node.mediaItemUrl,
+          leftText: banner.bannerTextLeftMn,
+          rightText: getBannerTextRight(banner.bannerTextRight, 'categoryTextMn'),
+        }
 
   if (searchValue === '') {
     return (
@@ -91,16 +91,15 @@ const SearchPage = ({ data, locale, banner }) => {
         featuredImageSmall: getImage(
           news.node.newsCustomFields.featuredImage.image?.mediaDetails,
           news.node.newsCustomFields.featuredImage.imageMn?.mediaDetails,
-          news.node.featuredImage?.node?.mediaDetails,
+          null,
           'medium',
         ),
         featuredImageBig: getImage(
           news.node.newsCustomFields.featuredImage.image?.mediaDetails,
           news.node.newsCustomFields.featuredImage.imageMn?.mediaDetails,
-          news.node.featuredImage?.node?.mediaDetails,
+          null,
           'medium_large',
         ),
-        featuredImage: news.node.featuredImage?.node.mediaItemUrl,
       })
     })
     return newsData
@@ -118,23 +117,37 @@ const SearchPage = ({ data, locale, banner }) => {
         slug: takeAction.node.slug,
         date: takeAction.node.dateGmt,
         title:
-          getTranslated(takeAction.node.takeActionCustomFields.title, takeAction.node.takeActionCustomFields.titleMn) !== null
-            ? getTranslated(takeAction.node.takeActionCustomFields.title, takeAction.node.takeActionCustomFields.titleMn, locale)
+          getTranslated(
+            takeAction.node.takeActionCustomFields.title,
+            takeAction.node.takeActionCustomFields.titleMn,
+          ) !== null
+            ? getTranslated(
+                takeAction.node.takeActionCustomFields.title,
+                takeAction.node.takeActionCustomFields.titleMn,
+                locale,
+              )
             : '',
         excerpt:
-          getTranslated(takeAction.node.takeActionCustomFields.excerpt, takeAction.node.takeActionCustomFields.excerptMn) !== null
-            ? getTranslated(takeAction.node.takeActionCustomFields.excerpt, takeAction.node.takeActionCustomFields.excerptMn, locale)
+          getTranslated(
+            takeAction.node.takeActionCustomFields.excerpt,
+            takeAction.node.takeActionCustomFields.excerptMn,
+          ) !== null
+            ? getTranslated(
+                takeAction.node.takeActionCustomFields.excerpt,
+                takeAction.node.takeActionCustomFields.excerptMn,
+                locale,
+              )
             : '',
         additionalResources:
           takeAction.node.takeActionCustomFields.additionalResources != null
             ? takeAction.node.takeActionCustomFields.additionalResources.map(
-              (resource: { title: string; titleMn: string; url: string; urlMn: string }) => {
-                return {
-                  title: getTranslated(resource.title, resource.titleMn),
-                  url: getTranslated(resource.url, resource.urlMn, locale),
-                }
-              },
-            )
+                (resource: { title: string; titleMn: string; url: string; urlMn: string }) => {
+                  return {
+                    title: getTranslated(resource.title, resource.titleMn),
+                    url: getTranslated(resource.url, resource.urlMn, locale),
+                  }
+                },
+              )
             : [],
         pledgeContent: getTranslated(
           takeAction.node.takeActionCustomFields.pledgeContent,
@@ -215,38 +228,38 @@ const SearchPage = ({ data, locale, banner }) => {
     searchValue === ''
       ? newses
       : newses.filter(
-        item =>
-          item.title?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-          item.body?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
-      )
+          item =>
+            item.title?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+            item.body?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
+        )
 
   const newFilteredTakeActions =
     searchValue === ''
       ? takeActions
       : takeActions.filter(
-        takeAction =>
-          takeAction.title?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-          takeAction.pledgeContent?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-          takeAction.excerpt?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
-      )
+          takeAction =>
+            takeAction.title?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+            takeAction.pledgeContent?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+            takeAction.excerpt?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
+        )
 
   const filteredPeople =
     searchValue === ''
       ? people
       : people.filter(
-        item =>
-          item.name?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-          item.description?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
-      )
+          item =>
+            item.name?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+            item.description?.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()),
+        )
 
   const filteredPolicies =
     searchValue === ''
       ? policies
       : policies.filter(policy =>
-        Object.values(policy.searchableText).some((text: string) =>
-          text?.toLowerCase().includes(searchValue.toLowerCase()),
-        ),
-      )
+          Object.values(policy.searchableText).some((text: string) =>
+            text?.toLowerCase().includes(searchValue.toLowerCase()),
+          ),
+        )
 
   const count = filteredPolicies.length + filteredNews.length + filteredPeople.length + newFilteredTakeActions.length
 

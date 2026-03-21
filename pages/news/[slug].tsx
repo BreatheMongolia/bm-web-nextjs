@@ -10,12 +10,7 @@ import { H2 } from 'components/generic/Typography'
 import { removeTags } from 'lib/utils/htmlParser'
 
 import { getImage } from 'lib/utils/getImage'
-import {
-  getNewsBannerImages,
-  getNewsFull,
-  getNewsPostSlugs,
-  getLastThree,
-} from 'lib/graphql-api/queries/news'
+import { getNewsBannerImages, getNewsFull, getNewsPostSlugs, getLastThree } from 'lib/graphql-api/queries/news'
 import { BreadCrumb, ShareButton, LatestNews, Banner } from 'components/NewsPage/DetailPage'
 import LoadingPage from 'components/generic/LoadingPage'
 
@@ -36,8 +31,6 @@ export default function NewsPostPage({ post, bannerImage, bannerText, getLatest 
   if (!post || !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
-
-  console.log(post)
 
   const { t } = useTranslation('news')
 
@@ -196,10 +189,10 @@ const getTransformedData = (banner: any, locale: string) => {
         locale,
       ) !== null
         ? getTranslated(
-          banner?.newsGeneralFields.banner?.bannerImage?.node?.mediaItemUrl,
-          banner?.newsGeneralFields.banner?.bannerImageMn?.node?.mediaItemUrl,
-          locale,
-        )
+            banner?.newsGeneralFields.banner?.bannerImage?.node?.mediaItemUrl,
+            banner?.newsGeneralFields.banner?.bannerImageMn?.node?.mediaItemUrl,
+            locale,
+          )
         : '',
   }
 }
@@ -229,14 +222,14 @@ const getNews = (news: News, locale: string): any => {
     authors:
       news?.newsCustomFields.authors !== null
         ? news?.newsCustomFields.authors?.map((author: any) => {
-          return {
-            name:
-              getTranslated(author.authorName, author.authorNameMn, locale) !== null
-                ? getTranslated(author.authorName, author.authorNameMn, locale)
-                : '',
-            authorLink: author.authorLink,
-          }
-        })
+            return {
+              name:
+                getTranslated(author.authorName, author.authorNameMn, locale) !== null
+                  ? getTranslated(author.authorName, author.authorNameMn, locale)
+                  : '',
+              authorLink: author.authorLink,
+            }
+          })
         : null,
     categories: news?.categories?.nodes.map((cat: any) => {
       return {
@@ -253,7 +246,11 @@ const getNews = (news: News, locale: string): any => {
       null,
       'large',
     ),
-    caption: getTranslated(news.newsCustomFields.featuredImage.caption, news.newsCustomFields.featuredImage.captionMn, locale),
+    caption: getTranslated(
+      news.newsCustomFields.featuredImage.caption,
+      news.newsCustomFields.featuredImage.captionMn,
+      locale,
+    ),
   }
 }
 

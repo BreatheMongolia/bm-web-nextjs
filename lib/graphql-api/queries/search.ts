@@ -129,12 +129,6 @@ export async function getSearchData() {
               captionMn
             }
             }
-            featuredImage {
-              node {
-                  id
-                  mediaItemUrl
-              }
-            }
             categories {
             nodes {
                 categoryCustomFields {
