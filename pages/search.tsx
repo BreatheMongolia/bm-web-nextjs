@@ -89,17 +89,24 @@ const SearchPage = ({ data, locale, banner }) => {
         }),
         newsContentType: news.node.newsCustomFields.newsContentType,
         featuredImageSmall: getImage(
-          news.node.newsCustomFields.featuredImage.image?.mediaDetails,
-          news.node.newsCustomFields.featuredImage.imageMn?.mediaDetails,
+          news.node.newsCustomFields.featuredImage?.image?.node?.mediaDetails ??
+            news.node.newsCustomFields.featuredImage?.image?.mediaDetails,
+          news.node.newsCustomFields.featuredImage?.imageMn?.node?.mediaDetails ??
+            news.node.newsCustomFields.featuredImage?.imageMn?.mediaDetails,
           null,
           'medium',
         ),
         featuredImageBig: getImage(
-          news.node.newsCustomFields.featuredImage.image?.mediaDetails,
-          news.node.newsCustomFields.featuredImage.imageMn?.mediaDetails,
+          news.node.newsCustomFields.featuredImage?.image?.node?.mediaDetails ??
+            news.node.newsCustomFields.featuredImage?.image?.mediaDetails,
+          news.node.newsCustomFields.featuredImage?.imageMn?.node?.mediaDetails ??
+            news.node.newsCustomFields.featuredImage?.imageMn?.mediaDetails,
           null,
           'medium_large',
         ),
+        featuredImage:
+          news.node.newsCustomFields.featuredImage?.image?.node?.mediaItemUrl ??
+          news.node.newsCustomFields.featuredImage?.imageMn?.node?.mediaItemUrl,
       })
     })
     return newsData
