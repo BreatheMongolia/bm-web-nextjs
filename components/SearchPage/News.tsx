@@ -6,11 +6,11 @@ import Desktop from 'components/Desktop'
 import Mobile from 'components/Mobile'
 
 const News: FC<{ data: any[] }> = ({ data: newsData }) => {
-  const [t, i18n] = useTranslation('search')
+  const { t } = useTranslation('search')
+  const [currentPage, setCurrentPage] = useState(1)
   if (newsData.length === 0) return null
 
   const cardsPerPage = 6
-  const [currentPage, setCurrentPage] = useState(1)
   const indexOfLastOrg = currentPage * cardsPerPage
   const indexOfFirstOrg = indexOfLastOrg - cardsPerPage
 
@@ -36,7 +36,7 @@ const News: FC<{ data: any[] }> = ({ data: newsData }) => {
               categories={data.categories}
               newsContentType={data.newsContentType}
               newsLandingPageFeatured={data.newsLandingPageFeatured}
-              featuredImageSmall={data.featuredImageBig || data.featuredImageSmall || data.featuredImage}
+              featuredImageSmall={data.featuredImageBig || data.featuredImageSmall}
               cName=""
             />
           ))}

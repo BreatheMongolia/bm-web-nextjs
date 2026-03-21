@@ -4,9 +4,9 @@ import { PolicyEntry } from 'components/PolicyPage/PolicyCard'
 
 const Policies: FC<{ data: any[] }> = ({ data: policyData }) => {
   const { t, i18n } = useTranslation(['search', 'policy'])
+  const [isExpanded, setIsExpanded] = useState(false)
   if (policyData.length === 0) return null
 
-  const [isExpanded, setIsExpanded] = useState(false)
   const initialDisplayCount = 5
   const shouldShowToggle = policyData.length > initialDisplayCount
 
@@ -18,11 +18,7 @@ const Policies: FC<{ data: any[] }> = ({ data: policyData }) => {
 
       <div className="policy-results">
         {displayedPolicies.map((policy: any, index: number) => (
-          <PolicyEntry
-            key={policy.databaseId || index}
-            policy={policy}
-            locale={i18n.language}
-          />
+          <PolicyEntry key={policy.databaseId || index} policy={policy} locale={i18n.language} />
         ))}
       </div>
 

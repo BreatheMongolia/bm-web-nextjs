@@ -8,6 +8,7 @@
 - [ ] fix: bug fix
 - [ ] refactor: refactoring of existing code
 - [ ] cleanup: cleanup of unnecessary or obsolete code
+- [ ] test: added or updated tests
 
 # Reference(s)\*
 
