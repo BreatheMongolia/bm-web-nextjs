@@ -287,15 +287,15 @@ function getLatestNews(data: any[], locale: string) {
       newsContentType: news.newsCustomFields.newsContentType,
       featuredImageSmall:
         getImage(
-          news.newsCustomFields.featuredImage.image?.mediaDetails,
-          news.newsCustomFields.featuredImage.imageMn?.mediaDetails,
+          news.newsCustomFields.featuredImage.image?.node?.mediaDetails,
+          news.newsCustomFields.featuredImage.imageMn?.node?.mediaDetails,
           null,
           'medium',
         ) || '',
       featuredImageBig:
         getImage(
-          news.newsCustomFields.featuredImage.image?.mediaDetails,
-          news.newsCustomFields.featuredImage.imageMn?.mediaDetails,
+          news.newsCustomFields.featuredImage.image?.node?.mediaDetails,
+          news.newsCustomFields.featuredImage.imageMn?.node?.mediaDetails,
           null,
           'large',
         ) || '',
