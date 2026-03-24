@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('News Detail Page', () => {
-  test('should render Latest news images on news detail page', async ({ page }) => {
+  test('should render latest news images on news detail page', async ({ page }) => {
     await page.goto('/en/news', { waitUntil: 'domcontentloaded', timeout: 0 })
 
     const slug = await page.evaluate(() => {
