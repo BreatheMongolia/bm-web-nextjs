@@ -6,8 +6,8 @@ on:
       - staging
 
   pull_request:
-    branches:
-      - '**'
+    branches-ignore:
+      - main
 jobs:
   e2e-tests:
     name: End-to-end Tests
@@ -27,7 +27,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # TODO: Update to V22
+          node-version: "22" # TODO: Update to V22
 
       - name: Install dependencies
         run: npm install -g yarn && yarn
