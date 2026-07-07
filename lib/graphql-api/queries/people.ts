@@ -7,26 +7,26 @@ export async function getPeople() {
         persons(first: ${MAX_NUM}) {
         edges {
             node {
-                title
-                featuredImage {
-                node {
-                    mediaItemUrl
-                }
-                }
                 personCustomFields {
-                nameMn
-                role
-                roleMn
-                description
-                descriptionMn
-                memberSince
-                memberSinceMn
-                featured
-                linkedin
+                    name
+                    nameMn
+                    role
+                    roleMn
+                    description
+                    descriptionMn
+                    memberSince
+                    memberSinceMn
+                    featured
+                    linkedin
+                    featuredImage {
+                        node {
+                            mediaItemUrl
+                        }
+                    }
                 }
             }
-            }
-    }
+        }
+    }        
 }
 `,
     {},
