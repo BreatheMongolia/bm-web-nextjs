@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 const InnerMongoliaFlag: FC = () => {
   return (
-    <svg width="105" height="70" viewBox="0 0 105 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="flag">
+    <svg width="105" height="70" viewBox="0 0 105 70" fill="none" xmlns="http://www.w3.org/2000/svg" id="flag-icons-inner">
       <path
         d="M4 0.5H101C102.933 0.5 104.5 2.067 104.5 4V66C104.5 67.933 102.933 69.5 101 69.5H4C2.067 69.5 0.5 67.933 0.5 66V4C0.5 2.067 2.067 0.5 4 0.5Z"
         fill="#0000FA"

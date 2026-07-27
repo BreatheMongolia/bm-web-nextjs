@@ -34,8 +34,8 @@ const getTransformedPeople = (PplData: string | any[], locale: string) => {
   const people = []
   for (let i = 0; i < PplData.length; i++) {
     people.push({
-      name: getTranslated(PplData[i].node.title, PplData[i].node.personCustomFields.nameMn, locale),
-      imgSrc: PplData[i].node.featuredImage.node.mediaItemUrl,
+      name: getTranslated(PplData[i].node.personCustomFields.name, PplData[i].node.personCustomFields.nameMn, locale),
+      imgSrc: PplData[i].node.personCustomFields.featuredImage.node.mediaItemUrl,
       role: getTranslated(PplData[i].node.personCustomFields.role, PplData[i].node.personCustomFields.roleMn, locale),
       description: getTranslated(
         PplData[i].node.personCustomFields.description,
