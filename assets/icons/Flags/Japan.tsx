@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 const JapanFlag: FC = () => {
   return (
-    <svg className="flag" width="105" height="70" viewBox="0 0 105 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="105" height="70" viewBox="0 0 105 70" fill="none" xmlns="http://www.w3.org/2000/svg" id="flag-icons-jp">
       <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="105" height="70">
         <rect x="0.5" y="0.5" width="104" height="69" rx="3.5" fill="#C4C4C4" stroke="#D8D8D8" />
       </mask>
