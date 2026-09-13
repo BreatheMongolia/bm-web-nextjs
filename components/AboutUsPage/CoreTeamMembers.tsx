@@ -22,7 +22,7 @@ const CoreTeamMembers = ({ people }: { people: People[] }) => {
   return (
     <div className="flex flex-col pb-20">
       <h1 className="our_team_section_title">{t('ourTeam.ourTeam')}</h1>
-      <div className="core-team-members-grid grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="core-team-members-grid grid justify-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
         {people.map(person => (
           <CoreMemberCard key={person.linkedin} person={person} />
         ))}

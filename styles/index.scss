@@ -812,6 +812,10 @@ p {
       border: 7px solid rgba(82, 143, 236, 0.25);
       border-radius: 100%;
       margin-bottom: 17px;
+
+      &.no-image {
+        background-color: rgba(82, 143, 236, 0.15);
+      }
     }
 
     h2 {

@@ -10,7 +10,11 @@ const CoreMemberCard: FC<Props> = ({ person }) => {
 
   return (
     <div className="core-member-card text-center">
-      <img src={person.imgSrc} alt="member profile image" className="profile_icon core" />
+      {person.imgSrc ? (
+        <img src={person.imgSrc} alt="member profile image" className="profile_icon core" />
+      ) : (
+        <div className="profile_icon core no-image" aria-hidden="true" />
+      )}
       <div className="core_member_title">
         <h4 className="member_name core">{person.name}</h4>
         <h5 className="member_role core">{person.role}</h5>

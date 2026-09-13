@@ -8536,6 +8536,8 @@ export type PersonCustomFields = AcfFieldGroup & AcfFieldGroupFields & PersonCus
   descriptionMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;true_false&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
   featured?: Maybe<Scalars['Boolean']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
+  featuredImage?: Maybe<AcfMediaItemConnectionEdge>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -8547,6 +8549,8 @@ export type PersonCustomFields = AcfFieldGroup & AcfFieldGroupFields & PersonCus
   memberSince?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
   memberSinceMn?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
+  name?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
   nameMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
@@ -8563,6 +8567,8 @@ export type PersonCustomFields_Fields = {
   descriptionMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;true_false&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
   featured?: Maybe<Scalars['Boolean']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
+  featuredImage?: Maybe<AcfMediaItemConnectionEdge>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -8574,6 +8580,8 @@ export type PersonCustomFields_Fields = {
   memberSince?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
   memberSinceMn?: Maybe<Scalars['String']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
+  name?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
   nameMn?: Maybe<Scalars['String']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;PersonCustomFields&quot; Field Group */
