@@ -11,7 +11,11 @@ const FeaturedMemberCard: FC<Props> = ({ person }) => {
   return (
     <div className="member_card">
       <div className="member_card_left">
-        <img src={person.imgSrc} className="member_img" />
+        {person.imgSrc ? (
+          <img src={person.imgSrc} className="member_img" alt="" />
+        ) : (
+          <div className="member_img no-image" aria-hidden="true" />
+        )}
       </div>
       <div className="member_card_right">
         <div className="member_info">

@@ -24,9 +24,7 @@ const MAP_BASE_CONFIG = {
   zoom: 12,
   style: 'streets-v11',
 }
-// FIXME: Bad to hardcode the API KEY in the code. But since it's static rendering it was easier this way.
-const MAPBOX_KEY =
-  'pk.eyJ1IjoiYnJlYXRoZW1vbmdvbGlhIiwiYSI6ImNrMjhnMHU4bDEwOXkzaXFodnFiaW1heHIifQ.7MPVleYVPDUY10UE200Zow'
+const MAPBOX_KEY = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
 export const MapComponent = ({
   title,
