@@ -17,7 +17,11 @@ const TeamCard: FC<Props> = ({ name, description, linkedin, image, role }) => {
     <>
       <div className={'team-card'}>
         <div className="card-header">
-          <img className="avatar" src={image} />
+          {image ? (
+            <img className="avatar" src={image} />
+          ) : (
+            <div className="avatar no-image" aria-hidden="true" />
+          )}
           <h2>{name}</h2>
           <span>{role}</span>
         </div>

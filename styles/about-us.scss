@@ -39,6 +39,10 @@ h1.our_team_section_title {
   height: 100%;
   border-radius: 20px 0 0 20px;
   object-fit: cover;
+
+  &.no-image {
+    background-color: rgba(82, 143, 236, 0.15);
+  }
 }
 
 .member_card_right {
@@ -147,6 +151,15 @@ h1.our_team_section_title {
       width: 80px;
       height: 80px;
       border: 7px solid rgba(82, 143, 236, 0.25);
+    }
+
+    .profile_icon.core.no-image {
+      display: block;
+      margin: 0px auto;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      background-color: rgba(82, 143, 236, 0.15);
     }
 
     .core_member_info {

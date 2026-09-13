@@ -185,7 +185,7 @@ const SearchPage = ({ data, locale, banner }) => {
     for (let i = 0; i < PplData.length; i++) {
       people.push({
         name: getTranslated(PplData[i].node.title, PplData[i].node.personCustomFields.nameMn, locale),
-        imgSrc: PplData[i].node.featuredImage.node.mediaItemUrl,
+        imgSrc: PplData[i].node.featuredImage?.node?.mediaItemUrl ?? null,
         role: getTranslated(PplData[i].node.personCustomFields.role, PplData[i].node.personCustomFields.roleMn, locale),
         description: getTranslated(
           PplData[i].node.personCustomFields.description,
