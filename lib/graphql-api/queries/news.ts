@@ -51,17 +51,6 @@ export async function getFeaturedNews(): Promise<News[]> {
                     }
                   }
                 }
-                featuredImage {
-                  node {
-                    id
-                    mediaDetails {
-                      sizes(include: [MEDIUM, MEDIUM_LARGE]) {
-                        name
-                        sourceUrl
-                      }
-                    }
-                  }
-                }
                 categories {
                   nodes {
                     slug
@@ -69,6 +58,7 @@ export async function getFeaturedNews(): Promise<News[]> {
                       name
                       nameMn
                     }
+                }
                   }
                 }
               }
@@ -76,10 +66,8 @@ export async function getFeaturedNews(): Promise<News[]> {
           }
         }
       }
-    }
     `,
-    {},
-  ).catch(err => console.error('Failed to fetch featuredeNews:', err))
+  )
 
   if (data?.page) {
     const page = data.page as Page
