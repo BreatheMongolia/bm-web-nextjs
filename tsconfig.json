@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "types": ["node", "vitest/globals"],
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -9,14 +11,20 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"]
+      "assets/*": ["./assets/*"],
+      "@/components/*": ["./components/*"],
+      "@bm-web-nextjs/*": ["./*"],
+      "components/*": ["./components/*"],
+      "graphql/*": ["./graphql/*"],
+      "lib/*": ["./lib/*"],
+      "pages/*": ["./pages/*"],
+      "styles/*": ["./styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
