@@ -38,7 +38,7 @@ export const CampaignCard: FC<Props> = ({
         <div className="campaign-content">
           {category && (
             <div className="flex flex-row content-center">
-              <div className="mt-2 custom_dot_green"></div>
+              <div className="mt-2 custom_dot_greens"></div>
               <div className="campaignCategory">{category}</div>
             </div>
           )}
