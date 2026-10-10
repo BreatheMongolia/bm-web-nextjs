@@ -266,7 +266,7 @@ describe('fetchPurpleAirStations', () => {
 
     givenSensors([
       createSensor({ name: 'Invalid Station', 'pm2.5': 'invalid' }),
-      createSensor(),
+      createSensor(), // This one is the valid sensor that should be returned
       createSensor({ name: 'Missing Station', 'pm2.5': null }),
     ])
 
@@ -342,10 +342,7 @@ describe('fetchPurpleAirStations', () => {
   it('should reject when the HTTP response is not successful', async () => {
     const { sut, fetchMock } = createSUT()
     fetchMock.mockResolvedValueOnce(
-      createResponse(
-        { error: 'SyntheticApiError', description: 'The key is restricted.' },
-        403,
-      ),
+      createResponse({ error: 'SyntheticApiError', description: 'The key is restricted.' }, 403),
     )
 
     await expect(sut()).rejects.toThrow('SyntheticApiError: The key is restricted.')
@@ -416,7 +413,7 @@ describe('fetchPurpleAirStations', () => {
     fetchMock.mockResolvedValueOnce(
       createResponse({
         error: 'DataInitializingError',
-        description: 'Please retry after 2 seconds.',
+        description: 'Please retry after 2 seconds.', // In the code we are parsing this description to extract the retry interval
       }),
     )
     givenSensors([])
@@ -484,11 +481,9 @@ describe('fetchPurpleAirStations', () => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date('2026-10-05T12:00:00.000Z'))
     fetchMock.mockResolvedValueOnce(
-      createResponse(
-        { error: 'SyntheticRateLimitError' },
-        429,
-        { 'Retry-After': new Date(Date.now() + 2000).toUTCString() },
-      ),
+      createResponse({ error: 'SyntheticRateLimitError' }, 429, {
+        'Retry-After': new Date(Date.now() + 2000).toUTCString(),
+      }),
     )
     givenSensors([])
 
@@ -606,16 +601,31 @@ describe('fetchPurpleAirStations', () => {
     await expect(sut()).rejects.toThrow('PurpleAir response is missing fields, location_types, or data')
   })
 
-  it('should reject when station conversion fails', async () => {
+  it('should log and skip a station conversion failure while processing remaining stations', async () => {
     const { sut, givenSensors, getAQIMock } = createSUT()
-    const error = new Error('AQI conversion failed')
+    const conversionError = new Error('AQI conversion failed')
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
 
-    givenSensors([createSensor(), createSensor({ name: 'Second Station', 'pm2.5': 25 })])
+    givenSensors([
+      createSensor({ name: 'First Station', 'pm2.5': 12 }),
+      createSensor({ name: 'Failing Station', 'pm2.5': 25 }),
+      createSensor({ name: 'Last Station', 'pm2.5': 30 }),
+    ])
 
-    getAQIMock.mockReturnValueOnce(50).mockImplementationOnce(() => {
-      throw error
+    getAQIMock.mockImplementation(pm25 => {
+      if (pm25 === 25) {
+        throw conversionError
+      }
+      return 50
     })
 
-    await expect(sut()).rejects.toBe(error)
+    const stations = await sut()
+
+    expect(stations.map(station => station.name)).toEqual(['First Station', 'Last Station'])
+    expect(getAQIMock.mock.calls.map(([pm25]) => pm25)).toEqual([12, 25, 30])
+    expect(consoleError).toHaveBeenCalledWith(
+      'failed to convert sensor "Failing Station":',
+      conversionError,
+    )
   })
 })

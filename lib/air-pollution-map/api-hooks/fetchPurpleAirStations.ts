@@ -31,6 +31,7 @@ function retryAfterHeaderDelay(retryAfter: string | null): number {
 }
 
 function initializationRetryDelay(description?: string): number {
+  // Couldn't find a definitive source of how description should look like when DataInitializingError is returned.
   const delay = description?.match(/(\d+(?:\.\d+)?)\s*(milliseconds?|ms|seconds?|s|minutes?|m)/i)
   if (!delay) {
     return DEFAULT_RETRY_DELAY_MS
@@ -57,9 +58,7 @@ function formatPurpleAirError(payload: unknown, fallback: string): Error {
   const errorPayload = isRecord(payload) ? payload : {}
   const errorCode = typeof errorPayload.error === 'string' ? errorPayload.error : undefined
   const description = typeof errorPayload.description === 'string' ? errorPayload.description : undefined
-  const message = description
-    ? `${errorCode ?? fallback}: ${description}`
-    : (errorCode ?? fallback)
+  const message = description ? `${errorCode ?? fallback}: ${description}` : (errorCode ?? fallback)
   return new Error(message)
 }
 
@@ -126,9 +125,7 @@ async function fetchSensorData() {
         throw formatPurpleAirError(data, 'PurpleAir data is initializing')
       }
 
-      await wait(initializationRetryDelay(
-        typeof data.description === 'string' ? data.description : undefined,
-      ))
+      await wait(initializationRetryDelay(typeof data.description === 'string' ? data.description : undefined))
       continue
     }
 
@@ -160,18 +157,22 @@ export const fetchPurpleAirStations = async () => {
   const validStations = rawStations.filter(sensor => parseInt(sensor['pm2.5']) > 0)
 
   validStations.forEach(sensor => {
-    const pm2 = parseInt(sensor['pm2.5'])
-    const stationAQI = getAQIFromPM2(pm2)
-    const locationType = locationTypes[sensor['location_type']]
+    try {
+      const pm2 = parseInt(sensor['pm2.5'])
+      const stationAQI = getAQIFromPM2(pm2)
+      const locationType = locationTypes[sensor['location_type']]
 
-    stations.push({
-      name: sensor.name,
-      pollution: { aqius: stationAQI, p2: pm2, ts: sensor.last_seen * 1000 },
-      location: { coordinates: [sensor.longitude, sensor.latitude] },
-      type: locationType === 'outside' ? 'outdoor' : 'indoor',
-      sponsoredBy: 'Purple Air',
-      color: getAQIColor(stationAQI),
-    })
+      stations.push({
+        name: sensor.name,
+        pollution: { aqius: stationAQI, p2: pm2, ts: sensor.last_seen * 1000 },
+        location: { coordinates: [sensor.longitude, sensor.latitude] },
+        type: locationType === 'outside' ? 'outdoor' : 'indoor',
+        sponsoredBy: 'Purple Air',
+        color: getAQIColor(stationAQI),
+      })
+    } catch (error) {
+      console.error(`failed to convert sensor "${sensor.name}":`, error)
+    }
   })
 
   return stations
