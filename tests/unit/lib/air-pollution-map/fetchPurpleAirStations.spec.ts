@@ -406,20 +406,27 @@ describe('fetchPurpleAirStations', () => {
     await expect(sut()).rejects.toThrow('PurpleAir response body is not valid JSON')
   })
 
-  it('should retry after the interval in a DataInitializingError description', async () => {
+  it.each([
+    { interval: '500 ms', delayMs: 500 },
+    { interval: '500 milliseconds', delayMs: 500 },
+    { interval: '2 s', delayMs: 2000 },
+    { interval: '2 seconds', delayMs: 2000 },
+    { interval: '1 m', delayMs: 60_000 },
+    { interval: '1 minute', delayMs: 60_000 },
+  ])('should retry after $interval in a DataInitializingError description', async ({ interval, delayMs }) => {
     const { sut, fetchMock, givenSensors } = createSUT()
     vi.useFakeTimers()
 
     fetchMock.mockResolvedValueOnce(
       createResponse({
         error: 'DataInitializingError',
-        description: 'Please retry after 2 seconds.', // In the code we are parsing this description to extract the retry interval
+        description: `Please retry after ${interval}.`,
       }),
     )
     givenSensors([])
 
     const result = sut()
-    await vi.advanceTimersByTimeAsync(1999)
+    await vi.advanceTimersByTimeAsync(delayMs - 1)
     expect(fetchMock).toHaveBeenCalledTimes(1)
     await vi.advanceTimersByTimeAsync(1)
 

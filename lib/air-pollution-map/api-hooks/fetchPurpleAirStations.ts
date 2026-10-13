@@ -37,14 +37,17 @@ function initializationRetryDelay(description?: string): number {
     return DEFAULT_RETRY_DELAY_MS
   }
 
-  const unit = delay[2].toLowerCase().replace(/s$/, '')
+  const unit = delay[2].toLowerCase()
   const millisecondsPerUnit: Record<string, number> = {
     ms: 1,
     millisecond: 1,
+    milliseconds: 1,
     s: 1000,
     second: 1000,
+    seconds: 1000,
     m: 60_000,
     minute: 60_000,
+    minutes: 60_000,
   }
 
   return boundedRetryDelay(Number(delay[1]) * millisecondsPerUnit[unit])
