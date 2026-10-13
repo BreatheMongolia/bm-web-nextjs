@@ -1,4 +1,5 @@
 import { fetchPurpleAirStations } from '@bm-web-nextjs/lib/air-pollution-map/api-hooks/fetchPurpleAirStations'
+import { logger } from '@bm-web-nextjs/lib/logger'
 import { getAQIFromPM2, getAQIColor } from '@bm-web-nextjs/components/HomePage/MapComponent/utils'
 import { PA_MONGOLIA_BOUNDING_BOX_COORDS } from '@bm-web-nextjs/components/HomePage/MapComponent/consts'
 import { vi } from 'vitest'
@@ -611,7 +612,7 @@ describe('fetchPurpleAirStations', () => {
   it('should log and skip a station conversion failure while processing remaining stations', async () => {
     const { sut, givenSensors, getAQIMock } = createSUT()
     const conversionError = new Error('AQI conversion failed')
-    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const loggerError = vi.spyOn(logger, 'error').mockImplementation(() => logger)
 
     givenSensors([
       createSensor({ name: 'First Station', 'pm2.5': 12 }),
@@ -630,9 +631,9 @@ describe('fetchPurpleAirStations', () => {
 
     expect(stations.map(station => station.name)).toEqual(['First Station', 'Last Station'])
     expect(getAQIMock.mock.calls.map(([pm25]) => pm25)).toEqual([12, 25, 30])
-    expect(consoleError).toHaveBeenCalledWith(
-      'failed to convert sensor "Failing Station":',
-      conversionError,
+    expect(loggerError).toHaveBeenCalledWith(
+      { component: 'purple-air', sensorName: 'Failing Station', err: conversionError },
+      'Failed to convert sensor',
     )
   })
 })

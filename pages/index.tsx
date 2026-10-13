@@ -18,6 +18,7 @@ import {
   fetchAirVisualIndoorStations,
   fetchAirVisualOutdoorStations,
 } from 'lib/air-pollution-map/api-hooks'
+import { logger } from 'lib/logger'
 // components
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
@@ -166,7 +167,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const purpleAirStations = isNotDev
     ? await fetchPurpleAirStations().catch(error => {
         purpleAirFetchFailed = true
-        console.error('Failed to fetch PurpleAir stations:', error)
+        logger.error({ component: 'purple-air', err: error }, 'Failed to fetch PurpleAir stations')
         return []
       })
     : []
