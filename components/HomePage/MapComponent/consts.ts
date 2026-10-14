@@ -212,7 +212,7 @@ export const indoorStationLocation: any = {
   },
   'skhd-hospital-indoor': {
     lat: 47.91499602726164,
-    log: 106.84651426970959,
+    lon: 106.84651426970959,
   },
   'khud hospital-indoor': {
     lat: 47.897912,

@@ -25,6 +25,7 @@ Most routes statically fetch WordPress data and specify a `revalidate` interval.
 | Languages | `next-i18next.config.js`, `public/locales/{mn,en}/`, `lib/utils/getTranslated.ts` | Mongolian default; translated JSON and WordPress fields |
 | Styling and assets | `styles/`, `tailwind.config.js`, `assets/`, `public/` | Global SCSS, utility classes, bundled and public assets |
 | Tests | `tests/e2e/`, component `__tests__/`, `playwright.config.ts`, `jest.config.ts` | Browser and component tests |
+| WordPress backend | `backend/` (git submodule of BreatheMongolia/wordpress) | Custom GraphQL mutations, ACF fields in `wp-content/themes/breathemongolia/functions.php` |
 
 ## Data and language details
 
@@ -35,5 +36,7 @@ The home page combines WordPress content with PurpleAir, OpenAQ, and AirVisual s
 The router locales are `mn` and `en`, with `mn` as default and automatic locale detection disabled. Translation JSON is split into namespaces such as `nav`, `home`, and `policy`; pages list the namespaces they load in `serverSideTranslations`. Some WordPress fields have separate English and Mongolian values selected by `getTranslated`. Pass the route locale during server rendering because browser `localStorage` is unavailable there.
 
 ## Operational dependencies
+
+The WordPress backend lives in the `backend/` git submodule (https://github.com/BreatheMongolia/wordpress). After cloning this repo, run `git submodule update --init` to fetch it. The local dev site (Local by Flywheel) at `C:\Users\Tugu\Local Sites\breathemon\app\public` serves the same code; the submodule is the source of truth for review and versioning. Custom backend behavior (pledge and feedback mutations, `totalPledges`/`totalUserFeedbacks` fields, admin news filters) is in `backend/wp-content/themes/breathemongolia/functions.php`.
 
 `next.config.js` requires `WORDPRESS_API_URL` even to load the Next configuration and derives an allowed image hostname from it. `codegen.yaml` points at a remote development WordPress schema. A production build may need live WordPress content, and home-page generation may contact sensor services. Keep those dependencies in mind when interpreting local or CI failures.
