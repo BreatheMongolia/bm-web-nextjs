@@ -2,6 +2,13 @@
 
 This is the front-end project for the BreatheMongolia Website that is written in React/NextJS.
 
+## Agent and developer guides
+
+- [Agent instructions](./AGENTS.md)
+- [Architecture map](./docs/architecture.md)
+- [Development and verification](./docs/development.md)
+- [Project review notes](./docs/project-review.md)
+
 ## Deployment Steps
 
 TODO: Outline steps for deployment processes here.
@@ -39,3 +46,5 @@ NEXT_PUBLIC_MAPBOX_TOKEN=
 yarn install
 yarn dev
 ```
+
+The site should be up and running on [http://localhost:9000](http://localhost:9000)!
