@@ -8,12 +8,16 @@ function getAbsolutePath(path: string) {
 export default defineConfig({
   test: {
     alias: {
+      'assets/': getAbsolutePath('./assets/'),
+      '@/components/': getAbsolutePath('./components/'),
       '@bm-web-nextjs/': getAbsolutePath('./'),
       'components/': getAbsolutePath('./components/'),
       'graphql/': getAbsolutePath('./graphql/'),
       'lib/': getAbsolutePath('./lib/'),
+      'pages/': getAbsolutePath('./pages/'),
+      'styles/': getAbsolutePath('./styles/'),
       '@/__tests__': getAbsolutePath('./tests'),
-      '@/utils/': getAbsolutePath('./utils'),
+      '@/utils/': getAbsolutePath('./utils/'),
     },
     coverage: {
       include: ['components/HomePage/MapComponent/**/*.{ts,tsx}', 'lib/air-pollution-map/**/*.{ts,tsx}'],
