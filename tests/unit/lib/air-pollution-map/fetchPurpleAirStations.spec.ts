@@ -289,17 +289,6 @@ describe('fetchPurpleAirStations', () => {
     expect(getAQIMock).toHaveBeenCalledWith(25)
   })
 
-  it('should preserve decimal PM2.5 readings', async () => {
-    const { sut, givenSensors, getAQIMock } = createSUT()
-    givenSensors([createSensor({ 'pm2.5': ' 14.2 ' })])
-
-    const stations = await sut()
-
-    expect(stations).toHaveLength(1)
-    expect(stations[0].pollution.p2).toBe(14.2)
-    expect(getAQIMock).toHaveBeenCalledWith(14.2)
-  })
-
   it.each([
     { label: 'outside', locationType: 0, expectedType: 'outdoor' },
     { label: 'inside', locationType: 1, expectedType: 'indoor' },

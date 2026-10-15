@@ -199,23 +199,16 @@ export const fetchPurpleAirStations = async () => {
     }, {}),
   )
 
-  const validStations = rawStations.flatMap(sensor => {
-    const rawPm25 = sensor['pm2.5']
-    if (typeof rawPm25 !== 'number' && typeof rawPm25 !== 'string') {
-      return []
-    }
-
-    const pm2 = Number(typeof rawPm25 === 'string' ? rawPm25.trim() : rawPm25)
-    return Number.isFinite(pm2) && pm2 > 0 ? [{ sensor, pm2 }] : []
-  })
+  const validStations = rawStations.filter(sensor => parseInt(sensor['pm2.5']) > 0)
   logger.info({
     component: 'purple-air',
     sensorsReceived: rawStations.length,
     sensorsWithValidPm25: validStations.length,
   }, 'Processing sensor response')
 
-  validStations.forEach(({ sensor, pm2 }) => {
+  validStations.forEach(sensor => {
     try {
+      const pm2 = parseInt(sensor['pm2.5'])
       const stationAQI = getAQIFromPM2(pm2)
       const locationType = locationTypes[sensor['location_type']]
 
