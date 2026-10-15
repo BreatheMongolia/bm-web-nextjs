@@ -6,5 +6,8 @@
   "tapToTakePledge": "Tap to take this pledge",
   "joined": "You and {{totalPledge}} people have taken this pledge!",
   "share": "Share Your Pledge Now!",
-  "mobileTitle": "Take This Pledge and Share with Your Network!"
+  "mobileTitle": "Take This Pledge and Share with Your Network!",
+  "submitting": "Submitting...",
+  "pledgeError": "Something went wrong. Please try again later.",
+  "rateLimitError": "You have already pledged recently. Please try again later."
 }
