@@ -7,5 +7,7 @@
   "question": "Did you find this information useful?",
   "thankYou": "Thank you for your feedback!",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "feedbackError": "Something went wrong. Please try again later.",
+  "rateLimitError": "You have submitted feedback recently. Please try again later."
 }

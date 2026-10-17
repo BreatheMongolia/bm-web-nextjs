@@ -2,6 +2,13 @@
 
 This is the front-end project for the BreatheMongolia Website that is written in React/NextJS.
 
+## Agent and developer guides
+
+- [Agent instructions](./AGENTS.md)
+- [Architecture map](./docs/architecture.md)
+- [Development and verification](./docs/development.md)
+- [Project review notes](./docs/project-review.md)
+
 ## Deployment Steps
 
 TODO: Outline steps for deployment processes here.
@@ -15,7 +22,7 @@ The below steps are the necessary steps for local development for this project.
 Setup a local `.env.local` file (which will be ignored by Git):
 
 ```bash
-cp .env.local.example .env.local
+cp .env.example .env.local
 ```
 
 Then open `.env.local` and set `WORDPRESS_API_URL` to be the URL to your GraphQL endpoint in WordPress.
@@ -24,6 +31,9 @@ Your `.env.local` file should look like this:
 
 ```bash
 WORDPRESS_API_URL=https://breathemon2.wpengine.com/graphql
+
+# Add your Mapbox public token to enable map tiles
+NEXT_PUBLIC_MAPBOX_TOKEN=
 
 # Only required if you want to enable preview mode
 # WORDPRESS_AUTH_REFRESH_TOKEN=
@@ -37,4 +47,4 @@ yarn install
 yarn dev
 ```
 
-The site should be up and running on [http://localhost:9001](http://localhost:9001)!
+The site should be up and running on [http://localhost:9000](http://localhost:9000)!

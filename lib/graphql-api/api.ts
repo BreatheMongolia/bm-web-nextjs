@@ -19,7 +19,11 @@ export async function fetchAPI(query = '', { variables, apiUrl }: Record<string,
   const json = await res.json()
   if (json.errors) {
     console.error(json.errors)
-    throw new Error('Failed to fetch API')
+    const error = new Error('Failed to fetch API')
+    // Attach GraphQL errors so callers can distinguish error classes
+    // (e.g. rate limiting) from generic failures.
+    ;(error as Error & { graphqlErrors?: unknown[] }).graphqlErrors = json.errors
+    throw error
   }
   return json.data
 }

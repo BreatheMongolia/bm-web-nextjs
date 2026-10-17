@@ -8,13 +8,11 @@ import closeBlackIcon from 'assets/images/close-black.png'
 import SocialShare from 'components/SocialShare'
 import Desktop from 'components/Desktop'
 import Mobile from 'components/Mobile'
-import { PLEDGE_MUTATION } from 'lib/graphql-api/mutations/takeAction'
 import { useMediaQuery } from 'react-responsive'
 import cx from 'classnames'
 import Modal from 'react-modal'
 import dayjs from 'dayjs'
 import Image from 'next/image'
-import { fetchAPI } from 'lib/graphql-api/api'
 
 type Props = {
   title: string
@@ -31,6 +29,8 @@ export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, to
   const isMobile = useMediaQuery({ maxWidth: 912 })
   const [isPledged, setIsPledged] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorKey, setErrorKey] = useState<'' | 'pledgeError' | 'rateLimitError'>('')
   const [totalPledge, setTotalPledge] = useState(totalPledges)
   const [currentUrl, setCurrentUrl] = useState('')
 
@@ -42,23 +42,43 @@ export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, to
   const language = i18n.language
 
   const pledgeAction = () => {
-    if (isPledged) {
-      setShowModal(true)
+    if (isPledged || isSubmitting) {
+      if (isPledged) setShowModal(true)
       return
     }
 
-    fetchAPI(PLEDGE_MUTATION, {
-      variables: {
+    setIsSubmitting(true)
+    setErrorKey('')
+
+    fetch('/api/pledge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         id: actionId,
-        cid: actionId.toString(),
         language: language,
         date: now.format(),
-      },
-    }).then(result => {
-      setTotalPledge(result?.addPledge?.takeAction?.totalPledges)
-      setIsPledged(true)
-      setShowModal(true)
+      }),
     })
+      .then(async res => {
+        if (res.status === 429) {
+          throw Object.assign(new Error('Rate limited'), { isRateLimit: true })
+        }
+        if (!res.ok) {
+          throw new Error(`Pledge failed: ${res.status}`)
+        }
+        return res.json()
+      })
+      .then(result => {
+        setTotalPledge(result?.totalPledges)
+        setIsPledged(true)
+        setShowModal(true)
+      })
+      .catch((err: Error & { isRateLimit?: boolean }) => {
+        setErrorKey(err.isRateLimit ? 'rateLimitError' : 'pledgeError')
+      })
+      .finally(() => {
+        setIsSubmitting(false)
+      })
   }
 
   return (
@@ -80,9 +100,16 @@ export const PledgeBox: FC<Props> = ({ title, actionId, pledgeTitle, content, to
           <div className="pledge-row">
             <div className="pledge-content">
               {content && parse(content)}
-              <div className={cx('pledge-button', isPledged && 'disabled')}>
-                <button onClick={() => pledgeAction()}>{isPledged ? t('pledged') : t('button')}</button>
-              </div>
+            <div className={cx('pledge-button', (isPledged || isSubmitting) && 'disabled')}>
+              <button onClick={() => pledgeAction()} disabled={isSubmitting}>
+                {isPledged ? t('pledged') : isSubmitting ? t('submitting') : t('button')}
+              </button>
+              {errorKey && (
+                <p className="pledge-error" role="alert">
+                  {t(errorKey)}
+                </p>
+              )}
+            </div>
             </div>
             <Desktop>
               <div className="pledge-hand">
