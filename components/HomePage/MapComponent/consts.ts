@@ -129,8 +129,6 @@ export const PA_MONGOLIA_BOUNDING_BOX_COORDS = {
   SE_LAT: 42.209709,
   SE_LNG: 120.416821,
 }
-export const PURPLE_AIR_API_KEY = 'A060ACF0-510E-11EB-9893-42010A8001E8'
-
 export const PML_OutdoorSensorPurpleAir =
   'https://api.openaq.org/v2/measurements?country=MN&sensorType=low-cost%20sensor'
 

@@ -32,6 +32,9 @@ Your `.env.local` file should look like this:
 ```bash
 WORDPRESS_API_URL=https://breathemon2.wpengine.com/graphql
 
+# Add your Mapbox public token to enable map tiles
+NEXT_PUBLIC_MAPBOX_TOKEN=
+
 # Only required if you want to enable preview mode
 # WORDPRESS_AUTH_REFRESH_TOKEN=
 # WORDPRESS_PREVIEW_SECRET=
