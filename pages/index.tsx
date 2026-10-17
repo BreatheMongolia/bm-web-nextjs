@@ -18,6 +18,7 @@ import {
   fetchAirVisualIndoorStations,
   fetchAirVisualOutdoorStations,
 } from 'lib/air-pollution-map/api-hooks'
+import { logger } from 'lib/logger'
 // components
 import { PageImageBanner } from 'components/generic/PageImageBanner'
 import { MapContextWrapper } from 'components/HomePage/MapComponent/MapContextWrapper'
@@ -162,7 +163,14 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const recommendationActions = await getRecommendationSettings()
   const isNotDev = process.env.NODE_ENV !== 'development'
 
-  const purpleAirStations = isNotDev ? await fetchPurpleAirStations() : []
+  let purpleAirFetchFailed = false
+  const purpleAirStations = isNotDev
+    ? await fetchPurpleAirStations().catch(error => {
+        purpleAirFetchFailed = true
+        logger.error({ component: 'purple-air', err: error }, 'Failed to fetch PurpleAir stations')
+        return []
+      })
+    : []
   const openAQStations = isNotDev ? await fetchOpenAQStations() : []
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
@@ -186,7 +194,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       description: getTranslated(data.description, data.descriptionMn, locale),
       image: getTranslated(data.image?.node.mediaItemUrl, data.imageMn?.node.mediaItemUrl, locale),
     },
-    // This tells the page how often to refetch from the API (in seconds) (1 hour)
-    revalidate: 60 * 60,
+    // Retry PurpleAir sooner after a temporary failure; otherwise revalidate hourly.
+    revalidate: purpleAirFetchFailed ? 60 : 60 * 60,
   }
 }
