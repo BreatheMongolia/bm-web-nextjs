@@ -64,13 +64,13 @@ export default function Index({
   const pageBanner =
     i18n.language === 'en'
       ? {
-        leftText: page.homePage.bannerTextLeft,
-        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
-      }
+          leftText: page.homePage.bannerTextLeft,
+          rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryText'),
+        }
       : {
-        leftText: page.homePage.bannerTextLeftMn,
-        rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
-      }
+          leftText: page.homePage.bannerTextLeftMn,
+          rightText: getBannerTextRight(page.homePage.bannerTextRight, 'categoryTextMn'),
+        }
 
   return (
     <div>
@@ -164,6 +164,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const isNotDev = process.env.NODE_ENV !== 'development'
 
   let purpleAirFetchFailed = false
+  let openAQFetchFailed = false
   const purpleAirStations = isNotDev
     ? await fetchPurpleAirStations().catch(error => {
         purpleAirFetchFailed = true
@@ -171,7 +172,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         return []
       })
     : []
-  const openAQStations = isNotDev ? await fetchOpenAQStations() : []
+  const openAQStations = isNotDev
+    ? await fetchOpenAQStations().catch(error => {
+        openAQFetchFailed = true
+        logger.error({ component: 'open-aq', err: error }, 'Failed to fetch OpenAQ stations')
+        return []
+      })
+    : []
 
   // adding a isNotDev check to disable api calls locally as it consumes api credits
   const airVisualOutdoorStations = isNotDev ? await fetchAirVisualOutdoorStations() : []
@@ -194,7 +201,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       description: getTranslated(data.description, data.descriptionMn, locale),
       image: getTranslated(data.image?.node.mediaItemUrl, data.imageMn?.node.mediaItemUrl, locale),
     },
-    // Retry PurpleAir sooner after a temporary failure; otherwise revalidate hourly.
-    revalidate: purpleAirFetchFailed ? 60 : 60 * 60,
+    // Retry sensor APIs sooner after a temporary failure; otherwise revalidate hourly.
+    revalidate: purpleAirFetchFailed || openAQFetchFailed ? 60 : 60 * 60,
   }
 }
