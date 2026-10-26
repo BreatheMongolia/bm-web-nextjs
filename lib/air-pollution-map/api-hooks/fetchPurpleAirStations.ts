@@ -104,11 +104,6 @@ async function fetchSensorData() {
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt += 1) {
     const attemptNumber = attempt + 1
     const requestStartedAt = Date.now()
-    logger.info({
-      component: 'purple-air',
-      attempt: attemptNumber,
-      maxAttempts: MAX_RETRIES + 1,
-    }, 'Starting sensor request')
 
     let response: Response
     try {
@@ -116,22 +111,18 @@ async function fetchSensorData() {
         headers: { 'x-api-key': apiKey },
       })
     } catch (error) {
-      logger.error({
-        component: 'purple-air',
-        attempt: attemptNumber,
-        durationMs: Date.now() - requestStartedAt,
-        err: error,
-      }, 'Sensor request failed before receiving a response')
+      logger.error(
+        {
+          component: 'purple-air',
+          attempt: attemptNumber,
+          durationMs: Date.now() - requestStartedAt,
+          err: error,
+        },
+        'Sensor request failed before receiving a response',
+      )
       throw error
     }
 
-    logger.info({
-      component: 'purple-air',
-      attempt: attemptNumber,
-      status: response.status,
-      ok: response.ok,
-      durationMs: Date.now() - requestStartedAt,
-    }, 'Sensor response received')
     const data = await parseResponseBody(response)
 
     if (response.status === 429) {
@@ -140,11 +131,14 @@ async function fetchSensorData() {
       }
 
       const retryDelayMs = retryAfterHeaderDelay(response.headers.get('Retry-After'))
-      logger.warn({
-        component: 'purple-air',
-        nextAttempt: attemptNumber + 1,
-        retryDelayMs,
-      }, 'Rate limited; retrying sensor request')
+      logger.warn(
+        {
+          component: 'purple-air',
+          nextAttempt: attemptNumber + 1,
+          retryDelayMs,
+        },
+        'Rate limited; retrying sensor request',
+      )
       await wait(retryDelayMs)
       continue
     }
@@ -162,14 +156,15 @@ async function fetchSensorData() {
         throw formatPurpleAirError(data, 'PurpleAir data is initializing')
       }
 
-      const retryDelayMs = initializationRetryDelay(
-        typeof data.description === 'string' ? data.description : undefined,
+      const retryDelayMs = initializationRetryDelay(typeof data.description === 'string' ? data.description : undefined)
+      logger.warn(
+        {
+          component: 'purple-air',
+          nextAttempt: attemptNumber + 1,
+          retryDelayMs,
+        },
+        'Sensor data is initializing; retrying request',
       )
-      logger.warn({
-        component: 'purple-air',
-        nextAttempt: attemptNumber + 1,
-        retryDelayMs,
-      }, 'Sensor data is initializing; retrying request')
       await wait(retryDelayMs)
       continue
     }
@@ -208,11 +203,6 @@ export const fetchPurpleAirStations = async () => {
     const pm2 = Number(typeof rawPm25 === 'string' ? rawPm25.trim() : rawPm25)
     return Number.isFinite(pm2) && pm2 > 0 ? [{ sensor, pm2 }] : []
   })
-  logger.info({
-    component: 'purple-air',
-    sensorsReceived: rawStations.length,
-    sensorsWithValidPm25: validStations.length,
-  }, 'Processing sensor response')
 
   validStations.forEach(({ sensor, pm2 }) => {
     try {
@@ -228,17 +218,16 @@ export const fetchPurpleAirStations = async () => {
         color: getAQIColor(stationAQI),
       })
     } catch (error) {
-      logger.error({
-        component: 'purple-air',
-        sensorName: sensor.name,
-        err: error,
-      }, 'Failed to convert sensor')
+      logger.error(
+        {
+          component: 'purple-air',
+          sensorName: sensor.name,
+          err: error,
+        },
+        'Failed to convert sensor',
+      )
     }
   })
 
-  logger.info({
-    component: 'purple-air',
-    stationsReturned: stations.length,
-  }, 'Sensor request completed')
   return stations
 }
