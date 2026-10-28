@@ -57,6 +57,7 @@ jobs:
       - name: Run live integration tests
         run: test -n "$PURPLE_AIR_API_KEY" && yarn test:integration
         env:
+          OPENAQ_API_KEY: ${{ secrets.OPENAQ_API_KEY }}
           PURPLE_AIR_API_KEY: ${{ secrets.PURPLE_AIR_API_KEY }}
 
   e2e-tests:
